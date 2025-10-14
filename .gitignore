@@ -1,0 +1,83 @@
+# Общие системные файлы
+.DS_Store
+Thumbs.db
+*.lnk
+
+# Файлы VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Файлы Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Файлы сборки .NET
+bin/
+obj/
+[Bb]uild/
+[Bb]uilds/
+out/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Файлы пакетов NuGet
+packages/
+[Nn]u[Gg]et/
+*.nupkg
+*.snupkg
+.nuget/
+
+# Файлы тестов
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Резервные копии и временные файлы
+*.[Cc]ache
+*.tmp
+*.temp
+*.log
+*.bak
+*.pidb
+*.log
+*.scc
+
+# Файлы покрытия кода
+coverage.xml
+*.coverage
+*.coveragexml
+
+# Файлы OpenCover
+OpenCover/
+
+# Файлы Avalonia
+*.cache
+*.ilk
+*.pdb
+*.dll
+*.exe
+
+# Файлы Rider
+.idea/
+*.sln.iml
+
+# Файлы macOS
+*.DS_Store
+
+# Файлы Linux
+*~
+
+# Файлы Windows
+[Tt]humbs.db
+
+# Выходные файлы публикации
+publish/
+
+# Файлы единицы измерения
+*.VisualState.xml
