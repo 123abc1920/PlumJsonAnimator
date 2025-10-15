@@ -1,7 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using AnimModels;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace SpinejsonEditor.ViewModels;
 
-public class ViewModelBase : ObservableObject
-{
-}
+public class ViewModelBase : ObservableObject { }

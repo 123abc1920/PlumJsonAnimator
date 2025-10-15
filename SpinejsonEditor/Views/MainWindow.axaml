@@ -15,6 +15,109 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+<DockPanel>
+    <Menu DockPanel.Dock="Top">
+      <MenuItem Header="_File">
+        <MenuItem Header="_Open..."/>
+        <Separator/>
+        <MenuItem Header="_Exit"/>
+      </MenuItem>
+      <MenuItem Header="_Edit">
+        <MenuItem Header="Copy"/>
+        <MenuItem Header="Paste"/>
+      </MenuItem>
+    </Menu>
+    <Grid DockPanel.Dock="Bottom">
+		<TextBlock Margin="0 5" FontSize="18" FontWeight="Bold">Heading</TextBlock>
+	</Grid>
+    <Grid>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="6"/>
+        <ColumnDefinition Width="3*"/>
+        <ColumnDefinition Width="6"/>
+        <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+	            <Grid Grid.Column="0" Background="AliceBlue">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="6"/>
+                        <RowDefinition Height="3*"/>
+                    </Grid.RowDefinitions>
+                    <ScrollViewer Background="LightBlue" Grid.Row="0" HorizontalScrollBarVisibility="Auto"
+                        VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <TextBlock FontSize="22" Height="100" Background="LightBlue">Block 1</TextBlock>
+                            <TextBlock FontSize="22" Height="100">Block 2</TextBlock>
+                        </StackPanel>
+                    </ScrollViewer>
+                    <GridSplitter Grid.Row="1" Background="Gray" Height="6" ResizeDirection="Rows"/>
+                    <ScrollViewer Background="LightBlue" HorizontalAlignment="Stretch" Grid.Row="3" HorizontalScrollBarVisibility="Auto"
+                        VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <TextBlock FontSize="22" Height="100" Background="LightBlue">Block 1</TextBlock>
+                            <TextBlock FontSize="22" Height="100">Block 2</TextBlock>
+                            <TextBlock FontSize="22" Height="100" Background="LightBlue">Block 3</TextBlock>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+	    <GridSplitter Grid.Column="1" Background="Gray" Width="6" ResizeDirection="Columns"/>
+        <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <ScrollViewer Background="LightBlue" VerticalAlignment="Stretch" Grid.Row="0"
+                        HorizontalScrollBarVisibility="Auto"
+                        VerticalScrollBarVisibility="Auto">
+                        <Canvas
+                                Background="White" 
+                                Width="1000" 
+                                Height="1000"
+                                Grid.Row="0"/>
+                </ScrollViewer>
+                <ScrollViewer Background="LightBlue" VerticalAlignment="Stretch" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <UniformGrid Rows="3" Columns="1" Width="1000">
+                        <Rectangle Fill="navy" />
+                        <Rectangle Fill="white" />
+                        <Rectangle Fill="red" />
+                    </UniformGrid>
+                </ScrollViewer>
+            </Grid>
+	    <GridSplitter Grid.Column="3" Background="Gray" Width="6" ResizeDirection="Columns"/>
+	    <Grid Grid.Column="4" Background="AliceBlue">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="6"/>
+                        <RowDefinition Height="3*"/>
+                    </Grid.RowDefinitions>
+                    <DockPanel Background="LightBlue" Grid.Row="0">
+                    	<Grid DockPanel.Dock="Top">
+							<Button Click="Add_Bone">+</Button>
+						</Grid>
+	                    <ScrollViewer
+	                        VerticalScrollBarVisibility="Auto">
+	                        <TreeView ItemsSource="{Binding Nodes}">
+                                <TreeView.ItemTemplate>
+                                    <TreeDataTemplate ItemsSource="{Binding SubNodes}">
+                                    <TextBlock Text="{Binding Title}"/>
+                                    </TreeDataTemplate>
+                                </TreeView.ItemTemplate>
+                            </TreeView>
+	                    </ScrollViewer>
+                    </DockPanel>
+                    <GridSplitter Grid.Row="1" Background="Gray" Height="6" ResizeDirection="Rows"/>
+                    <ScrollViewer Background="LightBlue" HorizontalAlignment="Stretch" Grid.Row="3" HorizontalScrollBarVisibility="Auto"
+                        VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <TextBlock FontSize="22" Height="100" Background="LightBlue">Block 1</TextBlock>
+                            <TextBlock FontSize="22" Height="100">Block 2</TextBlock>
+                            <TextBlock FontSize="22" Height="100" Background="LightBlue">Block 3</TextBlock>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+	</Grid>
+
+</DockPanel>
 
 </Window>
