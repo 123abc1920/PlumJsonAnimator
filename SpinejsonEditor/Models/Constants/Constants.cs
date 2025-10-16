@@ -1,4 +1,5 @@
 using AnimModels;
+using Avalonia.Controls;
 using SpinejsonEditor.ViewModels;
 
 namespace Constants
@@ -7,5 +8,6 @@ namespace Constants
     {
         public static Skeleton? mainSkeleton = null;
         public static MainWindowViewModel? viewModel = null;
+        public static Canvas mainCanvas = null;
     }
 }

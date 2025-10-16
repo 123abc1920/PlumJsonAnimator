@@ -71,6 +71,7 @@
                         HorizontalScrollBarVisibility="Auto"
                         VerticalScrollBarVisibility="Auto">
                         <Canvas
+                                Name="mainCanvas"
                                 Background="White" 
                                 Width="1000" 
                                 Height="1000"
@@ -93,14 +94,19 @@
                     </Grid.RowDefinitions>
                     <DockPanel Background="LightBlue" Grid.Row="0">
                     	<Grid DockPanel.Dock="Top">
-							<Button Click="Add_Bone">+</Button>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+							<Button Click="Add_Bone" Grid.Column="0">+</Button>
+                            <Button Click="Rename_Bone" Grid.Column="1">R</Button>
 						</Grid>
 	                    <ScrollViewer
 	                        VerticalScrollBarVisibility="Auto">
-	                        <TreeView ItemsSource="{Binding Nodes}">
+	                        <TreeView Name="boneTreeView" ItemsSource="{Binding Nodes}">
                                 <TreeView.ItemTemplate>
                                     <TreeDataTemplate ItemsSource="{Binding SubNodes}">
-                                    <TextBlock Text="{Binding Title}"/>
+                                        <TextBlock Text="{Binding Title}"/>
                                     </TreeDataTemplate>
                                 </TreeView.ItemTemplate>
                             </TreeView>

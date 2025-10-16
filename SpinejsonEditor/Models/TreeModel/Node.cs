@@ -1,21 +1,36 @@
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace TreeModel
 {
-    public class Node
+    public class Node : INotifyPropertyChanged
     {
-        public ObservableCollection<Node>? SubNodes { get; }
-        public string Title { get; }
+        private string _title;
+
+        public string Title
+        {
+            get => _title;
+            set
+            {
+                _title = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<Node> SubNodes { get; set; }
 
         public Node(string title)
         {
-            Title = title;
+            _title = title;
+            SubNodes = new ObservableCollection<Node>();
         }
 
-        public Node(string title, ObservableCollection<Node> subNodes)
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            Title = title;
-            SubNodes = subNodes;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
