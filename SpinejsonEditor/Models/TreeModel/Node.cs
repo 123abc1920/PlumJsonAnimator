@@ -18,12 +18,15 @@ namespace TreeModel
             }
         }
 
+        public int id = 0;
+
         public ObservableCollection<Node> SubNodes { get; set; }
 
-        public Node(string title)
+        public Node(string title, int _id)
         {
             _title = title;
             SubNodes = new ObservableCollection<Node>();
+            id = _id;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

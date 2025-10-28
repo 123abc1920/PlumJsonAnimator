@@ -67,16 +67,37 @@
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <ScrollViewer Background="LightBlue" VerticalAlignment="Stretch" Grid.Row="0"
-                        HorizontalScrollBarVisibility="Auto"
-                        VerticalScrollBarVisibility="Auto">
-                        <Canvas
-                                Name="mainCanvas"
-                                Background="White" 
-                                Width="1000" 
-                                Height="1000"
-                                Grid.Row="0"/>
-                </ScrollViewer>
+                <Grid>
+                    <ScrollViewer Background="LightBlue" VerticalAlignment="Stretch" Grid.Row="0"
+                            HorizontalScrollBarVisibility="Auto"
+                            VerticalScrollBarVisibility="Auto">
+                            <Canvas
+                                    Name="mainCanvas"
+                                    Background="White" 
+                                    Width="1000" 
+                                    Height="1000"
+                                    Grid.Row="0"
+                                    PointerPressed="Press_Canvas"
+                                    PointerMoved="Move_Canvas" 
+                                    PointerReleased="Release_Canvas"/>
+                    </ScrollViewer>
+                    <StackPanel Orientation="Vertical" 
+                        HorizontalAlignment="Left" 
+                        VerticalAlignment="Top" 
+                        Width="50">
+                            <Button Content="К"/>
+                            <Button Content="Л"/>
+                            <Button Content="О"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Bottom" 
+                        Width="50">
+                            <Button Click="Set_Transform_Mode" Content="XY"/>
+                            <Button Click="Set_Rotate_Mode" Content="A"/>
+                            <Button Click="Set_Scale_Mode" Content="S"/>
+                    </StackPanel>
+                </Grid>
                 <ScrollViewer Background="LightBlue" VerticalAlignment="Stretch" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                     <UniformGrid Rows="3" Columns="1" Width="1000">
                         <Rectangle Fill="navy" />
@@ -113,14 +134,18 @@
 	                    </ScrollViewer>
                     </DockPanel>
                     <GridSplitter Grid.Row="1" Background="Gray" Height="6" ResizeDirection="Rows"/>
-                    <ScrollViewer Background="LightBlue" HorizontalAlignment="Stretch" Grid.Row="3" HorizontalScrollBarVisibility="Auto"
-                        VerticalScrollBarVisibility="Auto">
-                        <StackPanel>
-                            <TextBlock FontSize="22" Height="100" Background="LightBlue">Block 1</TextBlock>
-                            <TextBlock FontSize="22" Height="100">Block 2</TextBlock>
-                            <TextBlock FontSize="22" Height="100" Background="LightBlue">Block 3</TextBlock>
-                        </StackPanel>
-                    </ScrollViewer>
+                    <DockPanel Background="LightBlue" Grid.Row="2">
+                    	<Grid DockPanel.Dock="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+							<Button Grid.Column="0">+</Button>
+						</Grid>
+	                    <ScrollViewer
+	                        VerticalScrollBarVisibility="Auto">
+	                        
+	                    </ScrollViewer>
+                    </DockPanel>
                 </Grid>
 	</Grid>
 

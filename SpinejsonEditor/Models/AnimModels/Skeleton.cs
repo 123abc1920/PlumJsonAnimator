@@ -13,19 +13,47 @@ namespace AnimModels
         private List<Skin> skins = new List<Skin>();
         private List<Slot> slots = new List<Slot>();
 
+        private int ids = 0;
+
         public Skeleton()
         {
             bones.Add(new Bone());
         }
 
-        public void addBone()
+        public void addBone(int id)
         {
-            this.bones.Add(new Bone(bones.Count));
+            Bone new_bone = new Bone(bones.Count);
+            this.bones.Add(new_bone);
+            foreach (Bone b in this.bones)
+            {
+                if (b.id == id)
+                {
+                    b.addChildren(new_bone);
+                }
+            }
+            ids++;
         }
 
         public string getLast()
         {
             return "bones1";
+        }
+
+        public int getId()
+        {
+            return ids;
+        }
+
+        public Bone? getBone(int id)
+        {
+            foreach (Bone b in this.bones)
+            {
+                if (b.id == id)
+                {
+                    return b;
+                }
+            }
+            return null;
         }
 
         public void drawSkeleton(Canvas canvas)

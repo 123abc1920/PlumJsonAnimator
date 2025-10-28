@@ -2,10 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
 using AnimModels;
-using Avalonia.Controls;
-using Avalonia.Interactivity;
 using Constants;
 using TreeModel;
 
@@ -17,18 +14,18 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
 
     public MainWindowViewModel()
     {
-        Nodes = new ObservableCollection<Node> { new Node("root") };
+        Nodes = new ObservableCollection<Node> { new Node("root", 0) };
     }
 
-    public void AddNode(string title, object? selectedBone)
+    public void AddNode(string title, int id, object? selectedBone)
     {
         if (selectedBone is Node selectedNode)
         {
-            selectedNode.SubNodes.Add(new Node(title));
+            selectedNode.SubNodes.Add(new Node(title, id));
         }
         else
         {
-            Nodes.Add(new Node(title));
+            Nodes.Add(new Node(title, id));
         }
     }
 
