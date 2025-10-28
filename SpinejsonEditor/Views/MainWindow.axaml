@@ -139,11 +139,13 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-							<Button Grid.Column="0">+</Button>
+							<Button Click="Add_Image" Grid.Column="0">+</Button>
 						</Grid>
 	                    <ScrollViewer
 	                        VerticalScrollBarVisibility="Auto">
-	                        
+	                        <StackPanel>
+                                <ListBox x:Name="slotsList"/>
+                            </StackPanel>
 	                    </ScrollViewer>
                     </DockPanel>
                 </Grid>

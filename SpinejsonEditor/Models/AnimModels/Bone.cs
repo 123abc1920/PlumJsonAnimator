@@ -90,8 +90,8 @@ namespace AnimModels
 
         public void drawBone(Canvas canvas)
         {
-            Point start = new Point(this.x, this.y);
-            Point end = new Point(this.endX, this.endY);
+            Point start = new Point(canvas.Width / 2 + this.x, canvas.Height / 2 + this.y);
+            Point end = new Point(canvas.Width / 2 + this.endX, canvas.Height / 2 + this.endY);
 
             var line = new Line
             {
