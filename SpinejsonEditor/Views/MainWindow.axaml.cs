@@ -1,18 +1,13 @@
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using AnimModels;
+using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Templates;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Media;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using Constants;
-using SlotsView;
 using transformModes;
 using TreeModel;
 
@@ -22,37 +17,42 @@ public partial class MainWindow : Window
 {
     private bool _isDragging = false;
     private Bone? selectedBone = null;
-    private ObservableCollection<string> SlotImagesTitles { get; set; } =
-        new ObservableCollection<string>();
 
     public MainWindow()
     {
         InitializeComponent();
+    }
 
+    public void initViews()
+    {
         DispatcherTimer _gameLoop = new DispatcherTimer();
         _gameLoop.Interval = TimeSpan.FromMilliseconds(16);
         _gameLoop.Tick += UpdateCanvas;
         _gameLoop.Start();
 
-        slotsList.ItemsSource = SlotImagesTitles;
+        DragDrop.SetAllowDrop(boneTreeView, true);
+        boneTreeView.AddHandler(DragDrop.DropEvent, OnTreeViewDrop);
     }
 
     private void UpdateCanvas(object? sender, EventArgs e)
     {
         mainCanvas.Children.Clear();
-        ConstantsClass.mainSkeleton.drawSkeleton(mainCanvas);
-        ConstantsClass.drawSlots(mainCanvas);
+        ConstantsClass.currentProject.drawSlots(mainCanvas);
+        ConstantsClass.currentProject.mainSkeleton.drawSkeleton(mainCanvas);
     }
 
     private void Add_Bone(object sender, RoutedEventArgs e)
     {
         Node selectedItem = (Node)boneTreeView.SelectedItem;
-        ConstantsClass.mainSkeleton.addBone(selectedItem.id);
-        ConstantsClass.viewModel.AddNode(
-            ConstantsClass.mainSkeleton.getLast(),
-            ConstantsClass.mainSkeleton.getId(),
-            boneTreeView.SelectedItem
-        );
+        if (selectedItem != null && selectedItem.isBone == true)
+        {
+            ConstantsClass.currentProject.mainSkeleton.addBone(selectedItem.id);
+            ConstantsClass.viewModel.AddNode(
+                ConstantsClass.currentProject.mainSkeleton.getLast(),
+                ConstantsClass.currentProject.mainSkeleton.getId(),
+                boneTreeView.SelectedItem
+            );
+        }
     }
 
     private async void Add_Image(object sender, RoutedEventArgs e)
@@ -71,9 +71,8 @@ public partial class MainWindow : Window
 
         foreach (string p in paths)
         {
-            SlotImage image = new SlotImage(p, Constants.ConstantsClass.SlotImages.Count, p);
-            Constants.ConstantsClass.SlotImages.Add(image);
-            SlotImagesTitles.Add(image.Title);
+            Slot image = new Slot(p, ConstantsClass.currentProject.Slots.Count, p);
+            Constants.ConstantsClass.currentProject.Slots.Add(image);
         }
     }
 
@@ -87,17 +86,17 @@ public partial class MainWindow : Window
 
     private void Set_Transform_Mode(object sender, RoutedEventArgs e)
     {
-        ConstantsClass.currentMode = new TransformMode();
+        ConstantsClass.currentProject.currentMode = new TransformMode();
     }
 
     private void Set_Rotate_Mode(object sender, RoutedEventArgs e)
     {
-        ConstantsClass.currentMode = new RotateMode();
+        ConstantsClass.currentProject.currentMode = new RotateMode();
     }
 
     private void Set_Scale_Mode(object sender, RoutedEventArgs e)
     {
-        ConstantsClass.currentMode = new ScaleMode();
+        ConstantsClass.currentProject.currentMode = new ScaleMode();
     }
 
     private void Press_Canvas(object sender, PointerPressedEventArgs e)
@@ -106,10 +105,10 @@ public partial class MainWindow : Window
         var point = e.GetPosition(canvas);
 
         Node selectedItem = (Node)boneTreeView.SelectedItem;
-        if (selectedItem != null)
+        if (selectedItem != null && selectedItem.isBone == true)
         {
             var id = selectedItem.id;
-            selectedBone = ConstantsClass.mainSkeleton.getBone(id);
+            selectedBone = ConstantsClass.currentProject.mainSkeleton.getBone(id);
         }
 
         var properties = e.GetCurrentPoint(canvas).Properties;
@@ -129,7 +128,7 @@ public partial class MainWindow : Window
 
         if (selectedBone != null)
         {
-            Constants.ConstantsClass.currentMode.transform(
+            Constants.ConstantsClass.currentProject.currentMode.transform(
                 selectedBone,
                 point.X - canvas.Width / 2,
                 point.Y - canvas.Height / 2
@@ -141,5 +140,54 @@ public partial class MainWindow : Window
     {
         _isDragging = false;
         selectedBone = null;
+    }
+
+    private void TextBox_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Enter)
+        {
+            Constants.ConstantsClass.currentProject.Name = projectName.Text;
+            Constants.ConstantsClass.currentProject.ProjectPath = projectPath.Text;
+        }
+    }
+
+    private void OnSlotPointerPressed(object sender, PointerPressedEventArgs e)
+    {
+        if (sender is TextBlock textBlock && textBlock.DataContext is Slot slot)
+        {
+            var data = new DataObject();
+            data.Set("Slot", slot);
+            DragDrop.DoDragDrop(e, data, DragDropEffects.Copy);
+        }
+    }
+
+    private void OnTreeViewDrop(object sender, DragEventArgs e)
+    {
+        if (e.Data.Get("Slot") is Slot slot)
+        {
+            var position = e.GetPosition(boneTreeView);
+            var element = boneTreeView.InputHitTest(position) as Visual;
+
+            while (element != null)
+            {
+                if (element is TreeViewItem item && item.DataContext is Node node)
+                {
+                    if (node.isBone == true)
+                    {
+                        Bone bone = ConstantsClass.currentProject.mainSkeleton.getBone(node.id);
+                        if (bone != null)
+                        {
+                            slot.BoundedBone = bone;
+                            Node slotNode = new Node(false, slot.Title, slot.Id, node.parent);
+                            ConstantsClass.viewModel.AddNode(slotNode, node.parent);
+                        }
+                        return;
+                    }
+                }
+                element = (Visual)element.Parent;
+            }
+
+            Console.WriteLine("Drop outside any node");
+        }
     }
 }

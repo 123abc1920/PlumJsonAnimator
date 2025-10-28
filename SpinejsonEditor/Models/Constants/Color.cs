@@ -19,7 +19,7 @@ namespace Constants
 
         public static IImmutableBrush getDotBoneColor(int id)
         {
-            if (ConstantsClass.seletedBoneId == id)
+            if (ConstantsClass.currentProject.seletedBoneId == id)
             {
                 return Red;
             }
@@ -31,7 +31,7 @@ namespace Constants
 
         public static IImmutableBrush getLineBoneColor(int id)
         {
-            if (ConstantsClass.seletedBoneId == id)
+            if (ConstantsClass.currentProject.seletedBoneId == id)
             {
                 return Blue;
             }

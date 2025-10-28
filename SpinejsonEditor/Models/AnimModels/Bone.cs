@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
-using Avalonia.Media;
-using Constants;
 
 namespace AnimModels
 {
@@ -16,8 +14,8 @@ namespace AnimModels
         public double y = 100;
         public double a = 0;
         public List<Bone> children = new List<Bone>();
-        private double endX = 110;
-        private double endY = 110;
+        public double endX = 110;
+        public double endY = 110;
         public double length = 10;
 
         public Bone()

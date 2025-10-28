@@ -23,7 +23,9 @@ public partial class App : Application
             var mainViewModelInstance = new MainWindowViewModel();
             mainViewModelInstance.initProgram();
 
-            desktop.MainWindow = new MainWindow { DataContext = mainViewModelInstance };
+            var mainWindow = new MainWindow { DataContext = mainViewModelInstance };
+            mainWindow.initViews();
+            desktop.MainWindow = mainWindow;
 
             Constants.ConstantsClass.viewModel = mainViewModelInstance;
         }
