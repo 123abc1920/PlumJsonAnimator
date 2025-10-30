@@ -14,6 +14,7 @@ namespace AnimModels
         public double y = 100;
         public double a = 0;
         public List<Bone> children = new List<Bone>();
+        public Slot? slot = null;
         public double endX = 110;
         public double endY = 110;
         public double length = 10;
@@ -54,6 +55,11 @@ namespace AnimModels
             {
                 c.move(c.x - deltaX, c.y - deltaY);
             }
+
+            if (this.slot != null)
+            {
+                this.slot.move(this.slot.x - deltaX, this.slot.y - deltaY);
+            }
         }
 
         public void scale(double x, double y)
@@ -83,6 +89,23 @@ namespace AnimModels
                 child.y = this.y + newDy;
 
                 child.rotate(child.a + (a - oldA));
+            }
+
+            if (this.slot != null)
+            {
+                double slotdx = this.slot.x - this.x;
+                double slotdy = this.slot.y - this.y;
+
+                double slotangleDiff = (a - oldA) * Math.PI / 180;
+                double slotnewDx =
+                    slotdx * Math.Cos(slotangleDiff) - slotdy * Math.Sin(slotangleDiff);
+                double slotnewDy =
+                    slotdx * Math.Sin(slotangleDiff) + slotdy * Math.Cos(slotangleDiff);
+
+                this.slot.x = this.x + slotnewDx;
+                this.slot.y = this.y + slotnewDy;
+
+                this.slot.a = this.slot.a + (a - oldA);
             }
         }
 

@@ -177,7 +177,12 @@ public partial class MainWindow : Window
                         Bone bone = ConstantsClass.currentProject.mainSkeleton.getBone(node.id);
                         if (bone != null)
                         {
+                            if (bone.slot != null)
+                            {
+                                bone.slot.BoundedBone = null;
+                            }
                             slot.BoundedBone = bone;
+                            bone.slot = slot;
                             Node slotNode = new Node(false, slot.Title, slot.Id, node.parent);
                             ConstantsClass.viewModel.AddNode(slotNode, node.parent);
                         }
