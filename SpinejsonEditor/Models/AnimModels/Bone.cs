@@ -6,13 +6,9 @@ using Avalonia.Controls.Shapes;
 
 namespace AnimModels
 {
-    public class Bone
+    public class Bone : IBone
     {
         public string name = "root";
-        public int id = 0;
-        public double x = 100;
-        public double y = 100;
-        public double a = 0;
         public List<Bone> children = new List<Bone>();
         public Slot? slot = null;
         public double endX = 110;
@@ -22,6 +18,9 @@ namespace AnimModels
         public Bone()
         {
             this.a = -100;
+            this.id = 0;
+            this.x = 100;
+            this.y = 100;
 
             double angleRad = this.a * Math.PI / 180;
             this.endX = this.x + length * Math.Cos(angleRad);
@@ -31,6 +30,9 @@ namespace AnimModels
         public Bone(int _id)
         {
             this.id = _id;
+            this.a = -100;
+            this.x = 100;
+            this.y = 100;
             this.name = "name" + this.id.ToString();
         }
 
@@ -39,7 +41,7 @@ namespace AnimModels
             this.children.Add(bone);
         }
 
-        public void move(double x, double y)
+        public override void move(double x, double y)
         {
             double deltaX = this.x - x;
             double deltaY = this.y - y;
@@ -62,12 +64,7 @@ namespace AnimModels
             }
         }
 
-        public void scale(double x, double y)
-        {
-            Console.WriteLine("scale");
-        }
-
-        public void rotate(double a)
+        public override void rotate(double a)
         {
             double oldA = this.a;
             this.a = a;

@@ -20,6 +20,19 @@ namespace EngineModels
             mainSkeleton = new Skeleton();
         }
 
+        public IBone? GetSlot(int id)
+        {
+            foreach (Slot s in Slots)
+            {
+                if (id == s.id)
+                {
+                    return s;
+                }
+            }
+
+            return null;
+        }
+
         public void drawSlots(Canvas c)
         {
             foreach (Slot s in Slots)

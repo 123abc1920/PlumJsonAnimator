@@ -16,7 +16,7 @@ namespace SpinejsonEditor.Views;
 public partial class MainWindow : Window
 {
     private bool _isDragging = false;
-    private Bone? selectedBone = null;
+    private IBone? selectedBone = null;
 
     public MainWindow()
     {
@@ -37,17 +37,17 @@ public partial class MainWindow : Window
     private void UpdateCanvas(object? sender, EventArgs e)
     {
         mainCanvas.Children.Clear();
-        ConstantsClass.currentProject.drawSlots(mainCanvas);
-        ConstantsClass.currentProject.mainSkeleton.drawSkeleton(mainCanvas);
+        ConstantsClass.currentProject?.drawSlots(mainCanvas);
+        ConstantsClass.currentProject?.mainSkeleton?.drawSkeleton(mainCanvas);
     }
 
     private void Add_Bone(object sender, RoutedEventArgs e)
     {
-        Node selectedItem = (Node)boneTreeView.SelectedItem;
+        Node? selectedItem = boneTreeView.SelectedItem as Node;
         if (selectedItem != null && selectedItem.isBone == true)
         {
-            ConstantsClass.currentProject.mainSkeleton.addBone(selectedItem.id);
-            ConstantsClass.viewModel.AddNode(
+            ConstantsClass.currentProject?.mainSkeleton?.addBone(selectedItem.id);
+            ConstantsClass.viewModel?.AddNode(
                 ConstantsClass.currentProject.mainSkeleton.getLast(),
                 ConstantsClass.currentProject.mainSkeleton.getId(),
                 boneTreeView.SelectedItem
@@ -104,11 +104,19 @@ public partial class MainWindow : Window
         var canvas = (Canvas)sender;
         var point = e.GetPosition(canvas);
 
-        Node selectedItem = (Node)boneTreeView.SelectedItem;
-        if (selectedItem != null && selectedItem.isBone == true)
+        Node? selectedItem = boneTreeView.SelectedItem as Node;
+        if (selectedItem != null)
         {
-            var id = selectedItem.id;
-            selectedBone = ConstantsClass.currentProject.mainSkeleton.getBone(id);
+            if (selectedItem.isBone == true)
+            {
+                var id = selectedItem.id;
+                selectedBone = ConstantsClass.currentProject?.mainSkeleton?.getBone(id);
+            }
+            else
+            {
+                var id = selectedItem.id;
+                selectedBone = ConstantsClass.currentProject?.GetSlot(id);
+            }
         }
 
         var properties = e.GetCurrentPoint(canvas).Properties;
@@ -128,7 +136,7 @@ public partial class MainWindow : Window
 
         if (selectedBone != null)
         {
-            Constants.ConstantsClass.currentProject.currentMode.transform(
+            Constants.ConstantsClass.currentProject?.currentMode.transform(
                 selectedBone,
                 point.X - canvas.Width / 2,
                 point.Y - canvas.Height / 2
@@ -183,13 +191,13 @@ public partial class MainWindow : Window
                             }
                             slot.BoundedBone = bone;
                             bone.slot = slot;
-                            Node slotNode = new Node(false, slot.Title, slot.Id, node.parent);
-                            ConstantsClass.viewModel.AddNode(slotNode, node.parent);
+                            Node slotNode = new Node(false, slot.Title, slot.id, node.parent);
+                            ConstantsClass.viewModel?.AddNode(slotNode, node.parent);
                         }
                         return;
                     }
                 }
-                element = (Visual)element.Parent;
+                element = element.Parent as Visual;
             }
 
             Console.WriteLine("Drop outside any node");

@@ -1,12 +1,4 @@
-using System;
-using System.Collections.Generic;
-using AnimModels;
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.Shapes;
 using Avalonia.Media;
-using SpinejsonEditor.ViewModels;
-using transformModes;
 
 namespace Constants
 {
@@ -19,7 +11,7 @@ namespace Constants
 
         public static IImmutableBrush getDotBoneColor(int id)
         {
-            if (ConstantsClass.currentProject.seletedBoneId == id)
+            if (ConstantsClass.currentProject?.seletedBoneId == id)
             {
                 return Red;
             }
@@ -31,7 +23,7 @@ namespace Constants
 
         public static IImmutableBrush getLineBoneColor(int id)
         {
-            if (ConstantsClass.currentProject.seletedBoneId == id)
+            if (ConstantsClass.currentProject?.seletedBoneId == id)
             {
                 return Blue;
             }

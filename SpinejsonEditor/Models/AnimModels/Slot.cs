@@ -7,10 +7,10 @@ using Avalonia.Media;
 
 namespace AnimModels
 {
-    public class Slot : INotifyPropertyChanged
+    public class Slot : IBone, INotifyPropertyChanged
     {
-        private string _title;
-        private string _path;
+        private string _title = "";
+        private string _path = "";
 
         public string Title
         {
@@ -31,13 +31,8 @@ namespace AnimModels
                 OnPropertyChanged();
             }
         }
-
-        public int Id { get; set; }
         public int DrawOrder { get; set; }
-        public double x = 0;
-        public double y = 0;
         public double selfA = 0;
-        public double a = 0;
         public double lengthX = 100;
         public double lengthY = 100;
         public Bone? BoundedBone { get; set; } = null;
@@ -46,7 +41,10 @@ namespace AnimModels
         {
             Title = title;
             Path = path;
-            Id = id;
+            this.id = id;
+            this.a = 0;
+            this.x = 0;
+            this.y = 0;
         }
 
         public void setBone(Bone? b)
@@ -59,18 +57,18 @@ namespace AnimModels
             }
         }
 
-        public void move(double x, double y)
+        public override void move(double x, double y)
         {
             this.x = x;
             this.y = y;
         }
 
-        public void scale(double x, double y)
+        public override void scale(double x, double y)
         {
-            Console.WriteLine("scale");
+            lengthX += 50;
         }
 
-        public void rotate(double a)
+        public override void rotate(double a)
         {
             this.selfA = a;
         }
@@ -82,8 +80,8 @@ namespace AnimModels
                 var image = new Image
                 {
                     Source = new Avalonia.Media.Imaging.Bitmap(this.Path),
-                    Width = 100,
-                    Height = 100,
+                    Width = lengthX,
+                    Height = lengthY,
                     RenderTransform = new RotateTransform(this.a + this.selfA),
                 };
 
@@ -102,3 +100,5 @@ namespace AnimModels
         }
     }
 }
+
+// тесты 3.6 3.7

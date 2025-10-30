@@ -18,12 +18,12 @@ namespace transformModes
 
     public interface Mode
     {
-        void transform(Bone bone, double a, double b);
+        void transform(IBone bone, double a, double b);
     }
 
     class NoMode : Mode
     {
-        public void transform(Bone bone, double x, double y)
+        public void transform(IBone bone, double x, double y)
         {
             return;
         }
@@ -33,7 +33,7 @@ namespace transformModes
     {
         public TransformMode() { }
 
-        public void transform(Bone bone, double x, double y)
+        public void transform(IBone bone, double x, double y)
         {
             bone.move(x, y);
         }
@@ -43,7 +43,7 @@ namespace transformModes
     {
         public ScaleMode() { }
 
-        public void transform(Bone bone, double x, double y)
+        public void transform(IBone bone, double x, double y)
         {
             bone.scale(x, y);
         }
@@ -53,7 +53,7 @@ namespace transformModes
     {
         public RotateMode() { }
 
-        public void transform(Bone bone, double x, double y)
+        public void transform(IBone bone, double x, double y)
         {
             double xx = x - bone.x;
             Point av = new Point(xx, y - bone.y);
