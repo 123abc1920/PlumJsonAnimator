@@ -100,13 +100,29 @@
                             <Button Click="Set_Scale_Mode" Content="S"/>
                     </StackPanel>
                 </Grid>
-                <ScrollViewer Background="LightBlue" VerticalAlignment="Stretch" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <UniformGrid Rows="3" Columns="1" Width="1000">
-                        <Rectangle Fill="navy" />
-                        <Rectangle Fill="white" />
-                        <Rectangle Fill="red" />
-                    </UniformGrid>
-                </ScrollViewer>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Left" 
+                                Grid.Row="0">
+                        <Button Content="XY"/>
+                        <Button Content="A"/>
+                        <Button Content="S"/>
+                    </StackPanel>
+                    <ScrollViewer Background="LightBlue" 
+                                Grid.Row="1"
+                                VerticalScrollBarVisibility="Auto" 
+                                HorizontalScrollBarVisibility="Auto">
+                        <UniformGrid Rows="3" Columns="1" Width="1000">
+                            <Rectangle Fill="navy" />
+                            <Rectangle Fill="white" />
+                            <Rectangle Fill="red" />
+                        </UniformGrid>
+                    </ScrollViewer>
+                </Grid>
             </Grid>
 	    <GridSplitter Grid.Column="3" Background="Gray" Width="6" ResizeDirection="Columns"/>
 	    <Grid Grid.Column="4" Background="AliceBlue">
