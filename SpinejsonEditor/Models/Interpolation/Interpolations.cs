@@ -2,9 +2,14 @@ namespace Interpolations
 {
     public class Interpolation
     {
-        public static double linearInterpolation(double start, double end)
+        public static double linearInterpolation(double start, double end, double t)
         {
-            return start + 0.5 * (end -start);
+            return start + t * (end - start);
+        }
+
+        public static double angleInterpolation(double start, double end, double t)
+        {
+            return start + ((end - start + 540) % 360 - 180) * t;
         }
     }
 }

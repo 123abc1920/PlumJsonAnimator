@@ -5,7 +5,7 @@ namespace AnimTransformations
         public double time;
     }
 
-    class Translate : IKeyframeType
+    public class Translate : IKeyframeType
     {
         public double x;
         public double y;
@@ -18,7 +18,7 @@ namespace AnimTransformations
         }
     }
 
-    class Rotate : IKeyframeType
+    public class Rotate : IKeyframeType
     {
         public double value;
 
