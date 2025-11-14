@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
+using AnimEngine;
+using AnimTransformations;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
+using Constants;
 
 namespace AnimModels
 {
@@ -14,6 +17,7 @@ namespace AnimModels
         public double endX = 110;
         public double endY = 110;
         public double length = 10;
+        public BoneInAnimation boneInAnimation;
 
         public Bone()
         {
@@ -62,6 +66,19 @@ namespace AnimModels
             {
                 this.slot.move(this.slot.x - deltaX, this.slot.y - deltaY);
             }
+
+            if (!ConstantsClass.currentProject.GetAnimation().isRun)
+            {
+                if (this.boneInAnimation == null)
+                {
+                    this.boneInAnimation = new BoneInAnimation(this);
+                    ConstantsClass
+                        .currentProject.GetAnimation()
+                        .skeletonInAnimation.bones.Add(this.boneInAnimation);
+                }
+
+                this.boneInAnimation.setTranslateKeyFrame(this.x, this.y);
+            }
         }
 
         public override void rotate(double a)
@@ -103,6 +120,18 @@ namespace AnimModels
                 this.slot.y = this.y + slotnewDy;
 
                 this.slot.a = this.slot.a + (a - oldA);
+            }
+
+            if (!ConstantsClass.currentProject.GetAnimation().isRun)
+            {
+                if (this.boneInAnimation == null)
+                {
+                    this.boneInAnimation = new BoneInAnimation(this);
+                    ConstantsClass
+                        .currentProject.GetAnimation()
+                        .skeletonInAnimation.bones.Add(this.boneInAnimation);
+                }
+                this.boneInAnimation.setRotateKeyFrame(this.a);
             }
         }
 

@@ -1,8 +1,7 @@
 using System;
-using System.Drawing;
 using AnimModels;
 
-namespace transformModes
+namespace TransformModes
 {
     class Point
     {

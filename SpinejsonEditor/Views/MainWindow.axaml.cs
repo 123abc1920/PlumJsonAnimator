@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using AnimEngine;
 using AnimModels;
 using Avalonia;
 using Avalonia.Controls;
@@ -8,7 +9,7 @@ using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using Constants;
-using transformModes;
+using TransformModes;
 using TreeModel;
 
 namespace SpinejsonEditor.Views;
@@ -39,6 +40,7 @@ public partial class MainWindow : Window
         mainCanvas.Children.Clear();
         ConstantsClass.currentProject?.drawSlots(mainCanvas);
         ConstantsClass.currentProject?.mainSkeleton?.drawSkeleton(mainCanvas);
+        Engine.runAnimation(ConstantsClass.currentProject.GetAnimation());
     }
 
     private void Add_Bone(object sender, RoutedEventArgs e)
@@ -202,5 +204,10 @@ public partial class MainWindow : Window
 
             Console.WriteLine("Drop outside any node");
         }
+    }
+
+    private void Play_Animation(object sender, RoutedEventArgs e)
+    {
+        ConstantsClass.currentProject.GetAnimation().playOrPause();
     }
 }

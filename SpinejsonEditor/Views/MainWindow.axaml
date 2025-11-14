@@ -42,7 +42,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="6"/>
-                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <ScrollViewer Background="LightBlue" Grid.Row="0" HorizontalScrollBarVisibility="Auto"
                         VerticalScrollBarVisibility="Auto">
@@ -57,9 +57,21 @@
                     <ScrollViewer Background="LightBlue" HorizontalAlignment="Stretch" Grid.Row="3" HorizontalScrollBarVisibility="Auto"
                         VerticalScrollBarVisibility="Auto">
                         <StackPanel>
-                            <TextBlock FontSize="22" Height="100" Background="LightBlue">Block 1</TextBlock>
-                            <TextBlock FontSize="22" Height="100">Block 2</TextBlock>
-                            <TextBlock FontSize="22" Height="100" Background="LightBlue">Block 3</TextBlock>
+                            <TextBlock FontSize="22" Background="LightBlue">Current Name</TextBlock>
+                            <TextBox Name="animationName" Text="anim0"/>
+                            <StackPanel>
+                                <ComboBox SelectedIndex="0" MaxDropDownHeight="100">
+                                    <ComboBoxItem>Text Item 1</ComboBoxItem>
+                                    <ComboBoxItem>Text Item 2</ComboBoxItem>
+                                    <ComboBoxItem>Text Item 3</ComboBoxItem>
+                                    <ComboBoxItem>Text Item 4</ComboBoxItem>
+                                    <ComboBoxItem>Text Item 5</ComboBoxItem>
+                                    <ComboBoxItem>Text Item 6</ComboBoxItem>
+                                    <ComboBoxItem>Text Item 7</ComboBoxItem>
+                                    <ComboBoxItem>Text Item 8</ComboBoxItem>
+                                    <ComboBoxItem>Text Item 9</ComboBoxItem>
+                                </ComboBox>
+                            </StackPanel>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
@@ -108,9 +120,9 @@
                     <StackPanel Orientation="Horizontal" 
                                 HorizontalAlignment="Left" 
                                 Grid.Row="0">
-                        <Button Content="XY"/>
-                        <Button Content="A"/>
-                        <Button Content="S"/>
+                        <Button Content="["/>
+                        <Button Click="Play_Animation" Content="P"/>
+                        <Button Content="]"/>
                     </StackPanel>
                     <ScrollViewer Background="LightBlue" 
                                 Grid.Row="1"
@@ -129,7 +141,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="6"/>
-                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <DockPanel Background="LightBlue" Grid.Row="0">
                     	<Grid DockPanel.Dock="Top">

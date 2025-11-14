@@ -1,7 +1,8 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using AnimModels;
 using Avalonia.Controls;
-using transformModes;
+using TransformModes;
 
 namespace EngineModels
 {
@@ -15,9 +16,18 @@ namespace EngineModels
         public int seletedBoneId = -1;
         public ObservableCollection<Slot> Slots { get; set; } = new ObservableCollection<Slot>();
 
+        public List<Animation> animations = new List<Animation>();
+        public int currentAnimation = 0;
+
         public Project()
         {
             mainSkeleton = new Skeleton();
+            animations.Add(new Animation());
+        }
+
+        public Animation GetAnimation()
+        {
+            return animations[currentAnimation];
         }
 
         public IBone? GetSlot(int id)
