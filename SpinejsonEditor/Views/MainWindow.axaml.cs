@@ -18,6 +18,7 @@ public partial class MainWindow : Window
 {
     private bool _isDragging = false;
     private IBone? selectedBone = null;
+    private DispatcherTimer _animationLoop = new DispatcherTimer();
 
     public MainWindow()
     {
@@ -27,12 +28,15 @@ public partial class MainWindow : Window
     public void initViews()
     {
         DispatcherTimer _gameLoop = new DispatcherTimer();
-        _gameLoop.Interval = TimeSpan.FromMilliseconds(16);
+        _gameLoop.Interval = TimeSpan.FromMilliseconds(1000 / 60.0);
         _gameLoop.Tick += UpdateCanvas;
         _gameLoop.Start();
 
         DragDrop.SetAllowDrop(boneTreeView, true);
         boneTreeView.AddHandler(DragDrop.DropEvent, OnTreeViewDrop);
+
+        _animationLoop.Interval = TimeSpan.FromSeconds(1);
+        _animationLoop.Tick += AnimationLoop_Tick;
     }
 
     private void UpdateCanvas(object? sender, EventArgs e)
@@ -41,6 +45,12 @@ public partial class MainWindow : Window
         ConstantsClass.currentProject?.drawSlots(mainCanvas);
         ConstantsClass.currentProject?.mainSkeleton?.drawSkeleton(mainCanvas);
         Engine.runAnimation(ConstantsClass.currentProject.GetAnimation());
+    }
+
+    private void AnimationLoop_Tick(object? sender, EventArgs e)
+    {
+        Timeline.CurrentTime = Math.Round(ConstantsClass.currentProject.GetAnimation().currentTime);
+        Timeline.InvalidateVisual();
     }
 
     private void Add_Bone(object sender, RoutedEventArgs e)
@@ -208,6 +218,18 @@ public partial class MainWindow : Window
 
     private void Play_Animation(object sender, RoutedEventArgs e)
     {
-        ConstantsClass.currentProject.GetAnimation().playOrPause();
+        if (ConstantsClass.currentProject.GetAnimation().playOrPause() == true)
+        {
+            this._animationLoop.Start();
+        }
+        else
+        {
+            this._animationLoop.Stop();
+        }
+    }
+
+    private void Add_New_Animation(object sender, RoutedEventArgs e)
+    {
+        ConstantsClass.currentProject.addAnimation();
     }
 }

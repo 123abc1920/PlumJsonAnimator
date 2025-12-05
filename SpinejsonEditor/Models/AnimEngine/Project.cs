@@ -16,7 +16,7 @@ namespace EngineModels
         public int seletedBoneId = -1;
         public ObservableCollection<Slot> Slots { get; set; } = new ObservableCollection<Slot>();
 
-        public List<Animation> animations = new List<Animation>();
+        public ObservableCollection<Animation> animations = new ObservableCollection<Animation>();
         public int currentAnimation = 0;
 
         public Project()
@@ -28,6 +28,12 @@ namespace EngineModels
         public Animation GetAnimation()
         {
             return animations[currentAnimation];
+        }
+
+        public void addAnimation()
+        {
+            this.animations.Add(new Animation("anim" + animations.Count.ToString()));
+            currentAnimation = this.animations.Count - 1;
         }
 
         public IBone? GetSlot(int id)

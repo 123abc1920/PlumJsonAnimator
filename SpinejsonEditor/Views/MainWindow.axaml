@@ -3,6 +3,8 @@
         xmlns:vm="using:SpinejsonEditor.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ctrls="using:TimeLine"
+        xmlns:models="using:TimeLine"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="SpinejsonEditor.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -58,19 +60,19 @@
                         VerticalScrollBarVisibility="Auto">
                         <StackPanel>
                             <TextBlock FontSize="22" Background="LightBlue">Current Name</TextBlock>
-                            <TextBox Name="animationName" Text="anim0"/>
-                            <StackPanel>
-                                <ComboBox SelectedIndex="0" MaxDropDownHeight="100">
-                                    <ComboBoxItem>Text Item 1</ComboBoxItem>
-                                    <ComboBoxItem>Text Item 2</ComboBoxItem>
-                                    <ComboBoxItem>Text Item 3</ComboBoxItem>
-                                    <ComboBoxItem>Text Item 4</ComboBoxItem>
-                                    <ComboBoxItem>Text Item 5</ComboBoxItem>
-                                    <ComboBoxItem>Text Item 6</ComboBoxItem>
-                                    <ComboBoxItem>Text Item 7</ComboBoxItem>
-                                    <ComboBoxItem>Text Item 8</ComboBoxItem>
-                                    <ComboBoxItem>Text Item 9</ComboBoxItem>
+                            <TextBox Name="animationName" Text="{Binding CurrentAnimation.AnimationName, Mode=TwoWay}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <ComboBox SelectedIndex="{Binding CurrentAnimationIndex, Mode=TwoWay}" 
+                                        MaxDropDownHeight="100"
+                                        ItemsSource="{Binding Animations}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding AnimationName}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
                                 </ComboBox>
+                                <Button Click="Add_New_Animation" Content="+"/>
+                                <Button Content="-"/>
                             </StackPanel>
                         </StackPanel>
                     </ScrollViewer>
@@ -128,11 +130,18 @@
                                 Grid.Row="1"
                                 VerticalScrollBarVisibility="Auto" 
                                 HorizontalScrollBarVisibility="Auto">
-                        <UniformGrid Rows="3" Columns="1" Width="1000">
-                            <Rectangle Fill="navy" />
-                            <Rectangle Fill="white" />
-                            <Rectangle Fill="red" />
-                        </UniformGrid>
+                        <Grid RowDefinitions="*">
+                            <ctrls:TimelineControl x:Name="Timeline" Grid.Row="0" 
+                            PixelsPerSecond="100"
+                           TotalDuration="60"
+                           CurrentTime="0">
+                                <ctrls:TimelineControl.Tracks>
+                                    <models:TimelineTrack Name="Bones" />
+                                    <models:TimelineTrack Name="Attachments" />
+                                    <models:TimelineTrack Name="Events" />
+                                </ctrls:TimelineControl.Tracks>
+                            </ctrls:TimelineControl>
+                        </Grid>
                     </ScrollViewer>
                 </Grid>
             </Grid>

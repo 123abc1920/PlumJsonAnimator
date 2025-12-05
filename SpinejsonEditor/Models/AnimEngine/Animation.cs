@@ -1,12 +1,24 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using AnimEngine;
 
 namespace AnimModels
 {
-    public class Animation
+    public class Animation : INotifyPropertyChanged
     {
         public string name = "anim0";
+        public string AnimationName
+        {
+            get => name;
+            set
+            {
+                name = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AnimationName)));
+            }
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
         public double currentTime = 0;
         public bool isRun = false;
         public SkeletonInAnimation skeletonInAnimation = new SkeletonInAnimation();
@@ -18,19 +30,21 @@ namespace AnimModels
             this.name = name;
         }
 
-        public void playOrPause()
+        public bool playOrPause()
         {
             if (this.isRun == false)
             {
                 this.currentTime = 0;
             }
             this.isRun = !this.isRun;
+
+            return this.isRun;
         }
 
         public void run()
         {
             skeletonInAnimation.animationStep(this.currentTime);
-            currentTime += Math.Round(currentTime + 0.0167, 4);
+            currentTime += 0.01666667;
         }
     }
 }

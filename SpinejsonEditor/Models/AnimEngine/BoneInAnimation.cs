@@ -103,96 +103,172 @@ namespace AnimEngine
             scaleKeyframes = scaleKeyframes.OrderBy(k => k.time).ToList();
         }
 
-        private void translateStep()
+        private void findCurrentSegment()
         {
-            if (translateKeyframes.Count > 1)
+            double currentTime = ConstantsClass.currentProject.GetAnimation().currentTime;
+
+            // Ищем сегмент, где currentTime находится между frame.time и nextFrame.time
+            for (int i = 0; i < translateKeyframes.Count - 1; i++)
             {
-                for (int i = 0; i < translateKeyframes.Count - 1; i++)
+                Translate frame = (Translate)translateKeyframes[i];
+                Translate nextFrame = (Translate)translateKeyframes[i + 1];
+
+                if (currentTime >= frame.time && currentTime < nextFrame.time)
                 {
-                    Translate frame = (Translate)translateKeyframes[i];
-                    Translate nextFrame = (Translate)translateKeyframes[i + 1];
-                    if (
-                        Math.Abs(
-                            frame.time - ConstantsClass.currentProject.GetAnimation().currentTime
-                        ) < 0.01f
-                    )
-                    {
-                        currentTranslateFrame = frame;
-                        nextTranslateFrame = nextFrame;
-                        tTranslate = 0;
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                if (currentTranslateFrame != null)
-                {
-                    this.bone?.move(
-                        ((Translate)translateKeyframes[0]).x,
-                        ((Translate)translateKeyframes[0]).y
-                    );
+                    currentTranslateFrame = frame;
+                    nextTranslateFrame = nextFrame;
+                    return; // Нашли сегмент, выходим
                 }
             }
 
-            if (currentTranslateFrame != null && nextTranslateFrame != null && tTranslate <= 1.0)
+            // Если время больше последнего кадра, просто остаемся на последнем кадре
+            if (
+                translateKeyframes.Count > 0
+                && currentTime >= ((Translate)translateKeyframes[translateKeyframes.Count - 1]).time
+            )
             {
-                tTranslate += 0.0167;
-
-                double interpolatedX = Interpolations.Interpolation.linearInterpolation(
-                    currentTranslateFrame.x,
-                    nextTranslateFrame.x,
-                    tTranslate
-                );
-                double interpolatedY = Interpolations.Interpolation.linearInterpolation(
-                    currentTranslateFrame.y,
-                    nextTranslateFrame.y,
-                    tTranslate
-                );
-                this.bone?.move(interpolatedX, interpolatedY);
+                currentTranslateFrame = (Translate)translateKeyframes[translateKeyframes.Count - 1];
+                nextTranslateFrame = null;
+            }
+            // Если время меньше первого кадра, остаемся на первом
+            else if (translateKeyframes.Count > 0)
+            {
+                currentTranslateFrame = (Translate)translateKeyframes[0];
+                nextTranslateFrame = (Translate)translateKeyframes[1];
             }
         }
 
-        private void rotateStep()
+        public void translateStep()
         {
-            if (rotateKeyframes.Count > 1)
+            findCurrentSegment();
+
+            if (currentTranslateFrame == null)
             {
-                for (int i = 0; i < rotateKeyframes.Count - 1; i++)
-                {
-                    Rotate frame = (Rotate)rotateKeyframes[i];
-                    Rotate nextFrame = (Rotate)rotateKeyframes[i + 1];
-                    if (
-                        Math.Abs(
-                            frame.time - ConstantsClass.currentProject.GetAnimation().currentTime
-                        ) < 0.01f
-                    )
-                    {
-                        currentRotateFrame = frame;
-                        nextRotateFrame = nextFrame;
-                        tRotate = 0;
-                        break;
-                    }
-                }
+                return;
+            }
+
+            if (nextTranslateFrame == null)
+            {
+                this.bone?.move(currentTranslateFrame.x, currentTranslateFrame.y);
+                return;
+            }
+
+            double currentTime = ConstantsClass.currentProject.GetAnimation().currentTime;
+
+            double segmentDuration = nextTranslateFrame.time - currentTranslateFrame.time;
+
+            double timeElapsed = currentTime - currentTranslateFrame.time;
+
+            double t;
+            if (segmentDuration > 0)
+            {
+                t = timeElapsed / segmentDuration;
             }
             else
             {
-                if (currentRotateFrame != null)
+                t = 1.0;
+            }
+
+            t = Math.Clamp(t, 0.0, 1.0);
+
+            double interpolatedX = Interpolations.Interpolation.linearInterpolation(
+                currentTranslateFrame.x,
+                nextTranslateFrame.x,
+                t
+            );
+            double interpolatedY = Interpolations.Interpolation.linearInterpolation(
+                currentTranslateFrame.y,
+                nextTranslateFrame.y,
+                t
+            );
+
+            this.bone?.move(interpolatedX, interpolatedY);
+        }
+
+        private void findCurrentRotateSegment(double currentTime)
+        {
+            // Если кадров меньше двух, сегмент для интерполяции не существует
+            if (rotateKeyframes.Count < 2)
+            {
+                currentRotateFrame = rotateKeyframes.Count > 0 ? (Rotate)rotateKeyframes[0] : null;
+                nextRotateFrame = null;
+                return;
+            }
+
+            // Ищем сегмент, где currentTime находится между frame.time и nextFrame.time
+            for (int i = 0; i < rotateKeyframes.Count - 1; i++)
+            {
+                Rotate frame = (Rotate)rotateKeyframes[i];
+                Rotate nextFrame = (Rotate)rotateKeyframes[i + 1];
+
+                if (currentTime >= frame.time && currentTime < nextFrame.time)
                 {
-                    this.bone?.rotate(currentRotateFrame.value);
+                    currentRotateFrame = frame;
+                    nextRotateFrame = nextFrame;
+                    return; // Нашли сегмент, выходим
                 }
             }
 
-            if (currentRotateFrame != null && nextRotateFrame != null && tRotate <= 1.0)
+            // Если время больше времени последнего кадра, остаемся на последнем кадре
+            Rotate lastFrame = (Rotate)rotateKeyframes[rotateKeyframes.Count - 1];
+            if (currentTime >= lastFrame.time)
             {
-                tRotate += 0.0167;
-
-                double interpolatedA = Interpolations.Interpolation.angleInterpolation(
-                    currentRotateFrame.value,
-                    nextRotateFrame.value,
-                    tRotate
-                );
-                this.bone?.rotate(interpolatedA);
+                currentRotateFrame = lastFrame;
+                nextRotateFrame = null;
             }
+        }
+
+        public void rotateStep()
+        {
+            double currentTime = ConstantsClass.currentProject.GetAnimation().currentTime;
+
+            // 1. Находим текущий сегмент на основе фактического времени
+            findCurrentRotateSegment(currentTime);
+
+            if (currentRotateFrame == null)
+            {
+                return;
+            }
+
+            // 2. Если только один кадр или конец анимации (nextRotateFrame == null)
+            if (nextRotateFrame == null)
+            {
+                // Устанавливаем значение последнего/единственного кадра
+                this.bone?.rotate(currentRotateFrame.value);
+                return;
+            }
+
+            // 3. Вычисление пропорционального фактора t
+
+            double segmentDuration = nextRotateFrame.time - currentRotateFrame.time;
+            double timeElapsed = currentTime - currentRotateFrame.time;
+
+            double t;
+            if (segmentDuration > 0)
+            {
+                // Пропорциональный фактор t находится в диапазоне [0, 1]
+                t = timeElapsed / segmentDuration;
+            }
+            else
+            {
+                // Если сегмент длится 0 времени, t = 1 (мгновенный переход)
+                t = 1.0;
+            }
+
+            // Ограничиваем t, чтобы избежать проблем с округлением
+            t = Math.Clamp(t, 0.0, 1.0);
+
+            // 4. Интерполяция с использованием t
+
+            // Используем angleInterpolation (это важно для корректного вращения,
+            // чтобы избежать длинного пути между, например, 350° и 10°)
+            double interpolatedA = Interpolations.Interpolation.angleInterpolation(
+                currentRotateFrame.value,
+                nextRotateFrame.value,
+                t // Используем t, основанное на времени
+            );
+
+            this.bone?.rotate(interpolatedA);
         }
 
         public void animationStep()

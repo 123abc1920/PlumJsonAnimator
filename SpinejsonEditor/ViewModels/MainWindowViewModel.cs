@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using AnimModels;
 using Constants;
@@ -13,6 +15,44 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
 {
     public ObservableCollection<Node> Nodes { get; set; }
     public Project CurrentProject { get; set; }
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    public ObservableCollection<Animation> Animations
+    {
+        get => CurrentProject.animations;
+        set
+        {
+            CurrentProject.animations = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public int CurrentAnimationIndex
+    {
+        get => CurrentProject.currentAnimation;
+        set
+        {
+            CurrentProject.currentAnimation = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(CurrentAnimation));
+        }
+    }
+
+    public Animation CurrentAnimation
+    {
+        get =>
+            CurrentProject.currentAnimation >= 0
+            && CurrentProject.currentAnimation < CurrentProject.animations.Count
+                ? CurrentProject.animations[CurrentProject.currentAnimation]
+                : null;
+        set
+        {
+            if (value != null)
+            {
+                CurrentAnimationIndex = CurrentProject.animations.IndexOf(value);
+            }
+        }
+    }
 
     public MainWindowViewModel()
     {
@@ -48,8 +88,6 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
         ConstantsClass.currentProject = new EngineModels.Project();
         CurrentProject = ConstantsClass.currentProject;
     }
-
-    public event PropertyChangedEventHandler PropertyChanged;
 
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
