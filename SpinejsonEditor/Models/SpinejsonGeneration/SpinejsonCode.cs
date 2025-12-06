@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using EngineModels;
+using Prettify;
 
 namespace SpinejsonGeneration
 {
@@ -42,6 +43,8 @@ namespace SpinejsonGeneration
             text += "}";
 
             text += "}";
+
+            text = Prettify.Prettify.prettify(text);
             OnPropertyChanged(nameof(Text));
         }
 
