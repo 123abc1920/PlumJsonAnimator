@@ -161,5 +161,14 @@ namespace AnimModels
             canvas.Children.Add(line);
             canvas.Children.Add(joint);
         }
+
+        public String generateCode()
+        {
+            String code = "";
+
+            code += "{\"name\": \"" + this.name + "\"}";
+
+            return code;
+        }
     }
 }

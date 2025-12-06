@@ -9,6 +9,7 @@ using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using Constants;
+using SpinejsonGeneration;
 using TransformModes;
 using TreeModel;
 
@@ -230,6 +231,22 @@ public partial class MainWindow : Window
 
     private void Add_New_Animation(object sender, RoutedEventArgs e)
     {
-        ConstantsClass.currentProject.addAnimation();
+        ConstantsClass.currentProject?.addAnimation();
+    }
+
+    private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.Source is TabControl tabControl)
+        {
+            if (
+                tabControl.SelectedItem is TabItem selectedTab
+                && selectedTab.Header?.ToString() == "Spinejson"
+            )
+            {
+                ConstantsClass.currentProject?.SpinejsonCode.generateCode(
+                    ConstantsClass.currentProject
+                );
+            }
+        }
     }
 }

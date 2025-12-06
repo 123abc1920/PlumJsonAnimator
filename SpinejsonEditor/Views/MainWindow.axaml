@@ -19,14 +19,16 @@
 
 <DockPanel>
     <Menu DockPanel.Dock="Top">
-      <MenuItem Header="_File">
-        <MenuItem Header="_Open..."/>
+      <MenuItem Header="Project">
+        <MenuItem Header="Open"/>
+        <MenuItem Header="New"/>
+        <MenuItem Header="Save"/>
         <Separator/>
-        <MenuItem Header="_Exit"/>
+        <MenuItem Header="Settings"/>
       </MenuItem>
-      <MenuItem Header="_Edit">
-        <MenuItem Header="Copy"/>
-        <MenuItem Header="Paste"/>
+      <MenuItem Header="File">
+        <MenuItem Header="Import json"/>
+        <MenuItem Header="Export json"/>
       </MenuItem>
     </Menu>
     <Grid DockPanel.Dock="Bottom">
@@ -79,46 +81,67 @@
                 </Grid>
 	    <GridSplitter Grid.Column="1" Background="Gray" Width="6" ResizeDirection="Columns"/>
         <Grid Grid.Column="2">
+    <TabControl Padding="0" SelectionChanged="TabControl_SelectionChanged">
+        <TabItem Header="Анимация">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"/>
+                    <RowDefinition Height="10"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Grid>
-                    <ScrollViewer Background="LightBlue" VerticalAlignment="Stretch" Grid.Row="0"
-                            HorizontalScrollBarVisibility="Auto"
-                            VerticalScrollBarVisibility="Auto">
-                            <Canvas
-                                    Name="mainCanvas"
-                                    Background="White" 
-                                    Width="1000" 
-                                    Height="1000"
-                                    Grid.Row="0"
-                                    PointerPressed="Press_Canvas"
-                                    PointerMoved="Move_Canvas" 
-                                    PointerReleased="Release_Canvas"/>
-                    </ScrollViewer>
-                    <StackPanel Orientation="Vertical" 
-                        HorizontalAlignment="Left" 
-                        VerticalAlignment="Top" 
-                        Width="50">
+                
+                <Grid Grid.Row="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <StackPanel Grid.Column="0"
+                                    Orientation="Vertical" 
+                                    HorizontalAlignment="Left" 
+                                    VerticalAlignment="Top" 
+                                    Width="50">
                             <Button Content="К"/>
                             <Button Content="Л"/>
                             <Button Content="О"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" 
-                        HorizontalAlignment="Center" 
-                        VerticalAlignment="Bottom" 
-                        Width="50">
+                        </StackPanel>
+                        
+                        <ScrollViewer Grid.Column="1"
+                                    Background="LightBlue" 
+                                    VerticalAlignment="Stretch"
+                                    HorizontalScrollBarVisibility="Auto"
+                                    VerticalScrollBarVisibility="Auto">
+                            <Canvas
+                                Name="mainCanvas"
+                                Background="White" 
+                                Width="1000" 
+                                Height="1000"
+                                PointerPressed="Press_Canvas"
+                                PointerMoved="Move_Canvas" 
+                                PointerReleased="Release_Canvas"/>
+                        </ScrollViewer>
+                        
+                        <StackPanel Grid.Column="1"
+                                    Orientation="Horizontal" 
+                                    HorizontalAlignment="Center" 
+                                    VerticalAlignment="Bottom" 
+                                    Width="50">
                             <Button Click="Set_Transform_Mode" Content="XY"/>
                             <Button Click="Set_Rotate_Mode" Content="A"/>
                             <Button Click="Set_Scale_Mode" Content="S"/>
-                    </StackPanel>
+                        </StackPanel>
+                    </Grid>
                 </Grid>
-                <Grid Grid.Row="1">
+
+                <GridSplitter Grid.Row="1" Background="Gray" ResizeDirection="Rows"/>
+                
+                <Grid Grid.Row="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
+                    
                     <StackPanel Orientation="Horizontal" 
                                 HorizontalAlignment="Left" 
                                 Grid.Row="0">
@@ -126,25 +149,35 @@
                         <Button Click="Play_Animation" Content="P"/>
                         <Button Content="]"/>
                     </StackPanel>
+                    
                     <ScrollViewer Background="LightBlue" 
                                 Grid.Row="1"
                                 VerticalScrollBarVisibility="Auto" 
                                 HorizontalScrollBarVisibility="Auto">
-                        <Grid RowDefinitions="*">
-                            <ctrls:TimelineControl x:Name="Timeline" Grid.Row="0" 
-                            PixelsPerSecond="100"
-                           TotalDuration="60"
-                           CurrentTime="0">
+                        <Grid>
+                            <ctrls:TimelineControl x:Name="Timeline" 
+                                PixelsPerSecond="100"
+                                TotalDuration="60"
+                                CurrentTime="0">
                                 <ctrls:TimelineControl.Tracks>
-                                    <models:TimelineTrack Name="Bones" />
-                                    <models:TimelineTrack Name="Attachments" />
-                                    <models:TimelineTrack Name="Events" />
+                                    <models:TimelineTrack Name="translate" />
+                                    <models:TimelineTrack Name="rotate" />
+                                    <models:TimelineTrack Name="scale" />
                                 </ctrls:TimelineControl.Tracks>
                             </ctrls:TimelineControl>
                         </Grid>
                     </ScrollViewer>
                 </Grid>
             </Grid>
+        </TabItem>
+        
+        <TabItem Header="Spinejson">
+            <TextBox AcceptsReturn="True"
+                Text="{Binding CurrentProject.SpinejsonCode.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </TabItem>
+        
+    </TabControl>
+</Grid>
 	    <GridSplitter Grid.Column="3" Background="Gray" Width="6" ResizeDirection="Columns"/>
 	    <Grid Grid.Column="4" Background="AliceBlue">
                     <Grid.RowDefinitions>

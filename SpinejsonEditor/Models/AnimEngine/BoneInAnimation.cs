@@ -276,5 +276,38 @@ namespace AnimEngine
             translateStep();
             rotateStep();
         }
+
+        public String generateCode()
+        {
+            String code = "\"" + this.bone.name + "\": {\"translate\": [";
+
+            for (int i = 0; i < this.translateKeyframes.Count; i++)
+            {
+                code += this.translateKeyframes[i].generateCode();
+                if (i != this.translateKeyframes.Count - 1)
+                {
+                    code += ",";
+                }
+            }
+
+            code += "], \"rotate\": [";
+
+            for (int i = 0; i < this.translateKeyframes.Count; i++)
+            {
+                code += this.translateKeyframes[i].generateCode();
+                if (i != this.translateKeyframes.Count - 1)
+                {
+                    code += ",";
+                }
+            }
+
+            code += "], \"shear\": [";
+
+            code += "]";
+
+            code += "}";
+
+            return code;
+        }
     }
 }

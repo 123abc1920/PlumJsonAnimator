@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using AnimModels;
 using Avalonia.Controls;
+using SpinejsonGeneration;
 using TransformModes;
 
 namespace EngineModels
@@ -15,6 +17,7 @@ namespace EngineModels
         public Mode currentMode = new NoMode();
         public int seletedBoneId = -1;
         public ObservableCollection<Slot> Slots { get; set; } = new ObservableCollection<Slot>();
+        public SpinejsonCode SpinejsonCode { get; set; } = new SpinejsonCode();
 
         public ObservableCollection<Animation> animations = new ObservableCollection<Animation>();
         public int currentAnimation = 0;

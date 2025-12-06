@@ -46,5 +46,17 @@ namespace AnimModels
             skeletonInAnimation.animationStep(this.currentTime);
             currentTime += 0.01666667;
         }
+
+        public String generateCode()
+        {
+            String code = "";
+
+            code += "\"" + this.AnimationName + "\": {\"bones\": {";
+
+            code += this.skeletonInAnimation.generateCode();
+
+            code += "}}";
+            return code;
+        }
     }
 }

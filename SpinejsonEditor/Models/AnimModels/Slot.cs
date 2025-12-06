@@ -98,6 +98,20 @@ namespace AnimModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public String generateCode()
+        {
+            String code =
+                "{\"name\": \""
+                + Title
+                + "\", \"bone\": \""
+                + this.BoundedBone?.name
+                + "\", \"attachment\": \""
+                + Title
+                + "\"}";
+
+            return code;
+        }
     }
 }
 

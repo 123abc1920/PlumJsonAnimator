@@ -1,8 +1,12 @@
+using System;
+
 namespace AnimTransformations
 {
     public abstract class IKeyframeType
     {
         public double time;
+
+        public abstract String generateCode();
     }
 
     public class Translate : IKeyframeType
@@ -16,6 +20,11 @@ namespace AnimTransformations
             this.x = _x;
             this.y = _y;
         }
+
+        public override string generateCode()
+        {
+            return "{\"time\": " + this.time.ToString().Replace(",", ".") + "}";
+        }
     }
 
     public class Rotate : IKeyframeType
@@ -26,6 +35,11 @@ namespace AnimTransformations
         {
             this.time = _time;
             this.value = _value;
+        }
+
+        public override string generateCode()
+        {
+            return "{\"time\": " + this.time.ToString().Replace(",", ".") + "}";
         }
     }
 
@@ -40,6 +54,11 @@ namespace AnimTransformations
             this.x = _x;
             this.y = _y;
         }
+
+        public override string generateCode()
+        {
+            return "{\"time\": " + this.time.ToString().Replace(",", ".") + "}";
+        }
     }
 
     class Scale : IKeyframeType
@@ -52,6 +71,11 @@ namespace AnimTransformations
             this.time = _time;
             this.x = _x;
             this.y = _y;
+        }
+
+        public override string generateCode()
+        {
+            return "{\"time\": " + this.time.ToString().Replace(",", ".") + "}";
         }
     }
 }

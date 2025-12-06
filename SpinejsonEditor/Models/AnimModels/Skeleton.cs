@@ -63,5 +63,30 @@ namespace AnimModels
                 b.drawBone(canvas);
             }
         }
+
+        public String generateCode()
+        {
+            String code = "\"bones\": [";
+
+            String slotsCode = "\"slots\": [";
+
+            for (int i = 0; i < this.bones.Count; i++)
+            {
+                code += this.bones[i].generateCode();
+                if (i != this.bones.Count - 1)
+                {
+                    code += ",";
+                }
+
+                if (this.bones[i].slot != null)
+                {
+                    slotsCode += this.bones[i].slot.generateCode() + ",";
+                }
+            }
+            slotsCode += "]";
+
+            code += "]," + slotsCode;
+            return code;
+        }
     }
 }
