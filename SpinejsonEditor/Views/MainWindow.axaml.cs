@@ -9,6 +9,7 @@ using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using Constants;
+using JsonValidator;
 using SpinejsonGeneration;
 using TransformModes;
 using TreeModel;
@@ -20,6 +21,7 @@ public partial class MainWindow : Window
     private bool _isDragging = false;
     private IBone? selectedBone = null;
     private DispatcherTimer _animationLoop = new DispatcherTimer();
+    private int currentTab = 0;
 
     public MainWindow()
     {
@@ -42,16 +44,30 @@ public partial class MainWindow : Window
 
     private void UpdateCanvas(object? sender, EventArgs e)
     {
-        mainCanvas.Children.Clear();
-        ConstantsClass.currentProject?.drawSlots(mainCanvas);
-        ConstantsClass.currentProject?.mainSkeleton?.drawSkeleton(mainCanvas);
-        Engine.runAnimation(ConstantsClass.currentProject.GetAnimation());
+        if (currentTab == 0)
+        {
+            mainCanvas.Children.Clear();
+            ConstantsClass.currentProject?.drawSlots(mainCanvas);
+            ConstantsClass.currentProject?.mainSkeleton?.drawSkeleton(mainCanvas);
+            Engine.runAnimation(ConstantsClass.currentProject.GetAnimation());
+        }
+        else if (currentTab == 1)
+        {
+            ConstantsClass.jsonError.ErrorText = JsonValidator.JsonValidator.validate(
+                spineJsonText.Text
+            );
+        }
     }
 
     private void AnimationLoop_Tick(object? sender, EventArgs e)
     {
-        Timeline.CurrentTime = Math.Round(ConstantsClass.currentProject.GetAnimation().currentTime);
-        Timeline.InvalidateVisual();
+        if (currentTab == 0)
+        {
+            Timeline.CurrentTime = Math.Round(
+                ConstantsClass.currentProject.GetAnimation().currentTime
+            );
+            Timeline.InvalidateVisual();
+        }
     }
 
     private void Add_Bone(object sender, RoutedEventArgs e)
@@ -236,16 +252,26 @@ public partial class MainWindow : Window
 
     private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (e.Source is TabControl tabControl)
+        if (e.Source is TabControl tabControl && tabControl.SelectedItem is TabItem selectedTab)
         {
-            if (
-                tabControl.SelectedItem is TabItem selectedTab
-                && selectedTab.Header?.ToString() == "Spinejson"
-            )
+            string header = selectedTab.Header?.ToString();
+
+            switch (header)
             {
-                ConstantsClass.currentProject?.SpinejsonCode.generateCode(
-                    ConstantsClass.currentProject
-                );
+                case "Spinejson":
+                    currentTab = 1;
+                    ConstantsClass.currentProject?.SpinejsonCode.generateCode(
+                        ConstantsClass.currentProject
+                    );
+                    break;
+
+                case "Анимация":
+                    currentTab = 0;
+                    break;
+
+                default:
+                    currentTab = 0;
+                    break;
             }
         }
     }

@@ -1,4 +1,5 @@
 using EngineModels;
+using JsonValidator;
 using SpinejsonEditor.ViewModels;
 
 namespace Constants
@@ -7,5 +8,6 @@ namespace Constants
     {
         public static MainWindowViewModel? viewModel = null;
         public static Project? currentProject = null;
+        public static JsonError jsonError = new JsonError();
     }
 }

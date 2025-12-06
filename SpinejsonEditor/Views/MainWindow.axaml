@@ -172,8 +172,23 @@
         </TabItem>
         
         <TabItem Header="Spinejson">
-            <TextBox AcceptsReturn="True"
-                Text="{Binding CurrentProject.SpinejsonCode.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="6"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBox Grid.Row="0" AcceptsReturn="True" Name="spineJsonText"
+                        Text="{Binding CurrentProject.SpinejsonCode.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <GridSplitter Grid.Row="1" Background="Gray" Height="6" ResizeDirection="Rows"/>
+
+                    <ScrollViewer Grid.Row="2"
+	                        VerticalScrollBarVisibility="Auto">
+	                        <TextBlock Text="{Binding JsonErrorObj.ErrorText}" TextWrapping="Wrap" TextAlignment="Left"/>
+	                </ScrollViewer>                    
+            </Grid>
         </TabItem>
         
     </TabControl>

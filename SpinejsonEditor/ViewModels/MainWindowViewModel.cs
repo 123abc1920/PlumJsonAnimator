@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using AnimModels;
 using Constants;
 using EngineModels;
+using JsonValidator;
 using TreeModel;
 
 namespace SpinejsonEditor.ViewModels;
@@ -15,6 +16,7 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
 {
     public ObservableCollection<Node> Nodes { get; set; }
     public Project CurrentProject { get; set; }
+    public JsonError JsonErrorObj { get; set; }
     public event PropertyChangedEventHandler? PropertyChanged;
 
     public ObservableCollection<Animation> Animations
@@ -87,6 +89,7 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     {
         ConstantsClass.currentProject = new EngineModels.Project();
         CurrentProject = ConstantsClass.currentProject;
+        JsonErrorObj = ConstantsClass.jsonError;
     }
 
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
