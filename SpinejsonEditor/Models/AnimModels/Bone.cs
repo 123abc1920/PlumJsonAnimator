@@ -13,6 +13,7 @@ namespace AnimModels
     {
         public string name = "root";
         public List<Bone> children = new List<Bone>();
+        public Bone parent = null;
         public Slot? slot = null;
         public double endX = 110;
         public double endY = 110;
@@ -43,6 +44,7 @@ namespace AnimModels
         public void addChildren(Bone bone)
         {
             this.children.Add(bone);
+            bone.parent = this;
         }
 
         public override void move(double x, double y)
@@ -166,7 +168,13 @@ namespace AnimModels
         {
             String code = "";
 
-            code += "{\"name\": \"" + this.name + "\"}";
+            code += "{\"name\": \"" + this.name + "\"";
+            if (this.parent != null)
+            {
+                code += ", " + "\"parent\": \"" + this.parent.name + "\"";
+            }
+
+            code += "}";
 
             return code;
         }

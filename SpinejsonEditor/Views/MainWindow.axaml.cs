@@ -100,7 +100,7 @@ public partial class MainWindow : Window
 
         foreach (string p in paths)
         {
-            Slot image = new Slot(p, ConstantsClass.currentProject.Slots.Count, p);
+            Slot image = new Slot(ConstantsClass.currentProject.Slots.Count, p);
             Constants.ConstantsClass.currentProject.Slots.Add(image);
         }
     }

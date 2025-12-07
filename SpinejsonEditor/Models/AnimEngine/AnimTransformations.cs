@@ -23,7 +23,13 @@ namespace AnimTransformations
 
         public override string generateCode()
         {
-            return "{\"time\": " + this.time.ToString().Replace(",", ".") + "}";
+            return "{\"time\": "
+                + this.time.ToString().Replace(",", ".")
+                + ", \"x\": "
+                + this.x.ToString().Replace(",", ".")
+                + ", \"y\": "
+                + this.y.ToString().Replace(",", ".")
+                + "}";
         }
     }
 
@@ -39,7 +45,11 @@ namespace AnimTransformations
 
         public override string generateCode()
         {
-            return "{\"time\": " + this.time.ToString().Replace(",", ".") + "}";
+            return "{\"time\": "
+                + this.time.ToString().Replace(",", ".")
+                + ", \"value\": "
+                + this.value.ToString().Replace(",", ".")
+                + "}";
         }
     }
 
@@ -57,7 +67,13 @@ namespace AnimTransformations
 
         public override string generateCode()
         {
-            return "{\"time\": " + this.time.ToString().Replace(",", ".") + "}";
+            return "{\"time\": "
+                + this.time.ToString().Replace(",", ".")
+                + ", \"x\": "
+                + this.x.ToString().Replace(",", ".")
+                + ", \"y\": "
+                + this.y.ToString().Replace(",", ".")
+                + "}";
         }
     }
 
@@ -75,7 +91,13 @@ namespace AnimTransformations
 
         public override string generateCode()
         {
-            return "{\"time\": " + this.time.ToString().Replace(",", ".") + "}";
+            return "{\"time\": "
+                + this.time.ToString().Replace(",", ".")
+                + ", \"x\": "
+                + this.x.ToString().Replace(",", ".")
+                + ", \"y\": "
+                + this.y.ToString().Replace(",", ".")
+                + "}";
         }
     }
 }

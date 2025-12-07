@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 using Avalonia;
 using Avalonia.Controls;
@@ -37,14 +38,15 @@ namespace AnimModels
         public double lengthY = 100;
         public Bone? BoundedBone { get; set; } = null;
 
-        public Slot(string title, int id, string path)
+        public Slot(int id, string path)
         {
-            Title = title;
             Path = path;
             this.id = id;
             this.a = 0;
             this.x = 0;
             this.y = 0;
+
+            Title = System.IO.Path.GetFileNameWithoutExtension(path);
         }
 
         public void setBone(Bone? b)
