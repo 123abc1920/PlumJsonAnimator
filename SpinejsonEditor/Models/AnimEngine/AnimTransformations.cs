@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json;
 
 namespace AnimTransformations
 {
@@ -6,7 +7,30 @@ namespace AnimTransformations
     {
         public double time;
 
-        public abstract String generateCode();
+        public abstract IKeyframeTypeData generateJSONData();
+
+        public String generateCode()
+        {
+            return JsonConvert.SerializeObject(
+                generateJSONData(),
+                Constants.ConstantsClass.jsonSettings
+            );
+        }
+    }
+
+    public class IKeyframeTypeData()
+    {
+        [JsonProperty("time")]
+        public Double? Time { get; set; }
+
+        [JsonProperty("x", NullValueHandling = NullValueHandling.Ignore)]
+        public Double? X { get; set; }
+
+        [JsonProperty("y", NullValueHandling = NullValueHandling.Ignore)]
+        public Double? Y { get; set; }
+
+        [JsonProperty("value", NullValueHandling = NullValueHandling.Ignore)]
+        public Double? Value { get; set; }
     }
 
     public class Translate : IKeyframeType
@@ -21,15 +45,15 @@ namespace AnimTransformations
             this.y = _y;
         }
 
-        public override string generateCode()
+        public override IKeyframeTypeData generateJSONData()
         {
-            return "{\"time\": "
-                + this.time.ToString().Replace(",", ".")
-                + ", \"x\": "
-                + this.x.ToString().Replace(",", ".")
-                + ", \"y\": "
-                + this.y.ToString().Replace(",", ".")
-                + "}";
+            return new IKeyframeTypeData
+            {
+                Time = this.time,
+                X = this.x,
+                Y = this.y,
+                Value = null,
+            };
         }
     }
 
@@ -43,13 +67,15 @@ namespace AnimTransformations
             this.value = _value;
         }
 
-        public override string generateCode()
+        public override IKeyframeTypeData generateJSONData()
         {
-            return "{\"time\": "
-                + this.time.ToString().Replace(",", ".")
-                + ", \"value\": "
-                + this.value.ToString().Replace(",", ".")
-                + "}";
+            return new IKeyframeTypeData
+            {
+                Time = this.time,
+                X = null,
+                Y = null,
+                Value = this.value,
+            };
         }
     }
 
@@ -65,15 +91,15 @@ namespace AnimTransformations
             this.y = _y;
         }
 
-        public override string generateCode()
+        public override IKeyframeTypeData generateJSONData()
         {
-            return "{\"time\": "
-                + this.time.ToString().Replace(",", ".")
-                + ", \"x\": "
-                + this.x.ToString().Replace(",", ".")
-                + ", \"y\": "
-                + this.y.ToString().Replace(",", ".")
-                + "}";
+            return new IKeyframeTypeData
+            {
+                Time = this.time,
+                X = this.x,
+                Y = this.y,
+                Value = null,
+            };
         }
     }
 
@@ -89,15 +115,15 @@ namespace AnimTransformations
             this.y = _y;
         }
 
-        public override string generateCode()
+        public override IKeyframeTypeData generateJSONData()
         {
-            return "{\"time\": "
-                + this.time.ToString().Replace(",", ".")
-                + ", \"x\": "
-                + this.x.ToString().Replace(",", ".")
-                + ", \"y\": "
-                + this.y.ToString().Replace(",", ".")
-                + "}";
+            return new IKeyframeTypeData
+            {
+                Time = this.time,
+                X = this.x,
+                Y = this.y,
+                Value = null,
+            };
         }
     }
 }

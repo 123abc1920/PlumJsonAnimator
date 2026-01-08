@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Avalonia.Controls;
 using Constants;
+using Newtonsoft.Json;
 using SpinejsonEditor.ViewModels;
 
 namespace AnimModels
@@ -11,7 +12,6 @@ namespace AnimModels
         public string name = "default";
         private List<Bone> bones = new List<Bone>();
         private List<Skin> skins = new List<Skin>();
-        private List<Slot> slots = new List<Slot>();
 
         private int ids = 0;
 
@@ -64,29 +64,45 @@ namespace AnimModels
             }
         }
 
-        public String generateCode()
+        public SkeletonData generateJSONData()
         {
-            String code = "\"bones\": [";
+            var skeletonData = new SkeletonData();
 
-            String slotsCode = "\"slots\": [";
-
-            for (int i = 0; i < this.bones.Count; i++)
+            var boneList = new List<BoneData>();
+            foreach (var bone in this.bones)
             {
-                code += this.bones[i].generateCode();
-                if (i != this.bones.Count - 1)
-                {
-                    code += ",";
-                }
+                boneList.Add(bone.generateJSONData());
+            }
+            skeletonData.Bones = boneList;
 
-                if (this.bones[i].slot != null)
+            var slotsList = new List<SlotData>();
+            foreach (var bone in this.bones)
+            {
+                if (bone.slot != null)
                 {
-                    slotsCode += this.bones[i].slot.generateCode() + ",";
+                    slotsList.Add(bone.slot.generateJSONData());
                 }
             }
-            slotsCode += "]";
+            skeletonData.Slots = slotsList;
 
-            code += "]," + slotsCode;
-            return code;
+            return skeletonData;
+        }
+
+        public String generateCode()
+        {
+            return JsonConvert.SerializeObject(generateJSONData(), ConstantsClass.jsonSettings);
         }
     }
+}
+
+public class SkeletonData
+{
+    [JsonProperty("bones")]
+    public List<BoneData> Bones { get; set; } = new List<BoneData>();
+
+    [JsonProperty("slots")]
+    public List<SlotData> Slots { get; set; } = new List<SlotData>();
+
+    /*[JsonProperty("skins", NullValueHandling = NullValueHandling.Ignore)]
+    public List<SkinData> Skins { get; set; } = new List<SkinData>();*/
 }

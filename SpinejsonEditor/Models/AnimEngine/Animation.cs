@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using AnimEngine;
+using Newtonsoft.Json;
 
 namespace AnimModels
 {
@@ -47,16 +48,21 @@ namespace AnimModels
             currentTime += 0.01666667;
         }
 
+        public AnimationData generateJSONData()
+        {
+            var animationData = new AnimationData();
+            animationData[this.AnimationName] = this.skeletonInAnimation.generateJSONData();
+            return animationData;
+        }
+
         public String generateCode()
         {
-            String code = "";
-
-            code += "\"" + this.AnimationName + "\": {\"bones\": {";
-
-            code += this.skeletonInAnimation.generateCode();
-
-            code += "}}";
-            return code;
+            return JsonConvert.SerializeObject(
+                generateJSONData(),
+                Constants.ConstantsClass.jsonSettings
+            );
         }
     }
 }
+
+public class AnimationData : Dictionary<string, SkeletonInAnimationData> { }

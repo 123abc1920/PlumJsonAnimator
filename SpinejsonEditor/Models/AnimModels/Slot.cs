@@ -1,10 +1,9 @@
 using System;
 using System.ComponentModel;
-using System.IO;
 using System.Runtime.CompilerServices;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
+using Newtonsoft.Json;
 
 namespace AnimModels
 {
@@ -101,20 +100,34 @@ namespace AnimModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public SlotData generateJSONData()
+        {
+            return new SlotData
+            {
+                Name = this.Title,
+                Bone = this.BoundedBone?.name,
+                Attachment = this.Title,
+            };
+        }
+
         public String generateCode()
         {
-            String code =
-                "{\"name\": \""
-                + Title
-                + "\", \"bone\": \""
-                + this.BoundedBone?.name
-                + "\", \"attachment\": \""
-                + Title
-                + "\"}";
-
-            return code;
+            return JsonConvert.SerializeObject(
+                generateJSONData(),
+                Constants.ConstantsClass.jsonSettings
+            );
         }
     }
 }
 
-// тесты 3.6 3.7
+public class SlotData
+{
+    [JsonProperty("name")]
+    public string Name { get; set; } = "";
+
+    [JsonProperty("bone", NullValueHandling = NullValueHandling.Ignore)]
+    public string Bone { get; set; }
+
+    [JsonProperty("attachment", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public required string Attachment { get; set; }
+}

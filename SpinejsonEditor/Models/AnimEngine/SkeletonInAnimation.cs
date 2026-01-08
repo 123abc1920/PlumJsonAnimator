@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace AnimEngine
 {
@@ -15,20 +16,29 @@ namespace AnimEngine
             }
         }
 
-        public String generateCode()
+        public SkeletonInAnimationData generateJSONData()
         {
-            String code = "";
-
+            List<BoneInAnimationData> bones = new List<BoneInAnimationData>();
             for (int i = 0; i < this.bones.Count; i++)
             {
-                code += this.bones[i].generateCode();
-                if (i != this.bones.Count - 1)
-                {
-                    code += ",";
-                }
+                bones.Add(this.bones[i].generateJSONData());
             }
 
-            return code;
+            return new SkeletonInAnimationData { Bones = bones };
+        }
+
+        public String generateCode()
+        {
+            return JsonConvert.SerializeObject(
+                generateJSONData(),
+                Constants.ConstantsClass.jsonSettings
+            );
         }
     }
+}
+
+public class SkeletonInAnimationData
+{
+    [JsonProperty("bones")]
+    public List<BoneInAnimationData> Bones { get; set; } = new List<BoneInAnimationData>();
 }

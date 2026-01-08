@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Generic;
 using AnimEngine;
 using AnimTransformations;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Constants;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace AnimModels
 {
@@ -13,7 +16,7 @@ namespace AnimModels
     {
         public string name = "root";
         public List<Bone> children = new List<Bone>();
-        public Bone parent = null;
+        public Bone? parent = null;
         public Slot? slot = null;
         public double endX = 110;
         public double endY = 110;
@@ -164,19 +167,42 @@ namespace AnimModels
             canvas.Children.Add(joint);
         }
 
-        public String generateCode()
+        public BoneData generateJSONData()
         {
-            String code = "";
-
-            code += "{\"name\": \"" + this.name + "\"";
-            if (this.parent != null)
+            return new BoneData
             {
-                code += ", " + "\"parent\": \"" + this.parent.name + "\"";
-            }
+                Name = this.name,
+                Parent = this.parent?.name,
+                X = this.x,
+                Y = this.y,
+                Rotation = this.a
+            };
+        }
 
-            code += "}";
-
-            return code;
+        public string generateCode()
+        {
+            return JsonConvert.SerializeObject(
+                generateJSONData(),
+                Constants.ConstantsClass.jsonSettings
+            );
         }
     }
+}
+
+public class BoneData
+{
+    [JsonProperty("name")]
+    public string Name { get; set; } = "";
+
+    [JsonProperty("parent", NullValueHandling = NullValueHandling.Ignore)]
+    public string Parent { get; set; }
+
+    [JsonProperty("x", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public double X { get; set; }
+
+    [JsonProperty("y", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public double Y { get; set; }
+
+    [JsonProperty("rotation", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public double Rotation { get; set; }
 }

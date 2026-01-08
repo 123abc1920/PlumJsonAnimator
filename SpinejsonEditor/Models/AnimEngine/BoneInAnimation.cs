@@ -4,6 +4,7 @@ using System.Linq;
 using AnimModels;
 using AnimTransformations;
 using Constants;
+using Newtonsoft.Json;
 
 namespace AnimEngine
 {
@@ -277,37 +278,52 @@ namespace AnimEngine
             rotateStep();
         }
 
+        public BoneInAnimationData generateJSONData()
+        {
+            List<IKeyframeTypeData> translate = new List<IKeyframeTypeData>();
+            for (int i = 0; i < this.translateKeyframes.Count; i++)
+            {
+                translate.Add(this.translateKeyframes[i].generateJSONData());
+            }
+
+            List<IKeyframeTypeData> rotate = new List<IKeyframeTypeData>();
+            /*for (int i = 0; i < this.translateKeyframes.Count; i++)
+            {
+                rotate.Add(this.rotateKeyframes[i].generateJSONData());
+            }*/
+
+            List<IKeyframeTypeData> shear = new List<IKeyframeTypeData>();
+
+            return new BoneInAnimationData
+            {
+                Name = this.bone.name,
+                Translate = translate,
+                Rotate = rotate,
+                Shear = shear,
+            };
+        }
+
         public String generateCode()
         {
-            String code = "\"" + this.bone.name + "\": {\"translate\": [";
-
-            for (int i = 0; i < this.translateKeyframes.Count; i++)
-            {
-                code += this.translateKeyframes[i].generateCode();
-                if (i != this.translateKeyframes.Count - 1)
-                {
-                    code += ",";
-                }
-            }
-
-            code += "], \"rotate\": [";
-
-            for (int i = 0; i < this.translateKeyframes.Count; i++)
-            {
-                code += this.translateKeyframes[i].generateCode();
-                if (i != this.translateKeyframes.Count - 1)
-                {
-                    code += ",";
-                }
-            }
-
-            code += "], \"shear\": [";
-
-            code += "]";
-
-            code += "}";
-
-            return code;
+            return JsonConvert.SerializeObject(
+                generateJSONData(),
+                Constants.ConstantsClass.jsonSettings
+            );
         }
     }
+}
+
+public class BoneInAnimationData
+{
+    [JsonProperty("name")]
+    public string Name { get; set; } = "";
+
+    [JsonProperty("translate", NullValueHandling = NullValueHandling.Ignore)]
+    public List<IKeyframeTypeData> Translate { get; set; }
+
+    [JsonProperty("rotate", NullValueHandling = NullValueHandling.Ignore)]
+    public List<IKeyframeTypeData> Rotate { get; set; }
+
+    [JsonProperty("shear", NullValueHandling = NullValueHandling.Ignore)]
+    public List<IKeyframeTypeData> Shear { get; set; }
 }
