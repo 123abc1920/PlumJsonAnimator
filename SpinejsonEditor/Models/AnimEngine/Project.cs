@@ -1,8 +1,7 @@
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using AnimModels;
 using Avalonia.Controls;
+using Newtonsoft.Json;
 using SpinejsonGeneration;
 using TransformModes;
 
@@ -12,6 +11,8 @@ namespace EngineModels
     {
         public string ProjectPath { get; set; } = "C:/Users/Документы/";
         public string Name { get; set; } = "NewProject";
+
+        private MetaData metaData = new MetaData { Spine = "4.2.22" };
 
         public Skeleton? mainSkeleton = null;
         public Mode currentMode = new NoMode();
@@ -59,5 +60,16 @@ namespace EngineModels
                 s.drawSlot(c);
             }
         }
+
+        public MetaData gemerateMetaData()
+        {
+            return this.metaData;
+        }
     }
+}
+
+public class MetaData
+{
+    [JsonProperty("spine")]
+    public string Spine { get; set; }
 }

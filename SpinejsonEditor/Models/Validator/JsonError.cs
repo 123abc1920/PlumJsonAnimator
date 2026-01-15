@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 
 namespace JsonValidator
@@ -12,9 +13,19 @@ namespace JsonValidator
             set
             {
                 _errorText = value;
+                if (value == "JSON is valid")
+                {
+                    this.isOk = true;
+                }
+                else
+                {
+                    this.isOk = false;
+                }
                 OnPropertyChanged(nameof(ErrorText));
             }
         }
+
+        public bool isOk = true;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

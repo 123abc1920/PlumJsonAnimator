@@ -10,7 +10,7 @@ namespace AnimModels
     public class Skeleton
     {
         public string name = "default";
-        private List<Bone> bones = new List<Bone>();
+        public List<Bone> bones = new List<Bone>();
         private List<Skin> skins = new List<Skin>();
 
         private int ids = 0;

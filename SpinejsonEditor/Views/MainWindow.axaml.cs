@@ -252,26 +252,36 @@ public partial class MainWindow : Window
 
     private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (e.Source is TabControl tabControl && tabControl.SelectedItem is TabItem selectedTab)
+        if (e.Source is TabControl tabControl)
         {
-            string header = selectedTab.Header?.ToString();
+            int newIndex = tabControl.SelectedIndex;
 
-            switch (header)
+            if (newIndex == 0 && Constants.ConstantsClass.jsonError.isOk != true)
             {
-                case "Spinejson":
-                    currentTab = 1;
-                    ConstantsClass.currentProject?.SpinejsonCode.generateCode(
-                        ConstantsClass.currentProject
-                    );
-                    break;
+                tabControl.SelectionChanged -= TabControl_SelectionChanged;
+                tabControl.SelectedIndex = 1;
+                tabControl.SelectionChanged += TabControl_SelectionChanged;
+                return;
+            }
 
-                case "Анимация":
-                    currentTab = 0;
-                    break;
+            if (tabControl.SelectedItem is TabItem selectedTab)
+            {
+                string header = selectedTab.Header?.ToString();
 
-                default:
-                    currentTab = 0;
-                    break;
+                switch (header)
+                {
+                    case "Spinejson":
+                        currentTab = 1;
+                        ConstantsClass.currentProject?.SpinejsonCode.generateCode(
+                            ConstantsClass.currentProject
+                        );
+                        break;
+
+                    case "Анимация":
+                        ConstantsClass.currentProject?.SpinejsonCode.regenerate();
+                        currentTab = 0;
+                        break;
+                }
             }
         }
     }

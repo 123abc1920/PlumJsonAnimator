@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 using Avalonia.Controls;
 using Avalonia.Media;
@@ -116,6 +117,51 @@ namespace AnimModels
                 generateJSONData(),
                 Constants.ConstantsClass.jsonSettings
             );
+        }
+
+        public static Slot regenerate(string json, string imagesFolder = "")
+        {
+            try
+            {
+                var data = JsonConvert.DeserializeObject<SlotData>(
+                    json,
+                    Constants.ConstantsClass.jsonSettings
+                );
+
+                if (data == null)
+                    return new Slot(0, "default.png");
+
+                string imagePath;
+                if (!string.IsNullOrEmpty(imagesFolder) && Directory.Exists(imagesFolder))
+                {
+                    var possibleExtensions = new[] { ".png", ".jpg", ".jpeg" };
+                    foreach (var ext in possibleExtensions)
+                    {
+                        var fullPath = imagesFolder + data.Attachment + ext;
+                        if (File.Exists(fullPath))
+                        {
+                            imagePath = fullPath;
+                            break;
+                        }
+                    }
+                    imagePath = imagesFolder + data.Attachment + ".png";
+                }
+                else
+                {
+                    imagePath = data.Attachment + ".png";
+                }
+
+                var slot = new Slot(0, imagePath)
+                {
+                    Title = data.Name,
+                };
+
+                return slot;
+            }
+            catch
+            {
+                return new Slot(0, "default.png");
+            }
         }
     }
 }

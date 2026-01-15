@@ -44,6 +44,16 @@ namespace AnimModels
             this.name = "name" + this.id.ToString();
         }
 
+        public Bone(int _id, Bone parent, String name, double x, double y, double a)
+        {
+            this.id = _id;
+            this.a = a;
+            this.x = x;
+            this.y = y;
+            this.name = name;
+            this.parent = parent;
+        }
+
         public void addChildren(Bone bone)
         {
             this.children.Add(bone);
@@ -175,7 +185,7 @@ namespace AnimModels
                 Parent = this.parent?.name,
                 X = this.x,
                 Y = this.y,
-                Rotation = this.a
+                Rotation = this.a,
             };
         }
 

@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using AnimModels;
 using EngineModels;
 using Newtonsoft.Json;
-using Prettify;
 
 namespace SpinejsonGeneration
 {
@@ -34,7 +36,7 @@ namespace SpinejsonGeneration
 
             return new CodeData
             {
-                Skeleton = new MetaData { Spine = "4.2.22" },
+                Skeleton = Constants.ConstantsClass.currentProject.gemerateMetaData(),
                 SkeletonData = project.mainSkeleton.generateJSONData(),
                 Animations = animations,
             };
@@ -50,6 +52,50 @@ namespace SpinejsonGeneration
 
             text = Prettify.Prettify.prettify(text);
             OnPropertyChanged(nameof(Text));
+        }
+
+        public void regenerate()
+        {
+            CodeData newData = JsonConvert.DeserializeObject<CodeData>(text);
+            if (newData == null)
+            {
+                return;
+            }
+
+            var currBones = Constants.ConstantsClass.currentProject.mainSkeleton.bones;
+
+            var currentBonesDict = currBones.ToDictionary(b => b.name, b => b);
+            var newBonesDict = newData.Bones.ToDictionary(b => b.Name, b => b);
+
+            for (int i = currBones.Count - 1; i >= 0; i--)
+            {
+                var bone = currBones[i];
+                if (newBonesDict.ContainsKey(bone.name))
+                {
+                    var oldjsonObj = bone.generateJSONData();
+                    if (newBonesDict.TryGetValue(bone.name, out var newjsonObj))
+                    {
+                        if (oldjsonObj.ToString() != newjsonObj.ToString())
+                        {
+                            currBones.RemoveAt(i);
+                            currBones.Add(
+                                new Bone(
+                                    currBones.Count,
+                                    currBones[0],
+                                    newjsonObj.Name,
+                                    newjsonObj.X,
+                                    newjsonObj.Y,
+                                    newjsonObj.Rotation
+                                )
+                            );
+                        }
+                    }
+                }
+                else
+                {
+                    currBones.RemoveAt(i);
+                }
+            }
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -70,17 +116,29 @@ public class CodeData
     public SkeletonData SkeletonData { get; set; }
 
     [JsonProperty("bones")]
-    public List<BoneData> Bones => SkeletonData?.Bones;
+    public List<BoneData> Bones
+    {
+        get => SkeletonData?.Bones;
+        set
+        {
+            if (SkeletonData == null)
+                SkeletonData = new SkeletonData();
+            SkeletonData.Bones = value ?? new List<BoneData>();
+        }
+    }
 
     [JsonProperty("slots")]
-    public List<SlotData> Slots => SkeletonData?.Slots;
+    public List<SlotData> Slots
+    {
+        get => SkeletonData?.Slots;
+        set
+        {
+            if (SkeletonData == null)
+                SkeletonData = new SkeletonData();
+            SkeletonData.Slots = value ?? new List<SlotData>();
+        }
+    }
 
     [JsonProperty("animations", NullValueHandling = NullValueHandling.Ignore)]
     public List<AnimationData> Animations { get; set; }
-}
-
-public class MetaData
-{
-    [JsonProperty("spine")]
-    public string Spine { get; set; }
 }
