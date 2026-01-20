@@ -14,7 +14,7 @@ namespace EngineModels
 
         private MetaData metaData = new MetaData { Spine = "4.2.22" };
 
-        public Skeleton? mainSkeleton = null;
+        public Skeleton? MainSkeleton { get; set; } = null;
         public Mode currentMode = new NoMode();
         public int seletedBoneId = -1;
         public ObservableCollection<Slot> Slots { get; set; } = new ObservableCollection<Slot>();
@@ -25,7 +25,7 @@ namespace EngineModels
 
         public Project()
         {
-            mainSkeleton = new Skeleton();
+            MainSkeleton = new Skeleton();
             animations.Add(new Animation());
         }
 

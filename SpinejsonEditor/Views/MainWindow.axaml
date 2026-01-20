@@ -1,247 +1,313 @@
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:SpinejsonEditor.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:ctrls="using:TimeLine"
-        xmlns:models="using:TimeLine"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="SpinejsonEditor.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="SpinejsonEditor">
+<Window
+    x:Class="SpinejsonEditor.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:Converters"
+    xmlns:ctrls="using:TimeLine"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:TimeLine"
+    xmlns:vm="using:SpinejsonEditor.ViewModels"
+    Title="SpinejsonEditor"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:MainWindowViewModel"
+    Icon="/Assets/avalonia-logo.ico"
+    mc:Ignorable="d">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
+        <!--
+            This only sets the DataContext for the previewer in an IDE,
+            to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs)
+        -->
+        <vm:MainWindowViewModel />
     </Design.DataContext>
 
-<DockPanel>
-    <Menu DockPanel.Dock="Top">
-      <MenuItem Header="Project">
-        <MenuItem Header="Open"/>
-        <MenuItem Header="New"/>
-        <MenuItem Header="Save"/>
-        <Separator/>
-        <MenuItem Header="Settings"/>
-      </MenuItem>
-      <MenuItem Header="File">
-        <MenuItem Header="Import json"/>
-        <MenuItem Header="Export json"/>
-      </MenuItem>
-    </Menu>
-    <Grid DockPanel.Dock="Bottom">
-		<TextBlock Margin="0 5" FontSize="18" FontWeight="Bold">Heading</TextBlock>
-	</Grid>
-    <Grid>
-    <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="*"/>
-        <ColumnDefinition Width="6"/>
-        <ColumnDefinition Width="3*"/>
-        <ColumnDefinition Width="6"/>
-        <ColumnDefinition Width="*"/>
-    </Grid.ColumnDefinitions>
-	            <Grid Grid.Column="0" Background="AliceBlue">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="6"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <ScrollViewer Background="LightBlue" Grid.Row="0" HorizontalScrollBarVisibility="Auto"
-                        VerticalScrollBarVisibility="Auto">
-                        <StackPanel>
-                            <TextBlock FontSize="22" Background="LightBlue">Project Name</TextBlock>
-                            <TextBox Name="projectName" Text="{Binding CurrentProject.Name}" Watermark="New Project" KeyDown="TextBox_KeyDown"/>
-                            <TextBlock FontSize="22">Project Path</TextBlock>
-                            <TextBox Name="projectPath" Text="{Binding CurrentProject.ProjectPath}" Watermark="Path" KeyDown="TextBox_KeyDown"/>
-                        </StackPanel>
-                    </ScrollViewer>
-                    <GridSplitter Grid.Row="1" Background="Gray" Height="6" ResizeDirection="Rows"/>
-                    <ScrollViewer Background="LightBlue" HorizontalAlignment="Stretch" Grid.Row="3" HorizontalScrollBarVisibility="Auto"
-                        VerticalScrollBarVisibility="Auto">
-                        <StackPanel>
-                            <TextBlock FontSize="22" Background="LightBlue">Current Name</TextBlock>
-                            <TextBox Name="animationName" Text="{Binding CurrentAnimation.AnimationName, Mode=TwoWay}"/>
-                            <StackPanel Orientation="Horizontal">
-                                <ComboBox SelectedIndex="{Binding CurrentAnimationIndex, Mode=TwoWay}" 
-                                        MaxDropDownHeight="100"
-                                        ItemsSource="{Binding Animations}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding AnimationName}"/>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
-                                <Button Click="Add_New_Animation" Content="+"/>
-                                <Button Content="-"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </ScrollViewer>
-                </Grid>
-	    <GridSplitter Grid.Column="1" Background="Gray" Width="6" ResizeDirection="Columns"/>
-        <Grid Grid.Column="2">
-    <TabControl Padding="0" SelectionChanged="TabControl_SelectionChanged">
-        <TabItem Header="Анимация">
-            <Grid>
+    <Window.Resources>
+        <converters:ObjectIsNotNullConverter x:Key="ObjectIsNotNullConverter" />
+    </Window.Resources>
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Project">
+                <MenuItem Header="Open" />
+                <MenuItem Header="New" />
+                <MenuItem Header="Save" />
+                <Separator />
+                <MenuItem Header="Settings" />
+            </MenuItem>
+            <MenuItem Header="File">
+                <MenuItem Header="Import json" />
+                <MenuItem Header="Export json" />
+            </MenuItem>
+        </Menu>
+        <Grid DockPanel.Dock="Bottom">
+            <TextBlock
+                Margin="0,5"
+                FontSize="18"
+                FontWeight="Bold">
+                Heading
+            </TextBlock>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="6" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="6" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Background="AliceBlue">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="6" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                
-                <Grid Grid.Row="0">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        
-                        <StackPanel Grid.Column="0"
-                                    Orientation="Vertical" 
-                                    HorizontalAlignment="Left" 
-                                    VerticalAlignment="Top" 
-                                    Width="50">
-                            <Button Content="К"/>
-                            <Button Content="Л"/>
-                            <Button Content="О"/>
+                <ScrollViewer
+                    Grid.Row="0"
+                    Background="LightBlue"
+                    HorizontalScrollBarVisibility="Auto"
+                    VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Background="LightBlue" FontSize="22">Project Name</TextBlock>
+                        <TextBox
+                            Name="projectName"
+                            KeyDown="TextBox_KeyDown"
+                            Text="{Binding CurrentProject.Name}"
+                            Watermark="New Project" />
+                        <TextBlock FontSize="22">Project Path</TextBlock>
+                        <TextBox
+                            Name="projectPath"
+                            KeyDown="TextBox_KeyDown"
+                            Text="{Binding CurrentProject.ProjectPath}"
+                            Watermark="Path" />
+                    </StackPanel>
+                </ScrollViewer>
+                <GridSplitter
+                    Grid.Row="1"
+                    Height="6"
+                    Background="Gray"
+                    ResizeDirection="Rows" />
+                <ScrollViewer
+                    Grid.Row="3"
+                    HorizontalAlignment="Stretch"
+                    Background="LightBlue"
+                    HorizontalScrollBarVisibility="Auto"
+                    VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Background="LightBlue" FontSize="22">Current Name</TextBlock>
+                        <TextBox Name="animationName" Text="{Binding CurrentAnimation.AnimationName, Mode=TwoWay}" />
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox
+                                ItemsSource="{Binding Animations}"
+                                MaxDropDownHeight="100"
+                                SelectedIndex="{Binding CurrentAnimationIndex, Mode=TwoWay}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding AnimationName}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Button Click="Add_New_Animation" Content="+" />
+                            <Button Content="-" />
                         </StackPanel>
-                        
-                        <ScrollViewer Grid.Column="1"
-                                    Background="LightBlue" 
-                                    VerticalAlignment="Stretch"
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+            <GridSplitter
+                Grid.Column="1"
+                Width="6"
+                Background="Gray"
+                ResizeDirection="Columns" />
+            <Grid Grid.Column="2">
+                <TabControl Padding="0" SelectionChanged="TabControl_SelectionChanged">
+                    <TabItem Header="Анимация">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="10" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel
+                                        Grid.Column="0"
+                                        Width="50"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Orientation="Vertical">
+                                        <Button Content="К" />
+                                        <Button Content="Л" />
+                                        <Button Content="О" />
+                                    </StackPanel>
+
+                                    <ScrollViewer
+                                        Grid.Column="1"
+                                        VerticalAlignment="Stretch"
+                                        Background="LightBlue"
+                                        HorizontalScrollBarVisibility="Auto"
+                                        VerticalScrollBarVisibility="Auto">
+                                        <Canvas
+                                            Name="mainCanvas"
+                                            Width="1000"
+                                            Height="1000"
+                                            Background="White"
+                                            PointerMoved="Move_Canvas"
+                                            PointerPressed="Press_Canvas"
+                                            PointerReleased="Release_Canvas" />
+                                    </ScrollViewer>
+
+                                    <StackPanel
+                                        Grid.Column="1"
+                                        Width="50"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Bottom"
+                                        Orientation="Horizontal">
+                                        <Button Click="Set_Transform_Mode" Content="XY" />
+                                        <Button Click="Set_Rotate_Mode" Content="A" />
+                                        <Button Click="Set_Scale_Mode" Content="S" />
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+
+                            <GridSplitter
+                                Grid.Row="1"
+                                Background="Gray"
+                                ResizeDirection="Rows" />
+
+                            <Grid Grid.Row="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <StackPanel
+                                    Grid.Row="0"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+                                    <Button Content="[" />
+                                    <Button Click="Play_Animation" Content="P" />
+                                    <Button Content="]" />
+                                </StackPanel>
+
+                                <ScrollViewer
+                                    Grid.Row="1"
+                                    Background="LightBlue"
                                     HorizontalScrollBarVisibility="Auto"
                                     VerticalScrollBarVisibility="Auto">
-                            <Canvas
-                                Name="mainCanvas"
-                                Background="White" 
-                                Width="1000" 
-                                Height="1000"
-                                PointerPressed="Press_Canvas"
-                                PointerMoved="Move_Canvas" 
-                                PointerReleased="Release_Canvas"/>
-                        </ScrollViewer>
-                        
-                        <StackPanel Grid.Column="1"
-                                    Orientation="Horizontal" 
-                                    HorizontalAlignment="Center" 
-                                    VerticalAlignment="Bottom" 
-                                    Width="50">
-                            <Button Click="Set_Transform_Mode" Content="XY"/>
-                            <Button Click="Set_Rotate_Mode" Content="A"/>
-                            <Button Click="Set_Scale_Mode" Content="S"/>
-                        </StackPanel>
-                    </Grid>
-                </Grid>
-
-                <GridSplitter Grid.Row="1" Background="Gray" ResizeDirection="Rows"/>
-                
-                <Grid Grid.Row="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    
-                    <StackPanel Orientation="Horizontal" 
-                                HorizontalAlignment="Left" 
-                                Grid.Row="0">
-                        <Button Content="["/>
-                        <Button Click="Play_Animation" Content="P"/>
-                        <Button Content="]"/>
-                    </StackPanel>
-                    
-                    <ScrollViewer Background="LightBlue" 
-                                Grid.Row="1"
-                                VerticalScrollBarVisibility="Auto" 
-                                HorizontalScrollBarVisibility="Auto">
-                        <Grid>
-                            <ctrls:TimelineControl x:Name="Timeline" 
-                                PixelsPerSecond="100"
-                                TotalDuration="60"
-                                CurrentTime="0">
-                                <ctrls:TimelineControl.Tracks>
-                                    <models:TimelineTrack Name="translate" />
-                                    <models:TimelineTrack Name="rotate" />
-                                    <models:TimelineTrack Name="scale" />
-                                </ctrls:TimelineControl.Tracks>
-                            </ctrls:TimelineControl>
+                                    <Grid>
+                                        <ctrls:TimelineControl
+                                            x:Name="Timeline"
+                                            CurrentTime="0"
+                                            PixelsPerSecond="100"
+                                            TotalDuration="60">
+                                            <ctrls:TimelineControl.Tracks>
+                                                <models:TimelineTrack Name="translate" />
+                                                <models:TimelineTrack Name="rotate" />
+                                                <models:TimelineTrack Name="scale" />
+                                            </ctrls:TimelineControl.Tracks>
+                                        </ctrls:TimelineControl>
+                                    </Grid>
+                                </ScrollViewer>
+                            </Grid>
                         </Grid>
+                    </TabItem>
+
+                    <TabItem Header="Spinejson">
+                        <Grid Grid.Row="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*" />
+                                <RowDefinition Height="6" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <TextBox
+                                Name="spineJsonText"
+                                Grid.Row="0"
+                                AcceptsReturn="True"
+                                Text="{Binding CurrentProject.SpinejsonCode.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                            <GridSplitter
+                                Grid.Row="1"
+                                Height="6"
+                                Background="Gray"
+                                ResizeDirection="Rows" />
+
+                            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                                <TextBlock
+                                    Text="{Binding JsonErrorObj.ErrorText}"
+                                    TextAlignment="Left"
+                                    TextWrapping="Wrap" />
+                            </ScrollViewer>
+                        </Grid>
+                    </TabItem>
+
+                </TabControl>
+            </Grid>
+            <GridSplitter
+                Grid.Column="3"
+                Width="6"
+                Background="Gray"
+                ResizeDirection="Columns" />
+            <Grid Grid.Column="4" Background="AliceBlue">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="6" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <DockPanel Grid.Row="0" Background="LightBlue">
+                    <Grid DockPanel.Dock="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Click="Add_Bone">+</Button>
+                        <Button Grid.Column="1" Click="Rename_Bone">R</Button>
+                    </Grid>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <TreeView Name="boneTreeView" ItemsSource="{Binding CurrentProject.MainSkeleton.RootBones}">
+                            <TreeView.ItemTemplate>
+                                <TreeDataTemplate ItemsSource="{Binding Children}">
+                                    <StackPanel Orientation="Vertical" Spacing="5">
+                                        <TextBlock Text="{Binding Name}" />
+                                        <TextBlock IsVisible="{Binding HasSlot}" Text="{Binding SlotName}" />
+                                    </StackPanel>
+                                </TreeDataTemplate>
+                            </TreeView.ItemTemplate>
+                        </TreeView>
                     </ScrollViewer>
-                </Grid>
+                </DockPanel>
+                <GridSplitter
+                    Grid.Row="1"
+                    Height="6"
+                    Background="Gray"
+                    ResizeDirection="Rows" />
+                <DockPanel Grid.Row="2" Background="LightBlue">
+                    <Grid DockPanel.Dock="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Click="Add_Image">+</Button>
+                    </Grid>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ListBox x:Name="slotsList" ItemsSource="{Binding CurrentProject.Slots}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock PointerPressed="OnSlotPointerPressed" Text="{Binding Name}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
+                </DockPanel>
             </Grid>
-        </TabItem>
-        
-        <TabItem Header="Spinejson">
-            <Grid Grid.Row="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="2*"/>
-                        <RowDefinition Height="6"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+        </Grid>
 
-                    <TextBox Grid.Row="0" AcceptsReturn="True" Name="spineJsonText"
-                        Text="{Binding CurrentProject.SpinejsonCode.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
-                    <GridSplitter Grid.Row="1" Background="Gray" Height="6" ResizeDirection="Rows"/>
-
-                    <ScrollViewer Grid.Row="2"
-	                        VerticalScrollBarVisibility="Auto">
-	                        <TextBlock Text="{Binding JsonErrorObj.ErrorText}" TextWrapping="Wrap" TextAlignment="Left"/>
-	                </ScrollViewer>                    
-            </Grid>
-        </TabItem>
-        
-    </TabControl>
-</Grid>
-	    <GridSplitter Grid.Column="3" Background="Gray" Width="6" ResizeDirection="Columns"/>
-	    <Grid Grid.Column="4" Background="AliceBlue">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="6"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <DockPanel Background="LightBlue" Grid.Row="0">
-                    	<Grid DockPanel.Dock="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-							<Button Click="Add_Bone" Grid.Column="0">+</Button>
-                            <Button Click="Rename_Bone" Grid.Column="1">R</Button>
-						</Grid>
-	                    <ScrollViewer
-	                        VerticalScrollBarVisibility="Auto">
-	                        <TreeView Name="boneTreeView" ItemsSource="{Binding Nodes}">
-                                <TreeView.ItemTemplate>
-                                    <TreeDataTemplate ItemsSource="{Binding SubNodes}">
-                                        <TextBlock Text="{Binding Title}"/>
-                                    </TreeDataTemplate>
-                                </TreeView.ItemTemplate>
-                            </TreeView>
-	                    </ScrollViewer>
-                    </DockPanel>
-                    <GridSplitter Grid.Row="1" Background="Gray" Height="6" ResizeDirection="Rows"/>
-                    <DockPanel Background="LightBlue" Grid.Row="2">
-                    	<Grid DockPanel.Dock="Top">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-							<Button Click="Add_Image" Grid.Column="0">+</Button>
-						</Grid>
-	                    <ScrollViewer
-	                        VerticalScrollBarVisibility="Auto">
-                            <ListBox x:Name="slotsList" ItemsSource="{Binding CurrentProject.Slots}">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Title}" PointerPressed="OnSlotPointerPressed"/>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-	                    </ScrollViewer>
-                    </DockPanel>
-                </Grid>
-	</Grid>
-
-</DockPanel>
+    </DockPanel>
 
 </Window>

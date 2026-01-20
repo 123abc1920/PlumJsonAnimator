@@ -1,30 +1,33 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Avalonia.Controls;
 using Constants;
 using Newtonsoft.Json;
-using SpinejsonEditor.ViewModels;
 
 namespace AnimModels
 {
     public class Skeleton
     {
         public string name = "default";
-        public List<Bone> bones = new List<Bone>();
+        public ObservableCollection<Bone> Bones { get; set; } = new ObservableCollection<Bone>();
+        public ObservableCollection<Bone> RootBones { get; set; } =
+            new ObservableCollection<Bone>();
         private List<Skin> skins = new List<Skin>();
 
         private int ids = 0;
 
         public Skeleton()
         {
-            bones.Add(new Bone());
+            Bones.Add(new Bone());
+            RootBones.Add(Bones[0]);
         }
 
         public void addBone(int id)
         {
-            Bone new_bone = new Bone(bones.Count);
-            this.bones.Add(new_bone);
-            foreach (Bone b in this.bones)
+            Bone new_bone = new Bone(Bones.Count);
+            this.Bones.Add(new_bone);
+            foreach (Bone b in this.Bones)
             {
                 if (b.id == id)
                 {
@@ -46,7 +49,7 @@ namespace AnimModels
 
         public Bone? getBone(int id)
         {
-            foreach (Bone b in this.bones)
+            foreach (Bone b in this.Bones)
             {
                 if (b.id == id)
                 {
@@ -58,7 +61,7 @@ namespace AnimModels
 
         public void drawSkeleton(Canvas canvas)
         {
-            foreach (Bone b in this.bones)
+            foreach (Bone b in this.Bones)
             {
                 b.drawBone(canvas);
             }
@@ -69,18 +72,18 @@ namespace AnimModels
             var skeletonData = new SkeletonData();
 
             var boneList = new List<BoneData>();
-            foreach (var bone in this.bones)
+            foreach (var bone in this.Bones)
             {
                 boneList.Add(bone.generateJSONData());
             }
             skeletonData.Bones = boneList;
 
             var slotsList = new List<SlotData>();
-            foreach (var bone in this.bones)
+            foreach (var bone in this.Bones)
             {
-                if (bone.slot != null)
+                if (bone.Slot != null)
                 {
-                    slotsList.Add(bone.slot.generateJSONData());
+                    slotsList.Add(bone.Slot.generateJSONData());
                 }
             }
             skeletonData.Slots = slotsList;

@@ -37,7 +37,7 @@ namespace SpinejsonGeneration
             return new CodeData
             {
                 Skeleton = Constants.ConstantsClass.currentProject.gemerateMetaData(),
-                SkeletonData = project.mainSkeleton.generateJSONData(),
+                SkeletonData = project.MainSkeleton.generateJSONData(),
                 Animations = animations,
             };
         }
@@ -62,18 +62,18 @@ namespace SpinejsonGeneration
                 return;
             }
 
-            var currBones = Constants.ConstantsClass.currentProject.mainSkeleton.bones;
+            var currBones = Constants.ConstantsClass.currentProject.MainSkeleton.Bones;
 
-            var currentBonesDict = currBones.ToDictionary(b => b.name, b => b);
+            var currentBonesDict = currBones.ToDictionary(b => b.Name, b => b);
             var newBonesDict = newData.Bones.ToDictionary(b => b.Name, b => b);
 
             for (int i = currBones.Count - 1; i >= 0; i--)
             {
                 var bone = currBones[i];
-                if (newBonesDict.ContainsKey(bone.name))
+                if (newBonesDict.ContainsKey(bone.Name))
                 {
                     var oldjsonObj = bone.generateJSONData();
-                    if (newBonesDict.TryGetValue(bone.name, out var newjsonObj))
+                    if (newBonesDict.TryGetValue(bone.Name, out var newjsonObj))
                     {
                         if (oldjsonObj.ToString() != newjsonObj.ToString())
                         {

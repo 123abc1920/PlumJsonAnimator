@@ -9,10 +9,7 @@ using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using Constants;
-using JsonValidator;
-using SpinejsonGeneration;
 using TransformModes;
-using TreeModel;
 
 namespace SpinejsonEditor.Views;
 
@@ -48,7 +45,7 @@ public partial class MainWindow : Window
         {
             mainCanvas.Children.Clear();
             ConstantsClass.currentProject?.drawSlots(mainCanvas);
-            ConstantsClass.currentProject?.mainSkeleton?.drawSkeleton(mainCanvas);
+            ConstantsClass.currentProject?.MainSkeleton?.drawSkeleton(mainCanvas);
             Engine.runAnimation(ConstantsClass.currentProject.GetAnimation());
         }
         else if (currentTab == 1)
@@ -72,15 +69,10 @@ public partial class MainWindow : Window
 
     private void Add_Bone(object sender, RoutedEventArgs e)
     {
-        Node? selectedItem = boneTreeView.SelectedItem as Node;
+        Bone? selectedItem = boneTreeView.SelectedItem as Bone;
         if (selectedItem != null && selectedItem.isBone == true)
         {
-            ConstantsClass.currentProject?.mainSkeleton?.addBone(selectedItem.id);
-            ConstantsClass.viewModel?.AddNode(
-                ConstantsClass.currentProject.mainSkeleton.getLast(),
-                ConstantsClass.currentProject.mainSkeleton.getId(),
-                boneTreeView.SelectedItem
-            );
+            ConstantsClass.currentProject?.MainSkeleton?.addBone(selectedItem.id);
         }
     }
 
@@ -107,9 +99,9 @@ public partial class MainWindow : Window
 
     private void Rename_Bone(object sender, RoutedEventArgs e)
     {
-        if (boneTreeView.SelectedItem is Node selectedNode)
+        if (boneTreeView.SelectedItem is Bone selectedBone)
         {
-            selectedNode.Title = "NewTitle";
+            selectedBone.Name = "NewTitle";
         }
     }
 
@@ -133,13 +125,13 @@ public partial class MainWindow : Window
         var canvas = (Canvas)sender;
         var point = e.GetPosition(canvas);
 
-        Node? selectedItem = boneTreeView.SelectedItem as Node;
+        Bone? selectedItem = boneTreeView.SelectedItem as Bone;
         if (selectedItem != null)
         {
             if (selectedItem.isBone == true)
             {
                 var id = selectedItem.id;
-                selectedBone = ConstantsClass.currentProject?.mainSkeleton?.getBone(id);
+                selectedBone = ConstantsClass.currentProject?.MainSkeleton?.getBone(id);
             }
             else
             {
@@ -207,21 +199,20 @@ public partial class MainWindow : Window
 
             while (element != null)
             {
-                if (element is TreeViewItem item && item.DataContext is Node node)
+                if (element is TreeViewItem item && item.DataContext is Bone Bone)
                 {
-                    if (node.isBone == true)
+                    if (Bone.isBone == true)
                     {
-                        Bone bone = ConstantsClass.currentProject.mainSkeleton.getBone(node.id);
+                        Bone bone = ConstantsClass.currentProject.MainSkeleton.getBone(Bone.id);
                         if (bone != null)
                         {
-                            if (bone.slot != null)
+                            if (bone.Slot != null)
                             {
-                                bone.slot.BoundedBone = null;
+                                bone.Slot.BoundedBone = null;
                             }
                             slot.BoundedBone = bone;
-                            bone.slot = slot;
-                            Node slotNode = new Node(false, slot.Title, slot.id, node.parent);
-                            ConstantsClass.viewModel?.AddNode(slotNode, node.parent);
+                            bone.Slot = slot;
+                            Console.WriteLine(bone.Slot.Name);
                         }
                         return;
                     }
@@ -229,7 +220,7 @@ public partial class MainWindow : Window
                 element = element.Parent as Visual;
             }
 
-            Console.WriteLine("Drop outside any node");
+            Console.WriteLine("Drop outside any Bone");
         }
     }
 

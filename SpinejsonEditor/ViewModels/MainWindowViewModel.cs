@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using AnimModels;
 using Constants;
 using EngineModels;
 using JsonValidator;
-using TreeModel;
 
 namespace SpinejsonEditor.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
 {
-    public ObservableCollection<Node> Nodes { get; set; }
     public Project CurrentProject { get; set; }
     public JsonError JsonErrorObj { get; set; }
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -56,32 +51,21 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
         }
     }
 
-    public MainWindowViewModel()
-    {
-        Nodes = new ObservableCollection<Node> { new Node("root", 0, null) };
-    }
+    public MainWindowViewModel() { }
 
-    public void AddNode(string title, int id, object? selectedBone)
+    public void AddBone(string title, int id, object? selectedBone)
     {
-        if (selectedBone is Node selectedNode)
+        if (selectedBone is Bone selectedNode)
         {
-            selectedNode.SubNodes.Add(new Node(title, id, selectedNode));
-        }
-        else
-        {
-            Nodes.Add(new Node(title, id, null));
+            selectedNode.addChildren(new Bone(selectedNode));
         }
     }
 
-    public void AddNode(Node newNode, Node? parent)
+    public void AddBone(Bone newBone, Bone? parent)
     {
         if (parent != null)
         {
-            parent.SubNodes.Add(newNode);
-        }
-        else
-        {
-            Nodes[0].SubNodes.Add(newNode);
+            parent.Children.Add(newBone);
         }
     }
 
@@ -92,7 +76,7 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
         JsonErrorObj = ConstantsClass.jsonError;
     }
 
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    protected new virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }

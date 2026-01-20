@@ -296,7 +296,7 @@ namespace AnimEngine
 
             return new BoneInAnimationData
             {
-                Name = this.bone.name,
+                Name = this.bone.Name,
                 Translate = translate,
                 Rotate = rotate,
                 Shear = shear,

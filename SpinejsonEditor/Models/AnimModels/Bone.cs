@@ -1,29 +1,93 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using AnimEngine;
-using AnimTransformations;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Constants;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace AnimModels
 {
-    public class Bone : IBone
+    public class Bone : IBone, INotifyPropertyChanged
     {
-        public string name = "root";
-        public List<Bone> children = new List<Bone>();
-        public Bone? parent = null;
-        public Slot? slot = null;
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public ObservableCollection<IBone> Children { get; set; } =
+            new ObservableCollection<IBone>();
+        public Bone? Parent { get; set; } = null;
+        private Slot? _slot;
+        public Slot? Slot
+        {
+            get => _slot;
+            set
+            {
+                _slot = value;
+
+                OnPropertyChanged(nameof(Slot));
+                OnPropertyChanged(nameof(SlotName));
+                OnPropertyChanged(nameof(HasSlot));
+            }
+        }
+        public string SlotName
+        {
+            get { return Slot?.Name ?? ""; }
+        }
+        public bool HasSlot
+        {
+            get { return Slot != null; }
+        }
         public double endX = 110;
         public double endY = 110;
         public double length = 10;
         public BoneInAnimation boneInAnimation;
 
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public Bone()
+        {
+            this.Name = "root";
+
+            this.a = -100;
+            this.id = 0;
+            this.x = 100;
+            this.y = 100;
+
+            double angleRad = this.a * Math.PI / 180;
+            this.endX = this.x + length * Math.Cos(angleRad);
+            this.endY = this.y + length * Math.Sin(angleRad);
+
+            this.isBone = true;
+        }
+
+        public Bone(int _id)
+        {
+            this.id = _id;
+            this.a = -100;
+            this.x = 100;
+            this.y = 100;
+            this.Name = "name" + this.id.ToString();
+
+            this.isBone = true;
+        }
+
+        public Bone(int _id, Bone parent, String name, double x, double y, double a)
+        {
+            this.id = _id;
+            this.a = a;
+            this.x = x;
+            this.y = y;
+            this.Name = name;
+            this.Parent = parent;
+
+            this.isBone = true;
+        }
+
+        public Bone(Bone parent)
         {
             this.a = -100;
             this.id = 0;
@@ -33,31 +97,17 @@ namespace AnimModels
             double angleRad = this.a * Math.PI / 180;
             this.endX = this.x + length * Math.Cos(angleRad);
             this.endY = this.y + length * Math.Sin(angleRad);
-        }
 
-        public Bone(int _id)
-        {
-            this.id = _id;
-            this.a = -100;
-            this.x = 100;
-            this.y = 100;
-            this.name = "name" + this.id.ToString();
-        }
+            this.Parent = parent;
+            this.id = 100;
 
-        public Bone(int _id, Bone parent, String name, double x, double y, double a)
-        {
-            this.id = _id;
-            this.a = a;
-            this.x = x;
-            this.y = y;
-            this.name = name;
-            this.parent = parent;
+            this.isBone = true;
         }
 
         public void addChildren(Bone bone)
         {
-            this.children.Add(bone);
-            bone.parent = this;
+            this.Children.Add(bone);
+            bone.Parent = this;
         }
 
         public override void move(double x, double y)
@@ -72,24 +122,23 @@ namespace AnimModels
             this.endX = this.x + length * Math.Cos(angleRad);
             this.endY = this.y + length * Math.Sin(angleRad);
 
-            foreach (Bone c in this.children)
+            foreach (Bone c in this.Children)
             {
                 c.move(c.x - deltaX, c.y - deltaY);
             }
 
-            if (this.slot != null)
+            if (this.Slot != null)
             {
-                this.slot.move(this.slot.x - deltaX, this.slot.y - deltaY);
+                this.Slot.move(this.Slot.x - deltaX, this.Slot.y - deltaY);
             }
 
-            if (!ConstantsClass.currentProject.GetAnimation().isRun)
+            var animation = ConstantsClass.currentProject?.GetAnimation();
+            if (animation != null && !animation.isRun)
             {
                 if (this.boneInAnimation == null)
                 {
                     this.boneInAnimation = new BoneInAnimation(this);
-                    ConstantsClass
-                        .currentProject.GetAnimation()
-                        .skeletonInAnimation.bones.Add(this.boneInAnimation);
+                    animation.skeletonInAnimation.bones.Add(this.boneInAnimation);
                 }
 
                 this.boneInAnimation.setTranslateKeyFrame(this.x, this.y);
@@ -105,7 +154,7 @@ namespace AnimModels
             this.endX = this.x + length * Math.Cos(angleRad);
             this.endY = this.y + length * Math.Sin(angleRad);
 
-            foreach (Bone child in this.children)
+            foreach (Bone child in this.Children)
             {
                 double dx = child.x - this.x;
                 double dy = child.y - this.y;
@@ -120,10 +169,10 @@ namespace AnimModels
                 child.rotate(child.a + (a - oldA));
             }
 
-            if (this.slot != null)
+            if (this.Slot != null)
             {
-                double slotdx = this.slot.x - this.x;
-                double slotdy = this.slot.y - this.y;
+                double slotdx = this.Slot.x - this.x;
+                double slotdy = this.Slot.y - this.y;
 
                 double slotangleDiff = (a - oldA) * Math.PI / 180;
                 double slotnewDx =
@@ -131,20 +180,19 @@ namespace AnimModels
                 double slotnewDy =
                     slotdx * Math.Sin(slotangleDiff) + slotdy * Math.Cos(slotangleDiff);
 
-                this.slot.x = this.x + slotnewDx;
-                this.slot.y = this.y + slotnewDy;
+                this.Slot.x = this.x + slotnewDx;
+                this.Slot.y = this.y + slotnewDy;
 
-                this.slot.a = this.slot.a + (a - oldA);
+                this.Slot.a = this.Slot.a + (a - oldA);
             }
 
-            if (!ConstantsClass.currentProject.GetAnimation().isRun)
+            var animation = ConstantsClass.currentProject?.GetAnimation();
+            if (animation != null && !animation.isRun)
             {
                 if (this.boneInAnimation == null)
                 {
                     this.boneInAnimation = new BoneInAnimation(this);
-                    ConstantsClass
-                        .currentProject.GetAnimation()
-                        .skeletonInAnimation.bones.Add(this.boneInAnimation);
+                    animation.skeletonInAnimation.bones.Add(this.boneInAnimation);
                 }
                 this.boneInAnimation.setRotateKeyFrame(this.a);
             }
@@ -159,7 +207,7 @@ namespace AnimModels
             {
                 StartPoint = start,
                 EndPoint = end,
-                Stroke = Constants.Color.getLineBoneColor(this.id),
+                Stroke = Color.getLineBoneColor(this.id),
                 StrokeThickness = 3,
             };
 
@@ -167,7 +215,7 @@ namespace AnimModels
             {
                 Width = 8,
                 Height = 8,
-                Fill = Constants.Color.getDotBoneColor(this.id),
+                Fill = Color.getDotBoneColor(this.id),
             };
 
             Canvas.SetLeft(joint, start.X - 4);
@@ -181,8 +229,8 @@ namespace AnimModels
         {
             return new BoneData
             {
-                Name = this.name,
-                Parent = this.parent?.name,
+                Name = this.Name,
+                Parent = this.Parent?.Name,
                 X = this.x,
                 Y = this.y,
                 Rotation = this.a,
@@ -195,6 +243,18 @@ namespace AnimModels
                 generateJSONData(),
                 Constants.ConstantsClass.jsonSettings
             );
+        }
+
+        public override IEnumerable<IBone> CombinedChildren
+        {
+            get
+            {
+                if (Slot != null)
+                    yield return Slot;
+
+                foreach (var child in Children)
+                    yield return child;
+            }
         }
     }
 }

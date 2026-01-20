@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -10,18 +11,7 @@ namespace AnimModels
 {
     public class Slot : IBone, INotifyPropertyChanged
     {
-        private string _title = "";
         private string _path = "";
-
-        public string Title
-        {
-            get => _title;
-            set
-            {
-                _title = value;
-                OnPropertyChanged();
-            }
-        }
 
         public string Path
         {
@@ -36,7 +26,19 @@ namespace AnimModels
         public double selfA = 0;
         public double lengthX = 100;
         public double lengthY = 100;
-        public Bone? BoundedBone { get; set; } = null;
+        private Bone? _boundedBone;
+        public Bone? BoundedBone
+        {
+            get => _boundedBone;
+            set
+            {
+                if (_boundedBone != value)
+                {
+                    _boundedBone = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public Slot(int id, string path)
         {
@@ -46,7 +48,8 @@ namespace AnimModels
             this.x = 0;
             this.y = 0;
 
-            Title = System.IO.Path.GetFileNameWithoutExtension(path);
+            this.Name = System.IO.Path.GetFileNameWithoutExtension(path);
+            this.isBone = false;
         }
 
         public void setBone(Bone? b)
@@ -105,9 +108,9 @@ namespace AnimModels
         {
             return new SlotData
             {
-                Name = this.Title,
-                Bone = this.BoundedBone?.name,
-                Attachment = this.Title,
+                Name = this.Name,
+                Bone = this.BoundedBone?.Name,
+                Attachment = this.Name,
             };
         }
 
@@ -151,10 +154,7 @@ namespace AnimModels
                     imagePath = data.Attachment + ".png";
                 }
 
-                var slot = new Slot(0, imagePath)
-                {
-                    Title = data.Name,
-                };
+                var slot = new Slot(0, imagePath) { Name = data.Name };
 
                 return slot;
             }
@@ -162,6 +162,11 @@ namespace AnimModels
             {
                 return new Slot(0, "default.png");
             }
+        }
+
+        public override IEnumerable<IBone> CombinedChildren
+        {
+            get { yield break; }
         }
     }
 }
