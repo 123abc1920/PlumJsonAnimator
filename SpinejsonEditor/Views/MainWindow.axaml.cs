@@ -99,7 +99,7 @@ public partial class MainWindow : Window
 
     private void Rename_Bone(object sender, RoutedEventArgs e)
     {
-        if (boneTreeView.SelectedItem is Bone selectedBone)
+        if (selectedBone != null)
         {
             selectedBone.Name = "NewTitle";
         }
@@ -107,17 +107,26 @@ public partial class MainWindow : Window
 
     private void Set_Transform_Mode(object sender, RoutedEventArgs e)
     {
-        ConstantsClass.currentProject.currentMode = new TransformMode();
+        ConstantsClass.currentProject.currentMode = TransformModeFactory.createMode(
+            ConstantsClass.currentProject.currentMode,
+            TransformModesTypes.TRANSLATE
+        );
     }
 
     private void Set_Rotate_Mode(object sender, RoutedEventArgs e)
     {
-        ConstantsClass.currentProject.currentMode = new RotateMode();
+        ConstantsClass.currentProject.currentMode = TransformModeFactory.createMode(
+            ConstantsClass.currentProject.currentMode,
+            TransformModesTypes.ROTATE
+        );
     }
 
     private void Set_Scale_Mode(object sender, RoutedEventArgs e)
     {
-        ConstantsClass.currentProject.currentMode = new ScaleMode();
+        ConstantsClass.currentProject.currentMode = TransformModeFactory.createMode(
+            ConstantsClass.currentProject.currentMode,
+            TransformModesTypes.SCALE
+        );
     }
 
     private void Press_Canvas(object sender, PointerPressedEventArgs e)
@@ -153,15 +162,14 @@ public partial class MainWindow : Window
     private void Release_Canvas(object sender, PointerReleasedEventArgs e)
     {
         _isDragging = false;
-        selectedBone = null;
     }
 
     private void TextBox_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key == Key.Enter)
         {
-            Constants.ConstantsClass.currentProject.Name = projectName.Text;
-            Constants.ConstantsClass.currentProject.ProjectPath = projectPath.Text;
+            ConstantsClass.currentProject.Name = projectName.Text;
+            ConstantsClass.currentProject.ProjectPath = projectPath.Text;
         }
     }
 

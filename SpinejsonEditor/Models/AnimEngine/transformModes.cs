@@ -3,6 +3,37 @@ using AnimModels;
 
 namespace TransformModes
 {
+    public enum TransformModesTypes
+    {
+        NO = 0,
+        TRANSLATE,
+        ROTATE,
+        SCALE,
+    }
+
+    public class TransformModeFactory
+    {
+        private static Mode[] modes =
+        {
+            new NoMode(),
+            new TransformMode(),
+            new RotateMode(),
+            new ScaleMode(),
+        };
+
+        public static Mode createMode(Mode old, TransformModesTypes type)
+        {
+            if (old.type == type)
+            {
+                return new NoMode();
+            }
+            else
+            {
+                return modes[(int)type];
+            }
+        }
+    }
+
     class Point
     {
         public double x;
@@ -15,14 +46,21 @@ namespace TransformModes
         }
     }
 
-    public interface Mode
+    public abstract class Mode
     {
-        void transform(IBone bone, double a, double b);
+        public TransformModesTypes type;
+
+        public abstract void transform(IBone bone, double a, double b);
     }
 
     class NoMode : Mode
     {
-        public void transform(IBone bone, double x, double y)
+        public NoMode()
+        {
+            type = TransformModesTypes.NO;
+        }
+
+        public override void transform(IBone bone, double a, double b)
         {
             return;
         }
@@ -30,9 +68,12 @@ namespace TransformModes
 
     class TransformMode : Mode
     {
-        public TransformMode() { }
+        public TransformMode()
+        {
+            type = TransformModesTypes.TRANSLATE;
+        }
 
-        public void transform(IBone bone, double x, double y)
+        public override void transform(IBone bone, double x, double y)
         {
             bone.move(x, y);
         }
@@ -40,9 +81,12 @@ namespace TransformModes
 
     class ScaleMode : Mode
     {
-        public ScaleMode() { }
+        public ScaleMode()
+        {
+            type = TransformModesTypes.SCALE;
+        }
 
-        public void transform(IBone bone, double x, double y)
+        public override void transform(IBone bone, double x, double y)
         {
             bone.scale(x, y);
         }
@@ -50,9 +94,12 @@ namespace TransformModes
 
     class RotateMode : Mode
     {
-        public RotateMode() { }
+        public RotateMode()
+        {
+            type = TransformModesTypes.ROTATE;
+        }
 
-        public void transform(IBone bone, double x, double y)
+        public override void transform(IBone bone, double x, double y)
         {
             double xx = x - bone.x;
             Point av = new Point(xx, y - bone.y);
