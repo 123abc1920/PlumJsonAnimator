@@ -125,21 +125,6 @@ public partial class MainWindow : Window
         var canvas = (Canvas)sender;
         var point = e.GetPosition(canvas);
 
-        Bone? selectedItem = boneTreeView.SelectedItem as Bone;
-        if (selectedItem != null)
-        {
-            if (selectedItem.isBone == true)
-            {
-                var id = selectedItem.id;
-                selectedBone = ConstantsClass.currentProject?.MainSkeleton?.getBone(id);
-            }
-            else
-            {
-                var id = selectedItem.id;
-                selectedBone = ConstantsClass.currentProject?.GetSlot(id);
-            }
-        }
-
         var properties = e.GetCurrentPoint(canvas).Properties;
         if (properties.IsLeftButtonPressed)
         {
@@ -157,7 +142,7 @@ public partial class MainWindow : Window
 
         if (selectedBone != null)
         {
-            Constants.ConstantsClass.currentProject?.currentMode.transform(
+            ConstantsClass.currentProject?.currentMode.transform(
                 selectedBone,
                 point.X - canvas.Width / 2,
                 point.Y - canvas.Height / 2
@@ -274,6 +259,31 @@ public partial class MainWindow : Window
                         break;
                 }
             }
+        }
+    }
+
+    private void OnBonePointerPressed(object sender, TappedEventArgs e)
+    {
+        if (sender is StackPanel panel && panel.DataContext is Bone bone)
+        {
+            if (bone == selectedBone)
+            {
+                if (bone.HasSlot)
+                {
+                    selectedBone = bone.Slot;
+                }
+                else
+                {
+                    selectedBone = null;
+                    boneTreeView.SelectedItem = null;
+                }
+            }
+            else
+            {
+                selectedBone = bone;
+            }
+            Console.WriteLine(selectedBone?.Name);
+            e.Handled = true;
         }
     }
 }

@@ -274,7 +274,10 @@
                         <TreeView Name="boneTreeView" ItemsSource="{Binding CurrentProject.MainSkeleton.RootBones}">
                             <TreeView.ItemTemplate>
                                 <TreeDataTemplate ItemsSource="{Binding Children}">
-                                    <StackPanel Orientation="Vertical" Spacing="5">
+                                    <StackPanel
+                                        Orientation="Vertical"
+                                        DoubleTapped="OnBonePointerPressed"
+                                        Spacing="5">
                                         <TextBlock Text="{Binding Name}" />
                                         <TextBlock IsVisible="{Binding HasSlot}" Text="{Binding SlotName}" />
                                     </StackPanel>
