@@ -99,10 +99,16 @@ public partial class MainWindow : Window
 
     private void Rename_Bone(object sender, RoutedEventArgs e)
     {
-        if (selectedBone != null)
+        if (selectedBone != null && selectedBone.isBone == true)
         {
-            selectedBone.Name = "NewTitle";
+            Bone bone = (Bone)selectedBone;
+            bone.Name = "NewTitle";
         }
+    }
+
+    private void Delete_Bone(object sender, RoutedEventArgs e)
+    {
+        Console.WriteLine("delete");
     }
 
     private void Set_Transform_Mode(object sender, RoutedEventArgs e)
@@ -279,6 +285,7 @@ public partial class MainWindow : Window
                 if (bone.HasSlot)
                 {
                     selectedBone = bone.Slot;
+                    Console.WriteLine("Slot");
                 }
                 else
                 {
@@ -289,8 +296,8 @@ public partial class MainWindow : Window
             else
             {
                 selectedBone = bone;
+                Console.WriteLine("Bone");
             }
-            Console.WriteLine(selectedBone?.Name);
             e.Handled = true;
         }
     }

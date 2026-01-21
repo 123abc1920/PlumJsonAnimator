@@ -4,7 +4,6 @@ namespace AnimModels
 {
     public class IBone
     {
-        public string Name { get; set; } = "";
         public double x;
         public double y;
         public double a;

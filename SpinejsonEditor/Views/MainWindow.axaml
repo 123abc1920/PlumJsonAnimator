@@ -266,19 +266,21 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Button Grid.Column="0" Click="Add_Bone">+</Button>
                         <Button Grid.Column="1" Click="Rename_Bone">R</Button>
+                        <Button Grid.Column="2" Click="Delete_Bone">-</Button>
                     </Grid>
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <TreeView Name="boneTreeView" ItemsSource="{Binding CurrentProject.MainSkeleton.RootBones}">
                             <TreeView.ItemTemplate>
                                 <TreeDataTemplate ItemsSource="{Binding Children}">
                                     <StackPanel
-                                        Orientation="Vertical"
                                         DoubleTapped="OnBonePointerPressed"
+                                        Orientation="Vertical"
                                         Spacing="5">
-                                        <TextBlock Text="{Binding Name}" />
+                                        <TextBlock Text="{Binding Name, Mode=TwoWay}" />
                                         <TextBlock IsVisible="{Binding HasSlot}" Text="{Binding SlotName}" />
                                     </StackPanel>
                                 </TreeDataTemplate>

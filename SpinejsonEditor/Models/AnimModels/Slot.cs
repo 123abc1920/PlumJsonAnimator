@@ -11,6 +11,19 @@ namespace AnimModels
 {
     public class Slot : IBone, INotifyPropertyChanged
     {
+        private string _name = "";
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                    OnPropertyChanged(nameof(Name));
+                }
+            }
+        }
         private string _path = "";
 
         public string Path
