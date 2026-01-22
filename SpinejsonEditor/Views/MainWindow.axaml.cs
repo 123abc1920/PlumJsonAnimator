@@ -106,9 +106,23 @@ public partial class MainWindow : Window
         }
     }
 
+    private void DeleteBone(Bone? bone)
+    {
+        if (bone != null && bone.Parent != null)
+        {
+            ConstantsClass.currentProject?.MainSkeleton?.Bones.Remove(bone);
+            bone.Parent.Children.Remove(bone);
+            foreach (Bone b in bone.Children.ToList())
+            {
+                DeleteBone(b);
+            }
+        }
+    }
+
     private void Delete_Bone(object sender, RoutedEventArgs e)
     {
-        Console.WriteLine("delete");
+        Bone bone = (Bone)selectedBone;
+        DeleteBone(bone);
     }
 
     private void Set_Transform_Mode(object sender, RoutedEventArgs e)
