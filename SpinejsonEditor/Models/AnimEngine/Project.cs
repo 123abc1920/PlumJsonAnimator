@@ -1,4 +1,6 @@
+using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using AnimModels;
 using Avalonia.Controls;
 using Newtonsoft.Json;
@@ -7,7 +9,7 @@ using TransformModes;
 
 namespace EngineModels
 {
-    public partial class Project
+    public partial class Project : INotifyPropertyChanged
     {
         public string ProjectPath { get; set; } = "C:/Users/Документы/";
         public string Name { get; set; } = "NewProject";
@@ -20,24 +22,56 @@ namespace EngineModels
         public ObservableCollection<Slot> Slots { get; set; } = new ObservableCollection<Slot>();
         public SpinejsonCode SpinejsonCode { get; set; } = new SpinejsonCode();
 
-        public ObservableCollection<Animation> animations = new ObservableCollection<Animation>();
+        public ObservableCollection<Animation> Animations = new ObservableCollection<Animation>();
         public int currentAnimation = 0;
+
+        public ObservableCollection<Skin> Skins { get; } = new ObservableCollection<Skin>();
+        private Skin _currentSkin;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public Skin CurrentSkin
+        {
+            get => _currentSkin;
+            set
+            {
+                if (_currentSkin != value)
+                {
+                    _currentSkin = value;
+                    OnPropertyChanged(nameof(CurrentSkin));
+                    RestartBindings();
+                }
+            }
+        }
+        public int CurrentSkinIndex { get; set; } = 0;
 
         public Project()
         {
             MainSkeleton = new Skeleton();
-            animations.Add(new Animation());
+            Animations.Add(new Animation());
+            Skins.Add(new Skin());
+            CurrentSkin = Skins[0];
         }
 
         public Animation GetAnimation()
         {
-            return animations[currentAnimation];
+            return Animations[currentAnimation];
         }
 
         public void addAnimation()
         {
-            this.animations.Add(new Animation("anim" + animations.Count.ToString()));
-            currentAnimation = this.animations.Count - 1;
+            this.Animations.Add(new Animation("anim" + Animations.Count.ToString()));
+            currentAnimation = this.Animations.Count - 1;
+        }
+
+        public void AddSkin()
+        {
+            this.Skins.Add(new Skin("skin" + Skins.Count.ToString()));
         }
 
         public IBone? GetSlot(int id)
@@ -53,12 +87,17 @@ namespace EngineModels
             return null;
         }
 
+        /// <summary>
+        /// Rebind all bones with new skin
+        /// </summary>
+        public void RestartBindings()
+        {
+            this.MainSkeleton.RestartBindings(CurrentSkin);
+        }
+
         public void drawSlots(Canvas c)
         {
-            foreach (Slot s in Slots)
-            {
-                s.drawSlot(c);
-            }
+            CurrentSkin.DrawSkin(c);
         }
 
         public MetaData gemerateMetaData()

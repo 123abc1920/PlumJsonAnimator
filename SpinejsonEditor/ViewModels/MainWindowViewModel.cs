@@ -16,10 +16,10 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
 
     public ObservableCollection<Animation> Animations
     {
-        get => CurrentProject.animations;
+        get => CurrentProject.Animations;
         set
         {
-            CurrentProject.animations = value;
+            CurrentProject.Animations = value;
             OnPropertyChanged();
         }
     }
@@ -39,19 +39,22 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     {
         get =>
             CurrentProject.currentAnimation >= 0
-            && CurrentProject.currentAnimation < CurrentProject.animations.Count
-                ? CurrentProject.animations[CurrentProject.currentAnimation]
+            && CurrentProject.currentAnimation < CurrentProject.Animations.Count
+                ? CurrentProject.Animations[CurrentProject.currentAnimation]
                 : null;
         set
         {
             if (value != null)
             {
-                CurrentAnimationIndex = CurrentProject.animations.IndexOf(value);
+                CurrentAnimationIndex = CurrentProject.Animations.IndexOf(value);
             }
         }
     }
 
-    public MainWindowViewModel() { }
+    public MainWindowViewModel()
+    {
+        
+    }
 
     public void AddBone(string title, int id, object? selectedBone)
     {

@@ -2,7 +2,6 @@
     x:Class="SpinejsonEditor.Views.MainWindow"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converters="clr-namespace:Converters"
     xmlns:ctrls="using:TimeLine"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -22,10 +21,6 @@
         -->
         <vm:MainWindowViewModel />
     </Design.DataContext>
-
-    <Window.Resources>
-        <converters:ObjectIsNotNullConverter x:Key="ObjectIsNotNullConverter" />
-    </Window.Resources>
 
     <DockPanel>
         <Menu DockPanel.Dock="Top">
@@ -69,18 +64,22 @@
                     HorizontalScrollBarVisibility="Auto"
                     VerticalScrollBarVisibility="Auto">
                     <StackPanel>
-                        <TextBlock Background="LightBlue" FontSize="22">Project Name</TextBlock>
-                        <TextBox
-                            Name="projectName"
-                            KeyDown="TextBox_KeyDown"
-                            Text="{Binding CurrentProject.Name}"
-                            Watermark="New Project" />
-                        <TextBlock FontSize="22">Project Path</TextBlock>
-                        <TextBox
-                            Name="projectPath"
-                            KeyDown="TextBox_KeyDown"
-                            Text="{Binding CurrentProject.ProjectPath}"
-                            Watermark="Path" />
+                        <TextBlock Background="LightBlue" FontSize="22">Current Name</TextBlock>
+                        <TextBox Name="skinName" Text="{Binding CurrentProject.CurrentSkin.Name, Mode=TwoWay}" />
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox
+                                ItemsSource="{Binding CurrentProject.Skins}"
+                                MaxDropDownHeight="100"
+                                SelectedItem="{Binding CurrentProject.CurrentSkin, Mode=TwoWay}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" />
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Button Click="Add_New_Skin" Content="+" />
+                            <Button Content="-" />
+                        </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
                 <GridSplitter
@@ -267,10 +266,12 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Button Grid.Column="0" Click="Add_Bone">+</Button>
                         <Button Grid.Column="1" Click="Rename_Bone">R</Button>
                         <Button Grid.Column="2" Click="Delete_Bone">-</Button>
+                        <Button Grid.Column="3" Click="Delete_Slot">-S</Button>
                     </Grid>
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <TreeView Name="boneTreeView" ItemsSource="{Binding CurrentProject.MainSkeleton.RootBones}">

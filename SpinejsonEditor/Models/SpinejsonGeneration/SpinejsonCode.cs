@@ -29,9 +29,9 @@ namespace SpinejsonGeneration
         public CodeData generateJSONData(Project project)
         {
             List<AnimationData> animations = new List<AnimationData>();
-            for (int i = 0; i < project.animations.Count; i++)
+            for (int i = 0; i < project.Animations.Count; i++)
             {
-                animations.Add(project.animations[i].generateJSONData());
+                animations.Add(project.Animations[i].generateJSONData());
             }
 
             return new CodeData

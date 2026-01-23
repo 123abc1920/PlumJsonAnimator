@@ -125,6 +125,12 @@ public partial class MainWindow : Window
         DeleteBone(bone);
     }
 
+    private void Delete_Slot(object sender, RoutedEventArgs e)
+    {
+        Bone bone = (Bone)selectedBone;
+        ConstantsClass.currentProject.CurrentSkin.UnbindBoneAndSlot(bone);
+    }
+
     private void Set_Transform_Mode(object sender, RoutedEventArgs e)
     {
         ConstantsClass.currentProject.currentMode = TransformModeFactory.createMode(
@@ -184,14 +190,7 @@ public partial class MainWindow : Window
         _isDragging = false;
     }
 
-    private void TextBox_KeyDown(object sender, KeyEventArgs e)
-    {
-        if (e.Key == Key.Enter)
-        {
-            ConstantsClass.currentProject.Name = projectName.Text;
-            ConstantsClass.currentProject.ProjectPath = projectPath.Text;
-        }
-    }
+    private void TextBox_KeyDown(object sender, KeyEventArgs e) { }
 
     private void OnSlotPointerPressed(object sender, PointerPressedEventArgs e)
     {
@@ -219,13 +218,7 @@ public partial class MainWindow : Window
                         Bone bone = ConstantsClass.currentProject.MainSkeleton.getBone(Bone.id);
                         if (bone != null)
                         {
-                            if (bone.Slot != null)
-                            {
-                                bone.Slot.BoundedBone = null;
-                            }
-                            slot.BoundedBone = bone;
-                            bone.Slot = slot;
-                            Console.WriteLine(bone.Slot.Name);
+                            ConstantsClass.currentProject.CurrentSkin.BindBoneAndSlot(bone, slot);
                         }
                         return;
                     }
@@ -252,6 +245,11 @@ public partial class MainWindow : Window
     private void Add_New_Animation(object sender, RoutedEventArgs e)
     {
         ConstantsClass.currentProject?.addAnimation();
+    }
+
+    private void Add_New_Skin(object sender, RoutedEventArgs e)
+    {
+        ConstantsClass.currentProject?.AddSkin();
     }
 
     private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
