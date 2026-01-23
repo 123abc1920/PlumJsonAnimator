@@ -14,47 +14,7 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     public JsonError JsonErrorObj { get; set; }
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public ObservableCollection<Animation> Animations
-    {
-        get => CurrentProject.Animations;
-        set
-        {
-            CurrentProject.Animations = value;
-            OnPropertyChanged();
-        }
-    }
-
-    public int CurrentAnimationIndex
-    {
-        get => CurrentProject.currentAnimation;
-        set
-        {
-            CurrentProject.currentAnimation = value;
-            OnPropertyChanged();
-            OnPropertyChanged(nameof(CurrentAnimation));
-        }
-    }
-
-    public Animation CurrentAnimation
-    {
-        get =>
-            CurrentProject.currentAnimation >= 0
-            && CurrentProject.currentAnimation < CurrentProject.Animations.Count
-                ? CurrentProject.Animations[CurrentProject.currentAnimation]
-                : null;
-        set
-        {
-            if (value != null)
-            {
-                CurrentAnimationIndex = CurrentProject.Animations.IndexOf(value);
-            }
-        }
-    }
-
-    public MainWindowViewModel()
-    {
-        
-    }
+    public MainWindowViewModel() { }
 
     public void AddBone(string title, int id, object? selectedBone)
     {

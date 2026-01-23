@@ -8,27 +8,20 @@ namespace AnimModels
 {
     public class Animation : INotifyPropertyChanged
     {
-        public string name = "anim0";
-        public string AnimationName
-        {
-            get => name;
-            set
-            {
-                name = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AnimationName)));
-            }
-        }
+        public string Name { get; set; } = "anim0";
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public double currentTime = 0;
         public bool isRun = false;
         public SkeletonInAnimation skeletonInAnimation = new SkeletonInAnimation();
+        public Dictionary<Bone, BoneInAnimation> BoneAnimationBinding =
+            new Dictionary<Bone, BoneInAnimation>();
 
         public Animation() { }
 
         public Animation(string name)
         {
-            this.name = name;
+            this.Name = name;
         }
 
         public bool playOrPause()
@@ -51,7 +44,7 @@ namespace AnimModels
         public AnimationData generateJSONData()
         {
             var animationData = new AnimationData();
-            animationData[this.AnimationName] = this.skeletonInAnimation.generateJSONData();
+            animationData[this.Name] = this.skeletonInAnimation.generateJSONData();
             return animationData;
         }
 

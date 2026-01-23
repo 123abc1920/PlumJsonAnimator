@@ -69,18 +69,21 @@ namespace AnimModels
 
         public void RestartBindings(Skin newSkin)
         {
-            foreach (Bone b in Bones)
+            if (newSkin != null)
             {
-                if (b.Slot != null)
+                foreach (Bone b in Bones)
                 {
-                    b.Slot.BoundedBone = null;
-                    b.Slot = null;
-                }
-                Slot? slot = newSkin.GetSlot(b);
-                if (slot != null)
-                {
-                    b.Slot = slot;
-                    slot.BoundedBone = b;
+                    if (b.Slot != null)
+                    {
+                        b.Slot.BoundedBone = null;
+                        b.Slot = null;
+                    }
+                    Slot? slot = newSkin.GetSlot(b);
+                    if (slot != null)
+                    {
+                        b.Slot = slot;
+                        slot.BoundedBone = b;
+                    }
                 }
             }
         }

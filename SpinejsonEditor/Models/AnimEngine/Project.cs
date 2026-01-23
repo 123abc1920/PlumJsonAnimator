@@ -22,11 +22,12 @@ namespace EngineModels
         public ObservableCollection<Slot> Slots { get; set; } = new ObservableCollection<Slot>();
         public SpinejsonCode SpinejsonCode { get; set; } = new SpinejsonCode();
 
-        public ObservableCollection<Animation> Animations = new ObservableCollection<Animation>();
-        public int currentAnimation = 0;
+        public ObservableCollection<Animation> Animations { get; } =
+            new ObservableCollection<Animation>();
 
         public ObservableCollection<Skin> Skins { get; } = new ObservableCollection<Skin>();
         private Skin _currentSkin;
+        private Animation _currentAnimation;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -48,25 +49,38 @@ namespace EngineModels
                 }
             }
         }
-        public int CurrentSkinIndex { get; set; } = 0;
+
+        public Animation CurrentAnimation
+        {
+            get => _currentAnimation;
+            set
+            {
+                if (_currentAnimation != value)
+                {
+                    _currentAnimation = value;
+                    OnPropertyChanged(nameof(CurrentAnimation));
+                    RestartBindings();
+                }
+            }
+        }
 
         public Project()
         {
             MainSkeleton = new Skeleton();
             Animations.Add(new Animation());
+            CurrentAnimation = Animations[0];
             Skins.Add(new Skin());
             CurrentSkin = Skins[0];
         }
 
         public Animation GetAnimation()
         {
-            return Animations[currentAnimation];
+            return CurrentAnimation;
         }
 
-        public void addAnimation()
+        public void AddAnimation()
         {
             this.Animations.Add(new Animation("anim" + Animations.Count.ToString()));
-            currentAnimation = this.Animations.Count - 1;
         }
 
         public void AddSkin()

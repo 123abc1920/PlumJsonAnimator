@@ -95,15 +95,15 @@
                     VerticalScrollBarVisibility="Auto">
                     <StackPanel>
                         <TextBlock Background="LightBlue" FontSize="22">Current Name</TextBlock>
-                        <TextBox Name="animationName" Text="{Binding CurrentAnimation.AnimationName, Mode=TwoWay}" />
+                        <TextBox Name="animationName" Text="{Binding CurrentProject.CurrentAnimation.Name, Mode=TwoWay}" />
                         <StackPanel Orientation="Horizontal">
                             <ComboBox
-                                ItemsSource="{Binding Animations}"
+                                ItemsSource="{Binding CurrentProject.Animations}"
                                 MaxDropDownHeight="100"
-                                SelectedIndex="{Binding CurrentAnimationIndex, Mode=TwoWay}">
+                                SelectedItem="{Binding CurrentProject.CurrentAnimation, Mode=TwoWay}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding AnimationName}" />
+                                        <TextBlock Text="{Binding Name}" />
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>

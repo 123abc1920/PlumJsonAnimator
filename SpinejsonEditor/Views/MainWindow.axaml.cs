@@ -244,7 +244,7 @@ public partial class MainWindow : Window
 
     private void Add_New_Animation(object sender, RoutedEventArgs e)
     {
-        ConstantsClass.currentProject?.addAnimation();
+        ConstantsClass.currentProject?.AddAnimation();
     }
 
     private void Add_New_Skin(object sender, RoutedEventArgs e)
