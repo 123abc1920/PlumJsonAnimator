@@ -148,13 +148,14 @@ namespace AnimModels
             var animation = ConstantsClass.currentProject?.GetAnimation();
             if (animation != null && !animation.isRun)
             {
-                if (this.boneInAnimation == null)
+                /*if (this.boneInAnimation == null)
                 {
                     this.boneInAnimation = new BoneInAnimation(this);
                     animation.skeletonInAnimation.bones.Add(this.boneInAnimation);
                 }
 
-                this.boneInAnimation.setTranslateKeyFrame(this.x, this.y);
+                this.boneInAnimation.setTranslateKeyFrame(this.x, this.y);*/
+                animation.TranslateBone(this, this.x, this.y);
             }
         }
 
@@ -202,12 +203,13 @@ namespace AnimModels
             var animation = ConstantsClass.currentProject?.GetAnimation();
             if (animation != null && !animation.isRun)
             {
-                if (this.boneInAnimation == null)
+                /*if (this.boneInAnimation == null)
                 {
                     this.boneInAnimation = new BoneInAnimation(this);
                     animation.skeletonInAnimation.bones.Add(this.boneInAnimation);
                 }
-                this.boneInAnimation.setRotateKeyFrame(this.a);
+                this.boneInAnimation.setRotateKeyFrame(this.a);*/
+                animation.RotateBone(this, this.a);
             }
         }
 

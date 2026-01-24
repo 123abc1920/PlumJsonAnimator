@@ -187,6 +187,7 @@ public partial class MainWindow : Window
 
     private void Release_Canvas(object sender, PointerReleasedEventArgs e)
     {
+        
         _isDragging = false;
     }
 

@@ -8,7 +8,7 @@ namespace AnimEngine
         {
             if (animation.isRun)
             {
-                animation.run();
+                animation.step();
             }
         }
     }

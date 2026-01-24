@@ -3,6 +3,14 @@ using Newtonsoft.Json;
 
 namespace AnimTransformations
 {
+    public enum KeyFrameTypes
+    {
+        TRANSLATE = 0,
+        ROTATE,
+        SCALE,
+        SHEAR,
+    }
+
     public abstract class IKeyframeType
     {
         public double time;
