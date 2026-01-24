@@ -114,7 +114,7 @@ namespace EngineModels
             CurrentSkin.DrawSkin(c);
         }
 
-        public MetaData gemerateMetaData()
+        public MetaData generateMetaData()
         {
             return this.metaData;
         }

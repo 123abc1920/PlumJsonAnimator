@@ -28,15 +28,23 @@ namespace SpinejsonGeneration
 
         public CodeData generateJSONData(Project project)
         {
-            List<AnimationData> animations = new List<AnimationData>();
+            /*List<AnimationData> animations = new List<AnimationData>();
             for (int i = 0; i < project.Animations.Count; i++)
             {
                 animations.Add(project.Animations[i].generateJSONData());
+            }*/
+            Dictionary<string, AnimationData> animations = new Dictionary<string, AnimationData>();
+            for (int i = 0; i < project.Animations.Count; i++)
+            {
+                animations.Add(
+                    project.Animations[i].Name,
+                    project.Animations[i].generateJSONData()
+                );
             }
 
             return new CodeData
             {
-                Skeleton = Constants.ConstantsClass.currentProject.gemerateMetaData(),
+                Skeleton = Constants.ConstantsClass.currentProject.generateMetaData(),
                 SkeletonData = project.MainSkeleton.generateJSONData(),
                 Animations = animations,
             };
@@ -140,5 +148,5 @@ public class CodeData
     }
 
     [JsonProperty("animations", NullValueHandling = NullValueHandling.Ignore)]
-    public List<AnimationData> Animations { get; set; }
+    public Dictionary<string, AnimationData> Animations { get; set; }
 }

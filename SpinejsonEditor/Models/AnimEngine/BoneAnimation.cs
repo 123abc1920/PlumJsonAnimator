@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AnimTransformations;
+using Newtonsoft.Json;
 
 namespace AnimModels
 {
@@ -255,5 +256,61 @@ namespace AnimModels
             TranslateStep(b, time);
             RotateStep(b, time);
         }
+
+        public BoneAnimationData generateJSONData()
+        {
+            List<IKeyframeTypeData> translatesJSON = new List<IKeyframeTypeData>();
+            List<IKeyframeTypeData> rotatesJSON = new List<IKeyframeTypeData>();
+            List<IKeyframeTypeData> scalesJSON = new List<IKeyframeTypeData>();
+            List<IKeyframeTypeData> shearsJSON = new List<IKeyframeTypeData>();
+
+            foreach (IKeyframeType frame in translateKeyframes.Values)
+            {
+                translatesJSON.Add(frame.generateJSONData());
+            }
+            foreach (IKeyframeType frame in rotateKeyframes.Values)
+            {
+                rotatesJSON.Add(frame.generateJSONData());
+            }
+            foreach (IKeyframeType frame in scaleKeyframes.Values)
+            {
+                scalesJSON.Add(frame.generateJSONData());
+            }
+            foreach (IKeyframeType frame in shearKeyframes.Values)
+            {
+                shearsJSON.Add(frame.generateJSONData());
+            }
+
+            return new BoneAnimationData
+            {
+                translate = translatesJSON,
+                rotate = rotatesJSON,
+                scale = scalesJSON,
+                shear = shearsJSON,
+            };
+        }
+
+        public string generateCode()
+        {
+            return JsonConvert.SerializeObject(
+                generateJSONData(),
+                Constants.ConstantsClass.jsonSettings
+            );
+        }
     }
+}
+
+public class BoneAnimationData
+{
+    [JsonProperty("translate")]
+    public List<IKeyframeTypeData> translate { get; set; }
+
+    [JsonProperty("rotate", NullValueHandling = NullValueHandling.Ignore)]
+    public List<IKeyframeTypeData> rotate { get; set; }
+
+    [JsonProperty("scale", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public List<IKeyframeTypeData> scale { get; set; }
+
+    [JsonProperty("shear", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public List<IKeyframeTypeData> shear { get; set; }
 }

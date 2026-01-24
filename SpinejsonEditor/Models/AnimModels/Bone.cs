@@ -54,7 +54,6 @@ namespace AnimModels
         public double endX = 110;
         public double endY = 110;
         public double length = 10;
-        public BoneInAnimation boneInAnimation;
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -148,13 +147,6 @@ namespace AnimModels
             var animation = ConstantsClass.currentProject?.GetAnimation();
             if (animation != null && !animation.isRun)
             {
-                /*if (this.boneInAnimation == null)
-                {
-                    this.boneInAnimation = new BoneInAnimation(this);
-                    animation.skeletonInAnimation.bones.Add(this.boneInAnimation);
-                }
-
-                this.boneInAnimation.setTranslateKeyFrame(this.x, this.y);*/
                 animation.TranslateBone(this, this.x, this.y);
             }
         }
@@ -203,12 +195,6 @@ namespace AnimModels
             var animation = ConstantsClass.currentProject?.GetAnimation();
             if (animation != null && !animation.isRun)
             {
-                /*if (this.boneInAnimation == null)
-                {
-                    this.boneInAnimation = new BoneInAnimation(this);
-                    animation.skeletonInAnimation.bones.Add(this.boneInAnimation);
-                }
-                this.boneInAnimation.setRotateKeyFrame(this.a);*/
                 animation.RotateBone(this, this.a);
             }
         }
@@ -248,7 +234,6 @@ namespace AnimModels
                 Parent = this.Parent?.Name,
                 X = this.x,
                 Y = this.y,
-                Rotation = this.a,
             };
         }
 
@@ -287,7 +272,4 @@ public class BoneData
 
     [JsonProperty("y", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public double Y { get; set; }
-
-    [JsonProperty("rotation", DefaultValueHandling = DefaultValueHandling.Ignore)]
-    public double Rotation { get; set; }
 }

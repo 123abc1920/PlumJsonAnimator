@@ -13,7 +13,6 @@ namespace AnimModels
         public event PropertyChangedEventHandler? PropertyChanged;
         public double currentTime = 0;
         public bool isRun = false;
-        public SkeletonInAnimation skeletonInAnimation = new SkeletonInAnimation();
         public Dictionary<Bone, BoneAnimation> BoneAnimationBinding =
             new Dictionary<Bone, BoneAnimation>();
 
@@ -37,7 +36,6 @@ namespace AnimModels
 
         public void step()
         {
-            //skeletonInAnimation.animationStep(this.currentTime);
             foreach (Bone b in BoneAnimationBinding.Keys)
             {
                 BoneAnimationBinding[b].BoneStep(b, currentTime);
@@ -48,8 +46,21 @@ namespace AnimModels
         public AnimationData generateJSONData()
         {
             var animationData = new AnimationData();
-            animationData[this.Name] = this.skeletonInAnimation.generateJSONData();
+            var boneListData = new BonesListData();
+            foreach (Bone b in BoneAnimationBinding.Keys)
+            {
+                boneListData.Add(b.Name, BoneAnimationBinding[b].generateJSONData());
+            }
+            animationData["bones"] = boneListData;
             return animationData;
+        }
+
+        public String generateCode()
+        {
+            return JsonConvert.SerializeObject(
+                generateJSONData(),
+                Constants.ConstantsClass.jsonSettings
+            );
         }
 
         /// <summary>
@@ -87,15 +98,11 @@ namespace AnimModels
             AnimateBone(b);
             BoneAnimationBinding[b].addShearFrame(currentTime, x, y);
         }
-
-        public String generateCode()
-        {
-            return JsonConvert.SerializeObject(
-                generateJSONData(),
-                Constants.ConstantsClass.jsonSettings
-            );
-        }
     }
 }
 
-public class AnimationData : Dictionary<string, SkeletonInAnimationData> { }
+public class BoneAnimationListData : Dictionary<string, BoneAnimationData> { }
+
+public class BonesListData : Dictionary<string, BoneAnimationData> { }
+
+public class AnimationData : Dictionary<string, BonesListData> { }
