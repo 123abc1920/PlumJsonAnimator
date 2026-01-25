@@ -28,11 +28,6 @@ namespace SpinejsonGeneration
 
         public CodeData generateJSONData(Project project)
         {
-            /*List<AnimationData> animations = new List<AnimationData>();
-            for (int i = 0; i < project.Animations.Count; i++)
-            {
-                animations.Add(project.Animations[i].generateJSONData());
-            }*/
             Dictionary<string, AnimationData> animations = new Dictionary<string, AnimationData>();
             for (int i = 0; i < project.Animations.Count; i++)
             {
@@ -47,6 +42,7 @@ namespace SpinejsonGeneration
                 Skeleton = Constants.ConstantsClass.currentProject.generateMetaData(),
                 SkeletonData = project.MainSkeleton.generateJSONData(),
                 Animations = animations,
+                Skins = Constants.ConstantsClass.currentProject.generateSkinsJSONData(),
             };
         }
 
@@ -86,16 +82,15 @@ namespace SpinejsonGeneration
                         if (oldjsonObj.ToString() != newjsonObj.ToString())
                         {
                             currBones.RemoveAt(i);
-                            currBones.Add(
+                            /*currBones.Add(
                                 new Bone(
                                     currBones.Count,
                                     currBones[0],
                                     newjsonObj.Name,
                                     newjsonObj.X,
-                                    newjsonObj.Y,
-                                    newjsonObj.Rotation
+                                    newjsonObj.Y
                                 )
-                            );
+                            );*/
                         }
                     }
                 }
@@ -146,6 +141,9 @@ public class CodeData
             SkeletonData.Slots = value ?? new List<SlotData>();
         }
     }
+
+    [JsonProperty("skins", NullValueHandling = NullValueHandling.Ignore)]
+    public List<SkinData> Skins { get; set; }
 
     [JsonProperty("animations", NullValueHandling = NullValueHandling.Ignore)]
     public Dictionary<string, AnimationData> Animations { get; set; }

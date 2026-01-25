@@ -24,14 +24,14 @@ namespace AnimModels
                 }
             }
         }
-        private string _path = "";
+        private string _attachment = "";
 
-        public string Path
+        public string Attachment
         {
-            get => _path;
+            get => _attachment;
             set
             {
-                _path = value;
+                _attachment = value;
                 OnPropertyChanged();
             }
         }
@@ -55,7 +55,7 @@ namespace AnimModels
 
         public Slot(int id, string path)
         {
-            Path = path;
+            Attachment = path;
             this.id = id;
             this.a = 0;
             this.x = 0;
@@ -97,7 +97,7 @@ namespace AnimModels
             {
                 var image = new Image
                 {
-                    Source = new Avalonia.Media.Imaging.Bitmap(this.Path),
+                    Source = new Avalonia.Media.Imaging.Bitmap(this.Attachment),
                     Width = lengthX,
                     Height = lengthY,
                     RenderTransform = new RotateTransform(this.a + this.selfA),

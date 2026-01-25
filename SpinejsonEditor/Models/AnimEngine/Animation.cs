@@ -101,8 +101,6 @@ namespace AnimModels
     }
 }
 
-public class BoneAnimationListData : Dictionary<string, BoneAnimationData> { }
-
 public class BonesListData : Dictionary<string, BoneAnimationData> { }
 
 public class AnimationData : Dictionary<string, BonesListData> { }

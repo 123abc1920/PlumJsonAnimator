@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using AnimModels;
@@ -117,6 +118,16 @@ namespace EngineModels
         public MetaData generateMetaData()
         {
             return this.metaData;
+        }
+
+        public List<SkinData> generateSkinsJSONData()
+        {
+            List<SkinData> skinData = new List<SkinData>();
+            foreach (Skin s in Skins)
+            {
+                skinData.Add(s.generateJSONData());
+            }
+            return skinData;
         }
     }
 }

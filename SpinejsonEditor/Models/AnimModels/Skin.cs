@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using System.Net.Mail;
 using Avalonia.Controls;
+using Newtonsoft.Json;
+using Tmds.DBus.Protocol;
 
 namespace AnimModels
 {
@@ -93,5 +96,53 @@ namespace AnimModels
                 s.drawSlot(canvas);
             }
         }
+
+        public SkinData generateJSONData()
+        {
+            Dictionary<string, Dictionary<string, AttachmentData>> attachments =
+                new Dictionary<string, Dictionary<string, AttachmentData>>();
+
+            foreach (Slot s in BoneSlotBinding.Values)
+            {
+                attachments[s.Name] = new Dictionary<string, AttachmentData>();
+                attachments[s.Name][s.Attachment] = new AttachmentData
+                {
+                    Name = s.Attachment,
+                    Width = 100,
+                    Height = 100,
+                };
+            }
+
+            return new SkinData { Name = this.Name, Attachments = attachments };
+        }
+
+        public string generateCode()
+        {
+            return JsonConvert.SerializeObject(
+                generateJSONData(),
+                Constants.ConstantsClass.jsonSettings
+            );
+        }
     }
+}
+
+public class AttachmentData
+{
+    [JsonProperty("name")]
+    public string Name { get; set; }
+
+    [JsonProperty("width")]
+    public int Width { get; set; }
+
+    [JsonProperty("height")]
+    public int Height { get; set; }
+}
+
+public class SkinData
+{
+    [JsonProperty("name")]
+    public string Name { get; set; }
+
+    [JsonProperty("attachments")]
+    public Dictionary<string, Dictionary<string, AttachmentData>> Attachments { get; set; }
 }
