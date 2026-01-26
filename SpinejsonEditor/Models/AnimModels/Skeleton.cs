@@ -69,23 +69,7 @@ namespace AnimModels
 
         public void RestartBindings(Skin newSkin)
         {
-            if (newSkin != null)
-            {
-                foreach (Bone b in Bones)
-                {
-                    if (b.Slot != null)
-                    {
-                        b.Slot.BoundedBone = null;
-                        b.Slot = null;
-                    }
-                    Slot? slot = newSkin.GetSlot(b);
-                    if (slot != null)
-                    {
-                        b.Slot = slot;
-                        slot.BoundedBone = b;
-                    }
-                }
-            }
+            
         }
 
         public SkeletonData generateJSONData()
@@ -100,13 +84,7 @@ namespace AnimModels
             skeletonData.Bones = boneList;
 
             var slotsList = new List<SlotData>();
-            foreach (var bone in this.Bones)
-            {
-                if (bone.Slot != null)
-                {
-                    slotsList.Add(bone.Slot.generateJSONData());
-                }
-            }
+
             skeletonData.Slots = slotsList;
 
             return skeletonData;

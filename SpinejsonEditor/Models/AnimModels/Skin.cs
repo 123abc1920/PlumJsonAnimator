@@ -1,17 +1,16 @@
+using System;
 using System.Collections.Generic;
-using System.Net.Mail;
 using AnimModels;
 using Avalonia.Controls;
 using Newtonsoft.Json;
-using Resources;
-using Tmds.DBus.Protocol;
 
 namespace AnimModels
 {
     public class Skin
     {
         public string Name { get; set; } = "defualt";
-        public Dictionary<Bone, Slot> BoneImageBinding = new Dictionary<Bone, Slot>();
+        public Dictionary<Slot, Attachment> SlotAttachmentBinding =
+            new Dictionary<Slot, Attachment>();
 
         public Skin() { }
 
@@ -20,70 +19,15 @@ namespace AnimModels
             this.Name = name;
         }
 
-        /// <summary>
-        /// Binds a bone with a slot
-        /// </summary>
-        /// <param name="b"></param>
-        /// <param name="s"></param>
-        public void BindBoneAndImage(Bone b, Slot s)
+        public void BindSlotAttachment(Slot s, Attachment a)
         {
-            if (BoneImageBinding.ContainsKey(b))
+            if (SlotAttachmentBinding.ContainsKey(s))
             {
-                BoneImageBinding[b] = s;
+                SlotAttachmentBinding[s] = a;
             }
             else
             {
-                BoneImageBinding.Add(b, s);
-            }
-            b.Slot = s;
-            s.BoundedBone = b;
-        }
-
-        /// <summary>
-        /// Unbinds a bone and a slot
-        /// </summary>
-        /// <param name="b"></param>
-        public void UnbindBoneAndSlot(Bone b)
-        {
-            if (b == null)
-            {
-                return;
-            }
-
-            if (b.Slot != null)
-            {
-                b.Slot.BoundedBone = null;
-            }
-            b.Slot = null;
-            BoneImageBinding.Remove(b);
-        }
-
-        /// <summary>
-        /// Returns bone slot in this skin
-        /// </summary>
-        /// <param name="bone"></param>
-        /// <returns></returns>
-        public Slot? GetSlot(Bone bone)
-        {
-            if (BoneImageBinding.ContainsKey(bone))
-            {
-                return BoneImageBinding[bone];
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// Must be called before skin deleting. Deletes bone slots
-        /// </summary>
-        public void DeleteSkin()
-        {
-            foreach (Bone b in BoneImageBinding.Keys)
-            {
-                if (b.Slot != null)
-                {
-                    b.Slot.BoundedBone = null;
-                }
-                b.Slot = null;
+                SlotAttachmentBinding.Add(s, a);
             }
         }
 
@@ -93,10 +37,32 @@ namespace AnimModels
         /// <param name="canvas"></param>
         public void DrawSkin(Canvas canvas)
         {
-            foreach (Slot s in BoneImageBinding.Values)
+            foreach (Slot s in SlotAttachmentBinding.Keys)
             {
                 s.drawSlot(canvas);
             }
+        }
+
+        public bool ContainsSlot(Slot s)
+        {
+            return SlotAttachmentBinding.ContainsKey(s);
+        }
+
+        public string GetImagePath(Slot s)
+        {
+            return ((ImageAttachment)SlotAttachmentBinding[s]).getPath();
+        }
+
+        public Slot? GetSlot(Bone b)
+        {
+            foreach (Slot s in SlotAttachmentBinding.Keys)
+            {
+                if (s.BoundedBone == b)
+                {
+                    return s;
+                }
+            }
+            return null;
         }
 
         public SkinData generateJSONData()
@@ -104,10 +70,11 @@ namespace AnimModels
             Dictionary<string, Dictionary<string, AttachmentData>> attachments =
                 new Dictionary<string, Dictionary<string, AttachmentData>>();
 
-            foreach (Slot s in BoneImageBinding.Values)
+            foreach (Slot s in SlotAttachmentBinding.Keys)
             {
                 attachments[s.Name] = new Dictionary<string, AttachmentData>();
-                attachments[s.Name][s.Attachment.Name] = s.Attachment.generateJSONData();
+                attachments[s.Name][SlotAttachmentBinding[s].Name] = SlotAttachmentBinding[s]
+                    .generateJSONData();
             }
 
             return new SkinData { Name = this.Name, Attachments = attachments };

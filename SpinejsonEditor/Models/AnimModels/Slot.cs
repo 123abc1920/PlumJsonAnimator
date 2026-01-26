@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using Avalonia.Controls;
 using Avalonia.Media;
+using Constants;
 using Newtonsoft.Json;
 using Resources;
 
@@ -25,17 +26,7 @@ namespace AnimModels
                 }
             }
         }
-        private Attachment _attachment;
 
-        public Attachment Attachment
-        {
-            get => _attachment;
-            set
-            {
-                _attachment = value;
-                OnPropertyChanged();
-            }
-        }
         public int DrawOrder { get; set; }
         public double selfA = 0;
         public double lengthX = 100;
@@ -65,11 +56,10 @@ namespace AnimModels
             this.isBone = false;
         }
 
-        public Slot(string name, Bone b, Attachment a)
+        public Slot(string name, Bone b)
         {
             this.Name = name;
             this.BoundedBone = b;
-            this.Attachment = a;
         }
 
         public void setBone(Bone? b)
@@ -100,12 +90,12 @@ namespace AnimModels
 
         public void drawSlot(Canvas canvas)
         {
-            if (this.BoundedBone != null)
+            if (ConstantsClass.currentProject.CurrentSkin.ContainsSlot(this))
             {
                 var image = new Image
                 {
                     Source = new Avalonia.Media.Imaging.Bitmap(
-                        ((ImageAttachment)this.Attachment).getPath()
+                        ConstantsClass.currentProject.CurrentSkin.GetImagePath(this)
                     ),
                     Width = lengthX,
                     Height = lengthY,

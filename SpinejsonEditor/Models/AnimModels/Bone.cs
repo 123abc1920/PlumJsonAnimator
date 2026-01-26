@@ -31,27 +31,7 @@ namespace AnimModels
         public ObservableCollection<IBone> Children { get; set; } =
             new ObservableCollection<IBone>();
         public Bone? Parent { get; set; } = null;
-        private Slot? _slot;
-        public Slot? Slot
-        {
-            get => _slot;
-            set
-            {
-                _slot = value;
 
-                OnPropertyChanged(nameof(Slot));
-                OnPropertyChanged(nameof(SlotName));
-                OnPropertyChanged(nameof(HasSlot));
-            }
-        }
-        public string SlotName
-        {
-            get { return Slot?.Name ?? ""; }
-        }
-        public bool HasSlot
-        {
-            get { return Slot != null; }
-        }
         public double endX = 110;
         public double endY = 110;
         public double length = 10;
@@ -140,9 +120,10 @@ namespace AnimModels
                 c.move(c.x - deltaX, c.y - deltaY);
             }
 
-            if (this.Slot != null)
+            Slot slot = ConstantsClass.currentProject.CurrentSkin.GetSlot(this);
+            if (slot != null)
             {
-                this.Slot.move(this.Slot.x - deltaX, this.Slot.y - deltaY);
+                slot.move(slot.x - deltaX, slot.y - deltaY);
             }
 
             var animation = ConstantsClass.currentProject?.GetAnimation();
@@ -176,10 +157,11 @@ namespace AnimModels
                 child.rotate(child.a + (a - oldA));
             }
 
-            if (this.Slot != null)
+            Slot slot = ConstantsClass.currentProject.CurrentSkin.GetSlot(this);
+            if (slot != null)
             {
-                double slotdx = this.Slot.x - this.x;
-                double slotdy = this.Slot.y - this.y;
+                double slotdx = slot.x - this.x;
+                double slotdy = slot.y - this.y;
 
                 double slotangleDiff = (a - oldA) * Math.PI / 180;
                 double slotnewDx =
@@ -187,10 +169,10 @@ namespace AnimModels
                 double slotnewDy =
                     slotdx * Math.Sin(slotangleDiff) + slotdy * Math.Cos(slotangleDiff);
 
-                this.Slot.x = this.x + slotnewDx;
-                this.Slot.y = this.y + slotnewDy;
+                slot.x = this.x + slotnewDx;
+                slot.y = this.y + slotnewDy;
 
-                this.Slot.a = this.Slot.a + (a - oldA);
+                slot.a = slot.a + (a - oldA);
             }
 
             var animation = ConstantsClass.currentProject?.GetAnimation();
@@ -238,30 +220,12 @@ namespace AnimModels
             };
         }
 
-        public void AddSlot(Res res)
-        {
-            Slot s = new Slot("tesr", this, new ImageAttachment((ImageRes)res));
-            this.Slot = s;
-        }
-
         public string generateCode()
         {
             return JsonConvert.SerializeObject(
                 generateJSONData(),
                 Constants.ConstantsClass.jsonSettings
             );
-        }
-
-        public override IEnumerable<IBone> CombinedChildren
-        {
-            get
-            {
-                if (Slot != null)
-                    yield return Slot;
-
-                foreach (var child in Children)
-                    yield return child;
-            }
         }
     }
 }

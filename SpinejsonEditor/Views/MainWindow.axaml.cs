@@ -132,7 +132,6 @@ public partial class MainWindow : Window
     private void Delete_Slot(object sender, RoutedEventArgs e)
     {
         Bone bone = (Bone)selectedBone;
-        ConstantsClass.currentProject.CurrentSkin.UnbindBoneAndSlot(bone);
     }
 
     private void Set_Transform_Mode(object sender, RoutedEventArgs e)
@@ -222,8 +221,11 @@ public partial class MainWindow : Window
                         Bone bone = ConstantsClass.currentProject.MainSkeleton.getBone(Bone.id);
                         if (bone != null)
                         {
-                            Slot s = new Slot("tesr", bone, new ImageAttachment((ImageRes)res));
-                            ConstantsClass.currentProject.CurrentSkin.BindBoneAndImage(bone, s);
+                            Slot s = new Slot("tesr", bone);
+                            ConstantsClass.currentProject.CurrentSkin.BindSlotAttachment(
+                                s,
+                                new ImageAttachment((ImageRes)res)
+                            );
                         }
                         return;
                     }
@@ -299,16 +301,8 @@ public partial class MainWindow : Window
         {
             if (bone == selectedBone)
             {
-                if (bone.HasSlot)
-                {
-                    selectedBone = bone.Slot;
-                    Console.WriteLine("Slot");
-                }
-                else
-                {
-                    selectedBone = null;
-                    boneTreeView.SelectedItem = null;
-                }
+                selectedBone = null;
+                Console.WriteLine("Not bone");
             }
             else
             {
