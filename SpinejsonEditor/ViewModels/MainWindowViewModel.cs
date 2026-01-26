@@ -17,11 +17,6 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
     private Bone? _currentBone;
 
-    private DispatcherTimer _updateTimer = new DispatcherTimer
-    {
-        Interval = TimeSpan.FromMilliseconds(16),
-    };
-
     public Bone? CurrentBone
     {
         get => _currentBone;
@@ -29,15 +24,8 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
         {
             if (_currentBone != value)
             {
-                _updateTimer.Stop();
                 _currentBone = value;
                 OnPropertyChanged(nameof(CurrentBone));
-
-                if (CurrentBone != null)
-                {
-                    _updateTimer.Tick += CurrentBone.UpdateSlots;
-                    _updateTimer.Start();
-                }
             }
         }
     }

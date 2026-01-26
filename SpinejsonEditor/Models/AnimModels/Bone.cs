@@ -29,7 +29,7 @@ namespace AnimModels
         private ObservableCollection<Slot> _slots = new ObservableCollection<Slot>();
         public ObservableCollection<Slot> Slots => _slots;
 
-        public void UpdateSlots(object? sender, EventArgs e)
+        public void UpdateSlots()
         {
             _slots.Clear();
 

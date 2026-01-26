@@ -250,10 +250,12 @@ public partial class MainWindow : Window
                         if (bone != null)
                         {
                             Slot s = new Slot("tesr", bone);
+                            ConstantsClass.currentProject.Slots.Add(s);
                             ConstantsClass.currentProject.CurrentSkin.BindSlotAttachment(
                                 s,
                                 new ImageAttachment((ImageRes)res)
                             );
+                            bone.UpdateSlots();
                         }
                         return;
                     }
