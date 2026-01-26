@@ -313,6 +313,25 @@
                         </TreeView>
                     </ScrollViewer>
                 </DockPanel>
+                <GridSplitter
+                    Grid.Row="1"
+                    Height="6"
+                    Background="Gray"
+                    ResizeDirection="Rows" />
+                <DockPanel Grid.Row="2" Background="LightBlue">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <TextBlock Text="{Binding CurrentBone.Name, FallbackValue='Не выбрано', TargetNullValue='Не выбрано'}" />
+                            <ListBox IsVisible="{Binding CurrentBone}" ItemsSource="{Binding CurrentBone.Slots}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" />
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </ScrollViewer>
+                </DockPanel>
             </Grid>
         </Grid>
 

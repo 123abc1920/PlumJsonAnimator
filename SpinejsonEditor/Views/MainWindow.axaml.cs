@@ -10,6 +10,7 @@ using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using Constants;
 using Resources;
+using SpinejsonEditor.ViewModels;
 using TransformModes;
 
 namespace SpinejsonEditor.Views;
@@ -17,13 +18,40 @@ namespace SpinejsonEditor.Views;
 public partial class MainWindow : Window
 {
     private bool _isDragging = false;
-    private IBone? selectedBone = null;
+    private Bone selectedBone;
+    public Bone? SelectedBone
+    {
+        get => selectedBone;
+        set
+        {
+            if (selectedBone != value)
+            {
+                selectedBone = value;
+
+                if (DataContext is MainWindowViewModel viewModel)
+                {
+                    viewModel.CurrentBone = selectedBone;
+                }
+            }
+        }
+    }
     private DispatcherTimer _animationLoop = new DispatcherTimer();
     private int currentTab = 0;
 
     public MainWindow()
     {
         InitializeComponent();
+
+        if (DataContext is MainWindowViewModel viewModel)
+        {
+            viewModel.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(MainWindowViewModel.CurrentBone))
+                {
+                    selectedBone = viewModel.CurrentBone;
+                }
+            };
+        }
     }
 
     public void initViews()
@@ -103,9 +131,9 @@ public partial class MainWindow : Window
 
     private void Rename_Bone(object sender, RoutedEventArgs e)
     {
-        if (selectedBone != null && selectedBone.isBone == true)
+        if (SelectedBone != null && SelectedBone.isBone == true)
         {
-            Bone bone = (Bone)selectedBone;
+            Bone bone = (Bone)SelectedBone;
             bone.Name = "NewTitle";
         }
     }
@@ -125,13 +153,13 @@ public partial class MainWindow : Window
 
     private void Delete_Bone(object sender, RoutedEventArgs e)
     {
-        Bone bone = (Bone)selectedBone;
+        Bone bone = (Bone)SelectedBone;
         DeleteBone(bone);
     }
 
     private void Delete_Slot(object sender, RoutedEventArgs e)
     {
-        Bone bone = (Bone)selectedBone;
+        Bone bone = (Bone)SelectedBone;
     }
 
     private void Set_Transform_Mode(object sender, RoutedEventArgs e)
@@ -178,10 +206,10 @@ public partial class MainWindow : Window
         var canvas = (Canvas)sender;
         var point = e.GetPosition(canvas);
 
-        if (selectedBone != null)
+        if (SelectedBone != null)
         {
             ConstantsClass.currentProject?.currentMode.transform(
-                selectedBone,
+                SelectedBone,
                 point.X - canvas.Width / 2,
                 point.Y - canvas.Height / 2
             );
@@ -299,14 +327,15 @@ public partial class MainWindow : Window
     {
         if (sender is StackPanel panel && panel.DataContext is Bone bone)
         {
-            if (bone == selectedBone)
+            if (bone == SelectedBone)
             {
-                selectedBone = null;
+                SelectedBone = null;
                 Console.WriteLine("Not bone");
             }
             else
             {
-                selectedBone = bone;
+                SelectedBone = bone;
+
                 Console.WriteLine("Bone");
             }
             e.Handled = true;

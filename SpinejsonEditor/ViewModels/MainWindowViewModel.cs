@@ -1,7 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using AnimModels;
+using Avalonia.Threading;
 using Constants;
 using EngineModels;
 using JsonValidator;
@@ -13,6 +15,32 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     public Project CurrentProject { get; set; }
     public JsonError JsonErrorObj { get; set; }
     public event PropertyChangedEventHandler? PropertyChanged;
+    private Bone? _currentBone;
+
+    private DispatcherTimer _updateTimer = new DispatcherTimer
+    {
+        Interval = TimeSpan.FromMilliseconds(16),
+    };
+
+    public Bone? CurrentBone
+    {
+        get => _currentBone;
+        set
+        {
+            if (_currentBone != value)
+            {
+                _updateTimer.Stop();
+                _currentBone = value;
+                OnPropertyChanged(nameof(CurrentBone));
+
+                if (CurrentBone != null)
+                {
+                    _updateTimer.Tick += CurrentBone.UpdateSlots;
+                    _updateTimer.Start();
+                }
+            }
+        }
+    }
 
     public MainWindowViewModel() { }
 

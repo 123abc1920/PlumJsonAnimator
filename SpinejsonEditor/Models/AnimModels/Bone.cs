@@ -2,13 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using AnimEngine;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Constants;
 using Newtonsoft.Json;
-using Resources;
 
 namespace AnimModels
 {
@@ -27,6 +25,24 @@ namespace AnimModels
                 }
             }
         }
+
+        private ObservableCollection<Slot> _slots = new ObservableCollection<Slot>();
+        public ObservableCollection<Slot> Slots => _slots;
+
+        public void UpdateSlots(object? sender, EventArgs e)
+        {
+            _slots.Clear();
+
+            var newSlots = ConstantsClass.currentProject?.CurrentSkin?.GetSlots(this);
+            if (newSlots != null)
+            {
+                foreach (var slot in newSlots)
+                {
+                    _slots.Add(slot);
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         public ObservableCollection<IBone> Children { get; set; } =
             new ObservableCollection<IBone>();
@@ -120,8 +136,8 @@ namespace AnimModels
                 c.move(c.x - deltaX, c.y - deltaY);
             }
 
-            Slot slot = ConstantsClass.currentProject.CurrentSkin.GetSlot(this);
-            if (slot != null)
+            List<Slot> slots = ConstantsClass.currentProject.CurrentSkin.GetSlots(this);
+            foreach (Slot slot in slots)
             {
                 slot.move(slot.x - deltaX, slot.y - deltaY);
             }
@@ -157,8 +173,8 @@ namespace AnimModels
                 child.rotate(child.a + (a - oldA));
             }
 
-            Slot slot = ConstantsClass.currentProject.CurrentSkin.GetSlot(this);
-            if (slot != null)
+            List<Slot> slots = ConstantsClass.currentProject.CurrentSkin.GetSlots(this);
+            foreach (Slot slot in slots)
             {
                 double slotdx = slot.x - this.x;
                 double slotdy = slot.y - this.y;

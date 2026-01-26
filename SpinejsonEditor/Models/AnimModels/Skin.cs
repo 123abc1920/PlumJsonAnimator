@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using AnimModels;
 using Avalonia.Controls;
 using Newtonsoft.Json;
@@ -53,16 +54,22 @@ namespace AnimModels
             return ((ImageAttachment)SlotAttachmentBinding[s]).getPath();
         }
 
-        public Slot? GetSlot(Bone b)
+        /// <summary>
+        /// Returns all slots bounded with this bone
+        /// </summary>
+        /// <param name="b"></param>
+        /// <returns>A list of slots</returns>
+        public List<Slot> GetSlots(Bone b)
         {
+            List<Slot> slots = new List<Slot>();
             foreach (Slot s in SlotAttachmentBinding.Keys)
             {
                 if (s.BoundedBone == b)
                 {
-                    return s;
+                    slots.Add(s);
                 }
             }
-            return null;
+            return slots;
         }
 
         public SkinData generateJSONData()
@@ -93,8 +100,8 @@ namespace AnimModels
 public class SkinData
 {
     [JsonProperty("name")]
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
     [JsonProperty("attachments")]
-    public Dictionary<string, Dictionary<string, AttachmentData>> Attachments { get; set; }
+    public required Dictionary<string, Dictionary<string, AttachmentData>> Attachments { get; set; }
 }
