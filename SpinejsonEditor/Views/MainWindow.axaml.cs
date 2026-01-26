@@ -9,6 +9,7 @@ using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using Constants;
+using Resources;
 using TransformModes;
 
 namespace SpinejsonEditor.Views;
@@ -76,7 +77,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private async void Add_Image(object sender, RoutedEventArgs e)
+    private async void Add_Res(object sender, RoutedEventArgs e)
     {
         var topLevel = TopLevel.GetTopLevel(this);
 
@@ -92,8 +93,11 @@ public partial class MainWindow : Window
 
         foreach (string p in paths)
         {
-            Slot image = new Slot(ConstantsClass.currentProject.Slots.Count, p);
-            Constants.ConstantsClass.currentProject.Slots.Add(image);
+            ImageRes image = new ImageRes(
+                p,
+                "img" + ConstantsClass.currentProject.Resources.Count.ToString()
+            );
+            Constants.ConstantsClass.currentProject.Resources.Add(image);
         }
     }
 
@@ -187,25 +191,24 @@ public partial class MainWindow : Window
 
     private void Release_Canvas(object sender, PointerReleasedEventArgs e)
     {
-        
         _isDragging = false;
     }
 
     private void TextBox_KeyDown(object sender, KeyEventArgs e) { }
 
-    private void OnSlotPointerPressed(object sender, PointerPressedEventArgs e)
+    private void OnResPointerPressed(object sender, PointerPressedEventArgs e)
     {
-        if (sender is TextBlock textBlock && textBlock.DataContext is Slot slot)
+        if (sender is TextBlock textBlock && textBlock.DataContext is Res res)
         {
             var data = new DataObject();
-            data.Set("Slot", slot);
+            data.Set("Resource", res);
             DragDrop.DoDragDrop(e, data, DragDropEffects.Copy);
         }
     }
 
     private void OnTreeViewDrop(object sender, DragEventArgs e)
     {
-        if (e.Data.Get("Slot") is Slot slot)
+        if (e.Data.Get("Resource") is Res res)
         {
             var position = e.GetPosition(boneTreeView);
             var element = boneTreeView.InputHitTest(position) as Visual;
@@ -219,7 +222,8 @@ public partial class MainWindow : Window
                         Bone bone = ConstantsClass.currentProject.MainSkeleton.getBone(Bone.id);
                         if (bone != null)
                         {
-                            ConstantsClass.currentProject.CurrentSkin.BindBoneAndSlot(bone, slot);
+                            Slot s = new Slot("tesr", bone, new ImageAttachment((ImageRes)res));
+                            ConstantsClass.currentProject.CurrentSkin.BindBoneAndImage(bone, s);
                         }
                         return;
                     }

@@ -8,6 +8,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Constants;
 using Newtonsoft.Json;
+using Resources;
 
 namespace AnimModels
 {
@@ -235,6 +236,12 @@ namespace AnimModels
                 X = this.x,
                 Y = this.y,
             };
+        }
+
+        public void AddSlot(Res res)
+        {
+            Slot s = new Slot("tesr", this, new ImageAttachment((ImageRes)res));
+            this.Slot = s;
         }
 
         public string generateCode()

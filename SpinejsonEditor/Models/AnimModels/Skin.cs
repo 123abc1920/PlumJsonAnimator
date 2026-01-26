@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Net.Mail;
+using AnimModels;
 using Avalonia.Controls;
 using Newtonsoft.Json;
+using Resources;
 using Tmds.DBus.Protocol;
 
 namespace AnimModels
@@ -9,7 +11,7 @@ namespace AnimModels
     public class Skin
     {
         public string Name { get; set; } = "defualt";
-        public Dictionary<Bone, Slot> BoneSlotBinding = new Dictionary<Bone, Slot>();
+        public Dictionary<Bone, Slot> BoneImageBinding = new Dictionary<Bone, Slot>();
 
         public Skin() { }
 
@@ -23,15 +25,15 @@ namespace AnimModels
         /// </summary>
         /// <param name="b"></param>
         /// <param name="s"></param>
-        public void BindBoneAndSlot(Bone b, Slot s)
+        public void BindBoneAndImage(Bone b, Slot s)
         {
-            if (BoneSlotBinding.ContainsKey(b))
+            if (BoneImageBinding.ContainsKey(b))
             {
-                BoneSlotBinding[b] = s;
+                BoneImageBinding[b] = s;
             }
             else
             {
-                BoneSlotBinding.Add(b, s);
+                BoneImageBinding.Add(b, s);
             }
             b.Slot = s;
             s.BoundedBone = b;
@@ -53,7 +55,7 @@ namespace AnimModels
                 b.Slot.BoundedBone = null;
             }
             b.Slot = null;
-            BoneSlotBinding.Remove(b);
+            BoneImageBinding.Remove(b);
         }
 
         /// <summary>
@@ -63,9 +65,9 @@ namespace AnimModels
         /// <returns></returns>
         public Slot? GetSlot(Bone bone)
         {
-            if (BoneSlotBinding.ContainsKey(bone))
+            if (BoneImageBinding.ContainsKey(bone))
             {
-                return BoneSlotBinding[bone];
+                return BoneImageBinding[bone];
             }
             return null;
         }
@@ -75,7 +77,7 @@ namespace AnimModels
         /// </summary>
         public void DeleteSkin()
         {
-            foreach (Bone b in BoneSlotBinding.Keys)
+            foreach (Bone b in BoneImageBinding.Keys)
             {
                 if (b.Slot != null)
                 {
@@ -91,7 +93,7 @@ namespace AnimModels
         /// <param name="canvas"></param>
         public void DrawSkin(Canvas canvas)
         {
-            foreach (Slot s in BoneSlotBinding.Values)
+            foreach (Slot s in BoneImageBinding.Values)
             {
                 s.drawSlot(canvas);
             }
@@ -102,15 +104,10 @@ namespace AnimModels
             Dictionary<string, Dictionary<string, AttachmentData>> attachments =
                 new Dictionary<string, Dictionary<string, AttachmentData>>();
 
-            foreach (Slot s in BoneSlotBinding.Values)
+            foreach (Slot s in BoneImageBinding.Values)
             {
                 attachments[s.Name] = new Dictionary<string, AttachmentData>();
-                attachments[s.Name][s.Attachment] = new AttachmentData
-                {
-                    Name = s.Attachment,
-                    Width = 100,
-                    Height = 100,
-                };
+                attachments[s.Name][s.Attachment.Name] = s.Attachment.generateJSONData();
             }
 
             return new SkinData { Name = this.Name, Attachments = attachments };
@@ -124,18 +121,6 @@ namespace AnimModels
             );
         }
     }
-}
-
-public class AttachmentData
-{
-    [JsonProperty("name")]
-    public string Name { get; set; }
-
-    [JsonProperty("width")]
-    public int Width { get; set; }
-
-    [JsonProperty("height")]
-    public int Height { get; set; }
 }
 
 public class SkinData

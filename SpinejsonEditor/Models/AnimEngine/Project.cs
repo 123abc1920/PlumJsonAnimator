@@ -5,6 +5,7 @@ using System.ComponentModel;
 using AnimModels;
 using Avalonia.Controls;
 using Newtonsoft.Json;
+using Resources;
 using SpinejsonGeneration;
 using TransformModes;
 
@@ -22,6 +23,8 @@ namespace EngineModels
         public int seletedBoneId = -1;
         public ObservableCollection<Slot> Slots { get; set; } = new ObservableCollection<Slot>();
         public SpinejsonCode SpinejsonCode { get; set; } = new SpinejsonCode();
+
+        public ObservableCollection<Res> Resources { get; } = new ObservableCollection<Res>();
 
         public ObservableCollection<Animation> Animations { get; } =
             new ObservableCollection<Animation>();

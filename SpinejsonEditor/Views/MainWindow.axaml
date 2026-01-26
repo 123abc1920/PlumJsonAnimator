@@ -57,6 +57,8 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="6" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="6" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <ScrollViewer
                     Grid.Row="0"
@@ -88,7 +90,7 @@
                     Background="Gray"
                     ResizeDirection="Rows" />
                 <ScrollViewer
-                    Grid.Row="3"
+                    Grid.Row="2"
                     HorizontalAlignment="Stretch"
                     Background="LightBlue"
                     HorizontalScrollBarVisibility="Auto"
@@ -112,6 +114,28 @@
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
+                <GridSplitter
+                    Grid.Row="3"
+                    Height="6"
+                    Background="Gray"
+                    ResizeDirection="Rows" />
+                <DockPanel Grid.Row="4" Background="LightBlue">
+                    <Grid DockPanel.Dock="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Click="Add_Res">+</Button>
+                    </Grid>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ListBox x:Name="resList" ItemsSource="{Binding CurrentProject.Resources}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock PointerPressed="OnResPointerPressed" Text="{Binding Name}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
+                </DockPanel>
             </Grid>
             <GridSplitter
                 Grid.Column="1"
@@ -282,33 +306,11 @@
                                         Orientation="Vertical"
                                         Spacing="5">
                                         <TextBlock Text="{Binding Name, Mode=TwoWay}" />
-                                        <TextBlock IsVisible="{Binding HasSlot}" Text="{Binding SlotName}" />
+                                        <!-- <TextBlock IsVisible="{Binding HasSlot}" Text="{Binding SlotName}" />-->
                                     </StackPanel>
                                 </TreeDataTemplate>
                             </TreeView.ItemTemplate>
                         </TreeView>
-                    </ScrollViewer>
-                </DockPanel>
-                <GridSplitter
-                    Grid.Row="1"
-                    Height="6"
-                    Background="Gray"
-                    ResizeDirection="Rows" />
-                <DockPanel Grid.Row="2" Background="LightBlue">
-                    <Grid DockPanel.Dock="Top">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Click="Add_Image">+</Button>
-                    </Grid>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <ListBox x:Name="slotsList" ItemsSource="{Binding CurrentProject.Slots}">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock PointerPressed="OnSlotPointerPressed" Text="{Binding Name}" />
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
                     </ScrollViewer>
                 </DockPanel>
             </Grid>

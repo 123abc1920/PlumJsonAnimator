@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Newtonsoft.Json;
+using Resources;
 
 namespace AnimModels
 {
@@ -24,9 +25,9 @@ namespace AnimModels
                 }
             }
         }
-        private string _attachment = "";
+        private Attachment _attachment;
 
-        public string Attachment
+        public Attachment Attachment
         {
             get => _attachment;
             set
@@ -55,7 +56,6 @@ namespace AnimModels
 
         public Slot(int id, string path)
         {
-            Attachment = path;
             this.id = id;
             this.a = 0;
             this.x = 0;
@@ -63,6 +63,13 @@ namespace AnimModels
 
             this.Name = System.IO.Path.GetFileNameWithoutExtension(path);
             this.isBone = false;
+        }
+
+        public Slot(string name, Bone b, Attachment a)
+        {
+            this.Name = name;
+            this.BoundedBone = b;
+            this.Attachment = a;
         }
 
         public void setBone(Bone? b)
@@ -97,7 +104,9 @@ namespace AnimModels
             {
                 var image = new Image
                 {
-                    Source = new Avalonia.Media.Imaging.Bitmap(this.Attachment),
+                    Source = new Avalonia.Media.Imaging.Bitmap(
+                        ((ImageAttachment)this.Attachment).getPath()
+                    ),
                     Width = lengthX,
                     Height = lengthY,
                     RenderTransform = new RotateTransform(this.a + this.selfA),
