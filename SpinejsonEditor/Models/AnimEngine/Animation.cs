@@ -40,7 +40,7 @@ namespace AnimModels
             {
                 BoneAnimationBinding[b].BoneStep(b, currentTime);
             }
-            currentTime += 0.01666667;
+            currentTime += 0.01666667; // FPS=60
         }
 
         public AnimationData generateJSONData()

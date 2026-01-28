@@ -14,6 +14,7 @@ namespace TimeLine
 {
     public class TimelineControl : Control
     {
+        private double timeStep;
         private bool _isDraggingPlayhead = false;
 
         public static readonly StyledProperty<double> PixelsPerSecondProperty =
@@ -167,8 +168,8 @@ namespace TimeLine
 
             int numIntervals = (int)Math.Ceiling(duration); // Используем Ceil, чтобы не обрезать последнюю метку
 
-            // Шаг отрисовки: 1 секунда (для мелких меток)
-            double step = 1.0;
+            double step = 1.0 / (double)ConstantsClass.FPS;
+            this.timeStep = step;
 
             for (double t = 0; t <= duration; t += step)
             {
@@ -176,7 +177,7 @@ namespace TimeLine
                 double xPosition = PixelsPerSecond * t;
 
                 // Высота метки: 8px для основных (каждые 5 сек), 5px для промежуточных
-                double tickHeight = (t % 5 == 0) ? 8 : 5;
+                double tickHeight = 5;
 
                 // Рисуем вертикальную метку: от midlineY вверх/вниз
                 context.DrawLine(
@@ -185,6 +186,11 @@ namespace TimeLine
                     new Point(xPosition, tickHeight)
                 );
             }
+
+            // ----------------------------------------------------------------------------------
+            // 7. Отрисовка ключкадров
+            // ----------------------------------------------------------------------------------
+            
         }
 
         protected override void OnPointerPressed(PointerPressedEventArgs e)
@@ -225,8 +231,25 @@ namespace TimeLine
                 // Расчет нового времени (должен использовать calculatedWidth)
                 double newTime = (newX / calculatedWidth) * TotalDuration;
 
+                // ПРИВЯЗЫВАЕМ К КАДРАМ
+                if (ConstantsClass.FPS > 0)
+                {
+                    double frameDuration = 1.0 / ConstantsClass.FPS;
+                    int frameNumber = (int)Math.Round(newTime / frameDuration);
+                    newTime = frameNumber * frameDuration;
+                }
+
+                // Еще раз ограничиваем после привязки
+                newTime = Math.Clamp(newTime, 0, TotalDuration);
+
+                // УСТАНАВЛИВАЕМ CurrentTime - бегунок подтянется сам при отрисовке
+                newTime = Math.Round(newTime / this.timeStep) * timeStep;
                 CurrentTime = newTime;
+
                 e.Handled = true;
+
+                // Обновляем отображение
+                InvalidateVisual();
             }
         }
 
@@ -237,6 +260,19 @@ namespace TimeLine
             {
                 _isDraggingPlayhead = false;
                 e.Handled = true;
+
+                if (ConstantsClass.FPS > 0)
+                {
+                    double frameDuration = 1.0 / ConstantsClass.FPS;
+                    int frameNumber = (int)Math.Round(CurrentTime / frameDuration);
+                    CurrentTime = frameNumber * frameDuration;
+                    Console.WriteLine($"until {CurrentTime}");
+                    CurrentTime = Math.Round(CurrentTime / this.timeStep) * this.timeStep;
+                    Console.WriteLine($"after {CurrentTime}");
+
+                    // Обновляем отображение
+                    InvalidateVisual();
+                }
             }
 
             ConstantsClass.currentProject.GetAnimation().currentTime = CurrentTime;

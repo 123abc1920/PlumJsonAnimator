@@ -17,5 +17,6 @@ namespace Constants
             NullValueHandling = NullValueHandling.Ignore,
             DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
         };
+        public static int FPS = 60;
     }
 }
