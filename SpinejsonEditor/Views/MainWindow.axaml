@@ -325,7 +325,10 @@
                             <ListBox IsVisible="{Binding CurrentBone}" ItemsSource="{Binding CurrentBone.Slots}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Name}" />
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Name}" />
+                                            <TextBlock Text="{Binding CurrentAttachment.Name}" />
+                                        </StackPanel>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>

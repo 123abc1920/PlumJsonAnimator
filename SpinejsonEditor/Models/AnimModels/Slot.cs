@@ -27,6 +27,9 @@ namespace AnimModels
             }
         }
 
+        public Attachment CurrentAttachment =>
+            ConstantsClass.currentProject.CurrentSkin.GetAttachment(this);
+
         public int DrawOrder { get; set; }
         public double selfA = 0;
         public double lengthX = 100;

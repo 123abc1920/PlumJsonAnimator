@@ -72,6 +72,15 @@ namespace AnimModels
             return slots;
         }
 
+        public Attachment? GetAttachment(Slot s)
+        {
+            if (SlotAttachmentBinding.ContainsKey(s))
+            {
+                return SlotAttachmentBinding[s];
+            }
+            return null;
+        }
+
         public SkinData generateJSONData()
         {
             Dictionary<string, Dictionary<string, AttachmentData>> attachments =

@@ -13,7 +13,6 @@ namespace AnimModels
         public ObservableCollection<Bone> Bones { get; set; } = new ObservableCollection<Bone>();
         public ObservableCollection<Bone> RootBones { get; set; } =
             new ObservableCollection<Bone>();
-        private List<Skin> skins = new List<Skin>();
 
         private int ids = 0;
 
@@ -67,11 +66,6 @@ namespace AnimModels
             }
         }
 
-        public void RestartBindings(Skin newSkin)
-        {
-            
-        }
-
         public SkeletonData generateJSONData()
         {
             var skeletonData = new SkeletonData();
@@ -82,10 +76,6 @@ namespace AnimModels
                 boneList.Add(bone.generateJSONData());
             }
             skeletonData.Bones = boneList;
-
-            var slotsList = new List<SlotData>();
-
-            skeletonData.Slots = slotsList;
 
             return skeletonData;
         }
@@ -101,10 +91,4 @@ public class SkeletonData
 {
     [JsonProperty("bones")]
     public List<BoneData> Bones { get; set; } = new List<BoneData>();
-
-    [JsonProperty("slots")]
-    public List<SlotData> Slots { get; set; } = new List<SlotData>();
-
-    /*[JsonProperty("skins", NullValueHandling = NullValueHandling.Ignore)]
-    public List<SkinData> Skins { get; set; } = new List<SkinData>();*/
 }

@@ -37,10 +37,17 @@ namespace SpinejsonGeneration
                 );
             }
 
+            List<SlotData> slots = new List<SlotData>();
+            foreach (Slot s in Constants.ConstantsClass.currentProject.Slots)
+            {
+                slots.Add(s.generateJSONData());
+            }
+
             return new CodeData
             {
                 Skeleton = Constants.ConstantsClass.currentProject.generateMetaData(),
                 SkeletonData = project.MainSkeleton.generateJSONData(),
+                Slots = slots,
                 Animations = animations,
                 Skins = Constants.ConstantsClass.currentProject.generateSkinsJSONData(),
             };
@@ -131,16 +138,7 @@ public class CodeData
     }
 
     [JsonProperty("slots")]
-    public List<SlotData> Slots
-    {
-        get => SkeletonData?.Slots;
-        set
-        {
-            if (SkeletonData == null)
-                SkeletonData = new SkeletonData();
-            SkeletonData.Slots = value ?? new List<SlotData>();
-        }
-    }
+    public List<SlotData> Slots { get; set; }
 
     [JsonProperty("skins", NullValueHandling = NullValueHandling.Ignore)]
     public List<SkinData> Skins { get; set; }

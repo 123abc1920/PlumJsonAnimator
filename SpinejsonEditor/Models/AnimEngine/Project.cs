@@ -49,7 +49,10 @@ namespace EngineModels
                 {
                     _currentSkin = value;
                     OnPropertyChanged(nameof(CurrentSkin));
-                    RestartBindings();
+                    foreach (Bone b in MainSkeleton.Bones)
+                    {
+                        b.UpdateSlots();
+                    }
                 }
             }
         }
@@ -63,7 +66,6 @@ namespace EngineModels
                 {
                     _currentAnimation = value;
                     OnPropertyChanged(nameof(CurrentAnimation));
-                    RestartBindings();
                 }
             }
         }
@@ -103,14 +105,6 @@ namespace EngineModels
             }
 
             return null;
-        }
-
-        /// <summary>
-        /// Rebind all bones with new skin
-        /// </summary>
-        public void RestartBindings()
-        {
-            this.MainSkeleton.RestartBindings(CurrentSkin);
         }
 
         public void drawSlots(Canvas c)
