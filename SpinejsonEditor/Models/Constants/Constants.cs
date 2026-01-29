@@ -1,3 +1,4 @@
+using AnimModels;
 using EngineModels;
 using JsonValidator;
 using Newtonsoft.Json;
@@ -18,5 +19,6 @@ namespace Constants
             DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
         };
         public static int FPS = 60;
+        public static Bone currentBone = null;
     }
 }

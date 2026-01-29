@@ -25,7 +25,12 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
             if (_currentBone != value)
             {
                 _currentBone = value;
+                ConstantsClass.currentBone = _currentBone;
                 OnPropertyChanged(nameof(CurrentBone));
+            }
+            else
+            {
+                ConstantsClass.currentBone = null;
             }
         }
     }

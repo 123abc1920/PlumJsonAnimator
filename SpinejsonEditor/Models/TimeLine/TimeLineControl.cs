@@ -1,14 +1,19 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using AnimEngine;
+using AnimModels;
+using AnimTransformations;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.Platform;
 using Avalonia.Rendering.SceneGraph;
+using Avalonia.Threading;
 using Avalonia.VisualTree;
 using Constants;
+using SpinejsonEditor.ViewModels;
 
 namespace TimeLine
 {
@@ -16,6 +21,14 @@ namespace TimeLine
     {
         private double timeStep;
         private bool _isDraggingPlayhead = false;
+        private DispatcherTimer _refreshTimer;
+
+        public TimelineControl()
+        {
+            _refreshTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(16) };
+            _refreshTimer.Tick += (s, e) => InvalidateVisual();
+            _refreshTimer.Start();
+        }
 
         public static readonly StyledProperty<double> PixelsPerSecondProperty =
             AvaloniaProperty.Register<TimelineControl, double>(nameof(PixelsPerSecond), 50.0);
@@ -89,6 +102,12 @@ namespace TimeLine
             return new Size(desiredWidth, desiredHeight);
         }
 
+        protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+        {
+            base.OnDetachedFromVisualTree(e);
+            _refreshTimer?.Stop();
+        }
+
         public override void Render(DrawingContext context)
         {
             // --- 1. Основные переменные ---
@@ -140,7 +159,7 @@ namespace TimeLine
             // 5. Расчет и отрисовка Дорожек
             // ----------------------------------------------------------------------------------
 
-            // Высота, доступная для всех дорожек (ВСЕ, ЧТО НИЖЕ timelineHeight)
+            // Высота, доступная для всех дорожек
             double availableTrackHeight = height - timelineHeight;
 
             // Высота одной дорожки (делим на количество дорожек)
@@ -158,8 +177,6 @@ namespace TimeLine
                     new Point(0, yPosition),
                     new Point(desiredWidth, yPosition)
                 );
-
-                // Тут можно добавить отрисовку имени дорожки
             }
 
             // ----------------------------------------------------------------------------------
@@ -190,7 +207,65 @@ namespace TimeLine
             // ----------------------------------------------------------------------------------
             // 7. Отрисовка ключкадров
             // ----------------------------------------------------------------------------------
-            
+            Dictionary<double, Dictionary<KeyFrameTypes, bool>> keyframesMarks =
+                ConstantsClass.currentProject.CurrentAnimation.GetKeyFramesMarks(
+                    ConstantsClass.currentBone
+                );
+
+            const double KeyframeWidth = 6;
+            const double KeyframeHeight = 18;
+            SolidColorBrush fillBrush = new SolidColorBrush(Colors.Red);
+
+            foreach (double time in keyframesMarks.Keys)
+            {
+                double xPosition = PixelsPerSecond * time;
+
+                if (keyframesMarks[time].ContainsKey(KeyFrameTypes.TRANSLATE))
+                {
+                    double yPosition = timelineHeight + (0 * trackRowHeight);
+
+                    // Создаем прямоугольник
+                    var rect = new Rect(
+                        xPosition - KeyframeWidth / 2, // Центрируем по X
+                        yPosition - KeyframeHeight / 2, // Центрируем по Y
+                        KeyframeWidth,
+                        KeyframeHeight
+                    );
+
+                    context.FillRectangle(fillBrush, rect);
+                    context.DrawRectangle(redPen, rect);
+                }
+
+                if (keyframesMarks[time].ContainsKey(KeyFrameTypes.ROTATE))
+                {
+                    double yPosition = timelineHeight + (1 * trackRowHeight);
+
+                    var rect = new Rect(
+                        xPosition - KeyframeWidth / 2,
+                        yPosition - KeyframeHeight / 2,
+                        KeyframeWidth,
+                        KeyframeHeight
+                    );
+
+                    context.FillRectangle(fillBrush, rect);
+                    context.DrawRectangle(redPen, rect);
+                }
+
+                if (keyframesMarks[time].ContainsKey(KeyFrameTypes.SCALE))
+                {
+                    double yPosition = timelineHeight + (2 * trackRowHeight);
+
+                    var rect = new Rect(
+                        xPosition - KeyframeWidth / 2,
+                        yPosition - KeyframeHeight / 2,
+                        KeyframeWidth,
+                        KeyframeHeight
+                    );
+
+                    context.FillRectangle(fillBrush, rect);
+                    context.DrawRectangle(redPen, rect);
+                }
+            }
         }
 
         protected override void OnPointerPressed(PointerPressedEventArgs e)
@@ -266,9 +341,9 @@ namespace TimeLine
                     double frameDuration = 1.0 / ConstantsClass.FPS;
                     int frameNumber = (int)Math.Round(CurrentTime / frameDuration);
                     CurrentTime = frameNumber * frameDuration;
-                    Console.WriteLine($"until {CurrentTime}");
+                    //Console.WriteLine($"until {CurrentTime}");
                     CurrentTime = Math.Round(CurrentTime / this.timeStep) * this.timeStep;
-                    Console.WriteLine($"after {CurrentTime}");
+                    //Console.WriteLine($"after {CurrentTime}");
 
                     // Обновляем отображение
                     InvalidateVisual();

@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using AnimEngine;
+using AnimTransformations;
 using Newtonsoft.Json;
+using Tmds.DBus.Protocol;
 
 namespace AnimModels
 {
@@ -61,6 +63,24 @@ namespace AnimModels
                 generateJSONData(),
                 Constants.ConstantsClass.jsonSettings
             );
+        }
+
+        /// <summary>
+        /// Collects data about keyframes for drawing in ui
+        /// </summary>
+        /// <returns>A dictionary, contains time-keys and another dictionary with keyframes</returns>
+        public Dictionary<double, Dictionary<KeyFrameTypes, bool>> GetKeyFramesMarks(Bone b)
+        {
+            Dictionary<double, Dictionary<KeyFrameTypes, bool>> result =
+                new Dictionary<double, Dictionary<KeyFrameTypes, bool>>();
+
+            if (b != null && BoneAnimationBinding.ContainsKey(b))
+            {
+                BoneAnimation ba = BoneAnimationBinding[b];
+                result = ba.GetKeyFeamesMarks();
+            }
+
+            return result;
         }
 
         /// <summary>

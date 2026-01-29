@@ -137,6 +137,50 @@ namespace AnimModels
             }
         }
 
+        public Dictionary<double, Dictionary<KeyFrameTypes, bool>> GetKeyFeamesMarks()
+        {
+            Dictionary<double, Dictionary<KeyFrameTypes, bool>> result =
+                new Dictionary<double, Dictionary<KeyFrameTypes, bool>>();
+
+            foreach (double time in rotateKeyframes.Keys)
+            {
+                if (!result.ContainsKey(time))
+                {
+                    result.Add(time, new Dictionary<KeyFrameTypes, bool>());
+                }
+                result[time].Add(KeyFrameTypes.ROTATE, true);
+            }
+
+            foreach (double time in translateKeyframes.Keys)
+            {
+                if (!result.ContainsKey(time))
+                {
+                    result.Add(time, new Dictionary<KeyFrameTypes, bool>());
+                }
+                result[time].Add(KeyFrameTypes.TRANSLATE, true);
+            }
+
+            foreach (double time in scaleKeyframes.Keys)
+            {
+                if (!result.ContainsKey(time))
+                {
+                    result.Add(time, new Dictionary<KeyFrameTypes, bool>());
+                }
+                result[time].Add(KeyFrameTypes.SCALE, true);
+            }
+
+            foreach (double time in shearKeyframes.Keys)
+            {
+                if (!result.ContainsKey(time))
+                {
+                    result.Add(time, new Dictionary<KeyFrameTypes, bool>());
+                }
+                result[time].Add(KeyFrameTypes.SHEAR, true);
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Finds current time segment
         /// </summary>
