@@ -30,6 +30,32 @@ namespace AnimModels
             {
                 SlotAttachmentBinding.Add(s, a);
             }
+            s.UpdateAttachment();
+        }
+
+        /// <summary>
+        /// Adds slots to skin without binding
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="a"></param>
+        public void AddSlot(Slot s)
+        {
+            if (SlotAttachmentBinding.ContainsKey(s))
+            {
+                SlotAttachmentBinding[s] = null;
+            }
+            else
+            {
+                SlotAttachmentBinding.Add(s, null);
+            }
+        }
+
+        public void DeleteSlot(Slot s)
+        {
+            if (SlotAttachmentBinding.ContainsKey(s))
+            {
+                SlotAttachmentBinding.Remove(s);
+            }
         }
 
         /// <summary>
@@ -51,7 +77,14 @@ namespace AnimModels
 
         public string GetImagePath(Slot s)
         {
-            return ((ImageAttachment)SlotAttachmentBinding[s]).getPath();
+            if (SlotAttachmentBinding.ContainsKey(s) && SlotAttachmentBinding[s] != null)
+            {
+                return ((ImageAttachment)SlotAttachmentBinding[s]).getPath();
+            }
+            else
+            {
+                return "Пусто";
+            }
         }
 
         /// <summary>
@@ -70,6 +103,20 @@ namespace AnimModels
                 }
             }
             return slots;
+        }
+
+        /// <summary>
+        /// Checks whether the slot can be drawn
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns>Returns true, if slot can be drawn</returns>
+        public bool isSlotDrawable(Slot s)
+        {
+            if (SlotAttachmentBinding.ContainsKey(s) && SlotAttachmentBinding[s] != null)
+            {
+                return true;
+            }
+            return false;
         }
 
         public Attachment? GetAttachment(Slot s)

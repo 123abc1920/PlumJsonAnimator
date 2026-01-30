@@ -89,9 +89,27 @@ namespace EngineModels
             this.Animations.Add(new Animation("anim" + Animations.Count.ToString()));
         }
 
+        public void DeleteAnimation()
+        {
+            if (this.Animations.Count > 1)
+            {
+                this.Animations.Remove(CurrentAnimation);
+                CurrentAnimation = this.Animations[0];
+            }
+        }
+
         public void AddSkin()
         {
             this.Skins.Add(new Skin("skin" + Skins.Count.ToString()));
+        }
+
+        public void DeleteSkin()
+        {
+            if (this.Skins.Count > 1)
+            {
+                this.Skins.Remove(CurrentSkin);
+                CurrentSkin = this.Skins[0];
+            }
         }
 
         public IBone? GetSlot(int id)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using AnimEngine;
 using AnimModels;
@@ -157,11 +158,6 @@ public partial class MainWindow : Window
         DeleteBone(bone);
     }
 
-    private void Delete_Slot(object sender, RoutedEventArgs e)
-    {
-        Bone bone = (Bone)SelectedBone;
-    }
-
     private void Set_Transform_Mode(object sender, RoutedEventArgs e)
     {
         ConstantsClass.currentProject.currentMode = TransformModeFactory.createMode(
@@ -262,8 +258,30 @@ public partial class MainWindow : Window
                 }
                 element = element.Parent as Visual;
             }
+        }
+    }
 
-            Console.WriteLine("Drop outside any Bone");
+    private void OnListBoxDrop(object sender, DragEventArgs e)
+    {
+        var listBox = (ListBox)sender;
+        var point = e.GetPosition(listBox);
+        var item = listBox.InputHitTest(point) as Visual;
+
+        while (item != null && !(item is ListBoxItem))
+        {
+            item = item.Parent as Visual;
+        }
+
+        if (item is ListBoxItem listBoxItem)
+        {
+            if (e.Data.Get("Resource") is ImageRes imageRes && listBoxItem.DataContext is Slot slot)
+            {
+                ConstantsClass.currentProject.CurrentSkin.BindSlotAttachment(
+                    slot,
+                    new ImageAttachment(imageRes)
+                );
+                e.Handled = true;
+            }
         }
     }
 
@@ -287,6 +305,51 @@ public partial class MainWindow : Window
     private void Add_New_Skin(object sender, RoutedEventArgs e)
     {
         ConstantsClass.currentProject?.AddSkin();
+    }
+
+    private void Delete_Skin(object sender, RoutedEventArgs e)
+    {
+        ConstantsClass.currentProject?.DeleteSkin();
+    }
+
+    private void Delete_Animation(object sender, RoutedEventArgs e)
+    {
+        ConstantsClass.currentProject?.DeleteAnimation();
+    }
+
+    private void Add_Slot(object sender, RoutedEventArgs e)
+    {
+        Bone bone = selectedBone;
+        if (bone != null)
+        {
+            Slot s = new Slot("tesr", bone);
+            ConstantsClass.currentProject.Slots.Add(s);
+            ConstantsClass.currentProject.CurrentSkin.AddSlot(s);
+            bone.UpdateSlots();
+        }
+    }
+
+    private void OnSlotSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (sender is ListBox listBox)
+        {
+            Slot selectedSlot = listBox.SelectedItem as Slot;
+            if (selectedSlot != null)
+            {
+                Console.WriteLine($"{selectedSlot.Name}");
+            }
+        }
+    }
+
+    private void Delete_Slot(object sender, RoutedEventArgs e)
+    {
+        Slot selectedSlot = SlotsList.SelectedItem as Slot;
+        if (selectedSlot != null)
+        {
+            ConstantsClass.currentProject.Slots.Remove(selectedSlot);
+            ConstantsClass.currentProject.CurrentSkin.DeleteSlot(selectedSlot);
+            selectedBone.UpdateSlots();
+        }
     }
 
     private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)

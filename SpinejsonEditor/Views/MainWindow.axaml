@@ -80,7 +80,7 @@
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
                             <Button Click="Add_New_Skin" Content="+" />
-                            <Button Content="-" />
+                            <Button Click="Delete_Skin" Content="-" />
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
@@ -110,7 +110,7 @@
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
                             <Button Click="Add_New_Animation" Content="+" />
-                            <Button Content="-" />
+                            <Button Click="Delete_Animation" Content="-" />
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
@@ -284,19 +284,12 @@
                     <RowDefinition Height="6" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <DockPanel Grid.Row="0" Background="LightBlue">
-                    <Grid DockPanel.Dock="Top">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                <StackPanel Grid.Row="0" Background="LightBlue">
+                    <StackPanel Orientation="Horizontal">
                         <Button Grid.Column="0" Click="Add_Bone">+</Button>
                         <Button Grid.Column="1" Click="Rename_Bone">R</Button>
                         <Button Grid.Column="2" Click="Delete_Bone">-</Button>
-                        <Button Grid.Column="3" Click="Delete_Slot">-S</Button>
-                    </Grid>
+                    </StackPanel>
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <TreeView Name="boneTreeView" ItemsSource="{Binding CurrentProject.MainSkeleton.RootBones}">
                             <TreeView.ItemTemplate>
@@ -312,7 +305,7 @@
                             </TreeView.ItemTemplate>
                         </TreeView>
                     </ScrollViewer>
-                </DockPanel>
+                </StackPanel>
                 <GridSplitter
                     Grid.Row="1"
                     Height="6"
@@ -321,11 +314,22 @@
                 <DockPanel Grid.Row="2" Background="LightBlue">
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Click="Add_Slot" Content="+" />
+                                <Button Click="Delete_Slot" Content="-" />
+                            </StackPanel>
                             <TextBlock Text="{Binding CurrentBone.Name, FallbackValue='Не выбрано', TargetNullValue='Не выбрано'}" />
-                            <ListBox IsVisible="{Binding CurrentBone}" ItemsSource="{Binding CurrentBone.Slots}">
+                            <ListBox
+                                x:Name="SlotsList"
+                                DragDrop.Drop="OnListBoxDrop"
+                                IsVisible="{Binding CurrentBone}"
+                                ItemsSource="{Binding CurrentBone.Slots}"
+                                SelectionChanged="OnSlotSelectionChanged">
+                                <DragDrop.AllowDrop>True</DragDrop.AllowDrop>
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
+                                            <DragDrop.AllowDrop>True</DragDrop.AllowDrop>
                                             <TextBlock Text="{Binding Name}" />
                                             <TextBlock Text="{Binding CurrentAttachment.Name}" />
                                         </StackPanel>

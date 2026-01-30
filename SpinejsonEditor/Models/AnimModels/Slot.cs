@@ -27,8 +27,25 @@ namespace AnimModels
             }
         }
 
-        public Attachment CurrentAttachment =>
-            ConstantsClass.currentProject.CurrentSkin.GetAttachment(this);
+        private Attachment _currentAttachment;
+
+        public Attachment CurrentAttachment
+        {
+            get => _currentAttachment;
+            set
+            {
+                if (_currentAttachment != value)
+                {
+                    _currentAttachment = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public void UpdateAttachment()
+        {
+            CurrentAttachment = ConstantsClass.currentProject.CurrentSkin.GetAttachment(this);
+        }
 
         public int DrawOrder { get; set; }
         public double selfA = 0;
@@ -57,12 +74,14 @@ namespace AnimModels
 
             this.Name = System.IO.Path.GetFileNameWithoutExtension(path);
             this.isBone = false;
+            UpdateAttachment();
         }
 
         public Slot(string name, Bone b)
         {
             this.Name = name;
             this.BoundedBone = b;
+            UpdateAttachment();
         }
 
         public void setBone(Bone? b)
@@ -93,7 +112,7 @@ namespace AnimModels
 
         public void drawSlot(Canvas canvas)
         {
-            if (ConstantsClass.currentProject.CurrentSkin.ContainsSlot(this))
+            if (ConstantsClass.currentProject.CurrentSkin.isSlotDrawable(this))
             {
                 var image = new Image
                 {
