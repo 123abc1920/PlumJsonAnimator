@@ -1,0 +1,16 @@
+<UserControl
+    x:Class="SpinejsonEditor.Views.ProjectSettingsPanel"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+        <TextBlock
+            FontSize="16"
+            FontWeight="Bold"
+            Text="PROJECT SETTINGS" />
+        <TextBox
+            Margin="0,10"
+            Text="{Binding CurrentProject.CurrentSkin.Name, Mode=TwoWay}"
+            Watermark="Project Name" />
+        <TextBox Margin="0,5" Watermark="Project Path" />
+    </StackPanel>
+</UserControl>

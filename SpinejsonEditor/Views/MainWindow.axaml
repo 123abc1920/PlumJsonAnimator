@@ -29,7 +29,7 @@
                 <MenuItem Header="New" />
                 <MenuItem Header="Save" />
                 <Separator />
-                <MenuItem Header="Settings" />
+                <MenuItem Click="OpenSettings_Click" Header="Settings" />
             </MenuItem>
             <MenuItem Header="File">
                 <MenuItem Header="Import json" />

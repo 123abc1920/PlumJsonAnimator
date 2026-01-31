@@ -406,4 +406,18 @@ public partial class MainWindow : Window
             e.Handled = true;
         }
     }
+
+    private async void OpenSettings_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        var window = new Window
+        {
+            Title = "Settings",
+            Width = 600,
+            Height = 400,
+            Content = new SettingsView(),
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
+        };
+
+        await window.ShowDialog(this);
+    }
 }
