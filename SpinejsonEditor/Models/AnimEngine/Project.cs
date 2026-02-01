@@ -16,7 +16,7 @@ namespace EngineModels
         public string ProjectPath { get; set; } = "C:/Users/Документы/";
         public string Name { get; set; } = "NewProject";
 
-        private MetaData metaData = new MetaData { Spine = "4.2.22" };
+        public MetaData MetaData { get; set; } = new MetaData { Spine = "4.2.22" };
 
         public Skeleton? MainSkeleton { get; set; } = null;
         public Mode currentMode = new NoMode();
@@ -132,7 +132,7 @@ namespace EngineModels
 
         public MetaData generateMetaData()
         {
-            return this.metaData;
+            return this.MetaData;
         }
 
         public List<SkinData> generateSkinsJSONData()

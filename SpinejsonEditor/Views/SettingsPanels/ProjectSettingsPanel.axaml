@@ -1,16 +1,16 @@
 <UserControl
     x:Class="SpinejsonEditor.Views.ProjectSettingsPanel"
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <StackPanel>
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:viewModels="clr-namespace:SpinejsonEditor.ViewModels">
+    <StackPanel x:DataType="viewModels:MainWindowViewModel">
         <TextBlock
             FontSize="16"
             FontWeight="Bold"
             Text="PROJECT SETTINGS" />
-        <TextBox
-            Margin="0,10"
-            Text="{Binding CurrentProject.CurrentSkin.Name, Mode=TwoWay}"
-            Watermark="Project Name" />
-        <TextBox Margin="0,5" Watermark="Project Path" />
+        <TextBox Text="{Binding CurrentProject.Name, Mode=TwoWay}" Watermark="Project Name" />
+        <TextBox Text="{Binding CurrentProject.ProjectPath, Mode=TwoWay}" Watermark="Project Path" />
+        <TextBox Text="{Binding CurrentProject.MetaData.Spine, Mode=TwoWay}" Watermark="Spine version" />
+        <Button Click="SaveSettings" Content="Save" />
     </StackPanel>
 </UserControl>

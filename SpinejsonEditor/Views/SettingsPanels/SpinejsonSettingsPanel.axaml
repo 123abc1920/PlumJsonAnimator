@@ -1,8 +1,9 @@
 <UserControl
     x:Class="SpinejsonEditor.Views.SpinejsonSettingsPanel"
     xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <StackPanel>
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:viewModels="clr-namespace:SpinejsonEditor.ViewModels">
+    <StackPanel x:DataType="viewModels:MainWindowViewModel">
         <TextBlock
             FontSize="16"
             FontWeight="Bold"

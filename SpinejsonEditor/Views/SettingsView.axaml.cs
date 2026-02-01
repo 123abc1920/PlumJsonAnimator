@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using SpinejsonEditor.ViewModels;
 
 namespace SpinejsonEditor.Views
 {
@@ -10,14 +11,26 @@ namespace SpinejsonEditor.Views
             InitializeComponent();
         }
 
+        public SettingsView(MainWindowViewModel viewModel)
+            : this()
+        {
+            DataContext = viewModel;
+        }
+
         private void ShowProjectSettings(object sender, RoutedEventArgs e)
         {
-            SettingsContentControl.Content = new ProjectSettingsPanel();
+            if (DataContext is MainWindowViewModel viewModel)
+            {
+                SettingsContentControl.Content = new ProjectSettingsPanel(viewModel);
+            }
         }
 
         private void ShowSpinejsonSettings(object sender, RoutedEventArgs e)
         {
-            SettingsContentControl.Content = new SpinejsonSettingsPanel();
+            if (DataContext is MainWindowViewModel viewModel)
+            {
+                SettingsContentControl.Content = new SpinejsonSettingsPanel(viewModel);
+            }
         }
     }
 }

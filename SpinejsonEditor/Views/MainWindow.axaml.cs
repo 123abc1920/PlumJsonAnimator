@@ -409,15 +409,18 @@ public partial class MainWindow : Window
 
     private async void OpenSettings_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        var window = new Window
+        if (DataContext is MainWindowViewModel viewModel)
         {
-            Title = "Settings",
-            Width = 600,
-            Height = 400,
-            Content = new SettingsView(),
-            WindowStartupLocation = WindowStartupLocation.CenterOwner,
-        };
+            var window = new Window
+            {
+                Title = "Settings",
+                Width = 600,
+                Height = 400,
+                Content = new SettingsView(viewModel),
+                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+            };
 
-        await window.ShowDialog(this);
+            await window.ShowDialog(this);
+        }
     }
 }

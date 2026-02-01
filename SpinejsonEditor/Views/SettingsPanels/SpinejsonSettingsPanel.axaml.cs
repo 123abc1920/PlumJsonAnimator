@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using SpinejsonEditor.ViewModels;
 
 namespace SpinejsonEditor.Views
 {
@@ -9,6 +10,12 @@ namespace SpinejsonEditor.Views
         public SpinejsonSettingsPanel()
         {
             InitializeComponent();
+        }
+
+        public SpinejsonSettingsPanel(MainWindowViewModel viewModel)
+            : this()
+        {
+            DataContext = viewModel;
         }
     }
 }
