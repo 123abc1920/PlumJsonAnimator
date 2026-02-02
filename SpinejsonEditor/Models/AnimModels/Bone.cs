@@ -12,8 +12,54 @@ namespace AnimModels
 {
     public class Bone : IBone, INotifyPropertyChanged
     {
+        private double _x = 0;
+        private double _y = 0;
+        private double _a = 0;
+
+        public override double x
+        {
+            get => _x;
+            set
+            {
+                if (Math.Abs(_x - value) > double.Epsilon)
+                {
+                    _x = value;
+                    move(_x, _y);
+                    OnPropertyChanged(nameof(x));
+                }
+            }
+        }
+
+        public override double y
+        {
+            get => _y;
+            set
+            {
+                if (Math.Abs(_y - value) > double.Epsilon)
+                {
+                    _y = value;
+                    move(_x, _y);
+                    OnPropertyChanged(nameof(y));
+                }
+            }
+        }
+
+        public override double a
+        {
+            get => _a;
+            set
+            {
+                if (Math.Abs(_a - value) > double.Epsilon)
+                {
+                    _a = value;
+                    rotate(_a);
+                    OnPropertyChanged(nameof(a));
+                }
+            }
+        }
+
         private string _name = "";
-        public string Name
+        public override string Name
         {
             get => _name;
             set
@@ -61,14 +107,14 @@ namespace AnimModels
         {
             this.Name = "root";
 
-            this.a = -100;
+            this._a = -100;
             this.id = 0;
-            this.x = 100;
-            this.y = 100;
+            this._x = 100;
+            this._y = 100;
 
             double angleRad = this.a * Math.PI / 180;
-            this.endX = this.x + length * Math.Cos(angleRad);
-            this.endY = this.y + length * Math.Sin(angleRad);
+            this.endX = this._x + length * Math.Cos(angleRad);
+            this.endY = this._y + length * Math.Sin(angleRad);
 
             this.isBone = true;
         }
@@ -76,9 +122,9 @@ namespace AnimModels
         public Bone(int _id)
         {
             this.id = _id;
-            this.a = -100;
-            this.x = 100;
-            this.y = 100;
+            this._a = -100;
+            this._x = 100;
+            this._y = 100;
             this.Name = "name" + this.id.ToString();
 
             this.isBone = true;
@@ -87,9 +133,9 @@ namespace AnimModels
         public Bone(int _id, Bone parent, String name, double x, double y, double a)
         {
             this.id = _id;
-            this.a = a;
-            this.x = x;
-            this.y = y;
+            this._a = a;
+            this._x = x;
+            this._y = y;
             this.Name = name;
             this.Parent = parent;
 
@@ -98,10 +144,10 @@ namespace AnimModels
 
         public Bone(Bone parent)
         {
-            this.a = -100;
+            this._a = -100;
             this.id = 0;
-            this.x = 100;
-            this.y = 100;
+            this._x = 100;
+            this._y = 100;
 
             double angleRad = this.a * Math.PI / 180;
             this.endX = this.x + length * Math.Cos(angleRad);

@@ -13,6 +13,52 @@ namespace AnimModels
 {
     public class Slot : IBone, INotifyPropertyChanged
     {
+        private double _x = 0;
+        private double _y = 0;
+        private double _a = 0;
+
+        public override double x
+        {
+            get => _x;
+            set
+            {
+                if (Math.Abs(_x - value) > double.Epsilon)
+                {
+                    _x = value;
+                    move(_x, _y);
+                    OnPropertyChanged(nameof(x));
+                }
+            }
+        }
+
+        public override double y
+        {
+            get => _y;
+            set
+            {
+                if (Math.Abs(_y - value) > double.Epsilon)
+                {
+                    _y = value;
+                    move(_x, _y);
+                    OnPropertyChanged(nameof(y));
+                }
+            }
+        }
+
+        public override double a
+        {
+            get => _a;
+            set
+            {
+                if (Math.Abs(_a - value) > double.Epsilon)
+                {
+                    _a = value;
+                    rotate(_a);
+                    OnPropertyChanged(nameof(a));
+                }
+            }
+        }
+
         private string _name = "";
         public string Name
         {

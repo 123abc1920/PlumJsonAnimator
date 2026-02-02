@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 
 namespace AnimModels
 {
     public class IBone : INotifyPropertyChanged
     {
         private string _name = "";
-        public string Name
+        public virtual string Name
         {
             get => _name;
             set
@@ -24,9 +25,9 @@ namespace AnimModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public double x;
-        public double y;
-        public double a;
+        public virtual double x { get; set; }
+        public virtual double y { get; set; }
+        public virtual double a { get; set; }
         public int id;
         public bool isBone;
 

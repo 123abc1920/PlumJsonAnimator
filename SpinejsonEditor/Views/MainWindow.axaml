@@ -2,6 +2,7 @@
     x:Class="SpinejsonEditor.Views.MainWindow"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:AnimConverters;assembly=SpinejsonEditor"
     xmlns:ctrls="using:TimeLine"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -13,6 +14,10 @@
     x:DataType="vm:MainWindowViewModel"
     Icon="/Assets/avalonia-logo.ico"
     mc:Ignorable="d">
+
+    <Window.Resources>
+        <converters:DoubleConverter x:Key="DoubleConverter" />
+    </Window.Resources>
 
     <Design.DataContext>
         <!--
@@ -154,24 +159,13 @@
 
                             <Grid Grid.Row="0">
                                 <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <StackPanel
-                                        Grid.Column="0"
-                                        Width="50"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Top"
-                                        Orientation="Vertical">
-                                        <Button Content="К" />
-                                        <Button Content="Л" />
-                                        <Button Content="О" />
-                                    </StackPanel>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
 
                                     <ScrollViewer
-                                        Grid.Column="1"
+                                        Grid.Row="0"
                                         VerticalAlignment="Stretch"
                                         Background="LightBlue"
                                         HorizontalScrollBarVisibility="Auto"
@@ -187,14 +181,27 @@
                                     </ScrollViewer>
 
                                     <StackPanel
-                                        Grid.Column="1"
-                                        Width="50"
+                                        Grid.Row="1"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Bottom"
                                         Orientation="Horizontal">
                                         <Button Click="Set_Transform_Mode" Content="XY" />
+                                        <TextBox
+                                            x:Name="transformX"
+                                            Text="{Binding CurrentBone.x, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
+                                            Watermark="X" />
+                                        <TextBox
+                                            x:Name="transformY"
+                                            Text="{Binding CurrentBone.y, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
+                                            Watermark="Y" />
                                         <Button Click="Set_Rotate_Mode" Content="A" />
+                                        <TextBox
+                                            x:Name="rotate"
+                                            Text="{Binding CurrentBone.a, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
+                                            Watermark="A" />
                                         <Button Click="Set_Scale_Mode" Content="S" />
+                                        <TextBox x:Name="scaleX" Watermark="X" />
+                                        <TextBox x:Name="scaleY" Watermark="Y" />
                                     </StackPanel>
                                 </Grid>
                             </Grid>
