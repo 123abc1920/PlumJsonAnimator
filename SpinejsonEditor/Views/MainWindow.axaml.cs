@@ -336,7 +336,7 @@ public partial class MainWindow : Window
             Slot selectedSlot = listBox.SelectedItem as Slot;
             if (selectedSlot != null)
             {
-                Console.WriteLine($"{selectedSlot.Name}");
+                SelectedBone = (Bone)selectedSlot;
             }
         }
     }

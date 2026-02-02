@@ -11,7 +11,7 @@ using Resources;
 
 namespace AnimModels
 {
-    public class Slot : IBone, INotifyPropertyChanged
+    public class Slot : Bone, INotifyPropertyChanged
     {
         private double _x = 0;
         private double _y = 0;
@@ -60,7 +60,7 @@ namespace AnimModels
         }
 
         private string _name = "";
-        public string Name
+        public override string Name
         {
             get => _name;
             set
@@ -94,7 +94,7 @@ namespace AnimModels
         }
 
         public int DrawOrder { get; set; }
-        public double selfA = 0;
+        public double parentA = 0;
         public double lengthX = 100;
         public double lengthY = 100;
         private Bone? _boundedBone;
@@ -114,7 +114,7 @@ namespace AnimModels
         public Slot(int id, string path)
         {
             this.id = id;
-            this.a = 0;
+            this.a = 0; // Теперь это свойство, которое использует _parentA
             this.x = 0;
             this.y = 0;
 
@@ -153,7 +153,7 @@ namespace AnimModels
 
         public override void rotate(double a)
         {
-            this.selfA = a;
+            this.a = a;
         }
 
         public void drawSlot(Canvas canvas)
@@ -167,7 +167,7 @@ namespace AnimModels
                     ),
                     Width = lengthX,
                     Height = lengthY,
-                    RenderTransform = new RotateTransform(this.a + this.selfA),
+                    RenderTransform = new RotateTransform(this.a + this.parentA), // Сумма свойства a и поля parentA
                 };
 
                 Canvas.SetLeft(image, canvas.Width / 2 + this.x - image.Width / 2);

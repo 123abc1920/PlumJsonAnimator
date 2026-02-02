@@ -9,7 +9,26 @@ namespace AnimConverters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value?.ToString() ?? string.Empty;
+            if (value == null)
+                return string.Empty;
+
+            if (value is double doubleValue)
+            {
+                // Ограничиваем до 2 знаков после запятой
+                return doubleValue.ToString("0.##", culture);
+            }
+            else if (value is decimal decimalValue)
+            {
+                // Ограничиваем до 2 знаков после запятой
+                return decimalValue.ToString("0.##", culture);
+            }
+            else if (value is float floatValue)
+            {
+                // Ограничиваем до 2 знаков после запятой
+                return floatValue.ToString("0.##", culture);
+            }
+
+            return value.ToString() ?? string.Empty;
         }
 
         public object ConvertBack(
@@ -42,6 +61,20 @@ namespace AnimConverters
                 )
             )
             {
+                // При конвертации обратно также ограничиваем до 2 знаков после запятой
+                if (targetType == typeof(double))
+                {
+                    return Math.Round(result, 2);
+                }
+                else if (targetType == typeof(decimal))
+                {
+                    return Math.Round((decimal)result, 2);
+                }
+                else if (targetType == typeof(float))
+                {
+                    return (float)Math.Round(result, 2);
+                }
+
                 return result;
             }
 

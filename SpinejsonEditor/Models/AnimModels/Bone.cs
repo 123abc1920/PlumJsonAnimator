@@ -234,7 +234,7 @@ namespace AnimModels
                 slot.x = this.x + slotnewDx;
                 slot.y = this.y + slotnewDy;
 
-                slot.a = slot.a + (a - oldA);
+                slot.parentA = slot.parentA + (a - oldA);
             }
 
             var animation = ConstantsClass.currentProject?.GetAnimation();
