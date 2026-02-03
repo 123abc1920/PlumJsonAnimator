@@ -7,6 +7,11 @@ namespace AnimModels
     {
         public string Name { get; set; }
 
+        public virtual Res GetRes()
+        {
+            return new Res();
+        }
+
         public abstract AttachmentData generateJSONData();
     }
 
@@ -33,6 +38,11 @@ namespace AnimModels
                 Width = this.image.width,
                 Height = this.image.height,
             };
+        }
+
+        public override Res GetRes()
+        {
+            return this.image;
         }
     }
 

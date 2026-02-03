@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using AnimModels;
 using Avalonia.Controls;
 using Newtonsoft.Json;
+using Resources;
 
 namespace AnimModels
 {
@@ -73,6 +75,32 @@ namespace AnimModels
         public bool ContainsSlot(Slot s)
         {
             return SlotAttachmentBinding.ContainsKey(s);
+        }
+
+        public bool ContainsRes(Res res)
+        {
+            foreach (Attachment a in SlotAttachmentBinding.Values)
+            {
+                if (a.GetRes() == res)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool ContainsAndRemoveRes(Res res)
+        {
+            foreach (Slot s in SlotAttachmentBinding.Keys)
+            {
+                if (SlotAttachmentBinding[s].GetRes() == res)
+                {
+                    SlotAttachmentBinding[s] = null;
+                    s.UpdateAttachment();
+                    return true;
+                }
+            }
+            return false;
         }
 
         public string GetImagePath(Slot s)

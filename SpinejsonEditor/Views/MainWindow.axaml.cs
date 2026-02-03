@@ -130,6 +130,19 @@ public partial class MainWindow : Window
         }
     }
 
+    private void DeleteRes(object sender, RoutedEventArgs e)
+    {
+        Res res = resList.SelectedItem as Res;
+        if (res != null)
+        {
+            foreach (Skin s in ConstantsClass.currentProject.Skins)
+            {
+                s.ContainsAndRemoveRes(res);
+            }
+            ConstantsClass.currentProject.Resources.Remove(res);
+        }
+    }
+
     private void Rename_Bone(object sender, RoutedEventArgs e)
     {
         if (SelectedBone != null && SelectedBone.isBone == true)

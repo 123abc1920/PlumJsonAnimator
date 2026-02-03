@@ -126,10 +126,10 @@
                     ResizeDirection="Rows" />
                 <DockPanel Grid.Row="4" Background="LightBlue">
                     <Grid DockPanel.Dock="Top">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Click="Add_Res">+</Button>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Click="Add_Res">+</Button>
+                            <Button Click="DeleteRes">-</Button>
+                        </StackPanel>
                     </Grid>
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <ListBox x:Name="resList" ItemsSource="{Binding CurrentProject.Resources}">
