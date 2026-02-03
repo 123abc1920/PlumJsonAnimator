@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using AnimModels;
 using Avalonia.Controls;
 using Newtonsoft.Json;
@@ -13,7 +14,11 @@ namespace EngineModels
 {
     public partial class Project : INotifyPropertyChanged
     {
-        public string ProjectPath { get; set; } = "C:/Users/Документы/";
+        public string ProjectPath { get; set; } =
+            Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                "SpinejsonWorkspace"
+            );
         public string Name { get; set; } = "NewProject";
 
         public MetaData MetaData { get; set; } = new MetaData { Spine = "4.2.22" };

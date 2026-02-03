@@ -93,7 +93,7 @@ namespace AnimModels
         {
             foreach (Slot s in SlotAttachmentBinding.Keys)
             {
-                if (SlotAttachmentBinding[s].GetRes() == res)
+                if (SlotAttachmentBinding[s] != null && SlotAttachmentBinding[s].GetRes() == res)
                 {
                     SlotAttachmentBinding[s] = null;
                     s.UpdateAttachment();

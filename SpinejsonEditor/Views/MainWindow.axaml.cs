@@ -10,6 +10,7 @@ using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using Constants;
+using ProjectManager;
 using Resources;
 using SpinejsonEditor.ViewModels;
 using TransformModes;
@@ -120,13 +121,14 @@ public partial class MainWindow : Window
             paths = files.Select(f => f.Path.LocalPath).ToArray();
         }
 
+        ProjectManager.ProjectManager.CreateProjectDir();
+
         foreach (string p in paths)
         {
-            ImageRes image = new ImageRes(
-                p,
-                "img" + ConstantsClass.currentProject.Resources.Count.ToString()
-            );
-            Constants.ConstantsClass.currentProject.Resources.Add(image);
+            string resName = "img" + ConstantsClass.currentProject.Resources.Count.ToString();
+            string ext = ProjectManager.ProjectManager.CopyRes(resName, p);
+            ImageRes image = new ImageRes(p, resName, ext);
+            ConstantsClass.currentProject.Resources.Add(image);
         }
     }
 
@@ -140,6 +142,7 @@ public partial class MainWindow : Window
                 s.ContainsAndRemoveRes(res);
             }
             ConstantsClass.currentProject.Resources.Remove(res);
+            ProjectManager.ProjectManager.DeleteResource(res.Name, res.ext);
         }
     }
 
