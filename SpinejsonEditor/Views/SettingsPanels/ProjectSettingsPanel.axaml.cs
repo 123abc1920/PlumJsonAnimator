@@ -1,8 +1,13 @@
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using AnimEngine;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
+using Avalonia.Media;
+using Avalonia.Threading;
 using Constants;
 using SpinejsonEditor.ViewModels;
 
@@ -71,6 +76,7 @@ namespace SpinejsonEditor.Views
 
             initOldVars();
             ProjectSettings.ProjectSettings.WriteSettings();
+            Popups.ShowPopup("Saved", this);
         }
     }
 }

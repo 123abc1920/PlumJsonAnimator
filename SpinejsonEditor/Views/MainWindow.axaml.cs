@@ -255,30 +255,6 @@ public partial class MainWindow : Window
         _isDragging = false;
     }
 
-    private void ShowPopup(string message)
-    {
-        var popup = new Popup
-        {
-            Child = new Border
-            {
-                Width = 200,
-                Height = 40,
-                Background = Brushes.White,
-                CornerRadius = new CornerRadius(5),
-                Padding = new Thickness(10, 10),
-                Child = new TextBlock { Text = message, Foreground = Brushes.Black },
-            },
-            PlacementTarget = this,
-            Placement = PlacementMode.RightEdgeAlignedBottom,
-            VerticalOffset = -50,
-            HorizontalOffset = -250,
-            IsOpen = true,
-        };
-
-        Task.Delay(1000)
-            .ContinueWith(_ => Dispatcher.UIThread.InvokeAsync(() => popup.IsOpen = false));
-    }
-
     private void OnResPointerPressed(object sender, PointerPressedEventArgs e)
     {
         if (sender is TextBlock textBlock && textBlock.DataContext is Res res)
@@ -487,6 +463,6 @@ public partial class MainWindow : Window
     private void SaveProject(object sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         ProjectSettings.ProjectSettings.WriteAnim();
-        ShowPopup("Saved");
+        Popups.ShowPopup("Saved", this);
     }
 }
