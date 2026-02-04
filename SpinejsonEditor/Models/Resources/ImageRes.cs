@@ -1,3 +1,5 @@
+using System.IO;
+
 namespace Resources
 {
     /// <summary>
@@ -22,9 +24,9 @@ namespace Resources
 
         public ImageRes(string _path, string name, string _ext)
         {
-            this.path = _path;
             this.Name = name;
             this.ext = _ext;
+            this.path = Path.Combine(_path, $"{this.Name}{this.ext}");
         }
     }
 }

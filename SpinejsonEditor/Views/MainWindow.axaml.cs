@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using AnimEngine;
 using AnimModels;
@@ -127,7 +128,11 @@ public partial class MainWindow : Window
         {
             string resName = "img" + ConstantsClass.currentProject.Resources.Count.ToString();
             string ext = ProjectManager.ProjectManager.CopyRes(resName, p);
-            ImageRes image = new ImageRes(p, resName, ext);
+            ImageRes image = new ImageRes(
+                Path.Combine(ConstantsClass.currentProject.GetProjectPath(), "res"),
+                resName,
+                ext
+            );
             ConstantsClass.currentProject.Resources.Add(image);
         }
     }

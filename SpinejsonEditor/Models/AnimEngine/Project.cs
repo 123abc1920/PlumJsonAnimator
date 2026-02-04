@@ -135,6 +135,11 @@ namespace EngineModels
             CurrentSkin.DrawSkin(c);
         }
 
+        public string GetProjectPath()
+        {
+            return Path.Combine(this.ProjectPath, this.Name);
+        }
+
         public MetaData generateMetaData()
         {
             return this.MetaData;

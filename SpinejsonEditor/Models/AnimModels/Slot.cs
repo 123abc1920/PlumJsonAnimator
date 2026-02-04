@@ -167,8 +167,10 @@ namespace AnimModels
                     ),
                     Width = lengthX,
                     Height = lengthY,
-                    RenderTransform = new RotateTransform(this.a + this.parentA), // Сумма свойства a и поля parentA
+                    RenderTransform = new RotateTransform(this.a + this.parentA),
                 };
+
+                Console.WriteLine(ConstantsClass.currentProject.CurrentSkin.GetImagePath(this));
 
                 Canvas.SetLeft(image, canvas.Width / 2 + this.x - image.Width / 2);
                 Canvas.SetTop(image, canvas.Height / 2 + this.y - image.Height / 2);
