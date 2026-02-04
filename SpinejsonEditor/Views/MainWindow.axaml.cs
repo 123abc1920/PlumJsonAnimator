@@ -67,6 +67,8 @@ public partial class MainWindow : Window
         DragDrop.SetAllowDrop(boneTreeView, true);
         boneTreeView.AddHandler(DragDrop.DropEvent, OnTreeViewDrop);
 
+        ProjectSettings.ProjectSettings.ReadSettings();
+
         _animationLoop.Interval = TimeSpan.FromSeconds(1);
         _animationLoop.Tick += AnimationLoop_Tick;
     }
@@ -428,7 +430,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private async void OpenSettings_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private async void OpenSettings(object sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         if (DataContext is MainWindowViewModel viewModel)
         {
@@ -443,5 +445,10 @@ public partial class MainWindow : Window
 
             await window.ShowDialog(this);
         }
+    }
+
+    private void SaveProject(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        ProjectSettings.ProjectSettings.WriteAnim();
     }
 }

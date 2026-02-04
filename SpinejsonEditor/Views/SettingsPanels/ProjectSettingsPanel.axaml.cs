@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Constants;
@@ -37,7 +38,36 @@ namespace SpinejsonEditor.Views
 
         private void SaveSettings(object sender, RoutedEventArgs e)
         {
+            if (oldName != ConstantsClass.currentProject.Name)
+            {
+                ProjectManager.ProjectManager.RenameProject(
+                    Path.Combine(ConstantsClass.currentProject.ProjectPath, oldName),
+                    Path.Combine(
+                        ConstantsClass.currentProject.ProjectPath,
+                        ConstantsClass.currentProject.Name
+                    )
+                );
+            }
+
+            if (
+                Path.Combine(oldPath, ConstantsClass.currentProject.Name)
+                != Path.Combine(
+                    ConstantsClass.currentProject.ProjectPath,
+                    ConstantsClass.currentProject.Name
+                )
+            )
+            {
+                ProjectManager.ProjectManager.CopyDir(
+                    Path.Combine(oldPath, ConstantsClass.currentProject.Name),
+                    Path.Combine(
+                        ConstantsClass.currentProject.ProjectPath,
+                        ConstantsClass.currentProject.Name
+                    )
+                );
+            }
+
             initOldVars();
+            ProjectSettings.ProjectSettings.WriteSettings();
         }
     }
 }

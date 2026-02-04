@@ -32,9 +32,9 @@
             <MenuItem Header="Project">
                 <MenuItem Header="Open" />
                 <MenuItem Header="New" />
-                <MenuItem Header="Save" />
+                <MenuItem Click="SaveProject" Header="Save" />
                 <Separator />
-                <MenuItem Click="OpenSettings_Click" Header="Settings" />
+                <MenuItem Click="OpenSettings" Header="Settings" />
             </MenuItem>
             <MenuItem Header="File">
                 <MenuItem Header="Import json" />

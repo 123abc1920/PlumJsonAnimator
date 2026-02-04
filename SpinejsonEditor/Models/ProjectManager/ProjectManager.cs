@@ -69,5 +69,37 @@ namespace ProjectManager
                 return false;
             }
         }
+
+        public static void RenameProject(string oldDir, string newDir)
+        {
+            if (Directory.Exists(oldDir))
+            {
+                Directory.Move(oldDir, newDir);
+            }
+        }
+
+        public static void CopyDir(string oldDir, string newDir)
+        {
+            if (Directory.Exists(oldDir))
+            {
+                Directory.CreateDirectory(newDir);
+
+                foreach (string file in Directory.GetFiles(oldDir))
+                {
+                    string fileName = Path.GetFileName(file);
+                    string destFile = Path.Combine(newDir, fileName);
+                    File.Copy(file, destFile, true);
+                }
+
+                foreach (string subDir in Directory.GetDirectories(oldDir))
+                {
+                    string dirName = Path.GetFileName(subDir);
+                    string destDir = Path.Combine(newDir, dirName);
+                    CopyDir(subDir, destDir);
+                }
+
+                Directory.Delete(oldDir, true);
+            }
+        }
     }
 }
