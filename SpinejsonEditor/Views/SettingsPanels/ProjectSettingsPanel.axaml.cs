@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using AnimEngine;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Constants;
@@ -47,6 +48,7 @@ namespace SpinejsonEditor.Views
                         ConstantsClass.currentProject.Name
                     )
                 );
+                AppSettings.SaveSettings();
             }
 
             if (
@@ -64,6 +66,7 @@ namespace SpinejsonEditor.Views
                         ConstantsClass.currentProject.Name
                     )
                 );
+                AppSettings.SaveSettings();
             }
 
             initOldVars();

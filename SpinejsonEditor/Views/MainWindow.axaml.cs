@@ -44,6 +44,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        this.KeyDown += OnWindowKeyDown;
 
         if (DataContext is MainWindowViewModel viewModel)
         {
@@ -67,6 +68,7 @@ public partial class MainWindow : Window
         DragDrop.SetAllowDrop(boneTreeView, true);
         boneTreeView.AddHandler(DragDrop.DropEvent, OnTreeViewDrop);
 
+        AppSettings.ReadSettings();
         ProjectSettings.ProjectSettings.ReadSettings();
 
         _animationLoop.Interval = TimeSpan.FromSeconds(1);
@@ -98,6 +100,15 @@ public partial class MainWindow : Window
                 ConstantsClass.currentProject.GetAnimation().currentTime
             );
             Timeline.InvalidateVisual();
+        }
+    }
+
+    private void OnWindowKeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.S && e.KeyModifiers.HasFlag(KeyModifiers.Control))
+        {
+            SaveProject(sender, new RoutedEventArgs());
+            e.Handled = true;
         }
     }
 

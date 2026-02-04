@@ -30,9 +30,21 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Project">
-                <MenuItem Header="Open" />
-                <MenuItem Header="New" />
-                <MenuItem Click="SaveProject" Header="Save" />
+                <MenuItem Header="Open">
+                    <MenuItem.InputGesture>
+                        <KeyGesture>Ctrl+O</KeyGesture>
+                    </MenuItem.InputGesture>
+                </MenuItem>
+                <MenuItem Header="New">
+                    <MenuItem.InputGesture>
+                        <KeyGesture>Ctrl+N</KeyGesture>
+                    </MenuItem.InputGesture>
+                </MenuItem>
+                <MenuItem Click="SaveProject" Header="Save">
+                    <MenuItem.InputGesture>
+                        <KeyGesture>Ctrl+S</KeyGesture>
+                    </MenuItem.InputGesture>
+                </MenuItem>
                 <Separator />
                 <MenuItem Click="OpenSettings" Header="Settings" />
             </MenuItem>

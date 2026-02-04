@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Constants;
@@ -118,6 +119,8 @@ namespace ProjectSettings
                 settingsPath,
                 JsonConvert.SerializeObject(settings, ConstantsClass.jsonSettings)
             );
+
+            Console.WriteLine("Saved");
         }
 
         public static void ReadSettings()
