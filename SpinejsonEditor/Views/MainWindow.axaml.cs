@@ -164,6 +164,32 @@ public partial class MainWindow : Window
         }
     }
 
+    private async void RenameRes(object sender, RoutedEventArgs e)
+    {
+        Res selectedRes = resList.SelectedItem as Res;
+        if (selectedRes != null)
+        {
+            if (DataContext is MainWindowViewModel viewModel)
+            {
+                viewModel.RedactObj = selectedRes;
+                Dialogs.ShowDialog("Rename", viewModel, this, ViewType.RENAME);
+            }
+        }
+    }
+
+    private async void RenameSlot(object sender, RoutedEventArgs e)
+    {
+        Slot selectedSlot = SlotsList.SelectedItem as Slot;
+        if (selectedSlot != null)
+        {
+            if (DataContext is MainWindowViewModel viewModel)
+            {
+                viewModel.RedactObj = selectedSlot;
+                Dialogs.ShowDialog("Rename", viewModel, this, ViewType.RENAME);
+            }
+        }
+    }
+
     private void DeleteRes(object sender, RoutedEventArgs e)
     {
         Res res = resList.SelectedItem as Res;
@@ -180,10 +206,14 @@ public partial class MainWindow : Window
 
     private void Rename_Bone(object sender, RoutedEventArgs e)
     {
-        if (SelectedBone != null && SelectedBone.isBone == true)
+        Bone bone = boneTreeView.SelectedItem as Bone;
+        if (bone != null)
         {
-            Bone bone = (Bone)SelectedBone;
-            bone.Name = "NewTitle";
+            if (DataContext is MainWindowViewModel viewModel)
+            {
+                viewModel.RedactObj = bone;
+                Dialogs.ShowDialog("Rename", viewModel, this, ViewType.RENAME);
+            }
         }
     }
 
@@ -375,15 +405,12 @@ public partial class MainWindow : Window
         }
     }
 
-    private void OnSlotSelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void OnSlotSelectionChanged(object sender, TappedEventArgs e)
     {
-        if (sender is ListBox listBox)
+        Slot selectedSlot = SlotsList.SelectedItem as Slot;
+        if (selectedSlot != null)
         {
-            Slot selectedSlot = listBox.SelectedItem as Slot;
-            if (selectedSlot != null)
-            {
-                SelectedBone = (Bone)selectedSlot;
-            }
+            SelectedBone = (Bone)selectedSlot;
         }
     }
 

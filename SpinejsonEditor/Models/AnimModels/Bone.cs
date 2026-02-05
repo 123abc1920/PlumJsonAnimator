@@ -7,10 +7,11 @@ using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Constants;
 using Newtonsoft.Json;
+using Renameble;
 
 namespace AnimModels
 {
-    public class Bone : IBone, INotifyPropertyChanged
+    public class Bone : IBone, INotifyPropertyChanged, IRenamable
     {
         private double _x = 0;
         private double _y = 0;
@@ -93,6 +94,17 @@ namespace AnimModels
         public ObservableCollection<IBone> Children { get; set; } =
             new ObservableCollection<IBone>();
         public Bone? Parent { get; set; } = null;
+        public string GetName
+        {
+            get => this.Name;
+            set
+            {
+                if (this.Name != value)
+                {
+                    this.Name = value;
+                }
+            }
+        }
 
         public double endX = 110;
         public double endY = 110;
@@ -288,6 +300,14 @@ namespace AnimModels
                 generateJSONData(),
                 Constants.ConstantsClass.jsonSettings
             );
+        }
+
+        public void SetName(string? name)
+        {
+            if (name != null)
+            {
+                this.Name = name;
+            }
         }
     }
 }

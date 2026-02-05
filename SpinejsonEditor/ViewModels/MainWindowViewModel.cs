@@ -7,6 +7,7 @@ using Avalonia.Threading;
 using Constants;
 using EngineModels;
 using JsonValidator;
+using Renameble;
 
 namespace SpinejsonEditor.ViewModels;
 
@@ -16,6 +17,7 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     public JsonError JsonErrorObj { get; set; }
     public event PropertyChangedEventHandler? PropertyChanged;
     private Bone? _currentBone;
+    public IRenamable RedactObj { get; set; } = null;
 
     public Bone? CurrentBone
     {
@@ -58,6 +60,11 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
         ConstantsClass.currentProject = new EngineModels.Project();
         CurrentProject = ConstantsClass.currentProject;
         JsonErrorObj = ConstantsClass.jsonError;
+    }
+
+    public void setRedactable(IRenamable obj)
+    {
+        this.RedactObj = obj;
     }
 
     protected new virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)

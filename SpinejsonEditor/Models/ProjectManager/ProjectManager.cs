@@ -118,6 +118,14 @@ namespace ProjectManager
             }
         }
 
+        public static void RenameFile(string oldFile, string newFile)
+        {
+            if (File.Exists(oldFile))
+            {
+                File.Move(oldFile, newFile);
+            }
+        }
+
         public static void CopyDir(string oldDir, string newDir)
         {
             if (Directory.Exists(oldDir))

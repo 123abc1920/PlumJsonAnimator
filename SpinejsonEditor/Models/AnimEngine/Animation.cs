@@ -1,16 +1,32 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using AnimEngine;
 using AnimTransformations;
 using Newtonsoft.Json;
-using Tmds.DBus.Protocol;
 
 namespace AnimModels
 {
     public class Animation : INotifyPropertyChanged
     {
-        public string Name { get; set; } = "anim0";
+        private string _name = "anim0";
+
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                    OnPropertyChanged(nameof(Name));
+                }
+            }
+        }
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public double currentTime = 0;

@@ -7,11 +7,12 @@ using Avalonia.Controls;
 using Avalonia.Media;
 using Constants;
 using Newtonsoft.Json;
+using Renameble;
 using Resources;
 
 namespace AnimModels
 {
-    public class Slot : Bone, INotifyPropertyChanged
+    public class Slot : Bone, INotifyPropertyChanged, IRenamable
     {
         private double _x = 0;
         private double _y = 0;
@@ -244,9 +245,29 @@ namespace AnimModels
             }
         }
 
+        public void SetName(string? name)
+        {
+            if (name != null)
+            {
+                this.Name = name;
+            }
+        }
+
         public override IEnumerable<IBone> CombinedChildren
         {
             get { yield break; }
+        }
+
+        public string GetName
+        {
+            get => this.Name;
+            set
+            {
+                if (this.Name != value)
+                {
+                    this.Name = value;
+                }
+            }
         }
     }
 }

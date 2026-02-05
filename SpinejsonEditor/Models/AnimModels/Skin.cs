@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+using System.ComponentModel;
 using AnimModels;
 using Avalonia.Controls;
 using Newtonsoft.Json;
@@ -9,11 +7,31 @@ using Resources;
 
 namespace AnimModels
 {
-    public class Skin
+    public class Skin : INotifyPropertyChanged
     {
-        public string Name { get; set; } = "defualt";
+        private string _name = "default";
+
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                    OnPropertyChanged(nameof(Name));
+                }
+            }
+        }
         public Dictionary<Slot, Attachment> SlotAttachmentBinding =
             new Dictionary<Slot, Attachment>();
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public Skin() { }
 
