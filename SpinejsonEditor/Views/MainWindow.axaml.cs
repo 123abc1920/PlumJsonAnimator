@@ -484,16 +484,7 @@ public partial class MainWindow : Window
     {
         if (DataContext is MainWindowViewModel viewModel)
         {
-            var window = new Window
-            {
-                Title = "Settings",
-                Width = 600,
-                Height = 400,
-                Content = new SettingsView(viewModel),
-                WindowStartupLocation = WindowStartupLocation.CenterOwner,
-            };
-
-            await window.ShowDialog(this);
+            Dialogs.ShowDialog("Settings", viewModel, this, ViewType.SETTINGS);
         }
     }
 
@@ -513,16 +504,7 @@ public partial class MainWindow : Window
     {
         if (DataContext is MainWindowViewModel viewModel)
         {
-            var window = new Window
-            {
-                Title = "New Project",
-                Width = 600,
-                Height = 400,
-                Content = new NewProjectDialog(viewModel),
-                WindowStartupLocation = WindowStartupLocation.CenterOwner,
-            };
-
-            await window.ShowDialog(this);
+            Dialogs.ShowDialog("New Project", viewModel, this, ViewType.NEWPROJECT);
         }
     }
 }
