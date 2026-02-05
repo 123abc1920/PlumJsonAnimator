@@ -2,9 +2,11 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AnimEngine;
 using Avalonia.Controls;
 using Avalonia.Platform.Storage;
 using Constants;
+using EngineModels;
 
 namespace ProjectManager
 {
@@ -31,9 +33,17 @@ namespace ProjectManager
             return result?.FirstOrDefault()?.Path.LocalPath;
         }
 
-        public static void NewProject()
+        public static bool NewProject(string? projectName, string? projectPath)
         {
-            Console.WriteLine("New");
+            if (projectName != null && projectPath != null)
+            {
+                ProjectSettings.ProjectSettings.WriteAllSettings();
+                ConstantsClass.currentProject = new Project(projectName, projectPath);
+                ProjectSettings.ProjectSettings.WriteAllSettings();
+                AppSettings.SaveSettings();
+                return true;
+            }
+            return false;
         }
 
         public static string CreateProjectDir()

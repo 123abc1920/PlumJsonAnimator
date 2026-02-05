@@ -84,6 +84,13 @@ namespace EngineModels
             CurrentSkin = Skins[0];
         }
 
+        public Project(string name, string path)
+            : this()
+        {
+            this.Name = name;
+            this.ProjectPath = path;
+        }
+
         public Animation GetAnimation()
         {
             return CurrentAnimation;

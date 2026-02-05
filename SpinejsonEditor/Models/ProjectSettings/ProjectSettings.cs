@@ -76,6 +76,8 @@ namespace ProjectSettings
                 settingsName
             );
 
+            ExistOrCreateProjectDirs();
+
             var settings = JsonConvert.DeserializeObject<SettingsData>(
                 File.ReadAllText(settingsPath)
             );
@@ -99,6 +101,8 @@ namespace ProjectSettings
                 ConstantsClass.currentProject.GetProjectPath(),
                 settingsName
             );
+
+            ExistOrCreateProjectDirs();
 
             var settings = JsonConvert.DeserializeObject<SettingsData>(
                 File.ReadAllText(settingsPath)
@@ -129,6 +133,8 @@ namespace ProjectSettings
                 WriteAllSettings();
                 return;
             }
+
+            ExistOrCreateProjectDirs();
 
             var settings = JsonConvert.DeserializeObject<SettingsData>(
                 File.ReadAllText(settingsPath)

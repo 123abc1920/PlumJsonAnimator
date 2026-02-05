@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using Constants;
 using Newtonsoft.Json;
+using Tmds.DBus.Protocol;
 
 namespace AnimEngine
 {
@@ -12,6 +13,7 @@ namespace AnimEngine
             "SpinejsonEditor"
         );
         private static string AppSettingsFile = Path.Combine(AppSettingsPath, "settings.spjsn");
+        public static AppSettingsData appSettings = null;
 
         public static void SaveSettings()
         {
@@ -36,6 +38,8 @@ namespace AnimEngine
 
             settings.LastDir = ConstantsClass.currentProject.GetProjectPath();
             settings.Workspace = ConstantsClass.currentProject.ProjectPath;
+
+            appSettings = settings;
 
             File.WriteAllText(
                 AppSettingsFile,

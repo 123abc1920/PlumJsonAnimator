@@ -482,8 +482,20 @@ public partial class MainWindow : Window
         ProjectSettings.ProjectSettings.ReadSettings(path);
     }
 
-    private void NewProject(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private async void NewProject(object sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
-        ProjectManager.ProjectManager.NewProject();
+        if (DataContext is MainWindowViewModel viewModel)
+        {
+            var window = new Window
+            {
+                Title = "New Project",
+                Width = 600,
+                Height = 400,
+                Content = new NewProjectDialog(viewModel),
+                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+            };
+
+            await window.ShowDialog(this);
+        }
     }
 }

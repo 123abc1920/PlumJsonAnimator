@@ -1,0 +1,17 @@
+<UserControl
+    x:Class="SpinejsonEditor.Views.NewProjectDialog"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:viewModels="clr-namespace:SpinejsonEditor.ViewModels">
+    <StackPanel x:DataType="viewModels:MainWindowViewModel">
+        <TextBox
+            Name="name"
+            Text="NewProject1"
+            Watermark="Project Name" />
+        <TextBox
+            Name="workspace"
+            Text=""
+            Watermark="Project Path" />
+        <Button Click="CreateProject" Content="Create" />
+    </StackPanel>
+</UserControl>
