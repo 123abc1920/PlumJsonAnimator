@@ -1,6 +1,9 @@
+using AnimEngine;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Constants;
 using SpinejsonEditor.ViewModels;
 
 namespace SpinejsonEditor.Views
@@ -16,6 +19,12 @@ namespace SpinejsonEditor.Views
             : this()
         {
             DataContext = viewModel;
+        }
+
+        private void SaveSettings(object sender, RoutedEventArgs e)
+        {
+            AppSettings.SaveSettings();
+            Popups.ShowPopup("Saved", this);
         }
     }
 }

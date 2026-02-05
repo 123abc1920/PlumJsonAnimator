@@ -114,6 +114,16 @@ public partial class MainWindow : Window
             SaveProject(sender, new RoutedEventArgs());
             e.Handled = true;
         }
+        if (e.Key == Key.O && e.KeyModifiers.HasFlag(KeyModifiers.Control))
+        {
+            OpenProject(sender, new RoutedEventArgs());
+            e.Handled = true;
+        }
+        if (e.Key == Key.N && e.KeyModifiers.HasFlag(KeyModifiers.Control))
+        {
+            NewProject(sender, new RoutedEventArgs());
+            e.Handled = true;
+        }
     }
 
     private void Add_Bone(object sender, RoutedEventArgs e)
@@ -464,5 +474,16 @@ public partial class MainWindow : Window
     {
         ProjectSettings.ProjectSettings.WriteAnim();
         Popups.ShowPopup("Saved", this);
+    }
+
+    private async void OpenProject(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        var path = await ProjectManager.ProjectManager.OpenProject(this);
+        ProjectSettings.ProjectSettings.ReadSettings(path);
+    }
+
+    private void NewProject(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        ProjectManager.ProjectManager.NewProject();
     }
 }

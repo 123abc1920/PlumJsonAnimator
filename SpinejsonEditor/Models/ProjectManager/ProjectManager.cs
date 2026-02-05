@@ -1,11 +1,41 @@
 using System;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Avalonia.Controls;
+using Avalonia.Platform.Storage;
 using Constants;
 
 namespace ProjectManager
 {
     public class ProjectManager
     {
+        public static async Task<string?> OpenProject(Window window)
+        {
+            var storageProvider = window.StorageProvider;
+
+            var fileTypeFilter = new FilePickerFileType[]
+            {
+                new("*.spjsn") { Patterns = new[] { "*.spjsn" } },
+            };
+
+            var result = await storageProvider.OpenFilePickerAsync(
+                new FilePickerOpenOptions
+                {
+                    Title = "Выберите файл настроек проекта",
+                    AllowMultiple = false,
+                    FileTypeFilter = fileTypeFilter,
+                }
+            );
+
+            return result?.FirstOrDefault()?.Path.LocalPath;
+        }
+
+        public static void NewProject()
+        {
+            Console.WriteLine("New");
+        }
+
         public static string CreateProjectDir()
         {
             string projectPath = Path.Combine(

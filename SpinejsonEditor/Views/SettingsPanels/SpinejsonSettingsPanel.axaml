@@ -8,13 +8,7 @@
             FontSize="16"
             FontWeight="Bold"
             Text="SPINEJSON SETTINGS" />
-        <TextBlock Margin="0,10" Text="Format: JSON" />
-        <CheckBox Margin="0,5" Content="Compress" />
-        <CheckBox Margin="0,5" Content="Pretty Print" />
-        <Slider
-            Margin="0,10"
-            Maximum="100"
-            Minimum="0"
-            Value="50" />
+        <TextBox Margin="0,10" Text="{Binding CurrentProject.ProjectPath, Mode=TwoWay}" />
+        <Button Click="SaveSettings" Content="Save" />
     </StackPanel>
 </UserControl>

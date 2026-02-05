@@ -35,6 +35,7 @@ namespace AnimEngine
             }
 
             settings.LastDir = ConstantsClass.currentProject.GetProjectPath();
+            settings.Workspace = ConstantsClass.currentProject.ProjectPath;
 
             File.WriteAllText(
                 AppSettingsFile,
@@ -84,4 +85,7 @@ public class AppSettingsData()
 {
     [JsonProperty("last_dir")]
     public string LastDir { get; set; }
+
+    [JsonProperty("workspace")]
+    public string Workspace { get; set; }
 }

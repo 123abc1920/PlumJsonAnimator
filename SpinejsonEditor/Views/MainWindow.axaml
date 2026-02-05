@@ -30,12 +30,12 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Project">
-                <MenuItem Header="Open">
+                <MenuItem Click="OpenProject" Header="Open">
                     <MenuItem.InputGesture>
                         <KeyGesture>Ctrl+O</KeyGesture>
                     </MenuItem.InputGesture>
                 </MenuItem>
-                <MenuItem Header="New">
+                <MenuItem Click="NewProject" Header="New">
                     <MenuItem.InputGesture>
                         <KeyGesture>Ctrl+N</KeyGesture>
                     </MenuItem.InputGesture>
@@ -51,6 +51,12 @@
             <MenuItem Header="File">
                 <MenuItem Header="Import json" />
                 <MenuItem Header="Export json" />
+            </MenuItem>
+            <MenuItem Header="Export">
+                <MenuItem Header="Export as PNG" />
+                <MenuItem Header="Export as JPG" />
+                <MenuItem Header="Export as GIF" />
+                <MenuItem Header="Export as MP4" />
             </MenuItem>
         </Menu>
         <Grid DockPanel.Dock="Bottom">
@@ -98,6 +104,7 @@
                             </ComboBox>
                             <Button Click="Add_New_Skin" Content="+" />
                             <Button Click="Delete_Skin" Content="-" />
+                            <Button>R</Button>
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
@@ -128,6 +135,7 @@
                             </ComboBox>
                             <Button Click="Add_New_Animation" Content="+" />
                             <Button Click="Delete_Animation" Content="-" />
+                            <Button>R</Button>
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
@@ -141,6 +149,7 @@
                         <StackPanel Orientation="Horizontal">
                             <Button Click="Add_Res">+</Button>
                             <Button Click="DeleteRes">-</Button>
+                            <Button>R</Button>
                         </StackPanel>
                     </Grid>
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -231,11 +240,15 @@
 
                                 <StackPanel
                                     Grid.Row="0"
-                                    HorizontalAlignment="Left"
+                                    HorizontalAlignment="Center"
                                     Orientation="Horizontal">
+                                    <Button Content="++" />
+                                    <Button Content="--" />
                                     <Button Content="[" />
                                     <Button Click="Play_Animation" Content="P" />
                                     <Button Content="]" />
+                                    <Button Content="+" />
+                                    <Button Content="-" />
                                 </StackPanel>
 
                                 <ScrollViewer
@@ -336,6 +349,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <Button Click="Add_Slot" Content="+" />
                                 <Button Click="Delete_Slot" Content="-" />
+                                <Button>R</Button>
                             </StackPanel>
                             <TextBlock Text="{Binding CurrentBone.Name, FallbackValue='Не выбрано', TargetNullValue='Не выбрано'}" />
                             <ListBox

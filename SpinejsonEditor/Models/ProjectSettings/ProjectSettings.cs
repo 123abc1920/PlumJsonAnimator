@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using AnimEngine;
 using Constants;
 using Newtonsoft.Json;
 
@@ -119,17 +120,10 @@ namespace ProjectSettings
                 settingsPath,
                 JsonConvert.SerializeObject(settings, ConstantsClass.jsonSettings)
             );
-
-            Console.WriteLine("Saved");
         }
 
-        public static void ReadSettings()
+        private static void readFile(string settingsPath)
         {
-            string settingsPath = Path.Combine(
-                ConstantsClass.currentProject.GetProjectPath(),
-                settingsName
-            );
-
             if (!File.Exists(settingsPath))
             {
                 WriteAllSettings();
@@ -142,6 +136,26 @@ namespace ProjectSettings
 
             ConstantsClass.currentProject.ProjectPath = settings.Path;
             ConstantsClass.currentProject.Name = settings.Name;
+
+            AppSettings.SaveSettings();
+        }
+
+        public static void ReadSettings()
+        {
+            string settingsPath = Path.Combine(
+                ConstantsClass.currentProject.GetProjectPath(),
+                settingsName
+            );
+
+            readFile(settingsPath);
+        }
+
+        public static void ReadSettings(string? path)
+        {
+            if (path != null)
+            {
+                readFile(path);
+            }
         }
     }
 }
