@@ -480,7 +480,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private async void OpenSettings(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private async void OpenSettings(object sender, RoutedEventArgs e)
     {
         if (DataContext is MainWindowViewModel viewModel)
         {
@@ -488,23 +488,33 @@ public partial class MainWindow : Window
         }
     }
 
-    private void SaveProject(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private void SaveProject(object sender, RoutedEventArgs e)
     {
         ProjectSettings.ProjectSettings.WriteAnim();
         Popups.ShowPopup("Saved", this);
     }
 
-    private async void OpenProject(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private async void OpenProject(object sender, RoutedEventArgs e)
     {
         var path = await ProjectManager.ProjectManager.OpenProject(this);
         ProjectSettings.ProjectSettings.ReadSettings(path);
     }
 
-    private async void NewProject(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private async void NewProject(object sender, RoutedEventArgs e)
     {
         if (DataContext is MainWindowViewModel viewModel)
         {
             Dialogs.ShowDialog("New Project", viewModel, this, ViewType.NEWPROJECT);
         }
+    }
+
+    private void IncreaseTimeLine(object sender, RoutedEventArgs e)
+    {
+        Timeline.Zoom++;
+    }
+
+    private void DecreaseTimeLine(object sender, RoutedEventArgs e)
+    {
+        Timeline.Zoom--;
     }
 }

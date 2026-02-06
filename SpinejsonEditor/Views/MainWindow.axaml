@@ -1,19 +1,19 @@
 <Window
-x:Class="SpinejsonEditor.Views.MainWindow"
-xmlns="https://github.com/avaloniaui"
-xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-xmlns:converters="clr-namespace:AnimConverters;assembly=SpinejsonEditor"
-xmlns:ctrls="using:TimeLine"
-xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-xmlns:models="using:TimeLine"
-xmlns:vm="using:SpinejsonEditor.ViewModels"
-Title="SpinejsonEditor"
-d:DesignHeight="450"
-d:DesignWidth="800"
-x:DataType="vm:MainWindowViewModel"
-Icon="/Assets/avalonia-logo.ico"
-mc:Ignorable="d">
+    x:Class="SpinejsonEditor.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:AnimConverters;assembly=SpinejsonEditor"
+    xmlns:ctrls="using:TimeLine"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:TimeLine"
+    xmlns:vm="using:SpinejsonEditor.ViewModels"
+    Title="SpinejsonEditor"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:MainWindowViewModel"
+    Icon="/Assets/avalonia-logo.ico"
+    mc:Ignorable="d">
 
     <Window.Resources>
         <converters:DoubleConverter x:Key="DoubleConverter" />
@@ -21,8 +21,8 @@ mc:Ignorable="d">
 
     <Design.DataContext>
         <!--
-        This only sets the DataContext for the previewer in an IDE,
-        to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs)
+            This only sets the DataContext for the previewer in an IDE,
+            to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs)
         -->
         <vm:MainWindowViewModel />
     </Design.DataContext>
@@ -61,9 +61,9 @@ mc:Ignorable="d">
         </Menu>
         <Grid DockPanel.Dock="Bottom">
             <TextBlock
-            Margin="0,5"
-            FontSize="18"
-            FontWeight="Bold">
+                Margin="0,5"
+                FontSize="18"
+                FontWeight="Bold">
                 Heading
             </TextBlock>
         </Grid>
@@ -84,18 +84,18 @@ mc:Ignorable="d">
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <ScrollViewer
-                Grid.Row="0"
-                Background="LightBlue"
-                HorizontalScrollBarVisibility="Auto"
-                VerticalScrollBarVisibility="Auto">
+                    Grid.Row="0"
+                    Background="LightBlue"
+                    HorizontalScrollBarVisibility="Auto"
+                    VerticalScrollBarVisibility="Auto">
                     <StackPanel>
                         <TextBlock Background="LightBlue" FontSize="22">Skin</TextBlock>
                         <TextBox Name="skinName" Text="{Binding CurrentProject.CurrentSkin.Name, Mode=TwoWay}" />
                         <StackPanel Orientation="Horizontal">
                             <ComboBox
-                            ItemsSource="{Binding CurrentProject.Skins}"
-                            MaxDropDownHeight="100"
-                            SelectedItem="{Binding CurrentProject.CurrentSkin, Mode=TwoWay}">
+                                ItemsSource="{Binding CurrentProject.Skins}"
+                                MaxDropDownHeight="100"
+                                SelectedItem="{Binding CurrentProject.CurrentSkin, Mode=TwoWay}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Name}" />
@@ -108,24 +108,24 @@ mc:Ignorable="d">
                     </StackPanel>
                 </ScrollViewer>
                 <GridSplitter
-                Grid.Row="1"
-                Height="6"
-                Background="Gray"
-                ResizeDirection="Rows" />
+                    Grid.Row="1"
+                    Height="6"
+                    Background="Gray"
+                    ResizeDirection="Rows" />
                 <ScrollViewer
-                Grid.Row="2"
-                HorizontalAlignment="Stretch"
-                Background="LightBlue"
-                HorizontalScrollBarVisibility="Auto"
-                VerticalScrollBarVisibility="Auto">
+                    Grid.Row="2"
+                    HorizontalAlignment="Stretch"
+                    Background="LightBlue"
+                    HorizontalScrollBarVisibility="Auto"
+                    VerticalScrollBarVisibility="Auto">
                     <StackPanel>
                         <TextBlock Background="LightBlue" FontSize="22">Animation</TextBlock>
                         <TextBox Name="animationName" Text="{Binding CurrentProject.CurrentAnimation.Name, Mode=TwoWay}" />
                         <StackPanel Orientation="Horizontal">
                             <ComboBox
-                            ItemsSource="{Binding CurrentProject.Animations}"
-                            MaxDropDownHeight="100"
-                            SelectedItem="{Binding CurrentProject.CurrentAnimation, Mode=TwoWay}">
+                                ItemsSource="{Binding CurrentProject.Animations}"
+                                MaxDropDownHeight="100"
+                                SelectedItem="{Binding CurrentProject.CurrentAnimation, Mode=TwoWay}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Name}" />
@@ -138,10 +138,10 @@ mc:Ignorable="d">
                     </StackPanel>
                 </ScrollViewer>
                 <GridSplitter
-                Grid.Row="3"
-                Height="6"
-                Background="Gray"
-                ResizeDirection="Rows" />
+                    Grid.Row="3"
+                    Height="6"
+                    Background="Gray"
+                    ResizeDirection="Rows" />
                 <DockPanel Grid.Row="4" Background="LightBlue">
                     <Grid DockPanel.Dock="Top">
                         <StackPanel Orientation="Horizontal">
@@ -162,10 +162,10 @@ mc:Ignorable="d">
                 </DockPanel>
             </Grid>
             <GridSplitter
-            Grid.Column="1"
-            Width="6"
-            Background="Gray"
-            ResizeDirection="Columns" />
+                Grid.Column="1"
+                Width="6"
+                Background="Gray"
+                ResizeDirection="Columns" />
             <Grid Grid.Column="2">
                 <TabControl Padding="0" SelectionChanged="TabControl_SelectionChanged">
                     <TabItem Header="Анимация">
@@ -184,40 +184,40 @@ mc:Ignorable="d">
                                     </Grid.RowDefinitions>
 
                                     <ScrollViewer
-                                    Grid.Row="0"
-                                    VerticalAlignment="Stretch"
-                                    Background="LightBlue"
-                                    HorizontalScrollBarVisibility="Auto"
-                                    VerticalScrollBarVisibility="Auto">
+                                        Grid.Row="0"
+                                        VerticalAlignment="Stretch"
+                                        Background="LightBlue"
+                                        HorizontalScrollBarVisibility="Auto"
+                                        VerticalScrollBarVisibility="Auto">
                                         <Canvas
-                                        Name="mainCanvas"
-                                        Width="1000"
-                                        Height="1000"
-                                        Background="White"
-                                        PointerMoved="Move_Canvas"
-                                        PointerPressed="Press_Canvas"
-                                        PointerReleased="Release_Canvas" />
+                                            Name="mainCanvas"
+                                            Width="1000"
+                                            Height="1000"
+                                            Background="White"
+                                            PointerMoved="Move_Canvas"
+                                            PointerPressed="Press_Canvas"
+                                            PointerReleased="Release_Canvas" />
                                     </ScrollViewer>
 
                                     <StackPanel
-                                    Grid.Row="1"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Bottom"
-                                    Orientation="Horizontal">
+                                        Grid.Row="1"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Bottom"
+                                        Orientation="Horizontal">
                                         <Button Click="Set_Transform_Mode" Content="XY" />
                                         <TextBox
-                                        x:Name="transformX"
-                                        Text="{Binding CurrentBone.x, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
-                                        Watermark="X" />
+                                            x:Name="transformX"
+                                            Text="{Binding CurrentBone.x, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
+                                            Watermark="X" />
                                         <TextBox
-                                        x:Name="transformY"
-                                        Text="{Binding CurrentBone.y, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
-                                        Watermark="Y" />
+                                            x:Name="transformY"
+                                            Text="{Binding CurrentBone.y, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
+                                            Watermark="Y" />
                                         <Button Click="Set_Rotate_Mode" Content="A" />
                                         <TextBox
-                                        x:Name="rotate"
-                                        Text="{Binding CurrentBone.a, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
-                                        Watermark="A" />
+                                            x:Name="rotate"
+                                            Text="{Binding CurrentBone.a, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
+                                            Watermark="A" />
                                         <Button Click="Set_Scale_Mode" Content="S" />
                                         <TextBox x:Name="scaleX" Watermark="X" />
                                         <TextBox x:Name="scaleY" Watermark="Y" />
@@ -226,9 +226,9 @@ mc:Ignorable="d">
                             </Grid>
 
                             <GridSplitter
-                            Grid.Row="1"
-                            Background="Gray"
-                            ResizeDirection="Rows" />
+                                Grid.Row="1"
+                                Background="Gray"
+                                ResizeDirection="Rows" />
 
                             <Grid Grid.Row="2">
                                 <Grid.RowDefinitions>
@@ -237,11 +237,11 @@ mc:Ignorable="d">
                                 </Grid.RowDefinitions>
 
                                 <StackPanel
-                                Grid.Row="0"
-                                HorizontalAlignment="Center"
-                                Orientation="Horizontal">
-                                    <Button Content="++" />
-                                    <Button Content="--" />
+                                    Grid.Row="0"
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal">
+                                    <Button Click="IncreaseTimeLine" Content="++" />
+                                    <Button Click="DecreaseTimeLine" Content="--" />
                                     <Button Content="[" />
                                     <Button Click="Play_Animation" Content="P" />
                                     <Button Content="]" />
@@ -250,16 +250,18 @@ mc:Ignorable="d">
                                 </StackPanel>
 
                                 <ScrollViewer
-                                Grid.Row="1"
-                                Background="LightBlue"
-                                HorizontalScrollBarVisibility="Auto"
-                                VerticalScrollBarVisibility="Auto">
-                                    <Grid>
+                                    Grid.Row="1"
+                                    Background="LightBlue"
+                                    HorizontalScrollBarVisibility="Auto"
+                                    VerticalScrollBarVisibility="Auto">
+                                    <Grid Margin="5">
                                         <ctrls:TimelineControl
-                                        x:Name="Timeline"
-                                        CurrentTime="0"
-                                        PixelsPerSecond="100"
-                                        TotalDuration="60">
+                                            x:Name="Timeline"
+                                            Height="150"
+                                            CurrentTime="0"
+                                            PixelsPerSecond="100"
+                                            TotalDuration="60"
+                                            Zoom="1">
                                             <ctrls:TimelineControl.Tracks>
                                                 <models:TimelineTrack Name="translate" />
                                                 <models:TimelineTrack Name="rotate" />
@@ -281,22 +283,22 @@ mc:Ignorable="d">
                             </Grid.RowDefinitions>
 
                             <TextBox
-                            Name="spineJsonText"
-                            Grid.Row="0"
-                            AcceptsReturn="True"
-                            Text="{Binding CurrentProject.SpinejsonCode.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                Name="spineJsonText"
+                                Grid.Row="0"
+                                AcceptsReturn="True"
+                                Text="{Binding CurrentProject.SpinejsonCode.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                             <GridSplitter
-                            Grid.Row="1"
-                            Height="6"
-                            Background="Gray"
-                            ResizeDirection="Rows" />
+                                Grid.Row="1"
+                                Height="6"
+                                Background="Gray"
+                                ResizeDirection="Rows" />
 
                             <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
                                 <TextBlock
-                                Text="{Binding JsonErrorObj.ErrorText}"
-                                TextAlignment="Left"
-                                TextWrapping="Wrap" />
+                                    Text="{Binding JsonErrorObj.ErrorText}"
+                                    TextAlignment="Left"
+                                    TextWrapping="Wrap" />
                             </ScrollViewer>
                         </Grid>
                     </TabItem>
@@ -304,10 +306,10 @@ mc:Ignorable="d">
                 </TabControl>
             </Grid>
             <GridSplitter
-            Grid.Column="3"
-            Width="6"
-            Background="Gray"
-            ResizeDirection="Columns" />
+                Grid.Column="3"
+                Width="6"
+                Background="Gray"
+                ResizeDirection="Columns" />
             <Grid Grid.Column="4" Background="AliceBlue">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -325,9 +327,9 @@ mc:Ignorable="d">
                             <TreeView.ItemTemplate>
                                 <TreeDataTemplate ItemsSource="{Binding Children}">
                                     <StackPanel
-                                    DoubleTapped="OnBonePointerPressed"
-                                    Orientation="Vertical"
-                                    Spacing="5">
+                                        DoubleTapped="OnBonePointerPressed"
+                                        Orientation="Vertical"
+                                        Spacing="5">
                                         <TextBlock Text="{Binding Name, Mode=TwoWay}" />
                                     </StackPanel>
                                 </TreeDataTemplate>
@@ -336,10 +338,10 @@ mc:Ignorable="d">
                     </ScrollViewer>
                 </StackPanel>
                 <GridSplitter
-                Grid.Row="1"
-                Height="6"
-                Background="Gray"
-                ResizeDirection="Rows" />
+                    Grid.Row="1"
+                    Height="6"
+                    Background="Gray"
+                    ResizeDirection="Rows" />
                 <DockPanel Grid.Row="2" Background="LightBlue">
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <StackPanel>
@@ -350,16 +352,16 @@ mc:Ignorable="d">
                             </StackPanel>
                             <TextBlock Text="{Binding CurrentBone.Name, FallbackValue='Не выбрано', TargetNullValue='Не выбрано'}" />
                             <ListBox
-                            x:Name="SlotsList"
-                            DragDrop.Drop="OnListBoxDrop"
-                            IsVisible="{Binding CurrentBone}"
-                            ItemsSource="{Binding CurrentBone.Slots}">
+                                x:Name="SlotsList"
+                                DragDrop.Drop="OnListBoxDrop"
+                                IsVisible="{Binding CurrentBone}"
+                                ItemsSource="{Binding CurrentBone.Slots}">
                                 <DragDrop.AllowDrop>True</DragDrop.AllowDrop>
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel DoubleTapped="OnSlotSelectionChanged">
                                             <DragDrop.AllowDrop>True</DragDrop.AllowDrop>
-                                            <TextBlock Text="{Binding Name}"/>
+                                            <TextBlock Text="{Binding Name}" />
                                             <TextBlock Text="{Binding CurrentAttachment.Name}" />
                                         </StackPanel>
                                     </DataTemplate>

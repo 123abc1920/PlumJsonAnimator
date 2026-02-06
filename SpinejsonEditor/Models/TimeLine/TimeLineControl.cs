@@ -39,10 +39,38 @@ namespace TimeLine
             set => SetValue(PixelsPerSecondProperty, value);
         }
 
+        public static readonly StyledProperty<int> ZoomProperty = AvaloniaProperty.Register<
+            TimelineControl,
+            int
+        >(nameof(Zoom), 1, coerce: CoerceZoom);
+
+        private static int CoerceZoom(AvaloniaObject obj, int value)
+        {
+            const int minZoom = 1;
+            const int maxZoom = 10;
+            return Math.Clamp(value, minZoom, maxZoom);
+        }
+
+        public int Zoom
+        {
+            get => GetValue(ZoomProperty);
+            set => SetValue(ZoomProperty, value);
+        }
+
+        protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
+        {
+            base.OnPropertyChanged(change);
+
+            if (change.Property == ZoomProperty)
+            {
+                InvalidateVisual();
+            }
+        }
+
         public static readonly StyledProperty<ObservableCollection<TimelineTrack>> TracksProperty =
             AvaloniaProperty.Register<TimelineControl, ObservableCollection<TimelineTrack>>(
                 nameof(Tracks),
-                new ObservableCollection<TimelineTrack>() // Инициализация пустой коллекцией
+                new ObservableCollection<TimelineTrack>()
             );
 
         public ObservableCollection<TimelineTrack> Tracks
@@ -70,7 +98,7 @@ namespace TimeLine
                 (sender, args) => sender.InvalidateVisual()
             );
             PixelsPerSecondProperty.Changed.AddClassHandler<TimelineControl>(
-                (sender, args) => sender.InvalidateMeasure() // Важно: Affects Measure
+                (sender, args) => sender.InvalidateMeasure()
             );
         }
 
@@ -86,18 +114,10 @@ namespace TimeLine
         protected override Size MeasureOverride(Size availableSize)
         {
             // Расчет ширины
-            double desiredWidth = TotalDuration * PixelsPerSecond;
+            double desiredWidth = TotalDuration * PixelsPerSecond * Zoom;
 
             // Высота: если Height не установлен (т.е. NaN), используем availableSize.Height.
-            double desiredHeight = double.IsNaN(Height) ? availableSize.Height : Height;
-
-            // Важно: Avalonia не любит, когда MeasureOverride возвращает Infinity или NaN.
-            // Ограничиваем высоту, если она бесконечна (хотя Grid должен это предотвратить).
-            if (double.IsInfinity(desiredHeight))
-            {
-                // Предоставляем разумное значение по умолчанию, если высота не ограничена.
-                desiredHeight = 150;
-            }
+            double desiredHeight = availableSize.Height;
 
             return new Size(desiredWidth, desiredHeight);
         }
@@ -112,7 +132,7 @@ namespace TimeLine
         {
             // --- 1. Основные переменные ---
             // desiredWidth: Полная ширина (6000px, если 60s * 100px/s)
-            double desiredWidth = TotalDuration * PixelsPerSecond;
+            double desiredWidth = TotalDuration * PixelsPerSecond * Zoom;
             // height: Фактическая высота в окне (например, 150px)
             double height = Bounds.Height;
             double duration = TotalDuration;
@@ -137,7 +157,7 @@ namespace TimeLine
             if (duration > 0)
             {
                 // ИСПОЛЬЗУЕМ desiredWidth для расчета X-позиции
-                double playheadX = (CurrentTime / duration) * desiredWidth;
+                double playheadX = CurrentTime * PixelsPerSecond * Zoom;
 
                 // Рисуем вертикальную линию бегунка (на всю высоту height)
                 context.DrawLine(redPen, new Point(playheadX, 0), new Point(playheadX, height));
@@ -191,7 +211,7 @@ namespace TimeLine
             for (double t = 0; t <= duration; t += step)
             {
                 // Используем desiredWidth
-                double xPosition = PixelsPerSecond * t;
+                double xPosition = PixelsPerSecond * t * Zoom;
 
                 // Высота метки: 8px для основных (каждые 5 сек), 5px для промежуточных
                 double tickHeight = 5;
@@ -218,7 +238,7 @@ namespace TimeLine
 
             foreach (double time in keyframesMarks.Keys)
             {
-                double xPosition = PixelsPerSecond * time;
+                double xPosition = PixelsPerSecond * time * Zoom;
 
                 if (keyframesMarks[time].ContainsKey(KeyFrameTypes.TRANSLATE))
                 {
@@ -274,11 +294,11 @@ namespace TimeLine
 
             var pos = e.GetCurrentPoint(this).Position;
 
-            // ✅ ИСПОЛЬЗУЕМ desiredWidth (Полная ширина шкалы)
-            double desiredWidth = TotalDuration * PixelsPerSecond;
+            // ИСПОЛЬЗУЕМ desiredWidth (Полная ширина шкалы)
+            double desiredWidth = TotalDuration * PixelsPerSecond * Zoom;
 
             // Расчет X-позиции бегунка на полной шкале
-            double playheadX = (CurrentTime / TotalDuration) * desiredWidth;
+            double playheadX = CurrentTime * PixelsPerSecond * Zoom;
 
             // Если указатель находится в пределах 10px от бегунка
             if (Math.Abs(pos.X - playheadX) < 10)
@@ -297,8 +317,8 @@ namespace TimeLine
                 var pos = e.GetCurrentPoint(this).Position;
                 double newX = pos.X;
 
-                // ✅ ИСПОЛЬЗУЕМ desiredWidth (Полная ширина шкалы)
-                double calculatedWidth = TotalDuration * PixelsPerSecond;
+                // ИСПОЛЬЗУЕМ desiredWidth (Полная ширина шкалы)
+                double calculatedWidth = TotalDuration * PixelsPerSecond * Zoom;
 
                 // Ограничиваем X-координату в пределах полной шкалы
                 newX = Math.Clamp(newX, 0, calculatedWidth);
