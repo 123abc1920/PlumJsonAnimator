@@ -195,7 +195,7 @@ namespace AnimModels
                 {
                     translateStart = translateKeyframes.Keys.ElementAt(i);
                     translateEnd = translateKeyframes.Keys.ElementAt(i + 1);
-                    if (currTime < translateEnd && currTime > translateStart)
+                    if (currTime <= translateEnd && currTime >= translateStart)
                     {
                         return;
                     }
@@ -207,7 +207,7 @@ namespace AnimModels
                 {
                     rotateStart = rotateKeyframes.Keys.ElementAt(i);
                     rotateEnd = rotateKeyframes.Keys.ElementAt(i + 1);
-                    if (currTime < rotateEnd && currTime > rotateStart)
+                    if (currTime <= rotateEnd && currTime >= rotateStart)
                     {
                         return;
                     }
@@ -219,7 +219,7 @@ namespace AnimModels
                 {
                     scaleStart = scaleKeyframes.Keys.ElementAt(i);
                     scaleEnd = scaleKeyframes.Keys.ElementAt(i + 1);
-                    if (currTime < scaleEnd && currTime > scaleStart)
+                    if (currTime <= scaleEnd && currTime >= scaleStart)
                     {
                         return;
                     }
@@ -231,7 +231,7 @@ namespace AnimModels
                 {
                     shearStart = shearKeyframes.Keys.ElementAt(i);
                     shearEnd = shearKeyframes.Keys.ElementAt(i + 1);
-                    if (currTime < shearEnd && currTime > shearStart)
+                    if (currTime <= shearEnd && currTime >= shearStart)
                     {
                         return;
                     }
@@ -245,11 +245,7 @@ namespace AnimModels
             {
                 return;
             }
-
-            if (time > translateEnd)
-            {
-                FindSegment(time, KeyFrameTypes.TRANSLATE);
-            }
+            FindSegment(time, KeyFrameTypes.TRANSLATE);
 
             double t = Interpolations.Interpolation.findInterpolateParam(
                 translateEnd - translateStart,
@@ -276,11 +272,7 @@ namespace AnimModels
             {
                 return;
             }
-
-            if (time > rotateEnd)
-            {
-                FindSegment(time, KeyFrameTypes.ROTATE);
-            }
+            FindSegment(time, KeyFrameTypes.ROTATE);
 
             double t = Interpolations.Interpolation.findInterpolateParam(
                 rotateEnd - rotateStart,
