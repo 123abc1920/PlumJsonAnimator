@@ -61,7 +61,7 @@ namespace TimeLine
         {
             base.OnPropertyChanged(change);
 
-            if (change.Property == ZoomProperty)
+            if (change.Property == ZoomProperty || change.Property == CurrentTimeProperty)
             {
                 InvalidateVisual();
             }
@@ -79,14 +79,17 @@ namespace TimeLine
             set => SetValue(TracksProperty, value);
         }
 
-        // Свойство для текущей позиции бегунка (от 0 до TotalDuration)
         public static readonly StyledProperty<double> CurrentTimeProperty =
             AvaloniaProperty.Register<TimelineControl, double>(nameof(CurrentTime), 0.0);
 
         public double CurrentTime
         {
             get => GetValue(CurrentTimeProperty);
-            set => SetValue(CurrentTimeProperty, value);
+            set
+            {
+                ConstantsClass.currentProject.CurrentAnimation.currentTime = value;
+                SetValue(CurrentTimeProperty, value);
+            }
         }
 
         static TimelineControl()

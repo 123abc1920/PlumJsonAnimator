@@ -9,6 +9,7 @@ namespace TransformModes
         TRANSLATE,
         ROTATE,
         SCALE,
+        SHEAR,
     }
 
     public class TransformModeFactory

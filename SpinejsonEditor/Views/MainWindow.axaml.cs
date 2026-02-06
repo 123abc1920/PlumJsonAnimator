@@ -517,4 +517,52 @@ public partial class MainWindow : Window
     {
         Timeline.Zoom--;
     }
+
+    private void PrevKeyframe(object sender, RoutedEventArgs e)
+    {
+        if (selectedBone != null)
+        {
+            Timeline.CurrentTime = ConstantsClass.currentProject.CurrentAnimation.FindKeyFrame(
+                selectedBone,
+                ConstantsClass.currentProject.CurrentAnimation.currentTime,
+                ConstantsClass.currentProject.currentMode.type,
+                false
+            );
+        }
+    }
+
+    private void NextKeyframe(object sender, RoutedEventArgs e)
+    {
+        if (selectedBone != null)
+        {
+            Timeline.CurrentTime = ConstantsClass.currentProject.CurrentAnimation.FindKeyFrame(
+                selectedBone,
+                ConstantsClass.currentProject.CurrentAnimation.currentTime,
+                ConstantsClass.currentProject.currentMode.type,
+                true
+            );
+        }
+    }
+
+    private void AddKeyFrame(object sender, RoutedEventArgs e)
+    {
+        if (selectedBone != null)
+        {
+            ConstantsClass.currentProject.CurrentAnimation.AddKeyFrame(
+                selectedBone,
+                ConstantsClass.currentProject.currentMode.type
+            );
+        }
+    }
+
+    private void DeleteKeyFrame(object sender, RoutedEventArgs e)
+    {
+        if (selectedBone != null)
+        {
+            ConstantsClass.currentProject.CurrentAnimation.DeleteKeyFrame(
+                selectedBone,
+                ConstantsClass.currentProject.currentMode.type
+            );
+        }
+    }
 }

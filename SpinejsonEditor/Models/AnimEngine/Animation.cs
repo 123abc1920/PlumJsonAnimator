@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using AnimTransformations;
 using Newtonsoft.Json;
+using TransformModes;
 
 namespace AnimModels
 {
@@ -133,6 +134,44 @@ namespace AnimModels
         {
             AnimateBone(b);
             BoneAnimationBinding[b].addShearFrame(currentTime, x, y);
+        }
+
+        public double FindKeyFrame(Bone b, double time, TransformModesTypes type, bool isNext)
+        {
+            if (BoneAnimationBinding.ContainsKey(b) && type != TransformModesTypes.NO)
+            {
+                return BoneAnimationBinding[b].FindTime(time, type, isNext);
+            }
+            return time;
+        }
+
+        public void AddKeyFrame(Bone b, TransformModesTypes type)
+        {
+            if (b != null && b.isBone && type != TransformModesTypes.NO)
+            {
+                if (type == TransformModesTypes.TRANSLATE)
+                {
+                    TranslateBone(b, b.x, b.y);
+                }
+                if (type == TransformModesTypes.ROTATE)
+                {
+                    RotateBone(b, b.a);
+                }
+                if (type == TransformModesTypes.SCALE) { }
+                if (type == TransformModesTypes.SHEAR) { }
+            }
+        }
+
+        public void DeleteKeyFrame(Bone b, TransformModesTypes type)
+        {
+            if (b != null && b.isBone && type != TransformModesTypes.NO)
+            {
+                if (BoneAnimationBinding.ContainsKey(b))
+                {
+                    BoneAnimation ba = BoneAnimationBinding[b];
+                    ba.deleteKeyFrame(currentTime, type);
+                }
+            }
         }
     }
 }

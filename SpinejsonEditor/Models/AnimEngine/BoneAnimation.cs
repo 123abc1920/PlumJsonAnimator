@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AnimTransformations;
 using Newtonsoft.Json;
+using TransformModes;
 
 namespace AnimModels
 {
@@ -105,30 +106,30 @@ namespace AnimModels
         /// </summary>
         /// <param name="time"></param>
         /// <param name="keyFrameType"></param>
-        public void deleteKeyFrame(double time, KeyFrameTypes keyFrameType)
+        public void deleteKeyFrame(double time, TransformModesTypes keyFrameType)
         {
-            if (keyFrameType == KeyFrameTypes.TRANSLATE)
+            if (keyFrameType == TransformModesTypes.TRANSLATE)
             {
                 if (translateKeyframes.ContainsKey(time))
                 {
                     translateKeyframes.Remove(time);
                 }
             }
-            else if (keyFrameType == KeyFrameTypes.ROTATE)
+            else if (keyFrameType == TransformModesTypes.ROTATE)
             {
                 if (rotateKeyframes.ContainsKey(time))
                 {
                     rotateKeyframes.Remove(time);
                 }
             }
-            else if (keyFrameType == KeyFrameTypes.SHEAR)
+            else if (keyFrameType == TransformModesTypes.SHEAR)
             {
                 if (shearKeyframes.ContainsKey(time))
                 {
                     shearKeyframes.Remove(time);
                 }
             }
-            else if (keyFrameType == KeyFrameTypes.SCALE)
+            else if (keyFrameType == TransformModesTypes.SCALE)
             {
                 if (scaleKeyframes.ContainsKey(time))
                 {
@@ -340,6 +341,52 @@ namespace AnimModels
                 generateJSONData(),
                 Constants.ConstantsClass.jsonSettings
             );
+        }
+
+        public double FindTime(double time, TransformModesTypes type, bool isNext)
+        {
+            SortedDictionary<double, IKeyframeType> keyframes = null;
+            if (type == TransformModesTypes.TRANSLATE)
+            {
+                keyframes = translateKeyframes;
+            }
+            if (type == TransformModesTypes.ROTATE)
+            {
+                keyframes = rotateKeyframes;
+            }
+            if (type == TransformModesTypes.SCALE)
+            {
+                keyframes = scaleKeyframes;
+            }
+            if (type == TransformModesTypes.SHEAR)
+            {
+                keyframes = shearKeyframes;
+            }
+
+            if (keyframes == null || keyframes.Count == 0)
+                return time;
+
+            if (isNext)
+            {
+                foreach (var key in keyframes.Keys)
+                {
+                    if (key > time)
+                        return key;
+                }
+            }
+            else
+            {
+                double previousKey = time;
+                foreach (var key in keyframes.Keys)
+                {
+                    if (key >= time)
+                        break;
+                    previousKey = key;
+                }
+                return previousKey;
+            }
+
+            return time;
         }
     }
 }
