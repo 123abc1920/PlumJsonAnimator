@@ -1,8 +1,8 @@
+using AnimEngine;
 using AnimModels;
 using EngineModels;
 using JsonValidator;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using SpinejsonEditor.ViewModels;
 
 namespace Constants
@@ -20,5 +20,6 @@ namespace Constants
         };
         public static int FPS = 60;
         public static Bone currentBone = null;
+        public static Engine MainEngine = new Engine();
     }
 }

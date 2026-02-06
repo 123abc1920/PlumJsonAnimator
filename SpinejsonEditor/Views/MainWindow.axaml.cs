@@ -42,7 +42,6 @@ public partial class MainWindow : Window
             }
         }
     }
-    private DispatcherTimer _animationLoop = new DispatcherTimer();
     private int currentTab = 0;
 
     public MainWindow()
@@ -75,8 +74,14 @@ public partial class MainWindow : Window
         AppSettings.ReadSettings();
         ProjectSettings.ProjectSettings.ReadSettings();
 
-        _animationLoop.Interval = TimeSpan.FromSeconds(1);
-        _animationLoop.Tick += AnimationLoop_Tick;
+        EventHandler animationTick = (sender, e) =>
+        {
+            if (currentTab == 0)
+            {
+                Timeline.CurrentTime += 1.0 / ConstantsClass.FPS;
+            }
+        };
+        ConstantsClass.MainEngine.AddCustomTickHandler(animationTick);
     }
 
     private void UpdateCanvas(object? sender, EventArgs e)
@@ -86,24 +91,12 @@ public partial class MainWindow : Window
             mainCanvas.Children.Clear();
             ConstantsClass.currentProject?.drawSlots(mainCanvas);
             ConstantsClass.currentProject?.MainSkeleton?.drawSkeleton(mainCanvas);
-            Engine.runAnimation(ConstantsClass.currentProject.GetAnimation());
         }
         else if (currentTab == 1)
         {
             ConstantsClass.jsonError.ErrorText = JsonValidator.JsonValidator.validate(
                 spineJsonText.Text
             );
-        }
-    }
-
-    private void AnimationLoop_Tick(object? sender, EventArgs e)
-    {
-        if (currentTab == 0)
-        {
-            Timeline.CurrentTime = Math.Round(
-                ConstantsClass.currentProject.GetAnimation().currentTime
-            );
-            Timeline.InvalidateVisual();
         }
     }
 
@@ -363,14 +356,7 @@ public partial class MainWindow : Window
 
     private void Play_Animation(object sender, RoutedEventArgs e)
     {
-        if (ConstantsClass.currentProject.GetAnimation().playOrPause() == true)
-        {
-            this._animationLoop.Start();
-        }
-        else
-        {
-            this._animationLoop.Stop();
-        }
+        ConstantsClass.MainEngine.runAnimation();
     }
 
     private void Add_New_Animation(object sender, RoutedEventArgs e)

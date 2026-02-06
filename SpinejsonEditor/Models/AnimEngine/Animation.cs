@@ -42,24 +42,17 @@ namespace AnimModels
             this.Name = name;
         }
 
-        public bool playOrPause()
-        {
-            if (this.isRun == false)
-            {
-                this.currentTime = 0;
-            }
-            this.isRun = !this.isRun;
-
-            return this.isRun;
-        }
-
-        public void step()
+        public void SetupBones()
         {
             foreach (Bone b in BoneAnimationBinding.Keys)
             {
                 BoneAnimationBinding[b].BoneStep(b, currentTime);
             }
-            currentTime += 0.01666667; // FPS=60
+        }
+
+        public void step()
+        {
+            SetupBones();
         }
 
         public AnimationData generateJSONData()

@@ -1,5 +1,6 @@
 using System;
 using AnimModels;
+using Constants;
 
 namespace TransformModes
 {
@@ -51,7 +52,7 @@ namespace TransformModes
     {
         public TransformModesTypes type;
 
-        public abstract void transform(IBone bone, double a, double b);
+        public abstract void transform(Bone bone, double a, double b);
     }
 
     class NoMode : Mode
@@ -61,7 +62,7 @@ namespace TransformModes
             type = TransformModesTypes.NO;
         }
 
-        public override void transform(IBone bone, double a, double b)
+        public override void transform(Bone bone, double a, double b)
         {
             return;
         }
@@ -74,9 +75,14 @@ namespace TransformModes
             type = TransformModesTypes.TRANSLATE;
         }
 
-        public override void transform(IBone bone, double x, double y)
+        public override void transform(Bone bone, double x, double y)
         {
             bone.move(x, y);
+            var animation = ConstantsClass.currentProject?.GetAnimation();
+            if (animation != null && !animation.isRun)
+            {
+                animation.TranslateBone(bone, bone.x, bone.y);
+            }
         }
     }
 
@@ -87,7 +93,7 @@ namespace TransformModes
             type = TransformModesTypes.SCALE;
         }
 
-        public override void transform(IBone bone, double x, double y)
+        public override void transform(Bone bone, double x, double y)
         {
             bone.scale(x, y);
         }
@@ -100,7 +106,7 @@ namespace TransformModes
             type = TransformModesTypes.ROTATE;
         }
 
-        public override void transform(IBone bone, double x, double y)
+        public override void transform(Bone bone, double x, double y)
         {
             double xx = x - bone.x;
             Point av = new Point(xx, y - bone.y);
@@ -112,6 +118,12 @@ namespace TransformModes
             double angleDeg = angleRad * 180 / Math.PI;
 
             bone.rotate(-angleDeg);
+
+            var animation = ConstantsClass.currentProject?.GetAnimation();
+            if (animation != null && !animation.isRun)
+            {
+                animation.RotateBone(bone, bone.a);
+            }
         }
     }
 }

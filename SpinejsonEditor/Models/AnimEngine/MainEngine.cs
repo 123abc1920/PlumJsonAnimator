@@ -1,14 +1,35 @@
+using System;
 using AnimModels;
+using Avalonia.Threading;
+using Constants;
 
 namespace AnimEngine
 {
-    class Engine
+    public class Engine
     {
-        public static void runAnimation(Animation animation)
+        private DispatcherTimer _animationLoop = new DispatcherTimer();
+
+        public Engine()
         {
-            if (animation.isRun)
+            this._animationLoop.Interval = TimeSpan.FromSeconds(1.0 / (double)ConstantsClass.FPS);
+        }
+
+        public void AddCustomTickHandler(EventHandler handler)
+        {
+            this._animationLoop.Tick += handler;
+        }
+
+        public void runAnimation()
+        {
+            if (ConstantsClass.currentProject.CurrentAnimation.isRun)
             {
-                animation.step();
+                this._animationLoop.Stop();
+                ConstantsClass.currentProject.CurrentAnimation.isRun = false;
+            }
+            else
+            {
+                this._animationLoop.Start();
+                ConstantsClass.currentProject.CurrentAnimation.isRun = true;
             }
         }
     }

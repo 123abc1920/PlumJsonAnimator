@@ -199,12 +199,6 @@ namespace AnimModels
             {
                 slot.move(slot.x - deltaX, slot.y - deltaY);
             }
-
-            var animation = ConstantsClass.currentProject?.GetAnimation();
-            if (animation != null && !animation.isRun)
-            {
-                animation.TranslateBone(this, this.x, this.y);
-            }
         }
 
         public override void rotate(double a)
@@ -247,12 +241,6 @@ namespace AnimModels
                 slot.y = this.y + slotnewDy;
 
                 slot.parentA = slot.parentA + (a - oldA);
-            }
-
-            var animation = ConstantsClass.currentProject?.GetAnimation();
-            if (animation != null && !animation.isRun)
-            {
-                animation.RotateBone(this, this.a);
             }
         }
 

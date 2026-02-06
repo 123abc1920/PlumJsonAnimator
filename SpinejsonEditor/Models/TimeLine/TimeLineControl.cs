@@ -88,6 +88,7 @@ namespace TimeLine
             set
             {
                 ConstantsClass.currentProject.CurrentAnimation.currentTime = value;
+                ConstantsClass.currentProject.CurrentAnimation.SetupBones();
                 SetValue(CurrentTimeProperty, value);
             }
         }
@@ -364,16 +365,11 @@ namespace TimeLine
                     double frameDuration = 1.0 / ConstantsClass.FPS;
                     int frameNumber = (int)Math.Round(CurrentTime / frameDuration);
                     CurrentTime = frameNumber * frameDuration;
-                    //Console.WriteLine($"until {CurrentTime}");
                     CurrentTime = Math.Round(CurrentTime / this.timeStep) * this.timeStep;
-                    //Console.WriteLine($"after {CurrentTime}");
 
-                    // Обновляем отображение
                     InvalidateVisual();
                 }
             }
-
-            ConstantsClass.currentProject.GetAnimation().currentTime = CurrentTime;
         }
     }
 }
