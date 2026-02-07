@@ -8,9 +8,12 @@
             FontSize="16"
             FontWeight="Bold"
             Text="PROJECT SETTINGS" />
-        <TextBox Text="{Binding CurrentProject.Name, Mode=TwoWay}" Watermark="Project Name" />
-        <TextBox Text="{Binding CurrentProject.ProjectPath, Mode=TwoWay}" Watermark="Project Path" />
-        <TextBox Text="{Binding CurrentProject.MetaData.Spine, Mode=TwoWay}" Watermark="Spine version" />
+        <TextBox Name="pName" Text="{Binding CurrentProject.Name, Mode=OneWay}" Watermark="Project Name" />
+        <StackPanel Orientation="Horizontal">
+            <TextBox Name="path" Text="{Binding CurrentProject.ProjectPath, Mode=OneWay}" Watermark="Project Path" />
+            <Button Click="SelectFolder" Content="O" />
+        </StackPanel>
+        <TextBox Name="pVersion" Text="{Binding CurrentProject.MetaData.Spine, Mode=OneWay}" Watermark="Spine version" />
         <Button Click="SaveSettings" Content="Save" />
     </StackPanel>
 </UserControl>

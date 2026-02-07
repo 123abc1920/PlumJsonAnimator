@@ -8,10 +8,15 @@
             Name="name"
             Text="NewProject1"
             Watermark="Project Name" />
-        <TextBox
-            Name="workspace"
-            Text=""
-            Watermark="Project Path" />
+
+        <StackPanel Orientation="Horizontal">
+            <TextBox
+                Name="workspace"
+                Text=""
+                Watermark="Project Path" />
+            <Button Click="SelectFolder" Content="O" />
+        </StackPanel>
+
         <Button Click="CreateProject" Content="Create" />
     </StackPanel>
 </UserControl>

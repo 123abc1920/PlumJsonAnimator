@@ -87,8 +87,6 @@ namespace ProjectSettings
             settings.Spine = ConstantsClass.currentProject.MetaData.Spine;
             settings.Anim = settings.Anim;
 
-            ExistOrCreateProjectDirs();
-
             File.WriteAllText(
                 settingsPath,
                 JsonConvert.SerializeObject(settings, ConstantsClass.jsonSettings)
@@ -142,6 +140,7 @@ namespace ProjectSettings
 
             ConstantsClass.currentProject.ProjectPath = settings.Path;
             ConstantsClass.currentProject.Name = settings.Name;
+            ConstantsClass.currentProject.MetaData.Spine = settings.Spine;
 
             AppSettings.SaveSettings();
         }

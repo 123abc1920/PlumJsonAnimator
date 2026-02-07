@@ -112,7 +112,7 @@ namespace ProjectManager
 
         public static void RenameProject(string oldDir, string newDir)
         {
-            if (Directory.Exists(oldDir))
+            if (Directory.Exists(oldDir) && oldDir != newDir)
             {
                 Directory.Move(oldDir, newDir);
             }
@@ -120,7 +120,7 @@ namespace ProjectManager
 
         public static void RenameFile(string oldFile, string newFile)
         {
-            if (File.Exists(oldFile))
+            if (File.Exists(oldFile) && oldFile != newFile)
             {
                 File.Move(oldFile, newFile);
             }
@@ -128,7 +128,7 @@ namespace ProjectManager
 
         public static void CopyDir(string oldDir, string newDir)
         {
-            if (Directory.Exists(oldDir))
+            if (Directory.Exists(oldDir) && oldDir != newDir)
             {
                 Directory.CreateDirectory(newDir);
 

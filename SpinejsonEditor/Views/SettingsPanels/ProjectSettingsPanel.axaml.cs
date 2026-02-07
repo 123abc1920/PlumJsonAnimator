@@ -1,13 +1,8 @@
-using System;
 using System.IO;
-using System.Threading.Tasks;
 using AnimEngine;
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
-using Avalonia.Media;
-using Avalonia.Threading;
+using Avalonia.Platform.Storage;
 using Constants;
 using SpinejsonEditor.ViewModels;
 
@@ -15,15 +10,9 @@ namespace SpinejsonEditor.Views
 {
     public partial class ProjectSettingsPanel : UserControl
     {
-        private string oldName;
-        private string oldPath;
-        private string oldSpineVersion;
-
         public ProjectSettingsPanel()
         {
             InitializeComponent();
-
-            initOldVars();
         }
 
         public ProjectSettingsPanel(MainWindowViewModel viewModel)
@@ -32,51 +21,54 @@ namespace SpinejsonEditor.Views
             DataContext = viewModel;
         }
 
-        /// <summary>
-        /// Intialises old settings values
-        /// </summary>
-        private void initOldVars()
-        {
-            oldName = ConstantsClass.currentProject.Name;
-            oldPath = ConstantsClass.currentProject.ProjectPath;
-            oldSpineVersion = ConstantsClass.currentProject.MetaData.Spine;
-        }
-
         private void SaveSettings(object sender, RoutedEventArgs e)
         {
-            if (oldName != ConstantsClass.currentProject.Name)
-            {
-                ProjectManager.ProjectManager.RenameProject(
-                    Path.Combine(ConstantsClass.currentProject.ProjectPath, oldName),
-                    Path.Combine(
-                        ConstantsClass.currentProject.ProjectPath,
-                        ConstantsClass.currentProject.Name
-                    )
-                );
-                AppSettings.SaveSettings();
-            }
-
-            if (
-                Path.Combine(oldPath, ConstantsClass.currentProject.Name)
-                != Path.Combine(
+            var oldName = ConstantsClass.currentProject.Name;
+            ConstantsClass.currentProject.Name = pName.Text;
+            ProjectManager.ProjectManager.RenameProject(
+                Path.Combine(ConstantsClass.currentProject.ProjectPath, oldName),
+                Path.Combine(
                     ConstantsClass.currentProject.ProjectPath,
                     ConstantsClass.currentProject.Name
                 )
-            )
-            {
-                ProjectManager.ProjectManager.CopyDir(
-                    Path.Combine(oldPath, ConstantsClass.currentProject.Name),
-                    Path.Combine(
-                        ConstantsClass.currentProject.ProjectPath,
-                        ConstantsClass.currentProject.Name
-                    )
-                );
-                AppSettings.SaveSettings();
-            }
+            );
 
-            initOldVars();
+            var oldPath = ConstantsClass.currentProject.ProjectPath;
+            ConstantsClass.currentProject.ProjectPath = path.Text;
+            ProjectManager.ProjectManager.CopyDir(
+                Path.Combine(oldPath, ConstantsClass.currentProject.Name),
+                Path.Combine(
+                    ConstantsClass.currentProject.ProjectPath,
+                    ConstantsClass.currentProject.Name
+                )
+            );
+            
+            AppSettings.SaveSettings();
+
+            ConstantsClass.currentProject.MetaData.Spine = pVersion.Text;
+
             ProjectSettings.ProjectSettings.WriteSettings();
             Popups.ShowPopup("Saved", this);
+        }
+
+        private async void SelectFolder(object sender, RoutedEventArgs e)
+        {
+            var topLevel = TopLevel.GetTopLevel(this);
+            var storageProvider = topLevel.StorageProvider;
+
+            var folders = await storageProvider.OpenFolderPickerAsync(
+                new FolderPickerOpenOptions { Title = "Выберите папку", AllowMultiple = false }
+            );
+
+            if (folders.Count > 0)
+            {
+                string folderPath = folders[0].Path.LocalPath;
+
+                if (this.FindControl<TextBox>("path") is TextBox pathTextBox)
+                {
+                    pathTextBox.Text = folderPath;
+                }
+            }
         }
     }
 }

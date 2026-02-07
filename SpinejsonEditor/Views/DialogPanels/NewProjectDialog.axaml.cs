@@ -2,6 +2,7 @@ using System;
 using AnimEngine;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Platform.Storage;
 using Constants;
 using SpinejsonEditor.ViewModels;
 
@@ -46,6 +47,26 @@ namespace SpinejsonEditor.Views
 
                 var parentWindow = this.VisualRoot as Window;
                 parentWindow?.Close();
+            }
+        }
+
+        private async void SelectFolder(object sender, RoutedEventArgs e)
+        {
+            var topLevel = TopLevel.GetTopLevel(this);
+            var storageProvider = topLevel.StorageProvider;
+
+            var folders = await storageProvider.OpenFolderPickerAsync(
+                new FolderPickerOpenOptions { Title = "Выберите папку", AllowMultiple = false }
+            );
+
+            if (folders.Count > 0)
+            {
+                string folderPath = folders[0].Path.LocalPath;
+
+                if (this.FindControl<TextBox>("workspace") is TextBox pathTextBox)
+                {
+                    pathTextBox.Text = folderPath;
+                }
             }
         }
     }
