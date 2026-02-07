@@ -58,6 +58,18 @@ namespace AnimModels
             return null;
         }
 
+        public Bone? getBone(string name)
+        {
+            foreach (Bone b in this.Bones)
+            {
+                if (b.Name == name)
+                {
+                    return b;
+                }
+            }
+            return null;
+        }
+
         public void drawSkeleton(Canvas canvas)
         {
             foreach (Bone b in this.Bones)
@@ -84,6 +96,8 @@ namespace AnimModels
         {
             return JsonConvert.SerializeObject(generateJSONData(), ConstantsClass.jsonSettings);
         }
+
+        public void regenerateBones(List<BoneData> boneDatas) { }
     }
 }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using AnimModels;
+using Constants;
 using EngineModels;
 using Newtonsoft.Json;
 
@@ -73,39 +74,41 @@ namespace SpinejsonGeneration
                 return;
             }
 
-            var currBones = Constants.ConstantsClass.currentProject.MainSkeleton.Bones;
+            List<BoneData> newBones = newData.Bones;
+            List<BoneData> oldBones = ConstantsClass
+                .currentProject.MainSkeleton.generateJSONData()
+                .Bones;
+            Dictionary<string, BoneData> updatedBones = SpinejsonModel.regenerateBones(
+                newBones.ToDictionary(b => b.Name, b => b),
+                oldBones.ToDictionary(b => b.Name, b => b)
+            );
 
-            var currentBonesDict = currBones.ToDictionary(b => b.Name, b => b);
-            var newBonesDict = newData.Bones.ToDictionary(b => b.Name, b => b);
+            List<SlotData> newSlots = newData.Slots;
+            List<SlotData> oldSlots = ConstantsClass.currentProject.generateSlotsJSONData();
+            Dictionary<string, SlotData> updatedSlots = SpinejsonModel.regenerateSlots(
+                newSlots.ToDictionary(b => b.Name, b => b),
+                oldSlots.ToDictionary(b => b.Name, b => b)
+            );
 
-            for (int i = currBones.Count - 1; i >= 0; i--)
-            {
-                var bone = currBones[i];
-                if (newBonesDict.ContainsKey(bone.Name))
-                {
-                    var oldjsonObj = bone.generateJSONData();
-                    if (newBonesDict.TryGetValue(bone.Name, out var newjsonObj))
-                    {
-                        if (oldjsonObj.ToString() != newjsonObj.ToString())
-                        {
-                            currBones.RemoveAt(i);
-                            /*currBones.Add(
-                                new Bone(
-                                    currBones.Count,
-                                    currBones[0],
-                                    newjsonObj.Name,
-                                    newjsonObj.X,
-                                    newjsonObj.Y
-                                )
-                            );*/
-                        }
-                    }
-                }
-                else
-                {
-                    currBones.RemoveAt(i);
-                }
-            }
+            List<SkinData> newSkins = newData.Skins;
+            List<SkinData> oldSkins = ConstantsClass.currentProject.generateSkinsJSONData();
+            Dictionary<string, SkinData> updatedSkins = SpinejsonModel.regenerateSkins(
+                newSkins.ToDictionary(b => b.Name, b => b),
+                oldSkins.ToDictionary(b => b.Name, b => b)
+            );
+
+            Dictionary<string, AnimationData> newAnimations = newData.Animations;
+            Dictionary<string, AnimationData> oldAnimations =
+                ConstantsClass.currentProject.generateAnimationsJSONData();
+            Dictionary<string, AnimationData> updatedAnimations =
+                SpinejsonModel.regenerateAnimations(newAnimations, oldAnimations);
+
+            ConstantsClass.currentProject.regenrateProject(
+                updatedBones,
+                updatedSlots,
+                updatedSkins,
+                updatedAnimations
+            );
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

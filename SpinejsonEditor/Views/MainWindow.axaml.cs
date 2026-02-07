@@ -1,21 +1,15 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using AnimEngine;
 using AnimModels;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Notifications;
-using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Media;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using Constants;
-using ProjectManager;
 using Resources;
 using SpinejsonEditor.ViewModels;
 using TransformModes;
@@ -73,6 +67,8 @@ public partial class MainWindow : Window
 
         AppSettings.ReadSettings();
         ProjectSettings.ProjectSettings.ReadSettings();
+        ProjectManager.ProjectManager.LoadRes();
+        ConstantsClass.currentProject.SpinejsonCode.regenerate();
 
         EventHandler animationTick = (sender, e) =>
         {

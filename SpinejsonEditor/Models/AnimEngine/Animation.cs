@@ -105,28 +105,76 @@ namespace AnimModels
             }
         }
 
-        public void TranslateBone(Bone b, double x, double y)
+        public void TranslateBone(Bone b, double? x, double? y)
         {
-            AnimateBone(b);
-            BoneAnimationBinding[b].addTranslateFrame(currentTime, x, y);
+            if (x != null && y != null)
+            {
+                AnimateBone(b);
+                BoneAnimationBinding[b].addTranslateFrame(currentTime, (double)x, (double)y);
+            }
         }
 
-        public void RotateBone(Bone b, double value)
+        public void TranslateBone(Bone b, double? x, double? y, double? currTime)
         {
-            AnimateBone(b);
-            BoneAnimationBinding[b].addRotateFrame(currentTime, value);
+            if (x != null && y != null && currTime != null)
+            {
+                AnimateBone(b);
+                BoneAnimationBinding[b].addTranslateFrame((double)currTime, (double)x, (double)y);
+            }
         }
 
-        public void ScaleBone(Bone b, double x, double y)
+        public void RotateBone(Bone b, double? value)
         {
-            AnimateBone(b);
-            BoneAnimationBinding[b].addScaleFrame(currentTime, x, y);
+            if (value != null)
+            {
+                AnimateBone(b);
+                BoneAnimationBinding[b].addRotateFrame(currentTime, (double)value);
+            }
         }
 
-        public void ShearBone(Bone b, double x, double y)
+        public void RotateBone(Bone b, double? value, double? currTime)
         {
-            AnimateBone(b);
-            BoneAnimationBinding[b].addShearFrame(currentTime, x, y);
+            if (value != null && currTime != null)
+            {
+                AnimateBone(b);
+                BoneAnimationBinding[b].addRotateFrame((double)currTime, (double)value);
+            }
+        }
+
+        public void ScaleBone(Bone b, double? x, double? y)
+        {
+            if (x != null && y != null)
+            {
+                AnimateBone(b);
+                BoneAnimationBinding[b].addScaleFrame(currentTime, (double)x, (double)y);
+            }
+        }
+
+        public void ScaleBone(Bone b, double? x, double? y, double? currTime)
+        {
+            if (x != null && y != null && currTime != null)
+            {
+                AnimateBone(b);
+                BoneAnimationBinding[b].addScaleFrame((double)currTime, (double)x, (double)y);
+            }
+        }
+
+        public void ShearBone(Bone b, double? x, double? y)
+        {
+            if (x != null && y != null)
+            {
+                AnimateBone(b);
+                BoneAnimationBinding[b].addShearFrame(currentTime, (double)x, (double)y);
+            }
+        }
+
+        public void ShearBone(Bone b, double? x, double? y, double? currTime)
+        {
+            if (x != null && y != null && currTime != null)
+            {
+                AnimateBone(b);
+                BoneAnimationBinding[b].addShearFrame((double)currTime, (double)x, (double)y);
+            }
         }
 
         public double FindKeyFrame(Bone b, double time, TransformModesTypes type, bool isNext)

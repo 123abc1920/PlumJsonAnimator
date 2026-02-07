@@ -141,6 +141,7 @@ namespace ProjectSettings
             ConstantsClass.currentProject.ProjectPath = settings.Path;
             ConstantsClass.currentProject.Name = settings.Name;
             ConstantsClass.currentProject.MetaData.Spine = settings.Spine;
+            ConstantsClass.currentProject.SpinejsonCode.Text = settings.Anim;
 
             AppSettings.SaveSettings();
         }

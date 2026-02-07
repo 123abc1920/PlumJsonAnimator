@@ -7,6 +7,7 @@ using Avalonia.Controls;
 using Avalonia.Platform.Storage;
 using Constants;
 using EngineModels;
+using Resources;
 
 namespace ProjectManager
 {
@@ -41,6 +42,7 @@ namespace ProjectManager
                 ConstantsClass.currentProject = new Project(projectName, projectPath);
                 ProjectSettings.ProjectSettings.WriteAllSettings();
                 AppSettings.SaveSettings();
+                LoadRes();
                 return true;
             }
             return false;
@@ -147,6 +149,40 @@ namespace ProjectManager
                 }
 
                 Directory.Delete(oldDir, true);
+            }
+        }
+
+        public static void LoadRes()
+        {
+            string directoryPath = Path.Combine(
+                ConstantsClass.currentProject.ProjectPath,
+                ConstantsClass.currentProject.Name,
+                "res"
+            );
+            string[] extensions = { "*.png", "*.jpg", "*.jpeg" };
+
+            try
+            {
+                var allFiles = extensions
+                    .SelectMany(ext => Directory.GetFiles(directoryPath, ext))
+                    .Select(filePath =>
+                    {
+                        return new ImageRes(
+                            filePath,
+                            Path.GetFileNameWithoutExtension(filePath),
+                            Path.GetExtension(filePath)
+                        );
+                    })
+                    .ToList();
+
+                foreach (var imageRes in allFiles)
+                {
+                    ConstantsClass.currentProject.Resources.Add(imageRes);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка: {ex.Message}");
             }
         }
     }

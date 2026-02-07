@@ -4,10 +4,12 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using AnimModels;
+using AnimTransformations;
 using Avalonia.Controls;
 using Newtonsoft.Json;
 using Resources;
 using SpinejsonGeneration;
+using Tmds.DBus.Protocol;
 using TransformModes;
 
 namespace EngineModels
@@ -137,6 +139,19 @@ namespace EngineModels
             return null;
         }
 
+        public Slot GetSlot(string name)
+        {
+            foreach (Slot s in Slots)
+            {
+                if (name == s.Name)
+                {
+                    return s;
+                }
+            }
+
+            return null;
+        }
+
         public void drawSlots(Canvas c)
         {
             CurrentSkin.DrawSkin(c);
@@ -160,6 +175,171 @@ namespace EngineModels
                 skinData.Add(s.generateJSONData());
             }
             return skinData;
+        }
+
+        public List<SlotData> generateSlotsJSONData()
+        {
+            List<SlotData> slotData = new List<SlotData>();
+            foreach (Slot s in Slots)
+            {
+                slotData.Add(s.generateJSONData());
+            }
+            return slotData;
+        }
+
+        public Dictionary<string, AnimationData> generateAnimationsJSONData()
+        {
+            Dictionary<string, AnimationData> animData = new Dictionary<string, AnimationData>();
+
+            foreach (Animation a in Animations)
+            {
+                animData.Add(a.Name, a.generateJSONData());
+            }
+
+            return animData;
+        }
+
+        public Res? FindRes(string name)
+        {
+            foreach (Res res in this.Resources)
+            {
+                if (res.Name == name)
+                {
+                    return res;
+                }
+            }
+            return null;
+        }
+
+        public void regenrateProject(
+            Dictionary<string, BoneData> bones,
+            Dictionary<string, SlotData> slots,
+            Dictionary<string, SkinData> skins,
+            Dictionary<string, AnimationData> animations
+        )
+        {
+            // recreate bones
+            List<Bone> bonesToRemove = new List<Bone>();
+
+            foreach (Bone b in this.MainSkeleton.Bones)
+            {
+                if (bones.TryGetValue(b.Name, out BoneData boneData))
+                {
+                    if (b.generateJSONData() != boneData)
+                    {
+                        b.x = boneData.X;
+                        b.y = boneData.Y;
+                    }
+                }
+                else
+                {
+                    bonesToRemove.Add(b);
+                }
+            }
+
+            foreach (var bone in bonesToRemove)
+            {
+                this.MainSkeleton.Bones.Remove(bone);
+            }
+
+            // recreate slots
+            List<Slot> slotsToRemove = new List<Slot>();
+
+            foreach (Slot b in this.Slots)
+            {
+                if (slots.TryGetValue(b.Name, out SlotData slotData))
+                {
+                    if (b.generateJSONData() != slotData)
+                    {
+                        b.BoundedBone = this.MainSkeleton.getBone(slotData.Bone);
+                    }
+                }
+                else
+                {
+                    slotsToRemove.Add(b);
+                }
+            }
+
+            foreach (var slot in slotsToRemove)
+            {
+                this.Slots.Remove(slot);
+            }
+
+            // recreate skins and slot-bone bounding
+            List<Skin> skinsToRemove = new List<Skin>();
+
+            foreach (Skin b in this.Skins)
+            {
+                if (skins.TryGetValue(b.Name, out SkinData skinData))
+                {
+                    if (b.generateJSONData() != skinData)
+                    {
+                        b.SlotAttachmentBinding = new Dictionary<Slot, Attachment>();
+                        foreach (string slotName in skinData.Attachments.Keys)
+                        {
+                            Dictionary<string, AttachmentData> attachs = skinData.Attachments[
+                                slotName
+                            ];
+                            foreach (string attachName in attachs.Keys)
+                            {
+                                var attach = attachs[attachName];
+                                ImageAttachment a = new ImageAttachment(
+                                    (ImageRes)this.FindRes(attach.Name)
+                                );
+                                b.BindSlotAttachment(this.GetSlot(slotName), a);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    skinsToRemove.Add(b);
+                }
+            }
+
+            foreach (var skin in skinsToRemove)
+            {
+                this.Skins.Remove(skin);
+            }
+
+            // recreate animations
+            List<Animation> animationsToRemove = new List<Animation>();
+
+            foreach (Animation b in this.Animations)
+            {
+                if (animations.TryGetValue(b.Name, out AnimationData animationData))
+                {
+                    if (b.generateJSONData() != animationData)
+                    {
+                        b.BoneAnimationBinding = new Dictionary<Bone, BoneAnimation>();
+                        foreach (string name in animationData.Keys)
+                        {
+                            var boneDict = animationData[name];
+                            foreach (string boneName in boneDict.Keys)
+                            {
+                                Bone bone = this.MainSkeleton.getBone(boneName);
+                                foreach (IKeyframeTypeData keyframe in boneDict[boneName].rotate)
+                                {
+                                    b.RotateBone(bone, keyframe.Value, keyframe.Time);
+                                }
+                                foreach (IKeyframeTypeData keyframe in boneDict[boneName].translate)
+                                {
+                                    b.TranslateBone(bone, keyframe.X, keyframe.Y, keyframe.Time);
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    animationsToRemove.Add(b);
+                }
+            }
+
+            foreach (var animation in animationsToRemove)
+            {
+                this.Animations.Remove(animation);
+            }
         }
     }
 }
