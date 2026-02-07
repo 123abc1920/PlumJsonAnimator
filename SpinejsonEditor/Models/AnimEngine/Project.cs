@@ -229,12 +229,20 @@ namespace EngineModels
                     {
                         b.x = boneData.X;
                         b.y = boneData.Y;
+                        b.Parent = this.MainSkeleton.getBone(boneData.Parent);
                     }
+                    bones.Remove(b.Name);
                 }
                 else
                 {
                     bonesToRemove.Add(b);
                 }
+            }
+
+            foreach (var bone in bones)
+            {
+                Bone b = new Bone(bone.Key, this.MainSkeleton.getBone(bone.Value.Parent));
+                this.MainSkeleton.Bones.Add(b);
             }
 
             foreach (var bone in bonesToRemove)
@@ -253,11 +261,18 @@ namespace EngineModels
                     {
                         b.BoundedBone = this.MainSkeleton.getBone(slotData.Bone);
                     }
+                    slots.Remove(b.Name);
                 }
                 else
                 {
                     slotsToRemove.Add(b);
                 }
+            }
+
+            foreach (var slot in slots)
+            {
+                Slot s = new Slot(slot.Key, this.MainSkeleton.getBone(slot.Value.Bone));
+                this.Slots.Add(s);
             }
 
             foreach (var slot in slotsToRemove)
@@ -290,11 +305,32 @@ namespace EngineModels
                             }
                         }
                     }
+                    skins.Remove(b.Name);
                 }
                 else
                 {
                     skinsToRemove.Add(b);
                 }
+            }
+
+            foreach (var skin in skins)
+            {
+                Skin s = new Skin(skin.Key);
+                var skinData = skin.Value;
+                s.SlotAttachmentBinding = new Dictionary<Slot, Attachment>();
+                foreach (string slotName in skinData.Attachments.Keys)
+                {
+                    Dictionary<string, AttachmentData> attachs = skinData.Attachments[slotName];
+                    foreach (string attachName in attachs.Keys)
+                    {
+                        var attach = attachs[attachName];
+                        ImageAttachment a = new ImageAttachment(
+                            (ImageRes)this.FindRes(attach.Name)
+                        );
+                        s.BindSlotAttachment(this.GetSlot(slotName), a);
+                    }
+                }
+                this.Skins.Add(s);
             }
 
             foreach (var skin in skinsToRemove)
@@ -329,6 +365,7 @@ namespace EngineModels
                             }
                         }
                     }
+                    animations.Remove(b.Name);
                 }
                 else
                 {
@@ -336,10 +373,37 @@ namespace EngineModels
                 }
             }
 
+            foreach (var animation in animations)
+            {
+                Animation a = new Animation(animation.Key);
+                a.BoneAnimationBinding = new Dictionary<Bone, BoneAnimation>();
+                var animationData = animation.Value;
+                foreach (string name in animationData.Keys)
+                {
+                    var boneDict = animationData[name];
+                    foreach (string boneName in boneDict.Keys)
+                    {
+                        Bone bone = this.MainSkeleton.getBone(boneName);
+                        foreach (IKeyframeTypeData keyframe in boneDict[boneName].rotate)
+                        {
+                            a.RotateBone(bone, keyframe.Value, keyframe.Time);
+                        }
+                        foreach (IKeyframeTypeData keyframe in boneDict[boneName].translate)
+                        {
+                            a.TranslateBone(bone, keyframe.X, keyframe.Y, keyframe.Time);
+                        }
+                    }
+                }
+                this.Animations.Add(a);
+            }
+
             foreach (var animation in animationsToRemove)
             {
                 this.Animations.Remove(animation);
             }
+
+            this.CurrentSkin = Skins[0];
+            this.CurrentAnimation = Animations[0];
         }
     }
 }

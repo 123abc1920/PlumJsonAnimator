@@ -1,19 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using AnimEngine;
-using AnimModels;
 using AnimTransformations;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Media;
-using Avalonia.Platform;
-using Avalonia.Rendering.SceneGraph;
 using Avalonia.Threading;
-using Avalonia.VisualTree;
 using Constants;
-using SpinejsonEditor.ViewModels;
 
 namespace TimeLine
 {
@@ -232,9 +226,14 @@ namespace TimeLine
             // 7. Отрисовка ключкадров
             // ----------------------------------------------------------------------------------
             Dictionary<double, Dictionary<KeyFrameTypes, bool>> keyframesMarks =
-                ConstantsClass.currentProject.CurrentAnimation.GetKeyFramesMarks(
+                ConstantsClass.currentProject?.CurrentAnimation?.GetKeyFramesMarks(
                     ConstantsClass.currentBone
                 );
+
+            if (keyframesMarks == null)
+            {
+                keyframesMarks = new Dictionary<double, Dictionary<KeyFrameTypes, bool>>();
+            }
 
             const double KeyframeWidth = 6;
             const double KeyframeHeight = 18;

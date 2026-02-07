@@ -171,6 +171,25 @@ namespace AnimModels
             this.isBone = true;
         }
 
+        public Bone(string name, Bone parent)
+        {
+            this._a = -100;
+            this.id = 0;
+            this._x = 100;
+            this._y = 100;
+
+            this._name = name;
+
+            double angleRad = this.a * Math.PI / 180;
+            this.endX = this.x + length * Math.Cos(angleRad);
+            this.endY = this.y + length * Math.Sin(angleRad);
+
+            this.Parent = parent;
+            this.id = 100;
+
+            this.isBone = true;
+        }
+
         public void addChildren(Bone bone)
         {
             this.Children.Add(bone);

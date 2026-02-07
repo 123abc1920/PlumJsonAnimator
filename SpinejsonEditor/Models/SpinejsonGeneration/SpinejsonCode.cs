@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Text.Json;
 using AnimModels;
 using Constants;
 using EngineModels;
@@ -102,6 +103,12 @@ namespace SpinejsonGeneration
                 ConstantsClass.currentProject.generateAnimationsJSONData();
             Dictionary<string, AnimationData> updatedAnimations =
                 SpinejsonModel.regenerateAnimations(newAnimations, oldAnimations);
+
+            string json = System.Text.Json.JsonSerializer.Serialize(
+                updatedAnimations,
+                new JsonSerializerOptions { WriteIndented = true }
+            );
+            Console.WriteLine(json);
 
             ConstantsClass.currentProject.regenrateProject(
                 updatedBones,
