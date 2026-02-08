@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -5,10 +6,7 @@ namespace SpinejsonGeneration
 {
     public class SpinejsonModel
     {
-        public static void LoadProjectAnim()
-        {
-            
-        }
+        public static void LoadProjectAnim() { }
 
         public static Dictionary<string, BoneData> regenerateBones(
             Dictionary<string, BoneData> newBones,
@@ -25,6 +23,7 @@ namespace SpinejsonGeneration
             {
                 oldBones.Remove(key);
             }
+
             return oldBones;
         }
 

@@ -1,9 +1,8 @@
 using System;
-using System.ComponentModel;
-using System.Data;
+using AnimModels;
+using Constants;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
 
 namespace JsonValidator
 {

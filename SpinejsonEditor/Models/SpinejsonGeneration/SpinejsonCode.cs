@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text.Json;
@@ -11,6 +10,19 @@ using Newtonsoft.Json;
 
 namespace SpinejsonGeneration
 {
+    public class ValidResult
+    {
+        public string Message { get; set; }
+        public bool IsOk { get; set; }
+        public object UpdatedArray { get; set; }
+    }
+
+    public class ProjectValidResult
+    {
+        public string Message { get; set; }
+        public bool IsOk { get; set; }
+    }
+
     public class SpinejsonCode : INotifyPropertyChanged
     {
         public String text = "";
@@ -67,15 +79,9 @@ namespace SpinejsonGeneration
             OnPropertyChanged(nameof(Text));
         }
 
-        public void regenerate()
+        public ValidResult regenerateBones(List<BoneData> bones)
         {
-            CodeData newData = JsonConvert.DeserializeObject<CodeData>(text);
-            if (newData == null)
-            {
-                return;
-            }
-
-            List<BoneData> newBones = newData.Bones;
+            List<BoneData> newBones = bones;
             List<BoneData> oldBones = ConstantsClass
                 .currentProject.MainSkeleton.generateJSONData()
                 .Bones;
@@ -84,38 +90,132 @@ namespace SpinejsonGeneration
                 oldBones.ToDictionary(b => b.Name, b => b)
             );
 
-            List<SlotData> newSlots = newData.Slots;
+            int rootBonesCount = 0;
+            foreach (BoneData b in updatedBones.Values)
+            {
+                if (b.Parent == null)
+                {
+                    rootBonesCount++;
+                }
+            }
+
+            if (rootBonesCount > 1)
+            {
+                return new ValidResult
+                {
+                    Message = "Ошибка: Несколько root костей!",
+                    IsOk = false,
+                    UpdatedArray = null,
+                };
+            }
+            else if (rootBonesCount < 1)
+            {
+                return new ValidResult
+                {
+                    Message = "Ошибка: Нет root кости!",
+                    IsOk = false,
+                    UpdatedArray = null,
+                };
+            }
+
+            return new ValidResult
+            {
+                Message = "",
+                IsOk = true,
+                UpdatedArray = updatedBones,
+            };
+        }
+
+        public ValidResult regenerateSlots(List<SlotData> slots)
+        {
+            List<SlotData> newSlots = slots;
             List<SlotData> oldSlots = ConstantsClass.currentProject.generateSlotsJSONData();
             Dictionary<string, SlotData> updatedSlots = SpinejsonModel.regenerateSlots(
                 newSlots.ToDictionary(b => b.Name, b => b),
                 oldSlots.ToDictionary(b => b.Name, b => b)
             );
 
-            List<SkinData> newSkins = newData.Skins;
+            return new ValidResult
+            {
+                Message = "",
+                IsOk = true,
+                UpdatedArray = updatedSlots,
+            };
+        }
+
+        public ValidResult regenerateSkins(List<SkinData> skins)
+        {
+            List<SkinData> newSkins = skins;
             List<SkinData> oldSkins = ConstantsClass.currentProject.generateSkinsJSONData();
             Dictionary<string, SkinData> updatedSkins = SpinejsonModel.regenerateSkins(
                 newSkins.ToDictionary(b => b.Name, b => b),
                 oldSkins.ToDictionary(b => b.Name, b => b)
             );
 
-            Dictionary<string, AnimationData> newAnimations = newData.Animations;
+            return new ValidResult
+            {
+                Message = "",
+                IsOk = true,
+                UpdatedArray = updatedSkins,
+            };
+        }
+
+        public ValidResult regenerateAnimations(Dictionary<string, AnimationData> animations)
+        {
+            Dictionary<string, AnimationData> newAnimations = animations;
             Dictionary<string, AnimationData> oldAnimations =
                 ConstantsClass.currentProject.generateAnimationsJSONData();
             Dictionary<string, AnimationData> updatedAnimations =
                 SpinejsonModel.regenerateAnimations(newAnimations, oldAnimations);
 
-            string json = System.Text.Json.JsonSerializer.Serialize(
-                updatedAnimations,
-                new JsonSerializerOptions { WriteIndented = true }
-            );
-            Console.WriteLine(json);
+            return new ValidResult
+            {
+                Message = "",
+                IsOk = true,
+                UpdatedArray = updatedAnimations,
+            };
+        }
+
+        public ProjectValidResult regenerate()
+        {
+            CodeData newData = JsonConvert.DeserializeObject<CodeData>(text);
+            if (newData == null)
+            {
+                return new ProjectValidResult { Message = "", IsOk = true };
+            }
+
+            var boneResult = regenerateBones(newData.Bones);
+            if (!boneResult.IsOk)
+            {
+                return new ProjectValidResult { Message = boneResult.Message, IsOk = false };
+            }
+
+            var slotResult = regenerateSlots(newData.Slots);
+            if (!slotResult.IsOk)
+            {
+                return new ProjectValidResult { Message = slotResult.Message, IsOk = false };
+            }
+
+            var skinResult = regenerateSkins(newData.Skins);
+            if (!skinResult.IsOk)
+            {
+                return new ProjectValidResult { Message = skinResult.Message, IsOk = false };
+            }
+
+            var animationResult = regenerateAnimations(newData.Animations);
+            if (!animationResult.IsOk)
+            {
+                return new ProjectValidResult { Message = animationResult.Message, IsOk = false };
+            }
 
             ConstantsClass.currentProject.regenrateProject(
-                updatedBones,
-                updatedSlots,
-                updatedSkins,
-                updatedAnimations
+                (Dictionary<string, BoneData>)boneResult.UpdatedArray,
+                (Dictionary<string, SlotData>)slotResult.UpdatedArray,
+                (Dictionary<string, SkinData>)skinResult.UpdatedArray,
+                (Dictionary<string, AnimationData>)animationResult.UpdatedArray
             );
+
+            return new ProjectValidResult { Message = "", IsOk = true };
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

@@ -12,6 +12,7 @@ using Avalonia.Threading;
 using Constants;
 using Resources;
 using SpinejsonEditor.ViewModels;
+using SpinejsonGeneration;
 using TransformModes;
 
 namespace SpinejsonEditor.Views;
@@ -65,10 +66,18 @@ public partial class MainWindow : Window
         DragDrop.SetAllowDrop(boneTreeView, true);
         boneTreeView.AddHandler(DragDrop.DropEvent, OnTreeViewDrop);
 
+        Popups.win = this;
+
         AppSettings.ReadSettings();
         ProjectSettings.ProjectSettings.ReadSettings();
         ProjectManager.ProjectManager.LoadRes();
-        ConstantsClass.currentProject.SpinejsonCode.regenerate();
+        ProjectValidResult validateResult =
+            ConstantsClass.currentProject.SpinejsonCode.regenerate();
+        if (!validateResult.IsOk)
+        {
+            Popups.ShowPopup("Возникли проблемы в json коде, невозможно восстановить проект", this);
+            currentTab = 1;
+        }
 
         EventHandler animationTick = (sender, e) =>
         {
@@ -93,6 +102,15 @@ public partial class MainWindow : Window
             ConstantsClass.jsonError.ErrorText = JsonValidator.JsonValidator.validate(
                 spineJsonText.Text
             );
+            if (ConstantsClass.jsonError.isOk)
+            {
+                ProjectValidResult validateResult =
+                    ConstantsClass.currentProject.SpinejsonCode.regenerate();
+                if (!validateResult.IsOk)
+                {
+                    ConstantsClass.jsonError.ErrorText = validateResult.Message;
+                }
+            }
         }
     }
 

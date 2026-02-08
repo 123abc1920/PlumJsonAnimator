@@ -250,6 +250,15 @@ namespace EngineModels
                 this.MainSkeleton.Bones.Remove(bone);
             }
 
+            if (this.MainSkeleton.Bones.Count <= 0)
+            {
+                this.MainSkeleton.Bones.Add(new Bone());
+                this.MainSkeleton.RootBones = new ObservableCollection<Bone>()
+                {
+                    this.MainSkeleton.Bones[0],
+                };
+            }
+
             // recreate slots
             List<Slot> slotsToRemove = new List<Slot>();
 
@@ -400,6 +409,15 @@ namespace EngineModels
             foreach (var animation in animationsToRemove)
             {
                 this.Animations.Remove(animation);
+            }
+
+            if (Skins.Count <= 0)
+            {
+                Skins.Add(new Skin());
+            }
+            if (Animations.Count <= 0)
+            {
+                Animations.Add(new Animation());
             }
 
             this.CurrentSkin = Skins[0];
