@@ -93,9 +93,31 @@ namespace SpinejsonGeneration
             int rootBonesCount = 0;
             foreach (BoneData b in updatedBones.Values)
             {
+                if (b.Name == null)
+                {
+                    return new ValidResult
+                    {
+                        Message = "Ошибка: У одной из костей не установлено имя",
+                        IsOk = false,
+                        UpdatedArray = null,
+                    };
+                }
                 if (b.Parent == null)
                 {
                     rootBonesCount++;
+                }
+                else
+                {
+                    Bone parent = ConstantsClass.currentProject.MainSkeleton.getBone(b.Parent);
+                    if (parent == null)
+                    {
+                        return new ValidResult
+                        {
+                            Message = $"Ошибка: Кость {b.Name} имеет недействительного родителя",
+                            IsOk = false,
+                            UpdatedArray = null,
+                        };
+                    }
                 }
             }
 
@@ -135,6 +157,19 @@ namespace SpinejsonGeneration
                 oldSlots.ToDictionary(b => b.Name, b => b)
             );
 
+            foreach (SlotData s in updatedSlots.Values)
+            {
+                if (s.Name == null)
+                {
+                    return new ValidResult
+                    {
+                        Message = "У одного из слотов не установлено имя!",
+                        IsOk = false,
+                        UpdatedArray = null,
+                    };
+                }
+            }
+
             return new ValidResult
             {
                 Message = "",
@@ -151,6 +186,19 @@ namespace SpinejsonGeneration
                 newSkins.ToDictionary(b => b.Name, b => b),
                 oldSkins.ToDictionary(b => b.Name, b => b)
             );
+
+            foreach (SkinData s in updatedSkins.Values)
+            {
+                if (s.Name == null)
+                {
+                    return new ValidResult
+                    {
+                        Message = "У одного из скинов не установлено имя!",
+                        IsOk = false,
+                        UpdatedArray = null,
+                    };
+                }
+            }
 
             return new ValidResult
             {
