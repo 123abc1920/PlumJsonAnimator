@@ -6,6 +6,13 @@
     <StackPanel x:DataType="viewModels:MainWindowViewModel">
 
         <StackPanel Orientation="Horizontal">
+            <TextBox
+                Name="path"
+                Text=""
+                Watermark="Save Path" />
+            <Button Click="SelectFolder" Content="O" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
             <TextBox Name="start" />
             <TextBox Name="end" />
         </StackPanel>

@@ -69,6 +69,7 @@ public partial class MainWindow : Window
         boneTreeView.AddHandler(DragDrop.DropEvent, OnTreeViewDrop);
 
         Popups.win = this;
+        ImageExporter.canvas = mainCanvas;
 
         AppSettings.ReadSettings();
         ProjectSettings.ProjectSettings.ReadSettings();
@@ -681,39 +682,17 @@ public partial class MainWindow : Window
 
     private async void ExportAsPng(object sender, RoutedEventArgs e)
     {
-        var topLevel = TopLevel.GetTopLevel(this);
-        var storageProvider = topLevel.StorageProvider;
-        var folder = await storageProvider.OpenFolderPickerAsync(
-            new FolderPickerOpenOptions { Title = "Выберите папку", AllowMultiple = false }
-        );
-
-        if (folder.Count > 0)
+        if (DataContext is MainWindowViewModel viewModel)
         {
-            if (DataContext is MainWindowViewModel viewModel)
-            {
-                ExportParams.Canvas = mainCanvas;
-                ExportParams.folder = folder[0].Path.LocalPath;
-                Dialogs.ShowDialog("Экспорт как PNG", viewModel, this, ViewType.EXPORT_PNG);
-            }
+            Dialogs.ShowDialog("Экспорт как PNG", viewModel, this, ViewType.EXPORT_PNG);
         }
     }
 
     private async void ExportAsJpg(object sender, RoutedEventArgs e)
     {
-        var topLevel = TopLevel.GetTopLevel(this);
-        var storageProvider = topLevel.StorageProvider;
-        var folder = await storageProvider.OpenFolderPickerAsync(
-            new FolderPickerOpenOptions { Title = "Выберите папку", AllowMultiple = false }
-        );
-
-        if (folder.Count > 0)
+        if (DataContext is MainWindowViewModel viewModel)
         {
-            if (DataContext is MainWindowViewModel viewModel)
-            {
-                ExportParams.Canvas = mainCanvas;
-                ExportParams.folder = folder[0].Path.LocalPath;
-                Dialogs.ShowDialog("Экспорт как JPG", viewModel, this, ViewType.EXPORT_JPG);
-            }
+            Dialogs.ShowDialog("Экспорт как JPG", viewModel, this, ViewType.EXPORT_JPG);
         }
     }
 

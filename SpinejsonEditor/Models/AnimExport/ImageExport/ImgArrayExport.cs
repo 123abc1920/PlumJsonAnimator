@@ -6,20 +6,16 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media.Imaging;
 using Constants;
-using HarfBuzzSharp;
 
 namespace AnimExport
 {
     namespace ImageExport
     {
-        public class ExportParams
-        {
-            public static Canvas Canvas;
-            public static string folder;
-        }
-
         public class ImageExporter
         {
+            public static string ExportPath = "";
+            public static Canvas canvas;
+
             private static RenderTargetBitmap CatchCanvas(Canvas canvas)
             {
                 var bounds = new Rect(0, 0, canvas.Bounds.Width, canvas.Bounds.Height);
@@ -39,8 +35,7 @@ namespace AnimExport
             public static async Task<ExportResult> ExportAsPng(
                 double start,
                 double end,
-                string outputFolder,
-                Canvas canvas
+                string outputFolder
             )
             {
                 if (Directory.Exists(outputFolder))
@@ -77,8 +72,7 @@ namespace AnimExport
             public static async Task<ExportResult> ExportAsJpg(
                 double start,
                 double end,
-                string outputFolder,
-                Canvas canvas
+                string outputFolder
             )
             {
                 if (Directory.Exists(outputFolder))

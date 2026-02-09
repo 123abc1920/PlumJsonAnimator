@@ -2,6 +2,7 @@ using AnimExport.ImageExport;
 using AnimExport.JsonExport;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Platform.Storage;
 using Constants;
 using SpinejsonEditor.ViewModels;
 
@@ -12,6 +13,12 @@ namespace SpinejsonEditor.Views
         public ExportPanelJPG()
         {
             InitializeComponent();
+
+            this.FindControl<TextBox>("path").Text = ImageExporter.ExportPath;
+            this.FindControl<TextBox>("start").Text = "0";
+            this.FindControl<TextBox>("end").Text = ConstantsClass
+                .currentProject.CurrentAnimation.MaxTime()
+                .ToString();
         }
 
         public ExportPanelJPG(MainWindowViewModel viewModel)
@@ -20,10 +27,37 @@ namespace SpinejsonEditor.Views
             DataContext = viewModel;
         }
 
+        private async void SelectFolder(object sender, RoutedEventArgs e)
+        {
+            var topLevel = TopLevel.GetTopLevel(this);
+            var storageProvider = topLevel.StorageProvider;
+            var folder = await storageProvider.OpenFolderPickerAsync(
+                new FolderPickerOpenOptions { Title = "Выберите папку", AllowMultiple = false }
+            );
+
+            if (folder.Count > 0)
+            {
+                if (DataContext is MainWindowViewModel viewModel)
+                {
+                    ImageExporter.ExportPath = folder[0].Path.LocalPath;
+                    this.FindControl<TextBox>("path").Text = ImageExporter.ExportPath;
+                }
+            }
+        }
+
         private async void ExportAsJpg(object sender, RoutedEventArgs e)
         {
             var startTextBox = this.FindControl<TextBox>("start");
             var endTextBox = this.FindControl<TextBox>("end");
+
+            if (
+                this.FindControl<TextBox>("path").Text == ""
+                || this.FindControl<TextBox>("path").Text == null
+            )
+            {
+                Popups.ShowPopup("Введите папку");
+                return;
+            }
 
             if (
                 double.TryParse(startTextBox.Text, out double startValue)
@@ -33,8 +67,7 @@ namespace SpinejsonEditor.Views
                 ExportResult result = await AnimExport.ImageExport.ImageExporter.ExportAsJpg(
                     startValue,
                     endValue,
-                    ExportParams.folder,
-                    ExportParams.Canvas
+                    this.FindControl<TextBox>("path").Text
                 );
 
                 if (result == ExportResult.SUCCESS)
