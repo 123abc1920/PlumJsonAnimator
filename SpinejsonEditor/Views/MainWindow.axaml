@@ -49,8 +49,8 @@
                 <MenuItem Click="OpenSettings" Header="Settings" />
             </MenuItem>
             <MenuItem Header="File">
-                <MenuItem Header="Import json" />
-                <MenuItem Header="Export json" />
+                <MenuItem Click="ImportAnim" Header="Import json" />
+                <MenuItem Click="ExportAnim" Header="Export json" />
             </MenuItem>
             <MenuItem Header="Export">
                 <MenuItem Header="Export as PNG" />

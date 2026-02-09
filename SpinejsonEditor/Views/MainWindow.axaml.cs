@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using AnimEngine;
+using AnimExport.JsonExport;
 using AnimModels;
 using Avalonia;
 using Avalonia.Controls;
@@ -109,6 +110,7 @@ public partial class MainWindow : Window
                 if (!validateResult.IsOk)
                 {
                     ConstantsClass.jsonError.ErrorText = validateResult.Message;
+                    currentTab = 1;
                 }
             }
         }
@@ -613,6 +615,66 @@ public partial class MainWindow : Window
             e.Handled = true;
             var closingChar = ConstantsClass.pairedSymbols[pressedChar.Value];
             InsertPairedSymbol(pressedChar.Value, closingChar);
+        }
+    }
+
+    private async void ExportAnim(object sender, RoutedEventArgs e)
+    {
+        var topLevel = TopLevel.GetTopLevel(this);
+        var storageProvider = topLevel.StorageProvider;
+        var folder = await storageProvider.OpenFolderPickerAsync(
+            new FolderPickerOpenOptions { Title = "Выберите папку", AllowMultiple = false }
+        );
+
+        if (folder.Count > 0)
+        {
+            ExportResult result = SpineJsonExport.exportSpineJson(folder[0].Path.LocalPath);
+            if (result == ExportResult.SUCCESS)
+            {
+                Popups.ShowPopup("Анимация успешно экспортирована!", this);
+            }
+            else if (result == ExportResult.NO_FOLDER)
+            {
+                Popups.ShowPopup("Невозможно экспортировать в эту папку", this);
+            }
+        }
+    }
+
+    private async void ImportAnim(object sender, RoutedEventArgs e)
+    {
+        var topLevel = TopLevel.GetTopLevel(this);
+
+        var files = await topLevel.StorageProvider.OpenFilePickerAsync(
+            new FilePickerOpenOptions { Title = "Open JSON File", AllowMultiple = false }
+        );
+
+        string[] paths = [];
+        if (files?.Count > 0)
+        {
+            paths = files.Select(f => f.Path.LocalPath).ToArray();
+        }
+
+        string path = null;
+        if (paths.Length > 0)
+        {
+            path = paths[0];
+        }
+
+        if (path != null && path != "")
+        {
+            ExportResult result = SpineJsonExport.importSpineJson(path);
+            if (result == ExportResult.SUCCESS)
+            {
+                Popups.ShowPopup("Успешно импортировано!");
+            }
+            else if (result == ExportResult.INCORRECT_JSON)
+            {
+                Popups.ShowPopup("Файл поврежден.");
+            }
+            else if (result == ExportResult.NO_FOLDER)
+            {
+                Popups.ShowPopup("Файл не существует.");
+            }
         }
     }
 }
