@@ -565,4 +565,54 @@ public partial class MainWindow : Window
             );
         }
     }
+
+    private void InsertPairedSymbol(char first, char second)
+    {
+        var caretIndex = spineJsonText.CaretIndex;
+        var text = spineJsonText.Text;
+        spineJsonText.Text = text.Insert(caretIndex, first.ToString() + second);
+        spineJsonText.CaretIndex = caretIndex + 1;
+    }
+
+    private void SpineJsonText_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (
+            (
+                e.Key == Key.F
+                && e.KeyModifiers.HasFlag(KeyModifiers.Shift)
+                && e.KeyModifiers.HasFlag(KeyModifiers.Alt)
+            )
+            || (
+                e.Key == Key.L
+                && e.KeyModifiers.HasFlag(KeyModifiers.Control)
+                && e.KeyModifiers.HasFlag(KeyModifiers.Alt)
+            )
+        )
+        {
+            spineJsonText.Text = Prettify.Prettify.prettify(spineJsonText.Text);
+            e.Handled = true;
+        }
+
+        char? pressedChar = null;
+
+        if (e.Key == Key.OemOpenBrackets)
+        {
+            pressedChar = e.KeyModifiers.HasFlag(KeyModifiers.Shift) ? '{' : '[';
+        }
+        else if (e.Key == Key.OemQuotes)
+        {
+            pressedChar = '"';
+        }
+        else if (e.Key == Key.OemComma && e.KeyModifiers.HasFlag(KeyModifiers.Shift))
+        {
+            pressedChar = '<';
+        }
+
+        if (pressedChar.HasValue && ConstantsClass.pairedSymbols.ContainsKey(pressedChar.Value))
+        {
+            e.Handled = true;
+            var closingChar = ConstantsClass.pairedSymbols[pressedChar.Value];
+            InsertPairedSymbol(pressedChar.Value, closingChar);
+        }
+    }
 }

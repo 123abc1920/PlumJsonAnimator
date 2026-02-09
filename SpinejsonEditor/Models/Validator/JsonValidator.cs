@@ -63,10 +63,22 @@ namespace JsonValidator
             string errorMessage
         )
         {
+            if (json == "" || json == null)
+            {
+                return $"Ошибка: {errorMessage}";
+            }
+
             var lines = json.Split('\n');
 
             if (errorLine > lines.Length)
+            {
                 return $"Ошибка: {errorMessage}";
+            }
+
+            if (lines.Length <= errorLine - 1)
+            {
+                return $"Ошибка: {errorMessage}";
+            }
 
             string errorLineText = lines[errorLine - 1];
 

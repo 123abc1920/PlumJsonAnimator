@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using AnimEngine;
 using AnimModels;
 using EngineModels;
@@ -21,5 +22,12 @@ namespace Constants
         public static int FPS = 60;
         public static Bone currentBone = null;
         public static Engine MainEngine = new Engine();
+        public static Dictionary<char, char> pairedSymbols = new Dictionary<char, char>()
+        {
+            { '{', '}' },
+            { '[', ']' },
+            { '"', '"' },
+            { '<', '>' },
+        };
     }
 }
