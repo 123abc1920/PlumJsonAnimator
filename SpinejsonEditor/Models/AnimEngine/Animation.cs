@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using AnimTransformations;
+using Constants;
 using Newtonsoft.Json;
 using TransformModes;
 
@@ -52,6 +53,7 @@ namespace AnimModels
 
         public void step()
         {
+            this.currentTime += 1.0 / (double)ConstantsClass.FPS;
             SetupBones();
         }
 
@@ -213,6 +215,19 @@ namespace AnimModels
                     ba.deleteKeyFrame(currentTime, type);
                 }
             }
+        }
+
+        public double MaxTime()
+        {
+            double maxTime = 0.0;
+            foreach (var b in BoneAnimationBinding)
+            {
+                if (b.Value != null)
+                {
+                    maxTime = Math.Max(maxTime, b.Value.MaxTime());
+                }
+            }
+            return maxTime;
         }
     }
 }

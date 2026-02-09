@@ -380,6 +380,26 @@ namespace AnimModels
 
             return time;
         }
+
+        private double findMax(SortedDictionary<double, IKeyframeType> dict)
+        {
+            if (dict.Count > 0)
+            {
+                return dict.Keys.Last();
+            }
+
+            return 0.0;
+        }
+
+        public double MaxTime()
+        {
+            double maxRotate = findMax(rotateKeyframes);
+            double maxTranslate = findMax(translateKeyframes);
+            double maxScale = findMax(scaleKeyframes);
+            double maxShear = findMax(shearKeyframes);
+
+            return Math.Max(Math.Max(maxRotate, maxTranslate), Math.Max(maxScale, maxShear));
+        }
     }
 }
 

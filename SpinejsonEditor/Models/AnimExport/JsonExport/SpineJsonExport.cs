@@ -1,8 +1,6 @@
 using System.IO;
 using Constants;
 using Newtonsoft.Json;
-using Resources;
-using SpinejsonGeneration;
 
 namespace AnimExport
 {

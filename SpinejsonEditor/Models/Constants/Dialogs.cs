@@ -11,6 +11,8 @@ namespace Constants
         SETTINGS = 0,
         NEWPROJECT,
         RENAME,
+        EXPORT_JPG,
+        EXPORT_PNG,
     }
 
     public class Dialogs
@@ -32,6 +34,8 @@ namespace Constants
             new DialogSize(600, 400),
             new DialogSize(600, 400),
             new DialogSize(250, 100),
+            new DialogSize(600, 400),
+            new DialogSize(600, 400),
         };
 
         private static UserControl userControlFactory(
@@ -50,6 +54,14 @@ namespace Constants
             if (viewType == ViewType.RENAME)
             {
                 return new RenameDialog(viewModel);
+            }
+            if (viewType == ViewType.EXPORT_JPG)
+            {
+                return new ExportPanelJPG(viewModel);
+            }
+            if (viewType == ViewType.EXPORT_PNG)
+            {
+                return new ExportPanelPNG(viewModel);
             }
             return new SettingsView(viewModel);
         }

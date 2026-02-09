@@ -53,10 +53,10 @@
                 <MenuItem Click="ExportAnim" Header="Export json" />
             </MenuItem>
             <MenuItem Header="Export">
-                <MenuItem Header="Export as PNG" />
-                <MenuItem Header="Export as JPG" />
-                <MenuItem Header="Export as GIF" />
-                <MenuItem Header="Export as MP4" />
+                <MenuItem Click="ExportAsPng" Header="Export as PNG" />
+                <MenuItem Click="ExportAsJpg" Header="Export as JPG" />
+                <MenuItem Click="ExportAsGif" Header="Export as GIF" />
+                <MenuItem Click="ExportAsMp4" Header="Export as MP4" />
             </MenuItem>
         </Menu>
         <Grid DockPanel.Dock="Bottom">
