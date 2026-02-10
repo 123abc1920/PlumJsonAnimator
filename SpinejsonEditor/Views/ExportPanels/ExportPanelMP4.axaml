@@ -5,6 +5,14 @@
     xmlns:viewModels="clr-namespace:SpinejsonEditor.ViewModels">
     <StackPanel x:DataType="viewModels:MainWindowViewModel">
 
+        <TextBlock Text="Для сохранения в mp4 формате необходимо установить программу ffmpeg.exe" />
+        <StackPanel Orientation="Horizontal">
+            <TextBox
+                Name="ffmpegPath"
+                Text=""
+                Watermark="Ffmpeg Path" />
+            <Button Click="SelectFfmpeg" Content="O" />
+        </StackPanel>
         <StackPanel Orientation="Horizontal">
             <TextBox
                 Name="path"
@@ -12,11 +20,15 @@
                 Watermark="Save Path" />
             <Button Click="SelectFolder" Content="O" />
         </StackPanel>
+        <TextBox
+            Name="pName"
+            Text=""
+            Watermark="MP4 name" />
         <StackPanel Orientation="Horizontal">
             <TextBox Name="start" />
             <TextBox Name="end" />
         </StackPanel>
-        <Button Click="ExportAsJpg" Content="Export" />
+        <Button Click="ExportAsMp4" Content="Export" />
 
     </StackPanel>
 </UserControl>

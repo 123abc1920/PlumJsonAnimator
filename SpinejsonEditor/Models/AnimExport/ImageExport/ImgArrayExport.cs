@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading.Tasks;
 using AnimExport.JsonExport;
 using Avalonia;
@@ -155,12 +158,10 @@ namespace AnimExport
                     using (var gif = frames[0].CloneAs<Rgba32>())
                     {
                         gif.Metadata.GetGifMetadata().RepeatCount = 0;
-                        gif.Frames.RootFrame.Metadata.GetGifMetadata().FrameDelay = 10;
 
                         for (int i = 1; i < frames.Count; i++)
                         {
                             gif.Frames.AddFrame(frames[i].Frames.RootFrame);
-                            gif.Frames[i].Metadata.GetGifMetadata().FrameDelay = 10;
                         }
 
                         gif.Save(outputFile, new GifEncoder());
@@ -177,7 +178,167 @@ namespace AnimExport
                 return ExportResult.NO_FOLDER;
             }
 
-            public static void ExportAsMp4() { }
+            public static async Task<ExportResult> ExportAsMp4(
+                double start,
+                double end,
+                string outputFile,
+                string ffmpegPath
+            )
+            {
+                if (!File.Exists(ffmpegPath))
+                    return ExportResult.NO_FFMPEG;
+
+                using (var testBitmap = CatchCanvas(canvas))
+                {
+                    if (testBitmap == null)
+                    {
+                        return ExportResult.FFMPEG_ERROR;
+                    }
+
+                    var size = testBitmap.PixelSize;
+
+                    int width = size.Width;
+                    int height = size.Height;
+
+                    if (width <= 0 || height <= 0)
+                    {
+                        return ExportResult.FFMPEG_ERROR;
+                    }
+
+                    string arguments =
+                        $"-f rawvideo -pix_fmt bgra "
+                        + $"-s {width}x{height} "
+                        + $"-r {ConstantsClass.FPS} "
+                        + $"-i - "
+                        + $"-c:v libx264 "
+                        + $"-preset fast "
+                        + $"-crf 23 "
+                        + $"-pix_fmt yuv420p "
+                        + $"-movflags +faststart "
+                        + $"-y "
+                        + $"\"{outputFile}\"";
+
+                    var process = new Process
+                    {
+                        StartInfo = new ProcessStartInfo
+                        {
+                            FileName = ffmpegPath,
+                            Arguments = arguments,
+                            UseShellExecute = false,
+                            RedirectStandardInput = true,
+                            RedirectStandardError = true,
+                            CreateNoWindow = true,
+                        },
+                    };
+
+                    StringBuilder errorOutput = new StringBuilder();
+                    process.ErrorDataReceived += (sender, e) =>
+                    {
+                        if (!string.IsNullOrEmpty(e.Data))
+                        {
+                            errorOutput.AppendLine(e.Data);
+                            Console.WriteLine($"FFmpeg: {e.Data}");
+                        }
+                    };
+
+                    process.Start();
+                    process.BeginErrorReadLine();
+
+                    using (var stdin = process.StandardInput.BaseStream)
+                    {
+                        ConstantsClass.currentProject.CurrentAnimation.currentTime = start;
+                        double endTime = Math.Min(
+                            ConstantsClass.currentProject.CurrentAnimation.MaxTime(),
+                            end
+                        );
+
+                        int frameCount = 0;
+                        bool error = false;
+
+                        while (
+                            ConstantsClass.currentProject.CurrentAnimation.currentTime <= endTime
+                        )
+                        {
+                            using (RenderTargetBitmap bitmap = CatchCanvas(canvas))
+                            {
+                                var currentSize = bitmap.PixelSize;
+
+                                if (currentSize.Width != width || currentSize.Height != height)
+                                {
+                                    Console.WriteLine(
+                                        $"Размер кадра не совпадает: {currentSize.Width}x{currentSize.Height}, ожидалось: {width}x{height}"
+                                    );
+                                    error = true;
+                                    break;
+                                }
+
+                                int stride = width * 4;
+                                int bufferSize = height * stride;
+
+                                var buffer = new byte[bufferSize];
+
+                                var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+                                try
+                                {
+                                    bitmap.CopyPixels(
+                                        new PixelRect(0, 0, width, height),
+                                        handle.AddrOfPinnedObject(),
+                                        bufferSize,
+                                        stride
+                                    );
+                                }
+                                finally
+                                {
+                                    handle.Free();
+                                }
+
+                                try
+                                {
+                                    await stdin.WriteAsync(buffer);
+                                    frameCount++;
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine($"Ошибка записи: {ex.Message}");
+                                    error = true;
+                                    break;
+                                }
+                            }
+
+                            ConstantsClass.currentProject.CurrentAnimation.step();
+                            canvas.InvalidateVisual();
+                            await Task.Delay(30);
+                        }
+
+                        if (!error)
+                        {
+                            stdin.Flush();
+                        }
+                    }
+
+                    if (!process.WaitForExit(10000))
+                    {
+                        process.Kill();
+                        Console.WriteLine("FFmpeg timeout");
+                        return ExportResult.FFMPEG_ERROR;
+                    }
+
+                    Console.WriteLine($"FFmpeg exit code: {process.ExitCode}");
+
+                    if (
+                        process.ExitCode == 0
+                        && File.Exists(outputFile)
+                        && new FileInfo(outputFile).Length > 0
+                    )
+                    {
+                        return ExportResult.SUCCESS;
+                    }
+                    else
+                    {
+                        return ExportResult.FFMPEG_ERROR;
+                    }
+                }
+            }
         }
     }
 }

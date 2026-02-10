@@ -1,5 +1,4 @@
 using System.IO;
-using System.Linq;
 using AnimExport.ImageExport;
 using AnimExport.JsonExport;
 using Avalonia.Controls;

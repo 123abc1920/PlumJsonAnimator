@@ -11,6 +11,8 @@ namespace AnimExport
             SUCCESS = 0,
             NO_FOLDER,
             INCORRECT_JSON,
+            NO_FFMPEG,
+            FFMPEG_ERROR,
         }
 
         public class SpineJsonExport
