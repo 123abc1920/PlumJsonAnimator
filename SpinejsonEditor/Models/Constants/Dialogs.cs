@@ -13,6 +13,8 @@ namespace Constants
         RENAME,
         EXPORT_JPG,
         EXPORT_PNG,
+        EXPORT_GIF,
+        EXPORT_MP4,
     }
 
     public class Dialogs
@@ -34,6 +36,8 @@ namespace Constants
             new DialogSize(600, 400),
             new DialogSize(600, 400),
             new DialogSize(250, 100),
+            new DialogSize(600, 400),
+            new DialogSize(600, 400),
             new DialogSize(600, 400),
             new DialogSize(600, 400),
         };
@@ -62,6 +66,14 @@ namespace Constants
             if (viewType == ViewType.EXPORT_PNG)
             {
                 return new ExportPanelPNG(viewModel);
+            }
+            if (viewType == ViewType.EXPORT_GIF)
+            {
+                return new ExportPanelGIF(viewModel);
+            }
+            if (viewType == ViewType.EXPORT_MP4)
+            {
+                return new ExportPanelMP4(viewModel);
             }
             return new SettingsView(viewModel);
         }

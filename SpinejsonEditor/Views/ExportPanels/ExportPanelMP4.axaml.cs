@@ -8,9 +8,9 @@ using SpinejsonEditor.ViewModels;
 
 namespace SpinejsonEditor.Views
 {
-    public partial class ExportPanelJPG : UserControl
+    public partial class ExportPanelMP4 : UserControl
     {
-        public ExportPanelJPG()
+        public ExportPanelMP4()
         {
             InitializeComponent();
 
@@ -21,7 +21,7 @@ namespace SpinejsonEditor.Views
                 .ToString();
         }
 
-        public ExportPanelJPG(MainWindowViewModel viewModel)
+        public ExportPanelMP4(MainWindowViewModel viewModel)
             : this()
         {
             DataContext = viewModel;

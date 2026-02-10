@@ -696,7 +696,19 @@ public partial class MainWindow : Window
         }
     }
 
-    private async void ExportAsGif(object sender, RoutedEventArgs e) { }
+    private async void ExportAsGif(object sender, RoutedEventArgs e)
+    {
+        if (DataContext is MainWindowViewModel viewModel)
+        {
+            Dialogs.ShowDialog("Экспорт как GIF", viewModel, this, ViewType.EXPORT_GIF);
+        }
+    }
 
-    private async void ExportAsMp4(object sender, RoutedEventArgs e) { }
+    private async void ExportAsMp4(object sender, RoutedEventArgs e)
+    {
+        if (DataContext is MainWindowViewModel viewModel)
+        {
+            Dialogs.ShowDialog("Экспорт как MP4", viewModel, this, ViewType.EXPORT_MP4);
+        }
+    }
 }

@@ -1,3 +1,5 @@
+using System.IO;
+using System.Linq;
 using AnimExport.ImageExport;
 using AnimExport.JsonExport;
 using Avalonia.Controls;
@@ -8,20 +10,21 @@ using SpinejsonEditor.ViewModels;
 
 namespace SpinejsonEditor.Views
 {
-    public partial class ExportPanelJPG : UserControl
+    public partial class ExportPanelGIF : UserControl
     {
-        public ExportPanelJPG()
+        public ExportPanelGIF()
         {
             InitializeComponent();
 
             this.FindControl<TextBox>("path").Text = ImageExporter.ExportPath;
+            this.FindControl<TextBox>("pName").Text = ConstantsClass.currentProject.Name;
             this.FindControl<TextBox>("start").Text = "0";
             this.FindControl<TextBox>("end").Text = ConstantsClass
                 .currentProject.CurrentAnimation.MaxTime()
                 .ToString();
         }
 
-        public ExportPanelJPG(MainWindowViewModel viewModel)
+        public ExportPanelGIF(MainWindowViewModel viewModel)
             : this()
         {
             DataContext = viewModel;
@@ -29,6 +32,32 @@ namespace SpinejsonEditor.Views
 
         private async void SelectFolder(object sender, RoutedEventArgs e)
         {
+            /*var topLevel = TopLevel.GetTopLevel(this);
+            var storageProvider = topLevel.StorageProvider;
+            var fileTypeFilter = new FilePickerFileType[]
+            {
+                new("*.gif") { Patterns = new[] { "*.gif" } },
+            };
+
+            var result = await storageProvider.OpenFilePickerAsync(
+                new FilePickerOpenOptions
+                {
+                    Title = "Выберите файл gif",
+                    AllowMultiple = false,
+                    FileTypeFilter = fileTypeFilter,
+                }
+            );
+
+            var filePath = result?.FirstOrDefault()?.Path.LocalPath;
+
+            if (filePath != null && filePath != "")
+            {
+                if (DataContext is MainWindowViewModel viewModel)
+                {
+                    ImageExporter.ExportPath = filePath;
+                    this.FindControl<TextBox>("path").Text = ImageExporter.ExportPath;
+                }
+            }*/
             var topLevel = TopLevel.GetTopLevel(this);
             var storageProvider = topLevel.StorageProvider;
             var folder = await storageProvider.OpenFolderPickerAsync(
@@ -45,7 +74,7 @@ namespace SpinejsonEditor.Views
             }
         }
 
-        private async void ExportAsJpg(object sender, RoutedEventArgs e)
+        private async void ExportAsGif(object sender, RoutedEventArgs e)
         {
             var startTextBox = this.FindControl<TextBox>("start");
             var endTextBox = this.FindControl<TextBox>("end");
@@ -60,14 +89,26 @@ namespace SpinejsonEditor.Views
             }
 
             if (
+                this.FindControl<TextBox>("pName").Text == ""
+                || this.FindControl<TextBox>("pName").Text == null
+            )
+            {
+                Popups.ShowPopup("Введите имя GIF");
+                return;
+            }
+
+            if (
                 double.TryParse(startTextBox.Text, out double startValue)
                 && double.TryParse(endTextBox.Text, out double endValue)
             )
             {
-                ExportResult result = await ImageExporter.ExportAsJpg(
+                ExportResult result = await ImageExporter.ExportAsGif(
                     startValue,
                     endValue,
-                    this.FindControl<TextBox>("path").Text
+                    Path.Combine(
+                        this.FindControl<TextBox>("path").Text,
+                        $"{this.FindControl<TextBox>("pName").Text}.gif"
+                    )
                 );
 
                 if (result == ExportResult.SUCCESS)
@@ -76,7 +117,7 @@ namespace SpinejsonEditor.Views
                 }
                 else if (result == ExportResult.NO_FOLDER)
                 {
-                    Popups.ShowPopup("Папка не найдена", this);
+                    Popups.ShowPopup("Файл не найдена", this);
                 }
             }
             else

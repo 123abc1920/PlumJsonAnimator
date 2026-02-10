@@ -1,0 +1,22 @@
+<UserControl
+    x:Class="SpinejsonEditor.Views.ExportPanelMP4"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:viewModels="clr-namespace:SpinejsonEditor.ViewModels">
+    <StackPanel x:DataType="viewModels:MainWindowViewModel">
+
+        <StackPanel Orientation="Horizontal">
+            <TextBox
+                Name="path"
+                Text=""
+                Watermark="Save Path" />
+            <Button Click="SelectFolder" Content="O" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBox Name="start" />
+            <TextBox Name="end" />
+        </StackPanel>
+        <Button Click="ExportAsJpg" Content="Export" />
+
+    </StackPanel>
+</UserControl>
