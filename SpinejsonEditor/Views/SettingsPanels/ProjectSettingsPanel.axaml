@@ -8,12 +8,26 @@
             FontSize="16"
             FontWeight="Bold"
             Text="PROJECT SETTINGS" />
-        <TextBox Name="pName" Text="{Binding CurrentProject.Name, Mode=OneWay}" Watermark="Project Name" />
+        <TextBox
+            Name="pName"
+            Text="{Binding CurrentProject.Name, Mode=OneWay}"
+            Watermark="Project Name" />
         <StackPanel Orientation="Horizontal">
-            <TextBox Name="path" Text="{Binding CurrentProject.ProjectPath, Mode=OneWay}" Watermark="Project Path" />
-            <Button Click="SelectFolder" Content="O" />
+            <TextBox
+                Name="path"
+                Text="{Binding CurrentProject.ProjectPath, Mode=OneWay}"
+                Watermark="Project Path" />
+            <Button
+                Width="32"
+                Height="32"
+                Click="SelectFolder">
+                <Svg Path="/Assets/bootstrap_icons/folder-fill.svg" />
+            </Button>
         </StackPanel>
-        <TextBox Name="pVersion" Text="{Binding CurrentProject.MetaData.Spine, Mode=OneWay}" Watermark="Spine version" />
+        <TextBox
+            Name="pVersion"
+            Text="{Binding CurrentProject.MetaData.Spine, Mode=OneWay}"
+            Watermark="Spine version" />
         <Button Click="SaveSettings" Content="Save" />
     </StackPanel>
 </UserControl>

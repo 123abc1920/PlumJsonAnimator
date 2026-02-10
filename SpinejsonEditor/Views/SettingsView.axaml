@@ -10,16 +10,18 @@
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
 
-        <ScrollViewer Grid.Column="0" Background="AliceBlue">
+        <ScrollViewer Grid.Column="0">
             <StackPanel>
                 <Button
                     Name="ProjectBtn"
+                    HorizontalAlignment="Stretch"
                     Click="ShowProjectSettings"
                     Content="Project Settings" />
                 <Button
                     Name="SpinejsonBtn"
+                    HorizontalAlignment="Stretch"
                     Click="ShowSpinejsonSettings"
-                    Content="Spinejson Settings" />
+                    Content="Json Settings" />
             </StackPanel>
         </ScrollViewer>
 
@@ -29,7 +31,7 @@
             Background="Gray"
             ResizeDirection="Columns" />
 
-        <ScrollViewer Grid.Column="2" Background="AliceBlue">
+        <ScrollViewer Grid.Column="2">
             <ContentControl Name="SettingsContentControl" />
         </ScrollViewer>
     </Grid>

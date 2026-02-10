@@ -10,7 +10,12 @@
                 Name="path"
                 Text=""
                 Watermark="Save Path" />
-            <Button Click="SelectFolder" Content="O" />
+            <Button
+                Width="32"
+                Height="32"
+                Click="SelectFolder">
+                <Svg Path="/Assets/bootstrap_icons/folder-fill.svg" />
+            </Button>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <TextBox Name="start" />

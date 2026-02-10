@@ -32,7 +32,19 @@ namespace AnimModels
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public double currentTime = 0;
-        public bool isRun = false;
+        private bool _isRun = false;
+        public bool IsRun
+        {
+            get => _isRun;
+            set
+            {
+                if (_isRun != value)
+                {
+                    _isRun = value;
+                    OnPropertyChanged(nameof(IsRun));
+                }
+            }
+        }
         public Dictionary<Bone, BoneAnimation> BoneAnimationBinding =
             new Dictionary<Bone, BoneAnimation>();
 

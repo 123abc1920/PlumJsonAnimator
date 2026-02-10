@@ -1,9 +1,10 @@
+using System;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using Avalonia.Svg.Skia;
 using SpinejsonEditor.ViewModels;
 using SpinejsonEditor.Views;
 
@@ -29,6 +30,9 @@ public partial class App : Application
 
             Constants.ConstantsClass.viewModel = mainViewModelInstance;
         }
+
+        GC.KeepAlive(typeof(SvgImageExtension).Assembly);
+        GC.KeepAlive(typeof(Avalonia.Svg.Skia.Svg).Assembly);
 
         base.OnFrameworkInitializationCompleted();
     }

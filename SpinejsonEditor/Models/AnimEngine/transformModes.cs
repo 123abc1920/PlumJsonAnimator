@@ -79,7 +79,7 @@ namespace TransformModes
         {
             bone.move(x, y);
             var animation = ConstantsClass.currentProject?.GetAnimation();
-            if (animation != null && !animation.isRun)
+            if (animation != null && !animation.IsRun)
             {
                 animation.TranslateBone(bone, bone.x, bone.y);
             }
@@ -120,7 +120,7 @@ namespace TransformModes
             bone.rotate(-angleDeg);
 
             var animation = ConstantsClass.currentProject?.GetAnimation();
-            if (animation != null && !animation.isRun)
+            if (animation != null && !animation.IsRun)
             {
                 animation.RotateBone(bone, bone.a);
             }

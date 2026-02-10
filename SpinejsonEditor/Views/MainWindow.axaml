@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:TimeLine"
+    xmlns:svg="https://github.com/wieslawsoltes/Svg.Skia"
     xmlns:vm="using:SpinejsonEditor.ViewModels"
     Title="SpinejsonEditor"
     d:DesignHeight="450"
@@ -17,6 +18,7 @@
 
     <Window.Resources>
         <converters:DoubleConverter x:Key="DoubleConverter" />
+        <converters:AnimationConverter x:Key="AnimationConverter" />
     </Window.Resources>
 
     <Design.DataContext>
@@ -29,6 +31,7 @@
 
     <DockPanel>
         <Menu DockPanel.Dock="Top">
+            <TextBlock Text="{Binding CurrentProject.Name}" />
             <MenuItem Header="Project">
                 <MenuItem Click="OpenProject" Header="Open">
                     <MenuItem.InputGesture>
@@ -55,6 +58,7 @@
             <MenuItem Header="Export">
                 <MenuItem Click="ExportAsPng" Header="Export as PNG" />
                 <MenuItem Click="ExportAsJpg" Header="Export as JPG" />
+                <Separator />
                 <MenuItem Click="ExportAsGif" Header="Export as GIF" />
                 <MenuItem Click="ExportAsMp4" Header="Export as MP4" />
             </MenuItem>
@@ -85,27 +89,41 @@
                 </Grid.RowDefinitions>
                 <ScrollViewer
                     Grid.Row="0"
-                    Background="LightBlue"
                     HorizontalScrollBarVisibility="Auto"
                     VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
-                        <TextBlock Background="LightBlue" FontSize="22">Skin</TextBlock>
-                        <TextBox Name="skinName" Text="{Binding CurrentProject.CurrentSkin.Name, Mode=TwoWay}" />
-                        <StackPanel Orientation="Horizontal">
-                            <ComboBox
-                                ItemsSource="{Binding CurrentProject.Skins}"
-                                MaxDropDownHeight="100"
-                                SelectedItem="{Binding CurrentProject.CurrentSkin, Mode=TwoWay}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Name}" />
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <Button Click="Add_New_Skin" Content="+" />
-                            <Button Click="Delete_Skin" Content="-" />
-                        </StackPanel>
-                    </StackPanel>
+                    <Grid ColumnDefinitions="*,Auto,Auto" RowDefinitions="Auto,Auto,Auto">
+                        <TextBlock Grid.Row="0" Grid.ColumnSpan="3">Skin</TextBlock>
+                        <TextBox
+                            Name="skinName"
+                            Grid.Row="1"
+                            Grid.ColumnSpan="3"
+                            Text="{Binding CurrentProject.CurrentSkin.Name, Mode=TwoWay}" />
+                        <ComboBox
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            HorizontalAlignment="Stretch"
+                            ItemsSource="{Binding CurrentProject.Skins}"
+                            MaxDropDownHeight="100"
+                            SelectedItem="{Binding CurrentProject.CurrentSkin, Mode=TwoWay}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Click="Add_New_Skin">
+                            <Svg Path="/Assets/bootstrap_icons/file-plus-fill.svg" />
+                        </Button>
+                        <Button
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            Click="Delete_Skin">
+                            <Svg Path="/Assets/bootstrap_icons/trash-fill.svg" />
+                        </Button>
+                    </Grid>
                 </ScrollViewer>
                 <GridSplitter
                     Grid.Row="1"
@@ -115,41 +133,72 @@
                 <ScrollViewer
                     Grid.Row="2"
                     HorizontalAlignment="Stretch"
-                    Background="LightBlue"
                     HorizontalScrollBarVisibility="Auto"
                     VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
-                        <TextBlock Background="LightBlue" FontSize="22">Animation</TextBlock>
-                        <TextBox Name="animationName" Text="{Binding CurrentProject.CurrentAnimation.Name, Mode=TwoWay}" />
-                        <StackPanel Orientation="Horizontal">
-                            <ComboBox
-                                ItemsSource="{Binding CurrentProject.Animations}"
-                                MaxDropDownHeight="100"
-                                SelectedItem="{Binding CurrentProject.CurrentAnimation, Mode=TwoWay}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Name}" />
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <Button Click="Add_New_Animation" Content="+" />
-                            <Button Click="Delete_Animation" Content="-" />
-                        </StackPanel>
-                    </StackPanel>
+                    <Grid ColumnDefinitions="*,Auto,Auto" RowDefinitions="Auto,Auto,Auto">
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.ColumnSpan="3"
+                            Text="Animation" />
+                        <TextBox
+                            Name="animationName"
+                            Grid.Row="1"
+                            Grid.ColumnSpan="3"
+                            Text="{Binding CurrentProject.CurrentAnimation.Name, Mode=TwoWay}" />
+                        <ComboBox
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            HorizontalAlignment="Stretch"
+                            ItemsSource="{Binding CurrentProject.Animations}"
+                            MaxDropDownHeight="100"
+                            SelectedItem="{Binding CurrentProject.CurrentAnimation, Mode=TwoWay}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Click="Add_New_Animation">
+                            <Svg Path="/Assets/bootstrap_icons/file-plus-fill.svg" />
+                        </Button>
+                        <Button
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            Click="Delete_Animation">
+                            <Svg Path="/Assets/bootstrap_icons/trash-fill.svg" />
+                        </Button>
+                    </Grid>
                 </ScrollViewer>
                 <GridSplitter
                     Grid.Row="3"
                     Height="6"
                     Background="Gray"
                     ResizeDirection="Rows" />
-                <DockPanel Grid.Row="4" Background="LightBlue">
-                    <Grid DockPanel.Dock="Top">
-                        <StackPanel Orientation="Horizontal">
-                            <Button Click="Add_Res">+</Button>
-                            <Button Click="DeleteRes">-</Button>
-                            <Button Click="RenameRes">R</Button>
-                        </StackPanel>
-                    </Grid>
+                <StackPanel Grid.Row="4">
+                    <TextBlock>Resources</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <Button
+                            Width="32"
+                            Height="32"
+                            Click="Add_Res">
+                            <Svg Path="/Assets/bootstrap_icons/file-plus-fill.svg" />
+                        </Button>
+                        <Button
+                            Width="32"
+                            Height="32"
+                            Click="DeleteRes">
+                            <Svg Path="/Assets/bootstrap_icons/trash-fill.svg" />
+                        </Button>
+                        <Button
+                            Width="32"
+                            Height="32"
+                            Click="RenameRes">
+                            <Svg Path="/Assets/bootstrap_icons/pencil-fill.svg" />
+                        </Button>
+                    </StackPanel>
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <ListBox x:Name="resList" ItemsSource="{Binding CurrentProject.Resources}">
                             <ListBox.ItemTemplate>
@@ -159,7 +208,7 @@
                             </ListBox.ItemTemplate>
                         </ListBox>
                     </ScrollViewer>
-                </DockPanel>
+                </StackPanel>
             </Grid>
             <GridSplitter
                 Grid.Column="1"
@@ -186,7 +235,6 @@
                                     <ScrollViewer
                                         Grid.Row="0"
                                         VerticalAlignment="Stretch"
-                                        Background="LightBlue"
                                         HorizontalScrollBarVisibility="Auto"
                                         VerticalScrollBarVisibility="Auto">
                                         <Canvas
@@ -204,7 +252,12 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Bottom"
                                         Orientation="Horizontal">
-                                        <Button Click="Set_Transform_Mode" Content="XY" />
+                                        <Button
+                                            Width="32"
+                                            Height="32"
+                                            Click="Set_Transform_Mode">
+                                            <Svg Path="/Assets/bootstrap_icons/arrows-move.svg" />
+                                        </Button>
                                         <TextBox
                                             x:Name="transformX"
                                             Text="{Binding CurrentBone.x, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
@@ -213,12 +266,22 @@
                                             x:Name="transformY"
                                             Text="{Binding CurrentBone.y, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
                                             Watermark="Y" />
-                                        <Button Click="Set_Rotate_Mode" Content="A" />
+                                        <Button
+                                            Width="32"
+                                            Height="32"
+                                            Click="Set_Rotate_Mode">
+                                            <Svg Path="/Assets/bootstrap_icons/arrow-clockwise.svg" />
+                                        </Button>
                                         <TextBox
                                             x:Name="rotate"
                                             Text="{Binding CurrentBone.a, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
                                             Watermark="A" />
-                                        <Button Click="Set_Scale_Mode" Content="S" />
+                                        <Button
+                                            Width="32"
+                                            Height="32"
+                                            Click="Set_Scale_Mode">
+                                            <Svg Path="/Assets/bootstrap_icons/zoom-out.svg" />
+                                        </Button>
                                         <TextBox x:Name="scaleX" Watermark="X" />
                                         <TextBox x:Name="scaleY" Watermark="Y" />
                                     </StackPanel>
@@ -227,6 +290,7 @@
 
                             <GridSplitter
                                 Grid.Row="1"
+                                Height="6"
                                 Background="Gray"
                                 ResizeDirection="Rows" />
 
@@ -240,18 +304,52 @@
                                     Grid.Row="0"
                                     HorizontalAlignment="Center"
                                     Orientation="Horizontal">
-                                    <Button Click="IncreaseTimeLine" Content="++" />
-                                    <Button Click="DecreaseTimeLine" Content="--" />
-                                    <Button Click="PrevKeyframe" Content="[" />
-                                    <Button Click="Play_Animation" Content="P" />
-                                    <Button Click="NextKeyframe" Content="]" />
-                                    <Button Click="AddKeyFrame" Content="+" />
-                                    <Button Click="DeleteKeyFrame" Content="-" />
+                                    <Button
+                                        Width="32"
+                                        Height="32"
+                                        Click="IncreaseTimeLine">
+                                        <Svg Path="/Assets/bootstrap_icons/zoom-in.svg" />
+                                    </Button>
+                                    <Button
+                                        Width="32"
+                                        Height="32"
+                                        Click="DecreaseTimeLine">
+                                        <Svg Path="/Assets/bootstrap_icons/zoom-out.svg" />
+                                    </Button>
+                                    <Button
+                                        Width="32"
+                                        Height="32"
+                                        Click="PrevKeyframe">
+                                        <Svg Path="/Assets/bootstrap_icons/caret-left-fill.svg" />
+                                    </Button>
+                                    <Button
+                                        Width="32"
+                                        Height="32"
+                                        Click="Play_Animation">
+                                        <Svg Path="{Binding CurrentProject.CurrentAnimation.IsRun, Converter={StaticResource AnimationConverter}}" />
+                                    </Button>
+                                    <Button
+                                        Width="32"
+                                        Height="32"
+                                        Click="NextKeyframe">
+                                        <Svg Path="/Assets/bootstrap_icons/caret-right-fill.svg" />
+                                    </Button>
+                                    <Button
+                                        Width="32"
+                                        Height="32"
+                                        Click="AddKeyFrame">
+                                        <Svg Path="/Assets/bootstrap_icons/file-plus-fill.svg" />
+                                    </Button>
+                                    <Button
+                                        Width="32"
+                                        Height="32"
+                                        Click="DeleteKeyFrame">
+                                        <Svg Path="/Assets/bootstrap_icons/file-minus-fill.svg" />
+                                    </Button>
                                 </StackPanel>
 
                                 <ScrollViewer
                                     Grid.Row="1"
-                                    Background="LightBlue"
                                     HorizontalScrollBarVisibility="Auto"
                                     VerticalScrollBarVisibility="Auto">
                                     <Grid Margin="5">
@@ -274,7 +372,7 @@
                         </Grid>
                     </TabItem>
 
-                    <TabItem Header="Spinejson">
+                    <TabItem Header="Json">
                         <Grid Grid.Row="2">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="2*" />
@@ -317,11 +415,27 @@
                     <RowDefinition Height="6" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Background="LightBlue">
+                <StackPanel Grid.Row="0">
+                    <TextBlock>Skeleton</TextBlock>
                     <StackPanel Orientation="Horizontal">
-                        <Button Grid.Column="0" Click="Add_Bone">+</Button>
-                        <Button Grid.Column="1" Click="Rename_Bone">R</Button>
-                        <Button Grid.Column="2" Click="Delete_Bone">-</Button>
+                        <Button
+                            Width="32"
+                            Height="32"
+                            Click="Add_Bone">
+                            <Svg Path="/Assets/bootstrap_icons/file-plus-fill.svg" />
+                        </Button>
+                        <Button
+                            Width="32"
+                            Height="32"
+                            Click="Delete_Bone">
+                            <Svg Path="/Assets/bootstrap_icons/trash-fill.svg" />
+                        </Button>
+                        <Button
+                            Width="32"
+                            Height="32"
+                            Click="Rename_Bone">
+                            <Svg Path="/Assets/bootstrap_icons/pencil-fill.svg" />
+                        </Button>
                     </StackPanel>
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <TreeView Name="boneTreeView" ItemsSource="{Binding CurrentProject.MainSkeleton.RootBones}">
@@ -343,13 +457,29 @@
                     Height="6"
                     Background="Gray"
                     ResizeDirection="Rows" />
-                <DockPanel Grid.Row="2" Background="LightBlue">
+                <DockPanel Grid.Row="2">
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <StackPanel>
+                            <TextBlock>Info</TextBlock>
                             <StackPanel Orientation="Horizontal">
-                                <Button Click="Add_Slot" Content="+" />
-                                <Button Click="Delete_Slot" Content="-" />
-                                <Button Click="RenameSlot">R</Button>
+                                <Button
+                                    Width="32"
+                                    Height="32"
+                                    Click="Add_Slot">
+                                    <Svg Path="/Assets/bootstrap_icons/file-plus-fill.svg" />
+                                </Button>
+                                <Button
+                                    Width="32"
+                                    Height="32"
+                                    Click="Delete_Slot">
+                                    <Svg Path="/Assets/bootstrap_icons/trash-fill.svg" />
+                                </Button>
+                                <Button
+                                    Width="32"
+                                    Height="32"
+                                    Click="RenameSlot">
+                                    <Svg Path="/Assets/bootstrap_icons/pencil-fill.svg" />
+                                </Button>
                             </StackPanel>
                             <TextBlock Text="{Binding CurrentBone.Name, FallbackValue='Не выбрано', TargetNullValue='Не выбрано'}" />
                             <ListBox

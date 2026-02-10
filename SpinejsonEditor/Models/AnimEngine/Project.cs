@@ -21,7 +21,20 @@ namespace EngineModels
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
                 "SpinejsonWorkspace"
             );
-        public string Name { get; set; } = "NewProject";
+
+        private string _name = "NewProject";
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                    OnPropertyChanged(nameof(Name));
+                }
+            }
+        }
 
         public MetaData MetaData { get; set; } = new MetaData { Spine = "4.2.22" };
 

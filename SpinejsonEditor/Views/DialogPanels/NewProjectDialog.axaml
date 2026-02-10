@@ -14,7 +14,12 @@
                 Name="workspace"
                 Text=""
                 Watermark="Project Path" />
-            <Button Click="SelectFolder" Content="O" />
+            <Button
+                Width="32"
+                Height="32"
+                Click="SelectFolder">
+                <Svg Path="/Assets/bootstrap_icons/folder-fill.svg" />
+            </Button>
         </StackPanel>
 
         <Button Click="CreateProject" Content="Create" />

@@ -449,7 +449,7 @@ public partial class MainWindow : Window
 
                 switch (header)
                 {
-                    case "Spinejson":
+                    case "Json":
                         currentTab = 1;
                         ConstantsClass.currentProject?.SpinejsonCode.generateCode(
                             ConstantsClass.currentProject

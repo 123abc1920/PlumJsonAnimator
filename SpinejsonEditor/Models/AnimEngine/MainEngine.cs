@@ -21,15 +21,15 @@ namespace AnimEngine
 
         public void runAnimation()
         {
-            if (ConstantsClass.currentProject.CurrentAnimation.isRun)
+            if (ConstantsClass.currentProject.CurrentAnimation.IsRun)
             {
                 this._animationLoop.Stop();
-                ConstantsClass.currentProject.CurrentAnimation.isRun = false;
+                ConstantsClass.currentProject.CurrentAnimation.IsRun = false;
             }
             else
             {
                 this._animationLoop.Start();
-                ConstantsClass.currentProject.CurrentAnimation.isRun = true;
+                ConstantsClass.currentProject.CurrentAnimation.IsRun = true;
             }
         }
     }
