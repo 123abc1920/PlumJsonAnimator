@@ -77,7 +77,7 @@ namespace Resources
         {
             this.Name = name;
             this.ext = _ext;
-            this.path = Path.Combine(_path, $"{this.Name}{this.ext}");
+            this.path = _path;
         }
     }
 }

@@ -54,6 +54,8 @@ namespace AnimExport
                     );
 
                     var i = 0;
+                    var drawBones = ConstantsClass.drawBones;
+                    ConstantsClass.drawBones = false;
                     while (ConstantsClass.currentProject.CurrentAnimation.currentTime <= endTime)
                     {
                         using (RenderTargetBitmap bitmap = CatchCanvas(canvas))
@@ -70,6 +72,7 @@ namespace AnimExport
                         await Task.Delay(30);
                         i++;
                     }
+                    ConstantsClass.drawBones = drawBones;
                     return ExportResult.SUCCESS;
                 }
 
@@ -91,6 +94,8 @@ namespace AnimExport
                     );
 
                     var i = 0;
+                    var drawBones = ConstantsClass.drawBones;
+                    ConstantsClass.drawBones = false;
                     while (ConstantsClass.currentProject.CurrentAnimation.currentTime <= endTime)
                     {
                         using (RenderTargetBitmap bitmap = CatchCanvas(canvas))
@@ -107,6 +112,7 @@ namespace AnimExport
                         await Task.Delay(30);
                         i++;
                     }
+                    ConstantsClass.drawBones = drawBones;
                     return ExportResult.SUCCESS;
                 }
 
@@ -132,6 +138,8 @@ namespace AnimExport
                         end
                     );
 
+                    var drawBones = ConstantsClass.drawBones;
+                    ConstantsClass.drawBones = false;
                     List<Image<Rgba32>> frames = new List<Image<Rgba32>>();
                     while (ConstantsClass.currentProject.CurrentAnimation.currentTime <= endTime)
                     {
@@ -171,6 +179,7 @@ namespace AnimExport
                         frame.Dispose();
                     }
 
+                    ConstantsClass.drawBones = drawBones;
                     return ExportResult.SUCCESS;
                 }
 
@@ -243,6 +252,8 @@ namespace AnimExport
                     process.Start();
                     process.BeginErrorReadLine();
 
+                    var drawBones = ConstantsClass.drawBones;
+                    ConstantsClass.drawBones = false;
                     using (var stdin = process.StandardInput.BaseStream)
                     {
                         ConstantsClass.currentProject.CurrentAnimation.currentTime = start;
@@ -314,6 +325,7 @@ namespace AnimExport
                             stdin.Flush();
                         }
                     }
+                    ConstantsClass.drawBones = drawBones;
 
                     if (!process.WaitForExit(10000))
                     {

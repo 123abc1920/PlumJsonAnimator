@@ -1,10 +1,7 @@
-using System;
-using System.Linq;
 using AnimEngine;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Platform.Storage;
 using Avalonia.Styling;
 using Constants;

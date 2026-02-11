@@ -64,7 +64,7 @@
         </Menu>
         <Grid
             Margin="5"
-            ColumnDefinitions="Auto,Auto"
+            ColumnDefinitions="Auto,Auto,Auto"
             DockPanel.Dock="Bottom">
             <TextBlock
                 Grid.Column="0"
@@ -251,20 +251,25 @@
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
 
-                                    <ScrollViewer
-                                        Grid.Row="0"
-                                        VerticalAlignment="Stretch"
-                                        HorizontalScrollBarVisibility="Auto"
-                                        VerticalScrollBarVisibility="Auto">
-                                        <Canvas
-                                            Name="mainCanvas"
-                                            Width="1000"
-                                            Height="1000"
-                                            Background="White"
-                                            PointerMoved="Move_Canvas"
-                                            PointerPressed="Press_Canvas"
-                                            PointerReleased="Release_Canvas" />
-                                    </ScrollViewer>
+                                    <Grid Grid.Row="0">
+                                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                            <Canvas
+                                                Name="mainCanvas"
+                                                Width="1000"
+                                                Height="1000"
+                                                Background="Transparent"
+                                                PointerMoved="Move_Canvas"
+                                                PointerPressed="Press_Canvas"
+                                                PointerReleased="Release_Canvas" />
+                                        </ScrollViewer>
+
+                                        <StackPanel
+                                            Margin="10"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Top">
+                                            <CheckBox Click="CheckBox_Click" IsChecked="True">Draw bones</CheckBox>
+                                        </StackPanel>
+                                    </Grid>
 
                                     <StackPanel
                                         Grid.Row="1"

@@ -30,5 +30,6 @@ namespace Constants
             { '<', '>' },
         };
         public static string theme = "light";
+        public static bool drawBones = true;
     }
 }

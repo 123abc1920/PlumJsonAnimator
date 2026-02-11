@@ -109,7 +109,10 @@ public partial class MainWindow : Window
         {
             mainCanvas.Children.Clear();
             ConstantsClass.currentProject?.drawSlots(mainCanvas);
-            ConstantsClass.currentProject?.MainSkeleton?.drawSkeleton(mainCanvas);
+            if (ConstantsClass.drawBones)
+            {
+                ConstantsClass.currentProject?.MainSkeleton?.drawSkeleton(mainCanvas);
+            }
         }
         else if (currentTab == 1)
         {
@@ -720,6 +723,17 @@ public partial class MainWindow : Window
         if (DataContext is MainWindowViewModel viewModel)
         {
             Dialogs.ShowDialog("Экспорт как MP4", viewModel, this, ViewType.EXPORT_MP4);
+        }
+    }
+
+    private void CheckBox_Click(object sender, RoutedEventArgs e)
+    {
+        var checkBox = sender as CheckBox;
+        var isChecked = checkBox.IsChecked;
+
+        if (isChecked != null)
+        {
+            ConstantsClass.drawBones = (bool)isChecked;
         }
     }
 }
