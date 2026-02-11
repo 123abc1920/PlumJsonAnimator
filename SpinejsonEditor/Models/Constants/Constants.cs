@@ -29,5 +29,6 @@ namespace Constants
             { '"', '"' },
             { '<', '>' },
         };
+        public static string theme = "light";
     }
 }

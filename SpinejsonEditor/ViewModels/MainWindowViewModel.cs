@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -18,6 +19,21 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
     private Bone? _currentBone;
     public IRenamable RedactObj { get; set; } = null;
+    public List<string> Themes { get; set; } = new List<string>() { "light", "dark" };
+    private string _currTheme = "light";
+    public string CurrentTheme
+    {
+        get => _currTheme;
+        set
+        {
+            if (_currTheme != value)
+            {
+                _currTheme = value;
+                ConstantsClass.theme = value;
+                OnPropertyChanged(nameof(CurrentTheme));
+            }
+        }
+    }
 
     public Bone? CurrentBone
     {
@@ -37,7 +53,10 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
         }
     }
 
-    public MainWindowViewModel() { }
+    public MainWindowViewModel()
+    {
+        CurrentTheme = Themes[0];
+    }
 
     public void AddBone(string title, int id, object? selectedBone)
     {

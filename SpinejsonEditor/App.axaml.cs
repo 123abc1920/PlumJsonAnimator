@@ -1,10 +1,18 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Svg.Skia;
+using Avalonia.Themes.Fluent;
 using SpinejsonEditor.ViewModels;
 using SpinejsonEditor.Views;
 
@@ -51,3 +59,5 @@ public partial class App : Application
         }
     }
 }
+
+// #ff003b #00ffc4 #011021 #070F19 #000A15 #DCDCDC

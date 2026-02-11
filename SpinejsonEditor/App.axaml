@@ -11,6 +11,69 @@
     </Application.DataTemplates>
 
     <Application.Styles>
-        <FluentTheme />
+        <FluentTheme>
+            <FluentTheme.Palettes>
+                <ColorPaletteResources
+                    x:Key="Light"
+                    Accent="#ffff003b"
+                    AltHigh="#DCDCDCFF"
+                    AltLow="#DCDCDCFF"
+                    AltMedium="#DCDCDCFF"
+                    AltMediumHigh="#DCDCDCFF"
+                    AltMediumLow="#DCDCDCFF"
+                    BaseHigh="Black"
+                    BaseLow="#00c81dcc"
+                    BaseMedium="#998e0c93"
+                    BaseMediumHigh="#ff67006d"
+                    BaseMediumLow="#cc7a0680"
+                    ChromeAltLow="#ff67006d"
+                    ChromeBlackHigh="Black"
+                    ChromeBlackLow="#00c81dcc"
+                    ChromeBlackMedium="#ff67006d"
+                    ChromeBlackMediumLow="#998e0c93"
+                    ChromeDisabledHigh="#00c81dcc"
+                    ChromeDisabledLow="#998e0c93"
+                    ChromeGray="#cc7a0680"
+                    ChromeHigh="#00c81dcc"
+                    ChromeLow="Gainsboro"
+                    ChromeMedium="#cce98beb"
+                    ChromeMediumLow="Gainsboro"
+                    ChromeWhite="#DCDCDCFF"
+                    ListLow="#cce98beb"
+                    ListMedium="#00c81dcc"
+                    RegionColor="Gainsboro" />
+                <ColorPaletteResources
+                    x:Key="Dark"
+                    Accent="#ffff003b"
+                    AltHigh="#00333333"
+                    AltLow="#00333333"
+                    AltMedium="#00333333"
+                    AltMediumHigh="#00333333"
+                    AltMediumLow="#00333333"
+                    BaseHigh="White"
+                    BaseLow="#00333333"
+                    BaseMedium="#cc9a9a9a"
+                    BaseMediumHigh="#ffb4b4b4"
+                    BaseMediumLow="#66676767"
+                    ChromeAltLow="#ffb4b4b4"
+                    ChromeBlackHigh="#00333333"
+                    ChromeBlackLow="#ffb4b4b4"
+                    ChromeBlackMedium="#00333333"
+                    ChromeBlackMediumLow="#00333333"
+                    ChromeDisabledHigh="#00333333"
+                    ChromeDisabledLow="#cc9a9a9a"
+                    ChromeGray="#99808080"
+                    ChromeHigh="#99808080"
+                    ChromeLow="#cc151515"
+                    ChromeMedium="#991d1d1d"
+                    ChromeMediumLow="#332c2c2c"
+                    ChromeWhite="White"
+                    ListLow="#991d1d1d"
+                    ListMedium="#00333333"
+                    RegionColor="#ff011021" />
+            </FluentTheme.Palettes>
+        </FluentTheme>
+
+        <StyleInclude Source="avares://SpinejsonEditor/Views/Themes/Theme.axaml" />
     </Application.Styles>
 </Application>

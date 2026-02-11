@@ -38,6 +38,8 @@ namespace AnimEngine
 
             settings.LastDir = ConstantsClass.currentProject.GetProjectPath();
             settings.Workspace = ConstantsClass.currentProject.ProjectPath;
+            settings.Lang = "ru";
+            settings.Theme = ConstantsClass.theme;
 
             appSettings = settings;
 
@@ -79,6 +81,7 @@ namespace AnimEngine
 
                     ConstantsClass.currentProject.ProjectPath = parentPath;
                     ConstantsClass.currentProject.Name = lastFolder;
+                    ConstantsClass.theme = settings.Theme;
                 }
             }
         }
@@ -92,4 +95,10 @@ public class AppSettingsData()
 
     [JsonProperty("workspace")]
     public string Workspace { get; set; }
+
+    [JsonProperty("theme")]
+    public string Theme { get; set; }
+
+    [JsonProperty("language")]
+    public string Lang { get; set; }
 }

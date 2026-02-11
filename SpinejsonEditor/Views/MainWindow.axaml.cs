@@ -82,6 +82,17 @@ public partial class MainWindow : Window
             currentTab = 1;
         }
 
+        if (DataContext is MainWindowViewModel viewModel)
+        {
+            foreach (string s in viewModel.Themes)
+            {
+                if (s == ConstantsClass.theme)
+                {
+                    viewModel.CurrentTheme = s;
+                }
+            }
+        }
+
         EventHandler animationTick = (sender, e) =>
         {
             if (currentTab == 0)

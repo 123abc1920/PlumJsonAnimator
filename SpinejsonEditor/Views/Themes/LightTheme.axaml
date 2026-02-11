@@ -1,0 +1,17 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Styles.Resources>
+        <Color x:Key="SystemAccentColor">#ff003b</Color>
+        <Color x:Key="SystemAccentColorDark1">#ff003b</Color>
+        <Color x:Key="SystemAccentColorDark2">#ff003b</Color>
+        <Color x:Key="SystemAccentColorLight1">#ff003b</Color>
+        <Color x:Key="SystemAccentColorLight2">#ff003b</Color>
+
+        <SolidColorBrush x:Key="SystemControlBackgroundAccentBrush" Color="#ff003b" />
+        <SolidColorBrush x:Key="SystemControlHighlightAccentBrush" Color="#ff003b" />
+        <SolidColorBrush x:Key="SystemControlForegroundAccentBrush" Color="#ff003b" />
+        <SolidColorBrush x:Key="SystemControlHighlightAltAccentBrush" Color="#ff003b" />
+        <SolidColorBrush x:Key="ContentControlSelectionForeground" Color="#ff003b" />
+        <SolidColorBrush x:Key="ContentControlSelectionForegroundPointerOver" Color="#ff003b" />
+    </Styles.Resources>
+
+</Styles>
