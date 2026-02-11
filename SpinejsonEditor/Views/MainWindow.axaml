@@ -31,7 +31,6 @@
 
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <TextBlock Text="{Binding CurrentProject.Name}" />
             <MenuItem Header="Project">
                 <MenuItem Click="OpenProject" Header="Open">
                     <MenuItem.InputGesture>
@@ -63,13 +62,15 @@
                 <MenuItem Click="ExportAsMp4" Header="Export as MP4" />
             </MenuItem>
         </Menu>
-        <Grid DockPanel.Dock="Bottom">
+        <Grid
+            Margin="5"
+            ColumnDefinitions="Auto,Auto"
+            DockPanel.Dock="Bottom">
             <TextBlock
-                Margin="0,5"
-                FontSize="18"
-                FontWeight="Bold">
-                Heading
-            </TextBlock>
+                Grid.Column="0"
+                Margin="0,0,5,0"
+                Text="Project:" />
+            <TextBlock Grid.Column="1" Text="{Binding CurrentProject.Name}" />
         </Grid>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -79,7 +80,7 @@
                 <ColumnDefinition Width="6" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" Background="AliceBlue">
+            <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="6" />
@@ -89,6 +90,7 @@
                 </Grid.RowDefinitions>
                 <ScrollViewer
                     Grid.Row="0"
+                    Margin="5"
                     HorizontalScrollBarVisibility="Auto"
                     VerticalScrollBarVisibility="Auto">
                     <Grid ColumnDefinitions="*,Auto,Auto" RowDefinitions="Auto,Auto,Auto">
@@ -97,10 +99,12 @@
                             Name="skinName"
                             Grid.Row="1"
                             Grid.ColumnSpan="3"
+                            Margin="0,5"
                             Text="{Binding CurrentProject.CurrentSkin.Name, Mode=TwoWay}" />
                         <ComboBox
                             Grid.Row="2"
                             Grid.Column="0"
+                            Margin="0,5,5,0"
                             HorizontalAlignment="Stretch"
                             ItemsSource="{Binding CurrentProject.Skins}"
                             MaxDropDownHeight="100"
@@ -114,12 +118,18 @@
                         <Button
                             Grid.Row="2"
                             Grid.Column="1"
+                            Width="32"
+                            Height="32"
+                            Margin="0,5"
                             Click="Add_New_Skin">
                             <Svg Path="/Assets/bootstrap_icons/file-plus-fill.svg" />
                         </Button>
                         <Button
                             Grid.Row="2"
                             Grid.Column="2"
+                            Width="32"
+                            Height="32"
+                            Margin="0,5"
                             Click="Delete_Skin">
                             <Svg Path="/Assets/bootstrap_icons/trash-fill.svg" />
                         </Button>
@@ -132,6 +142,7 @@
                     ResizeDirection="Rows" />
                 <ScrollViewer
                     Grid.Row="2"
+                    Margin="5"
                     HorizontalAlignment="Stretch"
                     HorizontalScrollBarVisibility="Auto"
                     VerticalScrollBarVisibility="Auto">
@@ -144,10 +155,12 @@
                             Name="animationName"
                             Grid.Row="1"
                             Grid.ColumnSpan="3"
+                            Margin="0,5"
                             Text="{Binding CurrentProject.CurrentAnimation.Name, Mode=TwoWay}" />
                         <ComboBox
                             Grid.Row="2"
                             Grid.Column="0"
+                            Margin="0,5,5,0"
                             HorizontalAlignment="Stretch"
                             ItemsSource="{Binding CurrentProject.Animations}"
                             MaxDropDownHeight="100"
@@ -161,12 +174,18 @@
                         <Button
                             Grid.Row="2"
                             Grid.Column="1"
+                            Width="32"
+                            Height="32"
+                            Margin="0,5"
                             Click="Add_New_Animation">
                             <Svg Path="/Assets/bootstrap_icons/file-plus-fill.svg" />
                         </Button>
                         <Button
                             Grid.Row="2"
                             Grid.Column="2"
+                            Width="32"
+                            Height="32"
+                            Margin="0,5"
                             Click="Delete_Animation">
                             <Svg Path="/Assets/bootstrap_icons/trash-fill.svg" />
                         </Button>
@@ -177,14 +196,14 @@
                     Height="6"
                     Background="Gray"
                     ResizeDirection="Rows" />
-                <StackPanel Grid.Row="4">
+                <StackPanel Grid.Row="4" Margin="5">
                     <TextBlock>Resources</TextBlock>
                     <StackPanel Orientation="Horizontal">
                         <Button
                             Width="32"
                             Height="32"
                             Click="Add_Res">
-                            <Svg Path="/Assets/bootstrap_icons/file-plus-fill.svg" />
+                            <Svg Path="/Assets/bootstrap_icons/folder-fill.svg" />
                         </Button>
                         <Button
                             Width="32"
@@ -199,7 +218,7 @@
                             <Svg Path="/Assets/bootstrap_icons/pencil-fill.svg" />
                         </Button>
                     </StackPanel>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer Margin="0,5" VerticalScrollBarVisibility="Auto">
                         <ListBox x:Name="resList" ItemsSource="{Binding CurrentProject.Resources}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -409,13 +428,13 @@
                 Width="6"
                 Background="Gray"
                 ResizeDirection="Columns" />
-            <Grid Grid.Column="4" Background="AliceBlue">
+            <Grid Grid.Column="4">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="6" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0">
+                <StackPanel Grid.Row="0" Margin="5">
                     <TextBlock>Skeleton</TextBlock>
                     <StackPanel Orientation="Horizontal">
                         <Button
@@ -437,14 +456,11 @@
                             <Svg Path="/Assets/bootstrap_icons/pencil-fill.svg" />
                         </Button>
                     </StackPanel>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer Margin="0,5" VerticalScrollBarVisibility="Auto">
                         <TreeView Name="boneTreeView" ItemsSource="{Binding CurrentProject.MainSkeleton.RootBones}">
                             <TreeView.ItemTemplate>
                                 <TreeDataTemplate ItemsSource="{Binding Children}">
-                                    <StackPanel
-                                        DoubleTapped="OnBonePointerPressed"
-                                        Orientation="Vertical"
-                                        Spacing="5">
+                                    <StackPanel DoubleTapped="OnBonePointerPressed">
                                         <TextBlock Text="{Binding Name, Mode=TwoWay}" />
                                     </StackPanel>
                                 </TreeDataTemplate>
@@ -458,7 +474,7 @@
                     Background="Gray"
                     ResizeDirection="Rows" />
                 <DockPanel Grid.Row="2">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer Margin="5" VerticalScrollBarVisibility="Auto">
                         <StackPanel>
                             <TextBlock>Info</TextBlock>
                             <StackPanel Orientation="Horizontal">
@@ -481,9 +497,10 @@
                                     <Svg Path="/Assets/bootstrap_icons/pencil-fill.svg" />
                                 </Button>
                             </StackPanel>
-                            <TextBlock Text="{Binding CurrentBone.Name, FallbackValue='Не выбрано', TargetNullValue='Не выбрано'}" />
+                            <TextBlock Margin="0,5" Text="{Binding CurrentBone.Name, FallbackValue='Не выбрано', TargetNullValue='Не выбрано'}" />
                             <ListBox
                                 x:Name="SlotsList"
+                                Margin="0,5"
                                 DragDrop.Drop="OnListBoxDrop"
                                 IsVisible="{Binding CurrentBone}"
                                 ItemsSource="{Binding CurrentBone.Slots}">
