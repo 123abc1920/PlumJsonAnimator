@@ -2,6 +2,7 @@
     x:Class="SpinejsonEditor.Views.SpinejsonSettingsPanel"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:iconPacks="https://github.com/MahApps/IconPacks.Avalonia"
     xmlns:viewModels="clr-namespace:SpinejsonEditor.ViewModels">
     <StackPanel Margin="10" x:DataType="viewModels:MainWindowViewModel">
         <TextBlock
@@ -25,8 +26,11 @@
                 Grid.Column="1"
                 Width="32"
                 Height="32"
+                Padding="0"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
                 Click="SelectFolder">
-                <Svg Path="/Assets/bootstrap_icons/folder-fill.svg" />
+                <iconPacks:PackIconBootstrapIcons Kind="FolderFill" />
             </Button>
         </Grid>
 

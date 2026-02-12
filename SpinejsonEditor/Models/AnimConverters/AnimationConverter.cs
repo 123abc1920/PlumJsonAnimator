@@ -1,19 +1,15 @@
 using System;
 using System.Globalization;
 using Avalonia.Data.Converters;
+using IconPacks.Avalonia.BootstrapIcons;
 
 namespace AnimConverters
 {
     public class AnimationConverter : IValueConverter
     {
-        public string PlayIcon
-        {
-            get => "/Assets/bootstrap_icons/play-fill.svg";
-        }
-        public string PauseIcon
-        {
-            get => "/Assets/bootstrap_icons/pause-fill.svg";
-        }
+        public PackIconBootstrapIconsKind PlayIcon => PackIconBootstrapIconsKind.PlayFill;
+
+        public PackIconBootstrapIconsKind PauseIcon => PackIconBootstrapIconsKind.PauseFill;
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -29,9 +25,6 @@ namespace AnimConverters
             Type targetType,
             object parameter,
             CultureInfo culture
-        )
-        {
-            throw new NotImplementedException();
-        }
+        ) => throw new NotImplementedException();
     }
 }

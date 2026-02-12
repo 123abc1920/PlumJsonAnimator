@@ -74,6 +74,8 @@
             </FluentTheme.Palettes>
         </FluentTheme>
 
+        <StyleInclude Source="avares://IconPacks.Avalonia.BootstrapIcons/BootstrapIcons.axaml" />
+
         <StyleInclude Source="avares://SpinejsonEditor/Views/Themes/Theme.axaml" />
     </Application.Styles>
 </Application>

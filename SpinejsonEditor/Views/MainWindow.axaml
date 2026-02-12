@@ -5,6 +5,7 @@
     xmlns:converters="clr-namespace:AnimConverters;assembly=SpinejsonEditor"
     xmlns:ctrls="using:TimeLine"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:iconPacks="https://github.com/MahApps/IconPacks.Avalonia"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:TimeLine"
     xmlns:svg="https://github.com/wieslawsoltes/Svg.Skia"
@@ -121,8 +122,11 @@
                             Width="32"
                             Height="32"
                             Margin="0,5"
+                            Padding="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
                             Click="Add_New_Skin">
-                            <Svg Path="/Assets/bootstrap_icons/file-plus-fill.svg" />
+                            <iconPacks:PackIconBootstrapIcons Kind="FilePlusFill" />
                         </Button>
                         <Button
                             Grid.Row="2"
@@ -130,8 +134,11 @@
                             Width="32"
                             Height="32"
                             Margin="0,5"
+                            Padding="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
                             Click="Delete_Skin">
-                            <Svg Path="/Assets/bootstrap_icons/trash-fill.svg" />
+                            <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
                         </Button>
                     </Grid>
                 </ScrollViewer>
@@ -177,8 +184,11 @@
                             Width="32"
                             Height="32"
                             Margin="0,5"
+                            Padding="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
                             Click="Add_New_Animation">
-                            <Svg Path="/Assets/bootstrap_icons/file-plus-fill.svg" />
+                            <iconPacks:PackIconBootstrapIcons Kind="FilePlusFill" />
                         </Button>
                         <Button
                             Grid.Row="2"
@@ -186,8 +196,11 @@
                             Width="32"
                             Height="32"
                             Margin="0,5"
+                            Padding="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
                             Click="Delete_Animation">
-                            <Svg Path="/Assets/bootstrap_icons/trash-fill.svg" />
+                            <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
                         </Button>
                     </Grid>
                 </ScrollViewer>
@@ -202,20 +215,29 @@
                         <Button
                             Width="32"
                             Height="32"
+                            Padding="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
                             Click="Add_Res">
-                            <Svg Path="/Assets/bootstrap_icons/folder-fill.svg" />
+                            <iconPacks:PackIconBootstrapIcons Kind="FolderFill" />
                         </Button>
                         <Button
                             Width="32"
                             Height="32"
+                            Padding="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
                             Click="DeleteRes">
-                            <Svg Path="/Assets/bootstrap_icons/trash-fill.svg" />
+                            <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
                         </Button>
                         <Button
                             Width="32"
                             Height="32"
+                            Padding="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
                             Click="RenameRes">
-                            <Svg Path="/Assets/bootstrap_icons/pencil-fill.svg" />
+                            <iconPacks:PackIconBootstrapIcons Kind="PencilFill" />
                         </Button>
                     </StackPanel>
                     <ScrollViewer Margin="0,5" VerticalScrollBarVisibility="Auto">
@@ -279,8 +301,11 @@
                                         <Button
                                             Width="32"
                                             Height="32"
+                                            Padding="0"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
                                             Click="Set_Transform_Mode">
-                                            <Svg Path="/Assets/bootstrap_icons/arrows-move.svg" />
+                                            <iconPacks:PackIconBootstrapIcons Kind="ArrowsMove" />
                                         </Button>
                                         <TextBox
                                             x:Name="transformX"
@@ -293,8 +318,11 @@
                                         <Button
                                             Width="32"
                                             Height="32"
+                                            Padding="0"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
                                             Click="Set_Rotate_Mode">
-                                            <Svg Path="/Assets/bootstrap_icons/arrow-clockwise.svg" />
+                                            <iconPacks:PackIconBootstrapIcons Kind="ArrowClockwise" />
                                         </Button>
                                         <TextBox
                                             x:Name="rotate"
@@ -303,8 +331,11 @@
                                         <Button
                                             Width="32"
                                             Height="32"
+                                            Padding="0"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
                                             Click="Set_Scale_Mode">
-                                            <Svg Path="/Assets/bootstrap_icons/zoom-out.svg" />
+                                            <iconPacks:PackIconBootstrapIcons Kind="ZoomIn" />
                                         </Button>
                                         <TextBox x:Name="scaleX" Watermark="X" />
                                         <TextBox x:Name="scaleY" Watermark="Y" />
@@ -331,44 +362,68 @@
                                     <Button
                                         Width="32"
                                         Height="32"
+                                        Padding="0"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
                                         Click="IncreaseTimeLine">
-                                        <Svg Path="/Assets/bootstrap_icons/zoom-in.svg" />
+                                        <iconPacks:PackIconBootstrapIcons Kind="ZoomIn" />
                                     </Button>
                                     <Button
                                         Width="32"
                                         Height="32"
+                                        Padding="0"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
                                         Click="DecreaseTimeLine">
-                                        <Svg Path="/Assets/bootstrap_icons/zoom-out.svg" />
+                                        <iconPacks:PackIconBootstrapIcons Kind="ZoomOut" />
                                     </Button>
                                     <Button
                                         Width="32"
                                         Height="32"
+                                        Padding="0"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
                                         Click="PrevKeyframe">
-                                        <Svg Path="/Assets/bootstrap_icons/caret-left-fill.svg" />
+                                        <iconPacks:PackIconBootstrapIcons Kind="CaretLeftFill" />
                                     </Button>
                                     <Button
                                         Width="32"
                                         Height="32"
+                                        Padding="0"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
                                         Click="Play_Animation">
-                                        <Svg Path="{Binding CurrentProject.CurrentAnimation.IsRun, Converter={StaticResource AnimationConverter}}" />
+                                        <iconPacks:PackIconBootstrapIcons
+                                            Width="20"
+                                            Height="20"
+                                            Kind="{Binding CurrentProject.CurrentAnimation.IsRun, Converter={StaticResource AnimationConverter}}" />
                                     </Button>
                                     <Button
                                         Width="32"
                                         Height="32"
+                                        Padding="0"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
                                         Click="NextKeyframe">
-                                        <Svg Path="/Assets/bootstrap_icons/caret-right-fill.svg" />
+                                        <iconPacks:PackIconBootstrapIcons Kind="CaretRightFill" />
                                     </Button>
                                     <Button
                                         Width="32"
                                         Height="32"
+                                        Padding="0"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
                                         Click="AddKeyFrame">
-                                        <Svg Path="/Assets/bootstrap_icons/file-plus-fill.svg" />
+                                        <iconPacks:PackIconBootstrapIcons Kind="FilePlusFill" />
                                     </Button>
                                     <Button
                                         Width="32"
                                         Height="32"
+                                        Padding="0"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
                                         Click="DeleteKeyFrame">
-                                        <Svg Path="/Assets/bootstrap_icons/file-minus-fill.svg" />
+                                        <iconPacks:PackIconBootstrapIcons Kind="FileMinusFill" />
                                     </Button>
                                 </StackPanel>
 
@@ -445,20 +500,29 @@
                         <Button
                             Width="32"
                             Height="32"
+                            Padding="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
                             Click="Add_Bone">
-                            <Svg Path="/Assets/bootstrap_icons/file-plus-fill.svg" />
+                            <iconPacks:PackIconBootstrapIcons Kind="FilePlusFill" />
                         </Button>
                         <Button
                             Width="32"
                             Height="32"
+                            Padding="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
                             Click="Delete_Bone">
-                            <Svg Path="/Assets/bootstrap_icons/trash-fill.svg" />
+                            <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
                         </Button>
                         <Button
                             Width="32"
                             Height="32"
+                            Padding="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
                             Click="Rename_Bone">
-                            <Svg Path="/Assets/bootstrap_icons/pencil-fill.svg" />
+                            <iconPacks:PackIconBootstrapIcons Kind="PencilFill" />
                         </Button>
                     </StackPanel>
                     <ScrollViewer Margin="0,5" VerticalScrollBarVisibility="Auto">
@@ -486,20 +550,29 @@
                                 <Button
                                     Width="32"
                                     Height="32"
+                                    Padding="0"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
                                     Click="Add_Slot">
-                                    <Svg Path="/Assets/bootstrap_icons/file-plus-fill.svg" />
+                                    <iconPacks:PackIconBootstrapIcons Kind="FilePlusFill" />
                                 </Button>
                                 <Button
                                     Width="32"
                                     Height="32"
+                                    Padding="0"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
                                     Click="Delete_Slot">
-                                    <Svg Path="/Assets/bootstrap_icons/trash-fill.svg" />
+                                    <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
                                 </Button>
                                 <Button
                                     Width="32"
                                     Height="32"
+                                    Padding="0"
+                                    HorizontalContentAlignment="Center"
+                                    VerticalContentAlignment="Center"
                                     Click="RenameSlot">
-                                    <Svg Path="/Assets/bootstrap_icons/pencil-fill.svg" />
+                                    <iconPacks:PackIconBootstrapIcons Kind="PencilFill" />
                                 </Button>
                             </StackPanel>
                             <TextBlock Margin="0,5" Text="{Binding CurrentBone.Name, FallbackValue='Не выбрано', TargetNullValue='Не выбрано'}" />
