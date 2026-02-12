@@ -1,0 +1,82 @@
+<Application
+    x:Class="PlumAnimation.App"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PlumAnimation"
+    RequestedThemeVariant="Default">
+    <!--  "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options.  -->
+
+    <Application.DataTemplates>
+        <local:ViewLocator />
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <FluentTheme>
+            <FluentTheme.Palettes>
+                <ColorPaletteResources
+                    x:Key="Light"
+                    Accent="#ffff003b"
+                    AltHigh="#DCDCDCff"
+                    AltLow="#DCDCDCff"
+                    AltMedium="#DCDCDCff"
+                    AltMediumHigh="#DCDCDCff"
+                    AltMediumLow="#DCDCDCff"
+                    BaseHigh="#011021"
+                    BaseLow="#00c81dcc"
+                    BaseMedium="#ffff003b"
+                    BaseMediumHigh="#ff67006d"
+                    BaseMediumLow="#cc7a0680"
+                    ChromeAltLow="#ff67006d"
+                    ChromeBlackHigh="#011021"
+                    ChromeBlackLow="#00c81dcc"
+                    ChromeBlackMedium="#ff67006d"
+                    ChromeBlackMediumLow="#ffff003b"
+                    ChromeDisabledHigh="#00c81dcc"
+                    ChromeDisabledLow="#ffff003b"
+                    ChromeGray="#cc7a0680"
+                    ChromeHigh="#00c81dcc"
+                    ChromeLow="Gainsboro"
+                    ChromeMedium="#cce98beb"
+                    ChromeMediumLow="Gainsboro"
+                    ChromeWhite="#DCDCDCff"
+                    ListLow="#cce98beb"
+                    ListMedium="#00c81dcc"
+                    RegionColor="Gainsboro" />
+
+                <ColorPaletteResources
+                    x:Key="Dark"
+                    Accent="#ffff003b"
+                    AltHigh="#011021ff"
+                    AltLow="#011021ff"
+                    AltMedium="#011021ff"
+                    AltMediumHigh="#011021ff"
+                    AltMediumLow="#011021ff"
+                    BaseHigh="#DCDCDCff"
+                    BaseLow="#ff011021"
+                    BaseMedium="#ff7a8a9a"
+                    BaseMediumHigh="#ff98a8b8"
+                    BaseMediumLow="#ff3d4d5d"
+                    ChromeAltLow="#ff98a8b8"
+                    ChromeBlackHigh="#011021ff"
+                    ChromeBlackLow="#ff98a8b8"
+                    ChromeBlackMedium="#011021ff"
+                    ChromeBlackMediumLow="#011021ff"
+                    ChromeDisabledHigh="#ff011021"
+                    ChromeDisabledLow="#ff7a8a9a"
+                    ChromeGray="#ff5c6b7c"
+                    ChromeHigh="#ff5c6b7c"
+                    ChromeLow="#ff000a22"
+                    ChromeMedium="#ff000b22"
+                    ChromeMediumLow="#ff010e21"
+                    ChromeWhite="#DCDCDCff"
+                    ListLow="#ff000b22"
+                    ListMedium="#ff011021"
+                    RegionColor="#ff011021" />
+            </FluentTheme.Palettes>
+        </FluentTheme>
+
+        <StyleInclude Source="avares://IconPacks.Avalonia.BootstrapIcons/BootstrapIcons.axaml" />
+
+        <StyleInclude Source="avares://PlumAnimation/Views/Themes/Theme.axaml" />
+    </Application.Styles>
+</Application>
