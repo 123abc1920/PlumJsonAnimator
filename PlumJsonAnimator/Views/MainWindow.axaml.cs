@@ -12,8 +12,8 @@ using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using Constants;
-using Resources;
 using PlumJsonAnimator.ViewModels;
+using Resources;
 using SpinejsonGeneration;
 using TransformModes;
 
@@ -267,6 +267,10 @@ public partial class MainWindow : Window
             ConstantsClass.currentProject.currentMode,
             TransformModesTypes.TRANSLATE
         );
+        if (DataContext is MainWindowViewModel viewModel)
+        {
+            viewModel.ModeName = ConstantsClass.currentProject.currentMode.name;
+        }
     }
 
     private void Set_Rotate_Mode(object sender, RoutedEventArgs e)
@@ -275,6 +279,10 @@ public partial class MainWindow : Window
             ConstantsClass.currentProject.currentMode,
             TransformModesTypes.ROTATE
         );
+        if (DataContext is MainWindowViewModel viewModel)
+        {
+            viewModel.ModeName = ConstantsClass.currentProject.currentMode.name;
+        }
     }
 
     private void Set_Scale_Mode(object sender, RoutedEventArgs e)
@@ -283,6 +291,10 @@ public partial class MainWindow : Window
             ConstantsClass.currentProject.currentMode,
             TransformModesTypes.SCALE
         );
+        if (DataContext is MainWindowViewModel viewModel)
+        {
+            viewModel.ModeName = ConstantsClass.currentProject.currentMode.name;
+        }
     }
 
     private void Press_Canvas(object sender, PointerPressedEventArgs e)

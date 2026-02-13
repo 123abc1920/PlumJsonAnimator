@@ -290,6 +290,7 @@
                                             HorizontalAlignment="Right"
                                             VerticalAlignment="Top">
                                             <CheckBox Click="CheckBox_Click" IsChecked="True">Draw bones</CheckBox>
+                                            <TextBlock Text="{Binding ModeName}" />
                                         </StackPanel>
                                     </Grid>
 

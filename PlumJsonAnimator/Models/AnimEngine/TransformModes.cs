@@ -51,6 +51,7 @@ namespace TransformModes
     public abstract class Mode
     {
         public TransformModesTypes type;
+        public string name = "";
 
         public abstract void transform(Bone bone, double a, double b);
     }
@@ -60,6 +61,7 @@ namespace TransformModes
         public NoMode()
         {
             type = TransformModesTypes.NO;
+            name = "";
         }
 
         public override void transform(Bone bone, double a, double b)
@@ -73,6 +75,7 @@ namespace TransformModes
         public TransformMode()
         {
             type = TransformModesTypes.TRANSLATE;
+            name = "transform";
         }
 
         public override void transform(Bone bone, double x, double y)
@@ -91,6 +94,7 @@ namespace TransformModes
         public ScaleMode()
         {
             type = TransformModesTypes.SCALE;
+            name = "scale";
         }
 
         public override void transform(Bone bone, double x, double y)
@@ -104,6 +108,7 @@ namespace TransformModes
         public RotateMode()
         {
             type = TransformModesTypes.ROTATE;
+            name = "rotate";
         }
 
         public override void transform(Bone bone, double x, double y)

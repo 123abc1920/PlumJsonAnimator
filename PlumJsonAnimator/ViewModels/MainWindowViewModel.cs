@@ -34,6 +34,19 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
             }
         }
     }
+    public string _modeName = "";
+    public string ModeName
+    {
+        get => _modeName;
+        set
+        {
+            if (_modeName != value)
+            {
+                _modeName = value;
+                OnPropertyChanged(nameof(ModeName));
+            }
+        }
+    }
 
     public Bone? CurrentBone
     {
