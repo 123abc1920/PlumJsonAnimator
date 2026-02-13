@@ -1,0 +1,41 @@
+<UserControl
+    x:Class="PlumJsonAnimator.Views.NewProjectDialog"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:iconPacks="https://github.com/MahApps/IconPacks.Avalonia"
+    xmlns:viewModels="clr-namespace:PlumJsonAnimator.ViewModels">
+    <StackPanel Margin="10" x:DataType="viewModels:MainWindowViewModel">
+        <TextBlock Margin="0,5" Text="New project name:" />
+        <TextBox
+            Name="name"
+            Text="NewProject1"
+            Watermark="Project Name" />
+
+        <TextBlock Margin="0,5" Text="New project path:" />
+        <Grid HorizontalAlignment="Stretch" ColumnDefinitions="*,Auto">
+            <TextBox
+                Name="workspace"
+                Grid.Column="0"
+                Margin="0,0,5,0"
+                HorizontalAlignment="Stretch"
+                Text=""
+                Watermark="Project Path" />
+            <Button
+                Grid.Column="1"
+                Width="32"
+                Height="32"
+                Padding="0"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Click="SelectFolder">
+                <iconPacks:PackIconBootstrapIcons Kind="FolderFill" />
+            </Button>
+        </Grid>
+
+        <Button
+            Margin="0,10"
+            HorizontalAlignment="Center"
+            Click="CreateProject"
+            Content="Create" />
+    </StackPanel>
+</UserControl>

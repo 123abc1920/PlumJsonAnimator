@@ -1,0 +1,59 @@
+<UserControl
+    x:Class="PlumJsonAnimator.Views.ExportPanelJPG"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:iconPacks="https://github.com/MahApps/IconPacks.Avalonia"
+    xmlns:viewModels="clr-namespace:PlumJsonAnimator.ViewModels">
+    <StackPanel Margin="10" x:DataType="viewModels:MainWindowViewModel">
+
+        <TextBlock Margin="0,5" Text="Export path:" />
+        <Grid ColumnDefinitions="*,Auto">
+            <TextBox
+                Name="path"
+                Grid.Column="0"
+                Margin="0,0,5,0"
+                Text=""
+                Watermark="Save Path" />
+            <Button
+                Grid.Column="1"
+                Width="32"
+                Height="32"
+                Padding="0"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Click="SelectFolder">
+                <iconPacks:PackIconBootstrapIcons Kind="FolderFill" />
+            </Button>
+        </Grid>
+
+        <Grid Margin="0,5" ColumnDefinitions="*,*">
+            <TextBlock
+                Grid.Column="0"
+                Margin="0,0,2.5,0"
+                Text="Start time:" />
+            <TextBlock
+                Grid.Column="1"
+                Margin="2.5,0,0,0"
+                Text="End time:" />
+        </Grid>
+        <Grid ColumnDefinitions="*,*">
+            <TextBox
+                Name="start"
+                Grid.Column="0"
+                Margin="0,0,2.5,0"
+                Text="Converter={StaticResource DoubleConverter}" />
+            <TextBox
+                Name="end"
+                Grid.Column="1"
+                Margin="2.5,0,0,0"
+                Text="Converter={StaticResource DoubleConverter}" />
+        </Grid>
+
+        <Button
+            Margin="0,10"
+            HorizontalAlignment="Center"
+            Click="ExportAsJpg"
+            Content="Export" />
+
+    </StackPanel>
+</UserControl>
