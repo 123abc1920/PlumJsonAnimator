@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
@@ -214,10 +215,15 @@ namespace AnimModels
             }
 
             List<Slot> slots = ConstantsClass.currentProject.CurrentSkin.GetSlots(this);
-            foreach (Slot slot in slots)
-            {
-                slot.move(slot.x - deltaX, slot.y - deltaY);
-            }
+            var options = ConstantsClass.GetParallelOptions();
+            Parallel.ForEach(
+                slots,
+                options,
+                slot =>
+                {
+                    slot.move(slot.x - deltaX, slot.y - deltaY);
+                }
+            );
         }
 
         public override void rotate(double a)
@@ -245,22 +251,27 @@ namespace AnimModels
             }
 
             List<Slot> slots = ConstantsClass.currentProject.CurrentSkin.GetSlots(this);
-            foreach (Slot slot in slots)
-            {
-                double slotdx = slot.x - this.x;
-                double slotdy = slot.y - this.y;
+            var options = ConstantsClass.GetParallelOptions();
+            Parallel.ForEach(
+                slots,
+                options,
+                slot =>
+                {
+                    double slotdx = slot.x - this.x;
+                    double slotdy = slot.y - this.y;
 
-                double slotangleDiff = (a - oldA) * Math.PI / 180;
-                double slotnewDx =
-                    slotdx * Math.Cos(slotangleDiff) - slotdy * Math.Sin(slotangleDiff);
-                double slotnewDy =
-                    slotdx * Math.Sin(slotangleDiff) + slotdy * Math.Cos(slotangleDiff);
+                    double slotangleDiff = (a - oldA) * Math.PI / 180;
+                    double slotnewDx =
+                        slotdx * Math.Cos(slotangleDiff) - slotdy * Math.Sin(slotangleDiff);
+                    double slotnewDy =
+                        slotdx * Math.Sin(slotangleDiff) + slotdy * Math.Cos(slotangleDiff);
 
-                slot.x = this.x + slotnewDx;
-                slot.y = this.y + slotnewDy;
+                    slot.x = this.x + slotnewDx;
+                    slot.y = this.y + slotnewDy;
 
-                slot.parentA = slot.parentA + (a - oldA);
-            }
+                    slot.parentA = slot.parentA + (a - oldA);
+                }
+            );
         }
 
         public void drawBone(Canvas canvas)

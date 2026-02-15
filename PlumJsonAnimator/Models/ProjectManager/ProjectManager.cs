@@ -137,12 +137,25 @@ namespace ProjectManager
             {
                 Directory.CreateDirectory(newDir);
 
-                foreach (string file in Directory.GetFiles(oldDir))
-                {
-                    string fileName = Path.GetFileName(file);
-                    string destFile = Path.Combine(newDir, fileName);
-                    File.Copy(file, destFile, true);
-                }
+                var files = Directory.GetFiles(oldDir);
+                var options = ConstantsClass.GetParallelOptions();
+                Parallel.ForEach(
+                    files,
+                    options,
+                    file =>
+                    {
+                        try
+                        {
+                            string fileName = Path.GetFileName(file);
+                            string destFile = Path.Combine(newDir, fileName);
+                            File.Copy(file, destFile, true);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Error copying {file}: {ex.Message}");
+                        }
+                    }
+                );
 
                 foreach (string subDir in Directory.GetDirectories(oldDir))
                 {

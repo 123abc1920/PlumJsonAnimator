@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using AnimTransformations;
 using Constants;
 using Newtonsoft.Json;
@@ -57,6 +58,12 @@ namespace AnimModels
 
         public void SetupBones()
         {
+            /*var parallelOptions = ConstantsClass.GetParallelOptions();
+            Parallel.ForEach(
+                BoneAnimationBinding.Keys,
+                parallelOptions,
+                b => BoneAnimationBinding[b].BoneStep(b, currentTime)
+            );*/
             foreach (Bone b in BoneAnimationBinding.Keys)
             {
                 BoneAnimationBinding[b].BoneStep(b, currentTime);

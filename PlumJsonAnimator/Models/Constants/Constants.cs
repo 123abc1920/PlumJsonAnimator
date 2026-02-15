@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using AnimEngine;
 using AnimModels;
 using EngineModels;
@@ -33,5 +35,12 @@ namespace Constants
         public static bool drawBones = true;
         public static string workspace = "PlumJsonAnimatorWorkspace";
         public static string programExt = ".plmjsn";
+
+        public static ParallelOptions GetParallelOptions()
+        {
+            int processorCount = Environment.ProcessorCount;
+            var parallelOptions = new ParallelOptions { MaxDegreeOfParallelism = processorCount };
+            return parallelOptions;
+        }
     }
 }
