@@ -1,5 +1,4 @@
 using System;
-using AnimModels;
 using Avalonia.Threading;
 using Constants;
 
