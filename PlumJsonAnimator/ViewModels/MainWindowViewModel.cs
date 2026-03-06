@@ -15,7 +15,7 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     public JsonError JsonErrorObj { get; set; }
     public event PropertyChangedEventHandler? PropertyChanged;
     private Bone? _currentBone;
-    public IRenamable RedactObj { get; set; } = null;
+    public IRenamable? RedactObj { get; set; } = null;
     public List<string> Themes { get; set; } = new List<string>() { "light", "dark" };
     private string _currTheme = "light";
     public string CurrentTheme

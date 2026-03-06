@@ -69,7 +69,7 @@ namespace AnimEngine.Project
                 {
                     _currentSkin = value;
                     OnPropertyChanged(nameof(CurrentSkin));
-                    foreach (Bone b in MainSkeleton.Bones)
+                    foreach (Bone b in MainSkeleton!.Bones)
                     {
                         b.UpdateSlots();
                     }

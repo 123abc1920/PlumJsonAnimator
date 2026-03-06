@@ -336,7 +336,7 @@ namespace AnimEngine.Models
 
         public double FindTime(double time, TransformModesTypes type, bool isNext)
         {
-            SortedDictionary<double, IKeyframeType> keyframes = null;
+            SortedDictionary<double, IKeyframeType>? keyframes = null;
             if (type == TransformModesTypes.TRANSLATE)
             {
                 keyframes = translateKeyframes;
@@ -405,14 +405,14 @@ namespace AnimEngine.Models
 public class BoneAnimationData
 {
     [JsonProperty("translate")]
-    public List<IKeyframeTypeData> translate { get; set; }
+    public required List<IKeyframeTypeData> translate { get; set; }
 
     [JsonProperty("rotate", NullValueHandling = NullValueHandling.Ignore)]
-    public List<IKeyframeTypeData> rotate { get; set; }
+    public List<IKeyframeTypeData>? rotate { get; set; }
 
     [JsonProperty("scale", DefaultValueHandling = DefaultValueHandling.Ignore)]
-    public List<IKeyframeTypeData> scale { get; set; }
+    public required List<IKeyframeTypeData> scale { get; set; }
 
     [JsonProperty("shear", DefaultValueHandling = DefaultValueHandling.Ignore)]
-    public List<IKeyframeTypeData> shear { get; set; }
+    public required List<IKeyframeTypeData> shear { get; set; }
 }

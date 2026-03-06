@@ -6,10 +6,10 @@ namespace SpinejsonGeneration
     public class SpineBoneJson
     {
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
         [JsonPropertyName("parent")]
-        public string Parent { get; set; }
+        public required string Parent { get; set; }
 
         [JsonPropertyName("x")]
         public float X { get; set; }
@@ -30,24 +30,24 @@ namespace SpinejsonGeneration
     public class SpineSkeletonJson
     {
         [JsonPropertyName("bones")]
-        public List<SpineBoneJson> Bones { get; set; }
+        public required List<SpineBoneJson> Bones { get; set; }
 
         [JsonPropertyName("skins")]
-        public List<SpineSkinJson> Skins { get; set; }
+        public required List<SpineSkinJson> Skins { get; set; }
     }
 
     public class SpineSlotJson
     {
         [JsonPropertyName("name")]
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
         [JsonPropertyName("bone")]
-        public string BoneName { get; set; }
+        public required string BoneName { get; set; }
     }
 
     public class SpineSkinJson
     {
         [JsonPropertyName("name")]
-        public string name { get; set; }
+        public required string Name { get; set; }
     }
 }

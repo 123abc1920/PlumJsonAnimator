@@ -49,7 +49,7 @@ namespace AnimModels
     public class AttachmentData
     {
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
         [JsonProperty("width", NullValueHandling = NullValueHandling.Ignore)]
         public int Width { get; set; }

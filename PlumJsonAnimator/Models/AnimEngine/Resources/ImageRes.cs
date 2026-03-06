@@ -37,8 +37,8 @@ namespace AnimEngine.Resources
             }
         }
 
-        public string path;
-        public string ext;
+        public string path = "";
+        public string ext = ".png";
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -55,7 +55,7 @@ namespace AnimEngine.Resources
                 ProjectManager.RenameFile(
                     path,
                     Path.Combine(
-                        ConstantsClass.currentProject.GetProjectPath(),
+                        ConstantsClass.currentProject!.GetProjectPath(),
                         "res",
                         $"{this.Name}{ext}"
                     )

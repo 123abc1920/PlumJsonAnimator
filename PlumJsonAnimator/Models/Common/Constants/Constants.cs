@@ -22,7 +22,7 @@ namespace Common.Constants
             DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
         };
         public static int FPS = 60;
-        public static Bone currentBone = null;
+        public static Bone? currentBone = null;
         public static Engine MainEngine = new Engine();
         public static Dictionary<char, char> pairedSymbols = new Dictionary<char, char>()
         {

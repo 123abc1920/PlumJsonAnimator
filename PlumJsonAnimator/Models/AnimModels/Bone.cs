@@ -214,7 +214,7 @@ namespace AnimModels
                 c.move(c.x - deltaX, c.y - deltaY);
             }
 
-            List<Slot> slots = ConstantsClass.currentProject.CurrentSkin.GetSlots(this);
+            List<Slot> slots = ConstantsClass.currentProject!.CurrentSkin.GetSlots(this);
             var options = ConstantsClass.GetParallelOptions();
             Parallel.ForEach(
                 slots,
@@ -250,7 +250,7 @@ namespace AnimModels
                 child.rotate(child.a + (a - oldA));
             }
 
-            List<Slot> slots = ConstantsClass.currentProject.CurrentSkin.GetSlots(this);
+            List<Slot> slots = ConstantsClass.currentProject!.CurrentSkin.GetSlots(this);
             var options = ConstantsClass.GetParallelOptions();
             Parallel.ForEach(
                 slots,
@@ -333,7 +333,7 @@ public class BoneData
     public string Name { get; set; } = "";
 
     [JsonProperty("parent", NullValueHandling = NullValueHandling.Ignore)]
-    public string Parent { get; set; }
+    public string? Parent { get; set; }
 
     [JsonProperty("x", DefaultValueHandling = DefaultValueHandling.Ignore)]
     public double X { get; set; }

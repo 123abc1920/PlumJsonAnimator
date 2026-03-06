@@ -52,7 +52,7 @@ namespace AnimEngine.Project
         public static string CreateProjectDir()
         {
             string projectPath = Path.Combine(
-                ConstantsClass.currentProject.ProjectPath,
+                ConstantsClass.currentProject!.ProjectPath,
                 ConstantsClass.currentProject.Name
             );
 
@@ -71,7 +71,7 @@ namespace AnimEngine.Project
         public static string CopyRes(string resName, string filePath)
         {
             string projectPath = Path.Combine(
-                ConstantsClass.currentProject.ProjectPath,
+                ConstantsClass.currentProject!.ProjectPath,
                 ConstantsClass.currentProject.Name
             );
             string resDir = Path.Combine(projectPath, "res");
@@ -93,7 +93,7 @@ namespace AnimEngine.Project
             try
             {
                 string projectPath = Path.Combine(
-                    ConstantsClass.currentProject.ProjectPath,
+                    ConstantsClass.currentProject!.ProjectPath,
                     ConstantsClass.currentProject.Name
                 );
                 string resDir = Path.Combine(projectPath, "res");
@@ -169,7 +169,7 @@ namespace AnimEngine.Project
         public static void LoadRes()
         {
             string directoryPath = Path.Combine(
-                ConstantsClass.currentProject.ProjectPath,
+                ConstantsClass.currentProject!.ProjectPath,
                 ConstantsClass.currentProject.Name,
                 "res"
             );

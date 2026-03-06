@@ -24,8 +24,8 @@ namespace AnimModels
                 }
             }
         }
-        public Dictionary<Slot, Attachment> SlotAttachmentBinding =
-            new Dictionary<Slot, Attachment>();
+        public Dictionary<Slot, Attachment?> SlotAttachmentBinding =
+            new Dictionary<Slot, Attachment?>();
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -98,9 +98,9 @@ namespace AnimModels
 
         public bool ContainsRes(Res res)
         {
-            foreach (Attachment a in SlotAttachmentBinding.Values)
+            foreach (Attachment? a in SlotAttachmentBinding.Values)
             {
-                if (a.GetRes() == res)
+                if (a?.GetRes() == res)
                 {
                     return true;
                 }

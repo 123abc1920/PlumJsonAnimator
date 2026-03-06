@@ -12,14 +12,14 @@ namespace SpinejsonGeneration
 {
     public class ValidResult
     {
-        public string Message { get; set; }
+        public required string Message { get; set; }
         public bool IsOk { get; set; }
-        public object UpdatedArray { get; set; }
+        public object? UpdatedArray { get; set; }
     }
 
     public class ProjectValidResult
     {
-        public string Message { get; set; }
+        public required string Message { get; set; }
         public bool IsOk { get; set; }
     }
 
@@ -108,7 +108,7 @@ namespace SpinejsonGeneration
                 }
                 else
                 {
-                    Bone parent = ConstantsClass.currentProject.MainSkeleton.getBone(b.Parent);
+                    Bone? parent = ConstantsClass.currentProject.MainSkeleton.getBone(b.Parent);
                     if (parent == null)
                     {
                         return new ValidResult
@@ -226,7 +226,7 @@ namespace SpinejsonGeneration
 
         public ProjectValidResult regenerate()
         {
-            CodeData newData = JsonConvert.DeserializeObject<CodeData>(text);
+            CodeData? newData = JsonConvert.DeserializeObject<CodeData>(text);
             if (newData == null)
             {
                 return new ProjectValidResult { Message = "", IsOk = true };
@@ -256,7 +256,7 @@ namespace SpinejsonGeneration
                 return new ProjectValidResult { Message = animationResult.Message, IsOk = false };
             }
 
-            ConstantsClass.currentProject.regenrateProject(
+            ConstantsClass.currentProject?.regenrateProject(
                 (Dictionary<string, BoneData>)boneResult.UpdatedArray,
                 (Dictionary<string, SlotData>)slotResult.UpdatedArray,
                 (Dictionary<string, SkinData>)skinResult.UpdatedArray,
@@ -278,15 +278,15 @@ namespace SpinejsonGeneration
 public class CodeData
 {
     [JsonProperty("skeleton")]
-    public MetaData Skeleton { get; set; }
+    public required MetaData Skeleton { get; set; }
 
     [JsonIgnore]
-    public SkeletonData SkeletonData { get; set; }
+    public required SkeletonData SkeletonData { get; set; }
 
     [JsonProperty("bones")]
     public List<BoneData> Bones
     {
-        get => SkeletonData?.Bones;
+        get => SkeletonData.Bones;
         set
         {
             if (SkeletonData == null)
@@ -296,11 +296,11 @@ public class CodeData
     }
 
     [JsonProperty("slots")]
-    public List<SlotData> Slots { get; set; }
+    public required List<SlotData> Slots { get; set; }
 
     [JsonProperty("skins", NullValueHandling = NullValueHandling.Ignore)]
-    public List<SkinData> Skins { get; set; }
+    public required List<SkinData> Skins { get; set; }
 
     [JsonProperty("animations", NullValueHandling = NullValueHandling.Ignore)]
-    public Dictionary<string, AnimationData> Animations { get; set; }
+    public required Dictionary<string, AnimationData> Animations { get; set; }
 }
