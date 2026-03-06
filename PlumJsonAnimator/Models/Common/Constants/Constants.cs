@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AnimEngine;
+using AnimEngine.Models;
+using AnimEngine.Project;
 using AnimModels;
-using EngineModels;
-using JsonValidator;
 using Newtonsoft.Json;
 using PlumJsonAnimator.ViewModels;
+using SpinejsonGeneration.JsonValidator;
 
-namespace Constants
+namespace Common.Constants
 {
     public class ConstantsClass
     {

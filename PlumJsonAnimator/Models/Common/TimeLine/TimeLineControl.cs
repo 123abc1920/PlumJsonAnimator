@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using AnimTransformations;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.Threading;
-using Constants;
+using Common.Constants;
+using Common.Constants.CommonModels;
 
-namespace TimeLine
+namespace Common.TimeLine
 {
     public class TimelineControl : Control
     {

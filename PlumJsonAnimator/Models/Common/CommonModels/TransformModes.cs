@@ -1,8 +1,7 @@
 using System;
 using AnimModels;
-using Constants;
 
-namespace TransformModes
+namespace Common.Constants.CommonModels
 {
     public enum TransformModesTypes
     {
@@ -33,18 +32,6 @@ namespace TransformModes
             {
                 return modes[(int)type];
             }
-        }
-    }
-
-    class Point
-    {
-        public double x;
-        public double y;
-
-        public Point(double x, double y)
-        {
-            this.x = x;
-            this.y = y;
         }
     }
 
@@ -105,6 +92,18 @@ namespace TransformModes
 
     class RotateMode : Mode
     {
+        private class Point
+        {
+            public double x;
+            public double y;
+
+            public Point(double x, double y)
+            {
+                this.x = x;
+                this.y = y;
+            }
+        }
+
         public RotateMode()
         {
             type = TransformModesTypes.ROTATE;

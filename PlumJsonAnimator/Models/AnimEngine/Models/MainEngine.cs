@@ -1,8 +1,8 @@
 using System;
 using Avalonia.Threading;
-using Constants;
+using Common.Constants;
 
-namespace AnimEngine
+namespace AnimEngine.Models
 {
     public class Engine
     {

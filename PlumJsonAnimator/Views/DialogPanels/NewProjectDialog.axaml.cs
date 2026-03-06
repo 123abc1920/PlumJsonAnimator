@@ -1,8 +1,8 @@
-using AnimEngine;
+using AnimEngine.Project;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
-using Constants;
+using Common.Constants;
 using PlumJsonAnimator.ViewModels;
 
 namespace PlumJsonAnimator.Views
@@ -35,7 +35,7 @@ namespace PlumJsonAnimator.Views
             var projectName = this.FindControl<TextBox>("name")?.Text;
             var workspace = this.FindControl<TextBox>("workspace")?.Text;
 
-            bool result = ProjectManager.ProjectManager.NewProject(projectName, workspace);
+            bool result = ProjectManager.NewProject(projectName, workspace);
 
             if (result == true)
             {

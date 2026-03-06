@@ -2,14 +2,12 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using AnimEngine;
+using AnimEngine.Resources;
 using Avalonia.Controls;
 using Avalonia.Platform.Storage;
-using Constants;
-using EngineModels;
-using Resources;
+using Common.Constants;
 
-namespace ProjectManager
+namespace AnimEngine.Project
 {
     public class ProjectManager
     {
@@ -41,9 +39,9 @@ namespace ProjectManager
         {
             if (projectName != null && projectPath != null)
             {
-                ProjectSettings.ProjectSettings.WriteAllSettings();
+                ProjectSettings.WriteAllSettings();
                 ConstantsClass.currentProject = new Project(projectName, projectPath);
-                ProjectSettings.ProjectSettings.WriteAllSettings();
+                ProjectSettings.WriteAllSettings();
                 AppSettings.SaveSettings();
                 LoadRes();
                 return true;

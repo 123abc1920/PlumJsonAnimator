@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace TimeLine
+namespace Common.TimeLine
 {
     public class TimelineTrack
     {

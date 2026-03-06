@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace AnimTransformations
+namespace Common.Constants.CommonModels
 {
     public enum KeyFrameTypes
     {
@@ -21,7 +21,7 @@ namespace AnimTransformations
         {
             return JsonConvert.SerializeObject(
                 generateJSONData(),
-                Constants.ConstantsClass.jsonSettings
+                ConstantsClass.jsonSettings
             );
         }
     }

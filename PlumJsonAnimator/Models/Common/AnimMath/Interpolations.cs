@@ -1,6 +1,6 @@
 using System;
 
-namespace Interpolations
+namespace Common.AnimMath
 {
     public class Interpolation
     {

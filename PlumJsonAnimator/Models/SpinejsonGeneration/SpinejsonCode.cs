@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text.Json;
+using AnimEngine.Project;
 using AnimModels;
-using Constants;
-using EngineModels;
+using Common.Constants;
 using Newtonsoft.Json;
 
 namespace SpinejsonGeneration
@@ -52,18 +52,18 @@ namespace SpinejsonGeneration
             }
 
             List<SlotData> slots = new List<SlotData>();
-            foreach (Slot s in Constants.ConstantsClass.currentProject.Slots)
+            foreach (Slot s in ConstantsClass.currentProject.Slots)
             {
                 slots.Add(s.generateJSONData());
             }
 
             return new CodeData
             {
-                Skeleton = Constants.ConstantsClass.currentProject.generateMetaData(),
+                Skeleton = ConstantsClass.currentProject.generateMetaData(),
                 SkeletonData = project.MainSkeleton.generateJSONData(),
                 Slots = slots,
                 Animations = animations,
-                Skins = Constants.ConstantsClass.currentProject.generateSkinsJSONData(),
+                Skins = ConstantsClass.currentProject.generateSkinsJSONData(),
             };
         }
 
@@ -72,7 +72,7 @@ namespace SpinejsonGeneration
             text = "";
             text = JsonConvert.SerializeObject(
                 generateJSONData(project),
-                Constants.ConstantsClass.jsonSettings
+                ConstantsClass.jsonSettings
             );
 
             text = Prettify.Prettify.prettify(text);

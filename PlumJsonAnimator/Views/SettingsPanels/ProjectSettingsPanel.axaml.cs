@@ -1,9 +1,10 @@
 using System.IO;
-using AnimEngine;
+using AnimEngine.Project;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
-using Constants;
+using Common.Constants;
+using Constants.CommonItemsUI;
 using PlumJsonAnimator.ViewModels;
 
 namespace PlumJsonAnimator.Views
@@ -25,7 +26,7 @@ namespace PlumJsonAnimator.Views
         {
             var oldName = ConstantsClass.currentProject.Name;
             ConstantsClass.currentProject.Name = pName.Text;
-            ProjectManager.ProjectManager.RenameProject(
+            ProjectManager.RenameProject(
                 Path.Combine(ConstantsClass.currentProject.ProjectPath, oldName),
                 Path.Combine(
                     ConstantsClass.currentProject.ProjectPath,
@@ -35,19 +36,19 @@ namespace PlumJsonAnimator.Views
 
             var oldPath = ConstantsClass.currentProject.ProjectPath;
             ConstantsClass.currentProject.ProjectPath = path.Text;
-            ProjectManager.ProjectManager.CopyDir(
+            ProjectManager.CopyDir(
                 Path.Combine(oldPath, ConstantsClass.currentProject.Name),
                 Path.Combine(
                     ConstantsClass.currentProject.ProjectPath,
                     ConstantsClass.currentProject.Name
                 )
             );
-            
+
             AppSettings.SaveSettings();
 
             ConstantsClass.currentProject.MetaData.Spine = pVersion.Text;
 
-            ProjectSettings.ProjectSettings.WriteSettings();
+            ProjectSettings.WriteSettings();
             Popups.ShowPopup("Saved", this);
         }
 

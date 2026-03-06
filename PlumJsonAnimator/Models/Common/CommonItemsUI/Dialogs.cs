@@ -5,7 +5,7 @@ using Avalonia.Platform;
 using PlumJsonAnimator.ViewModels;
 using PlumJsonAnimator.Views;
 
-namespace Constants
+namespace Constants.CommonItemsUI
 {
     public enum ViewType
     {

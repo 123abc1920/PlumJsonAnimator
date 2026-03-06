@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
-using AnimEngine;
-using Constants;
+using Common.Constants;
 using Newtonsoft.Json;
 
-namespace ProjectSettings
+namespace AnimEngine.Project
 {
     public class ProjectSettings
     {

@@ -1,6 +1,6 @@
 using Avalonia.Media;
 
-namespace Constants
+namespace Common.Constants
 {
     public class Color
     {

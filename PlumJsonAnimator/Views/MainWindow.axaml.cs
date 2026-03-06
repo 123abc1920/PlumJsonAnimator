@@ -1,9 +1,11 @@
 using System;
 using System.IO;
 using System.Linq;
-using AnimEngine;
-using AnimExport.ImageExport;
-using AnimExport.JsonExport;
+using AnimEngine.AnimExport;
+using AnimEngine.AnimExport.ImageExport;
+using AnimEngine.AnimExport.JsonExport;
+using AnimEngine.Project;
+using AnimEngine.Resources;
 using AnimModels;
 using Avalonia;
 using Avalonia.Controls;
@@ -11,11 +13,13 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
-using Constants;
+using Common.Constants;
+using Common.Constants.CommonModels;
+using Constants.CommonItemsUI;
 using PlumJsonAnimator.ViewModels;
-using Resources;
 using SpinejsonGeneration;
-using TransformModes;
+using SpinejsonGeneration.JsonValidator;
+using SpinejsonGeneration.Prettify;
 
 namespace PlumJsonAnimator.Views;
 
@@ -72,8 +76,8 @@ public partial class MainWindow : Window
         ImageExporter.canvas = mainCanvas;
 
         AppSettings.ReadSettings();
-        ProjectSettings.ProjectSettings.ReadSettings();
-        ProjectManager.ProjectManager.LoadRes();
+        ProjectSettings.ReadSettings();
+        ProjectManager.LoadRes();
         ProjectValidResult validateResult =
             ConstantsClass.currentProject.SpinejsonCode.regenerate();
         if (!validateResult.IsOk)
@@ -116,9 +120,7 @@ public partial class MainWindow : Window
         }
         else if (currentTab == 1)
         {
-            ConstantsClass.jsonError.ErrorText = JsonValidator.JsonValidator.validate(
-                spineJsonText.Text
-            );
+            ConstantsClass.jsonError.ErrorText = JsonValidator.validate(spineJsonText.Text);
             if (ConstantsClass.jsonError.isOk)
             {
                 ProjectValidResult validateResult =
@@ -174,12 +176,12 @@ public partial class MainWindow : Window
             paths = files.Select(f => f.Path.LocalPath).ToArray();
         }
 
-        ProjectManager.ProjectManager.CreateProjectDir();
+        ProjectManager.CreateProjectDir();
 
         foreach (string p in paths)
         {
             string resName = "img" + ConstantsClass.currentProject.Resources.Count.ToString();
-            string ext = ProjectManager.ProjectManager.CopyRes(resName, p);
+            string ext = ProjectManager.CopyRes(resName, p);
             ImageRes image = new ImageRes(
                 Path.Combine(ConstantsClass.currentProject.GetProjectPath(), "res"),
                 resName,
@@ -225,7 +227,7 @@ public partial class MainWindow : Window
                 s.ContainsAndRemoveRes(res);
             }
             ConstantsClass.currentProject.Resources.Remove(res);
-            ProjectManager.ProjectManager.DeleteResource(res.Name, res.ext);
+            ProjectManager.DeleteResource(res.Name, res.ext);
         }
     }
 
@@ -461,7 +463,7 @@ public partial class MainWindow : Window
         {
             int newIndex = tabControl.SelectedIndex;
 
-            if (newIndex == 0 && Constants.ConstantsClass.jsonError.isOk != true)
+            if (newIndex == 0 && ConstantsClass.jsonError.isOk != true)
             {
                 tabControl.SelectionChanged -= TabControl_SelectionChanged;
                 tabControl.SelectedIndex = 1;
@@ -520,14 +522,14 @@ public partial class MainWindow : Window
 
     private void SaveProject(object sender, RoutedEventArgs e)
     {
-        ProjectSettings.ProjectSettings.WriteAnim();
+        ProjectSettings.WriteAnim();
         Popups.ShowPopup("Saved", this);
     }
 
     private async void OpenProject(object sender, RoutedEventArgs e)
     {
-        var path = await ProjectManager.ProjectManager.OpenProject(this);
-        ProjectSettings.ProjectSettings.ReadSettings(path);
+        var path = await ProjectManager.OpenProject(this);
+        ProjectSettings.ReadSettings(path);
     }
 
     private async void NewProject(object sender, RoutedEventArgs e)
@@ -619,7 +621,7 @@ public partial class MainWindow : Window
             )
         )
         {
-            spineJsonText.Text = Prettify.Prettify.prettify(spineJsonText.Text);
+            spineJsonText.Text = Prettify.prettify(spineJsonText.Text);
             e.Handled = true;
         }
 

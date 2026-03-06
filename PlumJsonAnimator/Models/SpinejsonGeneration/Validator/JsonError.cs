@@ -1,7 +1,6 @@
-using System;
 using System.ComponentModel;
 
-namespace JsonValidator
+namespace SpinejsonGeneration.JsonValidator
 {
     public class JsonError : INotifyPropertyChanged
     {

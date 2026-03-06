@@ -1,10 +1,11 @@
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
-using Constants;
-using Renameble;
+using AnimEngine.Models;
+using AnimEngine.Project;
+using Common.Constants;
 
-namespace Resources
+namespace AnimEngine.Resources
 {
     /// <summary>
     /// Resources -- images, textures etc
@@ -51,7 +52,7 @@ namespace Resources
             if (name != null)
             {
                 this.Name = name;
-                ProjectManager.ProjectManager.RenameFile(
+                ProjectManager.RenameFile(
                     path,
                     Path.Combine(
                         ConstantsClass.currentProject.GetProjectPath(),

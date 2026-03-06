@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using AnimEngine.Models;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
-using Constants;
+using Common.Constants;
 using Newtonsoft.Json;
-using Renameble;
 
 namespace AnimModels
 {
@@ -314,10 +314,7 @@ namespace AnimModels
 
         public string generateCode()
         {
-            return JsonConvert.SerializeObject(
-                generateJSONData(),
-                Constants.ConstantsClass.jsonSettings
-            );
+            return JsonConvert.SerializeObject(generateJSONData(), ConstantsClass.jsonSettings);
         }
 
         public void SetName(string? name)

@@ -1,6 +1,5 @@
-using System;
+using AnimEngine.Resources;
 using Newtonsoft.Json;
-using Resources;
 
 namespace AnimModels
 {

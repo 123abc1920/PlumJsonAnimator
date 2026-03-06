@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
+using AnimEngine.Resources;
 using AnimModels;
 using Avalonia.Controls;
+using Common.Constants;
 using Newtonsoft.Json;
-using Resources;
 
 namespace AnimModels
 {
@@ -191,10 +192,7 @@ namespace AnimModels
 
         public string generateCode()
         {
-            return JsonConvert.SerializeObject(
-                generateJSONData(),
-                Constants.ConstantsClass.jsonSettings
-            );
+            return JsonConvert.SerializeObject(generateJSONData(), ConstantsClass.jsonSettings);
         }
     }
 }

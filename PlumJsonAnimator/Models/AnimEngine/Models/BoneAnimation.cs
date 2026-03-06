@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AnimTransformations;
+using AnimModels;
+using Common.AnimMath;
+using Common.Constants;
+using Common.Constants.CommonModels;
 using Newtonsoft.Json;
-using TransformModes;
 
-namespace AnimModels
+namespace AnimEngine.Models
 {
     /// <summary>
     /// Class BoneAnimation contains the bone's transformations during animation
@@ -247,17 +249,17 @@ namespace AnimModels
             }
             FindSegment(time, KeyFrameTypes.TRANSLATE);
 
-            double t = Interpolations.Interpolation.findInterpolateParam(
+            double t = Interpolation.findInterpolateParam(
                 translateEnd - translateStart,
                 time - translateStart
             );
 
-            double interpolatedX = Interpolations.Interpolation.linearInterpolation(
+            double interpolatedX = Interpolation.linearInterpolation(
                 ((Translate)translateKeyframes[translateStart]).x,
                 ((Translate)translateKeyframes[translateEnd]).x,
                 t
             );
-            double interpolatedY = Interpolations.Interpolation.linearInterpolation(
+            double interpolatedY = Interpolation.linearInterpolation(
                 ((Translate)translateKeyframes[translateStart]).y,
                 ((Translate)translateKeyframes[translateEnd]).y,
                 t
@@ -274,12 +276,12 @@ namespace AnimModels
             }
             FindSegment(time, KeyFrameTypes.ROTATE);
 
-            double t = Interpolations.Interpolation.findInterpolateParam(
+            double t = Interpolation.findInterpolateParam(
                 rotateEnd - rotateStart,
                 time - rotateStart
             );
 
-            double interpolatedA = Interpolations.Interpolation.angleInterpolation(
+            double interpolatedA = Interpolation.angleInterpolation(
                 ((Rotate)rotateKeyframes[rotateStart]).value,
                 ((Rotate)rotateKeyframes[rotateEnd]).value,
                 t
@@ -329,10 +331,7 @@ namespace AnimModels
 
         public string generateCode()
         {
-            return JsonConvert.SerializeObject(
-                generateJSONData(),
-                Constants.ConstantsClass.jsonSettings
-            );
+            return JsonConvert.SerializeObject(generateJSONData(), ConstantsClass.jsonSettings);
         }
 
         public double FindTime(double time, TransformModesTypes type, bool isNext)

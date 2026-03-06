@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using AnimEngine.Models;
+using AnimEngine.Project;
 using AnimModels;
-using Avalonia.Threading;
-using Constants;
-using EngineModels;
-using JsonValidator;
-using Renameble;
+using Common.Constants;
+using SpinejsonGeneration.JsonValidator;
 
 namespace PlumJsonAnimator.ViewModels;
 
@@ -89,7 +86,7 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
 
     public void initProgram()
     {
-        ConstantsClass.currentProject = new EngineModels.Project();
+        ConstantsClass.currentProject = new Project();
         CurrentProject = ConstantsClass.currentProject;
         JsonErrorObj = ConstantsClass.jsonError;
     }

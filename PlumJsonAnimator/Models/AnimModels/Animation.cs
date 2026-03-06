@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using AnimTransformations;
-using Constants;
+using AnimEngine.Models;
+using Common.Constants;
+using Common.Constants.CommonModels;
 using Newtonsoft.Json;
-using TransformModes;
 
 namespace AnimModels
 {
@@ -89,10 +89,7 @@ namespace AnimModels
 
         public String generateCode()
         {
-            return JsonConvert.SerializeObject(
-                generateJSONData(),
-                Constants.ConstantsClass.jsonSettings
-            );
+            return JsonConvert.SerializeObject(generateJSONData(), ConstantsClass.jsonSettings);
         }
 
         /// <summary>

@@ -5,6 +5,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Avalonia.Svg.Skia;
+using Common.Constants;
 using PlumJsonAnimator.ViewModels;
 using PlumJsonAnimator.Views;
 
@@ -28,7 +29,7 @@ public partial class App : Application
             mainWindow.initViews();
             desktop.MainWindow = mainWindow;
 
-            Constants.ConstantsClass.viewModel = mainViewModelInstance;
+            ConstantsClass.viewModel = mainViewModelInstance;
         }
 
         GC.KeepAlive(typeof(SvgImageExtension).Assembly);

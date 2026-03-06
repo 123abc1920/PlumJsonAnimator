@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Avalonia.Controls;
-using Constants;
+using Common.Constants;
 using Newtonsoft.Json;
 
 namespace AnimModels

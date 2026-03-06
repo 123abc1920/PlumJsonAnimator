@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
+using AnimEngine.Models;
 using Avalonia.Controls;
 using Avalonia.Media;
-using Constants;
+using Common.Constants;
 using Newtonsoft.Json;
-using Renameble;
-using Resources;
 
 namespace AnimModels
 {
@@ -197,10 +196,7 @@ namespace AnimModels
 
         public String generateCode()
         {
-            return JsonConvert.SerializeObject(
-                generateJSONData(),
-                Constants.ConstantsClass.jsonSettings
-            );
+            return JsonConvert.SerializeObject(generateJSONData(), ConstantsClass.jsonSettings);
         }
 
         public static Slot regenerate(string json, string imagesFolder = "")
@@ -209,7 +205,7 @@ namespace AnimModels
             {
                 var data = JsonConvert.DeserializeObject<SlotData>(
                     json,
-                    Constants.ConstantsClass.jsonSettings
+                    ConstantsClass.jsonSettings
                 );
 
                 if (data == null)

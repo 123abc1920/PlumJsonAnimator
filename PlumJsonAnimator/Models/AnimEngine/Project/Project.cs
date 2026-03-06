@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
-using System.Threading.Tasks;
+using AnimEngine.Models;
+using AnimEngine.Resources;
 using AnimModels;
-using AnimTransformations;
 using Avalonia.Controls;
-using Constants;
+using Common.Constants;
+using Common.Constants.CommonModels;
 using Newtonsoft.Json;
-using Resources;
 using SpinejsonGeneration;
-using TransformModes;
 
-namespace EngineModels
+namespace AnimEngine.Project
 {
     public partial class Project : INotifyPropertyChanged
     {

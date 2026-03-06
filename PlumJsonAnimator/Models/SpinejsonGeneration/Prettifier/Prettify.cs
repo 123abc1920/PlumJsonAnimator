@@ -1,9 +1,9 @@
 using System;
-using Constants;
+using Common.Constants;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Prettify
+namespace SpinejsonGeneration.Prettify
 {
     public class Prettify
     {

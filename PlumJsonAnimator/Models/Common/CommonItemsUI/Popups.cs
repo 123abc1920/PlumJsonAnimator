@@ -5,7 +5,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Media;
 using Avalonia.Threading;
 
-namespace Constants
+namespace Constants.CommonItemsUI
 {
     public class Popups
     {

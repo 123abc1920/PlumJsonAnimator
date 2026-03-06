@@ -2,10 +2,9 @@ using System;
 using System.IO;
 using Avalonia;
 using Avalonia.Styling;
-using Constants;
 using Newtonsoft.Json;
 
-namespace AnimEngine
+namespace Common.Constants
 {
     public class AppSettings
     {

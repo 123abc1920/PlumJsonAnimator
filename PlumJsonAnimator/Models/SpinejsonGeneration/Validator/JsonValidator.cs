@@ -1,10 +1,8 @@
 using System;
-using AnimModels;
-using Constants;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace JsonValidator
+namespace SpinejsonGeneration.JsonValidator
 {
     public class JsonValidator
     {

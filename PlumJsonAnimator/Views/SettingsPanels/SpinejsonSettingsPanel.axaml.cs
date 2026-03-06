@@ -1,10 +1,10 @@
-using AnimEngine;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.Styling;
-using Constants;
+using Common.Constants;
+using Constants.CommonItemsUI;
 using PlumJsonAnimator.ViewModels;
 
 namespace PlumJsonAnimator.Views
