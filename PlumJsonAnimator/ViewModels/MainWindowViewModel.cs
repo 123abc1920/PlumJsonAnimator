@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using AnimEngine.Models;
 using AnimEngine.Project;
 using AnimModels;
@@ -9,11 +7,10 @@ using SpinejsonGeneration.JsonValidator;
 
 namespace PlumJsonAnimator.ViewModels;
 
-public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
+public partial class MainWindowViewModel : ViewModelBase
 {
     public Project CurrentProject { get; set; }
     public JsonError JsonErrorObj { get; set; }
-    public event PropertyChangedEventHandler? PropertyChanged;
     private Bone? _currentBone;
     public IRenamable? RedactObj { get; set; } = null;
     public List<string> Themes { get; set; } = new List<string>() { "light", "dark" };
@@ -89,10 +86,9 @@ public partial class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
         ConstantsClass.currentProject = new Project();
         CurrentProject = ConstantsClass.currentProject;
         JsonErrorObj = ConstantsClass.jsonError;
-    }
 
-    protected new virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        AppSettings.ReadSettings();
+        ProjectSettings.ReadSettings();
+        ProjectManager.LoadRes();
     }
 }

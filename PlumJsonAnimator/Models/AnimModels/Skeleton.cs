@@ -78,18 +78,16 @@ namespace AnimModels
             }
         }
 
-        public SkeletonData generateJSONData()
+        public List<BoneData> generateJSONData()
         {
-            var skeletonData = new SkeletonData();
+            List<BoneData> result = new List<BoneData>();
 
-            var boneList = new List<BoneData>();
-            foreach (var bone in this.Bones)
+            foreach (Bone bone in Bones)
             {
-                boneList.Add(bone.generateJSONData());
+                result.Add(bone.generateJSONData());
             }
-            skeletonData.Bones = boneList;
 
-            return skeletonData;
+            return result;
         }
 
         public String generateCode()

@@ -75,17 +75,6 @@ public partial class MainWindow : Window
         Popups.win = this;
         ImageExporter.canvas = mainCanvas;
 
-        AppSettings.ReadSettings();
-        ProjectSettings.ReadSettings();
-        ProjectManager.LoadRes();
-        ProjectValidResult validateResult =
-            ConstantsClass.currentProject.SpinejsonCode.regenerate();
-        if (!validateResult.IsOk)
-        {
-            Popups.ShowPopup("Возникли проблемы в json коде, невозможно восстановить проект", this);
-            currentTab = 1;
-        }
-
         if (DataContext is MainWindowViewModel viewModel)
         {
             foreach (string s in viewModel.Themes)
@@ -105,6 +94,14 @@ public partial class MainWindow : Window
             }
         };
         ConstantsClass.MainEngine.AddCustomTickHandler(animationTick);
+
+        ProjectValidResult validateResult =
+            ConstantsClass.currentProject!.SpinejsonCode.regenerate();
+        if (!validateResult.IsOk)
+        {
+            Popups.ShowPopup("Возникли проблемы в json коде, невозможно восстановить проект", this);
+            currentTab = 1;
+        }
     }
 
     private void UpdateCanvas(object? sender, EventArgs e)
