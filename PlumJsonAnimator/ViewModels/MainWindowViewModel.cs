@@ -3,12 +3,16 @@ using AnimEngine.Models;
 using AnimEngine.Project;
 using AnimModels;
 using Common.Constants;
+using PlumJsonAnimator.Services;
 using SpinejsonGeneration.JsonValidator;
 
 namespace PlumJsonAnimator.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
+    private AppSettings appSettings;
+    private ProjectSettings projectSettings;
+    private ProjectManager projectManager;
     public Project CurrentProject { get; set; }
     public JsonError JsonErrorObj { get; set; }
     private Bone? _currentBone;
@@ -60,8 +64,16 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
-    public MainWindowViewModel()
+    public MainWindowViewModel(
+        AppSettings appSettings,
+        ProjectSettings projectSettings,
+        ProjectManager projectManager
+    )
     {
+        this.appSettings = appSettings;
+        this.projectSettings = projectSettings;
+        this.projectManager = projectManager;
+
         CurrentTheme = Themes[0];
     }
 
@@ -87,8 +99,8 @@ public partial class MainWindowViewModel : ViewModelBase
         CurrentProject = ConstantsClass.currentProject;
         JsonErrorObj = ConstantsClass.jsonError;
 
-        AppSettings.ReadSettings();
-        ProjectSettings.ReadSettings();
-        ProjectManager.LoadRes();
+        this.appSettings.ReadSettings();
+        this.projectSettings.ReadSettings();
+        this.projectManager.LoadRes();
     }
 }
