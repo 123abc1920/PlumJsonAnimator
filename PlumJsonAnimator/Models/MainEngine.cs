@@ -1,6 +1,6 @@
 using System;
 using Avalonia.Threading;
-using Common.Constants;
+using PlumJsonAnimator.Common.Constants;
 
 namespace PlumJsonAnimator.Models
 {
@@ -8,9 +8,11 @@ namespace PlumJsonAnimator.Models
     {
         private DispatcherTimer _animationLoop = new DispatcherTimer();
 
-        public Engine()
+        private int FPS;
+
+        public Engine(int FPS)
         {
-            this._animationLoop.Interval = TimeSpan.FromSeconds(1.0 / (double)ConstantsClass.FPS);
+            this._animationLoop.Interval = TimeSpan.FromSeconds(1.0 / (double)FPS);
         }
 
         public void AddCustomTickHandler(EventHandler handler)
@@ -20,7 +22,7 @@ namespace PlumJsonAnimator.Models
 
         public void runAnimation()
         {
-            if (ConstantsClass.currentProject.CurrentAnimation.IsRun)
+            /*if (ConstantsClass.currentProject.CurrentAnimation.IsRun)
             {
                 this._animationLoop.Stop();
                 ConstantsClass.currentProject.CurrentAnimation.IsRun = false;
@@ -29,7 +31,7 @@ namespace PlumJsonAnimator.Models
             {
                 this._animationLoop.Start();
                 ConstantsClass.currentProject.CurrentAnimation.IsRun = true;
-            }
+            }*/
         }
     }
 }

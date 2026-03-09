@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json;
+using PlumJsonAnimator.Common.Constants;
 
 namespace PlumJsonAnimator.Models.Common
 {
@@ -17,12 +18,16 @@ namespace PlumJsonAnimator.Models.Common
 
         public abstract IKeyframeTypeData generateJSONData();
 
+        protected GlobalState globalState;
+
+        public IKeyframeType(GlobalState globalState)
+        {
+            this.globalState = globalState;
+        }
+
         public String generateCode()
         {
-            return JsonConvert.SerializeObject(
-                generateJSONData(),
-                ConstantsClass.jsonSettings
-            );
+            return JsonConvert.SerializeObject(generateJSONData(), this.globalState.jsonSettings);
         }
     }
 
@@ -46,7 +51,8 @@ namespace PlumJsonAnimator.Models.Common
         public double x;
         public double y;
 
-        public Translate(double _time, double _x, double _y)
+        public Translate(GlobalState globalState, double _time, double _x, double _y)
+            : base(globalState)
         {
             this.time = _time;
             this.x = _x;
@@ -69,7 +75,8 @@ namespace PlumJsonAnimator.Models.Common
     {
         public double value;
 
-        public Rotate(double _time, double _value)
+        public Rotate(GlobalState globalState, double _time, double _value)
+            : base(globalState)
         {
             this.time = _time;
             this.value = _value;
@@ -92,7 +99,8 @@ namespace PlumJsonAnimator.Models.Common
         public double x;
         public double y;
 
-        public Shear(double _time, double _x, double _y)
+        public Shear(GlobalState globalState, double _time, double _x, double _y)
+            : base(globalState)
         {
             this.time = _time;
             this.x = _x;
@@ -116,7 +124,8 @@ namespace PlumJsonAnimator.Models.Common
         public double x;
         public double y;
 
-        public Scale(double _time, double _x, double _y)
+        public Scale(GlobalState globalState, double _time, double _x, double _y)
+            : base(globalState)
         {
             this.time = _time;
             this.x = _x;

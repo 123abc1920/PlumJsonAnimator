@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media.Imaging;
-using Common.Constants;
+using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Gif;
@@ -20,6 +20,13 @@ namespace PlumJsonAnimator.Services
     {
         public string ExportPath = "";
         public Canvas canvas;
+
+        private GlobalState globalState;
+
+        public ImageExporter(GlobalState globalState)
+        {
+            this.globalState = globalState;
+        }
 
         private RenderTargetBitmap CatchCanvas(Canvas canvas)
         {
@@ -41,16 +48,16 @@ namespace PlumJsonAnimator.Services
         {
             if (Directory.Exists(outputFolder))
             {
-                ConstantsClass.currentProject.CurrentAnimation.currentTime = start;
+                this.globalState.currentProject!.CurrentAnimation.currentTime = start;
                 double endTime = Math.Min(
-                    ConstantsClass.currentProject.CurrentAnimation.MaxTime(),
+                    this.globalState.currentProject.CurrentAnimation.MaxTime(),
                     end
                 );
 
                 var i = 0;
-                var drawBones = ConstantsClass.drawBones;
-                ConstantsClass.drawBones = false;
-                while (ConstantsClass.currentProject.CurrentAnimation.currentTime <= endTime)
+                var drawBones = this.globalState.drawBones;
+                this.globalState.drawBones = false;
+                while (this.globalState.currentProject.CurrentAnimation.currentTime <= endTime)
                 {
                     using (RenderTargetBitmap bitmap = CatchCanvas(canvas))
                     {
@@ -61,12 +68,12 @@ namespace PlumJsonAnimator.Services
                         }
                     }
 
-                    ConstantsClass.currentProject.CurrentAnimation.step();
+                    this.globalState.currentProject.CurrentAnimation.step();
                     canvas.InvalidateVisual();
                     await Task.Delay(30);
                     i++;
                 }
-                ConstantsClass.drawBones = drawBones;
+                this.globalState.drawBones = drawBones;
                 return ExportResult.SUCCESS;
             }
 
@@ -77,16 +84,16 @@ namespace PlumJsonAnimator.Services
         {
             if (Directory.Exists(outputFolder))
             {
-                ConstantsClass.currentProject.CurrentAnimation.currentTime = start;
+                this.globalState.currentProject!.CurrentAnimation.currentTime = start;
                 double endTime = Math.Min(
-                    ConstantsClass.currentProject.CurrentAnimation.MaxTime(),
+                    this.globalState.currentProject.CurrentAnimation.MaxTime(),
                     end
                 );
 
                 var i = 0;
-                var drawBones = ConstantsClass.drawBones;
-                ConstantsClass.drawBones = false;
-                while (ConstantsClass.currentProject.CurrentAnimation.currentTime <= endTime)
+                var drawBones = this.globalState.drawBones;
+                this.globalState.drawBones = false;
+                while (this.globalState.currentProject.CurrentAnimation.currentTime <= endTime)
                 {
                     using (RenderTargetBitmap bitmap = CatchCanvas(canvas))
                     {
@@ -97,12 +104,12 @@ namespace PlumJsonAnimator.Services
                         }
                     }
 
-                    ConstantsClass.currentProject.CurrentAnimation.step();
+                    this.globalState.currentProject.CurrentAnimation.step();
                     canvas.InvalidateVisual();
                     await Task.Delay(30);
                     i++;
                 }
-                ConstantsClass.drawBones = drawBones;
+                this.globalState.drawBones = drawBones;
                 return ExportResult.SUCCESS;
             }
 
@@ -118,16 +125,16 @@ namespace PlumJsonAnimator.Services
 
             if (File.Exists(outputFile))
             {
-                ConstantsClass.currentProject.CurrentAnimation.currentTime = start;
+                this.globalState.currentProject!.CurrentAnimation.currentTime = start;
                 double endTime = Math.Min(
-                    ConstantsClass.currentProject.CurrentAnimation.MaxTime(),
+                    this.globalState.currentProject.CurrentAnimation.MaxTime(),
                     end
                 );
 
-                var drawBones = ConstantsClass.drawBones;
-                ConstantsClass.drawBones = false;
+                var drawBones = this.globalState.drawBones;
+                this.globalState.drawBones = false;
                 List<Image<Rgba32>> frames = new List<Image<Rgba32>>();
-                while (ConstantsClass.currentProject.CurrentAnimation.currentTime <= endTime)
+                while (this.globalState.currentProject.CurrentAnimation.currentTime <= endTime)
                 {
                     using (RenderTargetBitmap bitmap = CatchCanvas(canvas))
                     {
@@ -143,7 +150,7 @@ namespace PlumJsonAnimator.Services
                         }
                     }
 
-                    ConstantsClass.currentProject.CurrentAnimation.step();
+                    this.globalState.currentProject.CurrentAnimation.step();
                     canvas.InvalidateVisual();
                     await Task.Delay(30);
                 }
@@ -165,7 +172,7 @@ namespace PlumJsonAnimator.Services
                     frame.Dispose();
                 }
 
-                ConstantsClass.drawBones = drawBones;
+                this.globalState.drawBones = drawBones;
                 return ExportResult.SUCCESS;
             }
 
@@ -202,7 +209,7 @@ namespace PlumJsonAnimator.Services
                 string arguments =
                     $"-f rawvideo -pix_fmt bgra "
                     + $"-s {width}x{height} "
-                    + $"-r {ConstantsClass.FPS} "
+                    + $"-r {this.globalState.FPS} "
                     + $"-i - "
                     + $"-c:v libx264 "
                     + $"-preset fast "
@@ -238,20 +245,20 @@ namespace PlumJsonAnimator.Services
                 process.Start();
                 process.BeginErrorReadLine();
 
-                var drawBones = ConstantsClass.drawBones;
-                ConstantsClass.drawBones = false;
+                var drawBones = this.globalState.drawBones;
+                this.globalState.drawBones = false;
                 using (var stdin = process.StandardInput.BaseStream)
                 {
-                    ConstantsClass.currentProject.CurrentAnimation.currentTime = start;
+                    this.globalState.currentProject!.CurrentAnimation.currentTime = start;
                     double endTime = Math.Min(
-                        ConstantsClass.currentProject.CurrentAnimation.MaxTime(),
+                        this.globalState.currentProject.CurrentAnimation.MaxTime(),
                         end
                     );
 
                     int frameCount = 0;
                     bool error = false;
 
-                    while (ConstantsClass.currentProject.CurrentAnimation.currentTime <= endTime)
+                    while (this.globalState.currentProject.CurrentAnimation.currentTime <= endTime)
                     {
                         using (RenderTargetBitmap bitmap = CatchCanvas(canvas))
                         {
@@ -299,7 +306,7 @@ namespace PlumJsonAnimator.Services
                             }
                         }
 
-                        ConstantsClass.currentProject.CurrentAnimation.step();
+                        this.globalState.currentProject.CurrentAnimation.step();
                         canvas.InvalidateVisual();
                         await Task.Delay(30);
                     }
@@ -309,7 +316,7 @@ namespace PlumJsonAnimator.Services
                         stdin.Flush();
                     }
                 }
-                ConstantsClass.drawBones = drawBones;
+                this.globalState.drawBones = drawBones;
 
                 if (!process.WaitForExit(10000))
                 {

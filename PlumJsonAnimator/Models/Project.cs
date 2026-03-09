@@ -1,26 +1,20 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.IO;
-using AnimEngine.Models;
-using AnimEngine.Resources;
-using AnimModels;
 using Avalonia.Controls;
-using Common.Constants;
-using Common.Constants.CommonModels;
 using Newtonsoft.Json;
+using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Interfaces;
+using PlumJsonAnimator.Models.Resources;
+using PlumJsonAnimator.Models.SkeletonNameSpace;
+using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.Models
 {
-    public partial class Project : INotifyPropertyChanged
+    public partial class Project : INotifyable
     {
-        public string ProjectPath { get; set; } =
-            Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                ConstantsClass.workspace
-            );
-
+        public string ProjectPath { get; set; }
         private string _name = "NewProject";
         public string Name
         {
@@ -34,16 +28,14 @@ namespace PlumJsonAnimator.Models
                 }
             }
         }
+        public MetaData MetaData { get; set; } = new MetaData();
 
-        public MetaData MetaData { get; set; } = new MetaData { Spine = "4.2.22" };
+        public Mode currentMode;
+        public int seletedBoneId = -1;
 
         public Skeleton? MainSkeleton { get; set; } = null;
-        public Mode currentMode = new NoMode();
-        public int seletedBoneId = -1;
         public ObservableCollection<Slot> Slots { get; set; } = new ObservableCollection<Slot>();
-
         public ObservableCollection<Res> Resources { get; } = new ObservableCollection<Res>();
-
         public ObservableCollection<Animation> Animations { get; } =
             new ObservableCollection<Animation>();
 
@@ -51,12 +43,8 @@ namespace PlumJsonAnimator.Models
         private Skin _currentSkin;
         private Animation _currentAnimation;
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        private GlobalState globalState;
+        private Interpolation interpolation;
 
         public Skin CurrentSkin
         {
@@ -88,17 +76,27 @@ namespace PlumJsonAnimator.Models
             }
         }
 
-        public Project()
+        public Project(GlobalState globalState, Interpolation interpolation)
         {
-            MainSkeleton = new Skeleton();
-            Animations.Add(new Animation());
+            MainSkeleton = new Skeleton(globalState);
+            Animations.Add(new Animation(globalState, interpolation));
             CurrentAnimation = Animations[0];
-            Skins.Add(new Skin());
+            Skins.Add(new Skin(globalState));
             CurrentSkin = Skins[0];
+
+            this.currentMode = new NoMode(globalState);
+
+            this.globalState = globalState;
+            this.interpolation = interpolation;
         }
 
-        public Project(string name, string path)
-            : this()
+        public Project(
+            string name,
+            string path,
+            GlobalState globalState,
+            Interpolation interpolation
+        )
+            : this(globalState, interpolation)
         {
             this.Name = name;
             this.ProjectPath = path;
@@ -111,7 +109,13 @@ namespace PlumJsonAnimator.Models
 
         public void AddAnimation()
         {
-            this.Animations.Add(new Animation("anim" + Animations.Count.ToString()));
+            this.Animations.Add(
+                new Animation(
+                    this.globalState,
+                    this.interpolation,
+                    "anim" + Animations.Count.ToString()
+                )
+            );
         }
 
         public void DeleteAnimation()
@@ -125,7 +129,7 @@ namespace PlumJsonAnimator.Models
 
         public void AddSkin()
         {
-            this.Skins.Add(new Skin("skin" + Skins.Count.ToString()));
+            this.Skins.Add(new Skin("skin" + Skins.Count.ToString(), this.globalState));
         }
 
         public void DeleteSkin()
@@ -252,7 +256,11 @@ namespace PlumJsonAnimator.Models
 
             foreach (var bone in bones)
             {
-                Bone b = new Bone(bone.Key, this.MainSkeleton.getBone(bone.Value.Parent));
+                Bone b = new Bone(
+                    this.globalState,
+                    bone.Key,
+                    this.MainSkeleton.getBone(bone.Value.Parent)
+                );
                 this.MainSkeleton.Bones.Add(b);
             }
 
@@ -263,7 +271,7 @@ namespace PlumJsonAnimator.Models
 
             if (this.MainSkeleton.Bones.Count <= 0)
             {
-                this.MainSkeleton.Bones.Add(new Bone());
+                this.MainSkeleton.Bones.Add(new Bone(this.globalState));
                 this.MainSkeleton.RootBones = new ObservableCollection<Bone>()
                 {
                     this.MainSkeleton.Bones[0],
@@ -291,7 +299,11 @@ namespace PlumJsonAnimator.Models
 
             foreach (var slot in slots)
             {
-                Slot s = new Slot(slot.Key, this.MainSkeleton.getBone(slot.Value.Bone));
+                Slot s = new Slot(
+                    this.globalState,
+                    slot.Key,
+                    this.MainSkeleton.getBone(slot.Value.Bone)
+                );
                 this.Slots.Add(s);
             }
 
@@ -335,7 +347,7 @@ namespace PlumJsonAnimator.Models
 
             foreach (var skin in skins)
             {
-                Skin s = new Skin(skin.Key);
+                Skin s = new Skin(skin.Key, this.globalState);
                 var skinData = skin.Value;
                 s.SlotAttachmentBinding = new Dictionary<Slot, Attachment>();
                 foreach (string slotName in skinData.Attachments.Keys)
@@ -395,7 +407,7 @@ namespace PlumJsonAnimator.Models
 
             foreach (var animation in animations)
             {
-                Animation a = new Animation(animation.Key);
+                Animation a = new Animation(this.globalState, this.interpolation, animation.Key);
                 a.BoneAnimationBinding = new Dictionary<Bone, BoneAnimation>();
                 var animationData = animation.Value;
                 foreach (string name in animationData.Keys)
@@ -424,11 +436,11 @@ namespace PlumJsonAnimator.Models
 
             if (Skins.Count <= 0)
             {
-                Skins.Add(new Skin());
+                Skins.Add(new Skin(this.globalState));
             }
             if (Animations.Count <= 0)
             {
-                Animations.Add(new Animation());
+                Animations.Add(new Animation(this.globalState, this.interpolation));
             }
 
             this.CurrentSkin = Skins[0];

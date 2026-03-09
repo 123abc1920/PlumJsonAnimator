@@ -1,18 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
-using Common.Constants;
 using Newtonsoft.Json;
+using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Models.Interfaces;
 
-namespace PlumJsonAnimator.Models.Skeleton
+namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
-    public class Bone : INotifyPropertyChanged, IRenamable
+    public class Bone : INotifyable, IRenamable
     {
+        public int id;
         private string _name = "";
         public string Name
         {
@@ -26,12 +27,13 @@ namespace PlumJsonAnimator.Models.Skeleton
                 }
             }
         }
+        public bool isBone = true;
 
         private double _x = 0;
         private double _y = 0;
         private double _a = 0;
 
-        public double x
+        public virtual double x
         {
             get => _x;
             set
@@ -45,7 +47,7 @@ namespace PlumJsonAnimator.Models.Skeleton
             }
         }
 
-        public double y
+        public virtual double y
         {
             get => _y;
             set
@@ -59,7 +61,7 @@ namespace PlumJsonAnimator.Models.Skeleton
             }
         }
 
-        public double a
+        public virtual double a
         {
             get => _a;
             set
@@ -80,7 +82,7 @@ namespace PlumJsonAnimator.Models.Skeleton
         {
             _slots.Clear();
 
-            var newSlots = ConstantsClass.currentProject?.CurrentSkin?.GetSlots(this);
+            var newSlots = this.globalState.currentProject?.CurrentSkin?.GetSlots(this);
             if (newSlots != null)
             {
                 foreach (var slot in newSlots)
@@ -90,8 +92,7 @@ namespace PlumJsonAnimator.Models.Skeleton
             }
         }
 
-        public ObservableCollection<Bone> Children { get; set; } =
-            new ObservableCollection<Bone>();
+        public ObservableCollection<Bone> Children { get; set; } = new ObservableCollection<Bone>();
         public Bone? Parent { get; set; } = null;
         public string GetName
         {
@@ -109,14 +110,11 @@ namespace PlumJsonAnimator.Models.Skeleton
         public double endY = 110;
         public double length = 10;
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        protected GlobalState globalState;
 
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        protected Bone() { }
 
-        public Bone()
+        public Bone(GlobalState globalState)
         {
             this.Name = "root";
 
@@ -129,10 +127,10 @@ namespace PlumJsonAnimator.Models.Skeleton
             this.endX = this._x + length * Math.Cos(angleRad);
             this.endY = this._y + length * Math.Sin(angleRad);
 
-            this.isBone = true;
+            this.globalState = globalState;
         }
 
-        public Bone(int _id)
+        public Bone(GlobalState globalState, int _id)
         {
             this.id = _id;
             this._a = -100;
@@ -140,10 +138,18 @@ namespace PlumJsonAnimator.Models.Skeleton
             this._y = 100;
             this.Name = "name" + this.id.ToString();
 
-            this.isBone = true;
+            this.globalState = globalState;
         }
 
-        public Bone(int _id, Bone parent, String name, double x, double y, double a)
+        public Bone(
+            GlobalState globalState,
+            int _id,
+            Bone parent,
+            String name,
+            double x,
+            double y,
+            double a
+        )
         {
             this.id = _id;
             this._a = a;
@@ -152,10 +158,10 @@ namespace PlumJsonAnimator.Models.Skeleton
             this.Name = name;
             this.Parent = parent;
 
-            this.isBone = true;
+            this.globalState = globalState;
         }
 
-        public Bone(Bone parent)
+        public Bone(GlobalState globalState, Bone parent)
         {
             this._a = -100;
             this.id = 0;
@@ -169,10 +175,10 @@ namespace PlumJsonAnimator.Models.Skeleton
             this.Parent = parent;
             this.id = 100;
 
-            this.isBone = true;
+            this.globalState = globalState;
         }
 
-        public Bone(string name, Bone parent)
+        public Bone(GlobalState globalState, string name, Bone parent)
         {
             this._a = -100;
             this.id = 0;
@@ -188,7 +194,7 @@ namespace PlumJsonAnimator.Models.Skeleton
             this.Parent = parent;
             this.id = 100;
 
-            this.isBone = true;
+            this.globalState = globalState;
         }
 
         public void addChildren(Bone bone)
@@ -197,7 +203,7 @@ namespace PlumJsonAnimator.Models.Skeleton
             bone.Parent = this;
         }
 
-        public void move(double x, double y)
+        public virtual void move(double x, double y)
         {
             double deltaX = this.x - x;
             double deltaY = this.y - y;
@@ -214,8 +220,8 @@ namespace PlumJsonAnimator.Models.Skeleton
                 c.move(c.x - deltaX, c.y - deltaY);
             }
 
-            List<Slot> slots = ConstantsClass.currentProject!.CurrentSkin.GetSlots(this);
-            var options = ConstantsClass.GetParallelOptions();
+            List<Slot> slots = this.globalState.currentProject!.CurrentSkin.GetSlots(this);
+            var options = this.globalState.GetParallelOptions();
             Parallel.ForEach(
                 slots,
                 options,
@@ -226,7 +232,7 @@ namespace PlumJsonAnimator.Models.Skeleton
             );
         }
 
-        public void rotate(double a)
+        public virtual void rotate(double a)
         {
             double oldA = this.a;
             this.a = a;
@@ -250,8 +256,8 @@ namespace PlumJsonAnimator.Models.Skeleton
                 child.rotate(child.a + (a - oldA));
             }
 
-            List<Slot> slots = ConstantsClass.currentProject!.CurrentSkin.GetSlots(this);
-            var options = ConstantsClass.GetParallelOptions();
+            List<Slot> slots = this.globalState.currentProject!.CurrentSkin.GetSlots(this);
+            var options = this.globalState.GetParallelOptions();
             Parallel.ForEach(
                 slots,
                 options,
@@ -274,6 +280,8 @@ namespace PlumJsonAnimator.Models.Skeleton
             );
         }
 
+        public virtual void scale(double x, double y) { }
+
         public void drawBone(Canvas canvas)
         {
             Point start = new Point(canvas.Width / 2 + this.x, canvas.Height / 2 + this.y);
@@ -283,7 +291,7 @@ namespace PlumJsonAnimator.Models.Skeleton
             {
                 StartPoint = start,
                 EndPoint = end,
-                Stroke = Color.getLineBoneColor(this.id),
+                Stroke = this.globalState.color.getLineBoneColor(this.id),
                 StrokeThickness = 3,
             };
 
@@ -291,7 +299,7 @@ namespace PlumJsonAnimator.Models.Skeleton
             {
                 Width = 8,
                 Height = 8,
-                Fill = Color.getDotBoneColor(this.id),
+                Fill = this.globalState.color.getDotBoneColor(this.id),
             };
 
             Canvas.SetLeft(joint, start.X - 4);
@@ -314,7 +322,7 @@ namespace PlumJsonAnimator.Models.Skeleton
 
         public string generateCode()
         {
-            return JsonConvert.SerializeObject(generateJSONData(), ConstantsClass.jsonSettings);
+            return JsonConvert.SerializeObject(generateJSONData(), this.globalState.jsonSettings);
         }
 
         public void SetName(string? name)

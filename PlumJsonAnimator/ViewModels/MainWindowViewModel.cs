@@ -1,18 +1,16 @@
-﻿using System.Collections.Generic;
-using AnimEngine.Models;
-using AnimEngine.Project;
-using AnimModels;
-using Common.Constants;
+﻿using System;
+using System.Collections.Generic;
+using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Models;
+using PlumJsonAnimator.Models.Interfaces;
+using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
-using SpinejsonGeneration.JsonValidator;
 
 namespace PlumJsonAnimator.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    private AppSettings appSettings;
-    private ProjectSettings projectSettings;
-    private ProjectManager projectManager;
     public Project CurrentProject { get; set; }
     public JsonError JsonErrorObj { get; set; }
     private Bone? _currentBone;
@@ -27,7 +25,7 @@ public partial class MainWindowViewModel : ViewModelBase
             if (_currTheme != value)
             {
                 _currTheme = value;
-                ConstantsClass.theme = _currTheme;
+                this.globalState.theme = _currTheme;
                 OnPropertyChanged(nameof(CurrentTheme));
             }
         }
@@ -54,25 +52,39 @@ public partial class MainWindowViewModel : ViewModelBase
             if (_currentBone != value)
             {
                 _currentBone = value;
-                ConstantsClass.currentBone = _currentBone;
+                this.globalState.currentBone = _currentBone;
                 OnPropertyChanged(nameof(CurrentBone));
             }
             else
             {
-                ConstantsClass.currentBone = null;
+                this.globalState.currentBone = null;
             }
         }
     }
+    public event EventHandler? TickRequested;
+
+    private AppSettings appSettings;
+    private ProjectSettings projectSettings;
+    private ProjectManager projectManager;
+    private GlobalState globalState;
+    private JsonCode jsonCode;
+    private Interpolation interpolation;
 
     public MainWindowViewModel(
         AppSettings appSettings,
         ProjectSettings projectSettings,
-        ProjectManager projectManager
+        ProjectManager projectManager,
+        GlobalState globalState,
+        JsonCode jsonCode,
+        Interpolation interpolation
     )
     {
         this.appSettings = appSettings;
         this.projectSettings = projectSettings;
         this.projectManager = projectManager;
+        this.globalState = globalState;
+        this.jsonCode = jsonCode;
+        this.interpolation = interpolation;
 
         CurrentTheme = Themes[0];
     }
@@ -81,7 +93,7 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         if (selectedBone is Bone selectedNode)
         {
-            selectedNode.addChildren(new Bone(selectedNode));
+            selectedNode.addChildren(new Bone(this.globalState, selectedNode));
         }
     }
 
@@ -93,14 +105,40 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
+    private int GetCurrThemeInd(string theme)
+    {
+        for (int i = 0; i < Themes.Count; i++)
+        {
+            if (Themes[i] == theme)
+            {
+                return i;
+            }
+        }
+
+        return 0;
+    }
+
+    private void OnTick()
+    {
+        TickRequested?.Invoke(this, EventArgs.Empty);
+    }
+
     public void initProgram()
     {
-        ConstantsClass.currentProject = new Project();
-        CurrentProject = ConstantsClass.currentProject;
-        JsonErrorObj = ConstantsClass.jsonError;
+        this.globalState.currentProject = new Project(this.globalState, this.interpolation);
+        CurrentProject = this.globalState.currentProject;
+        JsonErrorObj = this.globalState.jsonError;
 
         this.appSettings.ReadSettings();
         this.projectSettings.ReadSettings();
         this.projectManager.LoadRes();
+
+        CurrentTheme = Themes[GetCurrThemeInd(this.appSettings.GetTheme())];
+
+        ProjectValidResult validateResult = this.jsonCode.regenerate();
+        if (!validateResult.IsOk)
+        {
+            Popups.ShowPopup("Возникли проблемы в json коде, невозможно восстановить проект");
+        }
     }
 }

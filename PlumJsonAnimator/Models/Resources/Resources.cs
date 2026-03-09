@@ -1,15 +1,14 @@
-using System.ComponentModel;
 using System.IO;
-using System.Runtime.CompilerServices;
-using Common.Constants;
+using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
+using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.Models.Resources
 {
     /// <summary>
     /// Resources -- images, textures etc
     /// </summary>
-    public class Res : IRenamable, INotifyPropertyChanged
+    public class Res : INotifyable, IRenamable
     {
         private string _name = "";
         public string Name
@@ -24,6 +23,16 @@ namespace PlumJsonAnimator.Models.Resources
                 }
             }
         }
+
+        protected ProjectManager projectManager;
+        protected GlobalState globalState;
+
+        public Res(ProjectManager projectManager, GlobalState globalState)
+        {
+            this.projectManager = projectManager;
+            this.globalState = globalState;
+        }
+
         public string GetName
         {
             get => this.Name;
@@ -39,22 +48,15 @@ namespace PlumJsonAnimator.Models.Resources
         public string path = "";
         public string ext = ".png";
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         public void SetName(string? name)
         {
             if (name != null)
             {
                 this.Name = name;
-                ProjectManager.RenameFile(
+                this.projectManager.RenameFile(
                     path,
                     Path.Combine(
-                        ConstantsClass.currentProject!.GetProjectPath(),
+                        this.globalState.currentProject!.GetProjectPath(),
                         "res",
                         $"{this.Name}{ext}"
                     )
@@ -70,10 +72,21 @@ namespace PlumJsonAnimator.Models.Resources
     {
         public int width;
         public int height;
+        private string filePath;
+        private string v1;
+        private string v2;
 
-        public ImageRes() { }
+        public ImageRes(ProjectManager projectManager, GlobalState globalState)
+            : base(projectManager, globalState) { }
 
-        public ImageRes(string _path, string name, string _ext)
+        public ImageRes(
+            ProjectManager projectManager,
+            GlobalState globalState,
+            string _path,
+            string name,
+            string _ext
+        )
+            : base(projectManager, globalState)
         {
             this.Name = name;
             this.ext = _ext;

@@ -1,6 +1,6 @@
 using System.IO;
-using Common.Constants;
 using Newtonsoft.Json;
+using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models;
 
 namespace PlumJsonAnimator.Services
@@ -9,25 +9,27 @@ namespace PlumJsonAnimator.Services
     {
         private JsonValidator jsonValidator;
         private JsonCode jsonCode;
+        private GlobalState globalState;
 
-        public JsonExport(JsonValidator jsonValidator, JsonCode jsonCode)
+        public JsonExport(JsonValidator jsonValidator, JsonCode jsonCode, GlobalState globalState)
         {
             this.jsonValidator = jsonValidator;
             this.jsonCode = jsonCode;
+            this.globalState = globalState;
         }
 
         public ExportResult exportSpineJson(string outFolder)
         {
             string output = JsonConvert.SerializeObject(
-                this.jsonCode.generateJSONData(ConstantsClass.currentProject),
-                ConstantsClass.jsonSettings
+                this.jsonCode.generateJSONData(this.globalState.currentProject),
+                this.globalState.jsonSettings
             );
 
             if (Directory.Exists(outFolder))
             {
                 var filePath = Path.Combine(
                     outFolder,
-                    $"{ConstantsClass.currentProject.Name}.json"
+                    $"{this.globalState.currentProject.Name}.json"
                 );
                 if (!File.Exists(filePath))
                 {

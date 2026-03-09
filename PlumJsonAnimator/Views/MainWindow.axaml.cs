@@ -1,25 +1,16 @@
 using System;
 using System.IO;
 using System.Linq;
-using AnimEngine.AnimExport;
-using AnimEngine.AnimExport.ImageExport;
-using AnimEngine.AnimExport.JsonExport;
-using AnimEngine.Project;
-using AnimEngine.Resources;
-using AnimModels;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
-using Common.Constants;
-using Common.Constants.CommonModels;
-using Constants.CommonItemsUI;
+using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Models.SkeletonNameSpace;
+using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
-using SpinejsonGeneration;
-using SpinejsonGeneration.JsonValidator;
-using SpinejsonGeneration.Prettify;
 
 namespace PlumJsonAnimator.Views;
 
@@ -74,33 +65,13 @@ public partial class MainWindow : Window
 
         Popups.win = this;
         ImageExporter.canvas = mainCanvas;
+    }
 
-        if (DataContext is MainWindowViewModel viewModel)
+    private void AnimationTick(object? sender, EventArgs e)
+    {
+        if (currentTab == 0)
         {
-            foreach (string s in viewModel.Themes)
-            {
-                if (s == ConstantsClass.theme)
-                {
-                    viewModel.CurrentTheme = s;
-                }
-            }
-        }
-
-        EventHandler animationTick = (sender, e) =>
-        {
-            if (currentTab == 0)
-            {
-                Timeline.CurrentTime += 1.0 / ConstantsClass.FPS;
-            }
-        };
-        ConstantsClass.MainEngine.AddCustomTickHandler(animationTick);
-
-        ProjectValidResult validateResult =
-            ConstantsClass.currentProject!.SpinejsonCode.regenerate();
-        if (!validateResult.IsOk)
-        {
-            Popups.ShowPopup("Возникли проблемы в json коде, невозможно восстановить проект", this);
-            currentTab = 1;
+            Timeline.CurrentTime += 1.0 / 60;
         }
     }
 

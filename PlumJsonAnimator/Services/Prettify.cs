@@ -1,13 +1,18 @@
 using System;
-using Common.Constants;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using PlumJsonAnimator.Common.Constants;
 
 namespace PlumJsonAnimator.Services
 {
     public class Prettify
     {
-        public Prettify() { }
+        private GlobalState globalState;
+
+        public Prettify(GlobalState globalState)
+        {
+            this.globalState = globalState;
+        }
 
         public String prettify(String text)
         {
@@ -18,7 +23,7 @@ namespace PlumJsonAnimator.Services
             }
             catch (JsonReaderException ex)
             {
-                ConstantsClass.jsonError.ErrorText = GetErrorWithContext(
+                this.globalState.jsonError.ErrorText = GetErrorWithContext(
                     text,
                     ex.LineNumber,
                     ex.LinePosition,

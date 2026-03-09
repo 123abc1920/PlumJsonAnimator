@@ -1,17 +1,16 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.Runtime.CompilerServices;
 using Avalonia.Controls;
 using Avalonia.Media;
-using Common.Constants;
 using Newtonsoft.Json;
+using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Models.Interfaces;
 
-namespace PlumJsonAnimator.Models.Skeleton
+namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
-    public class Slot : Bone, INotifyPropertyChanged, IRenamable
+    public class Slot : Bone, IRenamable
     {
+        public new bool isBone = false;
         private double _x = 0;
         private double _y = 0;
         private double _a = 0;
@@ -58,23 +57,9 @@ namespace PlumJsonAnimator.Models.Skeleton
             }
         }
 
-        private string _name = "";
-        public override string Name
-        {
-            get => _name;
-            set
-            {
-                if (_name != value)
-                {
-                    _name = value;
-                    OnPropertyChanged(nameof(Name));
-                }
-            }
-        }
+        private Attachment? _currentAttachment;
 
-        private Attachment _currentAttachment;
-
-        public Attachment CurrentAttachment
+        public Attachment? CurrentAttachment
         {
             get => _currentAttachment;
             set
@@ -89,7 +74,7 @@ namespace PlumJsonAnimator.Models.Skeleton
 
         public void UpdateAttachment()
         {
-            CurrentAttachment = ConstantsClass.currentProject.CurrentSkin.GetAttachment(this);
+            CurrentAttachment = this.globalState.currentProject!.CurrentSkin.GetAttachment(this);
         }
 
         public int DrawOrder { get; set; }
@@ -110,22 +95,24 @@ namespace PlumJsonAnimator.Models.Skeleton
             }
         }
 
-        public Slot(int id, string path)
+        public Slot(GlobalState globalState, int id, string path)
         {
             this.id = id;
-            this.a = 0; // Теперь это свойство, которое использует _parentA
+            this.a = 0;
             this.x = 0;
             this.y = 0;
 
-            this.Name = System.IO.Path.GetFileNameWithoutExtension(path);
-            this.isBone = false;
+            this.Name = Path.GetFileNameWithoutExtension(path);
+
+            this.globalState = globalState;
             UpdateAttachment();
         }
 
-        public Slot(string name, Bone b)
+        public Slot(GlobalState globalState, string name, Bone b)
         {
             this.Name = name;
             this.BoundedBone = b;
+            this.globalState = globalState;
             UpdateAttachment();
         }
 
@@ -157,12 +144,12 @@ namespace PlumJsonAnimator.Models.Skeleton
 
         public void drawSlot(Canvas canvas)
         {
-            if (ConstantsClass.currentProject.CurrentSkin.isSlotDrawable(this))
+            if (this.globalState.currentProject!.CurrentSkin.isSlotDrawable(this))
             {
                 var image = new Image
                 {
                     Source = new Avalonia.Media.Imaging.Bitmap(
-                        ConstantsClass.currentProject.CurrentSkin.GetImagePath(this)
+                        this.globalState.currentProject.CurrentSkin.GetImagePath(this)
                     ),
                     Width = lengthX,
                     Height = lengthY,
@@ -176,14 +163,7 @@ namespace PlumJsonAnimator.Models.Skeleton
             }
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public SlotData generateJSONData()
+        public new SlotData generateJSONData()
         {
             return new SlotData
             {
@@ -193,22 +173,22 @@ namespace PlumJsonAnimator.Models.Skeleton
             };
         }
 
-        public String generateCode()
+        public new string generateCode()
         {
-            return JsonConvert.SerializeObject(generateJSONData(), ConstantsClass.jsonSettings);
+            return JsonConvert.SerializeObject(generateJSONData(), this.globalState.jsonSettings);
         }
 
-        public static Slot regenerate(string json, string imagesFolder = "")
+        public Slot regenerate(string json, string imagesFolder = "")
         {
             try
             {
                 var data = JsonConvert.DeserializeObject<SlotData>(
                     json,
-                    ConstantsClass.jsonSettings
+                    this.globalState.jsonSettings
                 );
 
                 if (data == null)
-                    return new Slot(0, "default.png");
+                    return new Slot(this.globalState, 0, "default.png");
 
                 string imagePath;
                 if (!string.IsNullOrEmpty(imagesFolder) && Directory.Exists(imagesFolder))
@@ -230,17 +210,17 @@ namespace PlumJsonAnimator.Models.Skeleton
                     imagePath = data.Attachment + ".png";
                 }
 
-                var slot = new Slot(0, imagePath) { Name = data.Name };
+                var slot = new Slot(this.globalState, 0, imagePath) { Name = data.Name };
 
                 return slot;
             }
             catch
             {
-                return new Slot(0, "default.png");
+                return new Slot(this.globalState, 0, "default.png");
             }
         }
 
-        public void SetName(string? name)
+        public new void SetName(string? name)
         {
             if (name != null)
             {
@@ -248,7 +228,7 @@ namespace PlumJsonAnimator.Models.Skeleton
             }
         }
 
-        public string GetName
+        public new string GetName
         {
             get => this.Name;
             set

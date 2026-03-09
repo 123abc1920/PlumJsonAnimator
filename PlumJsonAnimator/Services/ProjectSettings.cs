@@ -1,45 +1,72 @@
+using System;
 using System.IO;
-using Common.Constants;
 using Newtonsoft.Json;
+using PlumJsonAnimator.Common.Constants;
 
 namespace PlumJsonAnimator.Services
 {
     public class ProjectSettings
     {
         private AppSettings appSettings;
-        private string settingsName = $"settings{ConstantsClass.programExt}";
+        private GlobalState globalState;
+        private JsonCode jsonCode;
+        private string settingsName;
 
-        public ProjectSettings(AppSettings appSettings)
+        private SettingsData settingsData;
+
+        public ProjectSettings(AppSettings appSettings, GlobalState globalState, JsonCode jsonCode)
         {
             this.appSettings = appSettings;
+            this.globalState = globalState;
+            this.jsonCode = jsonCode;
+
+            this.settingsName = $"settings{this.globalState.programExt}";
+            this.settingsData = new SettingsData()
+            {
+                Path = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                    this.globalState.workspace
+                ),
+                Name = "NewProject",
+                Spine = "4.3.2",
+                Anim = "",
+            };
+        }
+
+        private void SetupProject()
+        {
+            this.globalState.currentProject!.ProjectPath = this.settingsData.Path;
+            this.globalState.currentProject.Name = this.settingsData.Name;
+            this.globalState.currentProject.MetaData.Spine = this.settingsData.Spine;
+            this.jsonCode.Text = this.settingsData.Anim;
         }
 
         public void ExistOrCreateProjectDirs()
         {
-            if (!Directory.Exists(ConstantsClass.currentProject.GetProjectPath()))
+            if (!Directory.Exists(this.globalState.currentProject!.GetProjectPath()))
             {
-                Directory.CreateDirectory(ConstantsClass.currentProject.GetProjectPath());
+                Directory.CreateDirectory(this.globalState.currentProject.GetProjectPath());
             }
 
             if (
                 !Directory.Exists(
-                    Path.Combine(ConstantsClass.currentProject.GetProjectPath(), "res")
+                    Path.Combine(this.globalState.currentProject.GetProjectPath(), "res")
                 )
             )
             {
                 Directory.CreateDirectory(
-                    Path.Combine(ConstantsClass.currentProject.GetProjectPath(), "res")
+                    Path.Combine(this.globalState.currentProject.GetProjectPath(), "res")
                 );
             }
 
             if (
                 !File.Exists(
-                    Path.Combine(ConstantsClass.currentProject.GetProjectPath(), settingsName)
+                    Path.Combine(this.globalState.currentProject.GetProjectPath(), settingsName)
                 )
             )
             {
                 File.Create(
-                        Path.Combine(ConstantsClass.currentProject.GetProjectPath(), settingsName)
+                        Path.Combine(this.globalState.currentProject.GetProjectPath(), settingsName)
                     )
                     .Close();
             }
@@ -48,82 +75,57 @@ namespace PlumJsonAnimator.Services
         public void WriteAllSettings()
         {
             string settingsPath = Path.Combine(
-                ConstantsClass.currentProject.GetProjectPath(),
+                this.globalState.currentProject!.GetProjectPath(),
                 settingsName
             );
 
-            SettingsData settings = new SettingsData();
-
-            settings.Path = ConstantsClass.currentProject.ProjectPath;
-            settings.Name = ConstantsClass.currentProject.Name;
-            settings.Spine = ConstantsClass.currentProject.MetaData.Spine;
+            /*settings.Path = this.globalState.currentProject.ProjectPath;
+            settings.Name = this.globalState.currentProject.Name;
+            settings.Spine = this.globalState.currentProject.MetaData.Spine;
             settings.Anim = JsonConvert.SerializeObject(
-                ConstantsClass.currentProject.SpinejsonCode.generateJSONData(
-                    ConstantsClass.currentProject
-                ),
-                ConstantsClass.jsonSettings
-            );
+                this.jsonCode.generateJSONData(this.globalState.currentProject),
+                this.globalState.jsonSettings
+            );*/
 
             ExistOrCreateProjectDirs();
 
             File.WriteAllText(
                 settingsPath,
-                JsonConvert.SerializeObject(settings, ConstantsClass.jsonSettings)
+                JsonConvert.SerializeObject(this.settingsData, this.globalState.jsonSettings)
             );
         }
 
         public void WriteSettings()
         {
             string settingsPath = Path.Combine(
-                ConstantsClass.currentProject.GetProjectPath(),
+                this.globalState.currentProject!.GetProjectPath(),
                 settingsName
             );
 
             ExistOrCreateProjectDirs();
 
-            var settings = JsonConvert.DeserializeObject<SettingsData>(
-                File.ReadAllText(settingsPath)
-            );
-
-            settings.Path = ConstantsClass.currentProject.ProjectPath;
-            settings.Name = ConstantsClass.currentProject.Name;
-            settings.Spine = ConstantsClass.currentProject.MetaData.Spine;
-            settings.Anim = settings.Anim;
-
             File.WriteAllText(
                 settingsPath,
-                JsonConvert.SerializeObject(settings, ConstantsClass.jsonSettings)
+                JsonConvert.SerializeObject(this.settingsData, this.globalState.jsonSettings)
             );
         }
 
-        public void WriteAnim()
+        public void WriteAnim(string anim)
         {
             string settingsPath = Path.Combine(
-                ConstantsClass.currentProject.GetProjectPath(),
+                this.globalState.currentProject!.GetProjectPath(),
                 settingsName
             );
 
             ExistOrCreateProjectDirs();
 
-            var settings = JsonConvert.DeserializeObject<SettingsData>(
-                File.ReadAllText(settingsPath)
-            );
-
-            settings.Path = settings.Path;
-            settings.Name = settings.Name;
-            settings.Spine = settings.Spine;
-            settings.Anim = JsonConvert.SerializeObject(
-                ConstantsClass.currentProject.SpinejsonCode.generateJSONData(
-                    ConstantsClass.currentProject
-                ),
-                ConstantsClass.jsonSettings
-            );
+            this.settingsData.Anim = anim;
 
             ExistOrCreateProjectDirs();
 
             File.WriteAllText(
                 settingsPath,
-                JsonConvert.SerializeObject(settings, ConstantsClass.jsonSettings)
+                JsonConvert.SerializeObject(this.settingsData, this.globalState.jsonSettings)
             );
         }
 
@@ -141,10 +143,13 @@ namespace PlumJsonAnimator.Services
                 File.ReadAllText(settingsPath)
             );
 
-            ConstantsClass.currentProject.ProjectPath = settings.Path;
-            ConstantsClass.currentProject.Name = settings.Name;
-            ConstantsClass.currentProject.MetaData.Spine = settings.Spine;
-            ConstantsClass.currentProject.SpinejsonCode.Text = settings.Anim;
+            if (settings != null)
+            {
+                this.settingsData.Path = settings.Path;
+                this.settingsData.Name = settings.Name;
+                this.settingsData.Spine = settings.Spine;
+                this.settingsData.Anim = settings.Anim;
+            }
 
             this.appSettings.SaveSettings();
         }
@@ -152,11 +157,12 @@ namespace PlumJsonAnimator.Services
         public void ReadSettings()
         {
             string settingsPath = Path.Combine(
-                ConstantsClass.currentProject.GetProjectPath(),
+                this.globalState.currentProject!.GetProjectPath(),
                 settingsName
             );
 
             readFile(settingsPath);
+            SetupProject();
         }
 
         public void ReadSettings(string? path)
@@ -164,22 +170,23 @@ namespace PlumJsonAnimator.Services
             if (path != null)
             {
                 readFile(path);
+                SetupProject();
             }
         }
     }
-}
 
-public class SettingsData
-{
-    [JsonProperty("project_path")]
-    public string Path { get; set; }
+    public class SettingsData
+    {
+        [JsonProperty("project_path")]
+        public required string Path { get; set; }
 
-    [JsonProperty("project_name")]
-    public string Name { get; set; }
+        [JsonProperty("project_name")]
+        public required string Name { get; set; }
 
-    [JsonProperty("project_spine")]
-    public string Spine { get; set; }
+        [JsonProperty("project_spine")]
+        public required string Spine { get; set; }
 
-    [JsonProperty("project_anim")]
-    public string Anim { get; set; }
+        [JsonProperty("project_anim")]
+        public required string Anim { get; set; }
+    }
 }

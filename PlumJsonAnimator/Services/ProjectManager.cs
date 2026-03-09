@@ -2,11 +2,11 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using AnimEngine.Project;
-using AnimEngine.Resources;
 using Avalonia.Controls;
 using Avalonia.Platform.Storage;
-using Common.Constants;
+using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Models;
+using PlumJsonAnimator.Models.Resources;
 
 namespace PlumJsonAnimator.Services
 {
@@ -14,11 +14,23 @@ namespace PlumJsonAnimator.Services
     {
         private ProjectSettings projectSettings;
         private AppSettings appSettings;
+        private GlobalState globalState;
+        private Interpolation interpolation;
+        private ProjectManager projectManager;
 
-        public ProjectManager(ProjectSettings projectSettings, AppSettings appSettings)
+        public ProjectManager(
+            ProjectSettings projectSettings,
+            AppSettings appSettings,
+            GlobalState globalState,
+            Interpolation interpolation,
+            ProjectManager projectManager
+        )
         {
             this.projectSettings = projectSettings;
             this.appSettings = appSettings;
+            this.globalState = globalState;
+            this.interpolation = interpolation;
+            this.projectManager = projectManager;
         }
 
         public async Task<string?> OpenProject(Window window)
@@ -27,9 +39,9 @@ namespace PlumJsonAnimator.Services
 
             var fileTypeFilter = new FilePickerFileType[]
             {
-                new($"*{ConstantsClass.programExt}")
+                new($"*{this.globalState.programExt}")
                 {
-                    Patterns = new[] { $"*{ConstantsClass.programExt}" },
+                    Patterns = new[] { $"*{this.globalState.programExt}" },
                 },
             };
 
@@ -50,7 +62,12 @@ namespace PlumJsonAnimator.Services
             if (projectName != null && projectPath != null)
             {
                 this.projectSettings.WriteAllSettings();
-                ConstantsClass.currentProject = new Project(projectName, projectPath);
+                this.globalState.currentProject = new Project(
+                    projectName,
+                    projectPath,
+                    this.globalState,
+                    this.interpolation
+                );
                 this.projectSettings.WriteAllSettings();
                 this.appSettings.SaveSettings();
                 LoadRes();
@@ -62,8 +79,8 @@ namespace PlumJsonAnimator.Services
         public string CreateProjectDir()
         {
             string projectPath = Path.Combine(
-                ConstantsClass.currentProject!.ProjectPath,
-                ConstantsClass.currentProject.Name
+                this.globalState.currentProject!.ProjectPath,
+                this.globalState.currentProject.Name
             );
 
             if (!Directory.Exists(projectPath))
@@ -81,8 +98,8 @@ namespace PlumJsonAnimator.Services
         public string CopyRes(string resName, string filePath)
         {
             string projectPath = Path.Combine(
-                ConstantsClass.currentProject!.ProjectPath,
-                ConstantsClass.currentProject.Name
+                this.globalState.currentProject!.ProjectPath,
+                this.globalState.currentProject.Name
             );
             string resDir = Path.Combine(projectPath, "res");
 
@@ -103,8 +120,8 @@ namespace PlumJsonAnimator.Services
             try
             {
                 string projectPath = Path.Combine(
-                    ConstantsClass.currentProject!.ProjectPath,
-                    ConstantsClass.currentProject.Name
+                    this.globalState.currentProject!.ProjectPath,
+                    this.globalState.currentProject.Name
                 );
                 string resDir = Path.Combine(projectPath, "res");
                 string resPath = Path.Combine(resDir, $"{name}{ext}");
@@ -146,7 +163,7 @@ namespace PlumJsonAnimator.Services
                 Directory.CreateDirectory(newDir);
 
                 var files = Directory.GetFiles(oldDir);
-                var options = ConstantsClass.GetParallelOptions();
+                var options = this.globalState.GetParallelOptions();
                 Parallel.ForEach(
                     files,
                     options,
@@ -179,8 +196,8 @@ namespace PlumJsonAnimator.Services
         public void LoadRes()
         {
             string directoryPath = Path.Combine(
-                ConstantsClass.currentProject!.ProjectPath,
-                ConstantsClass.currentProject.Name,
+                this.globalState.currentProject!.ProjectPath,
+                this.globalState.currentProject.Name,
                 "res"
             );
             string[] extensions = { "*.png", "*.jpg", "*.jpeg" };
@@ -192,6 +209,8 @@ namespace PlumJsonAnimator.Services
                     .Select(filePath =>
                     {
                         return new ImageRes(
+                            this.projectManager,
+                            this.globalState,
                             filePath,
                             Path.GetFileNameWithoutExtension(filePath),
                             Path.GetExtension(filePath)
@@ -201,7 +220,7 @@ namespace PlumJsonAnimator.Services
 
                 foreach (var imageRes in allFiles)
                 {
-                    ConstantsClass.currentProject.Resources.Add(imageRes);
+                    this.globalState.currentProject.Resources.Add(imageRes);
                 }
             }
             catch (Exception ex)

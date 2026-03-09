@@ -1,12 +1,13 @@
 using System.Collections.Generic;
-using System.ComponentModel;
 using Avalonia.Controls;
-using Common.Constants;
 using Newtonsoft.Json;
+using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Models.Interfaces;
+using PlumJsonAnimator.Models.Resources;
 
-namespace PlumJsonAnimator.Models.Skeleton
+namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
-    public class Skin : INotifyPropertyChanged
+    public class Skin : INotifyable
     {
         private string _name = "default";
 
@@ -25,18 +26,17 @@ namespace PlumJsonAnimator.Models.Skeleton
         public Dictionary<Slot, Attachment?> SlotAttachmentBinding =
             new Dictionary<Slot, Attachment?>();
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        private GlobalState globalState;
 
-        protected virtual void OnPropertyChanged(string propertyName)
+        public Skin(GlobalState globalState)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            this.globalState = globalState;
         }
 
-        public Skin() { }
-
-        public Skin(string name)
+        public Skin(string name, GlobalState globalState)
         {
             this.Name = name;
+            this.globalState = globalState;
         }
 
         public void BindSlotAttachment(Slot s, Attachment a)
@@ -190,7 +190,7 @@ namespace PlumJsonAnimator.Models.Skeleton
 
         public string generateCode()
         {
-            return JsonConvert.SerializeObject(generateJSONData(), ConstantsClass.jsonSettings);
+            return JsonConvert.SerializeObject(generateJSONData(), this.globalState.jsonSettings);
         }
     }
 

@@ -1,14 +1,16 @@
 using Newtonsoft.Json;
+using PlumJsonAnimator.Models.Interfaces;
+using PlumJsonAnimator.Models.Resources;
 
-namespace PlumJsonAnimator.Models.Skeleton
+namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
-    public abstract class Attachment
+    public abstract class Attachment : INotifyable
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
-        public virtual Res GetRes()
+        public virtual Res? GetRes()
         {
-            return new Res();
+            return null;
         }
 
         public abstract AttachmentData generateJSONData();

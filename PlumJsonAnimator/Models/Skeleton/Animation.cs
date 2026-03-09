@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Common.Constants;
 using Newtonsoft.Json;
+using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Interfaces;
+using PlumJsonAnimator.Services;
 
-namespace PlumJsonAnimator.Models.Skeleton
+namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
-    public class Animation : INotifyPropertyChanged
+    public class Animation : INotifyable
     {
         private string _name = "anim0";
 
@@ -24,12 +26,6 @@ namespace PlumJsonAnimator.Models.Skeleton
             }
         }
 
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
         public double currentTime = 0;
         private bool _isRun = false;
         public bool IsRun
@@ -47,16 +43,25 @@ namespace PlumJsonAnimator.Models.Skeleton
         public Dictionary<Bone, BoneAnimation> BoneAnimationBinding =
             new Dictionary<Bone, BoneAnimation>();
 
-        public Animation() { }
+        private GlobalState globalState;
+        private Interpolation interpolation;
 
-        public Animation(string name)
+        public Animation(GlobalState globalState, Interpolation interpolation)
         {
+            this.globalState = globalState;
+            this.interpolation = interpolation;
+        }
+
+        public Animation(GlobalState globalState, Interpolation interpolation, string name)
+        {
+            this.globalState = globalState;
+            this.interpolation = interpolation;
             this.Name = name;
         }
 
         public void SetupBones()
         {
-            /*var parallelOptions = ConstantsClass.GetParallelOptions();
+            /*var parallelOptions = this.globalState.GetParallelOptions();
             Parallel.ForEach(
                 BoneAnimationBinding.Keys,
                 parallelOptions,
@@ -70,7 +75,7 @@ namespace PlumJsonAnimator.Models.Skeleton
 
         public void step()
         {
-            this.currentTime += 1.0 / (double)ConstantsClass.FPS;
+            this.currentTime += 1.0 / (double)this.globalState.FPS;
             SetupBones();
         }
 
@@ -88,7 +93,7 @@ namespace PlumJsonAnimator.Models.Skeleton
 
         public String generateCode()
         {
-            return JsonConvert.SerializeObject(generateJSONData(), ConstantsClass.jsonSettings);
+            return JsonConvert.SerializeObject(generateJSONData(), this.globalState.jsonSettings);
         }
 
         /// <summary>
@@ -117,7 +122,10 @@ namespace PlumJsonAnimator.Models.Skeleton
         {
             if (!BoneAnimationBinding.ContainsKey(b))
             {
-                BoneAnimationBinding.Add(b, new BoneAnimation());
+                BoneAnimationBinding.Add(
+                    b,
+                    new BoneAnimation(this.globalState, this.interpolation)
+                );
             }
         }
 

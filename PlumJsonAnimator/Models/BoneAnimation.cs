@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Common.Constants;
-using Common.Constants.CommonModels;
 using Newtonsoft.Json;
+using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.SkeletonNameSpace;
+using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.Models
 {
@@ -30,6 +32,15 @@ namespace PlumJsonAnimator.Models
         private double shearStart,
             shearEnd;
 
+        private GlobalState globalState;
+        private Interpolation interpolation;
+
+        public BoneAnimation(GlobalState globalState, Interpolation interpolation)
+        {
+            this.globalState = globalState;
+            this.interpolation = interpolation;
+        }
+
         /// <summary>
         /// Add translate keyframe to bone
         /// </summary>
@@ -40,11 +51,11 @@ namespace PlumJsonAnimator.Models
         {
             if (translateKeyframes.ContainsKey(time))
             {
-                translateKeyframes[time] = new Translate(time, x, y);
+                translateKeyframes[time] = new Translate(this.globalState, time, x, y);
             }
             else
             {
-                translateKeyframes.Add(time, new Translate(time, x, y));
+                translateKeyframes.Add(time, new Translate(this.globalState, time, x, y));
             }
         }
 
@@ -57,11 +68,11 @@ namespace PlumJsonAnimator.Models
         {
             if (rotateKeyframes.ContainsKey(time))
             {
-                rotateKeyframes[time] = new Rotate(time, value);
+                rotateKeyframes[time] = new Rotate(this.globalState, time, value);
             }
             else
             {
-                rotateKeyframes.Add(time, new Rotate(time, value));
+                rotateKeyframes.Add(time, new Rotate(this.globalState, time, value));
             }
         }
 
@@ -75,11 +86,11 @@ namespace PlumJsonAnimator.Models
         {
             if (scaleKeyframes.ContainsKey(time))
             {
-                scaleKeyframes[time] = new Scale(time, x, y);
+                scaleKeyframes[time] = new Scale(this.globalState, time, x, y);
             }
             else
             {
-                scaleKeyframes.Add(time, new Scale(time, x, y));
+                scaleKeyframes.Add(time, new Scale(this.globalState, time, x, y));
             }
         }
 
@@ -93,11 +104,11 @@ namespace PlumJsonAnimator.Models
         {
             if (shearKeyframes.ContainsKey(time))
             {
-                shearKeyframes[time] = new Shear(time, x, y);
+                shearKeyframes[time] = new Shear(this.globalState, time, x, y);
             }
             else
             {
-                shearKeyframes.Add(time, new Shear(time, x, y));
+                shearKeyframes.Add(time, new Shear(this.globalState, time, x, y));
             }
         }
 
@@ -247,17 +258,17 @@ namespace PlumJsonAnimator.Models
             }
             FindSegment(time, KeyFrameTypes.TRANSLATE);
 
-            double t = Interpolation.findInterpolateParam(
+            double t = this.interpolation.findInterpolateParam(
                 translateEnd - translateStart,
                 time - translateStart
             );
 
-            double interpolatedX = Interpolation.linearInterpolation(
+            double interpolatedX = this.interpolation.linearInterpolation(
                 ((Translate)translateKeyframes[translateStart]).x,
                 ((Translate)translateKeyframes[translateEnd]).x,
                 t
             );
-            double interpolatedY = Interpolation.linearInterpolation(
+            double interpolatedY = this.interpolation.linearInterpolation(
                 ((Translate)translateKeyframes[translateStart]).y,
                 ((Translate)translateKeyframes[translateEnd]).y,
                 t
@@ -274,12 +285,12 @@ namespace PlumJsonAnimator.Models
             }
             FindSegment(time, KeyFrameTypes.ROTATE);
 
-            double t = Interpolation.findInterpolateParam(
+            double t = this.interpolation.findInterpolateParam(
                 rotateEnd - rotateStart,
                 time - rotateStart
             );
 
-            double interpolatedA = Interpolation.angleInterpolation(
+            double interpolatedA = this.interpolation.angleInterpolation(
                 ((Rotate)rotateKeyframes[rotateStart]).value,
                 ((Rotate)rotateKeyframes[rotateEnd]).value,
                 t
@@ -329,7 +340,7 @@ namespace PlumJsonAnimator.Models
 
         public string generateCode()
         {
-            return JsonConvert.SerializeObject(generateJSONData(), ConstantsClass.jsonSettings);
+            return JsonConvert.SerializeObject(generateJSONData(), this.globalState.jsonSettings);
         }
 
         public double FindTime(double time, TransformModesTypes type, bool isNext)

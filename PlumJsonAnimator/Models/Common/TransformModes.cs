@@ -1,4 +1,6 @@
 using System;
+using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Models.SkeletonNameSpace;
 
 namespace PlumJsonAnimator.Models.Common
 {
@@ -13,19 +15,27 @@ namespace PlumJsonAnimator.Models.Common
 
     public class TransformModeFactory
     {
-        private static Mode[] modes =
-        {
-            new NoMode(),
-            new TransformMode(),
-            new RotateMode(),
-            new ScaleMode(),
-        };
+        private GlobalState globalState;
+        private Mode[] modes;
 
-        public static Mode createMode(Mode old, TransformModesTypes type)
+        public TransformModeFactory(GlobalState globalState)
+        {
+            this.globalState = globalState;
+
+            modes = new Mode[]
+            {
+                new NoMode(globalState),
+                new TransformMode(globalState),
+                new RotateMode(globalState),
+                new ScaleMode(globalState),
+            };
+        }
+
+        public Mode createMode(Mode old, TransformModesTypes type)
         {
             if (old.type == type)
             {
-                return new NoMode();
+                return new NoMode(this.globalState);
             }
             else
             {
@@ -39,12 +49,20 @@ namespace PlumJsonAnimator.Models.Common
         public TransformModesTypes type;
         public string name = "";
 
+        protected GlobalState globalState;
+
+        public Mode(GlobalState globalState)
+        {
+            this.globalState = globalState;
+        }
+
         public abstract void transform(Bone bone, double a, double b);
     }
 
     class NoMode : Mode
     {
-        public NoMode()
+        public NoMode(GlobalState globalState)
+            : base(globalState)
         {
             type = TransformModesTypes.NO;
             name = "";
@@ -58,7 +76,8 @@ namespace PlumJsonAnimator.Models.Common
 
     class TransformMode : Mode
     {
-        public TransformMode()
+        public TransformMode(GlobalState globalState)
+            : base(globalState)
         {
             type = TransformModesTypes.TRANSLATE;
             name = "transform";
@@ -67,7 +86,7 @@ namespace PlumJsonAnimator.Models.Common
         public override void transform(Bone bone, double x, double y)
         {
             bone.move(x, y);
-            var animation = ConstantsClass.currentProject?.GetAnimation();
+            var animation = this.globalState.currentProject?.GetAnimation();
             if (animation != null && !animation.IsRun)
             {
                 animation.TranslateBone(bone, bone.x, bone.y);
@@ -77,7 +96,8 @@ namespace PlumJsonAnimator.Models.Common
 
     class ScaleMode : Mode
     {
-        public ScaleMode()
+        public ScaleMode(GlobalState globalState)
+            : base(globalState)
         {
             type = TransformModesTypes.SCALE;
             name = "scale";
@@ -103,7 +123,8 @@ namespace PlumJsonAnimator.Models.Common
             }
         }
 
-        public RotateMode()
+        public RotateMode(GlobalState globalState)
+            : base(globalState)
         {
             type = TransformModesTypes.ROTATE;
             name = "rotate";
@@ -122,7 +143,7 @@ namespace PlumJsonAnimator.Models.Common
 
             bone.rotate(-angleDeg);
 
-            var animation = ConstantsClass.currentProject?.GetAnimation();
+            var animation = this.globalState.currentProject?.GetAnimation();
             if (animation != null && !animation.IsRun)
             {
                 animation.RotateBone(bone, bone.a);

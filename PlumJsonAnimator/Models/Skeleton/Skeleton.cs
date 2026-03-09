@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Avalonia.Controls;
-using Common.Constants;
 using Newtonsoft.Json;
+using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Models.Interfaces;
 
-namespace PlumJsonAnimator.Models.Skeleton
+namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
-    public class Skeleton
+    public class Skeleton : INotifyable
     {
         public string name = "default";
         public ObservableCollection<Bone> Bones { get; set; } = new ObservableCollection<Bone>();
@@ -16,15 +17,19 @@ namespace PlumJsonAnimator.Models.Skeleton
 
         private int ids = 0;
 
-        public Skeleton()
+        private GlobalState globalState;
+
+        public Skeleton(GlobalState globalState)
         {
-            Bones.Add(new Bone());
+            Bones.Add(new Bone(globalState));
             RootBones.Add(Bones[0]);
+
+            this.globalState = globalState;
         }
 
         public void addBone(int id)
         {
-            Bone new_bone = new Bone(Bones.Count);
+            Bone new_bone = new Bone(this.globalState, Bones.Count);
             this.Bones.Add(new_bone);
             foreach (Bone b in this.Bones)
             {
@@ -92,7 +97,7 @@ namespace PlumJsonAnimator.Models.Skeleton
 
         public String generateCode()
         {
-            return JsonConvert.SerializeObject(generateJSONData(), ConstantsClass.jsonSettings);
+            return JsonConvert.SerializeObject(generateJSONData(), this.globalState.jsonSettings);
         }
 
         public void regenerateBones(List<BoneData> boneDatas) { }
