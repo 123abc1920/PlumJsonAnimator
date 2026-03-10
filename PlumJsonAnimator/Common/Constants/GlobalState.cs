@@ -21,13 +21,6 @@ namespace PlumJsonAnimator.Common.Constants
         public int FPS = 60;
         public Bone? currentBone = null;
         public Engine MainEngine;
-        public Dictionary<char, char> pairedSymbols = new Dictionary<char, char>()
-        {
-            { '{', '}' },
-            { '[', ']' },
-            { '"', '"' },
-            { '<', '>' },
-        };
         public string theme = "light";
         public bool drawBones = true;
         public string workspace = "PlumJsonAnimatorWorkspace";

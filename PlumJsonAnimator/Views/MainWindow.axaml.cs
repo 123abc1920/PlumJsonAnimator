@@ -1,5 +1,5 @@
 using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
@@ -8,6 +8,8 @@ using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Models;
+using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
@@ -16,6 +18,13 @@ namespace PlumJsonAnimator.Views;
 
 public partial class MainWindow : Window
 {
+    private Dictionary<char, char> pairedSymbols = new Dictionary<char, char>()
+    {
+        { '{', '}' },
+        { '[', ']' },
+        { '"', '"' },
+        { '<', '>' },
+    };
     private bool _isDragging = false;
     private Bone selectedBone;
     public Bone? SelectedBone
@@ -67,7 +76,11 @@ public partial class MainWindow : Window
         if (DataContext is MainWindowViewModel viewModel)
         {
             viewModel.Canvas = mainCanvas;
+            viewModel.Timeline = Timeline;
         }
+
+        Dialogs.mainWin = this;
+        Popups.win = this;
     }
 
     private void AnimationTick(object? sender, EventArgs e)
@@ -83,23 +96,28 @@ public partial class MainWindow : Window
         if (currentTab == 0)
         {
             mainCanvas.Children.Clear();
-            ConstantsClass.currentProject?.drawSlots(mainCanvas);
-            if (ConstantsClass.drawBones)
+            if (DataContext is MainWindowViewModel viewModel)
             {
-                ConstantsClass.currentProject?.MainSkeleton?.drawSkeleton(mainCanvas);
+                viewModel.CurrentProject?.drawSlots(mainCanvas);
+                if (viewModel.DrawBones)
+                {
+                    viewModel.CurrentProject?.MainSkeleton?.drawSkeleton(mainCanvas);
+                }
             }
         }
         else if (currentTab == 1)
         {
-            ConstantsClass.jsonError.ErrorText = JsonValidator.validate(spineJsonText.Text);
-            if (ConstantsClass.jsonError.isOk)
+            if (DataContext is MainWindowViewModel viewModel)
             {
-                ProjectValidResult validateResult =
-                    ConstantsClass.currentProject.SpinejsonCode.regenerate();
-                if (!validateResult.IsOk)
+                viewModel.JsonErrorObj.ErrorText = viewModel.Validate(spineJsonText.Text);
+                if (viewModel.JsonErrorObj.isOk)
                 {
-                    ConstantsClass.jsonError.ErrorText = validateResult.Message;
-                    currentTab = 1;
+                    ProjectValidResult validateResult = viewModel.ReGenerateCode();
+                    if (!validateResult.IsOk)
+                    {
+                        viewModel.JsonErrorObj.ErrorText = validateResult.Message;
+                        currentTab = 1;
+                    }
                 }
             }
         }
@@ -109,7 +127,10 @@ public partial class MainWindow : Window
     {
         if (e.Key == Key.S && e.KeyModifiers.HasFlag(KeyModifiers.Control))
         {
-            SaveProject(sender, new RoutedEventArgs());
+            if (DataContext is MainWindowViewModel viewModel)
+            {
+                viewModel.SaveProject.Execute(null);
+            }
             e.Handled = true;
         }
         if (e.Key == Key.O && e.KeyModifiers.HasFlag(KeyModifiers.Control))
@@ -124,16 +145,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private void Add_Bone(object sender, RoutedEventArgs e)
-    {
-        Bone? selectedItem = boneTreeView.SelectedItem as Bone;
-        if (selectedItem != null && selectedItem.isBone == true)
-        {
-            ConstantsClass.currentProject?.MainSkeleton?.addBone(selectedItem.id);
-        }
-    }
-
-    private async void Add_Res(object sender, RoutedEventArgs e)
+    private async void AddRes(object sender, RoutedEventArgs e)
     {
         var topLevel = TopLevel.GetTopLevel(this);
 
@@ -147,126 +159,9 @@ public partial class MainWindow : Window
             paths = files.Select(f => f.Path.LocalPath).ToArray();
         }
 
-        ProjectManager.CreateProjectDir();
-
-        foreach (string p in paths)
-        {
-            string resName = "img" + ConstantsClass.currentProject.Resources.Count.ToString();
-            string ext = ProjectManager.CopyRes(resName, p);
-            ImageRes image = new ImageRes(
-                Path.Combine(ConstantsClass.currentProject.GetProjectPath(), "res"),
-                resName,
-                ext
-            );
-            ConstantsClass.currentProject.Resources.Add(image);
-        }
-    }
-
-    private async void RenameRes(object sender, RoutedEventArgs e)
-    {
-        Res selectedRes = resList.SelectedItem as Res;
-        if (selectedRes != null)
-        {
-            if (DataContext is MainWindowViewModel viewModel)
-            {
-                viewModel.RedactObj = selectedRes;
-                Dialogs.ShowDialog("Rename", viewModel, this, ViewType.RENAME);
-            }
-        }
-    }
-
-    private async void RenameSlot(object sender, RoutedEventArgs e)
-    {
-        Slot selectedSlot = SlotsList.SelectedItem as Slot;
-        if (selectedSlot != null)
-        {
-            if (DataContext is MainWindowViewModel viewModel)
-            {
-                viewModel.RedactObj = selectedSlot;
-                Dialogs.ShowDialog("Rename", viewModel, this, ViewType.RENAME);
-            }
-        }
-    }
-
-    private void DeleteRes(object sender, RoutedEventArgs e)
-    {
-        Res res = resList.SelectedItem as Res;
-        if (res != null)
-        {
-            foreach (Skin s in ConstantsClass.currentProject.Skins)
-            {
-                s.ContainsAndRemoveRes(res);
-            }
-            ConstantsClass.currentProject.Resources.Remove(res);
-            ProjectManager.DeleteResource(res.Name, res.ext);
-        }
-    }
-
-    private void Rename_Bone(object sender, RoutedEventArgs e)
-    {
-        Bone bone = boneTreeView.SelectedItem as Bone;
-        if (bone != null)
-        {
-            if (DataContext is MainWindowViewModel viewModel)
-            {
-                viewModel.RedactObj = bone;
-                Dialogs.ShowDialog("Rename", viewModel, this, ViewType.RENAME);
-            }
-        }
-    }
-
-    private void DeleteBone(Bone? bone)
-    {
-        if (bone != null && bone.Parent != null)
-        {
-            ConstantsClass.currentProject?.MainSkeleton?.Bones.Remove(bone);
-            bone.Parent.Children.Remove(bone);
-            foreach (Bone b in bone.Children.ToList())
-            {
-                DeleteBone(b);
-            }
-        }
-    }
-
-    private void Delete_Bone(object sender, RoutedEventArgs e)
-    {
-        Bone bone = (Bone)SelectedBone;
-        DeleteBone(bone);
-    }
-
-    private void Set_Transform_Mode(object sender, RoutedEventArgs e)
-    {
-        ConstantsClass.currentProject.currentMode = TransformModeFactory.createMode(
-            ConstantsClass.currentProject.currentMode,
-            TransformModesTypes.TRANSLATE
-        );
         if (DataContext is MainWindowViewModel viewModel)
         {
-            viewModel.ModeName = ConstantsClass.currentProject.currentMode.name;
-        }
-    }
-
-    private void Set_Rotate_Mode(object sender, RoutedEventArgs e)
-    {
-        ConstantsClass.currentProject.currentMode = TransformModeFactory.createMode(
-            ConstantsClass.currentProject.currentMode,
-            TransformModesTypes.ROTATE
-        );
-        if (DataContext is MainWindowViewModel viewModel)
-        {
-            viewModel.ModeName = ConstantsClass.currentProject.currentMode.name;
-        }
-    }
-
-    private void Set_Scale_Mode(object sender, RoutedEventArgs e)
-    {
-        ConstantsClass.currentProject.currentMode = TransformModeFactory.createMode(
-            ConstantsClass.currentProject.currentMode,
-            TransformModesTypes.SCALE
-        );
-        if (DataContext is MainWindowViewModel viewModel)
-        {
-            viewModel.ModeName = ConstantsClass.currentProject.currentMode.name;
+            viewModel.AddRes(paths);
         }
     }
 
@@ -292,11 +187,14 @@ public partial class MainWindow : Window
 
         if (SelectedBone != null)
         {
-            ConstantsClass.currentProject?.currentMode.transform(
-                SelectedBone,
-                point.X - canvas.Width / 2,
-                point.Y - canvas.Height / 2
-            );
+            if (DataContext is MainWindowViewModel viewModel)
+            {
+                viewModel.CurrentProject?.currentMode.transform(
+                    SelectedBone,
+                    point.X - canvas.Width / 2,
+                    point.Y - canvas.Height / 2
+                );
+            }
         }
     }
 
@@ -324,22 +222,15 @@ public partial class MainWindow : Window
 
             while (element != null)
             {
-                if (element is TreeViewItem item && item.DataContext is Bone Bone)
+                if (element is TreeViewItem item && item.DataContext is Bone bone)
                 {
-                    if (Bone.isBone == true)
+                    if (bone.isBone == true)
                     {
-                        Bone bone = ConstantsClass.currentProject.MainSkeleton.getBone(Bone.id);
-                        if (bone != null)
+                        if (DataContext is MainWindowViewModel viewModel)
                         {
-                            Slot s = new Slot("tesr", bone);
-                            ConstantsClass.currentProject.Slots.Add(s);
-                            ConstantsClass.currentProject.CurrentSkin.BindSlotAttachment(
-                                s,
-                                new ImageAttachment((ImageRes)res)
-                            );
-                            bone.UpdateSlots();
+                            viewModel.DropSlotToBone(bone.id, res);
+                            return;
                         }
-                        return;
                     }
                 }
                 element = element.Parent as Visual;
@@ -362,10 +253,13 @@ public partial class MainWindow : Window
         {
             if (e.Data.Get("Resource") is ImageRes imageRes && listBoxItem.DataContext is Slot slot)
             {
-                ConstantsClass.currentProject.CurrentSkin.BindSlotAttachment(
-                    slot,
-                    new ImageAttachment(imageRes)
-                );
+                if (DataContext is MainWindowViewModel viewModel)
+                {
+                    viewModel.CurrentProject.CurrentSkin.BindSlotAttachment(
+                        slot,
+                        new ImageAttachment(imageRes)
+                    );
+                }
                 e.Handled = true;
             }
         }
@@ -373,39 +267,7 @@ public partial class MainWindow : Window
 
     private void Play_Animation(object sender, RoutedEventArgs e)
     {
-        ConstantsClass.MainEngine.runAnimation();
-    }
-
-    private void Add_New_Animation(object sender, RoutedEventArgs e)
-    {
-        ConstantsClass.currentProject?.AddAnimation();
-    }
-
-    private void Add_New_Skin(object sender, RoutedEventArgs e)
-    {
-        ConstantsClass.currentProject?.AddSkin();
-    }
-
-    private void Delete_Skin(object sender, RoutedEventArgs e)
-    {
-        ConstantsClass.currentProject?.DeleteSkin();
-    }
-
-    private void Delete_Animation(object sender, RoutedEventArgs e)
-    {
-        ConstantsClass.currentProject?.DeleteAnimation();
-    }
-
-    private void Add_Slot(object sender, RoutedEventArgs e)
-    {
-        Bone bone = selectedBone;
-        if (bone != null)
-        {
-            Slot s = new Slot("tesr", bone);
-            ConstantsClass.currentProject.Slots.Add(s);
-            ConstantsClass.currentProject.CurrentSkin.AddSlot(s);
-            bone.UpdateSlots();
-        }
+        //ConstantsClass.MainEngine.runAnimation();
     }
 
     private void OnSlotSelectionChanged(object sender, TappedEventArgs e)
@@ -417,48 +279,36 @@ public partial class MainWindow : Window
         }
     }
 
-    private void Delete_Slot(object sender, RoutedEventArgs e)
-    {
-        Slot selectedSlot = SlotsList.SelectedItem as Slot;
-        if (selectedSlot != null)
-        {
-            ConstantsClass.currentProject.Slots.Remove(selectedSlot);
-            ConstantsClass.currentProject.CurrentSkin.DeleteSlot(selectedSlot);
-            selectedBone.UpdateSlots();
-        }
-    }
-
     private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (e.Source is TabControl tabControl)
         {
             int newIndex = tabControl.SelectedIndex;
 
-            if (newIndex == 0 && ConstantsClass.jsonError.isOk != true)
+            if (DataContext is MainWindowViewModel viewModel)
             {
-                tabControl.SelectionChanged -= TabControl_SelectionChanged;
-                tabControl.SelectedIndex = 1;
-                tabControl.SelectionChanged += TabControl_SelectionChanged;
-                return;
-            }
-
-            if (tabControl.SelectedItem is TabItem selectedTab)
-            {
-                string header = selectedTab.Header?.ToString();
-
-                switch (header)
+                if (newIndex == 0 && viewModel.JsonErrorObj.isOk != true)
                 {
-                    case "Json":
-                        currentTab = 1;
-                        ConstantsClass.currentProject?.SpinejsonCode.generateCode(
-                            ConstantsClass.currentProject
-                        );
-                        break;
+                    tabControl.SelectionChanged -= TabControl_SelectionChanged;
+                    tabControl.SelectedIndex = 1;
+                    tabControl.SelectionChanged += TabControl_SelectionChanged;
+                    return;
+                }
 
-                    case "Анимация":
-                        ConstantsClass.currentProject?.SpinejsonCode.regenerate();
-                        currentTab = 0;
-                        break;
+                if (tabControl.SelectedItem is TabItem selectedTab)
+                {
+                    string header = selectedTab.Header?.ToString();
+
+                    switch (header)
+                    {
+                        case "Json":
+                            currentTab = 1;
+                            break;
+
+                        case "Анимация":
+                            currentTab = 0;
+                            break;
+                    }
                 }
             }
         }
@@ -491,16 +341,12 @@ public partial class MainWindow : Window
         }
     }
 
-    private void SaveProject(object sender, RoutedEventArgs e)
-    {
-        ProjectSettings.WriteAnim();
-        Popups.ShowPopup("Saved", this);
-    }
-
     private async void OpenProject(object sender, RoutedEventArgs e)
     {
-        var path = await ProjectManager.OpenProject(this);
-        ProjectSettings.ReadSettings(path);
+        if (DataContext is MainWindowViewModel viewModel)
+        {
+            viewModel.OpenProject(this);
+        }
     }
 
     private async void NewProject(object sender, RoutedEventArgs e)
@@ -519,54 +365,6 @@ public partial class MainWindow : Window
     private void DecreaseTimeLine(object sender, RoutedEventArgs e)
     {
         Timeline.Zoom--;
-    }
-
-    private void PrevKeyframe(object sender, RoutedEventArgs e)
-    {
-        if (selectedBone != null)
-        {
-            Timeline.CurrentTime = ConstantsClass.currentProject.CurrentAnimation.FindKeyFrame(
-                selectedBone,
-                ConstantsClass.currentProject.CurrentAnimation.currentTime,
-                ConstantsClass.currentProject.currentMode.type,
-                false
-            );
-        }
-    }
-
-    private void NextKeyframe(object sender, RoutedEventArgs e)
-    {
-        if (selectedBone != null)
-        {
-            Timeline.CurrentTime = ConstantsClass.currentProject.CurrentAnimation.FindKeyFrame(
-                selectedBone,
-                ConstantsClass.currentProject.CurrentAnimation.currentTime,
-                ConstantsClass.currentProject.currentMode.type,
-                true
-            );
-        }
-    }
-
-    private void AddKeyFrame(object sender, RoutedEventArgs e)
-    {
-        if (selectedBone != null)
-        {
-            ConstantsClass.currentProject.CurrentAnimation.AddKeyFrame(
-                selectedBone,
-                ConstantsClass.currentProject.currentMode.type
-            );
-        }
-    }
-
-    private void DeleteKeyFrame(object sender, RoutedEventArgs e)
-    {
-        if (selectedBone != null)
-        {
-            ConstantsClass.currentProject.CurrentAnimation.DeleteKeyFrame(
-                selectedBone,
-                ConstantsClass.currentProject.currentMode.type
-            );
-        }
     }
 
     private void InsertPairedSymbol(char first, char second)
@@ -592,7 +390,11 @@ public partial class MainWindow : Window
             )
         )
         {
-            spineJsonText.Text = Prettify.prettify(spineJsonText.Text);
+            if (DataContext is MainWindowViewModel viewModel)
+            {
+                spineJsonText.Text = viewModel.Prettify(spineJsonText.Text);
+            }
+
             e.Handled = true;
         }
 
@@ -611,10 +413,10 @@ public partial class MainWindow : Window
             pressedChar = '<';
         }
 
-        if (pressedChar.HasValue && ConstantsClass.pairedSymbols.ContainsKey(pressedChar.Value))
+        if (pressedChar.HasValue && pairedSymbols.ContainsKey(pressedChar.Value))
         {
             e.Handled = true;
-            var closingChar = ConstantsClass.pairedSymbols[pressedChar.Value];
+            var closingChar = pairedSymbols[pressedChar.Value];
             InsertPairedSymbol(pressedChar.Value, closingChar);
         }
     }
@@ -629,7 +431,12 @@ public partial class MainWindow : Window
 
         if (folder.Count > 0)
         {
-            ExportResult result = SpineJsonExport.exportSpineJson(folder[0].Path.LocalPath);
+            ExportResult result = ExportResult.NO_FOLDER;
+            if (DataContext is MainWindowViewModel viewModel)
+            {
+                result = viewModel.exportSpineJson(folder[0].Path.LocalPath);
+            }
+
             if (result == ExportResult.SUCCESS)
             {
                 Popups.ShowPopup("Анимация успешно экспортирована!", this);
@@ -663,7 +470,12 @@ public partial class MainWindow : Window
 
         if (path != null && path != "")
         {
-            ExportResult result = SpineJsonExport.importSpineJson(path);
+            ExportResult result = ExportResult.NO_FOLDER;
+            if (DataContext is MainWindowViewModel viewModel)
+            {
+                result = viewModel.importSpineJson(path);
+            }
+
             if (result == ExportResult.SUCCESS)
             {
                 Popups.ShowPopup("Успешно импортировано!");
@@ -718,7 +530,10 @@ public partial class MainWindow : Window
 
         if (isChecked != null)
         {
-            ConstantsClass.drawBones = (bool)isChecked;
+            if (DataContext is MainWindowViewModel viewModel)
+            {
+                viewModel.DrawBones = (bool)isChecked;
+            }
         }
     }
 }

@@ -43,7 +43,7 @@
                         <KeyGesture>Ctrl+N</KeyGesture>
                     </MenuItem.InputGesture>
                 </MenuItem>
-                <MenuItem Click="SaveProject" Header="Save">
+                <MenuItem Command="{Binding SaveProject}" Header="Save">
                     <MenuItem.InputGesture>
                         <KeyGesture>Ctrl+S</KeyGesture>
                     </MenuItem.InputGesture>
@@ -125,7 +125,7 @@
                             Padding="0"
                             HorizontalContentAlignment="Center"
                             VerticalContentAlignment="Center"
-                            Click="Add_New_Skin">
+                            Command="{Binding AddSkin}">
                             <iconPacks:PackIconBootstrapIcons Kind="FilePlusFill" />
                         </Button>
                         <Button
@@ -137,7 +137,7 @@
                             Padding="0"
                             HorizontalContentAlignment="Center"
                             VerticalContentAlignment="Center"
-                            Click="Delete_Skin">
+                            Command="{Binding AddSkin}">
                             <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
                         </Button>
                     </Grid>
@@ -187,7 +187,7 @@
                             Padding="0"
                             HorizontalContentAlignment="Center"
                             VerticalContentAlignment="Center"
-                            Click="Add_New_Animation">
+                            Command="{Binding AddAnimation}">
                             <iconPacks:PackIconBootstrapIcons Kind="FilePlusFill" />
                         </Button>
                         <Button
@@ -199,7 +199,7 @@
                             Padding="0"
                             HorizontalContentAlignment="Center"
                             VerticalContentAlignment="Center"
-                            Click="Delete_Animation">
+                            Command="{Binding DeleteAnimation}">
                             <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
                         </Button>
                     </Grid>
@@ -218,7 +218,7 @@
                             Padding="0"
                             HorizontalContentAlignment="Center"
                             VerticalContentAlignment="Center"
-                            Click="Add_Res">
+                            Click="AddRes">
                             <iconPacks:PackIconBootstrapIcons Kind="FolderFill" />
                         </Button>
                         <Button
@@ -227,7 +227,8 @@
                             Padding="0"
                             HorizontalContentAlignment="Center"
                             VerticalContentAlignment="Center"
-                            Click="DeleteRes">
+                            Command="{Binding DeleteRes}"
+                            CommandParameter="{Binding ElementName=resList}">
                             <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
                         </Button>
                         <Button
@@ -236,7 +237,8 @@
                             Padding="0"
                             HorizontalContentAlignment="Center"
                             VerticalContentAlignment="Center"
-                            Click="RenameRes">
+                            Command="{Binding RenameRes}"
+                            CommandParameter="{Binding ElementName=resList}">
                             <iconPacks:PackIconBootstrapIcons Kind="PencilFill" />
                         </Button>
                     </StackPanel>
@@ -305,7 +307,8 @@
                                             Padding="0"
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"
-                                            Click="Set_Transform_Mode">
+                                            Command="{Binding SetTransformMode}"
+                                            CommandParameter="transform">
                                             <iconPacks:PackIconBootstrapIcons Kind="ArrowsMove" />
                                         </Button>
                                         <TextBox
@@ -322,7 +325,8 @@
                                             Padding="0"
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"
-                                            Click="Set_Rotate_Mode">
+                                            Command="{Binding SetTransformMode}"
+                                            CommandParameter="rotate">
                                             <iconPacks:PackIconBootstrapIcons Kind="ArrowClockwise" />
                                         </Button>
                                         <TextBox
@@ -335,7 +339,8 @@
                                             Padding="0"
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"
-                                            Click="Set_Scale_Mode">
+                                            Command="{Binding SetTransformMode}"
+                                            CommandParameter="scale">
                                             <iconPacks:PackIconBootstrapIcons Kind="ZoomIn" />
                                         </Button>
                                         <TextBox x:Name="scaleX" Watermark="X" />
@@ -384,7 +389,7 @@
                                         Padding="0"
                                         HorizontalContentAlignment="Center"
                                         VerticalContentAlignment="Center"
-                                        Click="PrevKeyframe">
+                                        Command="{Binding PrevKeyFrame}">
                                         <iconPacks:PackIconBootstrapIcons Kind="CaretLeftFill" />
                                     </Button>
                                     <Button
@@ -405,7 +410,7 @@
                                         Padding="0"
                                         HorizontalContentAlignment="Center"
                                         VerticalContentAlignment="Center"
-                                        Click="NextKeyframe">
+                                        Command="{Binding NextKeyFrame}">
                                         <iconPacks:PackIconBootstrapIcons Kind="CaretRightFill" />
                                     </Button>
                                     <Button
@@ -414,7 +419,7 @@
                                         Padding="0"
                                         HorizontalContentAlignment="Center"
                                         VerticalContentAlignment="Center"
-                                        Click="AddKeyFrame">
+                                        Command="{Binding AddKeyFrame}">
                                         <iconPacks:PackIconBootstrapIcons Kind="FilePlusFill" />
                                     </Button>
                                     <Button
@@ -423,7 +428,7 @@
                                         Padding="0"
                                         HorizontalContentAlignment="Center"
                                         VerticalContentAlignment="Center"
-                                        Click="DeleteKeyFrame">
+                                        Command="{Binding DeleteKeyFrame}">
                                         <iconPacks:PackIconBootstrapIcons Kind="FileMinusFill" />
                                     </Button>
                                 </StackPanel>
@@ -468,7 +473,8 @@
                                 Grid.Row="0"
                                 AcceptsReturn="True"
                                 KeyDown="SpineJsonText_KeyDown"
-                                Text="{Binding CurrentProject.SpinejsonCode.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                Text="" />
+                                <!--{Binding CurrentProject.SpinejsonCode.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}-->
 
                             <GridSplitter
                                 Grid.Row="1"
@@ -517,7 +523,7 @@
                             Padding="0"
                             HorizontalContentAlignment="Center"
                             VerticalContentAlignment="Center"
-                            Click="Delete_Bone">
+                            Command="{Binding DeleteBone}">
                             <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
                         </Button>
                         <Button
@@ -526,7 +532,8 @@
                             Padding="0"
                             HorizontalContentAlignment="Center"
                             VerticalContentAlignment="Center"
-                            Click="Rename_Bone">
+                            Command="{Binding RenameBone}"
+                            CommandParameter="{Binding ElementName=boneTreeView}">
                             <iconPacks:PackIconBootstrapIcons Kind="PencilFill" />
                         </Button>
                     </StackPanel>
@@ -558,7 +565,7 @@
                                     Padding="0"
                                     HorizontalContentAlignment="Center"
                                     VerticalContentAlignment="Center"
-                                    Click="Add_Slot">
+                                    Command="{Binding AddSlot}">
                                     <iconPacks:PackIconBootstrapIcons Kind="FilePlusFill" />
                                 </Button>
                                 <Button
@@ -567,7 +574,8 @@
                                     Padding="0"
                                     HorizontalContentAlignment="Center"
                                     VerticalContentAlignment="Center"
-                                    Click="Delete_Slot">
+                                    Command="{Binding DeleteSlot}"
+                                    CommandParameter="{Binding ElementName=SlotsList}">
                                     <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
                                 </Button>
                                 <Button
@@ -576,7 +584,8 @@
                                     Padding="0"
                                     HorizontalContentAlignment="Center"
                                     VerticalContentAlignment="Center"
-                                    Click="RenameSlot">
+                                    Command="{Binding RenameSlot}"
+                                    CommandParameter="{Binding ElementName=SlotsList}">
                                     <iconPacks:PackIconBootstrapIcons Kind="PencilFill" />
                                 </Button>
                             </StackPanel>

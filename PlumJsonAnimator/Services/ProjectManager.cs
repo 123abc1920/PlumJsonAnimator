@@ -16,21 +16,18 @@ namespace PlumJsonAnimator.Services
         private AppSettings appSettings;
         private GlobalState globalState;
         private Interpolation interpolation;
-        private ProjectManager projectManager;
 
         public ProjectManager(
             ProjectSettings projectSettings,
             AppSettings appSettings,
             GlobalState globalState,
-            Interpolation interpolation,
-            ProjectManager projectManager
+            Interpolation interpolation
         )
         {
             this.projectSettings = projectSettings;
             this.appSettings = appSettings;
             this.globalState = globalState;
             this.interpolation = interpolation;
-            this.projectManager = projectManager;
         }
 
         public async Task<string?> OpenProject(Window window)
@@ -210,7 +207,7 @@ namespace PlumJsonAnimator.Services
                     .Select(filePath =>
                     {
                         return new ImageRes(
-                            this.projectManager,
+                            this,
                             this.globalState,
                             filePath,
                             Path.GetFileNameWithoutExtension(filePath),

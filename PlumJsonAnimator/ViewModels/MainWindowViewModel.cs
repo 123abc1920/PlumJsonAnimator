@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Avalonia.Controls;
+using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Common.Timeline;
 using PlumJsonAnimator.Models;
+using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Interfaces;
+using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
 
@@ -26,6 +32,23 @@ public partial class MainWindowViewModel : ViewModelBase
             }
         }
     }
+
+    public TimelineControl? Timeline;
+    private double _currentTime;
+    public double CurrentTime
+    {
+        get { return _currentTime; }
+        set
+        {
+            if (_currentTime != value)
+            {
+                _currentTime = value;
+                Timeline!.CurrentTime = value;
+                OnPropertyChanged(nameof(CurrentTime));
+            }
+        }
+    }
+
     public Project? CurrentProject
     {
         get { return this.globalState.currentProject; }
@@ -41,6 +64,14 @@ public partial class MainWindowViewModel : ViewModelBase
     public JsonError JsonErrorObj
     {
         get { return this.globalState.jsonError; }
+        set
+        {
+            if (this.globalState.jsonError != value)
+            {
+                this.globalState.jsonError = value;
+                OnPropertyChanged(nameof(JsonErrorObj));
+            }
+        }
     }
     public int FPS
     {
@@ -51,6 +82,19 @@ public partial class MainWindowViewModel : ViewModelBase
             {
                 this.globalState.FPS = value;
                 OnPropertyChanged(nameof(FPS));
+            }
+        }
+    }
+
+    public bool DrawBones
+    {
+        get { return this.globalState.drawBones; }
+        set
+        {
+            if (this.globalState.drawBones != value)
+            {
+                this.globalState.drawBones = value;
+                OnPropertyChanged(nameof(DrawBones));
             }
         }
     }
@@ -124,48 +168,6 @@ public partial class MainWindowViewModel : ViewModelBase
             }
         }
     }
-    public event EventHandler? TickRequested;
-
-    private AppSettings appSettings;
-    private ProjectSettings projectSettings;
-    private ProjectManager projectManager;
-    private GlobalState globalState;
-    private JsonCode jsonCode;
-    private Interpolation interpolation;
-    private ImageExporter imageExporter;
-
-    public MainWindowViewModel(
-        AppSettings appSettings,
-        ProjectSettings projectSettings,
-        ProjectManager projectManager,
-        GlobalState globalState,
-        JsonCode jsonCode,
-        Interpolation interpolation,
-        ImageExporter imageExporter
-    )
-    {
-        this.appSettings = appSettings;
-        this.projectSettings = projectSettings;
-        this.projectManager = projectManager;
-        this.globalState = globalState;
-        this.jsonCode = jsonCode;
-        this.interpolation = interpolation;
-        this.imageExporter = imageExporter;
-
-        CurrentTheme = Themes[0];
-
-        AddBoneView = new Command.Command(parameter =>
-        {
-            if (parameter is TreeView treeView)
-            {
-                Bone? selectedItem = treeView.SelectedItem as Bone;
-                if (selectedItem != null && selectedItem.isBone)
-                {
-                    CurrentProject?.MainSkeleton?.addBone(selectedItem.id);
-                }
-            }
-        });
-    }
 
     public void AddBone(string title, int id, object? selectedBone)
     {
@@ -194,6 +196,21 @@ public partial class MainWindowViewModel : ViewModelBase
         }
 
         return 0;
+    }
+
+    public void GenerateCode()
+    {
+        this.jsonCode.generateCode(CurrentProject);
+    }
+
+    public ProjectValidResult ReGenerateCode()
+    {
+        return this.jsonCode.regenerate();
+    }
+
+    public string Validate(string text)
+    {
+        return this.jsonValidator.validate(text);
     }
 
     public void initProgram()
@@ -258,6 +275,16 @@ public partial class MainWindowViewModel : ViewModelBase
         return result;
     }
 
+    public ExportResult exportSpineJson(string outFolder)
+    {
+        return this.jsonExport.exportSpineJson(outFolder);
+    }
+
+    public ExportResult importSpineJson(string inputFile)
+    {
+        return this.jsonExport.importSpineJson(inputFile);
+    }
+
     public void RenameProject(string oldDir, string newDir)
     {
         this.projectManager.RenameProject(oldDir, newDir);
@@ -278,5 +305,315 @@ public partial class MainWindowViewModel : ViewModelBase
         this.projectSettings.WriteSettings();
     }
 
+    public void AddRes(string[] paths)
+    {
+        this.projectManager.CreateProjectDir();
+
+        foreach (string p in paths)
+        {
+            string resName = "img" + CurrentProject.Resources.Count.ToString();
+            string ext = this.projectManager.CopyRes(resName, p);
+            ImageRes image = new ImageRes(
+                this.projectManager,
+                this.globalState,
+                Path.Combine(CurrentProject.GetProjectPath(), "res"),
+                resName,
+                ext
+            );
+            CurrentProject.Resources.Add(image);
+        }
+    }
+
+    public void DropSlotToBone(int id, Res res)
+    {
+        Bone bone = CurrentProject.MainSkeleton.getBone(id);
+        if (bone != null)
+        {
+            Slot s = new Slot(this.globalState, "tesr", bone);
+            CurrentProject.Slots.Add(s);
+            CurrentProject.CurrentSkin.BindSlotAttachment(s, new ImageAttachment((ImageRes)res));
+            bone.UpdateSlots();
+        }
+    }
+
+    public async void OpenProject(Window win)
+    {
+        var path = await this.projectManager.OpenProject(win);
+        this.projectSettings.ReadSettings(path);
+    }
+
+    public string Prettify(string text)
+    {
+        if (text == null)
+        {
+            return "";
+        }
+        return this.prettify.prettify(text);
+    }
+
+    private void DeleteBoneReqursion(Bone? bone)
+    {
+        if (bone != null && bone.Parent != null)
+        {
+            CurrentProject?.MainSkeleton?.Bones.Remove(bone);
+            bone.Parent.Children.Remove(bone);
+            foreach (Bone b in bone.Children.ToList())
+            {
+                DeleteBoneReqursion(b);
+            }
+        }
+    }
+
     public ICommand AddBoneView { get; }
+    public ICommand RenameRes { get; }
+    public ICommand DeleteRes { get; }
+    public ICommand RenameSlot { get; }
+    public ICommand RenameBone { get; }
+    public ICommand DeleteBone { get; }
+    public ICommand SetTransformMode { get; }
+    public ICommand AddAnimation { get; }
+    public ICommand AddSkin { get; }
+    public ICommand DeleteAnimation { get; }
+    public ICommand DeleteSkin { get; }
+    public ICommand AddSlot { get; }
+    public ICommand DeleteSlot { get; }
+    public ICommand SaveProject { get; }
+    public ICommand PrevKeyFrame { get; }
+    public ICommand NextKeyFrame { get; }
+    public ICommand AddKeyFrame { get; }
+    public ICommand DeleteKeyFrame { get; }
+
+    private AppSettings appSettings;
+    private ProjectSettings projectSettings;
+    private ProjectManager projectManager;
+    private GlobalState globalState;
+    private JsonCode jsonCode;
+    private Interpolation interpolation;
+    private ImageExporter imageExporter;
+    private TransformModeFactory transformModeFactory;
+    public Prettify prettify;
+    public JsonExport jsonExport;
+    public JsonValidator jsonValidator;
+
+    public MainWindowViewModel(
+        AppSettings appSettings,
+        ProjectSettings projectSettings,
+        ProjectManager projectManager,
+        GlobalState globalState,
+        JsonCode jsonCode,
+        Interpolation interpolation,
+        ImageExporter imageExporter,
+        TransformModeFactory transformModeFactory,
+        Prettify prettify,
+        JsonExport jsonExport,
+        JsonValidator jsonValidator
+    )
+    {
+        this.appSettings = appSettings;
+        this.projectSettings = projectSettings;
+        this.projectManager = projectManager;
+        this.globalState = globalState;
+        this.jsonCode = jsonCode;
+        this.interpolation = interpolation;
+        this.imageExporter = imageExporter;
+        this.transformModeFactory = transformModeFactory;
+        this.prettify = prettify;
+        this.jsonExport = jsonExport;
+        this.jsonValidator = jsonValidator;
+
+        CurrentTheme = Themes[0];
+
+        AddBoneView = new Command.Command(parameter =>
+        {
+            if (parameter is TreeView treeView)
+            {
+                Bone? selectedItem = treeView.SelectedItem as Bone;
+                if (selectedItem != null && selectedItem.isBone)
+                {
+                    CurrentProject?.MainSkeleton?.addBone(selectedItem.id);
+                }
+            }
+        });
+        RenameRes = new Command.Command(parameter =>
+        {
+            if (parameter is ListBox resList)
+            {
+                Res selectedRes = resList.SelectedItem as Res;
+                if (selectedRes != null)
+                {
+                    RedactObj = selectedRes;
+                    Dialogs.ShowDialog("Rename", this, ViewType.RENAME);
+                }
+            }
+        });
+        DeleteRes = new Command.Command(parameter =>
+        {
+            if (parameter is ListBox resList)
+            {
+                Res res = resList.SelectedItem as Res;
+                if (res != null)
+                {
+                    foreach (Skin s in CurrentProject.Skins)
+                    {
+                        s.ContainsAndRemoveRes(res);
+                    }
+                    CurrentProject.Resources.Remove(res);
+                    this.projectManager.DeleteResource(res.Name, res.ext);
+                }
+            }
+        });
+        RenameSlot = new Command.Command(parameter =>
+        {
+            if (parameter is ListBox SlotsList)
+            {
+                Slot selectedSlot = SlotsList.SelectedItem as Slot;
+                if (selectedSlot != null)
+                {
+                    RedactObj = selectedSlot;
+                    Dialogs.ShowDialog("Rename", this, ViewType.RENAME);
+                }
+            }
+        });
+        RenameBone = new Command.Command(parameter =>
+        {
+            if (parameter is TreeView boneTreeView)
+            {
+                Bone bone = boneTreeView.SelectedItem as Bone;
+                if (bone != null)
+                {
+                    RedactObj = bone;
+                    Dialogs.ShowDialog("Rename", this, ViewType.RENAME);
+                }
+            }
+        });
+        DeleteBone = new Command.Command(_ =>
+        {
+            Bone bone = CurrentBone;
+            DeleteBoneReqursion(bone);
+        });
+        SetTransformMode = new Command.Command(parameter =>
+        {
+            if (parameter is string modeType)
+            {
+                if (modeType == "transform")
+                {
+                    CurrentProject.currentMode = this.transformModeFactory.createMode(
+                        CurrentProject.currentMode,
+                        TransformModesTypes.TRANSLATE
+                    );
+                }
+                if (modeType == "rotate")
+                {
+                    CurrentProject.currentMode = this.transformModeFactory.createMode(
+                        CurrentProject.currentMode,
+                        TransformModesTypes.ROTATE
+                    );
+                }
+                if (modeType == "scale")
+                {
+                    CurrentProject.currentMode = this.transformModeFactory.createMode(
+                        CurrentProject.currentMode,
+                        TransformModesTypes.SCALE
+                    );
+                }
+
+                ModeName = CurrentProject.currentMode.name;
+            }
+        });
+        AddAnimation = new Command.Command(_ =>
+        {
+            CurrentProject?.AddAnimation();
+        });
+        AddSkin = new Command.Command(_ =>
+        {
+            CurrentProject?.AddSkin();
+        });
+        DeleteAnimation = new Command.Command(_ =>
+        {
+            CurrentProject?.DeleteAnimation();
+        });
+        DeleteSkin = new Command.Command(_ =>
+        {
+            CurrentProject?.DeleteSkin();
+        });
+        AddSlot = new Command.Command(_ =>
+        {
+            Bone bone = CurrentBone;
+            if (bone != null)
+            {
+                Slot s = new Slot(this.globalState, "tesr", bone);
+                CurrentProject.Slots.Add(s);
+                CurrentProject.CurrentSkin.AddSlot(s);
+                bone.UpdateSlots();
+            }
+        });
+        DeleteSlot = new Command.Command(parameter =>
+        {
+            if (parameter is ListBox SlotsList)
+            {
+                Slot selectedSlot = SlotsList.SelectedItem as Slot;
+                if (selectedSlot != null)
+                {
+                    CurrentProject.Slots.Remove(selectedSlot);
+                    CurrentProject.CurrentSkin.DeleteSlot(selectedSlot);
+                    CurrentBone.UpdateSlots();
+                }
+            }
+        });
+
+        SaveProject = new Command.Command(_ =>
+        {
+            string anim = JsonConvert.SerializeObject(
+                this.jsonCode.generateJSONData(CurrentProject),
+                this.globalState.jsonSettings
+            );
+            this.projectSettings.WriteAnim(anim);
+            Popups.ShowPopup("Saved");
+        });
+
+        PrevKeyFrame = new Command.Command(_ =>
+        {
+            if (CurrentBone != null)
+            {
+                CurrentTime = CurrentProject.CurrentAnimation.FindKeyFrame(
+                    CurrentBone,
+                    CurrentProject.CurrentAnimation.currentTime,
+                    CurrentProject.currentMode.type,
+                    false
+                );
+            }
+        });
+        NextKeyFrame = new Command.Command(_ =>
+        {
+            if (CurrentBone != null)
+            {
+                CurrentTime = CurrentProject.CurrentAnimation.FindKeyFrame(
+                    CurrentBone,
+                    CurrentProject.CurrentAnimation.currentTime,
+                    CurrentProject.currentMode.type,
+                    true
+                );
+            }
+        });
+        AddKeyFrame = new Command.Command(_ =>
+        {
+            if (CurrentBone != null)
+            {
+                CurrentProject.CurrentAnimation.AddKeyFrame(
+                    CurrentBone,
+                    CurrentProject.currentMode.type
+                );
+            }
+        });
+        DeleteKeyFrame = new Command.Command(_ =>
+        {
+            if (CurrentBone != null)
+            {
+                CurrentProject.CurrentAnimation.DeleteKeyFrame(
+                    CurrentBone,
+                    CurrentProject.currentMode.type
+                );
+            }
+        });
+    }
 }

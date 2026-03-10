@@ -102,5 +102,30 @@ namespace PlumJsonAnimator.Common.Dialogs
 
             await window.ShowDialog(owner);
         }
+
+        public static Window mainWin;
+
+        public static async void ShowDialog(
+            string title,
+            MainWindowViewModel viewModel,
+            ViewType viewType
+        )
+        {
+            DialogSize size = sizes[(int)viewType];
+
+            var window = new Window
+            {
+                Title = title,
+                Width = size.width,
+                Icon = new WindowIcon(
+                    AssetLoader.Open(new Uri("avares://PlumJsonAnimator/Assets/logo.ico"))
+                ),
+                Height = size.height,
+                Content = userControlFactory(viewType, viewModel),
+                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+            };
+
+            await window.ShowDialog(mainWin);
+        }
     }
 }
