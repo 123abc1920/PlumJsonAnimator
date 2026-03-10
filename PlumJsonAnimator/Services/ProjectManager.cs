@@ -57,12 +57,12 @@ namespace PlumJsonAnimator.Services
             return result?.FirstOrDefault()?.Path.LocalPath;
         }
 
-        public bool NewProject(string? projectName, string? projectPath)
+        public Project? NewProject(string? projectName, string? projectPath)
         {
             if (projectName != null && projectPath != null)
             {
                 this.projectSettings.WriteAllSettings();
-                this.globalState.currentProject = new Project(
+                Project newProject = new Project(
                     projectName,
                     projectPath,
                     this.globalState,
@@ -71,9 +71,10 @@ namespace PlumJsonAnimator.Services
                 this.projectSettings.WriteAllSettings();
                 this.appSettings.SaveSettings();
                 LoadRes();
-                return true;
+
+                return newProject;
             }
-            return false;
+            return null;
         }
 
         public string CreateProjectDir()

@@ -64,7 +64,10 @@ public partial class MainWindow : Window
         boneTreeView.AddHandler(DragDrop.DropEvent, OnTreeViewDrop);
 
         Popups.win = this;
-        ImageExporter.canvas = mainCanvas;
+        if (DataContext is MainWindowViewModel viewModel)
+        {
+            viewModel.Canvas = mainCanvas;
+        }
     }
 
     private void AnimationTick(object? sender, EventArgs e)

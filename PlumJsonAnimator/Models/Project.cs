@@ -63,7 +63,7 @@ namespace PlumJsonAnimator.Models
             }
         }
 
-        public Animation CurrentAnimation
+        public Animation? CurrentAnimation
         {
             get => _currentAnimation;
             set

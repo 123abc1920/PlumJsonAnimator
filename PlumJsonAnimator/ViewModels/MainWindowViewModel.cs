@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Avalonia.Controls;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models;
@@ -11,21 +14,69 @@ namespace PlumJsonAnimator.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    public Project CurrentProject { get; set; }
-    public JsonError JsonErrorObj { get; set; }
-    private Bone? _currentBone;
-    public IRenamable? RedactObj { get; set; } = null;
-    public List<string> Themes { get; set; } = new List<string>() { "light", "dark" };
-    private string _currTheme = "light";
-    public string CurrentTheme
+    public Canvas? Canvas
     {
-        get => _currTheme;
+        get { return this.imageExporter.canvas; }
         set
         {
-            if (_currTheme != value)
+            if (this.imageExporter.canvas != value)
             {
-                _currTheme = value;
-                this.globalState.theme = _currTheme;
+                this.imageExporter.canvas = value;
+                OnPropertyChanged(nameof(CurrentProject));
+            }
+        }
+    }
+    public Project? CurrentProject
+    {
+        get { return this.globalState.currentProject; }
+        set
+        {
+            if (this.globalState.currentProject != value)
+            {
+                this.globalState.currentProject = value;
+                OnPropertyChanged(nameof(CurrentProject));
+            }
+        }
+    }
+    public JsonError JsonErrorObj
+    {
+        get { return this.globalState.jsonError; }
+    }
+    public int FPS
+    {
+        get { return this.globalState.FPS; }
+        set
+        {
+            if (this.globalState.FPS != value)
+            {
+                this.globalState.FPS = value;
+                OnPropertyChanged(nameof(FPS));
+            }
+        }
+    }
+
+    public string ExportPath
+    {
+        get { return this.imageExporter.ExportPath; }
+        set
+        {
+            if (this.imageExporter.ExportPath != value)
+            {
+                this.imageExporter.ExportPath = value;
+                OnPropertyChanged(nameof(FPS));
+            }
+        }
+    }
+    public IRenamable? RedactObj { get; set; } = null;
+    public List<string> Themes { get; set; } = new List<string>() { "light", "dark" };
+    public string CurrentTheme
+    {
+        get => this.globalState.theme;
+        set
+        {
+            if (this.globalState.theme != value)
+            {
+                this.globalState.theme = value;
                 OnPropertyChanged(nameof(CurrentTheme));
             }
         }
@@ -46,18 +97,30 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public Bone? CurrentBone
     {
-        get => _currentBone;
+        get => this.globalState.currentBone;
         set
         {
-            if (_currentBone != value)
+            if (this.globalState.currentBone != value)
             {
-                _currentBone = value;
-                this.globalState.currentBone = _currentBone;
+                this.globalState.currentBone = value;
                 OnPropertyChanged(nameof(CurrentBone));
             }
             else
             {
                 this.globalState.currentBone = null;
+            }
+        }
+    }
+
+    public Animation? CurrentAnimation
+    {
+        get => CurrentProject!.CurrentAnimation;
+        set
+        {
+            if (CurrentProject!.CurrentAnimation != value)
+            {
+                CurrentProject!.CurrentAnimation = value;
+                OnPropertyChanged(nameof(CurrentBone));
             }
         }
     }
@@ -69,6 +132,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private GlobalState globalState;
     private JsonCode jsonCode;
     private Interpolation interpolation;
+    private ImageExporter imageExporter;
 
     public MainWindowViewModel(
         AppSettings appSettings,
@@ -76,7 +140,8 @@ public partial class MainWindowViewModel : ViewModelBase
         ProjectManager projectManager,
         GlobalState globalState,
         JsonCode jsonCode,
-        Interpolation interpolation
+        Interpolation interpolation,
+        ImageExporter imageExporter
     )
     {
         this.appSettings = appSettings;
@@ -85,8 +150,21 @@ public partial class MainWindowViewModel : ViewModelBase
         this.globalState = globalState;
         this.jsonCode = jsonCode;
         this.interpolation = interpolation;
+        this.imageExporter = imageExporter;
 
         CurrentTheme = Themes[0];
+
+        AddBoneView = new Command.Command(parameter =>
+        {
+            if (parameter is TreeView treeView)
+            {
+                Bone? selectedItem = treeView.SelectedItem as Bone;
+                if (selectedItem != null && selectedItem.isBone)
+                {
+                    CurrentProject?.MainSkeleton?.addBone(selectedItem.id);
+                }
+            }
+        });
     }
 
     public void AddBone(string title, int id, object? selectedBone)
@@ -118,16 +196,9 @@ public partial class MainWindowViewModel : ViewModelBase
         return 0;
     }
 
-    private void OnTick()
-    {
-        TickRequested?.Invoke(this, EventArgs.Empty);
-    }
-
     public void initProgram()
     {
         this.globalState.currentProject = new Project(this.globalState, this.interpolation);
-        CurrentProject = this.globalState.currentProject;
-        JsonErrorObj = this.globalState.jsonError;
 
         this.appSettings.ReadSettings();
         this.projectSettings.ReadSettings();
@@ -141,4 +212,71 @@ public partial class MainWindowViewModel : ViewModelBase
             Popups.ShowPopup("Возникли проблемы в json коде, невозможно восстановить проект");
         }
     }
+
+    public bool NewProject(string? projectName, string? projectPath)
+    {
+        Project? result = this.projectManager.NewProject(projectName, projectPath);
+        if (result != null)
+        {
+            CurrentProject = result;
+            return true;
+        }
+        return false;
+    }
+
+    public async Task<ExportResult> ExportAsGif(double start, double end, string outputFile)
+    {
+        ExportResult result = await this.imageExporter.ExportAsGif(start, end, outputFile);
+        return result;
+    }
+
+    public async Task<ExportResult> ExportAsJpg(double start, double end, string outputFolder)
+    {
+        ExportResult result = await this.imageExporter.ExportAsJpg(start, end, outputFolder);
+        return result;
+    }
+
+    public async Task<ExportResult> ExportAsMp4(
+        double start,
+        double end,
+        string outputFile,
+        string ffmpegPath
+    )
+    {
+        ExportResult result = await this.imageExporter.ExportAsMp4(
+            start,
+            end,
+            outputFile,
+            ffmpegPath
+        );
+        return result;
+    }
+
+    public async Task<ExportResult> ExportAsPng(double start, double end, string outputFolder)
+    {
+        ExportResult result = await this.imageExporter.ExportAsPng(start, end, outputFolder);
+        return result;
+    }
+
+    public void RenameProject(string oldDir, string newDir)
+    {
+        this.projectManager.RenameProject(oldDir, newDir);
+    }
+
+    public void CopyDir(string oldDir, string newDir)
+    {
+        this.projectManager.CopyDir(oldDir, newDir);
+    }
+
+    public void SaveSettings()
+    {
+        this.appSettings.SaveSettings();
+    }
+
+    public void WriteSettings()
+    {
+        this.projectSettings.WriteSettings();
+    }
+
+    public ICommand AddBoneView { get; }
 }

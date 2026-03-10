@@ -436,7 +436,10 @@
                                         <ctrls:TimelineControl
                                             x:Name="Timeline"
                                             Height="150"
+                                            CurrentAnimation="{Binding CurrentAnimation}"
+                                            CurrentBone="{Binding CurrentBone}"
                                             CurrentTime="0"
+                                            FPS="{Binding FPS}"
                                             PixelsPerSecond="100"
                                             TotalDuration="60"
                                             Zoom="1">
@@ -504,7 +507,8 @@
                             Padding="0"
                             HorizontalContentAlignment="Center"
                             VerticalContentAlignment="Center"
-                            Click="Add_Bone">
+                            Command="{Binding AddBoneView}"
+                            CommandParameter="{Binding ElementName=boneTreeView}">
                             <iconPacks:PackIconBootstrapIcons Kind="FilePlusFill" />
                         </Button>
                         <Button

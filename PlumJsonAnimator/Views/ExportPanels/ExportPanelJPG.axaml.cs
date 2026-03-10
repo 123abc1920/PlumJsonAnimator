@@ -1,10 +1,8 @@
-using AnimEngine.AnimExport;
-using AnimEngine.AnimExport.ImageExport;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
-using Common.Constants;
-using Constants.CommonItemsUI;
+using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Models;
 using PlumJsonAnimator.ViewModels;
 
 namespace PlumJsonAnimator.Views
@@ -14,18 +12,18 @@ namespace PlumJsonAnimator.Views
         public ExportPanelJPG()
         {
             InitializeComponent();
-
-            this.FindControl<TextBox>("path").Text = ImageExporter.ExportPath;
-            this.FindControl<TextBox>("start").Text = "0";
-            this.FindControl<TextBox>("end").Text = ConstantsClass
-                .currentProject.CurrentAnimation.MaxTime()
-                .ToString();
         }
 
         public ExportPanelJPG(MainWindowViewModel viewModel)
             : this()
         {
             DataContext = viewModel;
+
+            this.FindControl<TextBox>("path").Text = viewModel.ExportPath;
+            this.FindControl<TextBox>("start").Text = "0";
+            this.FindControl<TextBox>("end").Text = viewModel
+                .CurrentProject.CurrentAnimation.MaxTime()
+                .ToString();
         }
 
         private async void SelectFolder(object sender, RoutedEventArgs e)
@@ -40,8 +38,8 @@ namespace PlumJsonAnimator.Views
             {
                 if (DataContext is MainWindowViewModel viewModel)
                 {
-                    ImageExporter.ExportPath = folder[0].Path.LocalPath;
-                    this.FindControl<TextBox>("path").Text = ImageExporter.ExportPath;
+                    viewModel.ExportPath = folder[0].Path.LocalPath;
+                    this.FindControl<TextBox>("path").Text = viewModel.ExportPath;
                 }
             }
         }
@@ -65,11 +63,15 @@ namespace PlumJsonAnimator.Views
                 && double.TryParse(endTextBox.Text, out double endValue)
             )
             {
-                ExportResult result = await ImageExporter.ExportAsJpg(
-                    startValue,
-                    endValue,
-                    this.FindControl<TextBox>("path").Text
-                );
+                ExportResult result = ExportResult.INCORRECT_JSON;
+                if (DataContext is MainWindowViewModel viewModel)
+                {
+                    result = await viewModel.ExportAsJpg(
+                        startValue,
+                        endValue,
+                        this.FindControl<TextBox>("path").Text
+                    );
+                }
 
                 if (result == ExportResult.SUCCESS)
                 {

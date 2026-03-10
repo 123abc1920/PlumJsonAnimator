@@ -1,10 +1,8 @@
 using System.IO;
-using AnimEngine.Project;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
-using Common.Constants;
-using Constants.CommonItemsUI;
+using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.ViewModels;
 
 namespace PlumJsonAnimator.Views
@@ -24,32 +22,34 @@ namespace PlumJsonAnimator.Views
 
         private void SaveSettings(object sender, RoutedEventArgs e)
         {
-            var oldName = ConstantsClass.currentProject.Name;
-            ConstantsClass.currentProject.Name = pName.Text;
-            ProjectManager.RenameProject(
-                Path.Combine(ConstantsClass.currentProject.ProjectPath, oldName),
-                Path.Combine(
-                    ConstantsClass.currentProject.ProjectPath,
-                    ConstantsClass.currentProject.Name
-                )
-            );
+            if (DataContext is MainWindowViewModel viewModel)
+            {
+                var oldName = viewModel.CurrentProject!.Name;
+                viewModel.CurrentProject.Name = pName.Text;
+                viewModel.RenameProject(
+                    Path.Combine(viewModel.CurrentProject.ProjectPath, oldName),
+                    Path.Combine(
+                        viewModel.CurrentProject.ProjectPath,
+                        viewModel.CurrentProject.Name
+                    )
+                );
 
-            var oldPath = ConstantsClass.currentProject.ProjectPath;
-            ConstantsClass.currentProject.ProjectPath = path.Text;
-            ProjectManager.CopyDir(
-                Path.Combine(oldPath, ConstantsClass.currentProject.Name),
-                Path.Combine(
-                    ConstantsClass.currentProject.ProjectPath,
-                    ConstantsClass.currentProject.Name
-                )
-            );
+                var oldPath = viewModel.CurrentProject.ProjectPath;
+                viewModel.CurrentProject.ProjectPath = path.Text;
+                viewModel.CopyDir(
+                    Path.Combine(oldPath, viewModel.CurrentProject.Name),
+                    Path.Combine(
+                        viewModel.CurrentProject.ProjectPath,
+                        viewModel.CurrentProject.Name
+                    )
+                );
 
-            AppSettings.SaveSettings();
+                viewModel.SaveSettings();
+                viewModel.CurrentProject.MetaData.Spine = pVersion.Text;
 
-            ConstantsClass.currentProject.MetaData.Spine = pVersion.Text;
-
-            ProjectSettings.WriteSettings();
-            Popups.ShowPopup("Saved", this);
+                viewModel.WriteSettings();
+                Popups.ShowPopup("Saved", this);
+            }
         }
 
         private async void SelectFolder(object sender, RoutedEventArgs e)

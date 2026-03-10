@@ -3,8 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.Styling;
-using Common.Constants;
-using Constants.CommonItemsUI;
+using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.ViewModels;
 
 namespace PlumJsonAnimator.Views
@@ -24,16 +23,19 @@ namespace PlumJsonAnimator.Views
 
         private void SaveSettings(object sender, RoutedEventArgs e)
         {
-            AppSettings.SaveSettings();
-            Popups.ShowPopup("Saved", this);
+            if (DataContext is MainWindowViewModel viewModel)
+            {
+                viewModel.SaveSettings();
+                Popups.ShowPopup("Saved", this);
 
-            if (ConstantsClass.theme == "dark")
-            {
-                Application.Current.RequestedThemeVariant = ThemeVariant.Dark;
-            }
-            else
-            {
-                Application.Current.RequestedThemeVariant = ThemeVariant.Light;
+                if (viewModel.CurrentTheme == "dark")
+                {
+                    Application.Current.RequestedThemeVariant = ThemeVariant.Dark;
+                }
+                else
+                {
+                    Application.Current.RequestedThemeVariant = ThemeVariant.Light;
+                }
             }
         }
 

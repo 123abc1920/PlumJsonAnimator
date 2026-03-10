@@ -19,7 +19,7 @@ namespace PlumJsonAnimator.Services
     public class ImageExporter
     {
         public string ExportPath = "";
-        public Canvas canvas;
+        public Canvas? canvas = null;
 
         private GlobalState globalState;
 

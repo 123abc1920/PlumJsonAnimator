@@ -6,8 +6,8 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.Threading;
-using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.SkeletonNameSpace;
 
 namespace PlumJsonAnimator.Common.Timeline
 {
@@ -45,10 +45,39 @@ namespace PlumJsonAnimator.Common.Timeline
             return Math.Clamp(value, minZoom, maxZoom);
         }
 
+        public static readonly StyledProperty<int> FPSProperty = AvaloniaProperty.Register<
+            TimelineControl,
+            int
+        >(nameof(FPS), 1);
+
+        public static readonly StyledProperty<Bone?> CurrentBoneProperty =
+            AvaloniaProperty.Register<TimelineControl, Bone?>(nameof(CurrentBone), null);
+
+        public static readonly StyledProperty<Animation?> CurrentAnimationProperty =
+            AvaloniaProperty.Register<TimelineControl, Animation?>(nameof(CurrentAnimation), null);
+
         public int Zoom
         {
             get => GetValue(ZoomProperty);
             set => SetValue(ZoomProperty, value);
+        }
+
+        public int FPS
+        {
+            get => GetValue(FPSProperty);
+            set => SetValue(FPSProperty, value);
+        }
+
+        public Bone? CurrentBone
+        {
+            get => GetValue(CurrentBoneProperty);
+            set => SetValue(CurrentBoneProperty, value);
+        }
+
+        public Animation? CurrentAnimation
+        {
+            get => GetValue(CurrentAnimationProperty);
+            set => SetValue(CurrentAnimationProperty, value);
         }
 
         protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
@@ -81,8 +110,8 @@ namespace PlumJsonAnimator.Common.Timeline
             get => GetValue(CurrentTimeProperty);
             set
             {
-                GlobalState.currentProject.CurrentAnimation.currentTime = value;
-                GlobalState.currentProject.CurrentAnimation.SetupBones();
+                /*GlobalState.currentProject.CurrentAnimation.currentTime = value;
+                GlobalState.currentProject.CurrentAnimation.SetupBones();*/
                 SetValue(CurrentTimeProperty, value);
             }
         }
@@ -203,7 +232,7 @@ namespace PlumJsonAnimator.Common.Timeline
 
             int numIntervals = (int)Math.Ceiling(duration); // Используем Ceil, чтобы не обрезать последнюю метку
 
-            double step = 1.0 / (double)ConstantsClass.FPS;
+            double step = 1.0 / FPS;
             this.timeStep = step;
 
             for (double t = 0; t <= duration; t += step)
@@ -226,9 +255,7 @@ namespace PlumJsonAnimator.Common.Timeline
             // 7. Отрисовка ключкадров
             // ----------------------------------------------------------------------------------
             Dictionary<double, Dictionary<KeyFrameTypes, bool>> keyframesMarks =
-                ConstantsClass.currentProject?.CurrentAnimation?.GetKeyFramesMarks(
-                    ConstantsClass.currentBone
-                );
+                CurrentAnimation.GetKeyFramesMarks(CurrentBone);
 
             if (keyframesMarks == null)
             {
@@ -330,9 +357,9 @@ namespace PlumJsonAnimator.Common.Timeline
                 double newTime = (newX / calculatedWidth) * TotalDuration;
 
                 // ПРИВЯЗЫВАЕМ К КАДРАМ
-                if (ConstantsClass.FPS > 0)
+                if (FPS > 0)
                 {
-                    double frameDuration = 1.0 / ConstantsClass.FPS;
+                    double frameDuration = 1.0 / FPS;
                     int frameNumber = (int)Math.Round(newTime / frameDuration);
                     newTime = frameNumber * frameDuration;
                 }
@@ -359,9 +386,9 @@ namespace PlumJsonAnimator.Common.Timeline
                 _isDraggingPlayhead = false;
                 e.Handled = true;
 
-                if (ConstantsClass.FPS > 0)
+                if (FPS > 0)
                 {
-                    double frameDuration = 1.0 / ConstantsClass.FPS;
+                    double frameDuration = 1.0 / FPS;
                     int frameNumber = (int)Math.Round(CurrentTime / frameDuration);
                     CurrentTime = frameNumber * frameDuration;
                     CurrentTime = Math.Round(CurrentTime / this.timeStep) * this.timeStep;
