@@ -291,7 +291,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 StartPoint = start,
                 EndPoint = end,
-                Stroke = this.globalState.color.getLineBoneColor(this.id),
+                Stroke = this.globalState.getLineBoneColor(this.id),
                 StrokeThickness = 3,
             };
 
@@ -299,7 +299,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 Width = 8,
                 Height = 8,
-                Fill = this.globalState.color.getDotBoneColor(this.id),
+                Fill = this.globalState.getDotBoneColor(this.id),
             };
 
             Canvas.SetLeft(joint, start.X - 4);

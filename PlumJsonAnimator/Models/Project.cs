@@ -31,7 +31,6 @@ namespace PlumJsonAnimator.Models
         public MetaData MetaData { get; set; } = new MetaData();
 
         public Mode currentMode;
-        public int seletedBoneId = -1;
 
         public Skeleton? MainSkeleton { get; set; } = null;
         public ObservableCollection<Slot> Slots { get; set; } = new ObservableCollection<Slot>();

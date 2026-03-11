@@ -151,6 +151,8 @@ namespace PlumJsonAnimator.Services
                 settingsName
             );
 
+            Console.WriteLine(this.appSettings.appSettings!.Workspace);
+
             readFile(settingsPath);
             SetupProject();
         }

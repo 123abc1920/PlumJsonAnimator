@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Avalonia.Media;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
@@ -9,7 +10,6 @@ namespace PlumJsonAnimator.Common.Constants
 {
     public class GlobalState
     {
-        public Color color;
         public Project? currentProject = null;
         public JsonError jsonError = new JsonError();
         public JsonSerializerSettings jsonSettings = new JsonSerializerSettings
@@ -33,11 +33,35 @@ namespace PlumJsonAnimator.Common.Constants
             return parallelOptions;
         }
 
-        public GlobalState(Color color)
+        public IImmutableBrush getDotBoneColor(int id)
         {
-            this.color = color;
+            if (this.currentBone?.id == id)
+            {
+                return Color.Red;
+            }
+            else
+            {
+                return Color.Green;
+            }
+        }
 
+        public IImmutableBrush getLineBoneColor(int id)
+        {
+            if (this.currentBone?.id == id)
+            {
+                return Color.Blue;
+            }
+            else
+            {
+                return Color.Aqua;
+            }
+        }
+
+        public GlobalState()
+        {
             this.MainEngine = new Engine(this.FPS);
         }
     }
 }
+
+// zip PT62

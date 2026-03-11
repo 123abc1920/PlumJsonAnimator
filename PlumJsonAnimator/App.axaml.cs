@@ -39,7 +39,6 @@ public partial class App : Application
         services.AddSingleton<ImageExporter>();
         services.AddSingleton<JsonExport>();
         services.AddSingleton<GlobalState>();
-        services.AddSingleton<Color>();
         services.AddSingleton<TransformModeFactory>();
 
         _serviceProvider = services.BuildServiceProvider();
