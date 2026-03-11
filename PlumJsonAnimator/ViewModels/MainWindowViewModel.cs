@@ -168,19 +168,6 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
-    public string CodeText
-    {
-        get => this.jsonCode.Text;
-        set
-        {
-            if (this.jsonCode.Text != value)
-            {
-                this.jsonCode.Text = value;
-                OnPropertyChanged(nameof(CodeText));
-            }
-        }
-    }
-
     public void AddBone(string title, int id, object? selectedBone)
     {
         if (selectedBone is Bone selectedNode)
@@ -217,7 +204,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public ProjectValidResult ReGenerateCode()
     {
-        return this.jsonCode.regenerate();
+        return this.jsonCode.regenerate(CurrentProject);
     }
 
     public string Validate(string text)
@@ -231,11 +218,13 @@ public partial class MainWindowViewModel : ViewModelBase
 
         this.appSettings.ReadSettings();
         this.projectSettings.ReadSettings();
-        this.projectManager.LoadRes();
+        //this.projectManager.LoadRes();
+
+        CurrentProject?.SetupProjectSettings(this.projectSettings.GetSettingsData());
 
         CurrentTheme = Themes[GetCurrThemeInd(this.appSettings.GetTheme())];
 
-        ProjectValidResult validateResult = this.jsonCode.regenerate();
+        ProjectValidResult validateResult = this.jsonCode.regenerate(CurrentProject);
         if (!validateResult.IsOk)
         {
             Popups.ShowPopup("Возникли проблемы в json коде, невозможно восстановить проект");

@@ -14,6 +14,11 @@ namespace PlumJsonAnimator.Services
 
         private SettingsData settingsData;
 
+        public SettingsData GetSettingsData()
+        {
+            return this.settingsData;
+        }
+
         public ProjectSettings(AppSettings appSettings, GlobalState globalState, JsonCode jsonCode)
         {
             this.appSettings = appSettings;
@@ -31,14 +36,6 @@ namespace PlumJsonAnimator.Services
                 Spine = "4.3.2",
                 Anim = "",
             };
-        }
-
-        private void SetupProject()
-        {
-            this.globalState.currentProject!.ProjectPath = this.settingsData.Path;
-            this.globalState.currentProject.Name = this.settingsData.Name;
-            this.globalState.currentProject.MetaData.Spine = this.settingsData.Spine;
-            this.jsonCode.Text = this.settingsData.Anim;
         }
 
         public void ExistOrCreateProjectDirs()
@@ -151,10 +148,7 @@ namespace PlumJsonAnimator.Services
                 settingsName
             );
 
-            Console.WriteLine(this.appSettings.appSettings!.Workspace);
-
             readFile(settingsPath);
-            SetupProject();
         }
 
         public void ReadSettings(string? path)
@@ -162,7 +156,6 @@ namespace PlumJsonAnimator.Services
             if (path != null)
             {
                 readFile(path);
-                SetupProject();
             }
         }
     }

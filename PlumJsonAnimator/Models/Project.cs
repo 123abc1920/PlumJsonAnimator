@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -75,6 +76,20 @@ namespace PlumJsonAnimator.Models
             }
         }
 
+        private string _code;
+        public string Code
+        {
+            get => _code;
+            set
+            {
+                if (_code != value)
+                {
+                    _code = value;
+                    OnPropertyChanged(nameof(Code));
+                }
+            }
+        }
+
         public Project(GlobalState globalState, Interpolation interpolation)
         {
             MainSkeleton = new Skeleton(globalState);
@@ -99,6 +114,14 @@ namespace PlumJsonAnimator.Models
         {
             this.Name = name;
             this.ProjectPath = path;
+        }
+
+        public void SetupProjectSettings(SettingsData settingsData)
+        {
+            this.ProjectPath = settingsData.Path;
+            this.Name = settingsData.Name;
+            this.MetaData.Spine = settingsData.Spine;
+            this.Code = settingsData.Anim;
         }
 
         public Animation GetAnimation()
@@ -404,11 +427,13 @@ namespace PlumJsonAnimator.Models
                 }
             }
 
+            Console.WriteLine("kkk");
             foreach (var animation in animations)
             {
                 Animation a = new Animation(this.globalState, this.interpolation, animation.Key);
                 a.BoneAnimationBinding = new Dictionary<Bone, BoneAnimation>();
                 var animationData = animation.Value;
+                Console.WriteLine(animation.Value.Count);
                 foreach (string name in animationData.Keys)
                 {
                     var boneDict = animationData[name];

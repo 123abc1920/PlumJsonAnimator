@@ -50,7 +50,7 @@ namespace PlumJsonAnimator.Services
                 string result = this.jsonValidator.validate(text);
                 if (result == "JSON is valid")
                 {
-                    this.jsonCode.Text = text;
+                    this.globalState.currentProject.Code = text;
                     return ExportResult.SUCCESS;
                 }
                 else

@@ -26,7 +26,6 @@ namespace PlumJsonAnimator.Services
     public class JsonCode : INotifyPropertyChanged
     {
         private Prettify prettify;
-        public string _text = "";
 
         private GlobalState globalState;
 
@@ -34,19 +33,6 @@ namespace PlumJsonAnimator.Services
         {
             this.globalState = globalState;
             this.prettify = prettify;
-        }
-
-        public string Text
-        {
-            get => _text;
-            set
-            {
-                if (_text != value)
-                {
-                    _text = value;
-                    OnPropertyChanged(nameof(Text));
-                }
-            }
         }
 
         public JsonCode(Prettify prettify)
@@ -156,14 +142,13 @@ namespace PlumJsonAnimator.Services
 
         public void generateCode(Project project)
         {
-            _text = "";
-            _text = JsonConvert.SerializeObject(
+            var _text = JsonConvert.SerializeObject(
                 generateJSONData(project),
                 this.globalState.jsonSettings
             );
 
             _text = this.prettify.prettify(_text);
-            OnPropertyChanged(nameof(Text));
+            project.Code = _text;
         }
 
         public ValidResult regenerateBones(List<BoneData> bones)
@@ -312,50 +297,45 @@ namespace PlumJsonAnimator.Services
             };
         }
 
-        public ProjectValidResult regenerate()
+        public ProjectValidResult regenerate(Project project)
         {
-            if (_text == null || _text == "")
+            if (project.Code == null || project.Code == "")
             {
                 return new ProjectValidResult { Message = "Empty json code", IsOk = false };
             }
 
-            var root = JsonConvert.DeserializeObject<RootData>(_text);
-            CodeData? newData = null;
+            var codeData = JsonConvert.DeserializeObject<CodeData>(project.Code);
 
-            if (root != null && !string.IsNullOrEmpty(root.ProjectAnim))
+            if (codeData == null)
             {
-                newData = JsonConvert.DeserializeObject<CodeData>(root.ProjectAnim);
+                return new ProjectValidResult { Message = "", IsOk = false };
             }
 
-            if (newData == null)
-            {
-                return new ProjectValidResult { Message = "", IsOk = true };
-            }
-
-            var boneResult = regenerateBones(newData.Bones);
+            var boneResult = regenerateBones(codeData.Bones);
             if (!boneResult.IsOk)
             {
                 return new ProjectValidResult { Message = boneResult.Message, IsOk = false };
             }
 
-            var slotResult = regenerateSlots(newData.Slots);
+            var slotResult = regenerateSlots(codeData.Slots);
             if (!slotResult.IsOk)
             {
                 return new ProjectValidResult { Message = slotResult.Message, IsOk = false };
             }
 
-            var skinResult = regenerateSkins(newData.Skins);
+            var skinResult = regenerateSkins(codeData.Skins);
             if (!skinResult.IsOk)
             {
                 return new ProjectValidResult { Message = skinResult.Message, IsOk = false };
             }
 
-            var animationResult = regenerateAnimations(newData.Animations);
+            var animationResult = regenerateAnimations(codeData.Animations);
             if (!animationResult.IsOk)
             {
                 return new ProjectValidResult { Message = animationResult.Message, IsOk = false };
             }
 
+            Console.WriteLine("reg");
             this.globalState.currentProject?.regenrateProject(
                 (Dictionary<string, BoneData>)boneResult.UpdatedArray,
                 (Dictionary<string, SlotData>)slotResult.UpdatedArray,
@@ -373,40 +353,22 @@ namespace PlumJsonAnimator.Services
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-}
 
-public class RootData
-{
-    [JsonProperty("project_path")]
-    public required string ProjectPath { get; set; }
+    public class CodeData
+    {
+        [JsonProperty("skeleton")]
+        public required MetaData Skeleton { get; set; }
 
-    [JsonProperty("project_name")]
-    public required string ProjectName { get; set; }
+        [JsonProperty("bones")]
+        public required List<BoneData> Bones { get; set; }
 
-    [JsonProperty("project_spine")]
-    public required string ProjectSpine { get; set; }
+        [JsonProperty("slots")]
+        public required List<SlotData> Slots { get; set; }
 
-    [JsonProperty("project_anim")]
-    public required string ProjectAnim { get; set; }
+        [JsonProperty("skins")]
+        public required List<SkinData> Skins { get; set; }
 
-    [JsonIgnore]
-    public CodeData? AnimData { get; set; }
-}
-
-public class CodeData
-{
-    [JsonProperty("skeleton")]
-    public required MetaData Skeleton { get; set; }
-
-    [JsonProperty("bones")]
-    public required List<BoneData> Bones { get; set; }
-
-    [JsonProperty("slots")]
-    public required List<SlotData> Slots { get; set; }
-
-    [JsonProperty("skins")]
-    public required List<SkinData> Skins { get; set; }
-
-    [JsonProperty("animations")]
-    public required Dictionary<string, AnimationData> Animations { get; set; }
+        [JsonProperty("animations")]
+        public required Dictionary<string, AnimationData> Animations { get; set; }
+    }
 }
