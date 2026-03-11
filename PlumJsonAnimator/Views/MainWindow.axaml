@@ -473,8 +473,7 @@
                                 Grid.Row="0"
                                 AcceptsReturn="True"
                                 KeyDown="SpineJsonText_KeyDown"
-                                Text="" />
-                                <!--{Binding CurrentProject.SpinejsonCode.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}-->
+                                Text="{Binding CodeText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                             <GridSplitter
                                 Grid.Row="1"

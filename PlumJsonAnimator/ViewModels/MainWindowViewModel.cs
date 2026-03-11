@@ -168,6 +168,19 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
+    public string CodeText
+    {
+        get => this.jsonCode.Text;
+        set
+        {
+            if (this.jsonCode.Text != value)
+            {
+                this.jsonCode.Text = value;
+                OnPropertyChanged(nameof(CodeText));
+            }
+        }
+    }
+
     public void AddBone(string title, int id, object? selectedBone)
     {
         if (selectedBone is Bone selectedNode)
