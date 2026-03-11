@@ -265,11 +265,6 @@ public partial class MainWindow : Window
         }
     }
 
-    private void Play_Animation(object sender, RoutedEventArgs e)
-    {
-        //ConstantsClass.MainEngine.runAnimation();
-    }
-
     private void OnSlotSelectionChanged(object sender, TappedEventArgs e)
     {
         Slot selectedSlot = SlotsList.SelectedItem as Slot;

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Avalonia.Media;
 using Newtonsoft.Json;
@@ -20,7 +19,6 @@ namespace PlumJsonAnimator.Common.Constants
         };
         public int FPS = 60;
         public Bone? currentBone = null;
-        public Engine MainEngine;
         public string theme = "light";
         public bool drawBones = true;
         public string workspace = "PlumJsonAnimatorWorkspace";
@@ -57,10 +55,7 @@ namespace PlumJsonAnimator.Common.Constants
             }
         }
 
-        public GlobalState()
-        {
-            this.MainEngine = new Engine(this.FPS);
-        }
+        public GlobalState() { }
     }
 }
 

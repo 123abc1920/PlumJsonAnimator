@@ -394,6 +394,7 @@ public partial class MainWindowViewModel : ViewModelBase
     public ICommand NextKeyFrame { get; }
     public ICommand AddKeyFrame { get; }
     public ICommand DeleteKeyFrame { get; }
+    public ICommand PlayAnim { get; }
 
     private AppSettings appSettings;
     private ProjectSettings projectSettings;
@@ -406,6 +407,7 @@ public partial class MainWindowViewModel : ViewModelBase
     public Prettify prettify;
     public JsonExport jsonExport;
     public JsonValidator jsonValidator;
+    public Engine engine;
 
     public MainWindowViewModel(
         AppSettings appSettings,
@@ -418,7 +420,8 @@ public partial class MainWindowViewModel : ViewModelBase
         TransformModeFactory transformModeFactory,
         Prettify prettify,
         JsonExport jsonExport,
-        JsonValidator jsonValidator
+        JsonValidator jsonValidator,
+        Engine engine
     )
     {
         this.appSettings = appSettings;
@@ -432,6 +435,7 @@ public partial class MainWindowViewModel : ViewModelBase
         this.prettify = prettify;
         this.jsonExport = jsonExport;
         this.jsonValidator = jsonValidator;
+        this.engine = engine;
 
         CurrentTheme = Themes[0];
 
@@ -626,6 +630,11 @@ public partial class MainWindowViewModel : ViewModelBase
                     CurrentProject.currentMode.type
                 );
             }
+        });
+
+        PlayAnim = new Command.Command(_ =>
+        {
+            this.engine.runAnimation();
         });
     }
 }

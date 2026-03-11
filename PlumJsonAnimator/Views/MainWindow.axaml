@@ -398,7 +398,7 @@
                                         Padding="0"
                                         HorizontalContentAlignment="Center"
                                         VerticalContentAlignment="Center"
-                                        Click="Play_Animation">
+                                        Command="{Binding PlayAnim}">
                                         <iconPacks:PackIconBootstrapIcons
                                             Width="20"
                                             Height="20"

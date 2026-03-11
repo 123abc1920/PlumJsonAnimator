@@ -40,6 +40,7 @@ public partial class App : Application
         services.AddSingleton<JsonExport>();
         services.AddSingleton<GlobalState>();
         services.AddSingleton<TransformModeFactory>();
+        services.AddSingleton<Engine>();
 
         _serviceProvider = services.BuildServiceProvider();
     }
