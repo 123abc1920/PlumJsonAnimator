@@ -30,7 +30,7 @@ namespace PlumJsonAnimator.Services
             this.interpolation = interpolation;
         }
 
-        public async Task<string?> OpenProject(Window window)
+        public async Task<string?> OpenProjectDialog(Window window)
         {
             var storageProvider = window.StorageProvider;
 
@@ -54,12 +54,36 @@ namespace PlumJsonAnimator.Services
             return result?.FirstOrDefault()?.Path.LocalPath;
         }
 
+        public Project? OpenProject(string? path)
+        {
+            if (path != null && path != "")
+            {
+                this.projectSettings.ReadSettings(path);
+                SettingsData settingsData = this.projectSettings.GetSettingsData();
+                this.appSettings.ChangeProject(Path.Combine(settingsData.Path, settingsData.Name));
+
+                Project newProject = new Project(
+                    settingsData.Name,
+                    settingsData.Path,
+                    this.globalState,
+                    this.interpolation
+                );
+
+                this.projectSettings.WriteAllSettings();
+                this.appSettings.SaveSettings();
+                LoadRes(newProject);
+
+                return newProject;
+            }
+            return null;
+        }
+
         public Project? NewProject(string? projectName, string? projectPath)
         {
             if (projectName != null && projectPath != null)
             {
-                this.appSettings.NewProject(Path.Combine(projectPath, projectName));
                 this.projectSettings.WriteAllSettings();
+                this.appSettings.ChangeProject(Path.Combine(projectPath, projectName));
 
                 Project newProject = new Project(
                     projectName,
@@ -68,11 +92,10 @@ namespace PlumJsonAnimator.Services
                     this.interpolation
                 );
 
+                this.projectSettings.UpdateSettings(newProject);
                 this.projectSettings.WriteAllSettings();
                 this.appSettings.SaveSettings();
-                LoadRes();
-
-                Console.WriteLine("kkk");
+                LoadRes(newProject);
 
                 return newProject;
             }
@@ -196,13 +219,9 @@ namespace PlumJsonAnimator.Services
             }
         }
 
-        public void LoadRes()
+        public void LoadRes(Project project)
         {
-            string directoryPath = Path.Combine(
-                this.globalState.currentProject!.ProjectPath,
-                this.globalState.currentProject.Name,
-                "res"
-            );
+            string directoryPath = Path.Combine(project.ProjectPath, project.Name, "res");
             string[] extensions = { "*.png", "*.jpg", "*.jpeg" };
 
             try
@@ -223,7 +242,7 @@ namespace PlumJsonAnimator.Services
 
                 foreach (var imageRes in allFiles)
                 {
-                    this.globalState.currentProject.Resources.Add(imageRes);
+                    project.Resources.Add(imageRes);
                 }
             }
             catch (Exception ex)

@@ -76,7 +76,7 @@ namespace PlumJsonAnimator.Models
             }
         }
 
-        private string _code;
+        private string _code = "";
         public string Code
         {
             get => _code;

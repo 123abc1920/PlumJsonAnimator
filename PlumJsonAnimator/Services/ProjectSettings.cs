@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Models;
 
 namespace PlumJsonAnimator.Services
 {
@@ -17,6 +18,14 @@ namespace PlumJsonAnimator.Services
         public SettingsData GetSettingsData()
         {
             return this.settingsData;
+        }
+
+        public void UpdateSettings(Project project)
+        {
+            this.settingsData.Name = project.Name;
+            this.settingsData.Path = project.ProjectPath;
+            this.settingsData.Spine = project.MetaData.Spine;
+            this.settingsData.Anim = project.Code;
         }
 
         public ProjectSettings(AppSettings appSettings, GlobalState globalState, JsonCode jsonCode)
@@ -40,7 +49,6 @@ namespace PlumJsonAnimator.Services
 
         public void ExistOrCreateProjectDirs()
         {
-            Console.WriteLine(this.appSettings.appSettings.Workspace);
             if (!Directory.Exists(this.appSettings.appSettings!.Workspace))
             {
                 Directory.CreateDirectory(this.appSettings.appSettings!.Workspace);
@@ -131,15 +139,23 @@ namespace PlumJsonAnimator.Services
                 File.ReadAllText(settingsPath)
             );
 
-            if (settings != null)
+            if (
+                settings != null
+                && settings.Anim != null
+                && settings.Name != null
+                && settings.Path != null
+                && settings.Spine != null
+            )
             {
                 this.settingsData.Path = settings.Path;
                 this.settingsData.Name = settings.Name;
                 this.settingsData.Spine = settings.Spine;
                 this.settingsData.Anim = settings.Anim;
             }
-
-            this.appSettings.SaveSettings();
+            else
+            {
+                WriteAllSettings();
+            }
         }
 
         public void ReadSettings()

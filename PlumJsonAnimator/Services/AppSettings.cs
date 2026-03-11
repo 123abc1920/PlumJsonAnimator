@@ -35,14 +35,16 @@ namespace PlumJsonAnimator.Services
                 Theme = "light",
                 Workspace = Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                    this.globalState.workspace
+                    this.globalState.workspace,
+                    "NewProject"
                 ),
             };
         }
 
-        public void NewProject(string newWorkspace)
+        public void ChangeProject(string newWorkspace)
         {
-            this.appSettings.Workspace = newWorkspace;
+            this.appSettings!.Workspace = newWorkspace;
+            SaveSettings();
         }
 
         public void SaveSettings()
@@ -76,23 +78,24 @@ namespace PlumJsonAnimator.Services
                 SaveSettings();
             }
 
-            this.appSettings = JsonConvert.DeserializeObject<AppSettingsData>(
+            var newSettings = JsonConvert.DeserializeObject<AppSettingsData>(
                 File.ReadAllText(AppSettingsFile)
             );
 
-            if (this.appSettings != null)
+            if (newSettings != null)
             {
                 if (
-                    this.appSettings.LastDir != null
-                    && this.appSettings.LastDir != ""
-                    && Directory.Exists(appSettings.LastDir)
+                    newSettings.Workspace != null
+                    && newSettings.Workspace != ""
+                    && Directory.Exists(newSettings.Workspace)
                 )
                 {
-                    this.appSettings!.LastDir = this.appSettings.LastDir;
-                    this.appSettings.Workspace = this.appSettings.LastDir;
-                    this.appSettings.Theme = this.appSettings.Theme;
+                    this.appSettings!.LastDir = newSettings.LastDir;
+                    this.appSettings.Workspace = newSettings.Workspace;
+                    this.appSettings.Theme = newSettings.Theme;
+                    this.appSettings.Lang = newSettings.Lang;
 
-                    this.globalState.theme = this.appSettings.Theme;
+                    this.globalState.theme = newSettings.Theme;
 
                     if (this.globalState.theme == "dark")
                     {

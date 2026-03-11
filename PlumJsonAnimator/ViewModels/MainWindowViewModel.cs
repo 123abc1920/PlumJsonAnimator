@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -230,7 +231,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
         CurrentProject?.SetupProjectSettings(this.projectSettings.GetSettingsData());
 
-        this.projectManager.LoadRes();
+        this.projectManager.LoadRes(CurrentProject);
 
         CurrentTheme = Themes[GetCurrThemeInd(this.appSettings.GetTheme())];
 
@@ -349,8 +350,12 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public async void OpenProject(Window win)
     {
-        var path = await this.projectManager.OpenProject(win);
-        this.projectSettings.ReadSettings(path);
+        var path = await this.projectManager.OpenProjectDialog(win);
+        Project? result = this.projectManager.OpenProject(path);
+        if (result != null)
+        {
+            CurrentProject = result;
+        }
     }
 
     public string Prettify(string text)
