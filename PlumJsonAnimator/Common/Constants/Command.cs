@@ -12,13 +12,7 @@ namespace Command
             _execute = execute;
         }
 
-        public event EventHandler CanExecuteChanged;
-
-        event EventHandler? ICommand.CanExecuteChanged
-        {
-            add { throw new NotImplementedException(); }
-            remove { throw new NotImplementedException(); }
-        }
+        public event EventHandler? CanExecuteChanged;
 
         public bool CanExecute(object parameter) => true;
 

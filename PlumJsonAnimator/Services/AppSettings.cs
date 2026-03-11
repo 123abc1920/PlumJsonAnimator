@@ -71,23 +71,23 @@ namespace PlumJsonAnimator.Services
                 SaveSettings();
             }
 
-            var settings = JsonConvert.DeserializeObject<AppSettingsData>(
+            this.appSettings = JsonConvert.DeserializeObject<AppSettingsData>(
                 File.ReadAllText(AppSettingsFile)
             );
 
-            if (settings != null)
+            if (this.appSettings != null)
             {
                 if (
-                    settings.LastDir != null
-                    && settings.LastDir != ""
-                    && Directory.Exists(settings.LastDir)
+                    this.appSettings.LastDir != null
+                    && this.appSettings.LastDir != ""
+                    && Directory.Exists(appSettings.LastDir)
                 )
                 {
-                    this.appSettings!.LastDir = settings.LastDir;
-                    this.appSettings.Workspace = settings.LastDir;
-                    this.appSettings.Theme = settings.Theme;
+                    this.appSettings!.LastDir = this.appSettings.LastDir;
+                    this.appSettings.Workspace = this.appSettings.LastDir;
+                    this.appSettings.Theme = this.appSettings.Theme;
 
-                    this.globalState.theme = settings.Theme;
+                    this.globalState.theme = this.appSettings.Theme;
 
                     if (this.globalState.theme == "dark")
                     {

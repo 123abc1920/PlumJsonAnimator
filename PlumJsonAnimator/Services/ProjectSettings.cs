@@ -43,31 +43,21 @@ namespace PlumJsonAnimator.Services
 
         public void ExistOrCreateProjectDirs()
         {
-            if (!Directory.Exists(this.globalState.currentProject!.GetProjectPath()))
+            if (!Directory.Exists(this.appSettings.appSettings!.Workspace))
             {
-                Directory.CreateDirectory(this.globalState.currentProject.GetProjectPath());
+                Directory.CreateDirectory(this.appSettings.appSettings!.Workspace);
             }
 
-            if (
-                !Directory.Exists(
-                    Path.Combine(this.globalState.currentProject.GetProjectPath(), "res")
-                )
-            )
+            if (!Directory.Exists(Path.Combine(this.appSettings.appSettings!.Workspace, "res")))
             {
                 Directory.CreateDirectory(
-                    Path.Combine(this.globalState.currentProject.GetProjectPath(), "res")
+                    Path.Combine(this.appSettings.appSettings!.Workspace, "res")
                 );
             }
 
-            if (
-                !File.Exists(
-                    Path.Combine(this.globalState.currentProject.GetProjectPath(), settingsName)
-                )
-            )
+            if (!File.Exists(Path.Combine(this.appSettings.appSettings!.Workspace, settingsName)))
             {
-                File.Create(
-                        Path.Combine(this.globalState.currentProject.GetProjectPath(), settingsName)
-                    )
+                File.Create(Path.Combine(this.appSettings.appSettings!.Workspace, settingsName))
                     .Close();
             }
         }
@@ -75,7 +65,7 @@ namespace PlumJsonAnimator.Services
         public void WriteAllSettings()
         {
             string settingsPath = Path.Combine(
-                this.globalState.currentProject!.GetProjectPath(),
+                this.appSettings.appSettings!.Workspace,
                 settingsName
             );
 
@@ -98,7 +88,7 @@ namespace PlumJsonAnimator.Services
         public void WriteSettings()
         {
             string settingsPath = Path.Combine(
-                this.globalState.currentProject!.GetProjectPath(),
+                this.appSettings.appSettings!.Workspace,
                 settingsName
             );
 
@@ -113,7 +103,7 @@ namespace PlumJsonAnimator.Services
         public void WriteAnim(string anim)
         {
             string settingsPath = Path.Combine(
-                this.globalState.currentProject!.GetProjectPath(),
+                this.appSettings.appSettings!.Workspace,
                 settingsName
             );
 
@@ -157,7 +147,7 @@ namespace PlumJsonAnimator.Services
         public void ReadSettings()
         {
             string settingsPath = Path.Combine(
-                this.globalState.currentProject!.GetProjectPath(),
+                this.appSettings.appSettings!.Workspace,
                 settingsName
             );
 
