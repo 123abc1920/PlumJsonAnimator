@@ -83,14 +83,6 @@ public partial class MainWindow : Window
         Popups.win = this;
     }
 
-    private void AnimationTick(object? sender, EventArgs e)
-    {
-        if (currentTab == 0)
-        {
-            Timeline.CurrentTime += 1.0 / 60;
-        }
-    }
-
     private void UpdateCanvas(object? sender, EventArgs e)
     {
         if (currentTab == 0)
@@ -102,6 +94,7 @@ public partial class MainWindow : Window
                 if (viewModel.DrawBones)
                 {
                     viewModel.CurrentProject?.MainSkeleton?.drawSkeleton(mainCanvas);
+                    viewModel.GenerateCode();
                 }
             }
         }
@@ -109,15 +102,9 @@ public partial class MainWindow : Window
         {
             if (DataContext is MainWindowViewModel viewModel)
             {
-                viewModel.JsonErrorObj.ErrorText = viewModel.Validate(spineJsonText.Text);
-                if (viewModel.JsonErrorObj.isOk)
+                if (viewModel.CanGenerateProject() == true)
                 {
-                    ProjectValidResult validateResult = viewModel.ReGenerateCode();
-                    if (!validateResult.IsOk)
-                    {
-                        viewModel.JsonErrorObj.ErrorText = validateResult.Message;
-                        currentTab = 1;
-                    }
+                    currentTab = 1;
                 }
             }
         }

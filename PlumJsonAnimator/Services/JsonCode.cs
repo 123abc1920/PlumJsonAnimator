@@ -23,7 +23,7 @@ namespace PlumJsonAnimator.Services
         public bool IsOk { get; set; }
     }
 
-    public class JsonCode : INotifyPropertyChanged
+    public class JsonCode
     {
         private Prettify prettify;
 
@@ -343,13 +343,6 @@ namespace PlumJsonAnimator.Services
             );
 
             return new ProjectValidResult { Message = "", IsOk = true };
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 

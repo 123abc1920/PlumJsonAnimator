@@ -196,19 +196,29 @@ public partial class MainWindowViewModel : ViewModelBase
         return 0;
     }
 
-    public void GenerateCode()
+    public bool CanGenerateProject()
     {
-        this.jsonCode.generateCode(CurrentProject);
-    }
-
-    public ProjectValidResult ReGenerateCode()
-    {
-        return this.jsonCode.regenerate(CurrentProject);
+        JsonErrorObj.ErrorText = Validate(CurrentProject.Code);
+        if (JsonErrorObj.isOk)
+        {
+            ProjectValidResult validateResult = this.jsonCode.regenerate(CurrentProject);
+            if (!validateResult.IsOk)
+            {
+                JsonErrorObj.ErrorText = validateResult.Message;
+                return false;
+            }
+        }
+        return true;
     }
 
     public string Validate(string text)
     {
         return this.jsonValidator.validate(text);
+    }
+
+    public void GenerateCode()
+    {
+        this.jsonCode.generateCode(CurrentProject);
     }
 
     public void initProgram()
