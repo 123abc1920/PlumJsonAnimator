@@ -443,7 +443,7 @@
                                             Height="150"
                                             CurrentAnimation="{Binding CurrentAnimation}"
                                             CurrentBone="{Binding CurrentBone}"
-                                            CurrentTime="0"
+                                            CurrentTime="{Binding CurrentTime, Mode=TwoWay}"
                                             FPS="{Binding FPS}"
                                             PixelsPerSecond="100"
                                             TotalDuration="60"

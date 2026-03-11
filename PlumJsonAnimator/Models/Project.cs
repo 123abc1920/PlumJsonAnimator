@@ -427,7 +427,6 @@ namespace PlumJsonAnimator.Models
                 }
             }
 
-            Console.WriteLine("kkk");
             foreach (var animation in animations)
             {
                 Animation a = new Animation(this.globalState, this.interpolation, animation.Key);

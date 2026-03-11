@@ -84,7 +84,11 @@ namespace PlumJsonAnimator.Common.Timeline
         {
             base.OnPropertyChanged(change);
 
-            if (change.Property == ZoomProperty || change.Property == CurrentTimeProperty)
+            if (
+                change.Property == ZoomProperty
+                || change.Property == CurrentTimeProperty
+                || change.Property == CurrentTimeProperty
+            )
             {
                 InvalidateVisual();
             }
@@ -108,12 +112,7 @@ namespace PlumJsonAnimator.Common.Timeline
         public double CurrentTime
         {
             get => GetValue(CurrentTimeProperty);
-            set
-            {
-                /*GlobalState.currentProject.CurrentAnimation.currentTime = value;
-                GlobalState.currentProject.CurrentAnimation.SetupBones();*/
-                SetValue(CurrentTimeProperty, value);
-            }
+            set { SetValue(CurrentTimeProperty, value); }
         }
 
         static TimelineControl()

@@ -33,16 +33,15 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     public TimelineControl? Timeline;
-    private double _currentTime;
     public double CurrentTime
     {
-        get { return _currentTime; }
+        get { return this.CurrentProject.CurrentAnimation.currentTime; }
         set
         {
-            if (_currentTime != value)
+            if (this.CurrentProject.CurrentAnimation.currentTime != value)
             {
-                _currentTime = value;
-                Timeline!.CurrentTime = value;
+                this.CurrentProject.CurrentAnimation.currentTime = value;
+                this.CurrentProject.CurrentAnimation.SetupBones();
                 OnPropertyChanged(nameof(CurrentTime));
             }
         }
@@ -427,6 +426,11 @@ public partial class MainWindowViewModel : ViewModelBase
         this.engine = engine;
 
         CurrentTheme = Themes[0];
+
+        this.globalState.TimeUpdated += () =>
+        {
+            OnPropertyChanged(nameof(CurrentTime));
+        };
 
         AddBoneView = new Command.Command(parameter =>
         {

@@ -18,6 +18,12 @@ namespace PlumJsonAnimator.Common.Constants
             DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
         };
         public int FPS = 60;
+        public event Action TimeUpdated;
+        public void OnTimeUpdated()
+        {
+            TimeUpdated?.Invoke();
+        }
+
         public Bone? currentBone = null;
         public string theme = "light";
         public bool drawBones = true;

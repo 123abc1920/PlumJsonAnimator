@@ -21,6 +21,7 @@ namespace PlumJsonAnimator.Services
         private void AnimStep(object? sender, EventArgs e)
         {
             this.globalState.currentProject.CurrentAnimation.step();
+            this.globalState.OnTimeUpdated();
         }
 
         public void runAnimation()
