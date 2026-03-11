@@ -40,6 +40,11 @@ namespace PlumJsonAnimator.Services
             };
         }
 
+        public void NewProject(string newWorkspace)
+        {
+            this.appSettings.Workspace = newWorkspace;
+        }
+
         public void SaveSettings()
         {
             if (!Directory.Exists(AppSettingsPath))

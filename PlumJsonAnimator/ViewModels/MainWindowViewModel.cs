@@ -227,9 +227,10 @@ public partial class MainWindowViewModel : ViewModelBase
 
         this.appSettings.ReadSettings();
         this.projectSettings.ReadSettings();
-        //this.projectManager.LoadRes();
 
         CurrentProject?.SetupProjectSettings(this.projectSettings.GetSettingsData());
+
+        this.projectManager.LoadRes();
 
         CurrentTheme = Themes[GetCurrThemeInd(this.appSettings.GetTheme())];
 

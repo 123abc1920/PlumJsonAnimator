@@ -19,6 +19,7 @@ namespace PlumJsonAnimator.Common.Constants
         };
         public int FPS = 60;
         public event Action TimeUpdated;
+
         public void OnTimeUpdated()
         {
             TimeUpdated?.Invoke();
@@ -39,7 +40,7 @@ namespace PlumJsonAnimator.Common.Constants
 
         public IImmutableBrush getDotBoneColor(int id)
         {
-            if (this.currentBone?.id == id)
+            if (this.currentBone?.id == id && this.currentBone.isBone == true)
             {
                 return Color.Red;
             }
@@ -51,7 +52,7 @@ namespace PlumJsonAnimator.Common.Constants
 
         public IImmutableBrush getLineBoneColor(int id)
         {
-            if (this.currentBone?.id == id)
+            if (this.currentBone?.id == id && this.currentBone.isBone == true)
             {
                 return Color.Blue;
             }
@@ -60,8 +61,6 @@ namespace PlumJsonAnimator.Common.Constants
                 return Color.Aqua;
             }
         }
-
-        public GlobalState() { }
     }
 }
 

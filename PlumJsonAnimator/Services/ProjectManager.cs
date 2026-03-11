@@ -58,16 +58,21 @@ namespace PlumJsonAnimator.Services
         {
             if (projectName != null && projectPath != null)
             {
+                this.appSettings.NewProject(Path.Combine(projectPath, projectName));
                 this.projectSettings.WriteAllSettings();
+
                 Project newProject = new Project(
                     projectName,
                     projectPath,
                     this.globalState,
                     this.interpolation
                 );
+
                 this.projectSettings.WriteAllSettings();
                 this.appSettings.SaveSettings();
                 LoadRes();
+
+                Console.WriteLine("kkk");
 
                 return newProject;
             }

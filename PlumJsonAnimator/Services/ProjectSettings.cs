@@ -40,6 +40,7 @@ namespace PlumJsonAnimator.Services
 
         public void ExistOrCreateProjectDirs()
         {
+            Console.WriteLine(this.appSettings.appSettings.Workspace);
             if (!Directory.Exists(this.appSettings.appSettings!.Workspace))
             {
                 Directory.CreateDirectory(this.appSettings.appSettings!.Workspace);

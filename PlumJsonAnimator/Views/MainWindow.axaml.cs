@@ -11,7 +11,6 @@ using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
-using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
 
 namespace PlumJsonAnimator.Views;
@@ -26,40 +25,13 @@ public partial class MainWindow : Window
         { '<', '>' },
     };
     private bool _isDragging = false;
-    private Bone selectedBone;
-    public Bone? SelectedBone
-    {
-        get => selectedBone;
-        set
-        {
-            if (selectedBone != value)
-            {
-                selectedBone = value;
 
-                if (DataContext is MainWindowViewModel viewModel)
-                {
-                    viewModel.CurrentBone = selectedBone;
-                }
-            }
-        }
-    }
     private int currentTab = 0;
 
     public MainWindow()
     {
         InitializeComponent();
         this.KeyDown += OnWindowKeyDown;
-
-        if (DataContext is MainWindowViewModel viewModel)
-        {
-            viewModel.PropertyChanged += (sender, args) =>
-            {
-                if (args.PropertyName == nameof(MainWindowViewModel.CurrentBone))
-                {
-                    selectedBone = viewModel.CurrentBone;
-                }
-            };
-        }
     }
 
     public void initViews()
@@ -172,12 +144,12 @@ public partial class MainWindow : Window
         var canvas = (Canvas)sender;
         var point = e.GetPosition(canvas);
 
-        if (SelectedBone != null)
+        if (DataContext is MainWindowViewModel viewModel)
         {
-            if (DataContext is MainWindowViewModel viewModel)
+            if (viewModel.CurrentBone != null)
             {
                 viewModel.CurrentProject?.currentMode.transform(
-                    SelectedBone,
+                    viewModel.CurrentBone,
                     point.X - canvas.Width / 2,
                     point.Y - canvas.Height / 2
                 );
@@ -257,7 +229,10 @@ public partial class MainWindow : Window
         Slot selectedSlot = SlotsList.SelectedItem as Slot;
         if (selectedSlot != null)
         {
-            SelectedBone = (Bone)selectedSlot;
+            if (DataContext is MainWindowViewModel viewModel)
+            {
+                viewModel.CurrentBone = (Bone)selectedSlot;
+            }
         }
     }
 
@@ -300,16 +275,19 @@ public partial class MainWindow : Window
     {
         if (sender is StackPanel panel && panel.DataContext is Bone bone)
         {
-            if (bone == SelectedBone)
+            if (DataContext is MainWindowViewModel viewModel)
             {
-                SelectedBone = null;
-                Console.WriteLine("Not bone");
-            }
-            else
-            {
-                SelectedBone = bone;
+                if (bone == viewModel.CurrentBone)
+                {
+                    viewModel.CurrentBone = null;
+                    Console.WriteLine("Not bone");
+                }
+                else
+                {
+                    viewModel.CurrentBone = bone;
 
-                Console.WriteLine("Bone");
+                    Console.WriteLine("Bone");
+                }
             }
             e.Handled = true;
         }
