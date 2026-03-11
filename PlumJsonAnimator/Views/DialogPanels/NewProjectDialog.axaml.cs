@@ -49,7 +49,7 @@ namespace PlumJsonAnimator.Views
         private async void SelectFolder(object sender, RoutedEventArgs e)
         {
             var topLevel = TopLevel.GetTopLevel(this);
-            var storageProvider = topLevel.StorageProvider;
+            var storageProvider = topLevel!.StorageProvider;
 
             var folders = await storageProvider.OpenFolderPickerAsync(
                 new FolderPickerOpenOptions { Title = "Выберите папку", AllowMultiple = false }

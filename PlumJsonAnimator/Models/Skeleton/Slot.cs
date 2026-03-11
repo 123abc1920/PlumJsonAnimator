@@ -146,7 +146,6 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             if (this.globalState.currentProject!.CurrentSkin.isSlotDrawable(this))
             {
-                Console.WriteLine(this.globalState.currentProject.CurrentSkin.GetImagePath(this));
                 var image = new Image
                 {
                     Source = new Avalonia.Media.Imaging.Bitmap(

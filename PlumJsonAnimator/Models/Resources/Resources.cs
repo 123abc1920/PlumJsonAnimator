@@ -72,9 +72,6 @@ namespace PlumJsonAnimator.Models.Resources
     {
         public int width;
         public int height;
-        private string filePath;
-        private string v1;
-        private string v2;
 
         public ImageRes(ProjectManager projectManager, GlobalState globalState)
             : base(projectManager, globalState) { }

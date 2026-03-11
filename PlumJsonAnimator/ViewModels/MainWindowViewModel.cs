@@ -328,7 +328,7 @@ public partial class MainWindowViewModel : ViewModelBase
             ImageRes image = new ImageRes(
                 this.projectManager,
                 this.globalState,
-                Path.Combine(CurrentProject.GetProjectPath(), "res"),
+                Path.Combine(CurrentProject.GetProjectPath(), "res", $"{resName}{ext}"),
                 resName,
                 ext
             );
