@@ -3,9 +3,10 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.Styling;
-using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
 
+// TODO: исправить привязки
 namespace PlumJsonAnimator.Views
 {
     public partial class SpinejsonSettingsPanel : UserControl
@@ -25,8 +26,15 @@ namespace PlumJsonAnimator.Views
         {
             if (DataContext is MainWindowViewModel viewModel)
             {
-                viewModel.SaveSettings();
-                Popups.ShowPopup("Saved", this);
+                AppSettingsData appSettingsData = new AppSettingsData()
+                {
+                    LastDir = "",
+                    Workspace = pathTextBox.Text,
+                    Lang = "ru",
+                    Theme = viewModel.CurrentTheme,
+                };
+
+                viewModel.SaveSettings(appSettingsData);
 
                 if (viewModel.CurrentTheme == "dark")
                 {

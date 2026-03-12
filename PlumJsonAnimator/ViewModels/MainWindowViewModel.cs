@@ -321,9 +321,10 @@ public partial class MainWindowViewModel : ViewModelBase
         Popups.ShowPopup("Saved");
     }
 
-    public void SaveSettings()
+    public void SaveSettings(AppSettingsData data)
     {
-        this.appSettings.SaveSettings();
+        this.appSettings.SetSettings(data);
+        Popups.ShowPopup("Saved");
     }
 
     public void WriteSettings()
