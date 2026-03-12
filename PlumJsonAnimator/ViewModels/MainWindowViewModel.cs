@@ -146,6 +146,7 @@ public partial class MainWindowViewModel : ViewModelBase
             if (this.globalState.currentBone != value)
             {
                 this.globalState.currentBone = value;
+                this.globalState.currentBone?.UpdateSlots();
                 OnPropertyChanged(nameof(CurrentBone));
             }
             else
@@ -308,7 +309,6 @@ public partial class MainWindowViewModel : ViewModelBase
         var newDir = Path.Combine(CurrentProject.ProjectPath, settingsData.Name);
 
         this.projectManager.CopyDir(oldDir, newDir);
-        //this.projectManager.CopyDir(Path.Combine(oldDir, "res"), Path.Combine(newDir, "res"));
 
         CurrentProject.SetupProjectSettings(settingsData);
         this.projectSettings.UpdateSettings(CurrentProject);

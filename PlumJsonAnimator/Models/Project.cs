@@ -176,7 +176,7 @@ namespace PlumJsonAnimator.Models
             return null;
         }
 
-        public Slot GetSlot(string name)
+        public Slot? GetSlot(string name)
         {
             foreach (Slot s in Slots)
             {
@@ -324,7 +324,10 @@ namespace PlumJsonAnimator.Models
                 Slot s = new Slot(
                     this.globalState,
                     slot.Key,
-                    this.MainSkeleton.getBone(slot.Value.Bone)
+                    this.MainSkeleton.getBone(slot.Value.Bone),
+                    slot.Value.X,
+                    slot.Value.Y,
+                    slot.Value.A
                 );
                 this.Slots.Add(s);
             }

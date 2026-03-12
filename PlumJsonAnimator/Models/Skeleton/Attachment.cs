@@ -57,5 +57,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         [JsonProperty("height", NullValueHandling = NullValueHandling.Ignore)]
         public int Height { get; set; }
+
+        [JsonProperty("x", NullValueHandling = NullValueHandling.Ignore)]
+        public int X { get; set; }
+
+        [JsonProperty("y", NullValueHandling = NullValueHandling.Ignore)]
+        public int Y { get; set; }
     }
 }

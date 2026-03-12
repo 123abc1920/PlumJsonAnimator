@@ -77,6 +77,8 @@ namespace PlumJsonAnimator.Models.Resources
     {
         public int width;
         public int height;
+        public int x;
+        public int y;
 
         public ImageRes(ProjectManager projectManager, GlobalState globalState)
             : base(projectManager, globalState) { }
