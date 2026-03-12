@@ -4,12 +4,15 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 using Avalonia.Svg.Skia;
 using Microsoft.Extensions.DependencyInjection;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
 using PlumJsonAnimator.Views;
+using SukiUI;
+using SukiUI.Models;
 
 namespace PlumJsonAnimator;
 
@@ -47,6 +50,13 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        var theme = SukiUI.SukiTheme.GetInstance();
+        var myColor = Avalonia.Media.Color.Parse("#ff003b");
+
+        // Создаем свою цветовую тему на основе твоего цвета
+        // Первый аргумент - название, второй и третий - основной цвет и акцентный
+        theme.ChangeColorTheme(new SukiUI.Models.SukiColorTheme("PlumAccent", myColor, myColor));
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             if (_serviceProvider == null)

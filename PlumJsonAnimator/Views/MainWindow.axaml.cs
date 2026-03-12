@@ -12,10 +12,11 @@ using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.ViewModels;
+using SukiUI.Controls;
 
 namespace PlumJsonAnimator.Views;
 
-public partial class MainWindow : Window
+public partial class MainWindow : SukiWindow
 {
     private Dictionary<char, char> pairedSymbols = new Dictionary<char, char>()
     {

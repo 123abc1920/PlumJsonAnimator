@@ -3,8 +3,10 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.Styling;
+using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
+using SukiUI;
 
 // TODO: исправить привязки
 namespace PlumJsonAnimator.Views
@@ -36,14 +38,20 @@ namespace PlumJsonAnimator.Views
 
                 viewModel.SaveSettings(appSettingsData);
 
+                var sukiTheme = SukiTheme.GetInstance();
+
                 if (viewModel.CurrentTheme == "dark")
                 {
-                    Application.Current.RequestedThemeVariant = ThemeVariant.Dark;
+                    sukiTheme.ChangeBaseTheme(ThemeVariant.Dark);
                 }
                 else
                 {
-                    Application.Current.RequestedThemeVariant = ThemeVariant.Light;
+                    sukiTheme.ChangeBaseTheme(ThemeVariant.Light);
                 }
+
+                sukiTheme.ChangeColorTheme(
+                    new SukiUI.Models.SukiColorTheme("PlumTheme", Colors.AppColor, Colors.AppColor)
+                );
             }
         }
 

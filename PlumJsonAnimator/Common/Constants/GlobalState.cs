@@ -42,11 +42,11 @@ namespace PlumJsonAnimator.Common.Constants
         {
             if (this.currentBone?.id == id && this.currentBone.IsBone == true)
             {
-                return Color.Red;
+                return Colors.Red;
             }
             else
             {
-                return Color.Green;
+                return Colors.Green;
             }
         }
 
@@ -54,11 +54,11 @@ namespace PlumJsonAnimator.Common.Constants
         {
             if (this.currentBone?.id == id && this.currentBone.IsBone == true)
             {
-                return Color.Blue;
+                return Colors.Blue;
             }
             else
             {
-                return Color.Aqua;
+                return Colors.Aqua;
             }
         }
     }

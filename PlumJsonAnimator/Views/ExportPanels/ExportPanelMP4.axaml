@@ -3,7 +3,9 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:iconPacks="https://github.com/MahApps/IconPacks.Avalonia"
-    xmlns:viewModels="clr-namespace:PlumJsonAnimator.ViewModels">
+    xmlns:suki="clr-namespace:SukiUI.Controls;assembly=SukiUI"
+    xmlns:viewModels="clr-namespace:PlumJsonAnimator.ViewModels"
+    Background="{DynamicResource SukiBackgroundBrush}">
     <StackPanel Margin="10" x:DataType="viewModels:MainWindowViewModel">
 
         <TextBlock Margin="0,5" Text="Для сохранения в mp4 формате необходимо установить программу ffmpeg.exe" />

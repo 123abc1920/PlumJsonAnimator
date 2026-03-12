@@ -1,4 +1,4 @@
-<Window
+<suki:SukiWindow
     x:Class="PlumJsonAnimator.Views.MainWindow"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -8,6 +8,7 @@
     xmlns:iconPacks="https://github.com/MahApps/IconPacks.Avalonia"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:PlumJsonAnimator.Common.Timeline"
+    xmlns:suki="clr-namespace:SukiUI.Controls;assembly=SukiUI"
     xmlns:svg="https://github.com/wieslawsoltes/Svg.Skia"
     xmlns:vm="using:PlumJsonAnimator.ViewModels"
     Title="Plum Json Animator"
@@ -16,6 +17,15 @@
     x:DataType="vm:MainWindowViewModel"
     Icon="/Assets/logo.ico"
     mc:Ignorable="d">
+
+    <suki:SukiWindow.LogoContent>
+        <Image
+            Width="16"
+            Height="16"
+            RenderOptions.BitmapInterpolationMode="HighQuality"
+            Source="/Assets/logo.ico"
+            Stretch="Uniform" />
+    </suki:SukiWindow.LogoContent>
 
     <Window.Resources>
         <converters:DoubleConverter x:Key="DoubleConverter" />
@@ -614,4 +624,4 @@
 
     </DockPanel>
 
-</Window>
+</suki:SukiWindow>

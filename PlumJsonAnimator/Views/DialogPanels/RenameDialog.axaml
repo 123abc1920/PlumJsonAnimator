@@ -2,7 +2,9 @@
     x:Class="PlumJsonAnimator.Views.RenameDialog"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:viewModels="clr-namespace:PlumJsonAnimator.ViewModels">
+    xmlns:suki="clr-namespace:SukiUI.Controls;assembly=SukiUI"
+    xmlns:viewModels="clr-namespace:PlumJsonAnimator.ViewModels"
+    Background="{DynamicResource SukiBackgroundBrush}">
     <StackPanel Margin="10" x:DataType="viewModels:MainWindowViewModel">
         <TextBox
             Name="name"

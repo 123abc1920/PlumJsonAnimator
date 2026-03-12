@@ -4,6 +4,7 @@ using Avalonia.Controls;
 using Avalonia.Platform;
 using PlumJsonAnimator.ViewModels;
 using PlumJsonAnimator.Views;
+using SukiUI.Controls;
 
 namespace PlumJsonAnimator.Common.Dialogs
 {
@@ -36,7 +37,7 @@ namespace PlumJsonAnimator.Common.Dialogs
         {
             new DialogSize(600, 400),
             new DialogSize(600, 400),
-            new DialogSize(250, 100),
+            new DialogSize(250, 200),
             new DialogSize(600, 400),
             new DialogSize(600, 400),
             new DialogSize(600, 400),
@@ -88,7 +89,7 @@ namespace PlumJsonAnimator.Common.Dialogs
         {
             DialogSize size = sizes[(int)viewType];
 
-            var window = new Window
+            var window = new SukiWindow
             {
                 Title = title,
                 Width = size.width,
@@ -113,7 +114,7 @@ namespace PlumJsonAnimator.Common.Dialogs
         {
             DialogSize size = sizes[(int)viewType];
 
-            var window = new Window
+            var window = new SukiWindow
             {
                 Title = title,
                 Width = size.width,

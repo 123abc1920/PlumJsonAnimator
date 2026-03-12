@@ -1,9 +1,9 @@
 using System;
 using System.IO;
-using Avalonia;
 using Avalonia.Styling;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
+using SukiUI;
 
 namespace PlumJsonAnimator.Services
 {
@@ -103,14 +103,24 @@ namespace PlumJsonAnimator.Services
 
                     this.globalState.theme = newSettings.Theme;
 
+                    var sukiTheme = SukiTheme.GetInstance();
+
                     if (this.globalState.theme == "dark")
                     {
-                        Application.Current!.RequestedThemeVariant = ThemeVariant.Dark;
+                        sukiTheme.ChangeBaseTheme(ThemeVariant.Dark);
                     }
                     else
                     {
-                        Application.Current!.RequestedThemeVariant = ThemeVariant.Light;
+                        sukiTheme.ChangeBaseTheme(ThemeVariant.Light);
                     }
+
+                    sukiTheme.ChangeColorTheme(
+                        new SukiUI.Models.SukiColorTheme(
+                            "PlumTheme",
+                            Colors.AppColor,
+                            Colors.AppColor
+                        )
+                    );
                 }
             }
         }

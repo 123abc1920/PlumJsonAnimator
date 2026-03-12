@@ -1,20 +1,47 @@
-<Style
+<Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:iconPacks="https://github.com/MahApps/IconPacks.Avalonia">
 
-    <Style Selector="TextBox, ComboBox, ListBox">
+    <Style Selector="TextBox, ComboBox, ListBox, Button">
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background" Value="Transparent" />
     </Style>
 
-    <Style Selector="ComboBox:focus">
-        <Setter Property="BorderThickness" Value="2" />
+    <Style Selector="TextBox /template/ Border#PART_BorderElement,                   ComboBox /template/ Border#HighlightLayer,                   ListBox /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{DynamicResource SukiBackground}" />
+        <Setter Property="BorderThickness" Value="0" />
     </Style>
 
-    <Style Selector="iconPacks|PackIconBootstrapIcons">
+    <Style Selector="ComboBox /template/ Border#PART_RootBorder">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+    <Style Selector="Button">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Padding" Value="25,8" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="Button /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="6" />
+    </Style>
+
+    <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+    <Style Selector="Button iconPacks|PackIconBootstrapIcons">
         <Setter Property="Width" Value="15" />
         <Setter Property="Height" Value="15" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
-
-</Style>
+</Styles>
