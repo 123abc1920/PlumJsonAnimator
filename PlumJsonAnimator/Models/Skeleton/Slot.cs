@@ -79,6 +79,13 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public void UpdateAttachment()
         {
             CurrentAttachment = this.globalState.currentProject!.CurrentSkin.GetAttachment(this);
+
+            if (CurrentAttachment != null)
+            {
+                this._x = CurrentAttachment.x;
+                this._y = CurrentAttachment.y;
+                this._a = CurrentAttachment.a;
+            }
         }
 
         public int DrawOrder { get; set; }
@@ -120,18 +127,6 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             UpdateAttachment();
         }
 
-        public Slot(GlobalState globalState, string name, Bone b, double x, double y, double a)
-        {
-            this.Name = name;
-            this.BoundedBone = b;
-            this.globalState = globalState;
-            UpdateAttachment();
-
-            this.x = x;
-            this.y = y;
-            this.a = a;
-        }
-
         public void setBone(Bone? b)
         {
             this.BoundedBone = b;
@@ -146,6 +141,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             this.x = x;
             this.y = y;
+
+            CurrentAttachment?.SetPos(this.x, this.y, this.a);
         }
 
         public override void scale(double x, double y)
@@ -156,6 +153,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public override void rotate(double a)
         {
             this.a = a;
+
+            CurrentAttachment?.SetPos(this.x, this.y, this.a);
         }
 
         private Bitmap _cachedBitmap;
@@ -164,7 +163,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public void drawSlot(Canvas canvas)
         {
             if (!this.globalState.currentProject!.CurrentSkin.isSlotDrawable(this))
+            {
                 return;
+            }
 
             try
             {
@@ -212,9 +213,6 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 Name = this.Name,
                 Bone = this.BoundedBone?.Name,
                 Attachment = this.Name,
-                X = this.x,
-                Y = this.y,
-                A = this.a,
             };
         }
 
@@ -296,14 +294,5 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         [JsonProperty("attachment", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public required string Attachment { get; set; }
-
-        [JsonProperty("x", NullValueHandling = NullValueHandling.Ignore)]
-        public double X { get; set; }
-
-        [JsonProperty("y", NullValueHandling = NullValueHandling.Ignore)]
-        public double Y { get; set; }
-
-        [JsonProperty("a", NullValueHandling = NullValueHandling.Ignore)]
-        public double A { get; set; }
     }
 }

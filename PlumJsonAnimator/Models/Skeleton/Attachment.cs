@@ -8,6 +8,17 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
     {
         public string? Name { get; set; }
 
+        public double x;
+        public double y;
+        public double a;
+
+        public void SetPos(double x, double y, double a)
+        {
+            this.x = x;
+            this.y = y;
+            this.a = a;
+        }
+
         public virtual Res? GetRes()
         {
             return null;
@@ -18,12 +29,22 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
     public class ImageAttachment : Attachment
     {
-        public ImageRes image;
+        private ImageRes image;
 
         public ImageAttachment(ImageRes res)
         {
             this.image = res;
             this.Name = res.Name;
+        }
+
+        public ImageAttachment(ImageRes res, AttachmentData data)
+        {
+            this.image = res;
+            this.Name = res.Name;
+
+            this.x = data.X;
+            this.y = data.Y;
+            this.a = data.A;
         }
 
         public string getPath()
@@ -38,6 +59,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 Name = this.image.Name,
                 Width = this.image.width,
                 Height = this.image.height,
+                X = this.x,
+                Y = this.y,
+                A = this.a,
             };
         }
 
@@ -59,9 +83,12 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public int Height { get; set; }
 
         [JsonProperty("x", NullValueHandling = NullValueHandling.Ignore)]
-        public int X { get; set; }
+        public double X { get; set; }
 
         [JsonProperty("y", NullValueHandling = NullValueHandling.Ignore)]
-        public int Y { get; set; }
+        public double Y { get; set; }
+
+        [JsonProperty("a", NullValueHandling = NullValueHandling.Ignore)]
+        public double A { get; set; }
     }
 }

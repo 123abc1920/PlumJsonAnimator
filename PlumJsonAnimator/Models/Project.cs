@@ -324,10 +324,7 @@ namespace PlumJsonAnimator.Models
                 Slot s = new Slot(
                     this.globalState,
                     slot.Key,
-                    this.MainSkeleton.getBone(slot.Value.Bone),
-                    slot.Value.X,
-                    slot.Value.Y,
-                    slot.Value.A
+                    this.MainSkeleton.getBone(slot.Value.Bone)
                 );
                 this.Slots.Add(s);
             }
@@ -356,7 +353,8 @@ namespace PlumJsonAnimator.Models
                             {
                                 var attach = attachs[attachName];
                                 ImageAttachment a = new ImageAttachment(
-                                    (ImageRes)this.FindRes(attach.Name)
+                                    (ImageRes)this.FindRes(attach.Name),
+                                    attach
                                 );
                                 b.BindSlotAttachment(this.GetSlot(slotName), a);
                             }
@@ -382,7 +380,8 @@ namespace PlumJsonAnimator.Models
                     {
                         var attach = attachs[attachName];
                         ImageAttachment a = new ImageAttachment(
-                            (ImageRes)this.FindRes(attach.Name)
+                            (ImageRes)this.FindRes(attach.Name),
+                            attach
                         );
                         s.BindSlotAttachment(this.GetSlot(slotName), a);
                     }
