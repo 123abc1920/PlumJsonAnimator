@@ -38,13 +38,15 @@ namespace PlumJsonAnimator.Services
             this.settingsData = new SettingsData()
             {
                 Path = Path.Combine(
-                    Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                    Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
                     this.globalState.workspace
                 ),
                 Name = "NewProject",
                 Spine = "4.3.2",
                 Anim = "",
             };
+
+            Console.WriteLine(this.settingsData.Path);
         }
 
         public void ExistOrCreateProjectDirs()
@@ -139,13 +141,7 @@ namespace PlumJsonAnimator.Services
                 File.ReadAllText(settingsPath)
             );
 
-            if (
-                settings != null
-                && settings.Anim != null
-                && settings.Name != null
-                && settings.Path != null
-                && settings.Spine != null
-            )
+            if (settings != null && settings.Name != null && settings.Path != null)
             {
                 this.settingsData.Path = settings.Path;
                 this.settingsData.Name = settings.Name;

@@ -183,7 +183,7 @@ public partial class MainWindow : Window
             {
                 if (element is TreeViewItem item && item.DataContext is Bone bone)
                 {
-                    if (bone.isBone == true)
+                    if (bone.IsBone == true)
                     {
                         if (DataContext is MainWindowViewModel viewModel)
                         {

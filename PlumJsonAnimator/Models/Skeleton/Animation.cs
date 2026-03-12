@@ -119,6 +119,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="b"></param>
         private void AnimateBone(Bone b)
         {
+            if (b == null)
+            {
+                return;
+            }
+
             if (!BoneAnimationBinding.ContainsKey(b))
             {
                 BoneAnimationBinding.Add(
@@ -211,7 +216,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public void AddKeyFrame(Bone b, TransformModesTypes type)
         {
-            if (b != null && b.isBone && type != TransformModesTypes.NO)
+            if (b != null && b.IsBone && type != TransformModesTypes.NO)
             {
                 if (type == TransformModesTypes.TRANSLATE)
                 {
@@ -228,7 +233,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public void DeleteKeyFrame(Bone b, TransformModesTypes type)
         {
-            if (b != null && b.isBone && type != TransformModesTypes.NO)
+            if (b != null && b.IsBone && type != TransformModesTypes.NO)
             {
                 if (BoneAnimationBinding.ContainsKey(b))
                 {

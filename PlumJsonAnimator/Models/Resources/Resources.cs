@@ -63,6 +63,11 @@ namespace PlumJsonAnimator.Models.Resources
                 );
             }
         }
+
+        public void SetPath(string newProjectPath)
+        {
+            this.path = Path.Combine(newProjectPath, "res", $"{this.Name}{this.ext}");
+        }
     }
 
     /// <summary>

@@ -40,7 +40,7 @@ namespace PlumJsonAnimator.Common.Constants
 
         public IImmutableBrush getDotBoneColor(int id)
         {
-            if (this.currentBone?.id == id && this.currentBone.isBone == true)
+            if (this.currentBone?.id == id && this.currentBone.IsBone == true)
             {
                 return Color.Red;
             }
@@ -52,7 +52,7 @@ namespace PlumJsonAnimator.Common.Constants
 
         public IImmutableBrush getLineBoneColor(int id)
         {
-            if (this.currentBone?.id == id && this.currentBone.isBone == true)
+            if (this.currentBone?.id == id && this.currentBone.IsBone == true)
             {
                 return Color.Blue;
             }

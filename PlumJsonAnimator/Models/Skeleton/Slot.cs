@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using Avalonia.Controls;
 using Avalonia.Media;
+using Avalonia.Media.Imaging;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
@@ -10,7 +11,10 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
     public class Slot : Bone, IRenamable
     {
-        public new bool isBone = false;
+        public override bool IsBone
+        {
+            get { return false; }
+        }
         private double _x = 0;
         private double _y = 0;
         private double _a = 0;
@@ -142,15 +146,32 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this.a = a;
         }
 
+        private Bitmap _cachedBitmap;
+        private string _cachedPath;
+
         public void drawSlot(Canvas canvas)
         {
-            if (this.globalState.currentProject!.CurrentSkin.isSlotDrawable(this))
+            if (!this.globalState.currentProject!.CurrentSkin.isSlotDrawable(this))
+                return;
+
+            try
             {
+                string currentPath = this.globalState.currentProject.CurrentSkin.GetImagePath(this);
+
+                if (_cachedBitmap == null || _cachedPath != currentPath)
+                {
+                    _cachedPath = currentPath;
+                    byte[] imageBytes = File.ReadAllBytes(currentPath);
+                    using (var ms = new MemoryStream(imageBytes))
+                    {
+                        _cachedBitmap?.Dispose();
+                        _cachedBitmap = new Avalonia.Media.Imaging.Bitmap(ms);
+                    }
+                }
+
                 var image = new Image
                 {
-                    Source = new Avalonia.Media.Imaging.Bitmap(
-                        this.globalState.currentProject.CurrentSkin.GetImagePath(this)
-                    ),
+                    Source = _cachedBitmap,
                     Width = lengthX,
                     Height = lengthY,
                     RenderTransform = new RotateTransform(this.a + this.parentA),
@@ -161,6 +182,15 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
                 canvas.Children.Add(image);
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка: {ex.Message}");
+            }
+        }
+
+        public void Dispose()
+        {
+            _cachedBitmap?.Dispose();
         }
 
         public new SlotData generateJSONData()

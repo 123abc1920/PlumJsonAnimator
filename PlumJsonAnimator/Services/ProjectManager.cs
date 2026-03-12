@@ -174,6 +174,14 @@ namespace PlumJsonAnimator.Services
             }
         }
 
+        public void MoveRes(Project project)
+        {
+            foreach (Res res in project.Resources)
+            {
+                res.SetPath(Path.Combine(project.ProjectPath, project.Name));
+            }
+        }
+
         public void RenameFile(string oldFile, string newFile)
         {
             if (File.Exists(oldFile) && oldFile != newFile)

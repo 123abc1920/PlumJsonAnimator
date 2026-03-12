@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
 
 namespace PlumJsonAnimator.Views
@@ -24,38 +25,21 @@ namespace PlumJsonAnimator.Views
         {
             if (DataContext is MainWindowViewModel viewModel)
             {
-                var oldName = viewModel.CurrentProject!.Name;
-                viewModel.CurrentProject.Name = pName.Text;
-                viewModel.RenameProject(
-                    Path.Combine(viewModel.CurrentProject.ProjectPath, oldName),
-                    Path.Combine(
-                        viewModel.CurrentProject.ProjectPath,
-                        viewModel.CurrentProject.Name
-                    )
-                );
-
-                var oldPath = viewModel.CurrentProject.ProjectPath;
-                viewModel.CurrentProject.ProjectPath = path.Text;
-                viewModel.CopyDir(
-                    Path.Combine(oldPath, viewModel.CurrentProject.Name),
-                    Path.Combine(
-                        viewModel.CurrentProject.ProjectPath,
-                        viewModel.CurrentProject.Name
-                    )
-                );
-
-                viewModel.SaveSettings();
-                viewModel.CurrentProject.MetaData.Spine = pVersion.Text;
-
-                viewModel.WriteSettings();
-                Popups.ShowPopup("Saved", this);
+                SettingsData settingsData = new SettingsData()
+                {
+                    Path = path.Text,
+                    Name = pName.Text,
+                    Spine = pVersion.Text,
+                    Anim = "",
+                };
+                viewModel.RenameProject(settingsData);
             }
         }
 
         private async void SelectFolder(object sender, RoutedEventArgs e)
         {
             var topLevel = TopLevel.GetTopLevel(this);
-            var storageProvider = topLevel.StorageProvider;
+            var storageProvider = topLevel!.StorageProvider;
 
             var folders = await storageProvider.OpenFolderPickerAsync(
                 new FolderPickerOpenOptions { Title = "Выберите папку", AllowMultiple = false }

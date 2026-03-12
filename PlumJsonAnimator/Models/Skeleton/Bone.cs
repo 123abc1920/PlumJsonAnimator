@@ -27,7 +27,10 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 }
             }
         }
-        public bool isBone = true;
+        public virtual bool IsBone
+        {
+            get { return true; }
+        }
 
         private double _x = 0;
         private double _y = 0;

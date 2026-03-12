@@ -56,7 +56,7 @@ namespace PlumJsonAnimator.Models.Common
         {
             bone.move(x, y);
             var animation = this.globalState.currentProject?.GetAnimation();
-            if (animation != null && !animation.IsRun)
+            if (animation != null && !animation.IsRun && bone.IsBone == true)
             {
                 animation.TranslateBone(bone, bone.x, bone.y);
             }
@@ -113,7 +113,7 @@ namespace PlumJsonAnimator.Models.Common
             bone.rotate(-angleDeg);
 
             var animation = this.globalState.currentProject?.GetAnimation();
-            if (animation != null && !animation.IsRun)
+            if (animation != null && !animation.IsRun && bone.IsBone == true)
             {
                 animation.RotateBone(bone, bone.a);
             }

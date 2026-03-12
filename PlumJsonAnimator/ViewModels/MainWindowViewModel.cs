@@ -297,14 +297,28 @@ public partial class MainWindowViewModel : ViewModelBase
         return this.jsonExport.importSpineJson(inputFile);
     }
 
-    public void RenameProject(string oldDir, string newDir)
+    public void RenameProject(SettingsData settingsData)
     {
-        this.projectManager.RenameProject(oldDir, newDir);
-    }
+        settingsData.Anim = CurrentProject!.Code;
 
-    public void CopyDir(string oldDir, string newDir)
-    {
+        var oldName = CurrentProject!.Name;
+        var oldPath = CurrentProject.ProjectPath;
+
+        var oldDir = Path.Combine(oldPath, oldName);
+        var newDir = Path.Combine(CurrentProject.ProjectPath, settingsData.Name);
+
         this.projectManager.CopyDir(oldDir, newDir);
+        //this.projectManager.CopyDir(Path.Combine(oldDir, "res"), Path.Combine(newDir, "res"));
+
+        CurrentProject.SetupProjectSettings(settingsData);
+        this.projectSettings.UpdateSettings(CurrentProject);
+        this.appSettings.ChangeProject(newDir);
+
+        this.projectManager.MoveRes(CurrentProject);
+
+        this.projectSettings.WriteSettings();
+
+        Popups.ShowPopup("Saved");
     }
 
     public void SaveSettings()
@@ -453,7 +467,7 @@ public partial class MainWindowViewModel : ViewModelBase
             if (parameter is TreeView treeView)
             {
                 Bone? selectedItem = treeView.SelectedItem as Bone;
-                if (selectedItem != null && selectedItem.isBone)
+                if (selectedItem != null && selectedItem.IsBone)
                 {
                     CurrentProject?.MainSkeleton?.addBone(selectedItem.id);
                 }

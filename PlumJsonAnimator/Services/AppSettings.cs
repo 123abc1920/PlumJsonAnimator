@@ -34,7 +34,7 @@ namespace PlumJsonAnimator.Services
                 LastDir = "",
                 Theme = "light",
                 Workspace = Path.Combine(
-                    Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                    Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
                     this.globalState.workspace,
                     "NewProject"
                 ),
