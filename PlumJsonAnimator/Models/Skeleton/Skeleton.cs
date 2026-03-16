@@ -63,7 +63,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             return null;
         }
 
-        public Bone? getBone(string name)
+        public Bone? getBone(string? name)
         {
             foreach (Bone b in this.Bones)
             {

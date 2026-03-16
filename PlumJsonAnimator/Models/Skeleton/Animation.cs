@@ -55,7 +55,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             this.globalState = globalState;
             this.interpolation = interpolation;
-            this.Name = name;
+            this.Name = $"{name}{Counter.GenerateName()}";
         }
 
         public void SetupBones()
@@ -81,12 +81,41 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public AnimationData generateJSONData()
         {
             var animationData = new AnimationData();
+
             var boneListData = new BonesListData();
             foreach (Bone b in BoneAnimationBinding.Keys)
             {
                 boneListData.Add(b.Name, BoneAnimationBinding[b].generateJSONData());
             }
-            animationData["bones"] = boneListData;
+            animationData.Bones = boneListData;
+
+            var drawOrders = new List<DrawOrderItem>();
+
+            foreach (Bone b in BoneAnimationBinding.Keys)
+            {
+                var slots = b.Slots;
+                DrawOrderItem drawOrderItem = new DrawOrderItem()
+                {
+                    Time = 0,
+                    Offsets = new List<DrawOrderOffset>(),
+                };
+
+                foreach (Slot s in slots)
+                {
+                    DrawOrderOffset drawOrderOffset = new DrawOrderOffset()
+                    {
+                        Slot = s.Name,
+                        Offset = s.DrawOrderOffset,
+                    };
+
+                    drawOrderItem.Offsets.Add(drawOrderOffset);
+                }
+
+                drawOrders.Add(drawOrderItem);
+            }
+
+            animationData.DrawOrder = drawOrders;
+
             return animationData;
         }
 
@@ -257,7 +286,32 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         }
     }
 
+    public class AnimationData
+    {
+        [JsonProperty("bones")]
+        public BonesListData? Bones { get; set; }
+
+        [JsonProperty("drawOrder")]
+        public List<DrawOrderItem>? DrawOrder { get; set; }
+    }
+
     public class BonesListData : Dictionary<string, BoneAnimationData> { }
 
-    public class AnimationData : Dictionary<string, BonesListData> { }
+    public class DrawOrderItem
+    {
+        [JsonProperty("time")]
+        public float? Time { get; set; }
+
+        [JsonProperty("offsets")]
+        public List<DrawOrderOffset>? Offsets { get; set; }
+    }
+
+    public class DrawOrderOffset
+    {
+        [JsonProperty("slot")]
+        public required string Slot { get; set; }
+
+        [JsonProperty("offset")]
+        public int Offset { get; set; }
+    }
 }

@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
 
+// TODO: add scaling
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
     public class Slot : Bone, IRenamable
@@ -88,7 +89,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
-        public int DrawOrder { get; set; }
+        public int DrawOrderOffset { get; set; } = 0;
         public double parentA = 0;
         public double lengthX = 100;
         public double lengthY = 100;
@@ -113,7 +114,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this.x = 0;
             this.y = 0;
 
-            this.Name = Path.GetFileNameWithoutExtension(path);
+            this.Name = $"{Path.GetFileNameWithoutExtension(path)}{Counter.GenerateName()}";
 
             this.globalState = globalState;
             UpdateAttachment();
@@ -121,7 +122,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public Slot(GlobalState globalState, string name, Bone b)
         {
-            this.Name = name;
+            this.Name = $"{name}{Counter.GenerateName()}";
             this.BoundedBone = b;
             this.globalState = globalState;
             UpdateAttachment();

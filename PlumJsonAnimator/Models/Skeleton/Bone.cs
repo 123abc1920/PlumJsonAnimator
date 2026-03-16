@@ -139,7 +139,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this._a = -100;
             this._x = 100;
             this._y = 100;
-            this.Name = "name" + this.id.ToString();
+            string name = "bone";
+            this.Name = $"{name}{Counter.GenerateName()}";
 
             this.globalState = globalState;
         }
@@ -158,7 +159,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this._a = a;
             this._x = x;
             this._y = y;
-            this.Name = name;
+            this.Name = $"{name}{Counter.GenerateName()}";
             this.Parent = parent;
 
             this.globalState = globalState;
@@ -170,6 +171,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this.id = 0;
             this._x = 100;
             this._y = 100;
+
+            string name = "bone";
+            this.Name = $"{name}{Counter.GenerateName()}";
 
             double angleRad = this.a * Math.PI / 180;
             this.endX = this.x + length * Math.Cos(angleRad);
@@ -188,7 +192,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this._x = 100;
             this._y = 100;
 
-            this._name = name;
+            this._name = $"{name}{Counter.GenerateName()}";
 
             double angleRad = this.a * Math.PI / 180;
             this.endX = this.x + length * Math.Cos(angleRad);

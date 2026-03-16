@@ -17,7 +17,7 @@
     x:DataType="vm:MainWindowViewModel"
     Icon="/Assets/logo.ico"
     mc:Ignorable="d">
-
+    <!--  TODO: Dash and Plus  -->
     <suki:SukiWindow.LogoContent>
         <Image
             Width="16"
@@ -610,8 +610,27 @@
                                     <DataTemplate>
                                         <StackPanel DoubleTapped="OnSlotSelectionChanged">
                                             <DragDrop.AllowDrop>True</DragDrop.AllowDrop>
-                                            <TextBlock Text="{Binding Name}" />
-                                            <TextBlock Text="{Binding CurrentAttachment.Name}" />
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <StackPanel Grid.Column="0" Orientation="Vertical">
+                                                    <TextBlock
+                                                        Text="{Binding Name}"
+                                                        TextTrimming="CharacterEllipsis"
+                                                        TextWrapping="NoWrap" />
+                                                    <TextBlock
+                                                        Text="{Binding CurrentAttachment.Name}"
+                                                        TextTrimming="CharacterEllipsis"
+                                                        TextWrapping="NoWrap" />
+                                                </StackPanel>
+                                                <NumericUpDown
+                                                    Grid.Column="1"
+                                                    Increment="1"
+                                                    Value="{Binding DrawOrderOffset}" />
+                                            </Grid>
                                         </StackPanel>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>

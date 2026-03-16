@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Avalonia.Controls;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
@@ -36,12 +37,17 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public Skin(string name, GlobalState globalState)
         {
-            this.Name = name;
+            this.Name = $"{name}{Counter.GenerateName()}";
             this.globalState = globalState;
         }
 
         public void BindSlotAttachment(Slot s, Attachment a)
         {
+            if (s == null)
+            {
+                return;
+            }
+
             if (SlotAttachmentBinding.ContainsKey(s))
             {
                 SlotAttachmentBinding[s] = a;
@@ -84,7 +90,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="canvas"></param>
         public void DrawSkin(Canvas canvas)
         {
-            foreach (Slot s in SlotAttachmentBinding.Keys)
+            foreach (Slot s in SlotAttachmentBinding.Keys.OrderBy(slot => slot.DrawOrderOffset))
             {
                 s.drawSlot(canvas);
             }

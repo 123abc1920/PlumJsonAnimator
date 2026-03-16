@@ -23,10 +23,8 @@ namespace PlumJsonAnimator.Common.Dialogs
             if (overlayLayer == null)
                 return;
 
-            // 1. ОПРЕДЕЛЯЕМ ЦВЕТА (Раз TryGetResource не срабатывает)
             bool isDark = topLevel.ActualThemeVariant == ThemeVariant.Dark;
 
-            // В светлой теме Suki фон обычно белый или очень светло-серый
             var bgColor = isDark ? "#1A1A1A" : "#FFFFFF";
             var textColor = isDark ? Brushes.White : Brushes.Black;
 
@@ -43,7 +41,7 @@ namespace PlumJsonAnimator.Common.Dialogs
                 MinWidth = 200,
                 Background = SolidColorBrush.Parse(bgColor),
                 CornerRadius = new CornerRadius(8),
-                Padding = new Thickness(15, 10), // Чуть больше отступ слева для красоты
+                Padding = new Thickness(15, 10),
                 BorderBrush = SolidColorBrush.Parse("#ff003b"),
                 BorderThickness = new Thickness(1),
                 HorizontalAlignment = HorizontalAlignment.Right,
@@ -55,7 +53,7 @@ namespace PlumJsonAnimator.Common.Dialogs
                     Text = message,
                     Foreground = textColor,
                     FontSize = 13,
-                    TextAlignment = TextAlignment.Left, // ТЕКСТ ТЕПЕРЬ СЛЕВА
+                    TextAlignment = TextAlignment.Left,
                     TextWrapping = TextWrapping.Wrap,
                 },
             };
@@ -79,10 +77,8 @@ namespace PlumJsonAnimator.Common.Dialogs
             if (overlayLayer == null)
                 return;
 
-            // 1. ОПРЕДЕЛЯЕМ ЦВЕТА (Раз TryGetResource не срабатывает)
             bool isDark = topLevel.ActualThemeVariant == ThemeVariant.Dark;
 
-            // В светлой теме Suki фон обычно белый или очень светло-серый
             var bgColor = isDark ? "#1A1A1A" : "#FFFFFF";
             var textColor = isDark ? Brushes.White : Brushes.Black;
 
@@ -99,7 +95,7 @@ namespace PlumJsonAnimator.Common.Dialogs
                 MinWidth = 200,
                 Background = SolidColorBrush.Parse(bgColor),
                 CornerRadius = new CornerRadius(8),
-                Padding = new Thickness(15, 10), // Чуть больше отступ слева для красоты
+                Padding = new Thickness(15, 10),
                 BorderBrush = SolidColorBrush.Parse("#ff003b"),
                 BorderThickness = new Thickness(1),
                 HorizontalAlignment = HorizontalAlignment.Right,
@@ -111,7 +107,7 @@ namespace PlumJsonAnimator.Common.Dialogs
                     Text = message,
                     Foreground = textColor,
                     FontSize = 13,
-                    TextAlignment = TextAlignment.Left, // ТЕКСТ ТЕПЕРЬ СЛЕВА
+                    TextAlignment = TextAlignment.Left,
                     TextWrapping = TextWrapping.Wrap,
                 },
             };
