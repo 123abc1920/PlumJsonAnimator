@@ -353,8 +353,15 @@
                                             CommandParameter="scale">
                                             <iconPacks:PackIconBootstrapIcons Kind="ZoomIn" />
                                         </Button>
-                                        <TextBox x:Name="scaleX" Watermark="X" />
-                                        <TextBox x:Name="scaleY" Watermark="Y" />
+                                        <TextBox
+                                            x:Name="scaleX"
+                                            Text="{Binding CurrentBone.LengthX, Mode=TwoWay}"
+                                            Watermark="X" />
+                                        <TextBox
+                                            x:Name="scaleY"
+                                            IsVisible="{Binding !CurrentBone.IsBone}"
+                                            Text="{Binding CurrentBone.LengthY, Mode=TwoWay}"
+                                            Watermark="Y" />
                                     </StackPanel>
                                 </Grid>
                             </Grid>

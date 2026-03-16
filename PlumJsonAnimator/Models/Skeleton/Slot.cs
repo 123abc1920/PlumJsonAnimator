@@ -8,6 +8,7 @@ using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
 
 // TODO: add scaling
+// TODO: add draworder time
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
     public class Slot : Bone, IRenamable
@@ -91,8 +92,33 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public int DrawOrderOffset { get; set; } = 0;
         public double parentA = 0;
-        public double lengthX = 100;
-        public double lengthY = 100;
+        private double lengthX = 100;
+        private double lengthY = 100;
+        public override double LengthX
+        {
+            get => lengthX;
+            set
+            {
+                if (lengthX != value)
+                {
+                    lengthX = value;
+                    OnPropertyChanged(nameof(LengthX));
+                }
+            }
+        }
+
+        public override double LengthY
+        {
+            get => lengthY;
+            set
+            {
+                if (lengthY != value)
+                {
+                    lengthY = value;
+                    OnPropertyChanged(nameof(LengthY));
+                }
+            }
+        }
         private Bone? _boundedBone;
         public Bone? BoundedBone
         {

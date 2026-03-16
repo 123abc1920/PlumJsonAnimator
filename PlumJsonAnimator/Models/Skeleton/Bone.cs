@@ -109,9 +109,26 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
-        public double endX = 110;
-        public double endY = 110;
-        public double length = 10;
+        private double endX = 110;
+        private double endY = 110;
+        private double lengthX = 10;
+        public virtual double LengthX
+        {
+            get => lengthX;
+            set
+            {
+                if (lengthX != value)
+                {
+                    lengthX = value;
+                    double angleRad = this.a * Math.PI / 180;
+                    this.endX = this.x + lengthX * Math.Cos(angleRad);
+                    this.endY = this.y + lengthX * Math.Sin(angleRad);
+                    OnPropertyChanged(nameof(LengthX));
+                }
+            }
+        }
+
+        public virtual double LengthY { get; set; } = 0;
 
         protected GlobalState globalState;
 
@@ -127,8 +144,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this._y = 100;
 
             double angleRad = this.a * Math.PI / 180;
-            this.endX = this._x + length * Math.Cos(angleRad);
-            this.endY = this._y + length * Math.Sin(angleRad);
+            this.endX = this._x + lengthX * Math.Cos(angleRad);
+            this.endY = this._y + lengthX * Math.Sin(angleRad);
 
             this.globalState = globalState;
         }
@@ -176,8 +193,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this.Name = $"{name}{Counter.GenerateName()}";
 
             double angleRad = this.a * Math.PI / 180;
-            this.endX = this.x + length * Math.Cos(angleRad);
-            this.endY = this.y + length * Math.Sin(angleRad);
+            this.endX = this.x + lengthX * Math.Cos(angleRad);
+            this.endY = this.y + lengthX * Math.Sin(angleRad);
 
             this.Parent = parent;
             this.id = 100;
@@ -195,8 +212,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this._name = $"{name}{Counter.GenerateName()}";
 
             double angleRad = this.a * Math.PI / 180;
-            this.endX = this.x + length * Math.Cos(angleRad);
-            this.endY = this.y + length * Math.Sin(angleRad);
+            this.endX = this.x + lengthX * Math.Cos(angleRad);
+            this.endY = this.y + lengthX * Math.Sin(angleRad);
 
             this.Parent = parent;
             this.id = 100;
@@ -219,8 +236,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this.y = y;
 
             double angleRad = this.a * Math.PI / 180;
-            this.endX = this.x + length * Math.Cos(angleRad);
-            this.endY = this.y + length * Math.Sin(angleRad);
+            this.endX = this.x + lengthX * Math.Cos(angleRad);
+            this.endY = this.y + lengthX * Math.Sin(angleRad);
 
             foreach (Bone c in this.Children)
             {
@@ -245,8 +262,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this.a = a;
             double angleRad = this.a * Math.PI / 180;
 
-            this.endX = this.x + length * Math.Cos(angleRad);
-            this.endY = this.y + length * Math.Sin(angleRad);
+            this.endX = this.x + lengthX * Math.Cos(angleRad);
+            this.endY = this.y + lengthX * Math.Sin(angleRad);
 
             foreach (Bone child in this.Children)
             {
