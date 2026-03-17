@@ -29,8 +29,20 @@ namespace PlumJsonAnimator.Common.Constants
             }
             else
             {
-                return modes[(int)type];
+                if (type == TransformModesTypes.TRANSLATE)
+                {
+                    return new TransformMode(this.globalState);
+                }
+                else if (type == TransformModesTypes.ROTATE)
+                {
+                    return new RotateMode(this.globalState);
+                }
+                else if (type == TransformModesTypes.SCALE)
+                {
+                    return new ScaleMode(this.globalState);
+                }
             }
+            return new NoMode(this.globalState);
         }
     }
 }

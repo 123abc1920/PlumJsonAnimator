@@ -174,7 +174,23 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public override void scale(double x, double y)
         {
-            lengthX += 50;
+            if (x > 0)
+            {
+                this.LengthX += 10;
+            }
+            else
+            {
+                this.LengthX -= 10;
+            }
+
+            if (y > 0)
+            {
+                this.LengthY += 10;
+            }
+            else
+            {
+                this.LengthY -= 10;
+            }
         }
 
         public override void rotate(double a)

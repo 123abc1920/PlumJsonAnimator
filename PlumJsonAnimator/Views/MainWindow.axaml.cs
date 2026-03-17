@@ -162,6 +162,11 @@ public partial class MainWindow : SukiWindow
     private void Release_Canvas(object sender, PointerReleasedEventArgs e)
     {
         _isDragging = false;
+
+        if (DataContext is MainWindowViewModel viewModel)
+        {
+            viewModel.CurrentProject?.currentMode.clearMode();
+        }
     }
 
     private void OnResPointerPressed(object sender, PointerPressedEventArgs e)

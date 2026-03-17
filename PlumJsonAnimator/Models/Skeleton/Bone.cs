@@ -117,7 +117,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             get => lengthX;
             set
             {
-                if (lengthX != value)
+                if (lengthX != value && value > 0)
                 {
                     lengthX = value;
                     double angleRad = this.a * Math.PI / 180;
@@ -304,7 +304,10 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             );
         }
 
-        public virtual void scale(double x, double y) { }
+        public virtual void scale(double x, double y)
+        {
+            this.LengthX = Math.Sqrt((x - this.x) * (x - this.x) + (y - this.y) * (y - this.y));
+        }
 
         public void drawBone(Canvas canvas)
         {

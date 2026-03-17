@@ -25,6 +25,8 @@ namespace PlumJsonAnimator.Models.Common
             this.globalState = globalState;
         }
 
+        public abstract void clearMode();
+
         public abstract void transform(Bone bone, double a, double b);
     }
 
@@ -36,6 +38,8 @@ namespace PlumJsonAnimator.Models.Common
             type = TransformModesTypes.NO;
             name = "";
         }
+
+        public override void clearMode() { }
 
         public override void transform(Bone bone, double a, double b)
         {
@@ -52,6 +56,8 @@ namespace PlumJsonAnimator.Models.Common
             name = "transform";
         }
 
+        public override void clearMode() { }
+
         public override void transform(Bone bone, double x, double y)
         {
             bone.move(x, y);
@@ -65,6 +71,9 @@ namespace PlumJsonAnimator.Models.Common
 
     class ScaleMode : Mode
     {
+        private double? startX = null;
+        private double? startY = null;
+
         public ScaleMode(GlobalState globalState)
             : base(globalState)
         {
@@ -72,8 +81,24 @@ namespace PlumJsonAnimator.Models.Common
             name = "scale";
         }
 
+        public override void clearMode()
+        {
+            startX = null;
+            startY = null;
+        }
+
         public override void transform(Bone bone, double x, double y)
         {
+            if (startX == null || startY == null)
+            {
+                startX = x;
+                startY = y;
+                return;
+            }
+            double deltaX = (double)startX - x;
+            double deltaY = (double)startY - y;
+            startX = x;
+            startY = y;
             bone.scale(x, y);
         }
     }
@@ -98,6 +123,8 @@ namespace PlumJsonAnimator.Models.Common
             type = TransformModesTypes.ROTATE;
             name = "rotate";
         }
+
+        public override void clearMode() { }
 
         public override void transform(Bone bone, double x, double y)
         {
