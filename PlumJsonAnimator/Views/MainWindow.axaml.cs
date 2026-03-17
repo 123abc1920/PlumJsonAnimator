@@ -16,7 +16,7 @@ using SukiUI.Controls;
 
 namespace PlumJsonAnimator.Views;
 
-// TODO: grid splitters
+// TODO: resize canvas
 public partial class MainWindow : SukiWindow
 {
     private Dictionary<char, char> pairedSymbols = new Dictionary<char, char>()

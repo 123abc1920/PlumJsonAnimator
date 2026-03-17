@@ -44,4 +44,14 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
+
+    <Style Selector="GridSplitter">
+        <Setter Property="Background" Value="{DynamicResource SukiAccentColor}" />
+        <Setter Property="Opacity" Value="0.2" />
+    </Style>
+
+    <Style Selector="GridSplitter:pointerover">
+        <Setter Property="Background" Value="{DynamicResource SukiAccentColor}" />
+        <Setter Property="Opacity" Value="0.4" />
+    </Style>
 </Styles>

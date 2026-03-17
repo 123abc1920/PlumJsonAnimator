@@ -154,8 +154,8 @@
                 </ScrollViewer>
                 <GridSplitter
                     Grid.Row="1"
-                    Height="6"
-                    Background="Gray"
+                    Height="3"
+                    Background="{DynamicResource SukiPrimaryColor}"
                     ResizeDirection="Rows" />
                 <ScrollViewer
                     Grid.Row="2"
@@ -216,8 +216,8 @@
                 </ScrollViewer>
                 <GridSplitter
                     Grid.Row="3"
-                    Height="6"
-                    Background="Gray"
+                    Height="3"
+                    Background="{DynamicResource SukiPrimaryColor}"
                     ResizeDirection="Rows" />
                 <StackPanel Grid.Row="4" Margin="5">
                     <TextBlock>Resources</TextBlock>
@@ -265,8 +265,8 @@
             </Grid>
             <GridSplitter
                 Grid.Column="1"
-                Width="6"
-                Background="Gray"
+                Width="3"
+                Background="{DynamicResource SukiPrimaryColor}"
                 ResizeDirection="Columns" />
             <Grid Grid.Column="2">
                 <TabControl Padding="0" SelectionChanged="TabControl_SelectionChanged">
@@ -368,8 +368,8 @@
 
                             <GridSplitter
                                 Grid.Row="1"
-                                Height="6"
-                                Background="Gray"
+                                Height="3"
+                                Background="{DynamicResource SukiPrimaryColor}"
                                 ResizeDirection="Rows" />
 
                             <Grid Grid.Row="2">
@@ -494,8 +494,8 @@
 
                             <GridSplitter
                                 Grid.Row="1"
-                                Height="6"
-                                Background="Gray"
+                                Height="3"
+                                Background="{DynamicResource SukiPrimaryColor}"
                                 ResizeDirection="Rows" />
 
                             <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
@@ -511,8 +511,8 @@
             </Grid>
             <GridSplitter
                 Grid.Column="3"
-                Width="6"
-                Background="Gray"
+                Width="3"
+                Background="{DynamicResource SukiPrimaryColor}"
                 ResizeDirection="Columns" />
             <Grid Grid.Column="4">
                 <Grid.RowDefinitions>
@@ -567,8 +567,8 @@
                 </StackPanel>
                 <GridSplitter
                     Grid.Row="1"
-                    Height="6"
-                    Background="Gray"
+                    Height="3"
+                    Background="{DynamicResource SukiPrimaryColor}"
                     ResizeDirection="Rows" />
                 <DockPanel Grid.Row="2">
                     <ScrollViewer Margin="5" VerticalScrollBarVisibility="Auto">
