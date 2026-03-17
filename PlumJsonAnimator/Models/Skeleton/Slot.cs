@@ -148,7 +148,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public Slot(GlobalState globalState, string name, Bone b)
         {
-            this.Name = $"{name}{Counter.GenerateName()}";
+            this.Name = name;
             this.BoundedBone = b;
             this.globalState = globalState;
             UpdateAttachment();
