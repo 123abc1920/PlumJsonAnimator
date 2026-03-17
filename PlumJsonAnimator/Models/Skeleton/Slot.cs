@@ -99,7 +99,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             get => lengthX;
             set
             {
-                if (lengthX != value)
+                if (lengthX != value && value > 0)
                 {
                     lengthX = value;
                     OnPropertyChanged(nameof(LengthX));
@@ -112,7 +112,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             get => lengthY;
             set
             {
-                if (lengthY != value)
+                if (lengthY != value && value > 0)
                 {
                     lengthY = value;
                     OnPropertyChanged(nameof(LengthY));
@@ -174,23 +174,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public override void scale(double x, double y)
         {
-            if (x > 0)
-            {
-                this.LengthX += 10;
-            }
-            else
-            {
-                this.LengthX -= 10;
-            }
-
-            if (y > 0)
-            {
-                this.LengthY += 10;
-            }
-            else
-            {
-                this.LengthY -= 10;
-            }
+            this.LengthX = Math.Abs(x - this.x) * 5;
+            this.LengthY = Math.Abs(y - this.y) * 5;
         }
 
         public override void rotate(double a)
@@ -255,7 +240,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 Name = this.Name,
                 Bone = this.BoundedBone?.Name,
-                Attachment = this.Name,
+                Attachment = this.CurrentAttachment?.Name,
             };
         }
 
@@ -335,7 +320,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         [JsonProperty("bone", NullValueHandling = NullValueHandling.Ignore)]
         public string? Bone { get; set; }
 
-        [JsonProperty("attachment", DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public required string Attachment { get; set; }
+        [JsonProperty("attachment", NullValueHandling = NullValueHandling.Ignore)]
+        public string? Attachment { get; set; }
     }
 }

@@ -426,7 +426,10 @@ namespace PlumJsonAnimator.Models
                                     Slot s = this.globalState.currentProject!.GetSlot(
                                         drawOrderOffset.Slot
                                     );
-                                    s.DrawOrderOffset = drawOrderOffset.Offset;
+                                    if (s != null)
+                                    {
+                                        s.DrawOrderOffset = drawOrderOffset.Offset;
+                                    }
                                 }
                             }
                         }
