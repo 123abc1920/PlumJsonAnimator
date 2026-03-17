@@ -17,7 +17,7 @@
     x:DataType="vm:MainWindowViewModel"
     Icon="/Assets/logo.ico"
     mc:Ignorable="d">
-    <!--  TODO: Dash and Plus  -->
+
     <suki:SukiWindow.LogoContent>
         <Image
             Width="16"
@@ -136,7 +136,7 @@
                             HorizontalContentAlignment="Center"
                             VerticalContentAlignment="Center"
                             Command="{Binding AddSkin}">
-                            <iconPacks:PackIconBootstrapIcons Kind="FilePlusFill" />
+                            <iconPacks:PackIconBootstrapIcons Kind="Plus" />
                         </Button>
                         <Button
                             Grid.Row="2"
@@ -198,7 +198,7 @@
                             HorizontalContentAlignment="Center"
                             VerticalContentAlignment="Center"
                             Command="{Binding AddAnimation}">
-                            <iconPacks:PackIconBootstrapIcons Kind="FilePlusFill" />
+                            <iconPacks:PackIconBootstrapIcons Kind="Plus" />
                         </Button>
                         <Button
                             Grid.Row="2"
@@ -437,7 +437,7 @@
                                         HorizontalContentAlignment="Center"
                                         VerticalContentAlignment="Center"
                                         Command="{Binding AddKeyFrame}">
-                                        <iconPacks:PackIconBootstrapIcons Kind="FilePlusFill" />
+                                        <iconPacks:PackIconBootstrapIcons Kind="Plus" />
                                     </Button>
                                     <Button
                                         Width="32"
@@ -446,7 +446,7 @@
                                         HorizontalContentAlignment="Center"
                                         VerticalContentAlignment="Center"
                                         Command="{Binding DeleteKeyFrame}">
-                                        <iconPacks:PackIconBootstrapIcons Kind="FileMinusFill" />
+                                        <iconPacks:PackIconBootstrapIcons Kind="Dash" />
                                     </Button>
                                 </StackPanel>
 
@@ -531,7 +531,7 @@
                             VerticalContentAlignment="Center"
                             Command="{Binding AddBoneView}"
                             CommandParameter="{Binding ElementName=boneTreeView}">
-                            <iconPacks:PackIconBootstrapIcons Kind="FilePlusFill" />
+                            <iconPacks:PackIconBootstrapIcons Kind="Plus" />
                         </Button>
                         <Button
                             Width="32"
@@ -582,7 +582,7 @@
                                     HorizontalContentAlignment="Center"
                                     VerticalContentAlignment="Center"
                                     Command="{Binding AddSlot}">
-                                    <iconPacks:PackIconBootstrapIcons Kind="FilePlusFill" />
+                                    <iconPacks:PackIconBootstrapIcons Kind="Plus" />
                                 </Button>
                                 <Button
                                     Width="32"

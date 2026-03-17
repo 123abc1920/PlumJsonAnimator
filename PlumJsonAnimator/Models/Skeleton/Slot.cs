@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
 
-// TODO: add scaling
 // TODO: add draworder time
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
