@@ -117,8 +117,8 @@ namespace PlumJsonAnimator.Services
                     sukiTheme.ChangeColorTheme(
                         new SukiUI.Models.SukiColorTheme(
                             "PlumTheme",
-                            Colors.AppColor,
-                            Colors.AppColor
+                            AppColors.AppColor,
+                            AppColors.AppColor
                         )
                     );
                 }

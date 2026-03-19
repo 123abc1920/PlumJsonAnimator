@@ -50,7 +50,7 @@ namespace PlumJsonAnimator.Views
                 }
 
                 sukiTheme.ChangeColorTheme(
-                    new SukiUI.Models.SukiColorTheme("PlumTheme", Colors.AppColor, Colors.AppColor)
+                    new SukiUI.Models.SukiColorTheme("PlumTheme", AppColors.AppColor, AppColors.AppColor)
                 );
             }
         }

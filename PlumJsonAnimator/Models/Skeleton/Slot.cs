@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
@@ -217,10 +218,32 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                     RenderTransform = new RotateTransform(this.a + this.parentA),
                 };
 
-                Canvas.SetLeft(image, canvas.Width / 2 + this.x - image.Width / 2);
-                Canvas.SetTop(image, canvas.Height / 2 + this.y - image.Height / 2);
+                double left = canvas.Width / 2 + this.x - image.Width / 2;
+                double top = canvas.Height / 2 + this.y - image.Height / 2;
+
+                Canvas.SetLeft(image, left);
+                Canvas.SetTop(image, top);
 
                 canvas.Children.Add(image);
+
+                if (this.globalState.IsSlotSelected(this))
+                {
+                    int SELECTION = 10;
+
+                    var border = new Border
+                    {
+                        Width = SELECTION,
+                        Height = SELECTION,
+                        BorderBrush = AppColors.Red,
+                        BorderThickness = new Thickness(2),
+                        Background = null,
+                    };
+
+                    Canvas.SetLeft(border, canvas.Width / 2 + this.x - SELECTION / 2);
+                    Canvas.SetTop(border, canvas.Height / 2 + this.y - SELECTION / 2);
+
+                    canvas.Children.Add(border);
+                }
             }
             catch (Exception ex)
             {

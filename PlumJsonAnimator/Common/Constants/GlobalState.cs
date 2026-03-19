@@ -42,11 +42,11 @@ namespace PlumJsonAnimator.Common.Constants
         {
             if (this.currentBone?.id == id && this.currentBone.IsBone == true)
             {
-                return Colors.Red;
+                return AppColors.Red;
             }
             else
             {
-                return Colors.Green;
+                return AppColors.Green;
             }
         }
 
@@ -54,14 +54,24 @@ namespace PlumJsonAnimator.Common.Constants
         {
             if (this.currentBone?.id == id && this.currentBone.IsBone == true)
             {
-                return Colors.Blue;
+                return AppColors.Blue;
             }
             else
             {
-                return Colors.Aqua;
+                return AppColors.Aqua;
             }
+        }
+
+        public bool IsSlotSelected(Slot slot)
+        {
+            if (this.currentBone != null)
+            {
+                if (!this.currentBone.IsBone && this.currentBone == slot)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
-
-// zip PT62
