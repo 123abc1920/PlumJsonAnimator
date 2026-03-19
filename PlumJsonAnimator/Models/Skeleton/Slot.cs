@@ -10,7 +10,6 @@ using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
 
-// TODO: add draworder time
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
     public class Slot : Bone, IRenamable
@@ -147,6 +146,12 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 _isUpdatingFromCode = true;
                 this.CurrentDrawOrderOffset = value.Offset;
+                _isUpdatingFromCode = false;
+            }
+            else
+            {
+                _isUpdatingFromCode = true;
+                this.CurrentDrawOrderOffset = 0;
                 _isUpdatingFromCode = false;
             }
         }

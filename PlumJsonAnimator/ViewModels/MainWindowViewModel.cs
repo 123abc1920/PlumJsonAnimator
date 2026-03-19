@@ -43,6 +43,10 @@ public partial class MainWindowViewModel : ViewModelBase
             {
                 this.CurrentProject.CurrentAnimation.currentTime = value;
                 this.CurrentProject.CurrentAnimation.SetupBones();
+                foreach (Slot s in CurrentProject.Slots)
+                {
+                    s.UpdateDrawOrderOffset();
+                }
                 OnPropertyChanged(nameof(CurrentTime));
             }
         }
@@ -460,6 +464,10 @@ public partial class MainWindowViewModel : ViewModelBase
 
         this.globalState.TimeUpdated += () =>
         {
+            foreach (Slot s in CurrentProject.Slots)
+            {
+                s.UpdateDrawOrderOffset();
+            }
             OnPropertyChanged(nameof(CurrentTime));
         };
 

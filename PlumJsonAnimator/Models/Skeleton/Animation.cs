@@ -120,7 +120,10 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
                     foreach (var v in drawOrderItems.Values)
                     {
-                        drawOrders.Add(v);
+                        if (!drawOrders.Contains(v))
+                        {
+                            drawOrders.Add(v);
+                        }
                     }
                 }
             }
