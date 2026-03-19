@@ -439,7 +439,9 @@ namespace PlumJsonAnimator.Models
 
                                         if (item.Time == 0)
                                         {
+                                            s._isUpdatingFromCode = true;
                                             s.CurrentDrawOrderOffset = drawOrderOffset.Offset;
+                                            s._isUpdatingFromCode = false;
                                         }
                                     }
                                 }
@@ -491,7 +493,9 @@ namespace PlumJsonAnimator.Models
 
                             if (item.Time == 0)
                             {
+                                s._isUpdatingFromCode = true;
                                 s.CurrentDrawOrderOffset = drawOrderOffset.Offset;
+                                s._isUpdatingFromCode = false;
                             }
                         }
                     }

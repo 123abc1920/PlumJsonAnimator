@@ -96,27 +96,61 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             new SortedDictionary<double, DrawOrderOffset>();
 
         private int _currentDrawOrderOffset;
+        public bool _isUpdatingFromCode;
         public int CurrentDrawOrderOffset
         {
             get => _currentDrawOrderOffset;
             set
             {
-                _currentDrawOrderOffset = value;
-                double currTime = this.globalState.currentProject.CurrentAnimation.currentTime;
-                if (drawOrders.Keys.Contains(currTime))
+                if (value == null)
                 {
-                    drawOrders[currTime].Offset = value;
+                    _currentDrawOrderOffset = 0;
+                    OnPropertyChanged();
+                    return;
                 }
-                else
+
+                _currentDrawOrderOffset = value;
+                if (!_isUpdatingFromCode)
                 {
-                    drawOrders.Add(
-                        currTime,
-                        new DrawOrderOffset() { Slot = this.Name, Offset = value }
-                    );
+                    double currTime = this.globalState.currentProject.CurrentAnimation.currentTime;
+                    if (drawOrders.Keys.Contains(currTime))
+                    {
+                        drawOrders[currTime].Offset = value;
+                    }
+                    else
+                    {
+                        drawOrders.Add(
+                            currTime,
+                            new DrawOrderOffset() { Slot = this.Name, Offset = value }
+                        );
+                    }
                 }
                 OnPropertyChanged();
             }
         }
+
+        public void UpdateDrawOrderOffset()
+        {
+            double currTime = this.globalState.currentProject.CurrentAnimation.currentTime;
+
+            double? foundKey = null;
+            foreach (var key in drawOrders.Keys)
+            {
+                if (key <= currTime)
+                    foundKey = key;
+                else
+                    break;
+            }
+
+            var value = foundKey.HasValue ? drawOrders[foundKey.Value] : null;
+            if (value != null)
+            {
+                _isUpdatingFromCode = true;
+                this.CurrentDrawOrderOffset = value.Offset;
+                _isUpdatingFromCode = false;
+            }
+        }
+
         public double parentA = 0;
         private double lengthX = 100;
         private double lengthY = 100;
