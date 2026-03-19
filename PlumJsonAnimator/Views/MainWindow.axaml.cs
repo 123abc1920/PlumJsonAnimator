@@ -17,6 +17,7 @@ using SukiUI.Controls;
 namespace PlumJsonAnimator.Views;
 
 // TODO: resize canvas
+// TODO: обводки slot
 public partial class MainWindow : SukiWindow
 {
     private Dictionary<char, char> pairedSymbols = new Dictionary<char, char>()

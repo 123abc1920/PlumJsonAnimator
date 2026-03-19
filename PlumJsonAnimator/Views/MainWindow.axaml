@@ -608,37 +608,51 @@
                             <TextBlock Margin="0,5" Text="{Binding CurrentBone.Name, FallbackValue='Не выбрано', TargetNullValue='Не выбрано'}" />
                             <ListBox
                                 x:Name="SlotsList"
-                                Margin="0,5"
                                 DragDrop.Drop="OnListBoxDrop"
                                 IsVisible="{Binding CurrentBone}"
                                 ItemsSource="{Binding CurrentBone.Slots}">
                                 <DragDrop.AllowDrop>True</DragDrop.AllowDrop>
+
+                                <ListBox.Styles>
+                                    <Style Selector="ListBoxItem">
+                                        <Setter Property="Template">
+                                            <ControlTemplate>
+                                                <ContentPresenter
+                                                    Name="PART_ContentPresenter"
+                                                    HorizontalAlignment="Stretch"
+                                                    Content="{TemplateBinding Content}"
+                                                    ContentTemplate="{TemplateBinding ContentTemplate}" />
+                                            </ControlTemplate>
+                                        </Setter>
+                                    </Style>
+                                </ListBox.Styles>
+
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel DoubleTapped="OnSlotSelectionChanged">
+                                        <Grid HorizontalAlignment="Stretch" DoubleTapped="OnSlotSelectionChanged">
                                             <DragDrop.AllowDrop>True</DragDrop.AllowDrop>
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="Auto" />
-                                                </Grid.ColumnDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
 
-                                                <StackPanel Grid.Column="0" Orientation="Vertical">
-                                                    <TextBlock
-                                                        Text="{Binding Name}"
-                                                        TextTrimming="CharacterEllipsis"
-                                                        TextWrapping="NoWrap" />
-                                                    <TextBlock
-                                                        Text="{Binding CurrentAttachment.Name}"
-                                                        TextTrimming="CharacterEllipsis"
-                                                        TextWrapping="NoWrap" />
-                                                </StackPanel>
-                                                <NumericUpDown
-                                                    Grid.Column="1"
-                                                    Increment="1"
-                                                    Value="{Binding DrawOrderOffset}" />
-                                            </Grid>
-                                        </StackPanel>
+                                            <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
+                                                <TextBlock
+                                                    Text="{Binding Name}"
+                                                    TextTrimming="CharacterEllipsis"
+                                                    TextWrapping="NoWrap" />
+                                                <TextBlock
+                                                    Text="{Binding CurrentAttachment.Name}"
+                                                    TextTrimming="CharacterEllipsis"
+                                                    TextWrapping="NoWrap" />
+                                            </StackPanel>
+
+                                            <NumericUpDown
+                                                Grid.Column="1"
+                                                Margin="4,0,0,0"
+                                                Increment="1"
+                                                Value="{Binding DrawOrderOffset}" />
+                                        </Grid>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>

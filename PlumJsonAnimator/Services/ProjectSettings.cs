@@ -45,8 +45,6 @@ namespace PlumJsonAnimator.Services
                 Spine = "4.3.2",
                 Anim = "",
             };
-
-            Console.WriteLine(this.settingsData.Path);
         }
 
         public void ExistOrCreateProjectDirs()
