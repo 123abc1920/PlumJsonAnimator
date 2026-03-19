@@ -248,7 +248,7 @@ namespace PlumJsonAnimator.Models
             return null;
         }
 
-        public void regenrateProject(
+        public void regenerateProject(
             Dictionary<string, BoneData> bones,
             Dictionary<string, SlotData> slots,
             Dictionary<string, SkinData> skins,
@@ -428,7 +428,19 @@ namespace PlumJsonAnimator.Models
                                     );
                                     if (s != null)
                                     {
-                                        s.DrawOrderOffset = drawOrderOffset.Offset;
+                                        if (s.drawOrders.ContainsKey((double)item.Time))
+                                        {
+                                            s.drawOrders[(double)item.Time] = drawOrderOffset;
+                                        }
+                                        else
+                                        {
+                                            s.drawOrders.Add((double)item.Time, drawOrderOffset);
+                                        }
+
+                                        if (item.Time == 0)
+                                        {
+                                            s.CurrentDrawOrderOffset = drawOrderOffset.Offset;
+                                        }
                                     }
                                 }
                             }
@@ -466,7 +478,22 @@ namespace PlumJsonAnimator.Models
                     foreach (DrawOrderOffset drawOrderOffset in item.Offsets)
                     {
                         Slot s = this.globalState.currentProject!.GetSlot(drawOrderOffset.Slot);
-                        s.DrawOrderOffset = drawOrderOffset.Offset;
+                        if (s != null)
+                        {
+                            if (s.drawOrders.ContainsKey((double)item.Time))
+                            {
+                                s.drawOrders[(double)item.Time] = drawOrderOffset;
+                            }
+                            else
+                            {
+                                s.drawOrders.Add((double)item.Time, drawOrderOffset);
+                            }
+
+                            if (item.Time == 0)
+                            {
+                                s.CurrentDrawOrderOffset = drawOrderOffset.Offset;
+                            }
+                        }
                     }
                 }
                 this.Animations.Add(a);

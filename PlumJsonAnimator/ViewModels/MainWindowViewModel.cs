@@ -356,7 +356,7 @@ public partial class MainWindowViewModel : ViewModelBase
         Bone bone = CurrentProject.MainSkeleton.getBone(id);
         if (bone != null)
         {
-            Slot s = new Slot(this.globalState, "tesr", bone);
+            Slot s = new Slot(this.globalState, bone);
             CurrentProject.Slots.Add(s);
             CurrentProject.CurrentSkin.BindSlotAttachment(s, new ImageAttachment((ImageRes)res));
             bone.UpdateSlots();
@@ -581,7 +581,7 @@ public partial class MainWindowViewModel : ViewModelBase
             Bone bone = CurrentBone;
             if (bone != null)
             {
-                Slot s = new Slot(this.globalState, "tesr", bone);
+                Slot s = new Slot(this.globalState, bone);
                 CurrentProject.Slots.Add(s);
                 CurrentProject.CurrentSkin.AddSlot(s);
                 bone.UpdateSlots();

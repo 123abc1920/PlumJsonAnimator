@@ -651,7 +651,7 @@
                                                 Grid.Column="1"
                                                 Margin="4,0,0,0"
                                                 Increment="1"
-                                                Value="{Binding DrawOrderOffset}" />
+                                                Value="{Binding CurrentDrawOrderOffset}" />
                                         </Grid>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>

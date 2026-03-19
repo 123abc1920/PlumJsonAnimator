@@ -335,7 +335,7 @@ namespace PlumJsonAnimator.Services
                 return new ProjectValidResult { Message = animationResult.Message, IsOk = false };
             }
 
-            this.globalState.currentProject?.regenrateProject(
+            this.globalState.currentProject?.regenerateProject(
                 (Dictionary<string, BoneData>)boneResult.UpdatedArray,
                 (Dictionary<string, SlotData>)slotResult.UpdatedArray,
                 (Dictionary<string, SkinData>)skinResult.UpdatedArray,

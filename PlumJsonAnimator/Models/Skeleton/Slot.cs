@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using Avalonia;
 using Avalonia.Controls;
@@ -90,7 +92,31 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
-        public int DrawOrderOffset { get; set; } = 0;
+        public SortedDictionary<double, DrawOrderOffset> drawOrders =
+            new SortedDictionary<double, DrawOrderOffset>();
+
+        private int _currentDrawOrderOffset;
+        public int CurrentDrawOrderOffset
+        {
+            get => _currentDrawOrderOffset;
+            set
+            {
+                _currentDrawOrderOffset = value;
+                double currTime = this.globalState.currentProject.CurrentAnimation.currentTime;
+                if (drawOrders.Keys.Contains(currTime))
+                {
+                    drawOrders[currTime].Offset = value;
+                }
+                else
+                {
+                    drawOrders.Add(
+                        currTime,
+                        new DrawOrderOffset() { Slot = this.Name, Offset = value }
+                    );
+                }
+                OnPropertyChanged();
+            }
+        }
         public double parentA = 0;
         private double lengthX = 100;
         private double lengthY = 100;
@@ -149,6 +175,14 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public Slot(GlobalState globalState, string name, Bone b)
         {
             this.Name = name;
+            this.BoundedBone = b;
+            this.globalState = globalState;
+            UpdateAttachment();
+        }
+
+        public Slot(GlobalState globalState, Bone b)
+        {
+            this.Name = $"tesr{Counter.GenerateName()}";
             this.BoundedBone = b;
             this.globalState = globalState;
             UpdateAttachment();

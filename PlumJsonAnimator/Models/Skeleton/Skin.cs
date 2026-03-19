@@ -90,7 +90,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="canvas"></param>
         public void DrawSkin(Canvas canvas)
         {
-            foreach (Slot s in SlotAttachmentBinding.Keys.OrderBy(slot => slot.DrawOrderOffset))
+            foreach (Slot s in SlotAttachmentBinding.Keys.OrderBy(slot => slot.CurrentDrawOrderOffset))
             {
                 s.drawSlot(canvas);
             }

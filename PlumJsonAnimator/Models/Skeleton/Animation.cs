@@ -94,24 +94,35 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             foreach (Bone b in BoneAnimationBinding.Keys)
             {
                 var slots = b.Slots;
-                DrawOrderItem drawOrderItem = new DrawOrderItem()
-                {
-                    Time = 0,
-                    Offsets = new List<DrawOrderOffset>(),
-                };
+                Dictionary<double, DrawOrderItem> drawOrderItems =
+                    new Dictionary<double, DrawOrderItem>();
 
                 foreach (Slot s in slots)
                 {
-                    DrawOrderOffset drawOrderOffset = new DrawOrderOffset()
+                    foreach (var kv in s.drawOrders)
                     {
-                        Slot = s.Name,
-                        Offset = s.DrawOrderOffset,
-                    };
+                        if (drawOrderItems.Keys.Contains(kv.Key))
+                        {
+                            drawOrderItems[kv.Key].Offsets?.Add(kv.Value);
+                        }
+                        else
+                        {
+                            drawOrderItems.Add(
+                                kv.Key,
+                                new DrawOrderItem()
+                                {
+                                    Time = (float)kv.Key,
+                                    Offsets = new List<DrawOrderOffset>() { kv.Value },
+                                }
+                            );
+                        }
+                    }
 
-                    drawOrderItem.Offsets.Add(drawOrderOffset);
+                    foreach (var v in drawOrderItems.Values)
+                    {
+                        drawOrders.Add(v);
+                    }
                 }
-
-                drawOrders.Add(drawOrderItem);
             }
 
             animationData.DrawOrder = drawOrders;
