@@ -18,7 +18,6 @@ namespace PlumJsonAnimator.Services
 {
     // TODO: gif
     // TODO: image size
-    // TODO: ffmpeg ui binding
     public class ImageExporter
     {
         public string ExportPath = "";

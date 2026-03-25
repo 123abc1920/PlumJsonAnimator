@@ -114,6 +114,19 @@ public partial class MainWindowViewModel : ViewModelBase
             }
         }
     }
+
+    public string FfmpegPath
+    {
+        get { return this.appSettings.appSettings.Ffmpeg; }
+        set
+        {
+            if (this.appSettings.appSettings.Ffmpeg != value || value == null || value == "")
+            {
+                this.appSettings.appSettings.Ffmpeg = value;
+                OnPropertyChanged(nameof(FfmpegPath));
+            }
+        }
+    }
     public IRenamable? RedactObj { get; set; } = null;
     public List<string> Themes { get; set; } = new List<string>() { "light", "dark" };
     public string CurrentTheme

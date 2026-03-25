@@ -38,6 +38,7 @@ namespace PlumJsonAnimator.Services
                     this.globalState.workspace,
                     "NewProject"
                 ),
+                Ffmpeg = "",
             };
         }
 
@@ -100,6 +101,8 @@ namespace PlumJsonAnimator.Services
                     this.appSettings.Workspace = newSettings.Workspace;
                     this.appSettings.Theme = newSettings.Theme;
                     this.appSettings.Lang = newSettings.Lang;
+                    this.appSettings.Ffmpeg =
+                        (newSettings.Ffmpeg == null) ? this.appSettings.Ffmpeg : newSettings.Ffmpeg;
 
                     this.globalState.theme = newSettings.Theme;
 
@@ -144,5 +147,8 @@ namespace PlumJsonAnimator.Services
 
         [JsonProperty("language")]
         public string Lang { get; set; } = "ru";
+
+        [JsonProperty("ffmpeg")]
+        public string Ffmpeg { get; set; } = "";
     }
 }

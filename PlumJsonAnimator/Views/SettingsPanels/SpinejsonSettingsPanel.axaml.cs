@@ -1,4 +1,4 @@
-using Avalonia;
+using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
@@ -34,6 +34,7 @@ namespace PlumJsonAnimator.Views
                     Workspace = pathTextBox.Text,
                     Lang = "ru",
                     Theme = viewModel.CurrentTheme,
+                    Ffmpeg = viewModel.FfmpegPath,
                 };
 
                 viewModel.SaveSettings(appSettingsData);
@@ -50,7 +51,11 @@ namespace PlumJsonAnimator.Views
                 }
 
                 sukiTheme.ChangeColorTheme(
-                    new SukiUI.Models.SukiColorTheme("PlumTheme", AppColors.AppColor, AppColors.AppColor)
+                    new SukiUI.Models.SukiColorTheme(
+                        "PlumTheme",
+                        AppColors.AppColor,
+                        AppColors.AppColor
+                    )
                 );
             }
         }
@@ -68,6 +73,32 @@ namespace PlumJsonAnimator.Views
             {
                 string folderPath = folders[0].Path.LocalPath;
                 pathTextBox.Text = folderPath;
+            }
+        }
+
+        private async void SelectFfmpeg(object sender, RoutedEventArgs e)
+        {
+            var topLevel = TopLevel.GetTopLevel(this);
+            var storageProvider = topLevel.StorageProvider;
+
+            var fileTypeFilter = new FilePickerFileType[]
+            {
+                new($"*exe") { Patterns = new[] { $"*exe" } },
+            };
+
+            var result = await storageProvider.OpenFilePickerAsync(
+                new FilePickerOpenOptions
+                {
+                    Title = "Выберите файл ffmpeg.exe",
+                    AllowMultiple = false,
+                    FileTypeFilter = fileTypeFilter,
+                }
+            );
+
+            var path = result?.FirstOrDefault()?.Path.LocalPath;
+            if (DataContext is MainWindowViewModel viewModel)
+            {
+                viewModel.FfmpegPath = path;
             }
         }
     }

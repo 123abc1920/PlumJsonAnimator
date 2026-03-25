@@ -53,8 +53,6 @@ public partial class App : Application
         var theme = SukiUI.SukiTheme.GetInstance();
         var myColor = Avalonia.Media.Color.Parse("#ff003b");
 
-        // Создаем свою цветовую тему на основе твоего цвета
-        // Первый аргумент - название, второй и третий - основной цвет и акцентный
         theme.ChangeColorTheme(new SukiUI.Models.SukiColorTheme("PlumAccent", myColor, myColor));
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)

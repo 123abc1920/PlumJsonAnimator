@@ -10,8 +10,6 @@ namespace PlumJsonAnimator.Views
 {
     public partial class ExportPanelMP4 : UserControl
     {
-        private string FfmpegPath = "";
-
         public ExportPanelMP4()
         {
             InitializeComponent();
@@ -22,7 +20,6 @@ namespace PlumJsonAnimator.Views
         {
             DataContext = viewModel;
 
-            this.FindControl<TextBox>("ffmpegPath").Text = FfmpegPath;
             this.FindControl<TextBox>("path").Text = viewModel.ExportPath;
             this.FindControl<TextBox>("pName").Text = viewModel.CurrentProject!.Name;
             this.FindControl<TextBox>("start").Text = "0";
@@ -55,8 +52,7 @@ namespace PlumJsonAnimator.Views
             {
                 if (DataContext is MainWindowViewModel viewModel)
                 {
-                    FfmpegPath = filePath;
-                    this.FindControl<TextBox>("ffmpegPath").Text = FfmpegPath;
+                    viewModel.FfmpegPath = filePath;
                 }
             }
         }

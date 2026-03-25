@@ -17,7 +17,7 @@ using SukiUI.Controls;
 namespace PlumJsonAnimator.Views;
 
 // TODO: resize canvas
-// TODO: save images size
+// TODO: localization
 public partial class MainWindow : SukiWindow
 {
     private Dictionary<char, char> pairedSymbols = new Dictionary<char, char>()
