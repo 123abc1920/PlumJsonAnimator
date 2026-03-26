@@ -32,6 +32,9 @@ namespace PlumJsonAnimator.Common.Constants
         public string workspace = "PlumJsonAnimatorWorkspace";
         public string programExt = ".plmjsn";
 
+        public int canvasHeight = 1000;
+        public int canvasWidth = 1000;
+
         public CaptureArea? captureArea;
 
         public ParallelOptions GetParallelOptions()

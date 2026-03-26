@@ -28,6 +28,8 @@ namespace PlumJsonAnimator.Views
         {
             if (DataContext is MainWindowViewModel viewModel)
             {
+                var rect = viewModel.GetCaptureArea().GetRect();
+
                 AppSettingsData appSettingsData = new AppSettingsData()
                 {
                     LastDir = "",
@@ -35,6 +37,10 @@ namespace PlumJsonAnimator.Views
                     Lang = "ru",
                     Theme = viewModel.CurrentTheme,
                     Ffmpeg = viewModel.FfmpegPath,
+                    CaptureX = ((int)rect.X == null) ? 0 : (int)rect.X,
+                    CaptureY = ((int)rect.Y == null) ? 0 : (int)rect.Y,
+                    CaptureWidth = (int)rect.Width,
+                    CaptureHeight = (int)rect.Height,
                 };
 
                 viewModel.SaveSettings(appSettingsData);

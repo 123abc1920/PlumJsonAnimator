@@ -1,10 +1,13 @@
 using System;
 using System.IO;
+using Avalonia;
 using Avalonia.Styling;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Models;
 using SukiUI;
 
+// TODO: отделить настройки отдельного проекта от его json кода
 namespace PlumJsonAnimator.Services
 {
     public class AppSettings
@@ -39,12 +42,26 @@ namespace PlumJsonAnimator.Services
                     "NewProject"
                 ),
                 Ffmpeg = "",
+                CaptureX = 0,
+                CaptureY = 0,
+                CaptureWidth = this.globalState.canvasWidth,
+                CaptureHeight = this.globalState.canvasHeight,
             };
         }
 
         public void SetSettings(AppSettingsData appSettings)
         {
             this.appSettings = appSettings;
+            SaveSettings();
+        }
+
+        public void SetCaptureArea(Rect rect)
+        {
+            this.appSettings!.CaptureX = (int)rect.X;
+            this.appSettings.CaptureY = (int)rect.Y;
+            this.appSettings.CaptureWidth = (int)rect.Width;
+            this.appSettings.CaptureHeight = (int)rect.Height;
+
             SaveSettings();
         }
 
@@ -103,9 +120,24 @@ namespace PlumJsonAnimator.Services
                     this.appSettings.Lang = newSettings.Lang;
                     this.appSettings.Ffmpeg =
                         (newSettings.Ffmpeg == null) ? this.appSettings.Ffmpeg : newSettings.Ffmpeg;
+                    this.appSettings.CaptureX =
+                        (newSettings.CaptureX == null)
+                            ? this.appSettings.CaptureX
+                            : newSettings.CaptureX;
+                    this.appSettings.CaptureY =
+                        (newSettings.CaptureY == null)
+                            ? this.appSettings.CaptureY
+                            : newSettings.CaptureY;
+                    this.appSettings.CaptureWidth =
+                        (newSettings.CaptureWidth == null)
+                            ? this.appSettings.CaptureWidth
+                            : newSettings.CaptureWidth;
+                    this.appSettings.CaptureHeight =
+                        (newSettings.CaptureHeight == null)
+                            ? this.appSettings.CaptureHeight
+                            : newSettings.CaptureHeight;
 
                     this.globalState.theme = newSettings.Theme;
-
                     var sukiTheme = SukiTheme.GetInstance();
 
                     if (this.globalState.theme == "dark")
@@ -132,6 +164,17 @@ namespace PlumJsonAnimator.Services
         {
             return this.appSettings!.Theme;
         }
+
+        public CaptureArea CreateCaptureArea(int canvasWidth, int canvasHeight)
+        {
+            return new CaptureArea(
+                this.appSettings!.CaptureX > 0 ? this.appSettings.CaptureX : 0,
+                this.appSettings.CaptureY > 0 ? this.appSettings.CaptureY : 0,
+                this.appSettings.CaptureWidth > 0 ? this.appSettings.CaptureWidth : canvasWidth,
+                this.appSettings.CaptureHeight > 0 ? this.appSettings.CaptureHeight : canvasHeight,
+                this
+            );
+        }
     }
 
     public class AppSettingsData()
@@ -150,5 +193,17 @@ namespace PlumJsonAnimator.Services
 
         [JsonProperty("ffmpeg")]
         public string Ffmpeg { get; set; } = "";
+
+        [JsonProperty("capture_x")]
+        public int CaptureX { get; set; } = 0;
+
+        [JsonProperty("capture_y")]
+        public int CaptureY { get; set; } = 0;
+
+        [JsonProperty("capture_width")]
+        public int CaptureWidth { get; set; }
+
+        [JsonProperty("capture_height")]
+        public int CaptureHeight { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Avalonia.Media;
+using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.Models
 {
@@ -29,9 +30,11 @@ namespace PlumJsonAnimator.Models
 
         private Point? selectedPoint = null;
 
+        private AppSettings appSettings;
+
         private const int NEAR_REGION = 20;
 
-        public CaptureArea(int x, int y, int width, int height)
+        public CaptureArea(int x, int y, int width, int height, AppSettings appSettings)
         {
             this.a = new Point(x, y);
             this.b = new Point(x + width, y);
@@ -39,6 +42,8 @@ namespace PlumJsonAnimator.Models
             this.d = new Point(x, y + height);
 
             points = new Point[4] { this.a, this.b, this.c, this.d };
+
+            this.appSettings = appSettings;
         }
 
         public void SelectPoint(int x, int y)
@@ -79,6 +84,8 @@ namespace PlumJsonAnimator.Models
         public void UnSelectPoint()
         {
             this.selectedPoint = null;
+
+            this.appSettings.SetCaptureArea(GetRect());
         }
 
         public Rect GetRect()
@@ -95,7 +102,12 @@ namespace PlumJsonAnimator.Models
                 height++;
             }
 
-            return new Rect(this.a.x, this.a.y, width, height);
+            return new Rect(
+                Math.Floor((double)this.a.x),
+                Math.Floor((double)this.a.y),
+                width,
+                height
+            );
         }
 
         public void Draw(Canvas canvas)

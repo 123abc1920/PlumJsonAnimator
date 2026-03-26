@@ -18,6 +18,7 @@ using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.ViewModels;
 
+// TODO: docs
 public partial class MainWindowViewModel : ViewModelBase
 {
     public Canvas? Canvas
@@ -33,29 +34,27 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
-    private int _canvasWidth = 1000;
     public int CanvasWidth
     {
-        get { return _canvasWidth; }
+        get { return this.globalState.canvasWidth; }
         set
         {
-            if (_canvasWidth != value)
+            if (this.globalState.canvasWidth != value)
             {
-                _canvasWidth = value;
+                this.globalState.canvasWidth = value;
                 OnPropertyChanged(nameof(CanvasWidth));
             }
         }
     }
 
-    private int _canvasHeight = 1000;
     public int CanvasHeight
     {
-        get { return _canvasHeight; }
+        get { return this.globalState.canvasHeight; }
         set
         {
-            if (_canvasHeight != value)
+            if (this.globalState.canvasHeight != value)
             {
-                _canvasHeight = value;
+                this.globalState.canvasHeight = value;
                 OnPropertyChanged(nameof(CanvasHeight));
             }
         }
@@ -300,16 +299,9 @@ public partial class MainWindowViewModel : ViewModelBase
             Popups.ShowPopup("Возникли проблемы в json коде, невозможно восстановить проект");
         }
 
-        this.globalState.captureArea = new CaptureArea(0, 0, CanvasWidth, CanvasHeight);
-    }
-
-    public void initGlobalState()
-    {
-        this.globalState.captureArea = new CaptureArea(
-            0,
-            0,
-            (int)this.Canvas!.Bounds.Width,
-            (int)this.Canvas.Bounds.Height
+        this.globalState.captureArea = this.appSettings.CreateCaptureArea(
+            CanvasWidth,
+            CanvasHeight
         );
     }
 
