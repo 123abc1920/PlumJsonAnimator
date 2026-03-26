@@ -172,7 +172,8 @@ namespace PlumJsonAnimator.Services
                 this.appSettings.CaptureY > 0 ? this.appSettings.CaptureY : 0,
                 this.appSettings.CaptureWidth > 0 ? this.appSettings.CaptureWidth : canvasWidth,
                 this.appSettings.CaptureHeight > 0 ? this.appSettings.CaptureHeight : canvasHeight,
-                this
+                this,
+                this.globalState
             );
         }
     }

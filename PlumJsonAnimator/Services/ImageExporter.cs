@@ -17,7 +17,6 @@ using SixLabors.ImageSharp.PixelFormats;
 namespace PlumJsonAnimator.Services
 {
     // TODO: gif
-    // TODO: image size
     public class ImageExporter
     {
         public string ExportPath = "";

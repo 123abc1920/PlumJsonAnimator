@@ -3,6 +3,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Avalonia.Media;
+using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.Models
@@ -31,10 +32,18 @@ namespace PlumJsonAnimator.Models
         private Point? selectedPoint = null;
 
         private AppSettings appSettings;
+        private GlobalState globalState;
 
         private const int NEAR_REGION = 20;
 
-        public CaptureArea(int x, int y, int width, int height, AppSettings appSettings)
+        public CaptureArea(
+            int x,
+            int y,
+            int width,
+            int height,
+            AppSettings appSettings,
+            GlobalState globalState
+        )
         {
             this.a = new Point(x, y);
             this.b = new Point(x + width, y);
@@ -44,6 +53,7 @@ namespace PlumJsonAnimator.Models
             points = new Point[4] { this.a, this.b, this.c, this.d };
 
             this.appSettings = appSettings;
+            this.globalState = globalState;
         }
 
         public void SelectPoint(int x, int y)
@@ -59,6 +69,24 @@ namespace PlumJsonAnimator.Models
 
         public void MovePoint(int x, int y)
         {
+            if (x < 0)
+            {
+                x = 0;
+            }
+            if (y < 0)
+            {
+                y = 0;
+            }
+
+            if (x >= this.globalState.canvasWidth + this.a.x)
+            {
+                x = this.globalState.canvasWidth - 1;
+            }
+            if (y >= this.globalState.canvasHeight + this.a.y)
+            {
+                y = this.globalState.canvasHeight - 1;
+            }
+
             if (this.selectedPoint != null)
             {
                 var oldx = this.selectedPoint.x;
