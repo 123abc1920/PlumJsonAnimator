@@ -31,6 +31,8 @@ namespace PlumJsonAnimator.Common.Constants
         public string workspace = "PlumJsonAnimatorWorkspace";
         public string programExt = ".plmjsn";
 
+        public CaptureArea? captureArea;
+
         public ParallelOptions GetParallelOptions()
         {
             int processorCount = Environment.ProcessorCount;

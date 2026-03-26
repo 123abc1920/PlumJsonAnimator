@@ -32,18 +32,42 @@ namespace PlumJsonAnimator.Services
 
         private RenderTargetBitmap CatchCanvas(Canvas canvas)
         {
-            var bounds = new Rect(0, 0, canvas.Bounds.Width, canvas.Bounds.Height);
+            var captureBounds = this.globalState.captureArea!.GetRect();
 
-            var pixelSize = new PixelSize((int)bounds.Width, (int)bounds.Height);
-            var dpi = new Vector(96, 96);
+            var fullBounds = new Rect(0, 0, canvas.Bounds.Width, canvas.Bounds.Height);
+            var fullRender = new RenderTargetBitmap(
+                new PixelSize((int)fullBounds.Width, (int)fullBounds.Height),
+                new Vector(96, 96)
+            );
 
-            var renderTarget = new RenderTargetBitmap(pixelSize, dpi);
+            canvas.Measure(fullBounds.Size);
+            canvas.Arrange(fullBounds);
+            fullRender.Render(canvas);
 
-            canvas.Measure(bounds.Size);
-            canvas.Arrange(bounds);
-            renderTarget.Render(canvas);
+            var cropped = new CroppedBitmap(
+                fullRender,
+                new PixelRect(
+                    (int)captureBounds.X,
+                    (int)captureBounds.Y,
+                    (int)captureBounds.Width,
+                    (int)captureBounds.Height
+                )
+            );
 
-            return renderTarget;
+            var result = new RenderTargetBitmap(
+                new PixelSize((int)captureBounds.Width, (int)captureBounds.Height),
+                new Vector(96, 96)
+            );
+
+            using (var context = result.CreateDrawingContext())
+            {
+                context.DrawImage(
+                    cropped,
+                    new Rect(0, 0, captureBounds.Width, captureBounds.Height)
+                );
+            }
+
+            return result;
         }
 
         public async Task<ExportResult> ExportAsPng(double start, double end, string outputFolder)

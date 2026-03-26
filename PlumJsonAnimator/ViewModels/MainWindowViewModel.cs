@@ -33,6 +33,34 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
+    private int _canvasWidth = 1000;
+    public int CanvasWidth
+    {
+        get { return _canvasWidth; }
+        set
+        {
+            if (_canvasWidth != value)
+            {
+                _canvasWidth = value;
+                OnPropertyChanged(nameof(CanvasWidth));
+            }
+        }
+    }
+
+    private int _canvasHeight = 1000;
+    public int CanvasHeight
+    {
+        get { return _canvasHeight; }
+        set
+        {
+            if (_canvasHeight != value)
+            {
+                _canvasHeight = value;
+                OnPropertyChanged(nameof(CanvasHeight));
+            }
+        }
+    }
+
     public TimelineControl? Timeline;
     public double CurrentTime
     {
@@ -258,6 +286,23 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             Popups.ShowPopup("Возникли проблемы в json коде, невозможно восстановить проект");
         }
+
+        this.globalState.captureArea = new CaptureArea(0, 0, CanvasWidth, CanvasHeight);
+    }
+
+    public void initGlobalState()
+    {
+        this.globalState.captureArea = new CaptureArea(
+            0,
+            0,
+            (int)this.Canvas!.Bounds.Width,
+            (int)this.Canvas.Bounds.Height
+        );
+    }
+
+    public CaptureArea? GetCaptureArea()
+    {
+        return this.globalState.captureArea;
     }
 
     public bool NewProject(string? projectName, string? projectPath)
