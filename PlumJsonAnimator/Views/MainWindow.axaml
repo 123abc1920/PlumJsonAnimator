@@ -294,16 +294,50 @@
                                                 Background="Transparent"
                                                 PointerMoved="Move_Canvas"
                                                 PointerPressed="Press_Canvas"
-                                                PointerReleased="Release_Canvas" />
+                                                PointerReleased="Release_Canvas">
+                                                <Canvas.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform ScaleX="{Binding ZoomCanvas}" ScaleY="{Binding ZoomCanvas}" />
+                                                    </TransformGroup>
+                                                </Canvas.RenderTransform>
+                                            </Canvas>
                                         </ScrollViewer>
 
                                         <StackPanel
                                             Margin="10"
                                             HorizontalAlignment="Right"
                                             VerticalAlignment="Top">
-                                            <CheckBox Click="CheckBox_Click" IsChecked="True">Draw bones</CheckBox>
-                                            <CheckBox Click="EditCaptureMode" IsChecked="{Binding CaptureMode}">Edit capture area</CheckBox>
-                                            <TextBlock Text="{Binding ModeName}" />
+                                            <CheckBox
+                                                HorizontalAlignment="Right"
+                                                Click="CheckBox_Click"
+                                                IsChecked="True">
+                                                Draw bones
+                                            </CheckBox>
+                                            <CheckBox
+                                                HorizontalAlignment="Right"
+                                                Click="EditCaptureMode"
+                                                IsChecked="{Binding CaptureMode}">
+                                                Edit capture area
+                                            </CheckBox>
+                                            <TextBlock HorizontalAlignment="Right" Text="{Binding ModeName}" />
+                                            <Button
+                                                Width="32"
+                                                Height="32"
+                                                Padding="0"
+                                                HorizontalAlignment="Right"
+                                                Command="{Binding ZoomCanvasComm}"
+                                                CommandParameter="true">
+                                                <iconPacks:PackIconBootstrapIcons Kind="ZoomIn" />
+                                            </Button>
+                                            <Button
+                                                Width="32"
+                                                Height="32"
+                                                Padding="0"
+                                                HorizontalAlignment="Right"
+                                                Command="{Binding ZoomCanvasComm}"
+                                                CommandParameter="false">
+                                                <iconPacks:PackIconBootstrapIcons Kind="ZoomOut" />
+                                            </Button>
                                         </StackPanel>
                                     </Grid>
 

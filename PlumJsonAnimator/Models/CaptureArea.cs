@@ -6,6 +6,8 @@ using Avalonia.Media;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Services;
 
+// TODO: validate points
+// TODO: fix freezing when zoom<1
 namespace PlumJsonAnimator.Models
 {
     public class CaptureArea
@@ -58,6 +60,9 @@ namespace PlumJsonAnimator.Models
 
         public void SelectPoint(int x, int y)
         {
+            x = (int)(x);
+            y = (int)(y);
+
             foreach (Point p in points)
             {
                 if (Math.Abs(p.x - x) < NEAR_REGION && Math.Abs(p.y - y) < NEAR_REGION)
@@ -69,22 +74,25 @@ namespace PlumJsonAnimator.Models
 
         public void MovePoint(int x, int y)
         {
-            if (x < 0)
+            x = (int)(x);
+            y = (int)(y);
+
+            if (x < -this.globalState.canvasWidth / 2)
             {
-                x = 0;
+                x = -this.globalState.canvasWidth / 2;
             }
-            if (y < 0)
+            if (y < -this.globalState.canvasHeight / 2)
             {
-                y = 0;
+                y = -this.globalState.canvasHeight / 2;
             }
 
-            if (x >= this.globalState.canvasWidth + this.a.x)
+            if (x >= this.globalState.canvasWidth / 2)
             {
-                x = this.globalState.canvasWidth - 1;
+                x = this.globalState.canvasWidth / 2 - 1;
             }
-            if (y >= this.globalState.canvasHeight + this.a.y)
+            if (y >= this.globalState.canvasHeight / 2)
             {
-                y = this.globalState.canvasHeight - 1;
+                y = this.globalState.canvasHeight / 2 - 1;
             }
 
             if (this.selectedPoint != null)
@@ -140,7 +148,15 @@ namespace PlumJsonAnimator.Models
 
         public void Draw(Canvas canvas)
         {
-            Rect rect = GetRect();
+            var centerX = canvas.Width / 2;
+            var centerY = canvas.Height / 2;
+
+            var rect = new Rect(
+                centerX + this.a.x,
+                centerY + this.a.y,
+                Math.Abs(this.b.x - this.a.x),
+                Math.Abs(this.d.y - this.a.y)
+            );
 
             var rectangle = new Border
             {
@@ -154,10 +170,10 @@ namespace PlumJsonAnimator.Models
             Canvas.SetTop(rectangle, rect.Y);
             canvas.Children.Add(rectangle);
 
-            DrawPoint(canvas, a.x, a.y);
-            DrawPoint(canvas, b.x, b.y);
-            DrawPoint(canvas, c.x, c.y);
-            DrawPoint(canvas, d.x, d.y);
+            DrawPoint(canvas, centerX + this.a.x, centerY + this.a.y);
+            DrawPoint(canvas, centerX + this.b.x, centerY + this.b.y);
+            DrawPoint(canvas, centerX + this.c.x, centerY + this.c.y);
+            DrawPoint(canvas, centerX + this.d.x, centerY + this.d.y);
         }
 
         private void DrawPoint(Canvas canvas, double x, double y)

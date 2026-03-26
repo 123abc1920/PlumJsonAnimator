@@ -226,6 +226,28 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
+    private const double ZOOM_STEP = 0.1;
+    private const double MIN_ZOOM_CANVAS = 0.1;
+    private const double MAX_ZOOM_CANVAS = 5.0;
+    public double ZoomCanvas
+    {
+        get => this.globalState.zoomCanvas;
+        set
+        {
+            if (
+                this.globalState.zoomCanvas != value
+                && value > MIN_ZOOM_CANVAS
+                && value < MAX_ZOOM_CANVAS
+            )
+            {
+                this.globalState.zoomCanvas = value;
+                CanvasWidth = (int)(GlobalState.BASE_CANVAS_SIZE * value);
+                CanvasHeight = (int)(GlobalState.BASE_CANVAS_SIZE * value);
+                OnPropertyChanged(nameof(ZoomCanvas));
+            }
+        }
+    }
+
     public void AddBone(string title, int id, object? selectedBone)
     {
         if (selectedBone is Bone selectedNode)
@@ -481,6 +503,7 @@ public partial class MainWindowViewModel : ViewModelBase
     public ICommand AddKeyFrame { get; }
     public ICommand DeleteKeyFrame { get; }
     public ICommand PlayAnim { get; }
+    public ICommand ZoomCanvasComm { get; }
 
     private AppSettings appSettings;
     private ProjectSettings projectSettings;
@@ -730,6 +753,21 @@ public partial class MainWindowViewModel : ViewModelBase
         PlayAnim = new Command.Command(_ =>
         {
             this.engine.runAnimation();
+        });
+
+        ZoomCanvasComm = new Command.Command(parameter =>
+        {
+            if (parameter is string isZoomPlus)
+            {
+                if (isZoomPlus == "true")
+                {
+                    this.ZoomCanvas += ZOOM_STEP;
+                }
+                else
+                {
+                    this.ZoomCanvas -= ZOOM_STEP;
+                }
+            }
         });
     }
 }

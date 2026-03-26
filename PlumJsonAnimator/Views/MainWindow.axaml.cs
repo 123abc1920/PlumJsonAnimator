@@ -16,7 +16,6 @@ using SukiUI.Controls;
 
 namespace PlumJsonAnimator.Views;
 
-// TODO: resize canvas
 // TODO: localization
 public partial class MainWindow : SukiWindow
 {
@@ -147,7 +146,12 @@ public partial class MainWindow : SukiWindow
                 }
                 else
                 {
-                    viewModel.GetCaptureArea()?.SelectPoint((int)point.X, (int)point.Y);
+                    viewModel
+                        .GetCaptureArea()
+                        ?.SelectPoint(
+                            (int)(point.X - canvas.Width / 2),
+                            (int)(point.Y - canvas.Height / 2)
+                        );
                 }
             }
         }
@@ -162,7 +166,12 @@ public partial class MainWindow : SukiWindow
         {
             if (viewModel.CaptureMode == true)
             {
-                viewModel.GetCaptureArea()?.MovePoint((int)point.X, (int)point.Y);
+                viewModel
+                    .GetCaptureArea()
+                    ?.MovePoint(
+                        (int)(point.X - canvas.Width / 2),
+                        (int)(point.Y - canvas.Height / 2)
+                    );
                 return;
             }
 

@@ -32,8 +32,11 @@ namespace PlumJsonAnimator.Common.Constants
         public string workspace = "PlumJsonAnimatorWorkspace";
         public string programExt = ".plmjsn";
 
+        public const int BASE_CANVAS_SIZE = 1000;
         public int canvasHeight = 1000;
         public int canvasWidth = 1000;
+
+        public double zoomCanvas = 1;
 
         public CaptureArea? captureArea;
 
