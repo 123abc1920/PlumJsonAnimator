@@ -28,6 +28,7 @@ namespace PlumJsonAnimator.Common.Constants
         public Bone? currentBone = null;
         public string theme = "light";
         public bool drawBones = true;
+        public bool captureMode = false;
         public string workspace = "PlumJsonAnimatorWorkspace";
         public string programExt = ".plmjsn";
 

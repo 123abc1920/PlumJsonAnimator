@@ -130,6 +130,19 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
+    public bool CaptureMode
+    {
+        get { return this.globalState.captureMode; }
+        set
+        {
+            if (this.globalState.captureMode != value)
+            {
+                this.globalState.captureMode = value;
+                OnPropertyChanged(nameof(CaptureMode));
+            }
+        }
+    }
+
     public string ExportPath
     {
         get { return this.imageExporter.ExportPath; }

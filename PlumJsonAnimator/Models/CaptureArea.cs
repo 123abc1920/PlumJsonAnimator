@@ -1,5 +1,4 @@
 using System;
-using System.Drawing;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;

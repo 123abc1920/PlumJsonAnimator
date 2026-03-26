@@ -28,7 +28,6 @@ public partial class MainWindow : SukiWindow
         { '<', '>' },
     };
     private bool _isDragging = false;
-    private bool _captureMode = false;
 
     private int currentTab = 0;
 
@@ -72,7 +71,7 @@ public partial class MainWindow : SukiWindow
                     viewModel.CurrentProject?.MainSkeleton?.drawSkeleton(mainCanvas);
                     viewModel.GenerateCode();
                 }
-                if (_captureMode)
+                if (viewModel.CaptureMode)
                 {
                     viewModel.GetCaptureArea()?.Draw(mainCanvas);
                 }
@@ -140,13 +139,13 @@ public partial class MainWindow : SukiWindow
         var properties = e.GetCurrentPoint(canvas).Properties;
         if (properties.IsLeftButtonPressed)
         {
-            if (!_captureMode)
+            if (DataContext is MainWindowViewModel viewModel)
             {
-                _isDragging = true;
-            }
-            else
-            {
-                if (DataContext is MainWindowViewModel viewModel)
+                if (viewModel.CaptureMode == false)
+                {
+                    _isDragging = true;
+                }
+                else
                 {
                     viewModel.GetCaptureArea()?.SelectPoint((int)point.X, (int)point.Y);
                 }
@@ -159,31 +158,24 @@ public partial class MainWindow : SukiWindow
         var canvas = (Canvas)sender;
         var point = e.GetPosition(canvas);
 
-        Console.WriteLine($"{point.X} {point.Y}");
-
-        if (_captureMode)
-        {
-            if (DataContext is MainWindowViewModel viewModely)
-            {
-                viewModely.GetCaptureArea()?.MovePoint((int)point.X, (int)point.Y);
-            }
-            return;
-        }
-
-        if (!_isDragging)
-        {
-            return;
-        }
-
         if (DataContext is MainWindowViewModel viewModel)
         {
-            if (viewModel.CurrentBone != null)
+            if (viewModel.CaptureMode == true)
             {
-                viewModel.CurrentProject?.currentMode.transform(
-                    viewModel.CurrentBone,
-                    point.X - canvas.Width / 2,
-                    point.Y - canvas.Height / 2
-                );
+                viewModel.GetCaptureArea()?.MovePoint((int)point.X, (int)point.Y);
+                return;
+            }
+
+            if (_isDragging)
+            {
+                if (viewModel.CurrentBone != null)
+                {
+                    viewModel.CurrentProject?.currentMode.transform(
+                        viewModel.CurrentBone,
+                        point.X - canvas.Width / 2,
+                        point.Y - canvas.Height / 2
+                    );
+                }
             }
         }
     }
@@ -192,9 +184,9 @@ public partial class MainWindow : SukiWindow
     {
         _isDragging = false;
 
-        if (_captureMode)
+        if (DataContext is MainWindowViewModel viewModely)
         {
-            if (DataContext is MainWindowViewModel viewModely)
+            if (viewModely.CaptureMode)
             {
                 viewModely.GetCaptureArea()?.UnSelectPoint();
             }
@@ -546,7 +538,9 @@ public partial class MainWindow : SukiWindow
     {
         var checkBox = sender as CheckBox;
         var isChecked = checkBox?.IsChecked;
-
-        _captureMode = (isChecked != null) ? (bool)isChecked : false;
+        if (DataContext is MainWindowViewModel viewModel)
+        {
+            viewModel.CaptureMode = (isChecked != null) ? (bool)isChecked : false;
+        }
     }
 }

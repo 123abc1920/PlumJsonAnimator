@@ -302,7 +302,7 @@
                                             HorizontalAlignment="Right"
                                             VerticalAlignment="Top">
                                             <CheckBox Click="CheckBox_Click" IsChecked="True">Draw bones</CheckBox>
-                                            <CheckBox Click="EditCaptureMode" IsChecked="False">Edit capture area</CheckBox>
+                                            <CheckBox Click="EditCaptureMode" IsChecked="{Binding CaptureMode}">Edit capture area</CheckBox>
                                             <TextBlock Text="{Binding ModeName}" />
                                         </StackPanel>
                                     </Grid>

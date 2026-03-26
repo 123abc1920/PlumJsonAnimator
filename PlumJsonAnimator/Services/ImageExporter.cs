@@ -82,7 +82,9 @@ namespace PlumJsonAnimator.Services
 
                 var i = 0;
                 var drawBones = this.globalState.drawBones;
+                var captureMode = this.globalState.captureMode;
                 this.globalState.drawBones = false;
+                this.globalState.captureMode = false;
                 while (this.globalState.currentProject.CurrentAnimation.currentTime <= endTime)
                 {
                     using (RenderTargetBitmap bitmap = CatchCanvas(canvas))
@@ -100,6 +102,7 @@ namespace PlumJsonAnimator.Services
                     i++;
                 }
                 this.globalState.drawBones = drawBones;
+                this.globalState.captureMode = captureMode;
                 return ExportResult.SUCCESS;
             }
 
@@ -118,7 +121,9 @@ namespace PlumJsonAnimator.Services
 
                 var i = 0;
                 var drawBones = this.globalState.drawBones;
+                var captureMode = this.globalState.captureMode;
                 this.globalState.drawBones = false;
+                this.globalState.captureMode = false;
                 while (this.globalState.currentProject.CurrentAnimation.currentTime <= endTime)
                 {
                     using (RenderTargetBitmap bitmap = CatchCanvas(canvas))
@@ -136,6 +141,7 @@ namespace PlumJsonAnimator.Services
                     i++;
                 }
                 this.globalState.drawBones = drawBones;
+                this.globalState.captureMode = captureMode;
                 return ExportResult.SUCCESS;
             }
 
@@ -158,7 +164,9 @@ namespace PlumJsonAnimator.Services
                 );
 
                 var drawBones = this.globalState.drawBones;
+                var captureMode = this.globalState.captureMode;
                 this.globalState.drawBones = false;
+                this.globalState.captureMode = false;
                 List<Image<Rgba32>> frames = new List<Image<Rgba32>>();
                 while (this.globalState.currentProject.CurrentAnimation.currentTime <= endTime)
                 {
@@ -199,6 +207,7 @@ namespace PlumJsonAnimator.Services
                 }
 
                 this.globalState.drawBones = drawBones;
+                this.globalState.captureMode = captureMode;
                 return ExportResult.SUCCESS;
             }
 
@@ -272,7 +281,9 @@ namespace PlumJsonAnimator.Services
                 process.BeginErrorReadLine();
 
                 var drawBones = this.globalState.drawBones;
+                var captureMode = this.globalState.captureMode;
                 this.globalState.drawBones = false;
+                this.globalState.captureMode = false;
                 using (var stdin = process.StandardInput.BaseStream)
                 {
                     this.globalState.currentProject!.CurrentAnimation.currentTime = start;
@@ -343,6 +354,7 @@ namespace PlumJsonAnimator.Services
                     }
                 }
                 this.globalState.drawBones = drawBones;
+                this.globalState.captureMode = captureMode;
 
                 if (!process.WaitForExit(10000))
                 {
