@@ -287,11 +287,27 @@
 
                                     <Grid Grid.Row="0">
                                         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                            <Grid Width="{Binding CanvasWidth}" Height="{Binding CanvasHeight}">
+                                                <Canvas
+                                                    Name="mainCanvas"
+                                                    Width="1000"
+                                                    Height="1000"
+                                                    Background="Black"
+                                                    PointerMoved="Move_Canvas"
+                                                    PointerPressed="Press_Canvas"
+                                                    PointerReleased="Release_Canvas">
+                                                    <Canvas.RenderTransform>
+                                                        <ScaleTransform ScaleX="{Binding ZoomCanvas}" ScaleY="{Binding ZoomCanvas}" />
+                                                    </Canvas.RenderTransform>
+                                                </Canvas>
+                                            </Grid>
+                                        </ScrollViewer>
+                                        <!--<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                                             <Canvas
                                                 Name="mainCanvas"
                                                 Width="{Binding CanvasWidth}"
                                                 Height="{Binding CanvasHeight}"
-                                                Background="Transparent"
+                                                Background="Black"
                                                 PointerMoved="Move_Canvas"
                                                 PointerPressed="Press_Canvas"
                                                 PointerReleased="Release_Canvas">
@@ -301,7 +317,7 @@
                                                     </TransformGroup>
                                                 </Canvas.RenderTransform>
                                             </Canvas>
-                                        </ScrollViewer>
+                                        </ScrollViewer>-->
 
                                         <StackPanel
                                             Margin="10"

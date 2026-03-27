@@ -56,45 +56,56 @@ namespace PlumJsonAnimator.Models
 
             this.appSettings = appSettings;
             this.globalState = globalState;
+
+            foreach (Point p in points)
+            {
+                validatePoint(p);
+            }
+        }
+
+        private void validatePoint(Point p)
+        {
+            if (p.x < -GlobalState.BASE_CANVAS_SIZE / 2)
+            {
+                p.x = -GlobalState.BASE_CANVAS_SIZE / 2;
+            }
+
+            if (p.y < -GlobalState.BASE_CANVAS_SIZE / 2)
+            {
+                p.y = -GlobalState.BASE_CANVAS_SIZE / 2;
+            }
+
+            if (p.x > GlobalState.BASE_CANVAS_SIZE / 2)
+            {
+                p.x = GlobalState.BASE_CANVAS_SIZE / 2;
+            }
+
+            if (p.y > GlobalState.BASE_CANVAS_SIZE / 2)
+            {
+                p.y = GlobalState.BASE_CANVAS_SIZE / 2;
+            }
         }
 
         public void SelectPoint(int x, int y)
         {
-            x = (int)(x);
-            y = (int)(y);
+            double realX = x;
+            double realY = y;
 
             foreach (Point p in points)
             {
-                if (Math.Abs(p.x - x) < NEAR_REGION && Math.Abs(p.y - y) < NEAR_REGION)
+                double dx = Math.Abs(p.x - realX);
+                double dy = Math.Abs(p.y - realY);
+
+                if (dx < NEAR_REGION && dy < NEAR_REGION)
                 {
                     this.selectedPoint = p;
+                    break;
                 }
             }
         }
 
         public void MovePoint(int x, int y)
         {
-            x = (int)(x);
-            y = (int)(y);
-
-            if (x < -this.globalState.canvasWidth / 2)
-            {
-                x = -this.globalState.canvasWidth / 2;
-            }
-            if (y < -this.globalState.canvasHeight / 2)
-            {
-                y = -this.globalState.canvasHeight / 2;
-            }
-
-            if (x >= this.globalState.canvasWidth / 2)
-            {
-                x = this.globalState.canvasWidth / 2 - 1;
-            }
-            if (y >= this.globalState.canvasHeight / 2)
-            {
-                y = this.globalState.canvasHeight / 2 - 1;
-            }
-
             if (this.selectedPoint != null)
             {
                 var oldx = this.selectedPoint.x;
@@ -120,6 +131,11 @@ namespace PlumJsonAnimator.Models
         public void UnSelectPoint()
         {
             this.selectedPoint = null;
+
+            foreach (Point p in points)
+            {
+                validatePoint(p);
+            }
 
             this.appSettings.SetCaptureArea(GetRect());
         }
