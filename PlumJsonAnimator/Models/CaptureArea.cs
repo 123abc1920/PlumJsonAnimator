@@ -6,8 +6,6 @@ using Avalonia.Media;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Services;
 
-// TODO: validate points
-// TODO: fix freezing when zoom<1
 namespace PlumJsonAnimator.Models
 {
     public class CaptureArea
@@ -65,24 +63,47 @@ namespace PlumJsonAnimator.Models
 
         private void validatePoint(Point p)
         {
-            if (p.x < -GlobalState.BASE_CANVAS_SIZE / 2)
+            int halfSize = GlobalState.BASE_CANVAS_SIZE / 2;
+
+            foreach (Point point in points)
             {
-                p.x = -GlobalState.BASE_CANVAS_SIZE / 2;
+                point.x = Math.Max(-halfSize, Math.Min(halfSize, point.x));
+                point.y = Math.Max(-halfSize, Math.Min(halfSize, point.y));
             }
 
-            if (p.y < -GlobalState.BASE_CANVAS_SIZE / 2)
+            int minWidth = NEAR_REGION * 2;
+            int minHeight = NEAR_REGION * 2;
+
+            int left = Math.Min(a.x, Math.Min(b.x, Math.Min(c.x, d.x)));
+            int top = Math.Min(a.y, Math.Min(b.y, Math.Min(c.y, d.y)));
+            int right = Math.Max(a.x, Math.Max(b.x, Math.Max(c.x, d.x)));
+            int bottom = Math.Max(a.y, Math.Max(b.y, Math.Max(c.y, d.y)));
+
+            if (right - left < minWidth)
             {
-                p.y = -GlobalState.BASE_CANVAS_SIZE / 2;
+                right = left + minWidth;
+            }
+            if (bottom - top < minHeight)
+            {
+                bottom = top + minHeight;
             }
 
-            if (p.x > GlobalState.BASE_CANVAS_SIZE / 2)
-            {
-                p.x = GlobalState.BASE_CANVAS_SIZE / 2;
-            }
+            a.x = left;
+            a.y = top;
 
-            if (p.y > GlobalState.BASE_CANVAS_SIZE / 2)
+            b.x = right;
+            b.y = top;
+
+            c.x = right;
+            c.y = bottom;
+
+            d.x = left;
+            d.y = bottom;
+
+            foreach (Point point in points)
             {
-                p.y = GlobalState.BASE_CANVAS_SIZE / 2;
+                point.x = Math.Max(-halfSize, Math.Min(halfSize, point.x));
+                point.y = Math.Max(-halfSize, Math.Min(halfSize, point.y));
             }
         }
 
@@ -125,6 +146,11 @@ namespace PlumJsonAnimator.Models
                         p.y = this.selectedPoint.y;
                     }
                 }
+            }
+
+            foreach (Point p in points)
+            {
+                validatePoint(p);
             }
         }
 
