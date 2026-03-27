@@ -17,10 +17,12 @@ namespace PlumJsonAnimator.Services
         public AppSettingsData? appSettings = null;
 
         private GlobalState globalState;
+        private LocalizationService localizationService;
 
-        public AppSettings(GlobalState globalState)
+        public AppSettings(GlobalState globalState, LocalizationService localizationService)
         {
             this.globalState = globalState;
+            this.localizationService = localizationService;
 
             AppSettingsPath = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
@@ -33,7 +35,7 @@ namespace PlumJsonAnimator.Services
 
             this.appSettings = new AppSettingsData()
             {
-                Lang = "ru",
+                Lang = LocalizationService.START_LANG,
                 LastDir = "",
                 Theme = "light",
                 Workspace = Path.Combine(
@@ -137,9 +139,10 @@ namespace PlumJsonAnimator.Services
                             ? this.appSettings.CaptureHeight
                             : newSettings.CaptureHeight;
 
+                    this.localizationService.currentLang = newSettings.Lang;
+
                     this.globalState.theme = newSettings.Theme;
                     var sukiTheme = SukiTheme.GetInstance();
-
                     if (this.globalState.theme == "dark")
                     {
                         sukiTheme.ChangeBaseTheme(ThemeVariant.Dark);
@@ -148,7 +151,6 @@ namespace PlumJsonAnimator.Services
                     {
                         sukiTheme.ChangeBaseTheme(ThemeVariant.Light);
                     }
-
                     sukiTheme.ChangeColorTheme(
                         new SukiUI.Models.SukiColorTheme(
                             "PlumTheme",
@@ -190,7 +192,7 @@ namespace PlumJsonAnimator.Services
         public string Theme { get; set; } = "light";
 
         [JsonProperty("language")]
-        public string Lang { get; set; } = "ru";
+        public string Lang { get; set; } = LocalizationService.START_LANG;
 
         [JsonProperty("ffmpeg")]
         public string Ffmpeg { get; set; } = "";

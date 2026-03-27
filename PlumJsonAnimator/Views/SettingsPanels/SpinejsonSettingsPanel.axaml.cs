@@ -34,7 +34,7 @@ namespace PlumJsonAnimator.Views
                 {
                     LastDir = "",
                     Workspace = pathTextBox.Text,
-                    Lang = "ru",
+                    Lang = viewModel.CurrentLang,
                     Theme = viewModel.CurrentTheme,
                     Ffmpeg = viewModel.FfmpegPath,
                     CaptureX = ((int)rect.X == null) ? 0 : (int)rect.X,

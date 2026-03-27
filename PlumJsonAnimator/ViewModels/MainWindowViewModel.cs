@@ -19,6 +19,7 @@ using PlumJsonAnimator.Services;
 namespace PlumJsonAnimator.ViewModels;
 
 // TODO: docs
+// TODO: поделить viewmodels
 public partial class MainWindowViewModel : ViewModelBase
 {
     public Canvas? Canvas
@@ -181,6 +182,22 @@ public partial class MainWindowViewModel : ViewModelBase
             }
         }
     }
+    public List<string> Langs
+    {
+        get => this.localizationService.langs;
+    }
+    public string CurrentLang
+    {
+        get => this.localizationService.currentLang;
+        set
+        {
+            if (this.localizationService.currentLang != value)
+            {
+                this.localizationService.currentLang = value;
+                OnPropertyChanged(nameof(CurrentLang));
+            }
+        }
+    }
     public string _modeName = "";
     public string ModeName
     {
@@ -325,6 +342,8 @@ public partial class MainWindowViewModel : ViewModelBase
             CanvasWidth,
             CanvasHeight
         );
+
+        this.localizationService.LoadLangs();
     }
 
     public CaptureArea? GetCaptureArea()
@@ -517,6 +536,7 @@ public partial class MainWindowViewModel : ViewModelBase
     public JsonExport jsonExport;
     public JsonValidator jsonValidator;
     public Engine engine;
+    public LocalizationService localizationService;
 
     public MainWindowViewModel(
         AppSettings appSettings,
@@ -530,7 +550,8 @@ public partial class MainWindowViewModel : ViewModelBase
         Prettify prettify,
         JsonExport jsonExport,
         JsonValidator jsonValidator,
-        Engine engine
+        Engine engine,
+        LocalizationService localizationService
     )
     {
         this.appSettings = appSettings;
@@ -545,6 +566,7 @@ public partial class MainWindowViewModel : ViewModelBase
         this.jsonExport = jsonExport;
         this.jsonValidator = jsonValidator;
         this.engine = engine;
+        this.localizationService = localizationService;
 
         CurrentTheme = Themes[0];
 

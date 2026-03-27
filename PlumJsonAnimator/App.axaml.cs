@@ -44,6 +44,7 @@ public partial class App : Application
         services.AddSingleton<GlobalState>();
         services.AddSingleton<TransformModeFactory>();
         services.AddSingleton<Engine>();
+        services.AddSingleton<LocalizationService>();
 
         _serviceProvider = services.BuildServiceProvider();
     }
