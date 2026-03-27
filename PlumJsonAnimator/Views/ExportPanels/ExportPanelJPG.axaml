@@ -55,7 +55,7 @@
             Margin="0,10"
             HorizontalAlignment="Center"
             Click="ExportAsJpg"
-            Content="Export" />
+            Content="{DynamicResource export}" />
 
     </StackPanel>
 </UserControl>

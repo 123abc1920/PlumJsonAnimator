@@ -432,6 +432,9 @@ public partial class MainWindowViewModel : ViewModelBase
     public void SaveSettings(AppSettingsData data)
     {
         this.appSettings.SetSettings(data);
+
+        this.localizationService.LoadLangResorce(data.Lang);
+
         Popups.ShowPopup("Saved");
     }
 

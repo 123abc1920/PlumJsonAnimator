@@ -80,6 +80,9 @@ public partial class App : Application
 
             mainWindow.initViews();
             desktop.MainWindow = mainWindow;
+
+            var localization = _serviceProvider.GetRequiredService<LocalizationService>();
+            Application.Current?.Resources.MergedDictionaries.Add(localization.LangResources);
         }
 
         GC.KeepAlive(typeof(SvgImageExtension).Assembly);

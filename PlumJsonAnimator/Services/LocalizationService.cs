@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Avalonia.Controls;
+using Newtonsoft.Json;
+using PlumJsonAnimator.Models.Interfaces;
 
 // TODO: toggle btns for modes
 namespace PlumJsonAnimator.Services
 {
-    public class LocalizationService
+    public class LocalizationService : INotifyable
     {
         public const string START_LANG = "ru-RU";
 
@@ -15,6 +18,8 @@ namespace PlumJsonAnimator.Services
 
         public List<string> langs = new List<string>();
         public string currentLang = START_LANG;
+
+        public ResourceDictionary LangResources = new();
 
         public LocalizationService()
         {
@@ -65,6 +70,40 @@ namespace PlumJsonAnimator.Services
             {
                 var languageCode = Path.GetFileNameWithoutExtension(filePath);
                 this.langs.Add(languageCode);
+            }
+        }
+
+        public void LoadLangResorce(string lang)
+        {
+            this.currentLang = lang;
+
+            string filePath = Path.Combine(LocPath, $"{lang}.json");
+
+            if (!File.Exists(filePath))
+            {
+                filePath = Path.Combine(LocPath, $"{START_LANG}.json");
+                if (!File.Exists(filePath))
+                {
+                    return;
+                }
+            }
+
+            string jsonContent = File.ReadAllText(filePath);
+
+            var translations = JsonConvert.DeserializeObject<Dictionary<string, string>>(
+                jsonContent
+            );
+
+            if (translations == null)
+            {
+                return;
+            }
+
+            LangResources.Clear();
+
+            foreach (var (key, value) in translations)
+            {
+                LangResources[key] = value;
             }
         }
     }

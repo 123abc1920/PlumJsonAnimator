@@ -139,7 +139,7 @@ namespace PlumJsonAnimator.Services
                             ? this.appSettings.CaptureHeight
                             : newSettings.CaptureHeight;
 
-                    this.localizationService.currentLang = newSettings.Lang;
+                    this.localizationService.LoadLangResorce(newSettings.Lang);
 
                     this.globalState.theme = newSettings.Theme;
                     var sukiTheme = SukiTheme.GetInstance();
