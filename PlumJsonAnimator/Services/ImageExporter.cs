@@ -46,8 +46,8 @@ namespace PlumJsonAnimator.Services
             var cropped = new CroppedBitmap(
                 fullRender,
                 new PixelRect(
-                    (int)captureBounds.X,
-                    (int)captureBounds.Y,
+                    (int)captureBounds.X + GlobalState.BASE_CANVAS_SIZE / 2,
+                    (int)captureBounds.Y + GlobalState.BASE_CANVAS_SIZE / 2,
                     (int)captureBounds.Width,
                     (int)captureBounds.Height
                 )
