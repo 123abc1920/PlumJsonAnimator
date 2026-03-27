@@ -146,12 +146,7 @@ public partial class MainWindow : SukiWindow
                 }
                 else
                 {
-                    viewModel
-                        .GetCaptureArea()
-                        ?.SelectPoint(
-                            (int)(point.X - canvas.Width / 2),
-                            (int)(point.Y - canvas.Height / 2)
-                        );
+                    viewModel.GetCaptureArea()?.SelectPoint((int)(point.X), (int)(point.Y));
                 }
             }
         }
@@ -166,12 +161,7 @@ public partial class MainWindow : SukiWindow
         {
             if (viewModel.CaptureMode == true)
             {
-                viewModel
-                    .GetCaptureArea()
-                    ?.MovePoint(
-                        (int)(point.X - canvas.Width / 2),
-                        (int)(point.Y - canvas.Height / 2)
-                    );
+                viewModel.GetCaptureArea()?.MovePoint((int)(point.X), (int)(point.Y));
                 return;
             }
 

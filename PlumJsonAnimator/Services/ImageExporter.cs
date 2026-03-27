@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models;
@@ -17,6 +18,7 @@ using SixLabors.ImageSharp.PixelFormats;
 namespace PlumJsonAnimator.Services
 {
     // TODO: gif
+    // TODO: add progress bar
     public class ImageExporter
     {
         public string ExportPath = "";
@@ -29,41 +31,31 @@ namespace PlumJsonAnimator.Services
             this.globalState = globalState;
         }
 
-        private RenderTargetBitmap CatchCanvas(Canvas canvas)
+        private RenderTargetBitmap CatchCanvas(Canvas? canvas)
         {
             var captureBounds = this.globalState.captureArea!.GetRect();
-
-            var fullBounds = new Rect(0, 0, canvas.Bounds.Width, canvas.Bounds.Height);
-            var fullRender = new RenderTargetBitmap(
-                new PixelSize((int)fullBounds.Width, (int)fullBounds.Height),
-                new Vector(96, 96)
-            );
-
-            canvas.Measure(fullBounds.Size);
-            canvas.Arrange(fullBounds);
-            fullRender.Render(canvas);
-
-            var cropped = new CroppedBitmap(
-                fullRender,
-                new PixelRect(
-                    (int)captureBounds.X + GlobalState.BASE_CANVAS_SIZE / 2,
-                    (int)captureBounds.Y + GlobalState.BASE_CANVAS_SIZE / 2,
-                    (int)captureBounds.Width,
-                    (int)captureBounds.Height
-                )
-            );
 
             var result = new RenderTargetBitmap(
                 new PixelSize((int)captureBounds.Width, (int)captureBounds.Height),
                 new Vector(96, 96)
             );
 
-            using (var context = result.CreateDrawingContext())
+            if (canvas == null)
             {
-                context.DrawImage(
-                    cropped,
-                    new Rect(0, 0, captureBounds.Width, captureBounds.Height)
-                );
+                return result;
+            }
+
+            var originalTransform = canvas.RenderTransform;
+
+            try
+            {
+                canvas.RenderTransform = new TranslateTransform(-captureBounds.X, -captureBounds.Y);
+
+                result.Render(canvas);
+            }
+            finally
+            {
+                canvas.RenderTransform = originalTransform;
             }
 
             return result;
@@ -73,7 +65,7 @@ namespace PlumJsonAnimator.Services
         {
             if (Directory.Exists(outputFolder))
             {
-                this.globalState.currentProject!.CurrentAnimation.currentTime = start;
+                this.globalState.currentProject!.CurrentAnimation!.currentTime = start;
                 double endTime = Math.Min(
                     this.globalState.currentProject.CurrentAnimation.MaxTime(),
                     end
@@ -96,7 +88,7 @@ namespace PlumJsonAnimator.Services
                     }
 
                     this.globalState.currentProject.CurrentAnimation.step();
-                    canvas.InvalidateVisual();
+                    canvas!.InvalidateVisual();
                     await Task.Delay(30);
                     i++;
                 }
@@ -112,7 +104,7 @@ namespace PlumJsonAnimator.Services
         {
             if (Directory.Exists(outputFolder))
             {
-                this.globalState.currentProject!.CurrentAnimation.currentTime = start;
+                this.globalState.currentProject!.CurrentAnimation!.currentTime = start;
                 double endTime = Math.Min(
                     this.globalState.currentProject.CurrentAnimation.MaxTime(),
                     end
@@ -135,7 +127,7 @@ namespace PlumJsonAnimator.Services
                     }
 
                     this.globalState.currentProject.CurrentAnimation.step();
-                    canvas.InvalidateVisual();
+                    canvas!.InvalidateVisual();
                     await Task.Delay(30);
                     i++;
                 }
@@ -156,7 +148,7 @@ namespace PlumJsonAnimator.Services
 
             if (File.Exists(outputFile))
             {
-                this.globalState.currentProject!.CurrentAnimation.currentTime = start;
+                this.globalState.currentProject!.CurrentAnimation!.currentTime = start;
                 double endTime = Math.Min(
                     this.globalState.currentProject.CurrentAnimation.MaxTime(),
                     end
@@ -184,7 +176,7 @@ namespace PlumJsonAnimator.Services
                     }
 
                     this.globalState.currentProject.CurrentAnimation.step();
-                    canvas.InvalidateVisual();
+                    canvas!.InvalidateVisual();
                     await Task.Delay(30);
                 }
 
@@ -285,7 +277,7 @@ namespace PlumJsonAnimator.Services
                 this.globalState.captureMode = false;
                 using (var stdin = process.StandardInput.BaseStream)
                 {
-                    this.globalState.currentProject!.CurrentAnimation.currentTime = start;
+                    this.globalState.currentProject!.CurrentAnimation!.currentTime = start;
                     double endTime = Math.Min(
                         this.globalState.currentProject.CurrentAnimation.MaxTime(),
                         end
@@ -343,7 +335,7 @@ namespace PlumJsonAnimator.Services
                         }
 
                         this.globalState.currentProject.CurrentAnimation.step();
-                        canvas.InvalidateVisual();
+                        canvas!.InvalidateVisual();
                         await Task.Delay(30);
                     }
 

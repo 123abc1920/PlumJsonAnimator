@@ -63,12 +63,10 @@ namespace PlumJsonAnimator.Models
 
         private void validatePoint(Point p)
         {
-            int halfSize = GlobalState.BASE_CANVAS_SIZE / 2;
-
             foreach (Point point in points)
             {
-                point.x = Math.Max(-halfSize, Math.Min(halfSize, point.x));
-                point.y = Math.Max(-halfSize, Math.Min(halfSize, point.y));
+                point.x = Math.Max(0, Math.Min(GlobalState.BASE_CANVAS_SIZE, point.x));
+                point.y = Math.Max(0, Math.Min(GlobalState.BASE_CANVAS_SIZE, point.y));
             }
 
             int minWidth = NEAR_REGION * 2;
@@ -102,8 +100,8 @@ namespace PlumJsonAnimator.Models
 
             foreach (Point point in points)
             {
-                point.x = Math.Max(-halfSize, Math.Min(halfSize, point.x));
-                point.y = Math.Max(-halfSize, Math.Min(halfSize, point.y));
+                point.x = Math.Max(0, Math.Min(GlobalState.BASE_CANVAS_SIZE, point.x));
+                point.y = Math.Max(0, Math.Min(GlobalState.BASE_CANVAS_SIZE, point.y));
             }
         }
 
@@ -190,15 +188,7 @@ namespace PlumJsonAnimator.Models
 
         public void Draw(Canvas canvas)
         {
-            var centerX = canvas.Width / 2;
-            var centerY = canvas.Height / 2;
-
-            var rect = new Rect(
-                centerX + this.a.x,
-                centerY + this.a.y,
-                Math.Abs(this.b.x - this.a.x),
-                Math.Abs(this.d.y - this.a.y)
-            );
+            var rect = GetRect();
 
             var rectangle = new Border
             {
@@ -212,10 +202,10 @@ namespace PlumJsonAnimator.Models
             Canvas.SetTop(rectangle, rect.Y);
             canvas.Children.Add(rectangle);
 
-            DrawPoint(canvas, centerX + this.a.x, centerY + this.a.y);
-            DrawPoint(canvas, centerX + this.b.x, centerY + this.b.y);
-            DrawPoint(canvas, centerX + this.c.x, centerY + this.c.y);
-            DrawPoint(canvas, centerX + this.d.x, centerY + this.d.y);
+            DrawPoint(canvas, this.a.x, this.a.y);
+            DrawPoint(canvas, this.b.x, this.b.y);
+            DrawPoint(canvas, this.c.x, this.c.y);
+            DrawPoint(canvas, this.d.x, this.d.y);
         }
 
         private void DrawPoint(Canvas canvas, double x, double y)
