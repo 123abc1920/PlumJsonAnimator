@@ -8,14 +8,13 @@
     Background="{DynamicResource SukiBackgroundBrush}">
     <StackPanel Margin="10" x:DataType="viewModels:MainWindowViewModel">
 
-        <TextBlock Margin="0,5" Text="Export path:" />
+        <TextBlock Margin="0,5" Text="{DynamicResource export_path}" />
         <Grid ColumnDefinitions="*,Auto">
             <TextBox
                 Name="path"
                 Grid.Column="0"
                 Margin="0,0,5,0"
-                Text=""
-                Watermark="Save Path" />
+                Watermark="{DynamicResource save_path}" />
             <Button
                 Grid.Column="1"
                 Width="32"
@@ -32,11 +31,11 @@
             <TextBlock
                 Grid.Column="0"
                 Margin="0,0,2.5,0"
-                Text="Start time:" />
+                Text="{DynamicResource start_time}" />
             <TextBlock
                 Grid.Column="1"
                 Margin="2.5,0,0,0"
-                Text="End time:" />
+                Text="{DynamicResource end_time}" />
         </Grid>
         <Grid ColumnDefinitions="*,*">
             <TextBox

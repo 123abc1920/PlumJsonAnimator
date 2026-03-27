@@ -18,12 +18,12 @@
                     Name="ProjectBtn"
                     HorizontalAlignment="Stretch"
                     Click="ShowProjectSettings"
-                    Content="Project Settings" />
+                    Content="{DynamicResource project_settings}" />
                 <Button
                     Name="SpinejsonBtn"
                     HorizontalAlignment="Stretch"
                     Click="ShowSpinejsonSettings"
-                    Content="Json Settings" />
+                    Content="{DynamicResource app_settings}" />
             </StackPanel>
         </ScrollViewer>
 

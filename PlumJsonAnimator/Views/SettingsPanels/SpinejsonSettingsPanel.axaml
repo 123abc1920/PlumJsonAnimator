@@ -11,8 +11,8 @@
             Margin="0,5"
             FontSize="16"
             FontWeight="Bold"
-            Text="Json settings" />
-        <TextBlock Text="Project path:" />
+            Text="{DynamicResource app_settings}" />
+        <TextBlock Text="{DynamicResource project_path}" />
         <Grid
             Margin="0,5"
             ColumnDefinitions="*,Auto"
@@ -36,14 +36,14 @@
             </Button>
         </Grid>
 
-        <TextBlock Margin="0,5" Text="App theme:" />
+        <TextBlock Margin="0,5" Text="{DynamicResource app_theme}" />
         <ComboBox
             HorizontalAlignment="Stretch"
             ItemsSource="{Binding Themes}"
             MaxDropDownHeight="100"
             SelectedItem="{Binding CurrentTheme, Mode=TwoWay}" />
 
-        <TextBlock Margin="0,5" Text="Ffmpeg path:" />
+        <TextBlock Margin="0,5" Text="{DynamicResource ffmpeg_path}" />
         <Grid
             Margin="0,5"
             ColumnDefinitions="*,Auto"
@@ -62,7 +62,7 @@
             </Button>
         </Grid>
 
-        <TextBlock Margin="0,5" Text="Language:" />
+        <TextBlock Margin="0,5" Text="{DynamicResource language}" />
         <ComboBox
             Grid.Row="2"
             Grid.Column="0"
@@ -76,6 +76,6 @@
             Margin="0,10"
             HorizontalAlignment="Center"
             Click="SaveSettings"
-            Content="Save" />
+            Content="{DynamicResource save}" />
     </StackPanel>
 </UserControl>

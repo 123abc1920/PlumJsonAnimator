@@ -14,6 +14,6 @@
             Margin="0,10"
             HorizontalAlignment="Center"
             Click="SetName"
-            Content="Save" />
+            Content="{DynamicResource save}" />
     </StackPanel>
 </UserControl>

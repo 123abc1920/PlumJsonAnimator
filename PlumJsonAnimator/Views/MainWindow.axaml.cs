@@ -16,7 +16,7 @@ using SukiUI.Controls;
 
 namespace PlumJsonAnimator.Views;
 
-// TODO: localization
+// TODO: localize popups, dialogs, json error
 public partial class MainWindow : SukiWindow
 {
     private Dictionary<char, char> pairedSymbols = new Dictionary<char, char>()
@@ -290,18 +290,7 @@ public partial class MainWindow : SukiWindow
 
                 if (tabControl.SelectedItem is TabItem selectedTab)
                 {
-                    string header = selectedTab.Header?.ToString();
-
-                    switch (header)
-                    {
-                        case "Json":
-                            currentTab = 1;
-                            break;
-
-                        case "Анимация":
-                            currentTab = 0;
-                            break;
-                    }
+                    currentTab = tabControl.SelectedIndex;
                 }
             }
         }

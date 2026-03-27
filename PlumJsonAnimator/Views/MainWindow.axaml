@@ -42,35 +42,35 @@
 
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Project">
-                <MenuItem Click="OpenProject" Header="Open">
+            <MenuItem Header="{DynamicResource project_header}">
+                <MenuItem Click="OpenProject" Header="{DynamicResource open}">
                     <MenuItem.InputGesture>
                         <KeyGesture>Ctrl+O</KeyGesture>
                     </MenuItem.InputGesture>
                 </MenuItem>
-                <MenuItem Click="NewProject" Header="New">
+                <MenuItem Click="NewProject" Header="{DynamicResource new}">
                     <MenuItem.InputGesture>
                         <KeyGesture>Ctrl+N</KeyGesture>
                     </MenuItem.InputGesture>
                 </MenuItem>
-                <MenuItem Command="{Binding SaveProject}" Header="Save">
+                <MenuItem Command="{Binding SaveProject}" Header="{DynamicResource save}">
                     <MenuItem.InputGesture>
                         <KeyGesture>Ctrl+S</KeyGesture>
                     </MenuItem.InputGesture>
                 </MenuItem>
                 <Separator />
-                <MenuItem Click="OpenSettings" Header="Settings" />
+                <MenuItem Click="OpenSettings" Header="{DynamicResource settings}" />
             </MenuItem>
-            <MenuItem Header="File">
-                <MenuItem Click="ImportAnim" Header="Import json" />
-                <MenuItem Click="ExportAnim" Header="Export json" />
+            <MenuItem Header="{DynamicResource file}">
+                <MenuItem Click="ImportAnim" Header="{DynamicResource import_json}" />
+                <MenuItem Click="ExportAnim" Header="{DynamicResource export_json}" />
             </MenuItem>
-            <MenuItem Header="Export">
-                <MenuItem Click="ExportAsPng" Header="Export as PNG" />
-                <MenuItem Click="ExportAsJpg" Header="Export as JPG" />
+            <MenuItem Header="{DynamicResource export}">
+                <MenuItem Click="ExportAsPng" Header="{DynamicResource png_export}" />
+                <MenuItem Click="ExportAsJpg" Header="{DynamicResource jpg_export}" />
                 <Separator />
-                <MenuItem Click="ExportAsGif" Header="Export as GIF" />
-                <MenuItem Click="ExportAsMp4" Header="Export as MP4" />
+                <MenuItem Click="ExportAsGif" Header="{DynamicResource gif_export}" />
+                <MenuItem Click="ExportAsMp4" Header="{DynamicResource mp4_export}" />
             </MenuItem>
         </Menu>
         <Grid
@@ -80,7 +80,7 @@
             <TextBlock
                 Grid.Column="0"
                 Margin="0,0,5,0"
-                Text="Project:" />
+                Text="{DynamicResource project}" />
             <TextBlock Grid.Column="1" Text="{Binding CurrentProject.Name}" />
         </Grid>
         <Grid>
@@ -105,7 +105,10 @@
                     HorizontalScrollBarVisibility="Auto"
                     VerticalScrollBarVisibility="Auto">
                     <Grid ColumnDefinitions="*,Auto,Auto" RowDefinitions="Auto,Auto,Auto">
-                        <TextBlock Grid.Row="0" Grid.ColumnSpan="3">Skin</TextBlock>
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.ColumnSpan="3"
+                            Text="{DynamicResource skins}" />
                         <TextBox
                             Name="skinName"
                             Grid.Row="1"
@@ -167,7 +170,7 @@
                         <TextBlock
                             Grid.Row="0"
                             Grid.ColumnSpan="3"
-                            Text="Animation" />
+                            Text="{DynamicResource animation}" />
                         <TextBox
                             Name="animationName"
                             Grid.Row="1"
@@ -220,7 +223,7 @@
                     Background="{DynamicResource SukiPrimaryColor}"
                     ResizeDirection="Rows" />
                 <StackPanel Grid.Row="4" Margin="5">
-                    <TextBlock>Resources</TextBlock>
+                    <TextBlock Text="{DynamicResource resources}" />
                     <StackPanel Orientation="Horizontal">
                         <Button
                             Width="32"
@@ -270,7 +273,7 @@
                 ResizeDirection="Columns" />
             <Grid Grid.Column="2">
                 <TabControl Padding="0" SelectionChanged="TabControl_SelectionChanged">
-                    <TabItem Header="Анимация">
+                    <TabItem Header="{DynamicResource animation}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="2*" />
@@ -321,15 +324,13 @@
                                             <CheckBox
                                                 HorizontalAlignment="Right"
                                                 Click="CheckBox_Click"
-                                                IsChecked="True">
-                                                Draw bones
-                                            </CheckBox>
+                                                Content="{DynamicResource draw_bones}"
+                                                IsChecked="True" />
                                             <CheckBox
                                                 HorizontalAlignment="Right"
                                                 Click="EditCaptureMode"
-                                                IsChecked="{Binding CaptureMode}">
-                                                Edit capture area
-                                            </CheckBox>
+                                                Content="{DynamicResource capture_mode}"
+                                                IsChecked="{Binding CaptureMode}" />
                                             <TextBlock HorizontalAlignment="Right" Text="{Binding ModeName}" />
                                             <Button
                                                 Width="32"
@@ -523,7 +524,7 @@
                         </Grid>
                     </TabItem>
 
-                    <TabItem Header="Json">
+                    <TabItem Header="{DynamicResource json_code}">
                         <Grid Grid.Row="2">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="2*" />
@@ -567,7 +568,7 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" Margin="5">
-                    <TextBlock>Skeleton</TextBlock>
+                    <TextBlock Text="{DynamicResource skeleton}" />
                     <StackPanel Orientation="Horizontal">
                         <Button
                             Width="32"
@@ -619,7 +620,7 @@
                 <DockPanel Grid.Row="2">
                     <ScrollViewer Margin="5" VerticalScrollBarVisibility="Auto">
                         <StackPanel>
-                            <TextBlock>Info</TextBlock>
+                            <TextBlock Text="{DynamicResource info}" />
                             <StackPanel Orientation="Horizontal">
                                 <Button
                                     Width="32"
@@ -651,7 +652,7 @@
                                     <iconPacks:PackIconBootstrapIcons Kind="PencilFill" />
                                 </Button>
                             </StackPanel>
-                            <TextBlock Margin="0,5" Text="{Binding CurrentBone.Name, FallbackValue='Не выбрано', TargetNullValue='Не выбрано'}" />
+                            <TextBlock Margin="0,5" Text="{Binding CurrentBone.Name}" />
                             <ListBox
                                 x:Name="SlotsList"
                                 DragDrop.Drop="OnListBoxDrop"
