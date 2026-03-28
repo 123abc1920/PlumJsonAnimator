@@ -434,77 +434,94 @@
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
 
-                                <StackPanel
-                                    Grid.Row="0"
-                                    HorizontalAlignment="Center"
-                                    Orientation="Horizontal">
-                                    <Button
-                                        Width="32"
-                                        Height="32"
-                                        Padding="0"
-                                        HorizontalContentAlignment="Center"
-                                        VerticalContentAlignment="Center"
-                                        Click="IncreaseTimeLine">
-                                        <iconPacks:PackIconBootstrapIcons Kind="ZoomIn" />
-                                    </Button>
-                                    <Button
-                                        Width="32"
-                                        Height="32"
-                                        Padding="0"
-                                        HorizontalContentAlignment="Center"
-                                        VerticalContentAlignment="Center"
-                                        Click="DecreaseTimeLine">
-                                        <iconPacks:PackIconBootstrapIcons Kind="ZoomOut" />
-                                    </Button>
-                                    <Button
-                                        Width="32"
-                                        Height="32"
-                                        Padding="0"
-                                        HorizontalContentAlignment="Center"
-                                        VerticalContentAlignment="Center"
-                                        Command="{Binding PrevKeyFrame}">
-                                        <iconPacks:PackIconBootstrapIcons Kind="CaretLeftFill" />
-                                    </Button>
-                                    <Button
-                                        Width="32"
-                                        Height="32"
-                                        Padding="0"
-                                        HorizontalContentAlignment="Center"
-                                        VerticalContentAlignment="Center"
-                                        Command="{Binding PlayAnim}">
-                                        <iconPacks:PackIconBootstrapIcons
-                                            Width="20"
-                                            Height="20"
-                                            Kind="{Binding CurrentProject.CurrentAnimation.IsRun, Converter={StaticResource AnimationConverter}}" />
-                                    </Button>
-                                    <Button
-                                        Width="32"
-                                        Height="32"
-                                        Padding="0"
-                                        HorizontalContentAlignment="Center"
-                                        VerticalContentAlignment="Center"
-                                        Command="{Binding NextKeyFrame}">
-                                        <iconPacks:PackIconBootstrapIcons Kind="CaretRightFill" />
-                                    </Button>
-                                    <Button
-                                        Width="32"
-                                        Height="32"
-                                        Padding="0"
-                                        HorizontalContentAlignment="Center"
-                                        VerticalContentAlignment="Center"
-                                        Command="{Binding AddKeyFrame}">
-                                        <iconPacks:PackIconBootstrapIcons Kind="Plus" />
-                                    </Button>
-                                    <Button
-                                        Width="32"
-                                        Height="32"
-                                        Padding="0"
-                                        HorizontalContentAlignment="Center"
-                                        VerticalContentAlignment="Center"
-                                        Command="{Binding DeleteKeyFrame}">
-                                        <iconPacks:PackIconBootstrapIcons Kind="Dash" />
-                                    </Button>
-                                </StackPanel>
+                                <DockPanel Grid.Row="0" LastChildFill="True">
+                                    <TextBlock
+                                        Width="50"
+                                        Margin="5"
+                                        VerticalAlignment="Center"
+                                        DockPanel.Dock="Left"
+                                        Text="{Binding CurrentTime}" />
+
+                                    <TextBlock
+                                        Width="50"
+                                        Margin="5"
+                                        VerticalAlignment="Center"
+                                        DockPanel.Dock="Right"
+                                        Opacity="0"
+                                        Text="Just for symmetry" />
+
+                                    <StackPanel
+                                        Grid.Row="0"
+                                        HorizontalAlignment="Center"
+                                        Orientation="Horizontal">
+                                        <Button
+                                            Width="32"
+                                            Height="32"
+                                            Padding="0"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            Click="IncreaseTimeLine">
+                                            <iconPacks:PackIconBootstrapIcons Kind="ZoomIn" />
+                                        </Button>
+                                        <Button
+                                            Width="32"
+                                            Height="32"
+                                            Padding="0"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            Click="DecreaseTimeLine">
+                                            <iconPacks:PackIconBootstrapIcons Kind="ZoomOut" />
+                                        </Button>
+                                        <Button
+                                            Width="32"
+                                            Height="32"
+                                            Padding="0"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            Command="{Binding PrevKeyFrame}">
+                                            <iconPacks:PackIconBootstrapIcons Kind="CaretLeftFill" />
+                                        </Button>
+                                        <Button
+                                            Width="32"
+                                            Height="32"
+                                            Padding="0"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            Command="{Binding PlayAnim}">
+                                            <iconPacks:PackIconBootstrapIcons
+                                                Width="20"
+                                                Height="20"
+                                                Kind="{Binding CurrentProject.CurrentAnimation.IsRun, Converter={StaticResource AnimationConverter}}" />
+                                        </Button>
+                                        <Button
+                                            Width="32"
+                                            Height="32"
+                                            Padding="0"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            Command="{Binding NextKeyFrame}">
+                                            <iconPacks:PackIconBootstrapIcons Kind="CaretRightFill" />
+                                        </Button>
+                                        <Button
+                                            Width="32"
+                                            Height="32"
+                                            Padding="0"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            Command="{Binding AddKeyFrame}">
+                                            <iconPacks:PackIconBootstrapIcons Kind="Plus" />
+                                        </Button>
+                                        <Button
+                                            Width="32"
+                                            Height="32"
+                                            Padding="0"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            Command="{Binding DeleteKeyFrame}">
+                                            <iconPacks:PackIconBootstrapIcons Kind="Dash" />
+                                        </Button>
+                                    </StackPanel>
+                                </DockPanel>
 
                                 <ScrollViewer
                                     Grid.Row="1"

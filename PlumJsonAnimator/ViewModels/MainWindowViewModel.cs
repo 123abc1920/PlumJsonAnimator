@@ -21,6 +21,7 @@ namespace PlumJsonAnimator.ViewModels;
 
 // TODO: docs
 // TODO: поделить viewmodels
+// TODO: display doubles correctly
 public partial class MainWindowViewModel : ViewModelBase
 {
     public Canvas? Canvas

@@ -7,7 +7,6 @@ using Avalonia.Controls;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Models.Interfaces;
 
-// TODO: time textblock
 namespace PlumJsonAnimator.Services
 {
     public class LocalizationService : INotifyable
