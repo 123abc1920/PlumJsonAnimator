@@ -13,17 +13,14 @@ namespace PlumJsonAnimator.Common.Converters
 
             if (value is double doubleValue)
             {
-                // Ограничиваем до 2 знаков после запятой
                 return doubleValue.ToString("0.##", culture);
             }
             else if (value is decimal decimalValue)
             {
-                // Ограничиваем до 2 знаков после запятой
                 return decimalValue.ToString("0.##", culture);
             }
             else if (value is float floatValue)
             {
-                // Ограничиваем до 2 знаков после запятой
                 return floatValue.ToString("0.##", culture);
             }
 
@@ -60,7 +57,6 @@ namespace PlumJsonAnimator.Common.Converters
                 )
             )
             {
-                // При конвертации обратно также ограничиваем до 2 знаков после запятой
                 if (targetType == typeof(double))
                 {
                     return Math.Round(result, 2);

@@ -411,12 +411,12 @@
 
                                         <TextBox
                                             x:Name="scaleX"
-                                            Text="{Binding CurrentBone.LengthX, Mode=TwoWay}"
+                                            Text="{Binding CurrentBone.LengthX, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
                                             Watermark="X" />
                                         <TextBox
                                             x:Name="scaleY"
                                             IsVisible="{Binding !CurrentBone.IsBone}"
-                                            Text="{Binding CurrentBone.LengthY, Mode=TwoWay}"
+                                            Text="{Binding CurrentBone.LengthY, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
                                             Watermark="Y" />
                                     </StackPanel>
                                 </Grid>
@@ -440,7 +440,7 @@
                                         Margin="5"
                                         VerticalAlignment="Center"
                                         DockPanel.Dock="Left"
-                                        Text="{Binding CurrentTime}" />
+                                        Text="{Binding CurrentTime, Converter={StaticResource DoubleConverter}}" />
 
                                     <TextBlock
                                         Width="50"
