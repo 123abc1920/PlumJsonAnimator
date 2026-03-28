@@ -18,7 +18,6 @@ using SixLabors.ImageSharp.PixelFormats;
 namespace PlumJsonAnimator.Services
 {
     // TODO: gif
-    // TODO: add progress bar
     public class ImageExporter
     {
         public string ExportPath = "";
@@ -61,6 +60,8 @@ namespace PlumJsonAnimator.Services
             return result;
         }
 
+        public event EventHandler<int>? ProgressChanged;
+
         public async Task<ExportResult> ExportAsPng(double start, double end, string outputFolder)
         {
             if (Directory.Exists(outputFolder))
@@ -70,6 +71,9 @@ namespace PlumJsonAnimator.Services
                     this.globalState.currentProject.CurrentAnimation.MaxTime(),
                     end
                 );
+
+                var totalFrames = (int)((endTime - start) * this.globalState.FPS) + 1;
+                int frameCount = 0;
 
                 var i = 0;
                 var drawBones = this.globalState.drawBones;
@@ -87,6 +91,11 @@ namespace PlumJsonAnimator.Services
                         }
                     }
 
+                    frameCount++;
+
+                    var percent = (int)((double)frameCount / totalFrames * 100);
+                    ProgressChanged?.Invoke(this, percent);
+
                     this.globalState.currentProject.CurrentAnimation.step();
                     canvas!.InvalidateVisual();
                     await Task.Delay(30);
@@ -94,9 +103,12 @@ namespace PlumJsonAnimator.Services
                 }
                 this.globalState.drawBones = drawBones;
                 this.globalState.captureMode = captureMode;
+
+                ProgressChanged?.Invoke(this, 0);
                 return ExportResult.SUCCESS;
             }
 
+            ProgressChanged?.Invoke(this, 0);
             return ExportResult.NO_FOLDER;
         }
 
@@ -109,6 +121,9 @@ namespace PlumJsonAnimator.Services
                     this.globalState.currentProject.CurrentAnimation.MaxTime(),
                     end
                 );
+
+                var totalFrames = (int)((endTime - start) * this.globalState.FPS) + 1;
+                int frameCount = 0;
 
                 var i = 0;
                 var drawBones = this.globalState.drawBones;
@@ -126,6 +141,11 @@ namespace PlumJsonAnimator.Services
                         }
                     }
 
+                    frameCount++;
+
+                    var percent = (int)((double)frameCount / totalFrames * 100);
+                    ProgressChanged?.Invoke(this, percent);
+
                     this.globalState.currentProject.CurrentAnimation.step();
                     canvas!.InvalidateVisual();
                     await Task.Delay(30);
@@ -133,9 +153,12 @@ namespace PlumJsonAnimator.Services
                 }
                 this.globalState.drawBones = drawBones;
                 this.globalState.captureMode = captureMode;
+
+                ProgressChanged?.Invoke(this, 0);
                 return ExportResult.SUCCESS;
             }
 
+            ProgressChanged?.Invoke(this, 0);
             return ExportResult.NO_FOLDER;
         }
 
@@ -153,6 +176,9 @@ namespace PlumJsonAnimator.Services
                     this.globalState.currentProject.CurrentAnimation.MaxTime(),
                     end
                 );
+
+                var totalFrames = (int)((endTime - start) * this.globalState.FPS) + 1;
+                int frameCount = 0;
 
                 var drawBones = this.globalState.drawBones;
                 var captureMode = this.globalState.captureMode;
@@ -172,6 +198,11 @@ namespace PlumJsonAnimator.Services
                             stream.Position = 0;
                             var frameImage = SixLabors.ImageSharp.Image.Load<Rgba32>(stream);
                             frames.Add(frameImage);
+
+                            frameCount++;
+
+                            var percent = (int)((double)frameCount / totalFrames * 100);
+                            ProgressChanged?.Invoke(this, percent);
                         }
                     }
 
@@ -199,9 +230,12 @@ namespace PlumJsonAnimator.Services
 
                 this.globalState.drawBones = drawBones;
                 this.globalState.captureMode = captureMode;
+
+                ProgressChanged?.Invoke(this, 0);
                 return ExportResult.SUCCESS;
             }
 
+            ProgressChanged?.Invoke(this, 0);
             return ExportResult.NO_FOLDER;
         }
 
@@ -213,12 +247,16 @@ namespace PlumJsonAnimator.Services
         )
         {
             if (!File.Exists(ffmpegPath))
+            {
+                ProgressChanged?.Invoke(this, 0);
                 return ExportResult.NO_FFMPEG;
+            }
 
             using (var testBitmap = CatchCanvas(canvas))
             {
                 if (testBitmap == null)
                 {
+                    ProgressChanged?.Invoke(this, 0);
                     return ExportResult.FFMPEG_ERROR;
                 }
 
@@ -229,6 +267,7 @@ namespace PlumJsonAnimator.Services
 
                 if (width <= 0 || height <= 0)
                 {
+                    ProgressChanged?.Invoke(this, 0);
                     return ExportResult.FFMPEG_ERROR;
                 }
 
@@ -286,6 +325,8 @@ namespace PlumJsonAnimator.Services
                     int frameCount = 0;
                     bool error = false;
 
+                    var totalFrames = (int)((endTime - start) * this.globalState.FPS) + 1;
+
                     while (this.globalState.currentProject.CurrentAnimation.currentTime <= endTime)
                     {
                         using (RenderTargetBitmap bitmap = CatchCanvas(canvas))
@@ -325,6 +366,8 @@ namespace PlumJsonAnimator.Services
                             {
                                 await stdin.WriteAsync(buffer);
                                 frameCount++;
+                                var percent = (int)((double)frameCount / totalFrames * 100);
+                                ProgressChanged?.Invoke(this, percent);
                             }
                             catch (Exception ex)
                             {
@@ -351,6 +394,7 @@ namespace PlumJsonAnimator.Services
                 {
                     process.Kill();
                     Console.WriteLine("FFmpeg timeout");
+                    ProgressChanged?.Invoke(this, 0);
                     return ExportResult.FFMPEG_ERROR;
                 }
 
@@ -362,10 +406,12 @@ namespace PlumJsonAnimator.Services
                     && new FileInfo(outputFile).Length > 0
                 )
                 {
+                    ProgressChanged?.Invoke(this, 0);
                     return ExportResult.SUCCESS;
                 }
                 else
                 {
+                    ProgressChanged?.Invoke(this, 0);
                     return ExportResult.FFMPEG_ERROR;
                 }
             }

@@ -24,6 +24,20 @@ namespace PlumJsonAnimator.ViewModels;
 // TODO: display doubles correctly
 public partial class MainWindowViewModel : ViewModelBase
 {
+    private double _progressValue = 0;
+    public double ProgressValue
+    {
+        get => _progressValue;
+        set
+        {
+            if (value != _progressValue)
+            {
+                _progressValue = value;
+                OnPropertyChanged(nameof(ProgressValue));
+            }
+        }
+    }
+
     public Canvas? Canvas
     {
         get { return this.imageExporter.canvas; }
@@ -610,6 +624,11 @@ public partial class MainWindowViewModel : ViewModelBase
                 s.UpdateDrawOrderOffset();
             }
             OnPropertyChanged(nameof(CurrentTime));
+        };
+
+        this.imageExporter.ProgressChanged += (sender, percent) =>
+        {
+            ProgressValue = percent;
         };
 
         ToggleTransformModeCommand = new Command.Command(parameter =>

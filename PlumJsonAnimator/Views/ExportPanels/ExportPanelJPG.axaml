@@ -50,6 +50,11 @@
                 Text="Converter={StaticResource DoubleConverter}" />
         </Grid>
 
+        <ProgressBar
+            Maximum="100"
+            Minimum="0"
+            Value="{Binding ProgressValue}" />
+
         <Button
             Margin="0,10"
             HorizontalAlignment="Center"
