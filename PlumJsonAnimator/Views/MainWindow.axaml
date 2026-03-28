@@ -18,6 +18,10 @@
     Icon="/Assets/logo.ico"
     mc:Ignorable="d">
 
+    <suki:SukiWindow.Hosts>
+        <suki:SukiToastHost Name="ToastHost" />
+    </suki:SukiWindow.Hosts>
+
     <suki:SukiWindow.LogoContent>
         <Image
             Width="16"

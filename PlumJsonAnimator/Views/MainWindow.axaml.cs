@@ -14,11 +14,14 @@ using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
 using SukiUI.Controls;
+using SukiUI.Toasts;
 
 namespace PlumJsonAnimator.Views;
 
 public partial class MainWindow : SukiWindow
 {
+    public static ISukiToastManager ToastManager = new SukiToastManager();
+
     private Dictionary<char, char> pairedSymbols = new Dictionary<char, char>()
     {
         { '{', '}' },
@@ -34,6 +37,9 @@ public partial class MainWindow : SukiWindow
     {
         InitializeComponent();
         this.KeyDown += OnWindowKeyDown;
+
+        ToastHost.Manager = ToastManager;
+        Popups.ToastManager = ToastManager;
     }
 
     public void initViews()
@@ -46,15 +52,12 @@ public partial class MainWindow : SukiWindow
         DragDrop.SetAllowDrop(boneTreeView, true);
         boneTreeView.AddHandler(DragDrop.DropEvent, OnTreeViewDrop);
 
-        Popups.win = this;
         if (DataContext is MainWindowViewModel viewModel)
         {
             viewModel.Canvas = mainCanvas;
             viewModel.Timeline = Timeline;
             viewModel.SetMainWin(this);
         }
-
-        Popups.win = this;
     }
 
     private void UpdateCanvas(object? sender, EventArgs e)
