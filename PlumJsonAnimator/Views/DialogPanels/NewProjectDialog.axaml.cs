@@ -12,7 +12,7 @@ namespace PlumJsonAnimator.Views
             InitializeComponent();
         }
 
-        public NewProjectDialog(MainWindowViewModel viewModel)
+        public NewProjectDialog(ViewModelBase viewModel)
             : this()
         {
             DataContext = viewModel;
@@ -34,7 +34,7 @@ namespace PlumJsonAnimator.Views
             var workspace = this.FindControl<TextBox>("workspace")?.Text;
 
             bool result = false;
-            if (DataContext is MainWindowViewModel vm)
+            if (DataContext is NewProjectViewModel vm)
             {
                 result = vm.NewProject(projectName, workspace);
             }

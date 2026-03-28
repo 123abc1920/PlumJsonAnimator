@@ -18,7 +18,7 @@ namespace PlumJsonAnimator.Views
             InitializeComponent();
         }
 
-        public SpinejsonSettingsPanel(MainWindowViewModel viewModel)
+        public SpinejsonSettingsPanel(SpinejsonSettingsViewModel viewModel)
             : this()
         {
             DataContext = viewModel;
@@ -26,7 +26,7 @@ namespace PlumJsonAnimator.Views
 
         private void SaveSettings(object sender, RoutedEventArgs e)
         {
-            if (DataContext is MainWindowViewModel viewModel)
+            if (DataContext is SpinejsonSettingsViewModel viewModel)
             {
                 var rect = viewModel.GetCaptureArea().GetRect();
 
@@ -102,7 +102,7 @@ namespace PlumJsonAnimator.Views
             );
 
             var path = result?.FirstOrDefault()?.Path.LocalPath;
-            if (DataContext is MainWindowViewModel viewModel)
+            if (DataContext is SpinejsonSettingsViewModel viewModel)
             {
                 viewModel.FfmpegPath = path;
             }

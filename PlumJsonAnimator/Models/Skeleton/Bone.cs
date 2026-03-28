@@ -85,7 +85,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             _slots.Clear();
 
-            var newSlots = this.globalState.currentProject?.CurrentSkin?.GetSlots(this);
+            var newSlots = this.globalState.CurrentProject?.CurrentSkin?.GetSlots(this);
             if (newSlots != null)
             {
                 foreach (var slot in newSlots)
@@ -244,7 +244,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 c.move(c.x - deltaX, c.y - deltaY);
             }
 
-            List<Slot> slots = this.globalState.currentProject!.CurrentSkin.GetSlots(this);
+            List<Slot> slots = this.globalState.CurrentProject!.CurrentSkin.GetSlots(this);
             var options = this.globalState.GetParallelOptions();
             Parallel.ForEach(
                 slots,
@@ -280,7 +280,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 child.rotate(child.a + (a - oldA));
             }
 
-            List<Slot> slots = this.globalState.currentProject!.CurrentSkin.GetSlots(this);
+            List<Slot> slots = this.globalState.CurrentProject!.CurrentSkin.GetSlots(this);
             var options = this.globalState.GetParallelOptions();
             Parallel.ForEach(
                 slots,

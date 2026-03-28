@@ -11,7 +11,7 @@ namespace PlumJsonAnimator.Views
             InitializeComponent();
         }
 
-        public RenameDialog(MainWindowViewModel viewModel)
+        public RenameDialog(ViewModelBase viewModel)
             : this()
         {
             DataContext = viewModel;
@@ -19,7 +19,7 @@ namespace PlumJsonAnimator.Views
 
         private void SetName(object sender, RoutedEventArgs e)
         {
-            if (DataContext is MainWindowViewModel viewModel)
+            if (DataContext is RenameViewModel viewModel)
             {
                 string? newName = this.FindControl<TextBox>("name")?.Text;
                 viewModel.RedactObj.SetName(newName);

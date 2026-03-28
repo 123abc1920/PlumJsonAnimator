@@ -8,6 +8,7 @@ using Avalonia.Media;
 using Avalonia.Svg.Skia;
 using Microsoft.Extensions.DependencyInjection;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
 using PlumJsonAnimator.Views;
@@ -32,6 +33,15 @@ public partial class App : Application
         var services = new ServiceCollection();
 
         services.AddSingleton<MainWindowViewModel>();
+
+        services.AddTransient<NewProjectViewModel>();
+        services.AddTransient<RenameViewModel>();
+        services.AddTransient<ExportPanelGIFViewModel>();
+        services.AddTransient<ExportPanelJPGViewModel>();
+        services.AddTransient<ExportPanelMP4ViewModel>();
+        services.AddTransient<ExportPanelPNGViewModel>();
+        services.AddTransient<SpinejsonSettingsViewModel>();
+
         services.AddSingleton<AppSettings>();
         services.AddSingleton<ProjectSettings>();
         services.AddSingleton<ProjectManager>();
@@ -45,6 +55,8 @@ public partial class App : Application
         services.AddSingleton<TransformModeFactory>();
         services.AddSingleton<Engine>();
         services.AddSingleton<LocalizationService>();
+
+        services.AddSingleton<Dialogs>();
 
         _serviceProvider = services.BuildServiceProvider();
     }

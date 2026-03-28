@@ -15,12 +15,14 @@ namespace PlumJsonAnimator.Views
             InitializeComponent();
         }
 
-        public ExportPanelPNG(MainWindowViewModel viewModel)
+        public ExportPanelPNG(ViewModelBase viewModel)
             : this()
         {
             DataContext = viewModel;
 
-            this.FindControl<TextBox>("path").Text = viewModel.ExportPath;
+            var vm = (ExportPanelPNGViewModel)viewModel;
+
+            this.FindControl<TextBox>("path").Text = vm.ExportPath;
             this.FindControl<TextBox>("start").Text = "0";
             this.FindControl<TextBox>("end").Text = viewModel
                 .CurrentProject.CurrentAnimation!.MaxTime()
@@ -37,7 +39,7 @@ namespace PlumJsonAnimator.Views
 
             if (folder.Count > 0)
             {
-                if (DataContext is MainWindowViewModel viewModel)
+                if (DataContext is ExportPanelPNGViewModel viewModel)
                 {
                     viewModel.ExportPath = folder[0].Path.LocalPath;
                     this.FindControl<TextBox>("path").Text = viewModel.ExportPath;
@@ -47,7 +49,7 @@ namespace PlumJsonAnimator.Views
 
         private async void ExportAsPng(object sender, RoutedEventArgs e)
         {
-            if (DataContext is MainWindowViewModel viewModel)
+            if (DataContext is ExportPanelPNGViewModel viewModel)
             {
                 var startTextBox = this.FindControl<TextBox>("start");
                 var endTextBox = this.FindControl<TextBox>("end");

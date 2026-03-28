@@ -2,41 +2,26 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Avalonia.Controls;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Common.Timeline;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Common;
-using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
+using PlumJsonAnimator.Views;
 
 namespace PlumJsonAnimator.ViewModels;
 
 // TODO: docs
-// TODO: поделить viewmodels
 public partial class MainWindowViewModel : ViewModelBase
 {
-    private double _progressValue = 0;
-    public double ProgressValue
-    {
-        get => _progressValue;
-        set
-        {
-            if (value != _progressValue)
-            {
-                _progressValue = value;
-                OnPropertyChanged(nameof(ProgressValue));
-            }
-        }
-    }
-
     public Canvas? Canvas
     {
         get { return this.imageExporter.canvas; }
@@ -95,18 +80,6 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
-    public Project? CurrentProject
-    {
-        get { return this.globalState.currentProject; }
-        set
-        {
-            if (this.globalState.currentProject != value)
-            {
-                this.globalState.currentProject = value;
-                OnPropertyChanged(nameof(CurrentProject));
-            }
-        }
-    }
     public JsonError JsonErrorObj
     {
         get { return this.globalState.jsonError; }
@@ -154,62 +127,6 @@ public partial class MainWindowViewModel : ViewModelBase
             {
                 this.globalState.captureMode = value;
                 OnPropertyChanged(nameof(CaptureMode));
-            }
-        }
-    }
-
-    public string ExportPath
-    {
-        get { return this.imageExporter.ExportPath; }
-        set
-        {
-            if (this.imageExporter.ExportPath != value)
-            {
-                this.imageExporter.ExportPath = value;
-                OnPropertyChanged(nameof(FPS));
-            }
-        }
-    }
-
-    public string FfmpegPath
-    {
-        get { return this.appSettings.appSettings.Ffmpeg; }
-        set
-        {
-            if (this.appSettings.appSettings.Ffmpeg != value || value == null || value == "")
-            {
-                this.appSettings.appSettings.Ffmpeg = value;
-                OnPropertyChanged(nameof(FfmpegPath));
-            }
-        }
-    }
-    public IRenamable? RedactObj { get; set; } = null;
-    public List<string> Themes { get; set; } = new List<string>() { "light", "dark" };
-    public string CurrentTheme
-    {
-        get => this.globalState.theme;
-        set
-        {
-            if (this.globalState.theme != value)
-            {
-                this.globalState.theme = value;
-                OnPropertyChanged(nameof(CurrentTheme));
-            }
-        }
-    }
-    public List<string> Langs
-    {
-        get => this.localizationService.langs;
-    }
-    public string CurrentLang
-    {
-        get => this.localizationService.currentLang;
-        set
-        {
-            if (this.localizationService.currentLang != value)
-            {
-                this.localizationService.currentLang = value;
-                OnPropertyChanged(nameof(CurrentLang));
             }
         }
     }
@@ -318,19 +235,6 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
-    private int GetCurrThemeInd(string theme)
-    {
-        for (int i = 0; i < Themes.Count; i++)
-        {
-            if (Themes[i] == theme)
-            {
-                return i;
-            }
-        }
-
-        return 0;
-    }
-
     public bool CanGenerateProject()
     {
         JsonErrorObj.ErrorText = Validate(CurrentProject.Code);
@@ -351,6 +255,47 @@ public partial class MainWindowViewModel : ViewModelBase
         return this.jsonValidator.validate(text);
     }
 
+    public void SetMainWin(Window window)
+    {
+        this.dialogs.mainWin = window;
+    }
+
+    public async void ShowDialog(string title, Window owner, ViewType viewType)
+    {
+        ViewModelBase viewModel = this;
+
+        if (viewType == ViewType.SETTINGS)
+        {
+            viewModel = _serviceProvider.GetRequiredService<SpinejsonSettingsViewModel>();
+        }
+        if (viewType == ViewType.NEWPROJECT)
+        {
+            viewModel = _serviceProvider.GetRequiredService<NewProjectViewModel>();
+        }
+        if (viewType == ViewType.RENAME)
+        {
+            viewModel = _serviceProvider.GetRequiredService<RenameViewModel>();
+        }
+        if (viewType == ViewType.EXPORT_JPG)
+        {
+            viewModel = _serviceProvider.GetRequiredService<ExportPanelJPGViewModel>();
+        }
+        if (viewType == ViewType.EXPORT_PNG)
+        {
+            viewModel = _serviceProvider.GetRequiredService<ExportPanelPNGViewModel>();
+        }
+        if (viewType == ViewType.EXPORT_GIF)
+        {
+            viewModel = _serviceProvider.GetRequiredService<ExportPanelGIFViewModel>();
+        }
+        if (viewType == ViewType.EXPORT_MP4)
+        {
+            viewModel = _serviceProvider.GetRequiredService<ExportPanelMP4ViewModel>();
+        }
+
+        this.dialogs.ShowDialog(title, viewModel, owner, viewType);
+    }
+
     public void GenerateCode()
     {
         this.jsonCode.generateCode(CurrentProject);
@@ -358,7 +303,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public void initProgram()
     {
-        this.globalState.currentProject = new Project(this.globalState, this.interpolation);
+        this.CurrentProject = new Project(this.globalState, this.interpolation);
 
         this.appSettings.ReadSettings();
         this.projectSettings.ReadSettings();
@@ -383,56 +328,6 @@ public partial class MainWindowViewModel : ViewModelBase
         this.localizationService.LoadLangs();
     }
 
-    public CaptureArea? GetCaptureArea()
-    {
-        return this.globalState.captureArea;
-    }
-
-    public bool NewProject(string? projectName, string? projectPath)
-    {
-        Project? result = this.projectManager.NewProject(projectName, projectPath);
-        if (result != null)
-        {
-            CurrentProject = result;
-            return true;
-        }
-        return false;
-    }
-
-    public async Task<ExportResult> ExportAsGif(double start, double end, string outputFile)
-    {
-        ExportResult result = await this.imageExporter.ExportAsGif(start, end, outputFile);
-        return result;
-    }
-
-    public async Task<ExportResult> ExportAsJpg(double start, double end, string outputFolder)
-    {
-        ExportResult result = await this.imageExporter.ExportAsJpg(start, end, outputFolder);
-        return result;
-    }
-
-    public async Task<ExportResult> ExportAsMp4(
-        double start,
-        double end,
-        string outputFile,
-        string ffmpegPath
-    )
-    {
-        ExportResult result = await this.imageExporter.ExportAsMp4(
-            start,
-            end,
-            outputFile,
-            ffmpegPath
-        );
-        return result;
-    }
-
-    public async Task<ExportResult> ExportAsPng(double start, double end, string outputFolder)
-    {
-        ExportResult result = await this.imageExporter.ExportAsPng(start, end, outputFolder);
-        return result;
-    }
-
     public ExportResult exportSpineJson(string outFolder)
     {
         return this.jsonExport.exportSpineJson(outFolder);
@@ -441,38 +336,6 @@ public partial class MainWindowViewModel : ViewModelBase
     public ExportResult importSpineJson(string inputFile)
     {
         return this.jsonExport.importSpineJson(inputFile);
-    }
-
-    public void RenameProject(SettingsData settingsData)
-    {
-        settingsData.Anim = CurrentProject!.Code;
-
-        var oldName = CurrentProject!.Name;
-        var oldPath = CurrentProject.ProjectPath;
-
-        var oldDir = Path.Combine(oldPath, oldName);
-        var newDir = Path.Combine(CurrentProject.ProjectPath, settingsData.Name);
-
-        this.projectManager.CopyDir(oldDir, newDir);
-
-        CurrentProject.SetupProjectSettings(settingsData);
-        this.projectSettings.UpdateSettings(CurrentProject);
-        this.appSettings.ChangeProject(newDir);
-
-        this.projectManager.MoveRes(CurrentProject);
-
-        this.projectSettings.WriteSettings();
-
-        Popups.ShowPopup("Saved");
-    }
-
-    public void SaveSettings(AppSettingsData data)
-    {
-        this.appSettings.SetSettings(data);
-
-        this.localizationService.LoadLangResorce(data.Lang);
-
-        Popups.ShowPopup("Saved");
     }
 
     public void WriteSettings()
@@ -543,11 +406,6 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
-    public string GetMessage(LocalizationConsts constStr)
-    {
-        return this.localizationService.GetMessage(constStr);
-    }
-
     public ICommand AddBoneView { get; }
     public ICommand RenameRes { get; }
     public ICommand DeleteRes { get; }
@@ -570,21 +428,18 @@ public partial class MainWindowViewModel : ViewModelBase
     public ICommand ZoomCanvasComm { get; }
     public ICommand ToggleTransformModeCommand { get; }
 
-    private AppSettings appSettings;
-    private ProjectSettings projectSettings;
-    private ProjectManager projectManager;
-    private GlobalState globalState;
     private JsonCode jsonCode;
     private Interpolation interpolation;
-    private ImageExporter imageExporter;
     private TransformModeFactory transformModeFactory;
     public Prettify prettify;
     public JsonExport jsonExport;
     public JsonValidator jsonValidator;
     public Engine engine;
-    public LocalizationService localizationService;
+
+    private readonly IServiceProvider _serviceProvider;
 
     public MainWindowViewModel(
+        IServiceProvider serviceProvider,
         AppSettings appSettings,
         ProjectSettings projectSettings,
         ProjectManager projectManager,
@@ -597,22 +452,28 @@ public partial class MainWindowViewModel : ViewModelBase
         JsonExport jsonExport,
         JsonValidator jsonValidator,
         Engine engine,
-        LocalizationService localizationService
+        LocalizationService localizationService,
+        Dialogs dialogs
     )
+        : base(
+            globalState,
+            dialogs,
+            projectSettings,
+            projectManager,
+            appSettings,
+            localizationService,
+            imageExporter
+        )
     {
-        this.appSettings = appSettings;
-        this.projectSettings = projectSettings;
-        this.projectManager = projectManager;
-        this.globalState = globalState;
+        _serviceProvider = serviceProvider;
+
         this.jsonCode = jsonCode;
         this.interpolation = interpolation;
-        this.imageExporter = imageExporter;
         this.transformModeFactory = transformModeFactory;
         this.prettify = prettify;
         this.jsonExport = jsonExport;
         this.jsonValidator = jsonValidator;
         this.engine = engine;
-        this.localizationService = localizationService;
 
         CurrentTheme = Themes[0];
 
@@ -623,11 +484,6 @@ public partial class MainWindowViewModel : ViewModelBase
                 s.UpdateDrawOrderOffset();
             }
             OnPropertyChanged(nameof(CurrentTime));
-        };
-
-        this.imageExporter.ProgressChanged += (sender, percent) =>
-        {
-            ProgressValue = percent;
         };
 
         ToggleTransformModeCommand = new Command.Command(parameter =>
@@ -664,7 +520,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 if (selectedRes != null)
                 {
                     RedactObj = selectedRes;
-                    Dialogs.ShowDialog("Rename", this, ViewType.RENAME);
+                    this.dialogs.ShowDialog("Rename", this, ViewType.RENAME);
                 }
             }
         });
@@ -692,7 +548,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 if (selectedSlot != null)
                 {
                     RedactObj = selectedSlot;
-                    Dialogs.ShowDialog("Rename", this, ViewType.RENAME);
+                    this.dialogs.ShowDialog("Rename", this, ViewType.RENAME);
                 }
             }
         });
@@ -704,7 +560,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 if (bone != null)
                 {
                     RedactObj = bone;
-                    Dialogs.ShowDialog("Rename", this, ViewType.RENAME);
+                    this.dialogs.ShowDialog("Rename", this, ViewType.RENAME);
                 }
             }
         });

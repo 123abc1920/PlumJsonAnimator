@@ -105,8 +105,8 @@ namespace PlumJsonAnimator.Services
         public string CreateProjectDir()
         {
             string projectPath = Path.Combine(
-                this.globalState.currentProject!.ProjectPath,
-                this.globalState.currentProject.Name
+                this.globalState.CurrentProject!.ProjectPath,
+                this.globalState.CurrentProject.Name
             );
 
             if (!Directory.Exists(projectPath))
@@ -124,8 +124,8 @@ namespace PlumJsonAnimator.Services
         public string CopyRes(string resName, string filePath)
         {
             string projectPath = Path.Combine(
-                this.globalState.currentProject!.ProjectPath,
-                this.globalState.currentProject.Name
+                this.globalState.CurrentProject!.ProjectPath,
+                this.globalState.CurrentProject.Name
             );
             string resDir = Path.Combine(projectPath, "res");
 
@@ -146,8 +146,8 @@ namespace PlumJsonAnimator.Services
             try
             {
                 string projectPath = Path.Combine(
-                    this.globalState.currentProject!.ProjectPath,
-                    this.globalState.currentProject.Name
+                    this.globalState.CurrentProject!.ProjectPath,
+                    this.globalState.CurrentProject.Name
                 );
                 string resDir = Path.Combine(projectPath, "res");
                 string resPath = Path.Combine(resDir, $"{name}{ext}");

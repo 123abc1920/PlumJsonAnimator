@@ -6,7 +6,7 @@
     xmlns:suki="clr-namespace:SukiUI.Controls;assembly=SukiUI"
     xmlns:viewModels="clr-namespace:PlumJsonAnimator.ViewModels"
     Background="{DynamicResource SukiBackgroundBrush}">
-    <StackPanel Margin="10" x:DataType="viewModels:MainWindowViewModel">
+    <StackPanel Margin="10" x:DataType="viewModels:SpinejsonSettingsViewModel">
         <TextBlock
             Margin="0,5"
             FontSize="16"

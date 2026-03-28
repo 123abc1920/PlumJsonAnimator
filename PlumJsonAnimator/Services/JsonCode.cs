@@ -125,18 +125,18 @@ namespace PlumJsonAnimator.Services
             }
 
             List<SlotData> slots = new List<SlotData>();
-            foreach (Slot s in this.globalState.currentProject!.Slots)
+            foreach (Slot s in this.globalState.CurrentProject!.Slots)
             {
                 slots.Add(s.generateJSONData());
             }
 
             return new CodeData
             {
-                Skeleton = this.globalState.currentProject.generateMetaData(),
+                Skeleton = this.globalState.CurrentProject.generateMetaData(),
                 Bones = project.MainSkeleton!.generateJSONData(),
                 Slots = slots,
                 Animations = animations,
-                Skins = this.globalState.currentProject.generateSkinsJSONData(),
+                Skins = this.globalState.CurrentProject.generateSkinsJSONData(),
             };
         }
 
@@ -155,7 +155,7 @@ namespace PlumJsonAnimator.Services
         {
             List<BoneData> newBones = bones;
             List<BoneData> oldBones =
-                this.globalState.currentProject!.MainSkeleton!.generateJSONData();
+                this.globalState.CurrentProject!.MainSkeleton!.generateJSONData();
             Dictionary<string, BoneData> updatedBones = regenerateBones(
                 newBones.ToDictionary(b => b.Name, b => b),
                 oldBones.ToDictionary(b => b.Name, b => b)
@@ -179,7 +179,7 @@ namespace PlumJsonAnimator.Services
                 }
                 else
                 {
-                    Bone? parent = this.globalState.currentProject.MainSkeleton.getBone(b.Parent);
+                    Bone? parent = this.globalState.CurrentProject.MainSkeleton.getBone(b.Parent);
                     if (parent == null)
                     {
                         return new ValidResult
@@ -222,7 +222,7 @@ namespace PlumJsonAnimator.Services
         public ValidResult regenerateSlots(List<SlotData> slots)
         {
             List<SlotData> newSlots = slots;
-            List<SlotData> oldSlots = this.globalState.currentProject!.generateSlotsJSONData();
+            List<SlotData> oldSlots = this.globalState.CurrentProject!.generateSlotsJSONData();
             Dictionary<string, SlotData> updatedSlots = regenerateSlots(
                 newSlots.ToDictionary(b => b.Name, b => b),
                 oldSlots.ToDictionary(b => b.Name, b => b)
@@ -252,7 +252,7 @@ namespace PlumJsonAnimator.Services
         public ValidResult regenerateSkins(List<SkinData> skins)
         {
             List<SkinData> newSkins = skins;
-            List<SkinData> oldSkins = this.globalState.currentProject!.generateSkinsJSONData();
+            List<SkinData> oldSkins = this.globalState.CurrentProject!.generateSkinsJSONData();
             Dictionary<string, SkinData> updatedSkins = regenerateSkins(
                 newSkins.ToDictionary(b => b.Name, b => b),
                 oldSkins.ToDictionary(b => b.Name, b => b)
@@ -283,7 +283,7 @@ namespace PlumJsonAnimator.Services
         {
             Dictionary<string, AnimationData> newAnimations = animations;
             Dictionary<string, AnimationData> oldAnimations =
-                this.globalState.currentProject!.generateAnimationsJSONData();
+                this.globalState.CurrentProject!.generateAnimationsJSONData();
             Dictionary<string, AnimationData> updatedAnimations = regenerateAnimations(
                 newAnimations,
                 oldAnimations
@@ -335,7 +335,7 @@ namespace PlumJsonAnimator.Services
                 return new ProjectValidResult { Message = animationResult.Message, IsOk = false };
             }
 
-            this.globalState.currentProject?.regenerateProject(
+            this.globalState.CurrentProject?.regenerateProject(
                 (Dictionary<string, BoneData>)boneResult.UpdatedArray,
                 (Dictionary<string, SlotData>)slotResult.UpdatedArray,
                 (Dictionary<string, SkinData>)skinResult.UpdatedArray,

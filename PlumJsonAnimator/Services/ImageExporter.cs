@@ -65,9 +65,9 @@ namespace PlumJsonAnimator.Services
         {
             if (Directory.Exists(outputFolder))
             {
-                this.globalState.currentProject!.CurrentAnimation!.currentTime = start;
+                this.globalState.CurrentProject!.CurrentAnimation!.currentTime = start;
                 double endTime = Math.Min(
-                    this.globalState.currentProject.CurrentAnimation.MaxTime(),
+                    this.globalState.CurrentProject.CurrentAnimation.MaxTime(),
                     end
                 );
 
@@ -79,7 +79,7 @@ namespace PlumJsonAnimator.Services
                 var captureMode = this.globalState.captureMode;
                 this.globalState.drawBones = false;
                 this.globalState.captureMode = false;
-                while (this.globalState.currentProject.CurrentAnimation.currentTime <= endTime)
+                while (this.globalState.CurrentProject.CurrentAnimation.currentTime <= endTime)
                 {
                     using (RenderTargetBitmap bitmap = CatchCanvas(canvas))
                     {
@@ -95,7 +95,7 @@ namespace PlumJsonAnimator.Services
                     var percent = (int)((double)frameCount / totalFrames * 100);
                     ProgressChanged?.Invoke(this, percent);
 
-                    this.globalState.currentProject.CurrentAnimation.step();
+                    this.globalState.CurrentProject.CurrentAnimation.step();
                     canvas!.InvalidateVisual();
                     await Task.Delay(30);
                     i++;
@@ -115,9 +115,9 @@ namespace PlumJsonAnimator.Services
         {
             if (Directory.Exists(outputFolder))
             {
-                this.globalState.currentProject!.CurrentAnimation!.currentTime = start;
+                this.globalState.CurrentProject!.CurrentAnimation!.currentTime = start;
                 double endTime = Math.Min(
-                    this.globalState.currentProject.CurrentAnimation.MaxTime(),
+                    this.globalState.CurrentProject.CurrentAnimation.MaxTime(),
                     end
                 );
 
@@ -129,7 +129,7 @@ namespace PlumJsonAnimator.Services
                 var captureMode = this.globalState.captureMode;
                 this.globalState.drawBones = false;
                 this.globalState.captureMode = false;
-                while (this.globalState.currentProject.CurrentAnimation.currentTime <= endTime)
+                while (this.globalState.CurrentProject.CurrentAnimation.currentTime <= endTime)
                 {
                     using (RenderTargetBitmap bitmap = CatchCanvas(canvas))
                     {
@@ -145,7 +145,7 @@ namespace PlumJsonAnimator.Services
                     var percent = (int)((double)frameCount / totalFrames * 100);
                     ProgressChanged?.Invoke(this, percent);
 
-                    this.globalState.currentProject.CurrentAnimation.step();
+                    this.globalState.CurrentProject.CurrentAnimation.step();
                     canvas!.InvalidateVisual();
                     await Task.Delay(30);
                     i++;
@@ -170,9 +170,9 @@ namespace PlumJsonAnimator.Services
 
             if (File.Exists(outputFile))
             {
-                this.globalState.currentProject!.CurrentAnimation!.currentTime = start;
+                this.globalState.CurrentProject!.CurrentAnimation!.currentTime = start;
                 double endTime = Math.Min(
-                    this.globalState.currentProject.CurrentAnimation.MaxTime(),
+                    this.globalState.CurrentProject.CurrentAnimation.MaxTime(),
                     end
                 );
 
@@ -184,7 +184,7 @@ namespace PlumJsonAnimator.Services
                 this.globalState.drawBones = false;
                 this.globalState.captureMode = false;
                 List<Image<Rgba32>> frames = new List<Image<Rgba32>>();
-                while (this.globalState.currentProject.CurrentAnimation.currentTime <= endTime)
+                while (this.globalState.CurrentProject.CurrentAnimation.currentTime <= endTime)
                 {
                     canvas!.InvalidateVisual();
                     canvas.UpdateLayout();
@@ -208,7 +208,7 @@ namespace PlumJsonAnimator.Services
                         }
                     }
 
-                    this.globalState.currentProject.CurrentAnimation.step();
+                    this.globalState.CurrentProject.CurrentAnimation.step();
                     canvas!.InvalidateVisual();
                     await Task.Delay(30);
                 }
@@ -327,9 +327,9 @@ namespace PlumJsonAnimator.Services
                 this.globalState.captureMode = false;
                 using (var stdin = process.StandardInput.BaseStream)
                 {
-                    this.globalState.currentProject!.CurrentAnimation!.currentTime = start;
+                    this.globalState.CurrentProject!.CurrentAnimation!.currentTime = start;
                     double endTime = Math.Min(
-                        this.globalState.currentProject.CurrentAnimation.MaxTime(),
+                        this.globalState.CurrentProject.CurrentAnimation.MaxTime(),
                         end
                     );
 
@@ -338,7 +338,7 @@ namespace PlumJsonAnimator.Services
 
                     var totalFrames = (int)((endTime - start) * this.globalState.FPS) + 1;
 
-                    while (this.globalState.currentProject.CurrentAnimation.currentTime <= endTime)
+                    while (this.globalState.CurrentProject.CurrentAnimation.currentTime <= endTime)
                     {
                         using (RenderTargetBitmap bitmap = CatchCanvas(canvas))
                         {
@@ -388,7 +388,7 @@ namespace PlumJsonAnimator.Services
                             }
                         }
 
-                        this.globalState.currentProject.CurrentAnimation.step();
+                        this.globalState.CurrentProject.CurrentAnimation.step();
                         canvas!.InvalidateVisual();
                         await Task.Delay(30);
                     }

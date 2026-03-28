@@ -11,7 +11,7 @@ namespace PlumJsonAnimator.Views
             InitializeComponent();
         }
 
-        public SettingsView(MainWindowViewModel viewModel)
+        public SettingsView(ViewModelBase viewModel)
             : this()
         {
             DataContext = viewModel;
@@ -19,7 +19,7 @@ namespace PlumJsonAnimator.Views
 
         private void ShowProjectSettings(object sender, RoutedEventArgs e)
         {
-            if (DataContext is MainWindowViewModel viewModel)
+            if (DataContext is SpinejsonSettingsViewModel viewModel)
             {
                 SettingsContentControl.Content = new ProjectSettingsPanel(viewModel);
             }
@@ -27,7 +27,7 @@ namespace PlumJsonAnimator.Views
 
         private void ShowSpinejsonSettings(object sender, RoutedEventArgs e)
         {
-            if (DataContext is MainWindowViewModel viewModel)
+            if (DataContext is SpinejsonSettingsViewModel viewModel)
             {
                 SettingsContentControl.Content = new SpinejsonSettingsPanel(viewModel);
             }

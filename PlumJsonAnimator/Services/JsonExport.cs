@@ -21,7 +21,7 @@ namespace PlumJsonAnimator.Services
         public ExportResult exportSpineJson(string outFolder)
         {
             string output = JsonConvert.SerializeObject(
-                this.jsonCode.generateJSONData(this.globalState.currentProject),
+                this.jsonCode.generateJSONData(this.globalState.CurrentProject),
                 this.globalState.jsonSettings
             );
 
@@ -29,7 +29,7 @@ namespace PlumJsonAnimator.Services
             {
                 var filePath = Path.Combine(
                     outFolder,
-                    $"{this.globalState.currentProject.Name}.json"
+                    $"{this.globalState.CurrentProject.Name}.json"
                 );
                 if (!File.Exists(filePath))
                 {
@@ -50,7 +50,7 @@ namespace PlumJsonAnimator.Services
                 string result = this.jsonValidator.validate(text);
                 if (result == "JSON is valid")
                 {
-                    this.globalState.currentProject!.Code = text;
+                    this.globalState.CurrentProject!.Code = text;
                     return ExportResult.SUCCESS;
                 }
                 else

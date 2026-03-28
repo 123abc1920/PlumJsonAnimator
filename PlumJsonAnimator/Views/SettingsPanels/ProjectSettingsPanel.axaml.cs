@@ -1,8 +1,6 @@
-using System.IO;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
-using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
 
@@ -15,7 +13,7 @@ namespace PlumJsonAnimator.Views
             InitializeComponent();
         }
 
-        public ProjectSettingsPanel(MainWindowViewModel viewModel)
+        public ProjectSettingsPanel(SpinejsonSettingsViewModel viewModel)
             : this()
         {
             DataContext = viewModel;
@@ -23,7 +21,7 @@ namespace PlumJsonAnimator.Views
 
         private void SaveSettings(object sender, RoutedEventArgs e)
         {
-            if (DataContext is MainWindowViewModel viewModel)
+            if (DataContext is SpinejsonSettingsViewModel viewModel)
             {
                 SettingsData settingsData = new SettingsData()
                 {

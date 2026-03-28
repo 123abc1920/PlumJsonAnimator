@@ -16,12 +16,14 @@ namespace PlumJsonAnimator.Views
             InitializeComponent();
         }
 
-        public ExportPanelGIF(MainWindowViewModel viewModel)
+        public ExportPanelGIF(ViewModelBase viewModel)
             : this()
         {
             DataContext = viewModel;
 
-            this.FindControl<TextBox>("path").Text = viewModel.ExportPath;
+            var vm = (ExportPanelGIFViewModel)viewModel;
+
+            this.FindControl<TextBox>("path").Text = vm.ExportPath;
             this.FindControl<TextBox>("pName").Text = viewModel.CurrentProject!.Name;
             this.FindControl<TextBox>("start").Text = "0";
             this.FindControl<TextBox>("end").Text = viewModel
@@ -31,32 +33,6 @@ namespace PlumJsonAnimator.Views
 
         private async void SelectFolder(object sender, RoutedEventArgs e)
         {
-            /*var topLevel = TopLevel.GetTopLevel(this);
-            var storageProvider = topLevel.StorageProvider;
-            var fileTypeFilter = new FilePickerFileType[]
-            {
-                new("*.gif") { Patterns = new[] { "*.gif" } },
-            };
-
-            var result = await storageProvider.OpenFilePickerAsync(
-                new FilePickerOpenOptions
-                {
-                    Title = "Выберите файл gif",
-                    AllowMultiple = false,
-                    FileTypeFilter = fileTypeFilter,
-                }
-            );
-
-            var filePath = result?.FirstOrDefault()?.Path.LocalPath;
-
-            if (filePath != null && filePath != "")
-            {
-                if (DataContext is MainWindowViewModel viewModel)
-                {
-                    ImageExporter.ExportPath = filePath;
-                    this.FindControl<TextBox>("path").Text = ImageExporter.ExportPath;
-                }
-            }*/
             var topLevel = TopLevel.GetTopLevel(this);
             var storageProvider = topLevel.StorageProvider;
             var folder = await storageProvider.OpenFolderPickerAsync(
@@ -65,7 +41,7 @@ namespace PlumJsonAnimator.Views
 
             if (folder.Count > 0)
             {
-                if (DataContext is MainWindowViewModel viewModel)
+                if (DataContext is ExportPanelGIFViewModel viewModel)
                 {
                     viewModel.ExportPath = folder[0].Path.LocalPath;
                     this.FindControl<TextBox>("path").Text = folder[0].Path.LocalPath;
@@ -75,7 +51,7 @@ namespace PlumJsonAnimator.Views
 
         private async void ExportAsGif(object sender, RoutedEventArgs e)
         {
-            if (DataContext is MainWindowViewModel viewModel)
+            if (DataContext is ExportPanelGIFViewModel viewModel)
             {
                 var startTextBox = this.FindControl<TextBox>("start");
                 var endTextBox = this.FindControl<TextBox>("end");

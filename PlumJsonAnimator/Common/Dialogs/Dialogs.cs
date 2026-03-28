@@ -33,7 +33,7 @@ namespace PlumJsonAnimator.Common.Dialogs
             }
         }
 
-        private static List<DialogSize> sizes = new List<DialogSize>
+        private List<DialogSize> sizes = new List<DialogSize>
         {
             new DialogSize(600, 400),
             new DialogSize(600, 400),
@@ -44,10 +44,7 @@ namespace PlumJsonAnimator.Common.Dialogs
             new DialogSize(600, 400),
         };
 
-        private static UserControl userControlFactory(
-            ViewType viewType,
-            MainWindowViewModel viewModel
-        )
+        private UserControl userControlFactory(ViewType viewType, ViewModelBase viewModel)
         {
             if (viewType == ViewType.SETTINGS)
             {
@@ -80,9 +77,9 @@ namespace PlumJsonAnimator.Common.Dialogs
             return new SettingsView(viewModel);
         }
 
-        public static async void ShowDialog(
+        public async void ShowDialog(
             string title,
-            MainWindowViewModel viewModel,
+            ViewModelBase viewModel,
             Window owner,
             ViewType viewType
         )
@@ -104,13 +101,9 @@ namespace PlumJsonAnimator.Common.Dialogs
             await window.ShowDialog(owner);
         }
 
-        public static Window mainWin;
+        public Window mainWin;
 
-        public static async void ShowDialog(
-            string title,
-            MainWindowViewModel viewModel,
-            ViewType viewType
-        )
+        public async void ShowDialog(string title, ViewModelBase viewModel, ViewType viewType)
         {
             DialogSize size = sizes[(int)viewType];
 

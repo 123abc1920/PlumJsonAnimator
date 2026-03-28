@@ -3,13 +3,28 @@ using System.Threading.Tasks;
 using Avalonia.Media;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Models;
+using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 
 namespace PlumJsonAnimator.Common.Constants
 {
-    public class GlobalState
+    public class GlobalState : INotifyable
     {
-        public Project? currentProject = null;
+        private Project? _currentProject;
+
+        public Project? CurrentProject
+        {
+            get => _currentProject;
+            set
+            {
+                if (_currentProject != value)
+                {
+                    _currentProject = value;
+                    OnPropertyChanged(nameof(CurrentProject));
+                }
+            }
+        }
+
         public JsonError jsonError = new JsonError();
         public JsonSerializerSettings jsonSettings = new JsonSerializerSettings
         {
@@ -24,6 +39,8 @@ namespace PlumJsonAnimator.Common.Constants
         {
             TimeUpdated?.Invoke();
         }
+
+        public Dialogs.Dialogs dialogs;
 
         public Bone? currentBone = null;
         public string theme = "light";
@@ -81,6 +98,11 @@ namespace PlumJsonAnimator.Common.Constants
                 }
             }
             return false;
+        }
+
+        public GlobalState(Dialogs.Dialogs dialogs)
+        {
+            this.dialogs = dialogs;
         }
     }
 }

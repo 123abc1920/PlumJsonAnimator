@@ -56,7 +56,7 @@ namespace PlumJsonAnimator.Models.Resources
                 this.projectManager.RenameFile(
                     path,
                     Path.Combine(
-                        this.globalState.currentProject!.GetProjectPath(),
+                        this.globalState.CurrentProject!.GetProjectPath(),
                         "res",
                         $"{this.Name}{ext}"
                     )

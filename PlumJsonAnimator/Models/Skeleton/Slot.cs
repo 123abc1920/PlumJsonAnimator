@@ -81,7 +81,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public void UpdateAttachment()
         {
-            CurrentAttachment = this.globalState.currentProject!.CurrentSkin.GetAttachment(this);
+            CurrentAttachment = this.globalState.CurrentProject!.CurrentSkin.GetAttachment(this);
 
             if (CurrentAttachment != null)
             {
@@ -111,7 +111,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 _currentDrawOrderOffset = value;
                 if (!_isUpdatingFromCode)
                 {
-                    double currTime = this.globalState.currentProject.CurrentAnimation.currentTime;
+                    double currTime = this.globalState.CurrentProject.CurrentAnimation.currentTime;
                     if (drawOrders.Keys.Contains(currTime))
                     {
                         drawOrders[currTime].Offset = value;
@@ -130,7 +130,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public void UpdateDrawOrderOffset()
         {
-            double currTime = this.globalState.currentProject.CurrentAnimation.currentTime;
+            double currTime = this.globalState.CurrentProject.CurrentAnimation.currentTime;
 
             double? foundKey = null;
             foreach (var key in drawOrders.Keys)
@@ -263,14 +263,14 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public void drawSlot(Canvas canvas)
         {
-            if (!this.globalState.currentProject!.CurrentSkin.isSlotDrawable(this))
+            if (!this.globalState.CurrentProject!.CurrentSkin.isSlotDrawable(this))
             {
                 return;
             }
 
             try
             {
-                string currentPath = this.globalState.currentProject.CurrentSkin.GetImagePath(this);
+                string currentPath = this.globalState.CurrentProject.CurrentSkin.GetImagePath(this);
 
                 if (_cachedBitmap == null || _cachedPath != currentPath)
                 {

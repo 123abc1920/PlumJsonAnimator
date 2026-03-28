@@ -20,21 +20,21 @@ namespace PlumJsonAnimator.Services
 
         private void AnimStep(object? sender, EventArgs e)
         {
-            this.globalState.currentProject.CurrentAnimation.step();
+            this.globalState.CurrentProject.CurrentAnimation.step();
             this.globalState.OnTimeUpdated();
         }
 
         public void runAnimation()
         {
-            if (this.globalState.currentProject.CurrentAnimation.IsRun)
+            if (this.globalState.CurrentProject.CurrentAnimation.IsRun)
             {
                 this._animationLoop.Stop();
-                this.globalState.currentProject.CurrentAnimation.IsRun = false;
+                this.globalState.CurrentProject.CurrentAnimation.IsRun = false;
             }
             else
             {
                 this._animationLoop.Start();
-                this.globalState.currentProject.CurrentAnimation.IsRun = true;
+                this.globalState.CurrentProject.CurrentAnimation.IsRun = true;
             }
         }
     }

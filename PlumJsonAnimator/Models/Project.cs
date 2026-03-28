@@ -423,7 +423,7 @@ namespace PlumJsonAnimator.Models
                             {
                                 foreach (DrawOrderOffset drawOrderOffset in item.Offsets)
                                 {
-                                    Slot s = this.globalState.currentProject!.GetSlot(
+                                    Slot s = this.globalState.CurrentProject!.GetSlot(
                                         drawOrderOffset.Slot
                                     );
                                     if (s != null)
@@ -479,7 +479,7 @@ namespace PlumJsonAnimator.Models
                 {
                     foreach (DrawOrderOffset drawOrderOffset in item.Offsets)
                     {
-                        Slot s = this.globalState.currentProject!.GetSlot(drawOrderOffset.Slot);
+                        Slot s = this.globalState.CurrentProject!.GetSlot(drawOrderOffset.Slot);
                         if (s != null)
                         {
                             if (s.drawOrders.ContainsKey((double)item.Time))

@@ -51,9 +51,9 @@ public partial class MainWindow : SukiWindow
         {
             viewModel.Canvas = mainCanvas;
             viewModel.Timeline = Timeline;
+            viewModel.SetMainWin(this);
         }
 
-        Dialogs.mainWin = this;
         Popups.win = this;
     }
 
@@ -322,9 +322,8 @@ public partial class MainWindow : SukiWindow
     {
         if (DataContext is MainWindowViewModel viewModel)
         {
-            Dialogs.ShowDialog(
+            viewModel.ShowDialog(
                 viewModel.GetMessage(LocalizationConsts.SETTINGS),
-                viewModel,
                 this,
                 ViewType.SETTINGS
             );
@@ -343,9 +342,8 @@ public partial class MainWindow : SukiWindow
     {
         if (DataContext is MainWindowViewModel viewModel)
         {
-            Dialogs.ShowDialog(
+            viewModel.ShowDialog(
                 viewModel.GetMessage(LocalizationConsts.NEW_PROJECT),
-                viewModel,
                 this,
                 ViewType.NEWPROJECT
             );
@@ -490,9 +488,8 @@ public partial class MainWindow : SukiWindow
     {
         if (DataContext is MainWindowViewModel viewModel)
         {
-            Dialogs.ShowDialog(
+            viewModel.ShowDialog(
                 viewModel.GetMessage(LocalizationConsts.EXPORT_AS_PNG),
-                viewModel,
                 this,
                 ViewType.EXPORT_PNG
             );
@@ -503,9 +500,8 @@ public partial class MainWindow : SukiWindow
     {
         if (DataContext is MainWindowViewModel viewModel)
         {
-            Dialogs.ShowDialog(
+            viewModel.ShowDialog(
                 viewModel.GetMessage(LocalizationConsts.EXPORT_AS_JPG),
-                viewModel,
                 this,
                 ViewType.EXPORT_JPG
             );
@@ -516,9 +512,8 @@ public partial class MainWindow : SukiWindow
     {
         if (DataContext is MainWindowViewModel viewModel)
         {
-            Dialogs.ShowDialog(
+            viewModel.ShowDialog(
                 viewModel.GetMessage(LocalizationConsts.EXPORT_AS_GIF),
-                viewModel,
                 this,
                 ViewType.EXPORT_GIF
             );
@@ -529,9 +524,8 @@ public partial class MainWindow : SukiWindow
     {
         if (DataContext is MainWindowViewModel viewModel)
         {
-            Dialogs.ShowDialog(
+            viewModel.ShowDialog(
                 viewModel.GetMessage(LocalizationConsts.EXPORT_AS_MP4),
-                viewModel,
                 this,
                 ViewType.EXPORT_MP4
             );

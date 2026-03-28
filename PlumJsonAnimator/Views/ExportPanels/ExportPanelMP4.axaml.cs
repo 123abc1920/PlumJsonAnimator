@@ -16,12 +16,14 @@ namespace PlumJsonAnimator.Views
             InitializeComponent();
         }
 
-        public ExportPanelMP4(MainWindowViewModel viewModel)
+        public ExportPanelMP4(ViewModelBase viewModel)
             : this()
         {
             DataContext = viewModel;
 
-            this.FindControl<TextBox>("path").Text = viewModel.ExportPath;
+            var vm = (ExportPanelMP4ViewModel)viewModel;
+
+            this.FindControl<TextBox>("path").Text = vm.ExportPath;
             this.FindControl<TextBox>("pName").Text = viewModel.CurrentProject!.Name;
             this.FindControl<TextBox>("start").Text = "0";
             this.FindControl<TextBox>("end").Text = viewModel
@@ -51,7 +53,7 @@ namespace PlumJsonAnimator.Views
 
             if (filePath != null && filePath != "")
             {
-                if (DataContext is MainWindowViewModel viewModel)
+                if (DataContext is ExportPanelMP4ViewModel viewModel)
                 {
                     viewModel.FfmpegPath = filePath;
                 }
@@ -68,7 +70,7 @@ namespace PlumJsonAnimator.Views
 
             if (folder.Count > 0)
             {
-                if (DataContext is MainWindowViewModel viewModel)
+                if (DataContext is ExportPanelMP4ViewModel viewModel)
                 {
                     viewModel.ExportPath = folder[0].Path.LocalPath;
                     this.FindControl<TextBox>("path").Text = viewModel.ExportPath;
@@ -78,7 +80,7 @@ namespace PlumJsonAnimator.Views
 
         private async void ExportAsMp4(object sender, RoutedEventArgs e)
         {
-            if (DataContext is MainWindowViewModel viewModel)
+            if (DataContext is ExportPanelMP4ViewModel viewModel)
             {
                 var startTextBox = this.FindControl<TextBox>("start");
                 var endTextBox = this.FindControl<TextBox>("end");
