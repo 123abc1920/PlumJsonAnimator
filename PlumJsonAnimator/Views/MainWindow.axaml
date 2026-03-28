@@ -30,6 +30,7 @@
     <Window.Resources>
         <converters:DoubleConverter x:Key="DoubleConverter" />
         <converters:AnimationConverter x:Key="AnimationConverter" />
+        <converters:StringToBoolConverter x:Key="StringToBoolConverter" />
     </Window.Resources>
 
     <Design.DataContext>
@@ -331,7 +332,6 @@
                                                 Click="EditCaptureMode"
                                                 Content="{DynamicResource capture_mode}"
                                                 IsChecked="{Binding CaptureMode}" />
-                                            <TextBlock HorizontalAlignment="Right" Text="{Binding ModeName}" />
                                             <Button
                                                 Width="32"
                                                 Height="32"
@@ -358,16 +358,19 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Bottom"
                                         Orientation="Horizontal">
-                                        <Button
+
+                                        <ToggleButton
                                             Width="32"
                                             Height="32"
                                             Padding="0"
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"
-                                            Command="{Binding SetTransformMode}"
-                                            CommandParameter="transform">
+                                            Command="{Binding ToggleTransformModeCommand}"
+                                            CommandParameter="transform"
+                                            IsChecked="{Binding IsTransformModeActive, Converter={StaticResource StringToBoolConverter}, ConverterParameter='transform', Mode=OneWay}">
                                             <iconPacks:PackIconBootstrapIcons Kind="ArrowsMove" />
-                                        </Button>
+                                        </ToggleButton>
+
                                         <TextBox
                                             x:Name="transformX"
                                             Text="{Binding CurrentBone.x, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
@@ -376,30 +379,36 @@
                                             x:Name="transformY"
                                             Text="{Binding CurrentBone.y, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
                                             Watermark="Y" />
-                                        <Button
+
+                                        <ToggleButton
                                             Width="32"
                                             Height="32"
                                             Padding="0"
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"
-                                            Command="{Binding SetTransformMode}"
-                                            CommandParameter="rotate">
+                                            Command="{Binding ToggleTransformModeCommand}"
+                                            CommandParameter="rotate"
+                                            IsChecked="{Binding IsTransformModeActive, Converter={StaticResource StringToBoolConverter}, ConverterParameter='rotate', Mode=OneWay}">
                                             <iconPacks:PackIconBootstrapIcons Kind="ArrowClockwise" />
-                                        </Button>
+                                        </ToggleButton>
+
                                         <TextBox
                                             x:Name="rotate"
                                             Text="{Binding CurrentBone.a, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
                                             Watermark="A" />
-                                        <Button
+
+                                        <ToggleButton
                                             Width="32"
                                             Height="32"
                                             Padding="0"
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"
-                                            Command="{Binding SetTransformMode}"
-                                            CommandParameter="scale">
+                                            Command="{Binding ToggleTransformModeCommand}"
+                                            CommandParameter="scale"
+                                            IsChecked="{Binding IsTransformModeActive, Converter={StaticResource StringToBoolConverter}, ConverterParameter='scale', Mode=OneWay}">
                                             <iconPacks:PackIconBootstrapIcons Kind="ZoomIn" />
-                                        </Button>
+                                        </ToggleButton>
+
                                         <TextBox
                                             x:Name="scaleX"
                                             Text="{Binding CurrentBone.LengthX, Mode=TwoWay}"

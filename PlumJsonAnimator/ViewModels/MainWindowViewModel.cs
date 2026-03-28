@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Avalonia.Controls;
@@ -198,19 +199,41 @@ public partial class MainWindowViewModel : ViewModelBase
             }
         }
     }
-    public string _modeName = "";
-    public string ModeName
+
+    private string _transformMode;
+    public string TransformMode
     {
-        get => _modeName;
+        get => _transformMode;
         set
         {
-            if (_modeName != value)
+            if (_transformMode != value)
             {
-                _modeName = value;
-                OnPropertyChanged(nameof(ModeName));
+                _transformMode = value;
+
+                if (value == "transform")
+                {
+                    CurrentProject!.currentMode = new TransformMode(this.globalState);
+                }
+                else if (value == "rotate")
+                {
+                    CurrentProject!.currentMode = new RotateMode(this.globalState);
+                }
+                else if (value == "scale")
+                {
+                    CurrentProject!.currentMode = new ScaleMode(this.globalState);
+                }
+                else
+                {
+                    CurrentProject!.currentMode = new NoMode(this.globalState);
+                }
+
+                OnPropertyChanged(nameof(TransformMode));
+                OnPropertyChanged(nameof(IsTransformModeActive));
             }
         }
     }
+
+    public string IsTransformModeActive => TransformMode;
 
     public Bone? CurrentBone
     {
@@ -531,6 +554,7 @@ public partial class MainWindowViewModel : ViewModelBase
     public ICommand DeleteKeyFrame { get; }
     public ICommand PlayAnim { get; }
     public ICommand ZoomCanvasComm { get; }
+    public ICommand ToggleTransformModeCommand { get; }
 
     private AppSettings appSettings;
     private ProjectSettings projectSettings;
@@ -586,6 +610,21 @@ public partial class MainWindowViewModel : ViewModelBase
             }
             OnPropertyChanged(nameof(CurrentTime));
         };
+
+        ToggleTransformModeCommand = new Command.Command(parameter =>
+        {
+            if (parameter is string mode)
+            {
+                if (TransformMode == mode)
+                {
+                    TransformMode = null;
+                }
+                else
+                {
+                    TransformMode = mode;
+                }
+            }
+        });
 
         AddBoneView = new Command.Command(parameter =>
         {
@@ -654,35 +693,6 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             Bone bone = CurrentBone;
             DeleteBoneReqursion(bone);
-        });
-        SetTransformMode = new Command.Command(parameter =>
-        {
-            if (parameter is string modeType)
-            {
-                if (modeType == "transform")
-                {
-                    CurrentProject.currentMode = this.transformModeFactory.createMode(
-                        CurrentProject.currentMode,
-                        TransformModesTypes.TRANSLATE
-                    );
-                }
-                if (modeType == "rotate")
-                {
-                    CurrentProject.currentMode = this.transformModeFactory.createMode(
-                        CurrentProject.currentMode,
-                        TransformModesTypes.ROTATE
-                    );
-                }
-                if (modeType == "scale")
-                {
-                    CurrentProject.currentMode = this.transformModeFactory.createMode(
-                        CurrentProject.currentMode,
-                        TransformModesTypes.SCALE
-                    );
-                }
-
-                ModeName = CurrentProject.currentMode.name;
-            }
         });
         AddAnimation = new Command.Command(_ =>
         {
