@@ -40,13 +40,19 @@ namespace PlumJsonAnimator.Services
         }
     }
 }";*/
+        private LocalizationService localizationService;
+
+        public JsonValidator(LocalizationService localizationService)
+        {
+            this.localizationService = localizationService;
+        }
 
         public string validate(String text)
         {
             try
             {
                 JToken.Parse(text);
-                return "JSON is valid";
+                return this.localizationService.GetMessage(LocalizationConsts.JSON_VALID);
             }
             catch (JsonReaderException ex)
             {
@@ -63,19 +69,19 @@ namespace PlumJsonAnimator.Services
         {
             if (json == "" || json == null)
             {
-                return $"Ошибка: {errorMessage}";
+                return $"{this.localizationService.GetMessage(LocalizationConsts.ERROR)}: {errorMessage}";
             }
 
             var lines = json.Split('\n');
 
             if (errorLine > lines.Length)
             {
-                return $"Ошибка: {errorMessage}";
+                return $"{this.localizationService.GetMessage(LocalizationConsts.ERROR)}: {errorMessage}";
             }
 
             if (lines.Length <= errorLine - 1)
             {
-                return $"Ошибка: {errorMessage}";
+                return $"{this.localizationService.GetMessage(LocalizationConsts.ERROR)}: {errorMessage}";
             }
 
             string errorLineText = lines[errorLine - 1];
@@ -93,9 +99,9 @@ namespace PlumJsonAnimator.Services
             if (errorLine < lines.Length)
                 context += $"{errorLine + 1}: {lines[errorLine]}\n";
 
-            return $"Ошибка на строке {errorLine}, позиция {errorPos}:\n"
+            return $"{this.localizationService.GetMessage(LocalizationConsts.JSON_ERROR_STR)} {errorLine}, {this.localizationService.GetMessage(LocalizationConsts.JSON_ERROR_POS)} {errorPos}:\n"
                 + $"{errorMessage}\n\n"
-                + $"Контекст:\n{context}";
+                + $"{this.localizationService.GetMessage(LocalizationConsts.JSON_CONTEXT)}:\n{context}";
         }
     }
 }

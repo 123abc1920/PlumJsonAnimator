@@ -54,5 +54,10 @@
     "input_folder": "Enter a folder name!",
     "folder_not_exist": "Folder not found!",
     "ffmpeg_not_exist": "Ffmpeg.exe not found",
-    "input_ffmpeg": "Enter the path to ffmpeg.exe"
+    "input_ffmpeg": "Enter the path to ffmpeg.exe",
+    "error": "Error",
+    "json_valid": "JSON is valid",
+    "json_error_str": "Error in the line",
+    "json_error_pos": "position",
+    "json_context": "Context"
 }

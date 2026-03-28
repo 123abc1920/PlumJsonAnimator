@@ -128,6 +128,11 @@ namespace PlumJsonAnimator.Services
                 LocalizationConsts.FOLDER_NOT_EXIST => "folder_not_exist",
                 LocalizationConsts.FFMPEG_NOT_EXIST => "ffmpeg_not_exist",
                 LocalizationConsts.INPUT_FFMPEG => "input_ffmpeg",
+                LocalizationConsts.ERROR => "error",
+                LocalizationConsts.JSON_VALID => "json_valid",
+                LocalizationConsts.JSON_ERROR_STR => "json_error_str",
+                LocalizationConsts.JSON_ERROR_POS => "json_error_pos",
+                LocalizationConsts.JSON_CONTEXT => "json_context",
 
                 _ => null,
             };
@@ -158,5 +163,10 @@ namespace PlumJsonAnimator.Services
         FOLDER_NOT_EXIST,
         FFMPEG_NOT_EXIST,
         INPUT_FFMPEG,
+        ERROR,
+        JSON_VALID,
+        JSON_ERROR_STR,
+        JSON_ERROR_POS,
+        JSON_CONTEXT,
     }
 }

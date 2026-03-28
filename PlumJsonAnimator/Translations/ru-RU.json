@@ -54,5 +54,10 @@
     "input_folder": "Введите имя папки!",
     "folder_not_exist": "Папка не найдена!",
     "ffmpeg_not_exist": "Ffmpeg.exe не найден",
-    "input_ffmpeg": "Введите путь к ffmpeg.exe"
+    "input_ffmpeg": "Введите путь к ffmpeg.exe",
+    "error": "Ошибка",
+    "json_valid": "JSON правилен",
+    "json_error_str": "Ошибка в строке",
+    "json_error_pos": "позиция",
+    "json_context": "Контекст"
 }
