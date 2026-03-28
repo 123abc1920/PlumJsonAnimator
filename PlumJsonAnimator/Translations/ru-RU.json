@@ -42,5 +42,17 @@
     "mp4_export": "Экспорт в MP4",
     "new": "Новый",
     "open": "Открыть",
-    "json_code": "Json код"
+    "json_code": "Json код",
+    "new_project": "Новый проект",
+    "anim_success": "Анимация успешно экспортирована!",
+    "folder_error": "Невозможно экспортировать в эту папку.",
+    "file_damaged": "Файл поврежден.",
+    "import_success": "Успешно импортировано!",
+    "export_success": "Успешно экспортировано!",
+    "incorrect_time": "Некорректные значения времени",
+    "input_name": "Введите имя!",
+    "input_folder": "Введите имя папки!",
+    "folder_not_exist": "Папка не найдена!",
+    "ffmpeg_not_exist": "Ffmpeg.exe не найден",
+    "input_ffmpeg": "Введите путь к ffmpeg.exe"
 }

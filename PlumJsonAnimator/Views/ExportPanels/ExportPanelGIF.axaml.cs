@@ -4,6 +4,7 @@ using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models;
+using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
 
 namespace PlumJsonAnimator.Views
@@ -74,35 +75,36 @@ namespace PlumJsonAnimator.Views
 
         private async void ExportAsGif(object sender, RoutedEventArgs e)
         {
-            var startTextBox = this.FindControl<TextBox>("start");
-            var endTextBox = this.FindControl<TextBox>("end");
-
-            if (
-                this.FindControl<TextBox>("path").Text == ""
-                || this.FindControl<TextBox>("path").Text == null
-            )
+            if (DataContext is MainWindowViewModel viewModel)
             {
-                Popups.ShowPopup("Введите папку");
-                return;
-            }
+                var startTextBox = this.FindControl<TextBox>("start");
+                var endTextBox = this.FindControl<TextBox>("end");
 
-            if (
-                this.FindControl<TextBox>("pName").Text == ""
-                || this.FindControl<TextBox>("pName").Text == null
-            )
-            {
-                Popups.ShowPopup("Введите имя GIF");
-                return;
-            }
-
-            if (
-                double.TryParse(startTextBox.Text, out double startValue)
-                && double.TryParse(endTextBox.Text, out double endValue)
-            )
-            {
-                ExportResult result = ExportResult.INCORRECT_JSON;
-                if (DataContext is MainWindowViewModel viewModel)
+                if (
+                    this.FindControl<TextBox>("path").Text == ""
+                    || this.FindControl<TextBox>("path").Text == null
+                )
                 {
+                    Popups.ShowPopup(viewModel.GetMessage(LocalizationConsts.INPUT_FOLDER));
+                    return;
+                }
+
+                if (
+                    this.FindControl<TextBox>("pName").Text == ""
+                    || this.FindControl<TextBox>("pName").Text == null
+                )
+                {
+                    Popups.ShowPopup(viewModel.GetMessage(LocalizationConsts.INPUT_NAME));
+                    return;
+                }
+
+                if (
+                    double.TryParse(startTextBox.Text, out double startValue)
+                    && double.TryParse(endTextBox.Text, out double endValue)
+                )
+                {
+                    ExportResult result = ExportResult.INCORRECT_JSON;
+
                     result = await viewModel.ExportAsGif(
                         startValue,
                         endValue,
@@ -111,20 +113,26 @@ namespace PlumJsonAnimator.Views
                             $"{this.FindControl<TextBox>("pName").Text}.gif"
                         )
                     );
-                }
 
-                if (result == ExportResult.SUCCESS)
-                {
-                    Popups.ShowPopup("Успешно экспортировано", this);
+                    if (result == ExportResult.SUCCESS)
+                    {
+                        Popups.ShowPopup(
+                            viewModel.GetMessage(LocalizationConsts.EXPORT_SUCCESS),
+                            this
+                        );
+                    }
+                    else if (result == ExportResult.NO_FOLDER)
+                    {
+                        Popups.ShowPopup(
+                            viewModel.GetMessage(LocalizationConsts.FILE_NOT_EXIST),
+                            this
+                        );
+                    }
                 }
-                else if (result == ExportResult.NO_FOLDER)
+                else
                 {
-                    Popups.ShowPopup("Файл не найдена", this);
+                    Popups.ShowPopup(viewModel.GetMessage(LocalizationConsts.INCORRECT_TIME), this);
                 }
-            }
-            else
-            {
-                Popups.ShowPopup("Неверные значения времени", this);
             }
         }
     }

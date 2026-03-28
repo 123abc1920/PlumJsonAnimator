@@ -4,6 +4,7 @@ using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models;
+using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
 
 namespace PlumJsonAnimator.Views
@@ -77,44 +78,45 @@ namespace PlumJsonAnimator.Views
 
         private async void ExportAsMp4(object sender, RoutedEventArgs e)
         {
-            var startTextBox = this.FindControl<TextBox>("start");
-            var endTextBox = this.FindControl<TextBox>("end");
-
-            if (
-                this.FindControl<TextBox>("ffmpegPath").Text == ""
-                || this.FindControl<TextBox>("ffmpegPath").Text == null
-            )
+            if (DataContext is MainWindowViewModel viewModel)
             {
-                Popups.ShowPopup("Ffmpeg.exe не найден");
-                return;
-            }
+                var startTextBox = this.FindControl<TextBox>("start");
+                var endTextBox = this.FindControl<TextBox>("end");
 
-            if (
-                this.FindControl<TextBox>("path").Text == ""
-                || this.FindControl<TextBox>("path").Text == null
-            )
-            {
-                Popups.ShowPopup("Введите папку");
-                return;
-            }
-
-            if (
-                this.FindControl<TextBox>("pName").Text == ""
-                || this.FindControl<TextBox>("pName").Text == null
-            )
-            {
-                Popups.ShowPopup("Введите имя MP4");
-                return;
-            }
-
-            if (
-                double.TryParse(startTextBox.Text, out double startValue)
-                && double.TryParse(endTextBox.Text, out double endValue)
-            )
-            {
-                ExportResult result = ExportResult.INCORRECT_JSON;
-                if (DataContext is MainWindowViewModel viewModel)
+                if (
+                    this.FindControl<TextBox>("ffmpegPath").Text == ""
+                    || this.FindControl<TextBox>("ffmpegPath").Text == null
+                )
                 {
+                    Popups.ShowPopup(viewModel.GetMessage(LocalizationConsts.INPUT_FFMPEG));
+                    return;
+                }
+
+                if (
+                    this.FindControl<TextBox>("path").Text == ""
+                    || this.FindControl<TextBox>("path").Text == null
+                )
+                {
+                    Popups.ShowPopup(viewModel.GetMessage(LocalizationConsts.INPUT_FOLDER));
+                    return;
+                }
+
+                if (
+                    this.FindControl<TextBox>("pName").Text == ""
+                    || this.FindControl<TextBox>("pName").Text == null
+                )
+                {
+                    Popups.ShowPopup(viewModel.GetMessage(LocalizationConsts.INPUT_NAME));
+                    return;
+                }
+
+                if (
+                    double.TryParse(startTextBox.Text, out double startValue)
+                    && double.TryParse(endTextBox.Text, out double endValue)
+                )
+                {
+                    ExportResult result = ExportResult.INCORRECT_JSON;
+
                     result = await viewModel.ExportAsMp4(
                         startValue,
                         endValue,
@@ -124,24 +126,33 @@ namespace PlumJsonAnimator.Views
                         ),
                         this.FindControl<TextBox>("ffmpegPath").Text
                     );
-                }
 
-                if (result == ExportResult.SUCCESS)
-                {
-                    Popups.ShowPopup("Успешно экспортировано", this);
+                    if (result == ExportResult.SUCCESS)
+                    {
+                        Popups.ShowPopup(
+                            viewModel.GetMessage(LocalizationConsts.EXPORT_SUCCESS),
+                            this
+                        );
+                    }
+                    else if (result == ExportResult.NO_FOLDER)
+                    {
+                        Popups.ShowPopup(
+                            viewModel.GetMessage(LocalizationConsts.FOLDER_NOT_EXIST),
+                            this
+                        );
+                    }
+                    else if (result == ExportResult.NO_FFMPEG)
+                    {
+                        Popups.ShowPopup(
+                            viewModel.GetMessage(LocalizationConsts.FFMPEG_NOT_EXIST),
+                            this
+                        );
+                    }
                 }
-                else if (result == ExportResult.NO_FOLDER)
+                else
                 {
-                    Popups.ShowPopup("Папка не найдена", this);
+                    Popups.ShowPopup(viewModel.GetMessage(LocalizationConsts.INCORRECT_TIME), this);
                 }
-                else if (result == ExportResult.NO_FFMPEG)
-                {
-                    Popups.ShowPopup("Ffmpeg не найден", this);
-                }
-            }
-            else
-            {
-                Popups.ShowPopup("Неверные значения времени", this);
             }
         }
     }

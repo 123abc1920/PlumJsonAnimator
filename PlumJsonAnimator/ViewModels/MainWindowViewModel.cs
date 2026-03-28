@@ -506,6 +506,11 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
+    public string GetMessage(LocalizationConsts constStr)
+    {
+        return this.localizationService.GetMessage(constStr);
+    }
+
     public ICommand AddBoneView { get; }
     public ICommand RenameRes { get; }
     public ICommand DeleteRes { get; }

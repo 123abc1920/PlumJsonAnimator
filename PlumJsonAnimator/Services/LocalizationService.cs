@@ -106,5 +106,58 @@ namespace PlumJsonAnimator.Services
                 LangResources[key] = value;
             }
         }
+
+        public string GetMessage(LocalizationConsts constStr)
+        {
+            var key = constStr switch
+            {
+                LocalizationConsts.EXPORT_AS_GIF => "export_as_gif",
+                LocalizationConsts.EXPORT_AS_MP4 => "export_as_mp4",
+                LocalizationConsts.EXPORT_AS_PNG => "export_as_png",
+                LocalizationConsts.EXPORT_AS_JPG => "export_as_jpg",
+                LocalizationConsts.SETTINGS => "settings",
+                LocalizationConsts.NEW_PROJECT => "new_project",
+                LocalizationConsts.ANIM_SUCCESS => "anim_success",
+                LocalizationConsts.FOLDER_ERROR => "folder_error",
+                LocalizationConsts.FILE_NOT_EXIST => "file_not_exist",
+                LocalizationConsts.FILE_DAMAGED => "file_damaged",
+                LocalizationConsts.IMPORT_SUCCESS => "import_success",
+                LocalizationConsts.EXPORT_SUCCESS => "export_success",
+                LocalizationConsts.INCORRECT_TIME => "incorrect_time",
+                LocalizationConsts.INPUT_NAME => "input_name",
+                LocalizationConsts.INPUT_FOLDER => "input_foler",
+                LocalizationConsts.FOLDER_NOT_EXIST => "folder_not_exist",
+                LocalizationConsts.FFMPEG_NOT_EXIST => "ffmpeg_not_exist",
+                LocalizationConsts.INPUT_FFMPEG => "input_ffmpeg",
+
+                _ => null,
+            };
+
+            return key != null && LangResources.TryGetValue(key, out var value)
+                ? value?.ToString() ?? string.Empty
+                : string.Empty;
+        }
+    }
+
+    public enum LocalizationConsts
+    {
+        EXPORT_AS_GIF,
+        EXPORT_AS_MP4,
+        EXPORT_AS_PNG,
+        EXPORT_AS_JPG,
+        SETTINGS,
+        NEW_PROJECT,
+        ANIM_SUCCESS,
+        FOLDER_ERROR,
+        FILE_NOT_EXIST,
+        FILE_DAMAGED,
+        IMPORT_SUCCESS,
+        EXPORT_SUCCESS,
+        INCORRECT_TIME,
+        INPUT_NAME,
+        INPUT_FOLDER,
+        FOLDER_NOT_EXIST,
+        FFMPEG_NOT_EXIST,
+        INPUT_FFMPEG,
     }
 }

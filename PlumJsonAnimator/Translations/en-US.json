@@ -42,5 +42,17 @@
     "mp4_export": "Export in MP4",
     "new": "New",
     "open": "Open",
-    "json_code": "Json code"
+    "json_code": "Json code",
+    "new_project": "New project",
+    "anim_success": "Animation was exported successfully!",
+    "folder_error": "It is not possible to export to this folder.",
+    "file_damaged": "The file is corrupted.",
+    "import_success": "Imported successfully!",
+    "export_success": "Exported successfully!",
+    "incorrect_time": "Incorrect time values",
+    "input_name": "Enter a name!",
+    "input_folder": "Enter a folder name!",
+    "folder_not_exist": "Folder not found!",
+    "ffmpeg_not_exist": "Ffmpeg.exe not found",
+    "input_ffmpeg": "Enter the path to ffmpeg.exe"
 }

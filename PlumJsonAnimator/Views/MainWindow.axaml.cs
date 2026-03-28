@@ -11,12 +11,12 @@ using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
+using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
 using SukiUI.Controls;
 
 namespace PlumJsonAnimator.Views;
 
-// TODO: localize popups, dialogs, json error
 public partial class MainWindow : SukiWindow
 {
     private Dictionary<char, char> pairedSymbols = new Dictionary<char, char>()
@@ -322,7 +322,12 @@ public partial class MainWindow : SukiWindow
     {
         if (DataContext is MainWindowViewModel viewModel)
         {
-            Dialogs.ShowDialog("Settings", viewModel, this, ViewType.SETTINGS);
+            Dialogs.ShowDialog(
+                viewModel.GetMessage(LocalizationConsts.SETTINGS),
+                viewModel,
+                this,
+                ViewType.SETTINGS
+            );
         }
     }
 
@@ -338,7 +343,12 @@ public partial class MainWindow : SukiWindow
     {
         if (DataContext is MainWindowViewModel viewModel)
         {
-            Dialogs.ShowDialog("New Project", viewModel, this, ViewType.NEWPROJECT);
+            Dialogs.ShowDialog(
+                viewModel.GetMessage(LocalizationConsts.NEW_PROJECT),
+                viewModel,
+                this,
+                ViewType.NEWPROJECT
+            );
         }
     }
 
@@ -420,15 +430,15 @@ public partial class MainWindow : SukiWindow
             if (DataContext is MainWindowViewModel viewModel)
             {
                 result = viewModel.exportSpineJson(folder[0].Path.LocalPath);
-            }
 
-            if (result == ExportResult.SUCCESS)
-            {
-                Popups.ShowPopup("Анимация успешно экспортирована!", this);
-            }
-            else if (result == ExportResult.NO_FOLDER)
-            {
-                Popups.ShowPopup("Невозможно экспортировать в эту папку", this);
+                if (result == ExportResult.SUCCESS)
+                {
+                    Popups.ShowPopup(viewModel.GetMessage(LocalizationConsts.ANIM_SUCCESS), this);
+                }
+                else if (result == ExportResult.NO_FOLDER)
+                {
+                    Popups.ShowPopup(viewModel.GetMessage(LocalizationConsts.FOLDER_ERROR), this);
+                }
             }
         }
     }
@@ -459,19 +469,19 @@ public partial class MainWindow : SukiWindow
             if (DataContext is MainWindowViewModel viewModel)
             {
                 result = viewModel.importSpineJson(path);
-            }
 
-            if (result == ExportResult.SUCCESS)
-            {
-                Popups.ShowPopup("Успешно импортировано!");
-            }
-            else if (result == ExportResult.INCORRECT_JSON)
-            {
-                Popups.ShowPopup("Файл поврежден.");
-            }
-            else if (result == ExportResult.NO_FOLDER)
-            {
-                Popups.ShowPopup("Файл не существует.");
+                if (result == ExportResult.SUCCESS)
+                {
+                    Popups.ShowPopup(viewModel.GetMessage(LocalizationConsts.IMPORT_SUCCESS));
+                }
+                else if (result == ExportResult.INCORRECT_JSON)
+                {
+                    Popups.ShowPopup(viewModel.GetMessage(LocalizationConsts.FILE_DAMAGED));
+                }
+                else if (result == ExportResult.NO_FOLDER)
+                {
+                    Popups.ShowPopup(viewModel.GetMessage(LocalizationConsts.FILE_NOT_EXIST));
+                }
             }
         }
     }
@@ -480,7 +490,12 @@ public partial class MainWindow : SukiWindow
     {
         if (DataContext is MainWindowViewModel viewModel)
         {
-            Dialogs.ShowDialog("Экспорт как PNG", viewModel, this, ViewType.EXPORT_PNG);
+            Dialogs.ShowDialog(
+                viewModel.GetMessage(LocalizationConsts.EXPORT_AS_PNG),
+                viewModel,
+                this,
+                ViewType.EXPORT_PNG
+            );
         }
     }
 
@@ -488,7 +503,12 @@ public partial class MainWindow : SukiWindow
     {
         if (DataContext is MainWindowViewModel viewModel)
         {
-            Dialogs.ShowDialog("Экспорт как JPG", viewModel, this, ViewType.EXPORT_JPG);
+            Dialogs.ShowDialog(
+                viewModel.GetMessage(LocalizationConsts.EXPORT_AS_JPG),
+                viewModel,
+                this,
+                ViewType.EXPORT_JPG
+            );
         }
     }
 
@@ -496,7 +516,12 @@ public partial class MainWindow : SukiWindow
     {
         if (DataContext is MainWindowViewModel viewModel)
         {
-            Dialogs.ShowDialog("Экспорт как GIF", viewModel, this, ViewType.EXPORT_GIF);
+            Dialogs.ShowDialog(
+                viewModel.GetMessage(LocalizationConsts.EXPORT_AS_GIF),
+                viewModel,
+                this,
+                ViewType.EXPORT_GIF
+            );
         }
     }
 
@@ -504,7 +529,12 @@ public partial class MainWindow : SukiWindow
     {
         if (DataContext is MainWindowViewModel viewModel)
         {
-            Dialogs.ShowDialog("Экспорт как MP4", viewModel, this, ViewType.EXPORT_MP4);
+            Dialogs.ShowDialog(
+                viewModel.GetMessage(LocalizationConsts.EXPORT_AS_MP4),
+                viewModel,
+                this,
+                ViewType.EXPORT_MP4
+            );
         }
     }
 
