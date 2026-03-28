@@ -17,7 +17,6 @@ using SixLabors.ImageSharp.PixelFormats;
 
 namespace PlumJsonAnimator.Services
 {
-    // TODO: gif
     public class ImageExporter
     {
         public string ExportPath = "";
@@ -187,6 +186,9 @@ namespace PlumJsonAnimator.Services
                 List<Image<Rgba32>> frames = new List<Image<Rgba32>>();
                 while (this.globalState.currentProject.CurrentAnimation.currentTime <= endTime)
                 {
+                    canvas!.InvalidateVisual();
+                    canvas.UpdateLayout();
+
                     using (RenderTargetBitmap bitmap = CatchCanvas(canvas))
                     {
                         var pixelSize = bitmap.PixelSize;
@@ -215,12 +217,21 @@ namespace PlumJsonAnimator.Services
                 {
                     gif.Metadata.GetGifMetadata().RepeatCount = 0;
 
+                    gif.Frames.RootFrame.Metadata.GetGifMetadata().DisposalMethod =
+                        GifDisposalMethod.RestoreToBackground;
+                    gif.Frames.RootFrame.Metadata.GetGifMetadata().FrameDelay = 5;
+
                     for (int i = 1; i < frames.Count; i++)
                     {
-                        gif.Frames.AddFrame(frames[i].Frames.RootFrame);
+                        var frame = frames[i].Frames.RootFrame;
+                        frame.Metadata.GetGifMetadata().DisposalMethod =
+                            GifDisposalMethod.RestoreToBackground;
+                        frame.Metadata.GetGifMetadata().FrameDelay = 5;
+                        gif.Frames.AddFrame(frame);
                     }
 
-                    gif.Save(outputFile, new GifEncoder());
+                    var encoder = new GifEncoder();
+                    gif.Save(outputFile, encoder);
                 }
 
                 foreach (var frame in frames)
