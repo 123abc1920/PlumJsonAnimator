@@ -1,3 +1,4 @@
+using System.IO;
 using System.Linq;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -33,7 +34,7 @@ namespace PlumJsonAnimator.Views
                 AppSettingsData appSettingsData = new AppSettingsData()
                 {
                     LastDir = "",
-                    Workspace = pathTextBox.Text,
+                    Workspace = Path.Combine(pathTextBox.Text, viewModel.CurrentProject.Name),
                     Lang = viewModel.CurrentLang,
                     Theme = viewModel.CurrentTheme,
                     Ffmpeg = viewModel.FfmpegPath,

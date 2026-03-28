@@ -317,7 +317,10 @@ public partial class MainWindowViewModel : ViewModelBase
         ProjectValidResult validateResult = this.jsonCode.regenerate(CurrentProject);
         if (!validateResult.IsOk)
         {
-            Popups.ShowPopup("Возникли проблемы в json коде, невозможно восстановить проект");
+            Popups.ShowPopup(
+                GetMessage(LocalizationConsts.REGENERATE_ERROR),
+                GetMessage(LocalizationConsts.INFO_MESSAGE)
+            );
         }
 
         this.globalState.captureArea = this.appSettings.CreateCaptureArea(
@@ -520,7 +523,11 @@ public partial class MainWindowViewModel : ViewModelBase
                 if (selectedRes != null)
                 {
                     RedactObj = selectedRes;
-                    this.dialogs.ShowDialog("Rename", this, ViewType.RENAME);
+                    this.dialogs.ShowDialog(
+                        GetMessage(LocalizationConsts.RENAME),
+                        this,
+                        ViewType.RENAME
+                    );
                 }
             }
         });
@@ -548,7 +555,11 @@ public partial class MainWindowViewModel : ViewModelBase
                 if (selectedSlot != null)
                 {
                     RedactObj = selectedSlot;
-                    this.dialogs.ShowDialog("Rename", this, ViewType.RENAME);
+                    this.dialogs.ShowDialog(
+                        GetMessage(LocalizationConsts.RENAME),
+                        this,
+                        ViewType.RENAME
+                    );
                 }
             }
         });
@@ -560,7 +571,11 @@ public partial class MainWindowViewModel : ViewModelBase
                 if (bone != null)
                 {
                     RedactObj = bone;
-                    this.dialogs.ShowDialog("Rename", this, ViewType.RENAME);
+                    this.dialogs.ShowDialog(
+                        GetMessage(LocalizationConsts.RENAME),
+                        this,
+                        ViewType.RENAME
+                    );
                 }
             }
         });
@@ -617,7 +632,10 @@ public partial class MainWindowViewModel : ViewModelBase
                 this.globalState.jsonSettings
             );
             this.projectSettings.WriteAnim(anim);
-            Popups.ShowPopup("Saved");
+            Popups.ShowPopup(
+                GetMessage(LocalizationConsts.SAVED),
+                GetMessage(LocalizationConsts.INFO_MESSAGE)
+            );
         });
 
         PrevKeyFrame = new Command.Command(_ =>

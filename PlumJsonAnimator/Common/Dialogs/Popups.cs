@@ -16,22 +16,11 @@ namespace PlumJsonAnimator.Common.Dialogs
         public static ISukiToastManager ToastManager;
         private const double SHOW_TIME = 3;
 
-        public static void ShowPopup(string message, Control target)
+        public static void ShowPopup(string message, string title)
         {
             ToastManager
                 .CreateToast()
-                .WithTitle("Сообщение")
-                .WithContent(message)
-                .Dismiss()
-                .After(TimeSpan.FromSeconds(SHOW_TIME))
-                .Queue();
-        }
-
-        public static void ShowPopup(string message)
-        {
-            ToastManager
-                .CreateToast()
-                .WithTitle("Сообщение")
+                .WithTitle(title)
                 .WithContent(message)
                 .Dismiss()
                 .After(TimeSpan.FromSeconds(SHOW_TIME))

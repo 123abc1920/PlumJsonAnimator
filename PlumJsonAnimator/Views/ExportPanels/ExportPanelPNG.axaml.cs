@@ -1,3 +1,4 @@
+using System;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
@@ -59,7 +60,10 @@ namespace PlumJsonAnimator.Views
                     || this.FindControl<TextBox>("path").Text == null
                 )
                 {
-                    Popups.ShowPopup(viewModel.GetMessage(LocalizationConsts.INPUT_FOLDER));
+                    Popups.ShowPopup(
+                        viewModel.GetMessage(LocalizationConsts.INPUT_FOLDER),
+                        viewModel.GetMessage(LocalizationConsts.INFO_MESSAGE)
+                    );
                     return;
                 }
 
@@ -80,20 +84,23 @@ namespace PlumJsonAnimator.Views
                     {
                         Popups.ShowPopup(
                             viewModel.GetMessage(LocalizationConsts.EXPORT_SUCCESS),
-                            this
+                            viewModel.GetMessage(LocalizationConsts.INFO_MESSAGE)
                         );
                     }
                     else if (result == ExportResult.NO_FOLDER)
                     {
                         Popups.ShowPopup(
                             viewModel.GetMessage(LocalizationConsts.FOLDER_NOT_EXIST),
-                            this
+                            viewModel.GetMessage(LocalizationConsts.INFO_MESSAGE)
                         );
                     }
                 }
                 else
                 {
-                    Popups.ShowPopup(viewModel.GetMessage(LocalizationConsts.INCORRECT_TIME), this);
+                    Popups.ShowPopup(
+                        viewModel.GetMessage(LocalizationConsts.INCORRECT_TIME),
+                        viewModel.GetMessage(LocalizationConsts.INFO_MESSAGE)
+                    );
                 }
             }
         }

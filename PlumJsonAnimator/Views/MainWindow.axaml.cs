@@ -434,11 +434,17 @@ public partial class MainWindow : SukiWindow
 
                 if (result == ExportResult.SUCCESS)
                 {
-                    Popups.ShowPopup(viewModel.GetMessage(LocalizationConsts.ANIM_SUCCESS), this);
+                    Popups.ShowPopup(
+                        viewModel.GetMessage(LocalizationConsts.ANIM_SUCCESS),
+                        viewModel.GetMessage(LocalizationConsts.INFO_MESSAGE)
+                    );
                 }
                 else if (result == ExportResult.NO_FOLDER)
                 {
-                    Popups.ShowPopup(viewModel.GetMessage(LocalizationConsts.FOLDER_ERROR), this);
+                    Popups.ShowPopup(
+                        viewModel.GetMessage(LocalizationConsts.FOLDER_ERROR),
+                        viewModel.GetMessage(LocalizationConsts.INFO_MESSAGE)
+                    );
                 }
             }
         }
@@ -473,15 +479,24 @@ public partial class MainWindow : SukiWindow
 
                 if (result == ExportResult.SUCCESS)
                 {
-                    Popups.ShowPopup(viewModel.GetMessage(LocalizationConsts.IMPORT_SUCCESS));
+                    Popups.ShowPopup(
+                        viewModel.GetMessage(LocalizationConsts.IMPORT_SUCCESS),
+                        viewModel.GetMessage(LocalizationConsts.INFO_MESSAGE)
+                    );
                 }
                 else if (result == ExportResult.INCORRECT_JSON)
                 {
-                    Popups.ShowPopup(viewModel.GetMessage(LocalizationConsts.FILE_DAMAGED));
+                    Popups.ShowPopup(
+                        viewModel.GetMessage(LocalizationConsts.FILE_DAMAGED),
+                        viewModel.GetMessage(LocalizationConsts.INFO_MESSAGE)
+                    );
                 }
                 else if (result == ExportResult.NO_FOLDER)
                 {
-                    Popups.ShowPopup(viewModel.GetMessage(LocalizationConsts.FILE_NOT_EXIST));
+                    Popups.ShowPopup(
+                        viewModel.GetMessage(LocalizationConsts.FILE_NOT_EXIST),
+                        viewModel.GetMessage(LocalizationConsts.INFO_MESSAGE)
+                    );
                 }
             }
         }

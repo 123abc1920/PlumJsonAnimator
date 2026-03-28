@@ -91,7 +91,10 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
 
         this.localizationService.LoadLangResorce(data.Lang);
 
-        Popups.ShowPopup("Saved");
+        Popups.ShowPopup(
+            GetMessage(LocalizationConsts.SAVED),
+            GetMessage(LocalizationConsts.INFO_MESSAGE)
+        );
     }
 
     protected ViewModelBase(
@@ -174,7 +177,10 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
 
         this.projectSettings.WriteSettings();
 
-        Popups.ShowPopup("Saved");
+        Popups.ShowPopup(
+            GetMessage(LocalizationConsts.SAVED),
+            GetMessage(LocalizationConsts.INFO_MESSAGE)
+        );
     }
 
     public string GetMessage(LocalizationConsts constStr)
