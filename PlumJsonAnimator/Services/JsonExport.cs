@@ -10,12 +10,19 @@ namespace PlumJsonAnimator.Services
         private JsonValidator jsonValidator;
         private JsonCode jsonCode;
         private GlobalState globalState;
+        private LocalizationService localizationService;
 
-        public JsonExport(JsonValidator jsonValidator, JsonCode jsonCode, GlobalState globalState)
+        public JsonExport(
+            JsonValidator jsonValidator,
+            JsonCode jsonCode,
+            GlobalState globalState,
+            LocalizationService localizationService
+        )
         {
             this.jsonValidator = jsonValidator;
             this.jsonCode = jsonCode;
             this.globalState = globalState;
+            this.localizationService = localizationService;
         }
 
         public ExportResult exportSpineJson(string outFolder)
@@ -48,7 +55,7 @@ namespace PlumJsonAnimator.Services
             {
                 string text = File.ReadAllText(inputFile);
                 string result = this.jsonValidator.validate(text);
-                if (result == "JSON is valid")
+                if (result == this.localizationService.GetMessage(LocalizationConsts.JSON_VALID))
                 {
                     this.globalState.CurrentProject!.Code = text;
                     return ExportResult.SUCCESS;

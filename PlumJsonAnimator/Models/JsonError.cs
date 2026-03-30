@@ -1,9 +1,14 @@
 using System.ComponentModel;
+using PlumJsonAnimator.Models.Interfaces;
+using PlumJsonAnimator.Services;
 
+// TODO: should fix json error logic
 namespace PlumJsonAnimator.Models
 {
-    public class JsonError : INotifyPropertyChanged
+    public class JsonError : INotifyable
     {
+        private LocalizationService localizationService;
+
         private string _errorText = "";
 
         public string ErrorText
@@ -12,7 +17,7 @@ namespace PlumJsonAnimator.Models
             set
             {
                 _errorText = value;
-                if (value == "JSON is valid")
+                if (value == this.localizationService.GetMessage(LocalizationConsts.JSON_VALID))
                 {
                     this.isOk = true;
                 }
@@ -26,11 +31,9 @@ namespace PlumJsonAnimator.Models
 
         public bool isOk = true;
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
+        public JsonError(LocalizationService localizationService)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            this.localizationService = localizationService;
         }
     }
 }

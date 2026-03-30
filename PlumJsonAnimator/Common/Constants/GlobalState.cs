@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
+using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.Common.Constants
 {
@@ -25,7 +26,7 @@ namespace PlumJsonAnimator.Common.Constants
             }
         }
 
-        public JsonError jsonError = new JsonError();
+        public JsonError jsonError;
         public JsonSerializerSettings jsonSettings = new JsonSerializerSettings
         {
             Formatting = Formatting.Indented,
@@ -100,9 +101,11 @@ namespace PlumJsonAnimator.Common.Constants
             return false;
         }
 
-        public GlobalState(Dialogs.Dialogs dialogs)
+        public GlobalState(Dialogs.Dialogs dialogs, LocalizationService localizationService)
         {
             this.dialogs = dialogs;
+
+            this.jsonError = new JsonError(localizationService);
         }
     }
 }
