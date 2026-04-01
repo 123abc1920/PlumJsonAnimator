@@ -9,6 +9,7 @@ using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
 using SukiUI;
 
+// TODO: pictures preview
 // TODO: исправить привязки
 namespace PlumJsonAnimator.Views
 {

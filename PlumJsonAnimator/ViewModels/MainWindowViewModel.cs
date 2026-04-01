@@ -261,7 +261,7 @@ public partial class MainWindowViewModel : ViewModelBase
         this.dialogs.mainWin = window;
     }
 
-    public async void ShowDialog(string title, Window owner, ViewType viewType)
+    private ViewModelBase GetViewModel(ViewType viewType)
     {
         ViewModelBase viewModel = this;
 
@@ -294,6 +294,12 @@ public partial class MainWindowViewModel : ViewModelBase
             viewModel = _serviceProvider.GetRequiredService<ExportPanelMP4ViewModel>();
         }
 
+        return viewModel;
+    }
+
+    public async void ShowDialog(string title, Window owner, ViewType viewType)
+    {
+        ViewModelBase viewModel = GetViewModel(viewType);
         this.dialogs.ShowDialog(title, viewModel, owner, viewType);
     }
 
@@ -516,9 +522,11 @@ public partial class MainWindowViewModel : ViewModelBase
                 if (selectedRes != null)
                 {
                     RedactObj = selectedRes;
+                    var viewModel = GetViewModel(ViewType.RENAME);
+                    viewModel.RedactObj = RedactObj;
                     this.dialogs.ShowDialog(
                         GetMessage(LocalizationConsts.RENAME),
-                        this,
+                        viewModel,
                         ViewType.RENAME
                     );
                 }
@@ -548,9 +556,11 @@ public partial class MainWindowViewModel : ViewModelBase
                 if (selectedSlot != null)
                 {
                     RedactObj = selectedSlot;
+                    var viewModel = GetViewModel(ViewType.RENAME);
+                    viewModel.RedactObj = RedactObj;
                     this.dialogs.ShowDialog(
                         GetMessage(LocalizationConsts.RENAME),
-                        this,
+                        viewModel,
                         ViewType.RENAME
                     );
                 }
@@ -564,9 +574,11 @@ public partial class MainWindowViewModel : ViewModelBase
                 if (bone != null)
                 {
                     RedactObj = bone;
+                    var viewModel = GetViewModel(ViewType.RENAME);
+                    viewModel.RedactObj = RedactObj;
                     this.dialogs.ShowDialog(
                         GetMessage(LocalizationConsts.RENAME),
-                        this,
+                        viewModel,
                         ViewType.RENAME
                     );
                 }
