@@ -13,6 +13,9 @@ namespace PlumJsonAnimator.Services
         private JsonCode jsonCode;
         private string settingsName;
 
+        private const string BASE_ANIM =
+            "{'skeleton':{'spine':'4.3.2'},'bones':[{'name':'root','x':100.0,'y':100.0}],'slots':[],'skins':[{'name':'default','attachments':{}}],'animations':{'anim0':{'bones':{},'drawOrder':[]}}}";
+
         private SettingsData settingsData;
 
         public SettingsData GetSettingsData()
@@ -43,7 +46,7 @@ namespace PlumJsonAnimator.Services
                 ),
                 Name = "NewProject",
                 Spine = "4.3.2",
-                Anim = "",
+                Anim = BASE_ANIM,
             };
         }
 

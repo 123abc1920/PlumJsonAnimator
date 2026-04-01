@@ -57,6 +57,13 @@ public partial class MainWindow : SukiWindow
             viewModel.Canvas = mainCanvas;
             viewModel.Timeline = Timeline;
             viewModel.SetMainWin(this);
+            if (!viewModel.JsonErrorObj.isOk)
+            {
+                Popups.ShowPopup(
+                    viewModel.GetMessage(LocalizationConsts.REGENERATE_ERROR),
+                    viewModel.GetMessage(LocalizationConsts.INFO_MESSAGE)
+                );
+            }
         }
     }
 

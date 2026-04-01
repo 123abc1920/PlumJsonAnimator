@@ -78,6 +78,8 @@ public partial class App : Application
             }
 
             var localization = _serviceProvider.GetRequiredService<LocalizationService>();
+            localization.LoadLangs();
+            localization.LoadLangResorce();
             Application.Current?.Resources.MergedDictionaries.Add(localization.LangResources);
 
             var mainViewModelInstance = _serviceProvider.GetService<MainWindowViewModel>();

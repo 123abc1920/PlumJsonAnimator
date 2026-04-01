@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Avalonia;
 using Avalonia.Controls;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -314,21 +315,13 @@ public partial class MainWindowViewModel : ViewModelBase
 
         CurrentTheme = Themes[GetCurrThemeInd(this.appSettings.GetTheme())];
 
-        ProjectValidResult validateResult = this.jsonCode.regenerate(CurrentProject);
-        if (!validateResult.IsOk)
-        {
-            Popups.ShowPopup(
-                GetMessage(LocalizationConsts.REGENERATE_ERROR),
-                GetMessage(LocalizationConsts.INFO_MESSAGE)
-            );
-        }
-
         this.globalState.captureArea = this.appSettings.CreateCaptureArea(
             CanvasWidth,
             CanvasHeight
         );
 
-        this.localizationService.LoadLangs();
+        ProjectValidResult validateResult = this.jsonCode.regenerate(CurrentProject);
+        this.JsonErrorObj.isOk = validateResult.IsOk;
     }
 
     public ExportResult exportSpineJson(string outFolder)

@@ -10,6 +10,8 @@
     <Version>0.1.0-alpha.1</Version>
     <FileVersion>0.1.0.1</FileVersion>
     <AssemblyVersion>0.1.0.1</AssemblyVersion>
+
+    <ApplicationIcon>Assets/logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Models\" />

@@ -72,7 +72,7 @@ namespace PlumJsonAnimator.Services
             }
         }
 
-        public void LoadLangResorce(string lang)
+        private void loadLangRes(string lang)
         {
             this.currentLang = lang;
 
@@ -104,6 +104,16 @@ namespace PlumJsonAnimator.Services
             {
                 LangResources[key] = value;
             }
+        }
+
+        public void LoadLangResorce(string lang)
+        {
+            loadLangRes(lang);
+        }
+
+        public void LoadLangResorce()
+        {
+            loadLangRes(START_LANG);
         }
 
         public string GetMessage(LocalizationConsts constStr)
