@@ -49,7 +49,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public string getPath()
         {
-            return this.image.path;
+            return this.image.Path;
         }
 
         public override AttachmentData generateJSONData()

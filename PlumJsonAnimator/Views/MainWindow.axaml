@@ -227,9 +227,16 @@
                     Height="3"
                     Background="{DynamicResource SukiPrimaryColor}"
                     ResizeDirection="Rows" />
-                <StackPanel Grid.Row="4" Margin="5">
-                    <TextBlock Text="{DynamicResource resources}" />
-                    <StackPanel Orientation="Horizontal">
+                <Grid Grid.Row="4" Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="{DynamicResource resources}" />
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
                         <Button
                             Width="32"
                             Height="32"
@@ -260,16 +267,27 @@
                             <iconPacks:PackIconBootstrapIcons Kind="PencilFill" />
                         </Button>
                     </StackPanel>
-                    <ScrollViewer Margin="0,5" VerticalScrollBarVisibility="Auto">
-                        <ListBox x:Name="resList" ItemsSource="{Binding CurrentProject.Resources}">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock PointerPressed="OnResPointerPressed" Text="{Binding Name}" />
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                    </ScrollViewer>
-                </StackPanel>
+                    <ListBox
+                        x:Name="resList"
+                        Grid.Row="2"
+                        Margin="0,5"
+                        ItemsSource="{Binding CurrentProject.Resources}"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock PointerPressed="OnResPointerPressed" Text="{Binding Name}">
+                                    <ToolTip.Tip>
+                                        <Image
+                                            MaxWidth="200"
+                                            MaxHeight="150"
+                                            Source="{Binding Preview}"
+                                            Stretch="Uniform" />
+                                    </ToolTip.Tip>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
             </Grid>
             <GridSplitter
                 Grid.Column="1"

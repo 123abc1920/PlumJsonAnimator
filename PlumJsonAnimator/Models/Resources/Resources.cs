@@ -1,4 +1,6 @@
 using System.IO;
+using Avalonia.Media;
+using Avalonia.Media.Imaging;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Services;
@@ -45,7 +47,38 @@ namespace PlumJsonAnimator.Models.Resources
             }
         }
 
-        public string path = "";
+        protected string _path = "";
+        public string Path
+        {
+            get => _path;
+            set
+            {
+                if (_path != value)
+                {
+                    _path = value;
+                    _path = _path.Replace('\\', '/');
+                    OnPropertyChanged(nameof(Path));
+                }
+            }
+        }
+
+        private IImage? _preview;
+        public IImage? Preview
+        {
+            get
+            {
+                if (_preview == null && !string.IsNullOrEmpty(this.Path) && File.Exists(this.Path))
+                {
+                    try
+                    {
+                        _preview = new Bitmap(this.Path);
+                    }
+                    catch { }
+                }
+                return _preview;
+            }
+        }
+
         public string ext = ".png";
 
         public void SetName(string? name)
@@ -54,8 +87,8 @@ namespace PlumJsonAnimator.Models.Resources
             {
                 this.Name = name;
                 this.projectManager.RenameFile(
-                    path,
-                    Path.Combine(
+                    Path,
+                    System.IO.Path.Combine(
                         this.globalState.CurrentProject!.GetProjectPath(),
                         "res",
                         $"{this.Name}{ext}"
@@ -66,7 +99,7 @@ namespace PlumJsonAnimator.Models.Resources
 
         public void SetPath(string newProjectPath)
         {
-            this.path = Path.Combine(newProjectPath, "res", $"{this.Name}{this.ext}");
+            this.Path = System.IO.Path.Combine(newProjectPath, "res", $"{this.Name}{this.ext}");
         }
     }
 
@@ -92,7 +125,7 @@ namespace PlumJsonAnimator.Models.Resources
         {
             this.Name = name;
             this.ext = _ext;
-            this.path = _path;
+            this.Path = _path;
         }
     }
 }
