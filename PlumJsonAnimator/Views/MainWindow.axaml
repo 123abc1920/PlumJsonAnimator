@@ -615,9 +615,16 @@
                     <RowDefinition Height="6" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Margin="5">
-                    <TextBlock Text="{DynamicResource skeleton}" />
-                    <StackPanel Orientation="Horizontal">
+                <Grid Grid.Row="0" Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="{DynamicResource skeleton}" />
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
                         <Button
                             Width="32"
                             Height="32"
@@ -648,18 +655,20 @@
                             <iconPacks:PackIconBootstrapIcons Kind="PencilFill" />
                         </Button>
                     </StackPanel>
-                    <ScrollViewer Margin="0,5" VerticalScrollBarVisibility="Auto">
-                        <TreeView Name="boneTreeView" ItemsSource="{Binding CurrentProject.MainSkeleton.RootBones}">
-                            <TreeView.ItemTemplate>
-                                <TreeDataTemplate ItemsSource="{Binding Children}">
-                                    <StackPanel DoubleTapped="OnBonePointerPressed">
-                                        <TextBlock Text="{Binding Name, Mode=TwoWay}" />
-                                    </StackPanel>
-                                </TreeDataTemplate>
-                            </TreeView.ItemTemplate>
-                        </TreeView>
-                    </ScrollViewer>
-                </StackPanel>
+                    <TreeView
+                        Name="boneTreeView"
+                        Grid.Row="2"
+                        Margin="0,5"
+                        ItemsSource="{Binding CurrentProject.MainSkeleton.RootBones}">
+                        <TreeView.ItemTemplate>
+                            <TreeDataTemplate ItemsSource="{Binding Children}">
+                                <StackPanel DoubleTapped="OnBonePointerPressed">
+                                    <TextBlock Text="{Binding Name, Mode=TwoWay}" />
+                                </StackPanel>
+                            </TreeDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </Grid>
                 <GridSplitter
                     Grid.Row="1"
                     Height="3"

@@ -179,8 +179,8 @@ namespace PlumJsonAnimator.Services
                 }
                 else
                 {
-                    Bone? parent = this.globalState.CurrentProject.MainSkeleton.getBone(b.Parent);
-                    if (parent == null)
+                    bool parent = updatedBones.ContainsKey(b.Parent);
+                    if (parent == false)
                     {
                         return new ValidResult
                         {

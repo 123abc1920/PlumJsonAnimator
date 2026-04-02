@@ -278,12 +278,29 @@ namespace PlumJsonAnimator.Models
 
             foreach (var bone in bones)
             {
-                Bone b = new Bone(
-                    this.globalState,
-                    bone.Key,
-                    MainSkeleton.getBone(bone.Value.Parent)
-                );
-                this.MainSkeleton.Bones.Add(b);
+                Bone b = new Bone(this.globalState, bone.Key, null);
+                this.MainSkeleton.addBone(b);
+            }
+
+            foreach (var bone in bones)
+            {
+                if (!string.IsNullOrEmpty(bone.Value.Parent))
+                {
+                    var childBone = MainSkeleton.getBone(bone.Key);
+                    var parentBone = MainSkeleton.getBone(bone.Value.Parent);
+
+                    if (childBone != null && parentBone != null)
+                    {
+                        childBone.Parent = parentBone;
+                        parentBone.addChildren(childBone);
+                    }
+                    else
+                    {
+                        Console.WriteLine(
+                            $"Warning: Cannot set parent {bone.Value.Parent} for bone {bone.Key}"
+                        );
+                    }
+                }
             }
 
             foreach (var bone in bonesToRemove)

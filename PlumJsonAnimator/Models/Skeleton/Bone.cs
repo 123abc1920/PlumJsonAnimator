@@ -209,7 +209,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this._x = 100;
             this._y = 100;
 
-            this._name = $"{name}{Counter.GenerateName()}";
+            this._name = name;
 
             double angleRad = this.a * Math.PI / 180;
             this.endX = this.x + lengthX * Math.Cos(angleRad);
@@ -318,7 +318,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 StartPoint = start,
                 EndPoint = end,
-                Stroke = this.globalState.getLineBoneColor(this.id),
+                Stroke = this.globalState.getLineBoneColor(this),
                 StrokeThickness = 3,
             };
 
@@ -326,7 +326,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 Width = 8,
                 Height = 8,
-                Fill = this.globalState.getDotBoneColor(this.id),
+                Fill = this.globalState.getDotBoneColor(this),
             };
 
             Canvas.SetLeft(joint, start.X - 4);

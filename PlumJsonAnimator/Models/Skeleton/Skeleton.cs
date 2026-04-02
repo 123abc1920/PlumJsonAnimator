@@ -29,7 +29,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public void addBone(int id)
         {
-            Bone new_bone = new Bone(this.globalState, Bones.Count);
+            Bone new_bone = new Bone(this.globalState, ids);
             this.Bones.Add(new_bone);
             foreach (Bone b in this.Bones)
             {
@@ -41,14 +41,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             ids++;
         }
 
-        public string getLast()
+        public void addBone(Bone b)
         {
-            return "bones1";
-        }
-
-        public int getId()
-        {
-            return ids;
+            this.Bones.Add(b);
+            b.id = ids;
+            ids++;
         }
 
         public Bone? getBone(int id)
@@ -99,8 +96,6 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             return JsonConvert.SerializeObject(generateJSONData(), this.globalState.jsonSettings);
         }
-
-        public void regenerateBones(List<BoneData> boneDatas) { }
     }
 
     public class SkeletonData
