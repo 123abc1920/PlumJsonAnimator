@@ -90,7 +90,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="canvas"></param>
         public void DrawSkin(Canvas canvas)
         {
-            foreach (Slot s in SlotAttachmentBinding.Keys.OrderBy(slot => slot.CurrentDrawOrderOffset))
+            foreach (
+                Slot s in SlotAttachmentBinding.Keys.OrderBy(slot => slot.CurrentDrawOrderOffset)
+            )
             {
                 s.drawSlot(canvas);
             }
@@ -188,8 +190,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             foreach (Slot s in SlotAttachmentBinding.Keys)
             {
                 attachments[s.Name] = new Dictionary<string, AttachmentData>();
-                attachments[s.Name][SlotAttachmentBinding[s].Name] = SlotAttachmentBinding[s]
-                    .generateJSONData();
+                if (SlotAttachmentBinding[s] != null)
+                {
+                    attachments[s.Name][SlotAttachmentBinding[s].Name] = SlotAttachmentBinding[s]
+                        .generateJSONData();
+                }
             }
 
             return new SkinData { Name = this.Name, Attachments = attachments };
