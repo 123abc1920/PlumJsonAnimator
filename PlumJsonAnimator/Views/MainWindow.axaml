@@ -721,13 +721,33 @@
                                     <Style Selector="ListBoxItem">
                                         <Setter Property="Template">
                                             <ControlTemplate>
-                                                <ContentPresenter
-                                                    Name="PART_ContentPresenter"
-                                                    HorizontalAlignment="Stretch"
-                                                    Content="{TemplateBinding Content}"
-                                                    ContentTemplate="{TemplateBinding ContentTemplate}" />
+                                                <Border
+                                                    Name="PART_Border"
+                                                    Background="{TemplateBinding Background}"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}">
+                                                    <ContentPresenter
+                                                        Name="PART_ContentPresenter"
+                                                        HorizontalAlignment="Stretch"
+                                                        Content="{TemplateBinding Content}"
+                                                        ContentTemplate="{TemplateBinding ContentTemplate}" />
+                                                </Border>
                                             </ControlTemplate>
                                         </Setter>
+                                    </Style>
+
+                                    <Style Selector="ListBoxItem:selected">
+                                        <Setter Property="Background" Value="{DynamicResource SukiAccentColor}" />
+                                        <Setter Property="Foreground" Value="{DynamicResource SukiTextColor}" />
+                                    </Style>
+
+                                    <Style Selector="ListBoxItem:pointerover">
+                                        <Setter Property="Background" Value="{DynamicResource SukiCardBackground}" />
+                                    </Style>
+
+                                    <Style Selector="ListBoxItem:selected:pointerover">
+                                        <Setter Property="Background" Value="{DynamicResource SukiAccentColor}" />
+                                        <Setter Property="Opacity" Value="0.9" />
                                     </Style>
                                 </ListBox.Styles>
 

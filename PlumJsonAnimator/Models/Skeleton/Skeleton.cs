@@ -21,8 +21,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public Skeleton(GlobalState globalState)
         {
-            Bones.Add(new Bone(globalState));
-            RootBones.Add(Bones[0]);
+            var root = new Bone(globalState);
+            Bones.Add(root);
+            RootBones.Add(root);
+
+            ids++;
 
             this.globalState = globalState;
         }
