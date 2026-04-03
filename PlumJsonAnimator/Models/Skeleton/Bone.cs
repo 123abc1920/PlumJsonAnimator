@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
 
+// TODO: children dont moves recursively when change from ui
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
     public class Bone : INotifyable, IRenamable
