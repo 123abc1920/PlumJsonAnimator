@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
@@ -12,6 +13,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public double y;
         public double a;
 
+        protected int? width = null;
+        protected int? height = null;
+
         public void SetPos(double x, double y, double a)
         {
             this.x = x;
@@ -25,6 +29,21 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         }
 
         public abstract AttachmentData generateJSONData();
+
+        public void setSize(double width, double height)
+        {
+            this.width = (int)width;
+            this.height = (int)height;
+        }
+
+        public Dictionary<string, int?> getSize()
+        {
+            return new Dictionary<string, int?>()
+            {
+                ["width"] = this.width,
+                ["height"] = this.height,
+            };
+        }
     }
 
     public class ImageAttachment : Attachment
@@ -45,6 +64,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this.x = data.X;
             this.y = data.Y;
             this.a = data.A;
+
+            this.width = data.Width;
+            this.height = data.Height;
         }
 
         public string getPath()
@@ -57,8 +79,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             return new AttachmentData
             {
                 Name = this.image.Name,
-                Width = this.image.width,
-                Height = this.image.height,
+                Width = this.width,
+                Height = this.height,
                 X = this.x,
                 Y = this.y,
                 A = this.a,
@@ -77,10 +99,10 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public required string Name { get; set; }
 
         [JsonProperty("width", NullValueHandling = NullValueHandling.Ignore)]
-        public int Width { get; set; }
+        public int? Width { get; set; }
 
         [JsonProperty("height", NullValueHandling = NullValueHandling.Ignore)]
-        public int Height { get; set; }
+        public int? Height { get; set; }
 
         [JsonProperty("x", NullValueHandling = NullValueHandling.Ignore)]
         public double X { get; set; }

@@ -9,6 +9,7 @@ using Avalonia.Media.Imaging;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
+using Tmds.DBus.Protocol;
 
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
@@ -88,6 +89,10 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 this._x = CurrentAttachment.x;
                 this._y = CurrentAttachment.y;
                 this._a = CurrentAttachment.a;
+
+                Dictionary<string, int?> size = CurrentAttachment.getSize();
+                this.LengthX = size["width"] ?? this.LengthX;
+                this.LengthY = size["height"] ?? this.LengthY;
             }
         }
 
@@ -247,8 +252,13 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public override void scale(double x, double y)
         {
-            this.LengthX = Math.Abs(x - this.x) * 5;
-            this.LengthY = Math.Abs(y - this.y) * 5;
+            if (this.CurrentAttachment != null)
+            {
+                this.LengthX = Math.Abs(x - this.x) * 5;
+                this.LengthY = Math.Abs(y - this.y) * 5;
+
+                this.CurrentAttachment.setSize(this.LengthX, this.LengthY);
+            }
         }
 
         public override void rotate(double a)
