@@ -9,7 +9,6 @@ using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
 
-// TODO: children dont moves recursively when change from ui
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
     public class Bone : INotifyable, IRenamable
@@ -44,8 +43,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 if (Math.Abs(_x - value) > double.Epsilon)
                 {
+                    move(value, _y);
                     _x = value;
-                    move(_x, _y);
                     OnPropertyChanged(nameof(x));
                 }
             }
@@ -58,8 +57,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 if (Math.Abs(_y - value) > double.Epsilon)
                 {
+                    move(_x, value);
                     _y = value;
-                    move(_x, _y);
                     OnPropertyChanged(nameof(y));
                 }
             }
@@ -72,8 +71,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 if (Math.Abs(_a - value) > double.Epsilon)
                 {
+                    rotate(value);
                     _a = value;
-                    rotate(_a);
                     OnPropertyChanged(nameof(a));
                 }
             }
@@ -228,10 +227,22 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             bone.Parent = this;
         }
 
+        private bool _isMoving = false;
+
         public virtual void move(double x, double y)
         {
-            double deltaX = this.x - x;
-            double deltaY = this.y - y;
+            if (_isMoving)
+            {
+                return;
+            }
+
+            _isMoving = true;
+
+            double oldX = this.x;
+            double oldY = this.y;
+
+            double deltaX = oldX - x;
+            double deltaY = oldY - y;
 
             this.x = x;
             this.y = y;
@@ -255,10 +266,21 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                     slot.move(slot.x - deltaX, slot.y - deltaY);
                 }
             );
+
+            _isMoving = false;
         }
+
+        private bool _isRotating = false;
 
         public virtual void rotate(double a)
         {
+            if (_isRotating)
+            {
+                return;
+            }
+
+            _isRotating = true;
+
             double oldA = this.a;
             this.a = a;
             double angleRad = this.a * Math.PI / 180;
@@ -303,6 +325,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                     slot.parentA = slot.parentA + (a - oldA);
                 }
             );
+
+            _isRotating = false;
         }
 
         public virtual void scale(double x, double y)

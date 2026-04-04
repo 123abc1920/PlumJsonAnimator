@@ -78,6 +78,7 @@ public partial class MainWindow : SukiWindow
                 if (viewModel.DrawBones)
                 {
                     viewModel.CurrentProject?.MainSkeleton?.drawSkeleton(mainCanvas);
+                    viewModel.CurrentBone?.drawBone(mainCanvas);
                     viewModel.GenerateCode();
                 }
                 if (viewModel.CaptureMode)
