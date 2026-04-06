@@ -202,6 +202,21 @@ namespace PlumJsonAnimator.Models
             Canvas.SetTop(rectangle, rect.Y);
             canvas.Children.Add(rectangle);
 
+            var width = this.b.x - this.a.x;
+            var height = this.d.y - this.a.y;
+            var sizeText = new TextBlock
+            {
+                Text = $"{width:F0} x {height:F0}",
+                FontSize = 10,
+                Foreground = new SolidColorBrush(Colors.Black),
+                Background = new SolidColorBrush(Colors.White),
+                Padding = new Thickness(2),
+            };
+
+            Canvas.SetLeft(sizeText, rect.X);
+            Canvas.SetTop(sizeText, rect.Y);
+            canvas.Children.Add(sizeText);
+
             DrawPoint(canvas, this.a.x, this.a.y);
             DrawPoint(canvas, this.b.x, this.b.y);
             DrawPoint(canvas, this.c.x, this.c.y);
