@@ -6,7 +6,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models;
-using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.ViewModels;
@@ -20,20 +19,6 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
     protected AppSettings appSettings;
     protected LocalizationService localizationService;
     protected ImageExporter imageExporter;
-
-    private double _progressValue = 0;
-    public double ProgressValue
-    {
-        get => _progressValue;
-        set
-        {
-            if (value != _progressValue)
-            {
-                _progressValue = value;
-                OnPropertyChanged(nameof(ProgressValue));
-            }
-        }
-    }
 
     public List<string> Themes { get; set; } = new List<string>() { "light", "dark" };
     public string CurrentTheme
@@ -120,11 +105,6 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
             {
                 OnPropertyChanged(nameof(CurrentProject));
             }
-        };
-
-        this.imageExporter.ProgressChanged += (sender, percent) =>
-        {
-            ProgressValue = percent;
         };
     }
 

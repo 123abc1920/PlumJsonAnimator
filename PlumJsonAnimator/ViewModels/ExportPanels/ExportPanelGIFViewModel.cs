@@ -2,12 +2,27 @@ using System.Threading.Tasks;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models;
+using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.ViewModels;
 
 public partial class ExportPanelGIFViewModel : ViewModelBase
 {
+    private double _progressValue = 0;
+    public double ProgressValue
+    {
+        get => _progressValue;
+        set
+        {
+            if (value != _progressValue)
+            {
+                _progressValue = value;
+                OnPropertyChanged(nameof(ProgressValue));
+            }
+        }
+    }
+
     public string ExportPath
     {
         get { return this.imageExporter.ExportPath; }
@@ -38,7 +53,13 @@ public partial class ExportPanelGIFViewModel : ViewModelBase
             appSettings,
             localizationService,
             imageExporter
-        ) { }
+        )
+    {
+        this.imageExporter.ProgressChanged += (sender, percent) =>
+        {
+            ProgressValue = percent;
+        };
+    }
 
     public async Task<ExportResult> ExportAsGif(double start, double end, string outputFile)
     {
