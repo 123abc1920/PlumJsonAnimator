@@ -321,7 +321,10 @@ public partial class MainWindowViewModel : ViewModelBase
 
         this.projectManager.LoadRes(CurrentProject);
 
-        CurrentTheme = Themes[GetCurrThemeInd(this.appSettings.GetTheme())];
+        var spineJsonSettings = (SpinejsonSettingsViewModel)GetViewModel(ViewType.SETTINGS);
+        spineJsonSettings.CurrentTheme = spineJsonSettings.Themes[
+            spineJsonSettings.GetCurrThemeInd(this.appSettings.GetTheme())
+        ];
 
         this.globalState.captureArea = this.appSettings.CreateCaptureArea(
             CanvasWidth,
@@ -479,7 +482,8 @@ public partial class MainWindowViewModel : ViewModelBase
         this.jsonValidator = jsonValidator;
         this.engine = engine;
 
-        CurrentTheme = Themes[0];
+        var spineJsonSettings = (SpinejsonSettingsViewModel)GetViewModel(ViewType.SETTINGS);
+        spineJsonSettings.CurrentTheme = spineJsonSettings.Themes[0];
 
         this.globalState.TimeUpdated += () =>
         {
