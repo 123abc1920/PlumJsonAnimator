@@ -1,0 +1,429 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Services.Prettify
+  commentId: T:PlumJsonAnimator.Services.Prettify
+  id: Prettify
+  parent: PlumJsonAnimator.Services
+  children:
+  - PlumJsonAnimator.Services.Prettify.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
+  - PlumJsonAnimator.Services.Prettify.prettify(System.String)
+  langs:
+  - csharp
+  - vb
+  name: Prettify
+  nameWithType: Prettify
+  fullName: PlumJsonAnimator.Services.Prettify
+  type: Class
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/Prettify.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: Prettify
+    path: Services/Prettify.cs
+    startLine: 7
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public class Prettify
+    content.vb: Public Class Prettify
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: PlumJsonAnimator.Services.Prettify.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
+  commentId: M:PlumJsonAnimator.Services.Prettify.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
+  id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState)'
+  parent: PlumJsonAnimator.Services.Prettify
+  langs:
+  - csharp
+  - vb
+  name: Prettify(GlobalState)
+  nameWithType: Prettify.Prettify(GlobalState)
+  fullName: PlumJsonAnimator.Services.Prettify.Prettify(PlumJsonAnimator.Common.Constants.GlobalState)
+  type: Constructor
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/Prettify.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: .ctor
+    path: Services/Prettify.cs
+    startLine: 11
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public Prettify(GlobalState globalState)
+    parameters:
+    - id: globalState
+      type: PlumJsonAnimator.Common.Constants.GlobalState
+    content.vb: Public Sub New(globalState As GlobalState)
+  overload: PlumJsonAnimator.Services.Prettify.#ctor*
+  nameWithType.vb: Prettify.New(GlobalState)
+  fullName.vb: PlumJsonAnimator.Services.Prettify.New(PlumJsonAnimator.Common.Constants.GlobalState)
+  name.vb: New(GlobalState)
+- uid: PlumJsonAnimator.Services.Prettify.prettify(System.String)
+  commentId: M:PlumJsonAnimator.Services.Prettify.prettify(System.String)
+  id: prettify(System.String)
+  parent: PlumJsonAnimator.Services.Prettify
+  langs:
+  - csharp
+  - vb
+  name: prettify(string)
+  nameWithType: Prettify.prettify(string)
+  fullName: PlumJsonAnimator.Services.Prettify.prettify(string)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/Prettify.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: prettify
+    path: Services/Prettify.cs
+    startLine: 16
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public string prettify(string text)
+    parameters:
+    - id: text
+      type: System.String
+    return:
+      type: System.String
+    content.vb: Public Function prettify(text As String) As String
+  overload: PlumJsonAnimator.Services.Prettify.prettify*
+  nameWithType.vb: Prettify.prettify(String)
+  fullName.vb: PlumJsonAnimator.Services.Prettify.prettify(String)
+  name.vb: prettify(String)
+references:
+- uid: PlumJsonAnimator.Services
+  commentId: N:PlumJsonAnimator.Services
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Services
+  nameWithType: PlumJsonAnimator.Services
+  fullName: PlumJsonAnimator.Services
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Services
+    name: Services
+    href: PlumJsonAnimator.Services.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Services
+    name: Services
+    href: PlumJsonAnimator.Services.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: PlumJsonAnimator.Services.Prettify.#ctor*
+  commentId: Overload:PlumJsonAnimator.Services.Prettify.#ctor
+  href: PlumJsonAnimator.Services.Prettify.html#PlumJsonAnimator_Services_Prettify__ctor_PlumJsonAnimator_Common_Constants_GlobalState_
+  name: Prettify
+  nameWithType: Prettify.Prettify
+  fullName: PlumJsonAnimator.Services.Prettify.Prettify
+  nameWithType.vb: Prettify.New
+  fullName.vb: PlumJsonAnimator.Services.Prettify.New
+  name.vb: New
+- uid: PlumJsonAnimator.Common.Constants.GlobalState
+  commentId: T:PlumJsonAnimator.Common.Constants.GlobalState
+  parent: PlumJsonAnimator.Common.Constants
+  href: PlumJsonAnimator.Common.Constants.GlobalState.html
+  name: GlobalState
+  nameWithType: GlobalState
+  fullName: PlumJsonAnimator.Common.Constants.GlobalState
+- uid: PlumJsonAnimator.Common.Constants
+  commentId: N:PlumJsonAnimator.Common.Constants
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Common.Constants
+  nameWithType: PlumJsonAnimator.Common.Constants
+  fullName: PlumJsonAnimator.Common.Constants
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Constants
+    name: Constants
+    href: PlumJsonAnimator.Common.Constants.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Constants
+    name: Constants
+    href: PlumJsonAnimator.Common.Constants.html
+- uid: PlumJsonAnimator.Services.Prettify.prettify*
+  commentId: Overload:PlumJsonAnimator.Services.Prettify.prettify
+  href: PlumJsonAnimator.Services.Prettify.html#PlumJsonAnimator_Services_Prettify_prettify_System_String_
+  name: prettify
+  nameWithType: Prettify.prettify
+  fullName: PlumJsonAnimator.Services.Prettify.prettify
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String

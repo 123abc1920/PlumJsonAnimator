@@ -1,0 +1,103 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.ViewModels
+  commentId: N:PlumJsonAnimator.ViewModels
+  id: PlumJsonAnimator.ViewModels
+  children:
+  - PlumJsonAnimator.ViewModels.AppSettingsViewModel
+  - PlumJsonAnimator.ViewModels.ExportPanelGIFViewModel
+  - PlumJsonAnimator.ViewModels.ExportPanelJPGViewModel
+  - PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel
+  - PlumJsonAnimator.ViewModels.ExportPanelPNGViewModel
+  - PlumJsonAnimator.ViewModels.MainWindowViewModel
+  - PlumJsonAnimator.ViewModels.NewProjectViewModel
+  - PlumJsonAnimator.ViewModels.RenameViewModel
+  - PlumJsonAnimator.ViewModels.ViewModelBase
+  langs:
+  - csharp
+  - vb
+  name: PlumJsonAnimator.ViewModels
+  nameWithType: PlumJsonAnimator.ViewModels
+  fullName: PlumJsonAnimator.ViewModels
+  type: Namespace
+  assemblies:
+  - PlumJsonAnimator
+references:
+- uid: PlumJsonAnimator.ViewModels.NewProjectViewModel
+  commentId: T:PlumJsonAnimator.ViewModels.NewProjectViewModel
+  href: PlumJsonAnimator.ViewModels.NewProjectViewModel.html
+  name: NewProjectViewModel
+  nameWithType: NewProjectViewModel
+  fullName: PlumJsonAnimator.ViewModels.NewProjectViewModel
+- uid: PlumJsonAnimator.ViewModels.RenameViewModel
+  commentId: T:PlumJsonAnimator.ViewModels.RenameViewModel
+  href: PlumJsonAnimator.ViewModels.RenameViewModel.html
+  name: RenameViewModel
+  nameWithType: RenameViewModel
+  fullName: PlumJsonAnimator.ViewModels.RenameViewModel
+- uid: PlumJsonAnimator.ViewModels.ExportPanelGIFViewModel
+  commentId: T:PlumJsonAnimator.ViewModels.ExportPanelGIFViewModel
+  href: PlumJsonAnimator.ViewModels.ExportPanelGIFViewModel.html
+  name: ExportPanelGIFViewModel
+  nameWithType: ExportPanelGIFViewModel
+  fullName: PlumJsonAnimator.ViewModels.ExportPanelGIFViewModel
+- uid: PlumJsonAnimator.ViewModels.ExportPanelJPGViewModel
+  commentId: T:PlumJsonAnimator.ViewModels.ExportPanelJPGViewModel
+  href: PlumJsonAnimator.ViewModels.ExportPanelJPGViewModel.html
+  name: ExportPanelJPGViewModel
+  nameWithType: ExportPanelJPGViewModel
+  fullName: PlumJsonAnimator.ViewModels.ExportPanelJPGViewModel
+- uid: PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel
+  commentId: T:PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel
+  href: PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.html
+  name: ExportPanelMP4ViewModel
+  nameWithType: ExportPanelMP4ViewModel
+  fullName: PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel
+- uid: PlumJsonAnimator.ViewModels.ExportPanelPNGViewModel
+  commentId: T:PlumJsonAnimator.ViewModels.ExportPanelPNGViewModel
+  href: PlumJsonAnimator.ViewModels.ExportPanelPNGViewModel.html
+  name: ExportPanelPNGViewModel
+  nameWithType: ExportPanelPNGViewModel
+  fullName: PlumJsonAnimator.ViewModels.ExportPanelPNGViewModel
+- uid: PlumJsonAnimator.ViewModels.MainWindowViewModel
+  commentId: T:PlumJsonAnimator.ViewModels.MainWindowViewModel
+  href: PlumJsonAnimator.ViewModels.MainWindowViewModel.html
+  name: MainWindowViewModel
+  nameWithType: MainWindowViewModel
+  fullName: PlumJsonAnimator.ViewModels.MainWindowViewModel
+- uid: PlumJsonAnimator.ViewModels.AppSettingsViewModel
+  commentId: T:PlumJsonAnimator.ViewModels.AppSettingsViewModel
+  parent: PlumJsonAnimator.ViewModels
+  href: PlumJsonAnimator.ViewModels.AppSettingsViewModel.html
+  name: AppSettingsViewModel
+  nameWithType: AppSettingsViewModel
+  fullName: PlumJsonAnimator.ViewModels.AppSettingsViewModel
+- uid: PlumJsonAnimator.ViewModels.ViewModelBase
+  commentId: T:PlumJsonAnimator.ViewModels.ViewModelBase
+  parent: PlumJsonAnimator.ViewModels
+  href: PlumJsonAnimator.ViewModels.ViewModelBase.html
+  name: ViewModelBase
+  nameWithType: ViewModelBase
+  fullName: PlumJsonAnimator.ViewModels.ViewModelBase
+- uid: PlumJsonAnimator.ViewModels
+  commentId: N:PlumJsonAnimator.ViewModels
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.ViewModels
+  nameWithType: PlumJsonAnimator.ViewModels
+  fullName: PlumJsonAnimator.ViewModels
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.ViewModels
+    name: ViewModels
+    href: PlumJsonAnimator.ViewModels.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.ViewModels
+    name: ViewModels
+    href: PlumJsonAnimator.ViewModels.html

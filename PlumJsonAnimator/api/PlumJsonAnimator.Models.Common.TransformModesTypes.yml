@@ -1,0 +1,201 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Models.Common.TransformModesTypes
+  commentId: T:PlumJsonAnimator.Models.Common.TransformModesTypes
+  id: TransformModesTypes
+  parent: PlumJsonAnimator.Models.Common
+  children:
+  - PlumJsonAnimator.Models.Common.TransformModesTypes.NO
+  - PlumJsonAnimator.Models.Common.TransformModesTypes.ROTATE
+  - PlumJsonAnimator.Models.Common.TransformModesTypes.SCALE
+  - PlumJsonAnimator.Models.Common.TransformModesTypes.SHEAR
+  - PlumJsonAnimator.Models.Common.TransformModesTypes.TRANSLATE
+  langs:
+  - csharp
+  - vb
+  name: TransformModesTypes
+  nameWithType: TransformModesTypes
+  fullName: PlumJsonAnimator.Models.Common.TransformModesTypes
+  type: Enum
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Common/TransformModes.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: TransformModesTypes
+    path: Models/Common/TransformModes.cs
+    startLine: 6
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Common
+  syntax:
+    content: public enum TransformModesTypes
+    content.vb: Public Enum TransformModesTypes
+- uid: PlumJsonAnimator.Models.Common.TransformModesTypes.NO
+  commentId: F:PlumJsonAnimator.Models.Common.TransformModesTypes.NO
+  id: NO
+  parent: PlumJsonAnimator.Models.Common.TransformModesTypes
+  langs:
+  - csharp
+  - vb
+  name: NO
+  nameWithType: TransformModesTypes.NO
+  fullName: PlumJsonAnimator.Models.Common.TransformModesTypes.NO
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Common/TransformModes.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: NO
+    path: Models/Common/TransformModes.cs
+    startLine: 8
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Common
+  syntax:
+    content: NO = 0
+    return:
+      type: PlumJsonAnimator.Models.Common.TransformModesTypes
+- uid: PlumJsonAnimator.Models.Common.TransformModesTypes.TRANSLATE
+  commentId: F:PlumJsonAnimator.Models.Common.TransformModesTypes.TRANSLATE
+  id: TRANSLATE
+  parent: PlumJsonAnimator.Models.Common.TransformModesTypes
+  langs:
+  - csharp
+  - vb
+  name: TRANSLATE
+  nameWithType: TransformModesTypes.TRANSLATE
+  fullName: PlumJsonAnimator.Models.Common.TransformModesTypes.TRANSLATE
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Common/TransformModes.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: TRANSLATE
+    path: Models/Common/TransformModes.cs
+    startLine: 9
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Common
+  syntax:
+    content: TRANSLATE = 1
+    return:
+      type: PlumJsonAnimator.Models.Common.TransformModesTypes
+- uid: PlumJsonAnimator.Models.Common.TransformModesTypes.ROTATE
+  commentId: F:PlumJsonAnimator.Models.Common.TransformModesTypes.ROTATE
+  id: ROTATE
+  parent: PlumJsonAnimator.Models.Common.TransformModesTypes
+  langs:
+  - csharp
+  - vb
+  name: ROTATE
+  nameWithType: TransformModesTypes.ROTATE
+  fullName: PlumJsonAnimator.Models.Common.TransformModesTypes.ROTATE
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Common/TransformModes.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: ROTATE
+    path: Models/Common/TransformModes.cs
+    startLine: 10
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Common
+  syntax:
+    content: ROTATE = 2
+    return:
+      type: PlumJsonAnimator.Models.Common.TransformModesTypes
+- uid: PlumJsonAnimator.Models.Common.TransformModesTypes.SCALE
+  commentId: F:PlumJsonAnimator.Models.Common.TransformModesTypes.SCALE
+  id: SCALE
+  parent: PlumJsonAnimator.Models.Common.TransformModesTypes
+  langs:
+  - csharp
+  - vb
+  name: SCALE
+  nameWithType: TransformModesTypes.SCALE
+  fullName: PlumJsonAnimator.Models.Common.TransformModesTypes.SCALE
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Common/TransformModes.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: SCALE
+    path: Models/Common/TransformModes.cs
+    startLine: 11
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Common
+  syntax:
+    content: SCALE = 3
+    return:
+      type: PlumJsonAnimator.Models.Common.TransformModesTypes
+- uid: PlumJsonAnimator.Models.Common.TransformModesTypes.SHEAR
+  commentId: F:PlumJsonAnimator.Models.Common.TransformModesTypes.SHEAR
+  id: SHEAR
+  parent: PlumJsonAnimator.Models.Common.TransformModesTypes
+  langs:
+  - csharp
+  - vb
+  name: SHEAR
+  nameWithType: TransformModesTypes.SHEAR
+  fullName: PlumJsonAnimator.Models.Common.TransformModesTypes.SHEAR
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Common/TransformModes.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: SHEAR
+    path: Models/Common/TransformModes.cs
+    startLine: 12
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Common
+  syntax:
+    content: SHEAR = 4
+    return:
+      type: PlumJsonAnimator.Models.Common.TransformModesTypes
+references:
+- uid: PlumJsonAnimator.Models.Common
+  commentId: N:PlumJsonAnimator.Models.Common
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Models.Common
+  nameWithType: PlumJsonAnimator.Models.Common
+  fullName: PlumJsonAnimator.Models.Common
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.Common
+    name: Common
+    href: PlumJsonAnimator.Models.Common.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.Common
+    name: Common
+    href: PlumJsonAnimator.Models.Common.html
+- uid: PlumJsonAnimator.Models.Common.TransformModesTypes
+  commentId: T:PlumJsonAnimator.Models.Common.TransformModesTypes
+  parent: PlumJsonAnimator.Models.Common
+  href: PlumJsonAnimator.Models.Common.TransformModesTypes.html
+  name: TransformModesTypes
+  nameWithType: TransformModesTypes
+  fullName: PlumJsonAnimator.Models.Common.TransformModesTypes

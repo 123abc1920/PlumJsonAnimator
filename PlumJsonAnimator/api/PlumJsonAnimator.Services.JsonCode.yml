@@ -1,0 +1,988 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Services.JsonCode
+  commentId: T:PlumJsonAnimator.Services.JsonCode
+  id: JsonCode
+  parent: PlumJsonAnimator.Services
+  children:
+  - PlumJsonAnimator.Services.JsonCode.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Prettify)
+  - PlumJsonAnimator.Services.JsonCode.#ctor(PlumJsonAnimator.Services.Prettify)
+  - PlumJsonAnimator.Services.JsonCode.generateCode(PlumJsonAnimator.Models.Project)
+  - PlumJsonAnimator.Services.JsonCode.generateJSONData(PlumJsonAnimator.Models.Project)
+  - PlumJsonAnimator.Services.JsonCode.regenerate(PlumJsonAnimator.Models.Project)
+  - PlumJsonAnimator.Services.JsonCode.regenerateAnimations(System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData})
+  - PlumJsonAnimator.Services.JsonCode.regenerateBones(System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.BoneData})
+  - PlumJsonAnimator.Services.JsonCode.regenerateSkins(System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.SkinData})
+  - PlumJsonAnimator.Services.JsonCode.regenerateSlots(System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.SlotData})
+  langs:
+  - csharp
+  - vb
+  name: JsonCode
+  nameWithType: JsonCode
+  fullName: PlumJsonAnimator.Services.JsonCode
+  type: Class
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/JsonCode.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: JsonCode
+    path: Services/JsonCode.cs
+    startLine: 25
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public class JsonCode
+    content.vb: Public Class JsonCode
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: PlumJsonAnimator.Services.JsonCode.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Prettify)
+  commentId: M:PlumJsonAnimator.Services.JsonCode.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Prettify)
+  id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Prettify)'
+  parent: PlumJsonAnimator.Services.JsonCode
+  langs:
+  - csharp
+  - vb
+  name: JsonCode(GlobalState, Prettify)
+  nameWithType: JsonCode.JsonCode(GlobalState, Prettify)
+  fullName: PlumJsonAnimator.Services.JsonCode.JsonCode(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Prettify)
+  type: Constructor
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/JsonCode.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: .ctor
+    path: Services/JsonCode.cs
+    startLine: 31
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public JsonCode(GlobalState globalState, Prettify prettify)
+    parameters:
+    - id: globalState
+      type: PlumJsonAnimator.Common.Constants.GlobalState
+    - id: prettify
+      type: PlumJsonAnimator.Services.Prettify
+    content.vb: Public Sub New(globalState As GlobalState, prettify As Prettify)
+  overload: PlumJsonAnimator.Services.JsonCode.#ctor*
+  nameWithType.vb: JsonCode.New(GlobalState, Prettify)
+  fullName.vb: PlumJsonAnimator.Services.JsonCode.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Prettify)
+  name.vb: New(GlobalState, Prettify)
+- uid: PlumJsonAnimator.Services.JsonCode.#ctor(PlumJsonAnimator.Services.Prettify)
+  commentId: M:PlumJsonAnimator.Services.JsonCode.#ctor(PlumJsonAnimator.Services.Prettify)
+  id: '#ctor(PlumJsonAnimator.Services.Prettify)'
+  parent: PlumJsonAnimator.Services.JsonCode
+  langs:
+  - csharp
+  - vb
+  name: JsonCode(Prettify)
+  nameWithType: JsonCode.JsonCode(Prettify)
+  fullName: PlumJsonAnimator.Services.JsonCode.JsonCode(PlumJsonAnimator.Services.Prettify)
+  type: Constructor
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/JsonCode.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: .ctor
+    path: Services/JsonCode.cs
+    startLine: 37
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public JsonCode(Prettify prettify)
+    parameters:
+    - id: prettify
+      type: PlumJsonAnimator.Services.Prettify
+    content.vb: Public Sub New(prettify As Prettify)
+  overload: PlumJsonAnimator.Services.JsonCode.#ctor*
+  nameWithType.vb: JsonCode.New(Prettify)
+  fullName.vb: PlumJsonAnimator.Services.JsonCode.New(PlumJsonAnimator.Services.Prettify)
+  name.vb: New(Prettify)
+- uid: PlumJsonAnimator.Services.JsonCode.generateJSONData(PlumJsonAnimator.Models.Project)
+  commentId: M:PlumJsonAnimator.Services.JsonCode.generateJSONData(PlumJsonAnimator.Models.Project)
+  id: generateJSONData(PlumJsonAnimator.Models.Project)
+  parent: PlumJsonAnimator.Services.JsonCode
+  langs:
+  - csharp
+  - vb
+  name: generateJSONData(Project)
+  nameWithType: JsonCode.generateJSONData(Project)
+  fullName: PlumJsonAnimator.Services.JsonCode.generateJSONData(PlumJsonAnimator.Models.Project)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/JsonCode.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: generateJSONData
+    path: Services/JsonCode.cs
+    startLine: 115
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public CodeData generateJSONData(Project project)
+    parameters:
+    - id: project
+      type: PlumJsonAnimator.Models.Project
+    return:
+      type: PlumJsonAnimator.Services.CodeData
+    content.vb: Public Function generateJSONData(project As Project) As CodeData
+  overload: PlumJsonAnimator.Services.JsonCode.generateJSONData*
+- uid: PlumJsonAnimator.Services.JsonCode.generateCode(PlumJsonAnimator.Models.Project)
+  commentId: M:PlumJsonAnimator.Services.JsonCode.generateCode(PlumJsonAnimator.Models.Project)
+  id: generateCode(PlumJsonAnimator.Models.Project)
+  parent: PlumJsonAnimator.Services.JsonCode
+  langs:
+  - csharp
+  - vb
+  name: generateCode(Project)
+  nameWithType: JsonCode.generateCode(Project)
+  fullName: PlumJsonAnimator.Services.JsonCode.generateCode(PlumJsonAnimator.Models.Project)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/JsonCode.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: generateCode
+    path: Services/JsonCode.cs
+    startLine: 142
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public void generateCode(Project project)
+    parameters:
+    - id: project
+      type: PlumJsonAnimator.Models.Project
+    content.vb: Public Sub generateCode(project As Project)
+  overload: PlumJsonAnimator.Services.JsonCode.generateCode*
+- uid: PlumJsonAnimator.Services.JsonCode.regenerateBones(System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.BoneData})
+  commentId: M:PlumJsonAnimator.Services.JsonCode.regenerateBones(System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.BoneData})
+  id: regenerateBones(System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.BoneData})
+  parent: PlumJsonAnimator.Services.JsonCode
+  langs:
+  - csharp
+  - vb
+  name: regenerateBones(List<BoneData>)
+  nameWithType: JsonCode.regenerateBones(List<BoneData>)
+  fullName: PlumJsonAnimator.Services.JsonCode.regenerateBones(System.Collections.Generic.List<PlumJsonAnimator.Models.SkeletonNameSpace.BoneData>)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/JsonCode.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: regenerateBones
+    path: Services/JsonCode.cs
+    startLine: 153
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public ValidResult regenerateBones(List<BoneData> bones)
+    parameters:
+    - id: bones
+      type: System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.BoneData}
+    return:
+      type: PlumJsonAnimator.Services.ValidResult
+    content.vb: Public Function regenerateBones(bones As List(Of BoneData)) As ValidResult
+  overload: PlumJsonAnimator.Services.JsonCode.regenerateBones*
+  nameWithType.vb: JsonCode.regenerateBones(List(Of BoneData))
+  fullName.vb: PlumJsonAnimator.Services.JsonCode.regenerateBones(System.Collections.Generic.List(Of PlumJsonAnimator.Models.SkeletonNameSpace.BoneData))
+  name.vb: regenerateBones(List(Of BoneData))
+- uid: PlumJsonAnimator.Services.JsonCode.regenerateSlots(System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.SlotData})
+  commentId: M:PlumJsonAnimator.Services.JsonCode.regenerateSlots(System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.SlotData})
+  id: regenerateSlots(System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.SlotData})
+  parent: PlumJsonAnimator.Services.JsonCode
+  langs:
+  - csharp
+  - vb
+  name: regenerateSlots(List<SlotData>)
+  nameWithType: JsonCode.regenerateSlots(List<SlotData>)
+  fullName: PlumJsonAnimator.Services.JsonCode.regenerateSlots(System.Collections.Generic.List<PlumJsonAnimator.Models.SkeletonNameSpace.SlotData>)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/JsonCode.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: regenerateSlots
+    path: Services/JsonCode.cs
+    startLine: 221
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public ValidResult regenerateSlots(List<SlotData> slots)
+    parameters:
+    - id: slots
+      type: System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.SlotData}
+    return:
+      type: PlumJsonAnimator.Services.ValidResult
+    content.vb: Public Function regenerateSlots(slots As List(Of SlotData)) As ValidResult
+  overload: PlumJsonAnimator.Services.JsonCode.regenerateSlots*
+  nameWithType.vb: JsonCode.regenerateSlots(List(Of SlotData))
+  fullName.vb: PlumJsonAnimator.Services.JsonCode.regenerateSlots(System.Collections.Generic.List(Of PlumJsonAnimator.Models.SkeletonNameSpace.SlotData))
+  name.vb: regenerateSlots(List(Of SlotData))
+- uid: PlumJsonAnimator.Services.JsonCode.regenerateSkins(System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.SkinData})
+  commentId: M:PlumJsonAnimator.Services.JsonCode.regenerateSkins(System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.SkinData})
+  id: regenerateSkins(System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.SkinData})
+  parent: PlumJsonAnimator.Services.JsonCode
+  langs:
+  - csharp
+  - vb
+  name: regenerateSkins(List<SkinData>)
+  nameWithType: JsonCode.regenerateSkins(List<SkinData>)
+  fullName: PlumJsonAnimator.Services.JsonCode.regenerateSkins(System.Collections.Generic.List<PlumJsonAnimator.Models.SkeletonNameSpace.SkinData>)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/JsonCode.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: regenerateSkins
+    path: Services/JsonCode.cs
+    startLine: 251
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public ValidResult regenerateSkins(List<SkinData> skins)
+    parameters:
+    - id: skins
+      type: System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.SkinData}
+    return:
+      type: PlumJsonAnimator.Services.ValidResult
+    content.vb: Public Function regenerateSkins(skins As List(Of SkinData)) As ValidResult
+  overload: PlumJsonAnimator.Services.JsonCode.regenerateSkins*
+  nameWithType.vb: JsonCode.regenerateSkins(List(Of SkinData))
+  fullName.vb: PlumJsonAnimator.Services.JsonCode.regenerateSkins(System.Collections.Generic.List(Of PlumJsonAnimator.Models.SkeletonNameSpace.SkinData))
+  name.vb: regenerateSkins(List(Of SkinData))
+- uid: PlumJsonAnimator.Services.JsonCode.regenerateAnimations(System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData})
+  commentId: M:PlumJsonAnimator.Services.JsonCode.regenerateAnimations(System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData})
+  id: regenerateAnimations(System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData})
+  parent: PlumJsonAnimator.Services.JsonCode
+  langs:
+  - csharp
+  - vb
+  name: regenerateAnimations(Dictionary<string, AnimationData>)
+  nameWithType: JsonCode.regenerateAnimations(Dictionary<string, AnimationData>)
+  fullName: PlumJsonAnimator.Services.JsonCode.regenerateAnimations(System.Collections.Generic.Dictionary<string, PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData>)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/JsonCode.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: regenerateAnimations
+    path: Services/JsonCode.cs
+    startLine: 281
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public ValidResult regenerateAnimations(Dictionary<string, AnimationData> animations)
+    parameters:
+    - id: animations
+      type: System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData}
+    return:
+      type: PlumJsonAnimator.Services.ValidResult
+    content.vb: Public Function regenerateAnimations(animations As Dictionary(Of String, AnimationData)) As ValidResult
+  overload: PlumJsonAnimator.Services.JsonCode.regenerateAnimations*
+  nameWithType.vb: JsonCode.regenerateAnimations(Dictionary(Of String, AnimationData))
+  fullName.vb: PlumJsonAnimator.Services.JsonCode.regenerateAnimations(System.Collections.Generic.Dictionary(Of String, PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData))
+  name.vb: regenerateAnimations(Dictionary(Of String, AnimationData))
+- uid: PlumJsonAnimator.Services.JsonCode.regenerate(PlumJsonAnimator.Models.Project)
+  commentId: M:PlumJsonAnimator.Services.JsonCode.regenerate(PlumJsonAnimator.Models.Project)
+  id: regenerate(PlumJsonAnimator.Models.Project)
+  parent: PlumJsonAnimator.Services.JsonCode
+  langs:
+  - csharp
+  - vb
+  name: regenerate(Project)
+  nameWithType: JsonCode.regenerate(Project)
+  fullName: PlumJsonAnimator.Services.JsonCode.regenerate(PlumJsonAnimator.Models.Project)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/JsonCode.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: regenerate
+    path: Services/JsonCode.cs
+    startLine: 299
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public ProjectValidResult regenerate(Project project)
+    parameters:
+    - id: project
+      type: PlumJsonAnimator.Models.Project
+    return:
+      type: PlumJsonAnimator.Services.ProjectValidResult
+    content.vb: Public Function regenerate(project As Project) As ProjectValidResult
+  overload: PlumJsonAnimator.Services.JsonCode.regenerate*
+references:
+- uid: PlumJsonAnimator.Services
+  commentId: N:PlumJsonAnimator.Services
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Services
+  nameWithType: PlumJsonAnimator.Services
+  fullName: PlumJsonAnimator.Services
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Services
+    name: Services
+    href: PlumJsonAnimator.Services.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Services
+    name: Services
+    href: PlumJsonAnimator.Services.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: PlumJsonAnimator.Services.JsonCode.#ctor*
+  commentId: Overload:PlumJsonAnimator.Services.JsonCode.#ctor
+  href: PlumJsonAnimator.Services.JsonCode.html#PlumJsonAnimator_Services_JsonCode__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_Prettify_
+  name: JsonCode
+  nameWithType: JsonCode.JsonCode
+  fullName: PlumJsonAnimator.Services.JsonCode.JsonCode
+  nameWithType.vb: JsonCode.New
+  fullName.vb: PlumJsonAnimator.Services.JsonCode.New
+  name.vb: New
+- uid: PlumJsonAnimator.Common.Constants.GlobalState
+  commentId: T:PlumJsonAnimator.Common.Constants.GlobalState
+  parent: PlumJsonAnimator.Common.Constants
+  href: PlumJsonAnimator.Common.Constants.GlobalState.html
+  name: GlobalState
+  nameWithType: GlobalState
+  fullName: PlumJsonAnimator.Common.Constants.GlobalState
+- uid: PlumJsonAnimator.Services.Prettify
+  commentId: T:PlumJsonAnimator.Services.Prettify
+  parent: PlumJsonAnimator.Services
+  href: PlumJsonAnimator.Services.Prettify.html
+  name: Prettify
+  nameWithType: Prettify
+  fullName: PlumJsonAnimator.Services.Prettify
+- uid: PlumJsonAnimator.Common.Constants
+  commentId: N:PlumJsonAnimator.Common.Constants
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Common.Constants
+  nameWithType: PlumJsonAnimator.Common.Constants
+  fullName: PlumJsonAnimator.Common.Constants
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Constants
+    name: Constants
+    href: PlumJsonAnimator.Common.Constants.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Constants
+    name: Constants
+    href: PlumJsonAnimator.Common.Constants.html
+- uid: PlumJsonAnimator.Services.JsonCode.generateJSONData*
+  commentId: Overload:PlumJsonAnimator.Services.JsonCode.generateJSONData
+  href: PlumJsonAnimator.Services.JsonCode.html#PlumJsonAnimator_Services_JsonCode_generateJSONData_PlumJsonAnimator_Models_Project_
+  name: generateJSONData
+  nameWithType: JsonCode.generateJSONData
+  fullName: PlumJsonAnimator.Services.JsonCode.generateJSONData
+- uid: PlumJsonAnimator.Models.Project
+  commentId: T:PlumJsonAnimator.Models.Project
+  parent: PlumJsonAnimator.Models
+  href: PlumJsonAnimator.Models.Project.html
+  name: Project
+  nameWithType: Project
+  fullName: PlumJsonAnimator.Models.Project
+- uid: PlumJsonAnimator.Services.CodeData
+  commentId: T:PlumJsonAnimator.Services.CodeData
+  parent: PlumJsonAnimator.Services
+  href: PlumJsonAnimator.Services.CodeData.html
+  name: CodeData
+  nameWithType: CodeData
+  fullName: PlumJsonAnimator.Services.CodeData
+- uid: PlumJsonAnimator.Models
+  commentId: N:PlumJsonAnimator.Models
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Models
+  nameWithType: PlumJsonAnimator.Models
+  fullName: PlumJsonAnimator.Models
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+- uid: PlumJsonAnimator.Services.JsonCode.generateCode*
+  commentId: Overload:PlumJsonAnimator.Services.JsonCode.generateCode
+  href: PlumJsonAnimator.Services.JsonCode.html#PlumJsonAnimator_Services_JsonCode_generateCode_PlumJsonAnimator_Models_Project_
+  name: generateCode
+  nameWithType: JsonCode.generateCode
+  fullName: PlumJsonAnimator.Services.JsonCode.generateCode
+- uid: PlumJsonAnimator.Services.JsonCode.regenerateBones*
+  commentId: Overload:PlumJsonAnimator.Services.JsonCode.regenerateBones
+  href: PlumJsonAnimator.Services.JsonCode.html#PlumJsonAnimator_Services_JsonCode_regenerateBones_System_Collections_Generic_List_PlumJsonAnimator_Models_SkeletonNameSpace_BoneData__
+  name: regenerateBones
+  nameWithType: JsonCode.regenerateBones
+  fullName: PlumJsonAnimator.Services.JsonCode.regenerateBones
+- uid: System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.BoneData}
+  commentId: T:System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.BoneData}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<BoneData>
+  nameWithType: List<BoneData>
+  fullName: System.Collections.Generic.List<PlumJsonAnimator.Models.SkeletonNameSpace.BoneData>
+  nameWithType.vb: List(Of BoneData)
+  fullName.vb: System.Collections.Generic.List(Of PlumJsonAnimator.Models.SkeletonNameSpace.BoneData)
+  name.vb: List(Of BoneData)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData
+    name: BoneData
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData
+    name: BoneData
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.html
+  - name: )
+- uid: PlumJsonAnimator.Services.ValidResult
+  commentId: T:PlumJsonAnimator.Services.ValidResult
+  parent: PlumJsonAnimator.Services
+  href: PlumJsonAnimator.Services.ValidResult.html
+  name: ValidResult
+  nameWithType: ValidResult
+  fullName: PlumJsonAnimator.Services.ValidResult
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: PlumJsonAnimator.Services.JsonCode.regenerateSlots*
+  commentId: Overload:PlumJsonAnimator.Services.JsonCode.regenerateSlots
+  href: PlumJsonAnimator.Services.JsonCode.html#PlumJsonAnimator_Services_JsonCode_regenerateSlots_System_Collections_Generic_List_PlumJsonAnimator_Models_SkeletonNameSpace_SlotData__
+  name: regenerateSlots
+  nameWithType: JsonCode.regenerateSlots
+  fullName: PlumJsonAnimator.Services.JsonCode.regenerateSlots
+- uid: System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.SlotData}
+  commentId: T:System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.SlotData}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<SlotData>
+  nameWithType: List<SlotData>
+  fullName: System.Collections.Generic.List<PlumJsonAnimator.Models.SkeletonNameSpace.SlotData>
+  nameWithType.vb: List(Of SlotData)
+  fullName.vb: System.Collections.Generic.List(Of PlumJsonAnimator.Models.SkeletonNameSpace.SlotData)
+  name.vb: List(Of SlotData)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.SlotData
+    name: SlotData
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.SlotData.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.SlotData
+    name: SlotData
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.SlotData.html
+  - name: )
+- uid: PlumJsonAnimator.Services.JsonCode.regenerateSkins*
+  commentId: Overload:PlumJsonAnimator.Services.JsonCode.regenerateSkins
+  href: PlumJsonAnimator.Services.JsonCode.html#PlumJsonAnimator_Services_JsonCode_regenerateSkins_System_Collections_Generic_List_PlumJsonAnimator_Models_SkeletonNameSpace_SkinData__
+  name: regenerateSkins
+  nameWithType: JsonCode.regenerateSkins
+  fullName: PlumJsonAnimator.Services.JsonCode.regenerateSkins
+- uid: System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.SkinData}
+  commentId: T:System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.SkinData}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<SkinData>
+  nameWithType: List<SkinData>
+  fullName: System.Collections.Generic.List<PlumJsonAnimator.Models.SkeletonNameSpace.SkinData>
+  nameWithType.vb: List(Of SkinData)
+  fullName.vb: System.Collections.Generic.List(Of PlumJsonAnimator.Models.SkeletonNameSpace.SkinData)
+  name.vb: List(Of SkinData)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.SkinData
+    name: SkinData
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.SkinData.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.SkinData
+    name: SkinData
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.SkinData.html
+  - name: )
+- uid: PlumJsonAnimator.Services.JsonCode.regenerateAnimations*
+  commentId: Overload:PlumJsonAnimator.Services.JsonCode.regenerateAnimations
+  href: PlumJsonAnimator.Services.JsonCode.html#PlumJsonAnimator_Services_JsonCode_regenerateAnimations_System_Collections_Generic_Dictionary_System_String_PlumJsonAnimator_Models_SkeletonNameSpace_AnimationData__
+  name: regenerateAnimations
+  nameWithType: JsonCode.regenerateAnimations
+  fullName: PlumJsonAnimator.Services.JsonCode.regenerateAnimations
+- uid: System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  name: Dictionary<string, AnimationData>
+  nameWithType: Dictionary<string, AnimationData>
+  fullName: System.Collections.Generic.Dictionary<string, PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData>
+  nameWithType.vb: Dictionary(Of String, AnimationData)
+  fullName.vb: System.Collections.Generic.Dictionary(Of String, PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData)
+  name.vb: Dictionary(Of String, AnimationData)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData
+    name: AnimationData
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData
+    name: AnimationData
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData.html
+  - name: )
+- uid: System.Collections.Generic.Dictionary`2
+  commentId: T:System.Collections.Generic.Dictionary`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  name: Dictionary<TKey, TValue>
+  nameWithType: Dictionary<TKey, TValue>
+  fullName: System.Collections.Generic.Dictionary<TKey, TValue>
+  nameWithType.vb: Dictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.Dictionary(Of TKey, TValue)
+  name.vb: Dictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: PlumJsonAnimator.Services.JsonCode.regenerate*
+  commentId: Overload:PlumJsonAnimator.Services.JsonCode.regenerate
+  href: PlumJsonAnimator.Services.JsonCode.html#PlumJsonAnimator_Services_JsonCode_regenerate_PlumJsonAnimator_Models_Project_
+  name: regenerate
+  nameWithType: JsonCode.regenerate
+  fullName: PlumJsonAnimator.Services.JsonCode.regenerate
+- uid: PlumJsonAnimator.Services.ProjectValidResult
+  commentId: T:PlumJsonAnimator.Services.ProjectValidResult
+  parent: PlumJsonAnimator.Services
+  href: PlumJsonAnimator.Services.ProjectValidResult.html
+  name: ProjectValidResult
+  nameWithType: ProjectValidResult
+  fullName: PlumJsonAnimator.Services.ProjectValidResult

@@ -1,0 +1,193 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Models.ExportResult
+  commentId: T:PlumJsonAnimator.Models.ExportResult
+  id: ExportResult
+  parent: PlumJsonAnimator.Models
+  children:
+  - PlumJsonAnimator.Models.ExportResult.FFMPEG_ERROR
+  - PlumJsonAnimator.Models.ExportResult.INCORRECT_JSON
+  - PlumJsonAnimator.Models.ExportResult.NO_FFMPEG
+  - PlumJsonAnimator.Models.ExportResult.NO_FOLDER
+  - PlumJsonAnimator.Models.ExportResult.SUCCESS
+  langs:
+  - csharp
+  - vb
+  name: ExportResult
+  nameWithType: ExportResult
+  fullName: PlumJsonAnimator.Models.ExportResult
+  type: Enum
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/ExportResult.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: ExportResult
+    path: Models/ExportResult.cs
+    startLine: 2
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models
+  syntax:
+    content: public enum ExportResult
+    content.vb: Public Enum ExportResult
+- uid: PlumJsonAnimator.Models.ExportResult.SUCCESS
+  commentId: F:PlumJsonAnimator.Models.ExportResult.SUCCESS
+  id: SUCCESS
+  parent: PlumJsonAnimator.Models.ExportResult
+  langs:
+  - csharp
+  - vb
+  name: SUCCESS
+  nameWithType: ExportResult.SUCCESS
+  fullName: PlumJsonAnimator.Models.ExportResult.SUCCESS
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/ExportResult.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: SUCCESS
+    path: Models/ExportResult.cs
+    startLine: 4
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models
+  syntax:
+    content: SUCCESS = 0
+    return:
+      type: PlumJsonAnimator.Models.ExportResult
+- uid: PlumJsonAnimator.Models.ExportResult.NO_FOLDER
+  commentId: F:PlumJsonAnimator.Models.ExportResult.NO_FOLDER
+  id: NO_FOLDER
+  parent: PlumJsonAnimator.Models.ExportResult
+  langs:
+  - csharp
+  - vb
+  name: NO_FOLDER
+  nameWithType: ExportResult.NO_FOLDER
+  fullName: PlumJsonAnimator.Models.ExportResult.NO_FOLDER
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/ExportResult.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: NO_FOLDER
+    path: Models/ExportResult.cs
+    startLine: 5
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models
+  syntax:
+    content: NO_FOLDER = 1
+    return:
+      type: PlumJsonAnimator.Models.ExportResult
+- uid: PlumJsonAnimator.Models.ExportResult.INCORRECT_JSON
+  commentId: F:PlumJsonAnimator.Models.ExportResult.INCORRECT_JSON
+  id: INCORRECT_JSON
+  parent: PlumJsonAnimator.Models.ExportResult
+  langs:
+  - csharp
+  - vb
+  name: INCORRECT_JSON
+  nameWithType: ExportResult.INCORRECT_JSON
+  fullName: PlumJsonAnimator.Models.ExportResult.INCORRECT_JSON
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/ExportResult.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: INCORRECT_JSON
+    path: Models/ExportResult.cs
+    startLine: 6
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models
+  syntax:
+    content: INCORRECT_JSON = 2
+    return:
+      type: PlumJsonAnimator.Models.ExportResult
+- uid: PlumJsonAnimator.Models.ExportResult.NO_FFMPEG
+  commentId: F:PlumJsonAnimator.Models.ExportResult.NO_FFMPEG
+  id: NO_FFMPEG
+  parent: PlumJsonAnimator.Models.ExportResult
+  langs:
+  - csharp
+  - vb
+  name: NO_FFMPEG
+  nameWithType: ExportResult.NO_FFMPEG
+  fullName: PlumJsonAnimator.Models.ExportResult.NO_FFMPEG
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/ExportResult.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: NO_FFMPEG
+    path: Models/ExportResult.cs
+    startLine: 7
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models
+  syntax:
+    content: NO_FFMPEG = 3
+    return:
+      type: PlumJsonAnimator.Models.ExportResult
+- uid: PlumJsonAnimator.Models.ExportResult.FFMPEG_ERROR
+  commentId: F:PlumJsonAnimator.Models.ExportResult.FFMPEG_ERROR
+  id: FFMPEG_ERROR
+  parent: PlumJsonAnimator.Models.ExportResult
+  langs:
+  - csharp
+  - vb
+  name: FFMPEG_ERROR
+  nameWithType: ExportResult.FFMPEG_ERROR
+  fullName: PlumJsonAnimator.Models.ExportResult.FFMPEG_ERROR
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/ExportResult.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: FFMPEG_ERROR
+    path: Models/ExportResult.cs
+    startLine: 8
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models
+  syntax:
+    content: FFMPEG_ERROR = 4
+    return:
+      type: PlumJsonAnimator.Models.ExportResult
+references:
+- uid: PlumJsonAnimator.Models
+  commentId: N:PlumJsonAnimator.Models
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Models
+  nameWithType: PlumJsonAnimator.Models
+  fullName: PlumJsonAnimator.Models
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+- uid: PlumJsonAnimator.Models.ExportResult
+  commentId: T:PlumJsonAnimator.Models.ExportResult
+  parent: PlumJsonAnimator.Models
+  href: PlumJsonAnimator.Models.ExportResult.html
+  name: ExportResult
+  nameWithType: ExportResult
+  fullName: PlumJsonAnimator.Models.ExportResult

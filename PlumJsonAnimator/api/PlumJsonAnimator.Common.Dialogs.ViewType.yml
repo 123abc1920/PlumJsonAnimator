@@ -1,0 +1,255 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Common.Dialogs.ViewType
+  commentId: T:PlumJsonAnimator.Common.Dialogs.ViewType
+  id: ViewType
+  parent: PlumJsonAnimator.Common.Dialogs
+  children:
+  - PlumJsonAnimator.Common.Dialogs.ViewType.EXPORT_GIF
+  - PlumJsonAnimator.Common.Dialogs.ViewType.EXPORT_JPG
+  - PlumJsonAnimator.Common.Dialogs.ViewType.EXPORT_MP4
+  - PlumJsonAnimator.Common.Dialogs.ViewType.EXPORT_PNG
+  - PlumJsonAnimator.Common.Dialogs.ViewType.NEWPROJECT
+  - PlumJsonAnimator.Common.Dialogs.ViewType.RENAME
+  - PlumJsonAnimator.Common.Dialogs.ViewType.SETTINGS
+  langs:
+  - csharp
+  - vb
+  name: ViewType
+  nameWithType: ViewType
+  fullName: PlumJsonAnimator.Common.Dialogs.ViewType
+  type: Enum
+  source:
+    remote:
+      path: PlumJsonAnimator/Common/Dialogs/Dialogs.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: ViewType
+    path: Common/Dialogs/Dialogs.cs
+    startLine: 10
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Common.Dialogs
+  syntax:
+    content: public enum ViewType
+    content.vb: Public Enum ViewType
+- uid: PlumJsonAnimator.Common.Dialogs.ViewType.SETTINGS
+  commentId: F:PlumJsonAnimator.Common.Dialogs.ViewType.SETTINGS
+  id: SETTINGS
+  parent: PlumJsonAnimator.Common.Dialogs.ViewType
+  langs:
+  - csharp
+  - vb
+  name: SETTINGS
+  nameWithType: ViewType.SETTINGS
+  fullName: PlumJsonAnimator.Common.Dialogs.ViewType.SETTINGS
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Common/Dialogs/Dialogs.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: SETTINGS
+    path: Common/Dialogs/Dialogs.cs
+    startLine: 12
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Common.Dialogs
+  syntax:
+    content: SETTINGS = 0
+    return:
+      type: PlumJsonAnimator.Common.Dialogs.ViewType
+- uid: PlumJsonAnimator.Common.Dialogs.ViewType.NEWPROJECT
+  commentId: F:PlumJsonAnimator.Common.Dialogs.ViewType.NEWPROJECT
+  id: NEWPROJECT
+  parent: PlumJsonAnimator.Common.Dialogs.ViewType
+  langs:
+  - csharp
+  - vb
+  name: NEWPROJECT
+  nameWithType: ViewType.NEWPROJECT
+  fullName: PlumJsonAnimator.Common.Dialogs.ViewType.NEWPROJECT
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Common/Dialogs/Dialogs.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: NEWPROJECT
+    path: Common/Dialogs/Dialogs.cs
+    startLine: 13
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Common.Dialogs
+  syntax:
+    content: NEWPROJECT = 1
+    return:
+      type: PlumJsonAnimator.Common.Dialogs.ViewType
+- uid: PlumJsonAnimator.Common.Dialogs.ViewType.RENAME
+  commentId: F:PlumJsonAnimator.Common.Dialogs.ViewType.RENAME
+  id: RENAME
+  parent: PlumJsonAnimator.Common.Dialogs.ViewType
+  langs:
+  - csharp
+  - vb
+  name: RENAME
+  nameWithType: ViewType.RENAME
+  fullName: PlumJsonAnimator.Common.Dialogs.ViewType.RENAME
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Common/Dialogs/Dialogs.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: RENAME
+    path: Common/Dialogs/Dialogs.cs
+    startLine: 14
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Common.Dialogs
+  syntax:
+    content: RENAME = 2
+    return:
+      type: PlumJsonAnimator.Common.Dialogs.ViewType
+- uid: PlumJsonAnimator.Common.Dialogs.ViewType.EXPORT_JPG
+  commentId: F:PlumJsonAnimator.Common.Dialogs.ViewType.EXPORT_JPG
+  id: EXPORT_JPG
+  parent: PlumJsonAnimator.Common.Dialogs.ViewType
+  langs:
+  - csharp
+  - vb
+  name: EXPORT_JPG
+  nameWithType: ViewType.EXPORT_JPG
+  fullName: PlumJsonAnimator.Common.Dialogs.ViewType.EXPORT_JPG
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Common/Dialogs/Dialogs.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: EXPORT_JPG
+    path: Common/Dialogs/Dialogs.cs
+    startLine: 15
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Common.Dialogs
+  syntax:
+    content: EXPORT_JPG = 3
+    return:
+      type: PlumJsonAnimator.Common.Dialogs.ViewType
+- uid: PlumJsonAnimator.Common.Dialogs.ViewType.EXPORT_PNG
+  commentId: F:PlumJsonAnimator.Common.Dialogs.ViewType.EXPORT_PNG
+  id: EXPORT_PNG
+  parent: PlumJsonAnimator.Common.Dialogs.ViewType
+  langs:
+  - csharp
+  - vb
+  name: EXPORT_PNG
+  nameWithType: ViewType.EXPORT_PNG
+  fullName: PlumJsonAnimator.Common.Dialogs.ViewType.EXPORT_PNG
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Common/Dialogs/Dialogs.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: EXPORT_PNG
+    path: Common/Dialogs/Dialogs.cs
+    startLine: 16
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Common.Dialogs
+  syntax:
+    content: EXPORT_PNG = 4
+    return:
+      type: PlumJsonAnimator.Common.Dialogs.ViewType
+- uid: PlumJsonAnimator.Common.Dialogs.ViewType.EXPORT_GIF
+  commentId: F:PlumJsonAnimator.Common.Dialogs.ViewType.EXPORT_GIF
+  id: EXPORT_GIF
+  parent: PlumJsonAnimator.Common.Dialogs.ViewType
+  langs:
+  - csharp
+  - vb
+  name: EXPORT_GIF
+  nameWithType: ViewType.EXPORT_GIF
+  fullName: PlumJsonAnimator.Common.Dialogs.ViewType.EXPORT_GIF
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Common/Dialogs/Dialogs.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: EXPORT_GIF
+    path: Common/Dialogs/Dialogs.cs
+    startLine: 17
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Common.Dialogs
+  syntax:
+    content: EXPORT_GIF = 5
+    return:
+      type: PlumJsonAnimator.Common.Dialogs.ViewType
+- uid: PlumJsonAnimator.Common.Dialogs.ViewType.EXPORT_MP4
+  commentId: F:PlumJsonAnimator.Common.Dialogs.ViewType.EXPORT_MP4
+  id: EXPORT_MP4
+  parent: PlumJsonAnimator.Common.Dialogs.ViewType
+  langs:
+  - csharp
+  - vb
+  name: EXPORT_MP4
+  nameWithType: ViewType.EXPORT_MP4
+  fullName: PlumJsonAnimator.Common.Dialogs.ViewType.EXPORT_MP4
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Common/Dialogs/Dialogs.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: EXPORT_MP4
+    path: Common/Dialogs/Dialogs.cs
+    startLine: 18
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Common.Dialogs
+  syntax:
+    content: EXPORT_MP4 = 6
+    return:
+      type: PlumJsonAnimator.Common.Dialogs.ViewType
+references:
+- uid: PlumJsonAnimator.Common.Dialogs
+  commentId: N:PlumJsonAnimator.Common.Dialogs
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Common.Dialogs
+  nameWithType: PlumJsonAnimator.Common.Dialogs
+  fullName: PlumJsonAnimator.Common.Dialogs
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Dialogs
+    name: Dialogs
+    href: PlumJsonAnimator.Common.Dialogs.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Dialogs
+    name: Dialogs
+    href: PlumJsonAnimator.Common.Dialogs.html
+- uid: PlumJsonAnimator.Common.Dialogs.ViewType
+  commentId: T:PlumJsonAnimator.Common.Dialogs.ViewType
+  parent: PlumJsonAnimator.Common.Dialogs
+  href: PlumJsonAnimator.Common.Dialogs.ViewType.html
+  name: ViewType
+  nameWithType: ViewType
+  fullName: PlumJsonAnimator.Common.Dialogs.ViewType

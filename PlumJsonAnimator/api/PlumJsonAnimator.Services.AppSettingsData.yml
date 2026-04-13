@@ -1,0 +1,791 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Services.AppSettingsData
+  commentId: T:PlumJsonAnimator.Services.AppSettingsData
+  id: AppSettingsData
+  parent: PlumJsonAnimator.Services
+  children:
+  - PlumJsonAnimator.Services.AppSettingsData.#ctor
+  - PlumJsonAnimator.Services.AppSettingsData.CaptureHeight
+  - PlumJsonAnimator.Services.AppSettingsData.CaptureWidth
+  - PlumJsonAnimator.Services.AppSettingsData.CaptureX
+  - PlumJsonAnimator.Services.AppSettingsData.CaptureY
+  - PlumJsonAnimator.Services.AppSettingsData.Ffmpeg
+  - PlumJsonAnimator.Services.AppSettingsData.Lang
+  - PlumJsonAnimator.Services.AppSettingsData.LastDir
+  - PlumJsonAnimator.Services.AppSettingsData.Theme
+  - PlumJsonAnimator.Services.AppSettingsData.Workspace
+  langs:
+  - csharp
+  - vb
+  name: AppSettingsData
+  nameWithType: AppSettingsData
+  fullName: PlumJsonAnimator.Services.AppSettingsData
+  type: Class
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/AppSettings.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: AppSettingsData
+    path: Services/AppSettings.cs
+    startLine: 182
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public class AppSettingsData
+    content.vb: Public Class AppSettingsData
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: PlumJsonAnimator.Services.AppSettingsData.#ctor
+  commentId: M:PlumJsonAnimator.Services.AppSettingsData.#ctor
+  id: '#ctor'
+  parent: PlumJsonAnimator.Services.AppSettingsData
+  langs:
+  - csharp
+  - vb
+  name: AppSettingsData()
+  nameWithType: AppSettingsData.AppSettingsData()
+  fullName: PlumJsonAnimator.Services.AppSettingsData.AppSettingsData()
+  type: Constructor
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/AppSettings.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: .ctor
+    path: Services/AppSettings.cs
+    startLine: 182
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public AppSettingsData()
+    content.vb: Public Sub New()
+  overload: PlumJsonAnimator.Services.AppSettingsData.#ctor*
+  nameWithType.vb: AppSettingsData.New()
+  fullName.vb: PlumJsonAnimator.Services.AppSettingsData.New()
+  name.vb: New()
+- uid: PlumJsonAnimator.Services.AppSettingsData.LastDir
+  commentId: P:PlumJsonAnimator.Services.AppSettingsData.LastDir
+  id: LastDir
+  parent: PlumJsonAnimator.Services.AppSettingsData
+  langs:
+  - csharp
+  - vb
+  name: LastDir
+  nameWithType: AppSettingsData.LastDir
+  fullName: PlumJsonAnimator.Services.AppSettingsData.LastDir
+  type: Property
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/AppSettings.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: LastDir
+    path: Services/AppSettings.cs
+    startLine: 184
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: >-
+      [JsonProperty("last_dir")]
+
+      public required string LastDir { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <JsonProperty("last_dir")>
+
+      Public Property LastDir As String
+  overload: PlumJsonAnimator.Services.AppSettingsData.LastDir*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: last_dir
+- uid: PlumJsonAnimator.Services.AppSettingsData.Workspace
+  commentId: P:PlumJsonAnimator.Services.AppSettingsData.Workspace
+  id: Workspace
+  parent: PlumJsonAnimator.Services.AppSettingsData
+  langs:
+  - csharp
+  - vb
+  name: Workspace
+  nameWithType: AppSettingsData.Workspace
+  fullName: PlumJsonAnimator.Services.AppSettingsData.Workspace
+  type: Property
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/AppSettings.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: Workspace
+    path: Services/AppSettings.cs
+    startLine: 187
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: >-
+      [JsonProperty("workspace")]
+
+      public required string Workspace { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <JsonProperty("workspace")>
+
+      Public Property Workspace As String
+  overload: PlumJsonAnimator.Services.AppSettingsData.Workspace*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: workspace
+- uid: PlumJsonAnimator.Services.AppSettingsData.Theme
+  commentId: P:PlumJsonAnimator.Services.AppSettingsData.Theme
+  id: Theme
+  parent: PlumJsonAnimator.Services.AppSettingsData
+  langs:
+  - csharp
+  - vb
+  name: Theme
+  nameWithType: AppSettingsData.Theme
+  fullName: PlumJsonAnimator.Services.AppSettingsData.Theme
+  type: Property
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/AppSettings.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: Theme
+    path: Services/AppSettings.cs
+    startLine: 190
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: >-
+      [JsonProperty("theme")]
+
+      public string Theme { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <JsonProperty("theme")>
+
+      Public Property Theme As String
+  overload: PlumJsonAnimator.Services.AppSettingsData.Theme*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: theme
+- uid: PlumJsonAnimator.Services.AppSettingsData.Lang
+  commentId: P:PlumJsonAnimator.Services.AppSettingsData.Lang
+  id: Lang
+  parent: PlumJsonAnimator.Services.AppSettingsData
+  langs:
+  - csharp
+  - vb
+  name: Lang
+  nameWithType: AppSettingsData.Lang
+  fullName: PlumJsonAnimator.Services.AppSettingsData.Lang
+  type: Property
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/AppSettings.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: Lang
+    path: Services/AppSettings.cs
+    startLine: 193
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: >-
+      [JsonProperty("language")]
+
+      public string Lang { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <JsonProperty("language")>
+
+      Public Property Lang As String
+  overload: PlumJsonAnimator.Services.AppSettingsData.Lang*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: language
+- uid: PlumJsonAnimator.Services.AppSettingsData.Ffmpeg
+  commentId: P:PlumJsonAnimator.Services.AppSettingsData.Ffmpeg
+  id: Ffmpeg
+  parent: PlumJsonAnimator.Services.AppSettingsData
+  langs:
+  - csharp
+  - vb
+  name: Ffmpeg
+  nameWithType: AppSettingsData.Ffmpeg
+  fullName: PlumJsonAnimator.Services.AppSettingsData.Ffmpeg
+  type: Property
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/AppSettings.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: Ffmpeg
+    path: Services/AppSettings.cs
+    startLine: 196
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: >-
+      [JsonProperty("ffmpeg")]
+
+      public string Ffmpeg { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <JsonProperty("ffmpeg")>
+
+      Public Property Ffmpeg As String
+  overload: PlumJsonAnimator.Services.AppSettingsData.Ffmpeg*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: ffmpeg
+- uid: PlumJsonAnimator.Services.AppSettingsData.CaptureX
+  commentId: P:PlumJsonAnimator.Services.AppSettingsData.CaptureX
+  id: CaptureX
+  parent: PlumJsonAnimator.Services.AppSettingsData
+  langs:
+  - csharp
+  - vb
+  name: CaptureX
+  nameWithType: AppSettingsData.CaptureX
+  fullName: PlumJsonAnimator.Services.AppSettingsData.CaptureX
+  type: Property
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/AppSettings.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: CaptureX
+    path: Services/AppSettings.cs
+    startLine: 199
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: >-
+      [JsonProperty("capture_x")]
+
+      public int CaptureX { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: >-
+      <JsonProperty("capture_x")>
+
+      Public Property CaptureX As Integer
+  overload: PlumJsonAnimator.Services.AppSettingsData.CaptureX*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: capture_x
+- uid: PlumJsonAnimator.Services.AppSettingsData.CaptureY
+  commentId: P:PlumJsonAnimator.Services.AppSettingsData.CaptureY
+  id: CaptureY
+  parent: PlumJsonAnimator.Services.AppSettingsData
+  langs:
+  - csharp
+  - vb
+  name: CaptureY
+  nameWithType: AppSettingsData.CaptureY
+  fullName: PlumJsonAnimator.Services.AppSettingsData.CaptureY
+  type: Property
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/AppSettings.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: CaptureY
+    path: Services/AppSettings.cs
+    startLine: 202
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: >-
+      [JsonProperty("capture_y")]
+
+      public int CaptureY { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: >-
+      <JsonProperty("capture_y")>
+
+      Public Property CaptureY As Integer
+  overload: PlumJsonAnimator.Services.AppSettingsData.CaptureY*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: capture_y
+- uid: PlumJsonAnimator.Services.AppSettingsData.CaptureWidth
+  commentId: P:PlumJsonAnimator.Services.AppSettingsData.CaptureWidth
+  id: CaptureWidth
+  parent: PlumJsonAnimator.Services.AppSettingsData
+  langs:
+  - csharp
+  - vb
+  name: CaptureWidth
+  nameWithType: AppSettingsData.CaptureWidth
+  fullName: PlumJsonAnimator.Services.AppSettingsData.CaptureWidth
+  type: Property
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/AppSettings.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: CaptureWidth
+    path: Services/AppSettings.cs
+    startLine: 205
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: >-
+      [JsonProperty("capture_width")]
+
+      public int CaptureWidth { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: >-
+      <JsonProperty("capture_width")>
+
+      Public Property CaptureWidth As Integer
+  overload: PlumJsonAnimator.Services.AppSettingsData.CaptureWidth*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: capture_width
+- uid: PlumJsonAnimator.Services.AppSettingsData.CaptureHeight
+  commentId: P:PlumJsonAnimator.Services.AppSettingsData.CaptureHeight
+  id: CaptureHeight
+  parent: PlumJsonAnimator.Services.AppSettingsData
+  langs:
+  - csharp
+  - vb
+  name: CaptureHeight
+  nameWithType: AppSettingsData.CaptureHeight
+  fullName: PlumJsonAnimator.Services.AppSettingsData.CaptureHeight
+  type: Property
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/AppSettings.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: CaptureHeight
+    path: Services/AppSettings.cs
+    startLine: 208
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: >-
+      [JsonProperty("capture_height")]
+
+      public int CaptureHeight { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: >-
+      <JsonProperty("capture_height")>
+
+      Public Property CaptureHeight As Integer
+  overload: PlumJsonAnimator.Services.AppSettingsData.CaptureHeight*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: capture_height
+references:
+- uid: PlumJsonAnimator.Services
+  commentId: N:PlumJsonAnimator.Services
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Services
+  nameWithType: PlumJsonAnimator.Services
+  fullName: PlumJsonAnimator.Services
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Services
+    name: Services
+    href: PlumJsonAnimator.Services.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Services
+    name: Services
+    href: PlumJsonAnimator.Services.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: PlumJsonAnimator.Services.AppSettingsData.#ctor*
+  commentId: Overload:PlumJsonAnimator.Services.AppSettingsData.#ctor
+  href: PlumJsonAnimator.Services.AppSettingsData.html#PlumJsonAnimator_Services_AppSettingsData__ctor
+  name: AppSettingsData
+  nameWithType: AppSettingsData.AppSettingsData
+  fullName: PlumJsonAnimator.Services.AppSettingsData.AppSettingsData
+  nameWithType.vb: AppSettingsData.New
+  fullName.vb: PlumJsonAnimator.Services.AppSettingsData.New
+  name.vb: New
+- uid: PlumJsonAnimator.Services.AppSettingsData.LastDir*
+  commentId: Overload:PlumJsonAnimator.Services.AppSettingsData.LastDir
+  href: PlumJsonAnimator.Services.AppSettingsData.html#PlumJsonAnimator_Services_AppSettingsData_LastDir
+  name: LastDir
+  nameWithType: AppSettingsData.LastDir
+  fullName: PlumJsonAnimator.Services.AppSettingsData.LastDir
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: PlumJsonAnimator.Services.AppSettingsData.Workspace*
+  commentId: Overload:PlumJsonAnimator.Services.AppSettingsData.Workspace
+  href: PlumJsonAnimator.Services.AppSettingsData.html#PlumJsonAnimator_Services_AppSettingsData_Workspace
+  name: Workspace
+  nameWithType: AppSettingsData.Workspace
+  fullName: PlumJsonAnimator.Services.AppSettingsData.Workspace
+- uid: PlumJsonAnimator.Services.AppSettingsData.Theme*
+  commentId: Overload:PlumJsonAnimator.Services.AppSettingsData.Theme
+  href: PlumJsonAnimator.Services.AppSettingsData.html#PlumJsonAnimator_Services_AppSettingsData_Theme
+  name: Theme
+  nameWithType: AppSettingsData.Theme
+  fullName: PlumJsonAnimator.Services.AppSettingsData.Theme
+- uid: PlumJsonAnimator.Services.AppSettingsData.Lang*
+  commentId: Overload:PlumJsonAnimator.Services.AppSettingsData.Lang
+  href: PlumJsonAnimator.Services.AppSettingsData.html#PlumJsonAnimator_Services_AppSettingsData_Lang
+  name: Lang
+  nameWithType: AppSettingsData.Lang
+  fullName: PlumJsonAnimator.Services.AppSettingsData.Lang
+- uid: PlumJsonAnimator.Services.AppSettingsData.Ffmpeg*
+  commentId: Overload:PlumJsonAnimator.Services.AppSettingsData.Ffmpeg
+  href: PlumJsonAnimator.Services.AppSettingsData.html#PlumJsonAnimator_Services_AppSettingsData_Ffmpeg
+  name: Ffmpeg
+  nameWithType: AppSettingsData.Ffmpeg
+  fullName: PlumJsonAnimator.Services.AppSettingsData.Ffmpeg
+- uid: PlumJsonAnimator.Services.AppSettingsData.CaptureX*
+  commentId: Overload:PlumJsonAnimator.Services.AppSettingsData.CaptureX
+  href: PlumJsonAnimator.Services.AppSettingsData.html#PlumJsonAnimator_Services_AppSettingsData_CaptureX
+  name: CaptureX
+  nameWithType: AppSettingsData.CaptureX
+  fullName: PlumJsonAnimator.Services.AppSettingsData.CaptureX
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: PlumJsonAnimator.Services.AppSettingsData.CaptureY*
+  commentId: Overload:PlumJsonAnimator.Services.AppSettingsData.CaptureY
+  href: PlumJsonAnimator.Services.AppSettingsData.html#PlumJsonAnimator_Services_AppSettingsData_CaptureY
+  name: CaptureY
+  nameWithType: AppSettingsData.CaptureY
+  fullName: PlumJsonAnimator.Services.AppSettingsData.CaptureY
+- uid: PlumJsonAnimator.Services.AppSettingsData.CaptureWidth*
+  commentId: Overload:PlumJsonAnimator.Services.AppSettingsData.CaptureWidth
+  href: PlumJsonAnimator.Services.AppSettingsData.html#PlumJsonAnimator_Services_AppSettingsData_CaptureWidth
+  name: CaptureWidth
+  nameWithType: AppSettingsData.CaptureWidth
+  fullName: PlumJsonAnimator.Services.AppSettingsData.CaptureWidth
+- uid: PlumJsonAnimator.Services.AppSettingsData.CaptureHeight*
+  commentId: Overload:PlumJsonAnimator.Services.AppSettingsData.CaptureHeight
+  href: PlumJsonAnimator.Services.AppSettingsData.html#PlumJsonAnimator_Services_AppSettingsData_CaptureHeight
+  name: CaptureHeight
+  nameWithType: AppSettingsData.CaptureHeight
+  fullName: PlumJsonAnimator.Services.AppSettingsData.CaptureHeight

@@ -1,0 +1,1386 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  id: Skin
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace
+  children:
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.#ctor(System.String,PlumJsonAnimator.Common.Constants.GlobalState)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.AddSlot(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.BindSlotAttachment(PlumJsonAnimator.Models.SkeletonNameSpace.Slot,PlumJsonAnimator.Models.SkeletonNameSpace.Attachment)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsAndRemoveRes(PlumJsonAnimator.Models.Resources.Res)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsRes(PlumJsonAnimator.Models.Resources.Res)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsSlot(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.DeleteSlot(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.DrawSkin(Avalonia.Controls.Canvas)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetAttachment(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetImagePath(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetSlots(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.Name
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.SlotAttachmentBinding
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateCode
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateJSONData
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.isSlotDrawable(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  langs:
+  - csharp
+  - vb
+  name: Skin
+  nameWithType: Skin
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  type: Class
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Skeleton/Skin.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: Skin
+    path: Models/Skeleton/Skin.cs
+    startLine: 11
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  syntax:
+    content: 'public class Skin : INotifyable, INotifyPropertyChanged'
+    content.vb: Public Class Skin Inherits INotifyable Implements INotifyPropertyChanged
+  inheritance:
+  - System.Object
+  - PlumJsonAnimator.Models.Interfaces.INotifyable
+  implements:
+  - System.ComponentModel.INotifyPropertyChanged
+  inheritedMembers:
+  - PlumJsonAnimator.Models.Interfaces.INotifyable.PropertyChanged
+  - PlumJsonAnimator.Models.Interfaces.INotifyable.OnPropertyChanged(System.String)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.Name
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.Name
+  id: Name
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: Skin.Name
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.Name
+  type: Property
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Skeleton/Skin.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: Name
+    path: Models/Skeleton/Skin.cs
+    startLine: 15
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  syntax:
+    content: public string Name { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Name As String
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.Name*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.SlotAttachmentBinding
+  commentId: F:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.SlotAttachmentBinding
+  id: SlotAttachmentBinding
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  langs:
+  - csharp
+  - vb
+  name: SlotAttachmentBinding
+  nameWithType: Skin.SlotAttachmentBinding
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.SlotAttachmentBinding
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Skeleton/Skin.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: SlotAttachmentBinding
+    path: Models/Skeleton/Skin.cs
+    startLine: 27
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  syntax:
+    content: public Dictionary<Slot, Attachment?> SlotAttachmentBinding
+    return:
+      type: System.Collections.Generic.Dictionary{PlumJsonAnimator.Models.SkeletonNameSpace.Slot,PlumJsonAnimator.Models.SkeletonNameSpace.Attachment}
+    content.vb: Public SlotAttachmentBinding As Dictionary(Of Slot, Attachment)
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
+  id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState)'
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  langs:
+  - csharp
+  - vb
+  name: Skin(GlobalState)
+  nameWithType: Skin.Skin(GlobalState)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.Skin(PlumJsonAnimator.Common.Constants.GlobalState)
+  type: Constructor
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Skeleton/Skin.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: .ctor
+    path: Models/Skeleton/Skin.cs
+    startLine: 32
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  syntax:
+    content: public Skin(GlobalState globalState)
+    parameters:
+    - id: globalState
+      type: PlumJsonAnimator.Common.Constants.GlobalState
+    content.vb: Public Sub New(globalState As GlobalState)
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.#ctor*
+  nameWithType.vb: Skin.New(GlobalState)
+  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.New(PlumJsonAnimator.Common.Constants.GlobalState)
+  name.vb: New(GlobalState)
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.#ctor(System.String,PlumJsonAnimator.Common.Constants.GlobalState)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.#ctor(System.String,PlumJsonAnimator.Common.Constants.GlobalState)
+  id: '#ctor(System.String,PlumJsonAnimator.Common.Constants.GlobalState)'
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  langs:
+  - csharp
+  - vb
+  name: Skin(string, GlobalState)
+  nameWithType: Skin.Skin(string, GlobalState)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.Skin(string, PlumJsonAnimator.Common.Constants.GlobalState)
+  type: Constructor
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Skeleton/Skin.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: .ctor
+    path: Models/Skeleton/Skin.cs
+    startLine: 37
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  syntax:
+    content: public Skin(string name, GlobalState globalState)
+    parameters:
+    - id: name
+      type: System.String
+    - id: globalState
+      type: PlumJsonAnimator.Common.Constants.GlobalState
+    content.vb: Public Sub New(name As String, globalState As GlobalState)
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.#ctor*
+  nameWithType.vb: Skin.New(String, GlobalState)
+  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.New(String, PlumJsonAnimator.Common.Constants.GlobalState)
+  name.vb: New(String, GlobalState)
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.BindSlotAttachment(PlumJsonAnimator.Models.SkeletonNameSpace.Slot,PlumJsonAnimator.Models.SkeletonNameSpace.Attachment)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.BindSlotAttachment(PlumJsonAnimator.Models.SkeletonNameSpace.Slot,PlumJsonAnimator.Models.SkeletonNameSpace.Attachment)
+  id: BindSlotAttachment(PlumJsonAnimator.Models.SkeletonNameSpace.Slot,PlumJsonAnimator.Models.SkeletonNameSpace.Attachment)
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  langs:
+  - csharp
+  - vb
+  name: BindSlotAttachment(Slot, Attachment)
+  nameWithType: Skin.BindSlotAttachment(Slot, Attachment)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.BindSlotAttachment(PlumJsonAnimator.Models.SkeletonNameSpace.Slot, PlumJsonAnimator.Models.SkeletonNameSpace.Attachment)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Skeleton/Skin.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: BindSlotAttachment
+    path: Models/Skeleton/Skin.cs
+    startLine: 43
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  syntax:
+    content: public void BindSlotAttachment(Slot s, Attachment a)
+    parameters:
+    - id: s
+      type: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+    - id: a
+      type: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment
+    content.vb: Public Sub BindSlotAttachment(s As Slot, a As Attachment)
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.BindSlotAttachment*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.AddSlot(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.AddSlot(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  id: AddSlot(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  langs:
+  - csharp
+  - vb
+  name: AddSlot(Slot)
+  nameWithType: Skin.AddSlot(Slot)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.AddSlot(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Skeleton/Skin.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: AddSlot
+    path: Models/Skeleton/Skin.cs
+    startLine: 66
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  summary: Adds slots to skin without binding
+  example: []
+  syntax:
+    content: public void AddSlot(Slot s)
+    parameters:
+    - id: s
+      type: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+      description: ''
+    content.vb: Public Sub AddSlot(s As Slot)
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.AddSlot*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.DeleteSlot(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.DeleteSlot(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  id: DeleteSlot(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  langs:
+  - csharp
+  - vb
+  name: DeleteSlot(Slot)
+  nameWithType: Skin.DeleteSlot(Slot)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.DeleteSlot(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Skeleton/Skin.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: DeleteSlot
+    path: Models/Skeleton/Skin.cs
+    startLine: 78
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  syntax:
+    content: public void DeleteSlot(Slot s)
+    parameters:
+    - id: s
+      type: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+    content.vb: Public Sub DeleteSlot(s As Slot)
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.DeleteSlot*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.DrawSkin(Avalonia.Controls.Canvas)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.DrawSkin(Avalonia.Controls.Canvas)
+  id: DrawSkin(Avalonia.Controls.Canvas)
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  langs:
+  - csharp
+  - vb
+  name: DrawSkin(Canvas)
+  nameWithType: Skin.DrawSkin(Canvas)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.DrawSkin(Avalonia.Controls.Canvas)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Skeleton/Skin.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: DrawSkin
+    path: Models/Skeleton/Skin.cs
+    startLine: 90
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  summary: Draws skin
+  example: []
+  syntax:
+    content: public void DrawSkin(Canvas canvas)
+    parameters:
+    - id: canvas
+      type: Avalonia.Controls.Canvas
+      description: ''
+    content.vb: Public Sub DrawSkin(canvas As Canvas)
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.DrawSkin*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsSlot(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsSlot(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  id: ContainsSlot(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  langs:
+  - csharp
+  - vb
+  name: ContainsSlot(Slot)
+  nameWithType: Skin.ContainsSlot(Slot)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsSlot(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Skeleton/Skin.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: ContainsSlot
+    path: Models/Skeleton/Skin.cs
+    startLine: 100
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  syntax:
+    content: public bool ContainsSlot(Slot s)
+    parameters:
+    - id: s
+      type: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+    return:
+      type: System.Boolean
+    content.vb: Public Function ContainsSlot(s As Slot) As Boolean
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsSlot*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsRes(PlumJsonAnimator.Models.Resources.Res)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsRes(PlumJsonAnimator.Models.Resources.Res)
+  id: ContainsRes(PlumJsonAnimator.Models.Resources.Res)
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  langs:
+  - csharp
+  - vb
+  name: ContainsRes(Res)
+  nameWithType: Skin.ContainsRes(Res)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsRes(PlumJsonAnimator.Models.Resources.Res)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Skeleton/Skin.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: ContainsRes
+    path: Models/Skeleton/Skin.cs
+    startLine: 105
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  syntax:
+    content: public bool ContainsRes(Res res)
+    parameters:
+    - id: res
+      type: PlumJsonAnimator.Models.Resources.Res
+    return:
+      type: System.Boolean
+    content.vb: Public Function ContainsRes(res As Res) As Boolean
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsRes*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsAndRemoveRes(PlumJsonAnimator.Models.Resources.Res)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsAndRemoveRes(PlumJsonAnimator.Models.Resources.Res)
+  id: ContainsAndRemoveRes(PlumJsonAnimator.Models.Resources.Res)
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  langs:
+  - csharp
+  - vb
+  name: ContainsAndRemoveRes(Res)
+  nameWithType: Skin.ContainsAndRemoveRes(Res)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsAndRemoveRes(PlumJsonAnimator.Models.Resources.Res)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Skeleton/Skin.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: ContainsAndRemoveRes
+    path: Models/Skeleton/Skin.cs
+    startLine: 117
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  syntax:
+    content: public bool ContainsAndRemoveRes(Res res)
+    parameters:
+    - id: res
+      type: PlumJsonAnimator.Models.Resources.Res
+    return:
+      type: System.Boolean
+    content.vb: Public Function ContainsAndRemoveRes(res As Res) As Boolean
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsAndRemoveRes*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetImagePath(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetImagePath(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  id: GetImagePath(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  langs:
+  - csharp
+  - vb
+  name: GetImagePath(Slot)
+  nameWithType: Skin.GetImagePath(Slot)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetImagePath(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Skeleton/Skin.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: GetImagePath
+    path: Models/Skeleton/Skin.cs
+    startLine: 131
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  syntax:
+    content: public string GetImagePath(Slot s)
+    parameters:
+    - id: s
+      type: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+    return:
+      type: System.String
+    content.vb: Public Function GetImagePath(s As Slot) As String
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetImagePath*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetSlots(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetSlots(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  id: GetSlots(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  langs:
+  - csharp
+  - vb
+  name: GetSlots(Bone)
+  nameWithType: Skin.GetSlots(Bone)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetSlots(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Skeleton/Skin.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: GetSlots
+    path: Models/Skeleton/Skin.cs
+    startLine: 148
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  summary: Returns all slots bounded with this bone
+  example: []
+  syntax:
+    content: public List<Slot> GetSlots(Bone b)
+    parameters:
+    - id: b
+      type: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+      description: ''
+    return:
+      type: System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.Slot}
+      description: A list of slots
+    content.vb: Public Function GetSlots(b As Bone) As List(Of Slot)
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetSlots*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.isSlotDrawable(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.isSlotDrawable(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  id: isSlotDrawable(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  langs:
+  - csharp
+  - vb
+  name: isSlotDrawable(Slot)
+  nameWithType: Skin.isSlotDrawable(Slot)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.isSlotDrawable(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Skeleton/Skin.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: isSlotDrawable
+    path: Models/Skeleton/Skin.cs
+    startLine: 166
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  summary: Checks whether the slot can be drawn
+  example: []
+  syntax:
+    content: public bool isSlotDrawable(Slot s)
+    parameters:
+    - id: s
+      type: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+      description: ''
+    return:
+      type: System.Boolean
+      description: Returns true, if slot can be drawn
+    content.vb: Public Function isSlotDrawable(s As Slot) As Boolean
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.isSlotDrawable*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetAttachment(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetAttachment(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  id: GetAttachment(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  langs:
+  - csharp
+  - vb
+  name: GetAttachment(Slot)
+  nameWithType: Skin.GetAttachment(Slot)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetAttachment(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Skeleton/Skin.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: GetAttachment
+    path: Models/Skeleton/Skin.cs
+    startLine: 175
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  syntax:
+    content: public Attachment? GetAttachment(Slot s)
+    parameters:
+    - id: s
+      type: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+    return:
+      type: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment
+    content.vb: Public Function GetAttachment(s As Slot) As Attachment
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetAttachment*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateJSONData
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateJSONData
+  id: generateJSONData
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  langs:
+  - csharp
+  - vb
+  name: generateJSONData()
+  nameWithType: Skin.generateJSONData()
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateJSONData()
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Skeleton/Skin.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: generateJSONData
+    path: Models/Skeleton/Skin.cs
+    startLine: 184
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  syntax:
+    content: public SkinData generateJSONData()
+    return:
+      type: PlumJsonAnimator.Models.SkeletonNameSpace.SkinData
+    content.vb: Public Function generateJSONData() As SkinData
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateJSONData*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateCode
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateCode
+  id: generateCode
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  langs:
+  - csharp
+  - vb
+  name: generateCode()
+  nameWithType: Skin.generateCode()
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateCode()
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Skeleton/Skin.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: generateCode
+    path: Models/Skeleton/Skin.cs
+    startLine: 202
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  syntax:
+    content: public string generateCode()
+    return:
+      type: System.String
+    content.vb: Public Function generateCode() As String
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateCode*
+references:
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace
+  commentId: N:PlumJsonAnimator.Models.SkeletonNameSpace
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Models.SkeletonNameSpace
+  nameWithType: PlumJsonAnimator.Models.SkeletonNameSpace
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace
+    name: SkeletonNameSpace
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace
+    name: SkeletonNameSpace
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: PlumJsonAnimator.Models.Interfaces.INotifyable
+  commentId: T:PlumJsonAnimator.Models.Interfaces.INotifyable
+  parent: PlumJsonAnimator.Models.Interfaces
+  href: PlumJsonAnimator.Models.Interfaces.INotifyable.html
+  name: INotifyable
+  nameWithType: INotifyable
+  fullName: PlumJsonAnimator.Models.Interfaces.INotifyable
+- uid: System.ComponentModel.INotifyPropertyChanged
+  commentId: T:System.ComponentModel.INotifyPropertyChanged
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged
+  name: INotifyPropertyChanged
+  nameWithType: INotifyPropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged
+- uid: PlumJsonAnimator.Models.Interfaces.INotifyable.PropertyChanged
+  commentId: E:PlumJsonAnimator.Models.Interfaces.INotifyable.PropertyChanged
+  parent: PlumJsonAnimator.Models.Interfaces.INotifyable
+  href: PlumJsonAnimator.Models.Interfaces.INotifyable.html#PlumJsonAnimator_Models_Interfaces_INotifyable_PropertyChanged
+  name: PropertyChanged
+  nameWithType: INotifyable.PropertyChanged
+  fullName: PlumJsonAnimator.Models.Interfaces.INotifyable.PropertyChanged
+- uid: PlumJsonAnimator.Models.Interfaces.INotifyable.OnPropertyChanged(System.String)
+  commentId: M:PlumJsonAnimator.Models.Interfaces.INotifyable.OnPropertyChanged(System.String)
+  parent: PlumJsonAnimator.Models.Interfaces.INotifyable
+  isExternal: true
+  href: PlumJsonAnimator.Models.Interfaces.INotifyable.html#PlumJsonAnimator_Models_Interfaces_INotifyable_OnPropertyChanged_System_String_
+  name: OnPropertyChanged(string)
+  nameWithType: INotifyable.OnPropertyChanged(string)
+  fullName: PlumJsonAnimator.Models.Interfaces.INotifyable.OnPropertyChanged(string)
+  nameWithType.vb: INotifyable.OnPropertyChanged(String)
+  fullName.vb: PlumJsonAnimator.Models.Interfaces.INotifyable.OnPropertyChanged(String)
+  name.vb: OnPropertyChanged(String)
+  spec.csharp:
+  - uid: PlumJsonAnimator.Models.Interfaces.INotifyable.OnPropertyChanged(System.String)
+    name: OnPropertyChanged
+    href: PlumJsonAnimator.Models.Interfaces.INotifyable.html#PlumJsonAnimator_Models_Interfaces_INotifyable_OnPropertyChanged_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: PlumJsonAnimator.Models.Interfaces.INotifyable.OnPropertyChanged(System.String)
+    name: OnPropertyChanged
+    href: PlumJsonAnimator.Models.Interfaces.INotifyable.html#PlumJsonAnimator_Models_Interfaces_INotifyable_OnPropertyChanged_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: PlumJsonAnimator.Models.Interfaces
+  commentId: N:PlumJsonAnimator.Models.Interfaces
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Models.Interfaces
+  nameWithType: PlumJsonAnimator.Models.Interfaces
+  fullName: PlumJsonAnimator.Models.Interfaces
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.Interfaces
+    name: Interfaces
+    href: PlumJsonAnimator.Models.Interfaces.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.Interfaces
+    name: Interfaces
+    href: PlumJsonAnimator.Models.Interfaces.html
+- uid: System.ComponentModel
+  commentId: N:System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.ComponentModel
+  nameWithType: System.ComponentModel
+  fullName: System.ComponentModel
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.Name*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.Name
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_Name
+  name: Name
+  nameWithType: Skin.Name
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.Name
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Collections.Generic.Dictionary{PlumJsonAnimator.Models.SkeletonNameSpace.Slot,PlumJsonAnimator.Models.SkeletonNameSpace.Attachment}
+  commentId: T:System.Collections.Generic.Dictionary{PlumJsonAnimator.Models.SkeletonNameSpace.Slot,PlumJsonAnimator.Models.SkeletonNameSpace.Attachment}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  name: Dictionary<Slot, Attachment>
+  nameWithType: Dictionary<Slot, Attachment>
+  fullName: System.Collections.Generic.Dictionary<PlumJsonAnimator.Models.SkeletonNameSpace.Slot, PlumJsonAnimator.Models.SkeletonNameSpace.Attachment>
+  nameWithType.vb: Dictionary(Of Slot, Attachment)
+  fullName.vb: System.Collections.Generic.Dictionary(Of PlumJsonAnimator.Models.SkeletonNameSpace.Slot, PlumJsonAnimator.Models.SkeletonNameSpace.Attachment)
+  name.vb: Dictionary(Of Slot, Attachment)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  - name: <
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+    name: Slot
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html
+  - name: ','
+  - name: " "
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment
+    name: Attachment
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+    name: Slot
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html
+  - name: ','
+  - name: " "
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment
+    name: Attachment
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html
+  - name: )
+- uid: System.Collections.Generic.Dictionary`2
+  commentId: T:System.Collections.Generic.Dictionary`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  name: Dictionary<TKey, TValue>
+  nameWithType: Dictionary<TKey, TValue>
+  fullName: System.Collections.Generic.Dictionary<TKey, TValue>
+  nameWithType.vb: Dictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.Dictionary(Of TKey, TValue)
+  name.vb: Dictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  - name: <
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: ','
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.#ctor*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.#ctor
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin__ctor_PlumJsonAnimator_Common_Constants_GlobalState_
+  name: Skin
+  nameWithType: Skin.Skin
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.Skin
+  nameWithType.vb: Skin.New
+  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.New
+  name.vb: New
+- uid: PlumJsonAnimator.Common.Constants.GlobalState
+  commentId: T:PlumJsonAnimator.Common.Constants.GlobalState
+  parent: PlumJsonAnimator.Common.Constants
+  href: PlumJsonAnimator.Common.Constants.GlobalState.html
+  name: GlobalState
+  nameWithType: GlobalState
+  fullName: PlumJsonAnimator.Common.Constants.GlobalState
+- uid: PlumJsonAnimator.Common.Constants
+  commentId: N:PlumJsonAnimator.Common.Constants
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Common.Constants
+  nameWithType: PlumJsonAnimator.Common.Constants
+  fullName: PlumJsonAnimator.Common.Constants
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Constants
+    name: Constants
+    href: PlumJsonAnimator.Common.Constants.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Constants
+    name: Constants
+    href: PlumJsonAnimator.Common.Constants.html
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.BindSlotAttachment*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.BindSlotAttachment
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_BindSlotAttachment_PlumJsonAnimator_Models_SkeletonNameSpace_Slot_PlumJsonAnimator_Models_SkeletonNameSpace_Attachment_
+  name: BindSlotAttachment
+  nameWithType: Skin.BindSlotAttachment
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.BindSlotAttachment
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html
+  name: Slot
+  nameWithType: Slot
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.Attachment
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html
+  name: Attachment
+  nameWithType: Attachment
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.AddSlot*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.AddSlot
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_AddSlot_PlumJsonAnimator_Models_SkeletonNameSpace_Slot_
+  name: AddSlot
+  nameWithType: Skin.AddSlot
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.AddSlot
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.DeleteSlot*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.DeleteSlot
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_DeleteSlot_PlumJsonAnimator_Models_SkeletonNameSpace_Slot_
+  name: DeleteSlot
+  nameWithType: Skin.DeleteSlot
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.DeleteSlot
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.DrawSkin*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.DrawSkin
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_DrawSkin_Avalonia_Controls_Canvas_
+  name: DrawSkin
+  nameWithType: Skin.DrawSkin
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.DrawSkin
+- uid: Avalonia.Controls.Canvas
+  commentId: T:Avalonia.Controls.Canvas
+  parent: Avalonia.Controls
+  isExternal: true
+  name: Canvas
+  nameWithType: Canvas
+  fullName: Avalonia.Controls.Canvas
+- uid: Avalonia.Controls
+  commentId: N:Avalonia.Controls
+  isExternal: true
+  name: Avalonia.Controls
+  nameWithType: Avalonia.Controls
+  fullName: Avalonia.Controls
+  spec.csharp:
+  - uid: Avalonia
+    name: Avalonia
+    isExternal: true
+  - name: .
+  - uid: Avalonia.Controls
+    name: Controls
+    isExternal: true
+  spec.vb:
+  - uid: Avalonia
+    name: Avalonia
+    isExternal: true
+  - name: .
+  - uid: Avalonia.Controls
+    name: Controls
+    isExternal: true
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsSlot*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsSlot
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_ContainsSlot_PlumJsonAnimator_Models_SkeletonNameSpace_Slot_
+  name: ContainsSlot
+  nameWithType: Skin.ContainsSlot
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsSlot
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsRes*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsRes
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_ContainsRes_PlumJsonAnimator_Models_Resources_Res_
+  name: ContainsRes
+  nameWithType: Skin.ContainsRes
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsRes
+- uid: PlumJsonAnimator.Models.Resources.Res
+  commentId: T:PlumJsonAnimator.Models.Resources.Res
+  parent: PlumJsonAnimator.Models.Resources
+  href: PlumJsonAnimator.Models.Resources.Res.html
+  name: Res
+  nameWithType: Res
+  fullName: PlumJsonAnimator.Models.Resources.Res
+- uid: PlumJsonAnimator.Models.Resources
+  commentId: N:PlumJsonAnimator.Models.Resources
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Models.Resources
+  nameWithType: PlumJsonAnimator.Models.Resources
+  fullName: PlumJsonAnimator.Models.Resources
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.Resources
+    name: Resources
+    href: PlumJsonAnimator.Models.Resources.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.Resources
+    name: Resources
+    href: PlumJsonAnimator.Models.Resources.html
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsAndRemoveRes*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsAndRemoveRes
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_ContainsAndRemoveRes_PlumJsonAnimator_Models_Resources_Res_
+  name: ContainsAndRemoveRes
+  nameWithType: Skin.ContainsAndRemoveRes
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsAndRemoveRes
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetImagePath*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetImagePath
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_GetImagePath_PlumJsonAnimator_Models_SkeletonNameSpace_Slot_
+  name: GetImagePath
+  nameWithType: Skin.GetImagePath
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetImagePath
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetSlots*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetSlots
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_GetSlots_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_
+  name: GetSlots
+  nameWithType: Skin.GetSlots
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetSlots
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html
+  name: Bone
+  nameWithType: Bone
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+- uid: System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.Slot}
+  commentId: T:System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.Slot}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<Slot>
+  nameWithType: List<Slot>
+  fullName: System.Collections.Generic.List<PlumJsonAnimator.Models.SkeletonNameSpace.Slot>
+  nameWithType.vb: List(Of Slot)
+  fullName.vb: System.Collections.Generic.List(Of PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  name.vb: List(Of Slot)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+    name: Slot
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+    name: Slot
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html
+  - name: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.isSlotDrawable*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.isSlotDrawable
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_isSlotDrawable_PlumJsonAnimator_Models_SkeletonNameSpace_Slot_
+  name: isSlotDrawable
+  nameWithType: Skin.isSlotDrawable
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.isSlotDrawable
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetAttachment*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetAttachment
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_GetAttachment_PlumJsonAnimator_Models_SkeletonNameSpace_Slot_
+  name: GetAttachment
+  nameWithType: Skin.GetAttachment
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetAttachment
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateJSONData*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateJSONData
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_generateJSONData
+  name: generateJSONData
+  nameWithType: Skin.generateJSONData
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateJSONData
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.SkinData
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.SkinData
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.SkinData.html
+  name: SkinData
+  nameWithType: SkinData
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.SkinData
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateCode*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateCode
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_generateCode
+  name: generateCode
+  nameWithType: Skin.generateCode
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateCode

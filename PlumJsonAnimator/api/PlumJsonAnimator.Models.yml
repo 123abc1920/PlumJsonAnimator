@@ -1,0 +1,85 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Models
+  commentId: N:PlumJsonAnimator.Models
+  id: PlumJsonAnimator.Models
+  children:
+  - PlumJsonAnimator.Models.BoneAnimation
+  - PlumJsonAnimator.Models.BoneAnimationData
+  - PlumJsonAnimator.Models.CaptureArea
+  - PlumJsonAnimator.Models.ExportResult
+  - PlumJsonAnimator.Models.JsonError
+  - PlumJsonAnimator.Models.Project
+  langs:
+  - csharp
+  - vb
+  name: PlumJsonAnimator.Models
+  nameWithType: PlumJsonAnimator.Models
+  fullName: PlumJsonAnimator.Models
+  type: Namespace
+  assemblies:
+  - PlumJsonAnimator
+references:
+- uid: PlumJsonAnimator.Models.BoneAnimation
+  commentId: T:PlumJsonAnimator.Models.BoneAnimation
+  href: PlumJsonAnimator.Models.BoneAnimation.html
+  name: BoneAnimation
+  nameWithType: BoneAnimation
+  fullName: PlumJsonAnimator.Models.BoneAnimation
+- uid: PlumJsonAnimator.Models.BoneAnimationData
+  commentId: T:PlumJsonAnimator.Models.BoneAnimationData
+  parent: PlumJsonAnimator.Models
+  href: PlumJsonAnimator.Models.BoneAnimationData.html
+  name: BoneAnimationData
+  nameWithType: BoneAnimationData
+  fullName: PlumJsonAnimator.Models.BoneAnimationData
+- uid: PlumJsonAnimator.Models.CaptureArea
+  commentId: T:PlumJsonAnimator.Models.CaptureArea
+  parent: PlumJsonAnimator.Models
+  href: PlumJsonAnimator.Models.CaptureArea.html
+  name: CaptureArea
+  nameWithType: CaptureArea
+  fullName: PlumJsonAnimator.Models.CaptureArea
+- uid: PlumJsonAnimator.Models.ExportResult
+  commentId: T:PlumJsonAnimator.Models.ExportResult
+  parent: PlumJsonAnimator.Models
+  href: PlumJsonAnimator.Models.ExportResult.html
+  name: ExportResult
+  nameWithType: ExportResult
+  fullName: PlumJsonAnimator.Models.ExportResult
+- uid: PlumJsonAnimator.Models.JsonError
+  commentId: T:PlumJsonAnimator.Models.JsonError
+  parent: PlumJsonAnimator.Models
+  href: PlumJsonAnimator.Models.JsonError.html
+  name: JsonError
+  nameWithType: JsonError
+  fullName: PlumJsonAnimator.Models.JsonError
+- uid: PlumJsonAnimator.Models.Project
+  commentId: T:PlumJsonAnimator.Models.Project
+  parent: PlumJsonAnimator.Models
+  href: PlumJsonAnimator.Models.Project.html
+  name: Project
+  nameWithType: Project
+  fullName: PlumJsonAnimator.Models.Project
+- uid: PlumJsonAnimator.Models
+  commentId: N:PlumJsonAnimator.Models
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Models
+  nameWithType: PlumJsonAnimator.Models
+  fullName: PlumJsonAnimator.Models
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html

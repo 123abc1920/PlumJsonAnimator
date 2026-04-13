@@ -1,0 +1,62 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Models.Resources
+  commentId: N:PlumJsonAnimator.Models.Resources
+  id: PlumJsonAnimator.Models.Resources
+  children:
+  - PlumJsonAnimator.Models.Resources.ImageRes
+  - PlumJsonAnimator.Models.Resources.Res
+  langs:
+  - csharp
+  - vb
+  name: PlumJsonAnimator.Models.Resources
+  nameWithType: PlumJsonAnimator.Models.Resources
+  fullName: PlumJsonAnimator.Models.Resources
+  type: Namespace
+  assemblies:
+  - PlumJsonAnimator
+references:
+- uid: PlumJsonAnimator.Models.Resources.Res
+  commentId: T:PlumJsonAnimator.Models.Resources.Res
+  parent: PlumJsonAnimator.Models.Resources
+  href: PlumJsonAnimator.Models.Resources.Res.html
+  name: Res
+  nameWithType: Res
+  fullName: PlumJsonAnimator.Models.Resources.Res
+- uid: PlumJsonAnimator.Models.Resources.ImageRes
+  commentId: T:PlumJsonAnimator.Models.Resources.ImageRes
+  parent: PlumJsonAnimator.Models.Resources
+  href: PlumJsonAnimator.Models.Resources.ImageRes.html
+  name: ImageRes
+  nameWithType: ImageRes
+  fullName: PlumJsonAnimator.Models.Resources.ImageRes
+- uid: PlumJsonAnimator.Models.Resources
+  commentId: N:PlumJsonAnimator.Models.Resources
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Models.Resources
+  nameWithType: PlumJsonAnimator.Models.Resources
+  fullName: PlumJsonAnimator.Models.Resources
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.Resources
+    name: Resources
+    href: PlumJsonAnimator.Models.Resources.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.Resources
+    name: Resources
+    href: PlumJsonAnimator.Models.Resources.html

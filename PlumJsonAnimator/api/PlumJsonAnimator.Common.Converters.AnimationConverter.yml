@@ -1,0 +1,761 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Common.Converters.AnimationConverter
+  commentId: T:PlumJsonAnimator.Common.Converters.AnimationConverter
+  id: AnimationConverter
+  parent: PlumJsonAnimator.Common.Converters
+  children:
+  - PlumJsonAnimator.Common.Converters.AnimationConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+  - PlumJsonAnimator.Common.Converters.AnimationConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+  - PlumJsonAnimator.Common.Converters.AnimationConverter.PauseIcon
+  - PlumJsonAnimator.Common.Converters.AnimationConverter.PlayIcon
+  langs:
+  - csharp
+  - vb
+  name: AnimationConverter
+  nameWithType: AnimationConverter
+  fullName: PlumJsonAnimator.Common.Converters.AnimationConverter
+  type: Class
+  source:
+    remote:
+      path: PlumJsonAnimator/Common/Converters/AnimationConverter.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: AnimationConverter
+    path: Common/Converters/AnimationConverter.cs
+    startLine: 7
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Common.Converters
+  syntax:
+    content: 'public class AnimationConverter : IValueConverter'
+    content.vb: Public Class AnimationConverter Implements IValueConverter
+  inheritance:
+  - System.Object
+  implements:
+  - Avalonia.Data.Converters.IValueConverter
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: PlumJsonAnimator.Common.Converters.AnimationConverter.PlayIcon
+  commentId: P:PlumJsonAnimator.Common.Converters.AnimationConverter.PlayIcon
+  id: PlayIcon
+  parent: PlumJsonAnimator.Common.Converters.AnimationConverter
+  langs:
+  - csharp
+  - vb
+  name: PlayIcon
+  nameWithType: AnimationConverter.PlayIcon
+  fullName: PlumJsonAnimator.Common.Converters.AnimationConverter.PlayIcon
+  type: Property
+  source:
+    remote:
+      path: PlumJsonAnimator/Common/Converters/AnimationConverter.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: PlayIcon
+    path: Common/Converters/AnimationConverter.cs
+    startLine: 9
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Common.Converters
+  syntax:
+    content: public PackIconBootstrapIconsKind PlayIcon { get; }
+    parameters: []
+    return:
+      type: IconPacks.Avalonia.BootstrapIcons.PackIconBootstrapIconsKind
+    content.vb: Public ReadOnly Property PlayIcon As PackIconBootstrapIconsKind
+  overload: PlumJsonAnimator.Common.Converters.AnimationConverter.PlayIcon*
+- uid: PlumJsonAnimator.Common.Converters.AnimationConverter.PauseIcon
+  commentId: P:PlumJsonAnimator.Common.Converters.AnimationConverter.PauseIcon
+  id: PauseIcon
+  parent: PlumJsonAnimator.Common.Converters.AnimationConverter
+  langs:
+  - csharp
+  - vb
+  name: PauseIcon
+  nameWithType: AnimationConverter.PauseIcon
+  fullName: PlumJsonAnimator.Common.Converters.AnimationConverter.PauseIcon
+  type: Property
+  source:
+    remote:
+      path: PlumJsonAnimator/Common/Converters/AnimationConverter.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: PauseIcon
+    path: Common/Converters/AnimationConverter.cs
+    startLine: 11
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Common.Converters
+  syntax:
+    content: public PackIconBootstrapIconsKind PauseIcon { get; }
+    parameters: []
+    return:
+      type: IconPacks.Avalonia.BootstrapIcons.PackIconBootstrapIconsKind
+    content.vb: Public ReadOnly Property PauseIcon As PackIconBootstrapIconsKind
+  overload: PlumJsonAnimator.Common.Converters.AnimationConverter.PauseIcon*
+- uid: PlumJsonAnimator.Common.Converters.AnimationConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+  commentId: M:PlumJsonAnimator.Common.Converters.AnimationConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+  id: Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+  parent: PlumJsonAnimator.Common.Converters.AnimationConverter
+  langs:
+  - csharp
+  - vb
+  name: Convert(object, Type, object, CultureInfo)
+  nameWithType: AnimationConverter.Convert(object, Type, object, CultureInfo)
+  fullName: PlumJsonAnimator.Common.Converters.AnimationConverter.Convert(object, System.Type, object, System.Globalization.CultureInfo)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Common/Converters/AnimationConverter.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: Convert
+    path: Common/Converters/AnimationConverter.cs
+    startLine: 13
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Common.Converters
+  summary: Converts a value.
+  remarks: >-
+    This method should not throw exceptions. If the value is not convertible, return
+
+    a <xref href="Avalonia.Data.BindingNotification" data-throw-if-not-resolved="false"></xref> in an error state. Any exceptions thrown will be
+
+    treated as an application exception.
+  example: []
+  syntax:
+    content: public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    parameters:
+    - id: value
+      type: System.Object
+      description: The value to convert.
+    - id: targetType
+      type: System.Type
+      description: The type of the target.
+    - id: parameter
+      type: System.Object
+      description: A user-defined parameter.
+    - id: culture
+      type: System.Globalization.CultureInfo
+      description: The culture to use.
+    return:
+      type: System.Object
+      description: The converted value.
+    content.vb: Public Function Convert(value As Object, targetType As Type, parameter As Object, culture As CultureInfo) As Object
+  overload: PlumJsonAnimator.Common.Converters.AnimationConverter.Convert*
+  implements:
+  - Avalonia.Data.Converters.IValueConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+  nameWithType.vb: AnimationConverter.Convert(Object, Type, Object, CultureInfo)
+  fullName.vb: PlumJsonAnimator.Common.Converters.AnimationConverter.Convert(Object, System.Type, Object, System.Globalization.CultureInfo)
+  name.vb: Convert(Object, Type, Object, CultureInfo)
+- uid: PlumJsonAnimator.Common.Converters.AnimationConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+  commentId: M:PlumJsonAnimator.Common.Converters.AnimationConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+  id: ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+  parent: PlumJsonAnimator.Common.Converters.AnimationConverter
+  langs:
+  - csharp
+  - vb
+  name: ConvertBack(object, Type, object, CultureInfo)
+  nameWithType: AnimationConverter.ConvertBack(object, Type, object, CultureInfo)
+  fullName: PlumJsonAnimator.Common.Converters.AnimationConverter.ConvertBack(object, System.Type, object, System.Globalization.CultureInfo)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Common/Converters/AnimationConverter.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: ConvertBack
+    path: Common/Converters/AnimationConverter.cs
+    startLine: 22
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Common.Converters
+  summary: Converts a value.
+  remarks: >-
+    This method should not throw exceptions. If the value is not convertible, return
+
+    a <xref href="Avalonia.Data.BindingNotification" data-throw-if-not-resolved="false"></xref> in an error state. Any exceptions thrown will be
+
+    treated as an application exception.
+  example: []
+  syntax:
+    content: public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    parameters:
+    - id: value
+      type: System.Object
+      description: The value to convert.
+    - id: targetType
+      type: System.Type
+      description: The type of the target.
+    - id: parameter
+      type: System.Object
+      description: A user-defined parameter.
+    - id: culture
+      type: System.Globalization.CultureInfo
+      description: The culture to use.
+    return:
+      type: System.Object
+      description: The converted value.
+    content.vb: Public Function ConvertBack(value As Object, targetType As Type, parameter As Object, culture As CultureInfo) As Object
+  overload: PlumJsonAnimator.Common.Converters.AnimationConverter.ConvertBack*
+  implements:
+  - Avalonia.Data.Converters.IValueConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+  nameWithType.vb: AnimationConverter.ConvertBack(Object, Type, Object, CultureInfo)
+  fullName.vb: PlumJsonAnimator.Common.Converters.AnimationConverter.ConvertBack(Object, System.Type, Object, System.Globalization.CultureInfo)
+  name.vb: ConvertBack(Object, Type, Object, CultureInfo)
+references:
+- uid: PlumJsonAnimator.Common.Converters
+  commentId: N:PlumJsonAnimator.Common.Converters
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Common.Converters
+  nameWithType: PlumJsonAnimator.Common.Converters
+  fullName: PlumJsonAnimator.Common.Converters
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Converters
+    name: Converters
+    href: PlumJsonAnimator.Common.Converters.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Converters
+    name: Converters
+    href: PlumJsonAnimator.Common.Converters.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Avalonia.Data.Converters.IValueConverter
+  commentId: T:Avalonia.Data.Converters.IValueConverter
+  parent: Avalonia.Data.Converters
+  isExternal: true
+  name: IValueConverter
+  nameWithType: IValueConverter
+  fullName: Avalonia.Data.Converters.IValueConverter
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Avalonia.Data.Converters
+  commentId: N:Avalonia.Data.Converters
+  isExternal: true
+  name: Avalonia.Data.Converters
+  nameWithType: Avalonia.Data.Converters
+  fullName: Avalonia.Data.Converters
+  spec.csharp:
+  - uid: Avalonia
+    name: Avalonia
+    isExternal: true
+  - name: .
+  - uid: Avalonia.Data
+    name: Data
+    isExternal: true
+  - name: .
+  - uid: Avalonia.Data.Converters
+    name: Converters
+    isExternal: true
+  spec.vb:
+  - uid: Avalonia
+    name: Avalonia
+    isExternal: true
+  - name: .
+  - uid: Avalonia.Data
+    name: Data
+    isExternal: true
+  - name: .
+  - uid: Avalonia.Data.Converters
+    name: Converters
+    isExternal: true
+- uid: PlumJsonAnimator.Common.Converters.AnimationConverter.PlayIcon*
+  commentId: Overload:PlumJsonAnimator.Common.Converters.AnimationConverter.PlayIcon
+  href: PlumJsonAnimator.Common.Converters.AnimationConverter.html#PlumJsonAnimator_Common_Converters_AnimationConverter_PlayIcon
+  name: PlayIcon
+  nameWithType: AnimationConverter.PlayIcon
+  fullName: PlumJsonAnimator.Common.Converters.AnimationConverter.PlayIcon
+- uid: IconPacks.Avalonia.BootstrapIcons.PackIconBootstrapIconsKind
+  commentId: T:IconPacks.Avalonia.BootstrapIcons.PackIconBootstrapIconsKind
+  parent: IconPacks.Avalonia.BootstrapIcons
+  isExternal: true
+  name: PackIconBootstrapIconsKind
+  nameWithType: PackIconBootstrapIconsKind
+  fullName: IconPacks.Avalonia.BootstrapIcons.PackIconBootstrapIconsKind
+- uid: IconPacks.Avalonia.BootstrapIcons
+  commentId: N:IconPacks.Avalonia.BootstrapIcons
+  isExternal: true
+  name: IconPacks.Avalonia.BootstrapIcons
+  nameWithType: IconPacks.Avalonia.BootstrapIcons
+  fullName: IconPacks.Avalonia.BootstrapIcons
+  spec.csharp:
+  - uid: IconPacks
+    name: IconPacks
+    isExternal: true
+  - name: .
+  - uid: IconPacks.Avalonia
+    name: Avalonia
+    isExternal: true
+  - name: .
+  - uid: IconPacks.Avalonia.BootstrapIcons
+    name: BootstrapIcons
+    isExternal: true
+  spec.vb:
+  - uid: IconPacks
+    name: IconPacks
+    isExternal: true
+  - name: .
+  - uid: IconPacks.Avalonia
+    name: Avalonia
+    isExternal: true
+  - name: .
+  - uid: IconPacks.Avalonia.BootstrapIcons
+    name: BootstrapIcons
+    isExternal: true
+- uid: PlumJsonAnimator.Common.Converters.AnimationConverter.PauseIcon*
+  commentId: Overload:PlumJsonAnimator.Common.Converters.AnimationConverter.PauseIcon
+  href: PlumJsonAnimator.Common.Converters.AnimationConverter.html#PlumJsonAnimator_Common_Converters_AnimationConverter_PauseIcon
+  name: PauseIcon
+  nameWithType: AnimationConverter.PauseIcon
+  fullName: PlumJsonAnimator.Common.Converters.AnimationConverter.PauseIcon
+- uid: Avalonia.Data.BindingNotification
+  commentId: T:Avalonia.Data.BindingNotification
+  isExternal: true
+  name: BindingNotification
+  nameWithType: BindingNotification
+  fullName: Avalonia.Data.BindingNotification
+- uid: PlumJsonAnimator.Common.Converters.AnimationConverter.Convert*
+  commentId: Overload:PlumJsonAnimator.Common.Converters.AnimationConverter.Convert
+  href: PlumJsonAnimator.Common.Converters.AnimationConverter.html#PlumJsonAnimator_Common_Converters_AnimationConverter_Convert_System_Object_System_Type_System_Object_System_Globalization_CultureInfo_
+  name: Convert
+  nameWithType: AnimationConverter.Convert
+  fullName: PlumJsonAnimator.Common.Converters.AnimationConverter.Convert
+- uid: Avalonia.Data.Converters.IValueConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+  commentId: M:Avalonia.Data.Converters.IValueConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+  parent: Avalonia.Data.Converters.IValueConverter
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: Convert(object, Type, object, CultureInfo)
+  nameWithType: IValueConverter.Convert(object, Type, object, CultureInfo)
+  fullName: Avalonia.Data.Converters.IValueConverter.Convert(object, System.Type, object, System.Globalization.CultureInfo)
+  nameWithType.vb: IValueConverter.Convert(Object, Type, Object, CultureInfo)
+  fullName.vb: Avalonia.Data.Converters.IValueConverter.Convert(Object, System.Type, Object, System.Globalization.CultureInfo)
+  name.vb: Convert(Object, Type, Object, CultureInfo)
+  spec.csharp:
+  - uid: Avalonia.Data.Converters.IValueConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+    name: Convert
+    isExternal: true
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Globalization.CultureInfo
+    name: CultureInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.globalization.cultureinfo
+  - name: )
+  spec.vb:
+  - uid: Avalonia.Data.Converters.IValueConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+    name: Convert
+    isExternal: true
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Globalization.CultureInfo
+    name: CultureInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.globalization.cultureinfo
+  - name: )
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.type
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.Globalization.CultureInfo
+  commentId: T:System.Globalization.CultureInfo
+  parent: System.Globalization
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.globalization.cultureinfo
+  name: CultureInfo
+  nameWithType: CultureInfo
+  fullName: System.Globalization.CultureInfo
+- uid: System.Globalization
+  commentId: N:System.Globalization
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Globalization
+  nameWithType: System.Globalization
+  fullName: System.Globalization
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Globalization
+    name: Globalization
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.globalization
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Globalization
+    name: Globalization
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.globalization
+- uid: PlumJsonAnimator.Common.Converters.AnimationConverter.ConvertBack*
+  commentId: Overload:PlumJsonAnimator.Common.Converters.AnimationConverter.ConvertBack
+  href: PlumJsonAnimator.Common.Converters.AnimationConverter.html#PlumJsonAnimator_Common_Converters_AnimationConverter_ConvertBack_System_Object_System_Type_System_Object_System_Globalization_CultureInfo_
+  name: ConvertBack
+  nameWithType: AnimationConverter.ConvertBack
+  fullName: PlumJsonAnimator.Common.Converters.AnimationConverter.ConvertBack
+- uid: Avalonia.Data.Converters.IValueConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+  commentId: M:Avalonia.Data.Converters.IValueConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+  parent: Avalonia.Data.Converters.IValueConverter
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: ConvertBack(object, Type, object, CultureInfo)
+  nameWithType: IValueConverter.ConvertBack(object, Type, object, CultureInfo)
+  fullName: Avalonia.Data.Converters.IValueConverter.ConvertBack(object, System.Type, object, System.Globalization.CultureInfo)
+  nameWithType.vb: IValueConverter.ConvertBack(Object, Type, Object, CultureInfo)
+  fullName.vb: Avalonia.Data.Converters.IValueConverter.ConvertBack(Object, System.Type, Object, System.Globalization.CultureInfo)
+  name.vb: ConvertBack(Object, Type, Object, CultureInfo)
+  spec.csharp:
+  - uid: Avalonia.Data.Converters.IValueConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+    name: ConvertBack
+    isExternal: true
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Globalization.CultureInfo
+    name: CultureInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.globalization.cultureinfo
+  - name: )
+  spec.vb:
+  - uid: Avalonia.Data.Converters.IValueConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)
+    name: ConvertBack
+    isExternal: true
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Type
+    name: Type
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.type
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Globalization.CultureInfo
+    name: CultureInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.globalization.cultureinfo
+  - name: )

@@ -1,0 +1,69 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Common.Dialogs
+  commentId: N:PlumJsonAnimator.Common.Dialogs
+  id: PlumJsonAnimator.Common.Dialogs
+  children:
+  - PlumJsonAnimator.Common.Dialogs.Dialogs
+  - PlumJsonAnimator.Common.Dialogs.Popups
+  - PlumJsonAnimator.Common.Dialogs.ViewType
+  langs:
+  - csharp
+  - vb
+  name: PlumJsonAnimator.Common.Dialogs
+  nameWithType: PlumJsonAnimator.Common.Dialogs
+  fullName: PlumJsonAnimator.Common.Dialogs
+  type: Namespace
+  assemblies:
+  - PlumJsonAnimator
+references:
+- uid: PlumJsonAnimator.Common.Dialogs.ViewType
+  commentId: T:PlumJsonAnimator.Common.Dialogs.ViewType
+  parent: PlumJsonAnimator.Common.Dialogs
+  href: PlumJsonAnimator.Common.Dialogs.ViewType.html
+  name: ViewType
+  nameWithType: ViewType
+  fullName: PlumJsonAnimator.Common.Dialogs.ViewType
+- uid: PlumJsonAnimator.Common.Dialogs.Dialogs
+  commentId: T:PlumJsonAnimator.Common.Dialogs.Dialogs
+  parent: PlumJsonAnimator.Common.Dialogs
+  href: PlumJsonAnimator.Common.Dialogs.Dialogs.html
+  name: Dialogs
+  nameWithType: Dialogs
+  fullName: PlumJsonAnimator.Common.Dialogs.Dialogs
+- uid: PlumJsonAnimator.Common.Dialogs.Popups
+  commentId: T:PlumJsonAnimator.Common.Dialogs.Popups
+  href: PlumJsonAnimator.Common.Dialogs.Popups.html
+  name: Popups
+  nameWithType: Popups
+  fullName: PlumJsonAnimator.Common.Dialogs.Popups
+- uid: PlumJsonAnimator.Common.Dialogs
+  commentId: N:PlumJsonAnimator.Common.Dialogs
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Common.Dialogs
+  nameWithType: PlumJsonAnimator.Common.Dialogs
+  fullName: PlumJsonAnimator.Common.Dialogs
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Dialogs
+    name: Dialogs
+    href: PlumJsonAnimator.Common.Dialogs.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Dialogs
+    name: Dialogs
+    href: PlumJsonAnimator.Common.Dialogs.html

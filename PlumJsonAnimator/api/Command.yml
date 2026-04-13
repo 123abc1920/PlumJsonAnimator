@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: Command
+  commentId: N:Command
+  id: Command
+  children:
+  - Command.Command
+  langs:
+  - csharp
+  - vb
+  name: Command
+  nameWithType: Command
+  fullName: Command
+  type: Namespace
+  assemblies:
+  - PlumJsonAnimator
+references:
+- uid: Command.Command
+  commentId: T:Command.Command
+  href: Command.Command.html
+  name: Command
+  nameWithType: Command
+  fullName: Command.Command

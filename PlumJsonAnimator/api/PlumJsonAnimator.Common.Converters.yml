@@ -1,0 +1,37 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Common.Converters
+  commentId: N:PlumJsonAnimator.Common.Converters
+  id: PlumJsonAnimator.Common.Converters
+  children:
+  - PlumJsonAnimator.Common.Converters.AnimationConverter
+  - PlumJsonAnimator.Common.Converters.DoubleConverter
+  - PlumJsonAnimator.Common.Converters.StringToBoolConverter
+  langs:
+  - csharp
+  - vb
+  name: PlumJsonAnimator.Common.Converters
+  nameWithType: PlumJsonAnimator.Common.Converters
+  fullName: PlumJsonAnimator.Common.Converters
+  type: Namespace
+  assemblies:
+  - PlumJsonAnimator
+references:
+- uid: PlumJsonAnimator.Common.Converters.AnimationConverter
+  commentId: T:PlumJsonAnimator.Common.Converters.AnimationConverter
+  href: PlumJsonAnimator.Common.Converters.AnimationConverter.html
+  name: AnimationConverter
+  nameWithType: AnimationConverter
+  fullName: PlumJsonAnimator.Common.Converters.AnimationConverter
+- uid: PlumJsonAnimator.Common.Converters.DoubleConverter
+  commentId: T:PlumJsonAnimator.Common.Converters.DoubleConverter
+  href: PlumJsonAnimator.Common.Converters.DoubleConverter.html
+  name: DoubleConverter
+  nameWithType: DoubleConverter
+  fullName: PlumJsonAnimator.Common.Converters.DoubleConverter
+- uid: PlumJsonAnimator.Common.Converters.StringToBoolConverter
+  commentId: T:PlumJsonAnimator.Common.Converters.StringToBoolConverter
+  href: PlumJsonAnimator.Common.Converters.StringToBoolConverter.html
+  name: StringToBoolConverter
+  nameWithType: StringToBoolConverter
+  fullName: PlumJsonAnimator.Common.Converters.StringToBoolConverter

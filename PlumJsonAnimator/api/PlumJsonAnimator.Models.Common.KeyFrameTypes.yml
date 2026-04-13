@@ -1,0 +1,174 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Models.Common.KeyFrameTypes
+  commentId: T:PlumJsonAnimator.Models.Common.KeyFrameTypes
+  id: KeyFrameTypes
+  parent: PlumJsonAnimator.Models.Common
+  children:
+  - PlumJsonAnimator.Models.Common.KeyFrameTypes.ROTATE
+  - PlumJsonAnimator.Models.Common.KeyFrameTypes.SCALE
+  - PlumJsonAnimator.Models.Common.KeyFrameTypes.SHEAR
+  - PlumJsonAnimator.Models.Common.KeyFrameTypes.TRANSLATE
+  langs:
+  - csharp
+  - vb
+  name: KeyFrameTypes
+  nameWithType: KeyFrameTypes
+  fullName: PlumJsonAnimator.Models.Common.KeyFrameTypes
+  type: Enum
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Common/AnimTransformations.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: KeyFrameTypes
+    path: Models/Common/AnimTransformations.cs
+    startLine: 6
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Common
+  syntax:
+    content: public enum KeyFrameTypes
+    content.vb: Public Enum KeyFrameTypes
+- uid: PlumJsonAnimator.Models.Common.KeyFrameTypes.TRANSLATE
+  commentId: F:PlumJsonAnimator.Models.Common.KeyFrameTypes.TRANSLATE
+  id: TRANSLATE
+  parent: PlumJsonAnimator.Models.Common.KeyFrameTypes
+  langs:
+  - csharp
+  - vb
+  name: TRANSLATE
+  nameWithType: KeyFrameTypes.TRANSLATE
+  fullName: PlumJsonAnimator.Models.Common.KeyFrameTypes.TRANSLATE
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Common/AnimTransformations.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: TRANSLATE
+    path: Models/Common/AnimTransformations.cs
+    startLine: 8
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Common
+  syntax:
+    content: TRANSLATE = 0
+    return:
+      type: PlumJsonAnimator.Models.Common.KeyFrameTypes
+- uid: PlumJsonAnimator.Models.Common.KeyFrameTypes.ROTATE
+  commentId: F:PlumJsonAnimator.Models.Common.KeyFrameTypes.ROTATE
+  id: ROTATE
+  parent: PlumJsonAnimator.Models.Common.KeyFrameTypes
+  langs:
+  - csharp
+  - vb
+  name: ROTATE
+  nameWithType: KeyFrameTypes.ROTATE
+  fullName: PlumJsonAnimator.Models.Common.KeyFrameTypes.ROTATE
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Common/AnimTransformations.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: ROTATE
+    path: Models/Common/AnimTransformations.cs
+    startLine: 9
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Common
+  syntax:
+    content: ROTATE = 1
+    return:
+      type: PlumJsonAnimator.Models.Common.KeyFrameTypes
+- uid: PlumJsonAnimator.Models.Common.KeyFrameTypes.SCALE
+  commentId: F:PlumJsonAnimator.Models.Common.KeyFrameTypes.SCALE
+  id: SCALE
+  parent: PlumJsonAnimator.Models.Common.KeyFrameTypes
+  langs:
+  - csharp
+  - vb
+  name: SCALE
+  nameWithType: KeyFrameTypes.SCALE
+  fullName: PlumJsonAnimator.Models.Common.KeyFrameTypes.SCALE
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Common/AnimTransformations.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: SCALE
+    path: Models/Common/AnimTransformations.cs
+    startLine: 10
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Common
+  syntax:
+    content: SCALE = 2
+    return:
+      type: PlumJsonAnimator.Models.Common.KeyFrameTypes
+- uid: PlumJsonAnimator.Models.Common.KeyFrameTypes.SHEAR
+  commentId: F:PlumJsonAnimator.Models.Common.KeyFrameTypes.SHEAR
+  id: SHEAR
+  parent: PlumJsonAnimator.Models.Common.KeyFrameTypes
+  langs:
+  - csharp
+  - vb
+  name: SHEAR
+  nameWithType: KeyFrameTypes.SHEAR
+  fullName: PlumJsonAnimator.Models.Common.KeyFrameTypes.SHEAR
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Common/AnimTransformations.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: SHEAR
+    path: Models/Common/AnimTransformations.cs
+    startLine: 11
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Common
+  syntax:
+    content: SHEAR = 3
+    return:
+      type: PlumJsonAnimator.Models.Common.KeyFrameTypes
+references:
+- uid: PlumJsonAnimator.Models.Common
+  commentId: N:PlumJsonAnimator.Models.Common
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Models.Common
+  nameWithType: PlumJsonAnimator.Models.Common
+  fullName: PlumJsonAnimator.Models.Common
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.Common
+    name: Common
+    href: PlumJsonAnimator.Models.Common.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.Common
+    name: Common
+    href: PlumJsonAnimator.Models.Common.html
+- uid: PlumJsonAnimator.Models.Common.KeyFrameTypes
+  commentId: T:PlumJsonAnimator.Models.Common.KeyFrameTypes
+  parent: PlumJsonAnimator.Models.Common
+  href: PlumJsonAnimator.Models.Common.KeyFrameTypes.html
+  name: KeyFrameTypes
+  nameWithType: KeyFrameTypes
+  fullName: PlumJsonAnimator.Models.Common.KeyFrameTypes

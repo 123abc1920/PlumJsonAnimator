@@ -1,0 +1,76 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Common.Constants
+  commentId: N:PlumJsonAnimator.Common.Constants
+  id: PlumJsonAnimator.Common.Constants
+  children:
+  - PlumJsonAnimator.Common.Constants.AppColors
+  - PlumJsonAnimator.Common.Constants.Counter
+  - PlumJsonAnimator.Common.Constants.GlobalState
+  - PlumJsonAnimator.Common.Constants.TransformModeFactory
+  langs:
+  - csharp
+  - vb
+  name: PlumJsonAnimator.Common.Constants
+  nameWithType: PlumJsonAnimator.Common.Constants
+  fullName: PlumJsonAnimator.Common.Constants
+  type: Namespace
+  assemblies:
+  - PlumJsonAnimator
+references:
+- uid: PlumJsonAnimator.Common.Constants.AppColors
+  commentId: T:PlumJsonAnimator.Common.Constants.AppColors
+  href: PlumJsonAnimator.Common.Constants.AppColors.html
+  name: AppColors
+  nameWithType: AppColors
+  fullName: PlumJsonAnimator.Common.Constants.AppColors
+- uid: PlumJsonAnimator.Common.Constants.Counter
+  commentId: T:PlumJsonAnimator.Common.Constants.Counter
+  href: PlumJsonAnimator.Common.Constants.Counter.html
+  name: Counter
+  nameWithType: Counter
+  fullName: PlumJsonAnimator.Common.Constants.Counter
+- uid: PlumJsonAnimator.Common.Constants.GlobalState
+  commentId: T:PlumJsonAnimator.Common.Constants.GlobalState
+  parent: PlumJsonAnimator.Common.Constants
+  href: PlumJsonAnimator.Common.Constants.GlobalState.html
+  name: GlobalState
+  nameWithType: GlobalState
+  fullName: PlumJsonAnimator.Common.Constants.GlobalState
+- uid: PlumJsonAnimator.Common.Constants.TransformModeFactory
+  commentId: T:PlumJsonAnimator.Common.Constants.TransformModeFactory
+  parent: PlumJsonAnimator.Common.Constants
+  href: PlumJsonAnimator.Common.Constants.TransformModeFactory.html
+  name: TransformModeFactory
+  nameWithType: TransformModeFactory
+  fullName: PlumJsonAnimator.Common.Constants.TransformModeFactory
+- uid: PlumJsonAnimator.Common.Constants
+  commentId: N:PlumJsonAnimator.Common.Constants
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Common.Constants
+  nameWithType: PlumJsonAnimator.Common.Constants
+  fullName: PlumJsonAnimator.Common.Constants
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Constants
+    name: Constants
+    href: PlumJsonAnimator.Common.Constants.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Constants
+    name: Constants
+    href: PlumJsonAnimator.Common.Constants.html

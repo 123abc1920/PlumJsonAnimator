@@ -1,0 +1,157 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Models.Interfaces.IRenamable
+  commentId: T:PlumJsonAnimator.Models.Interfaces.IRenamable
+  id: IRenamable
+  parent: PlumJsonAnimator.Models.Interfaces
+  children:
+  - PlumJsonAnimator.Models.Interfaces.IRenamable.GetName
+  - PlumJsonAnimator.Models.Interfaces.IRenamable.SetName(System.String)
+  langs:
+  - csharp
+  - vb
+  name: IRenamable
+  nameWithType: IRenamable
+  fullName: PlumJsonAnimator.Models.Interfaces.IRenamable
+  type: Interface
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Interfaces/IRenameble.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: IRenamable
+    path: Models/Interfaces/IRenameble.cs
+    startLine: 2
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Interfaces
+  syntax:
+    content: public interface IRenamable
+    content.vb: Public Interface IRenamable
+  derivedClasses:
+  - PlumJsonAnimator.Models.Resources.ImageRes
+  - PlumJsonAnimator.Models.Resources.Res
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+- uid: PlumJsonAnimator.Models.Interfaces.IRenamable.GetName
+  commentId: P:PlumJsonAnimator.Models.Interfaces.IRenamable.GetName
+  id: GetName
+  parent: PlumJsonAnimator.Models.Interfaces.IRenamable
+  langs:
+  - csharp
+  - vb
+  name: GetName
+  nameWithType: IRenamable.GetName
+  fullName: PlumJsonAnimator.Models.Interfaces.IRenamable.GetName
+  type: Property
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Interfaces/IRenameble.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: GetName
+    path: Models/Interfaces/IRenameble.cs
+    startLine: 4
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Interfaces
+  syntax:
+    content: string GetName { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Property GetName As String
+  overload: PlumJsonAnimator.Models.Interfaces.IRenamable.GetName*
+- uid: PlumJsonAnimator.Models.Interfaces.IRenamable.SetName(System.String)
+  commentId: M:PlumJsonAnimator.Models.Interfaces.IRenamable.SetName(System.String)
+  id: SetName(System.String)
+  parent: PlumJsonAnimator.Models.Interfaces.IRenamable
+  langs:
+  - csharp
+  - vb
+  name: SetName(string?)
+  nameWithType: IRenamable.SetName(string?)
+  fullName: PlumJsonAnimator.Models.Interfaces.IRenamable.SetName(string?)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Interfaces/IRenameble.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: SetName
+    path: Models/Interfaces/IRenameble.cs
+    startLine: 6
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Interfaces
+  syntax:
+    content: void SetName(string? name)
+    parameters:
+    - id: name
+      type: System.String
+    content.vb: Sub SetName(name As String)
+  overload: PlumJsonAnimator.Models.Interfaces.IRenamable.SetName*
+  nameWithType.vb: IRenamable.SetName(String)
+  fullName.vb: PlumJsonAnimator.Models.Interfaces.IRenamable.SetName(String)
+  name.vb: SetName(String)
+references:
+- uid: PlumJsonAnimator.Models.Interfaces
+  commentId: N:PlumJsonAnimator.Models.Interfaces
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Models.Interfaces
+  nameWithType: PlumJsonAnimator.Models.Interfaces
+  fullName: PlumJsonAnimator.Models.Interfaces
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.Interfaces
+    name: Interfaces
+    href: PlumJsonAnimator.Models.Interfaces.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.Interfaces
+    name: Interfaces
+    href: PlumJsonAnimator.Models.Interfaces.html
+- uid: PlumJsonAnimator.Models.Interfaces.IRenamable.GetName*
+  commentId: Overload:PlumJsonAnimator.Models.Interfaces.IRenamable.GetName
+  href: PlumJsonAnimator.Models.Interfaces.IRenamable.html#PlumJsonAnimator_Models_Interfaces_IRenamable_GetName
+  name: GetName
+  nameWithType: IRenamable.GetName
+  fullName: PlumJsonAnimator.Models.Interfaces.IRenamable.GetName
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: PlumJsonAnimator.Models.Interfaces.IRenamable.SetName*
+  commentId: Overload:PlumJsonAnimator.Models.Interfaces.IRenamable.SetName
+  href: PlumJsonAnimator.Models.Interfaces.IRenamable.html#PlumJsonAnimator_Models_Interfaces_IRenamable_SetName_System_String_
+  name: SetName
+  nameWithType: IRenamable.SetName
+  fullName: PlumJsonAnimator.Models.Interfaces.IRenamable.SetName

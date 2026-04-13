@@ -1,0 +1,462 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Services.Interpolation
+  commentId: T:PlumJsonAnimator.Services.Interpolation
+  id: Interpolation
+  parent: PlumJsonAnimator.Services
+  children:
+  - PlumJsonAnimator.Services.Interpolation.angleInterpolation(System.Double,System.Double,System.Double)
+  - PlumJsonAnimator.Services.Interpolation.findInterpolateParam(System.Double,System.Double)
+  - PlumJsonAnimator.Services.Interpolation.linearInterpolation(System.Double,System.Double,System.Double)
+  langs:
+  - csharp
+  - vb
+  name: Interpolation
+  nameWithType: Interpolation
+  fullName: PlumJsonAnimator.Services.Interpolation
+  type: Class
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/Interpolations.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: Interpolation
+    path: Services/Interpolations.cs
+    startLine: 7
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  summary: Provides interpolation methods for animations and method for finding interpolation parameter t.
+  example: []
+  syntax:
+    content: public class Interpolation
+    content.vb: Public Class Interpolation
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: PlumJsonAnimator.Services.Interpolation.linearInterpolation(System.Double,System.Double,System.Double)
+  commentId: M:PlumJsonAnimator.Services.Interpolation.linearInterpolation(System.Double,System.Double,System.Double)
+  id: linearInterpolation(System.Double,System.Double,System.Double)
+  parent: PlumJsonAnimator.Services.Interpolation
+  langs:
+  - csharp
+  - vb
+  name: linearInterpolation(double, double, double)
+  nameWithType: Interpolation.linearInterpolation(double, double, double)
+  fullName: PlumJsonAnimator.Services.Interpolation.linearInterpolation(double, double, double)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/Interpolations.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: linearInterpolation
+    path: Services/Interpolations.cs
+    startLine: 18
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  summary: Linear interpolation between two values
+  example:
+  - new Interpolation().linearInterpolation(20, 40, 0.5);
+  syntax:
+    content: public double linearInterpolation(double start, double end, double t)
+    parameters:
+    - id: start
+      type: System.Double
+      description: Start value at t=0
+    - id: end
+      type: System.Double
+      description: End value at t=1
+    - id: t
+      type: System.Double
+      description: Interpolation parameter (0 to 1)
+    return:
+      type: System.Double
+    content.vb: Public Function linearInterpolation(start As Double, [end] As Double, t As Double) As Double
+  overload: PlumJsonAnimator.Services.Interpolation.linearInterpolation*
+  nameWithType.vb: Interpolation.linearInterpolation(Double, Double, Double)
+  fullName.vb: PlumJsonAnimator.Services.Interpolation.linearInterpolation(Double, Double, Double)
+  name.vb: linearInterpolation(Double, Double, Double)
+- uid: PlumJsonAnimator.Services.Interpolation.angleInterpolation(System.Double,System.Double,System.Double)
+  commentId: M:PlumJsonAnimator.Services.Interpolation.angleInterpolation(System.Double,System.Double,System.Double)
+  id: angleInterpolation(System.Double,System.Double,System.Double)
+  parent: PlumJsonAnimator.Services.Interpolation
+  langs:
+  - csharp
+  - vb
+  name: angleInterpolation(double, double, double)
+  nameWithType: Interpolation.angleInterpolation(double, double, double)
+  fullName: PlumJsonAnimator.Services.Interpolation.angleInterpolation(double, double, double)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/Interpolations.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: angleInterpolation
+    path: Services/Interpolations.cs
+    startLine: 32
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  summary: Angle interpolation with shortest path (handles 360° wrap-around)
+  example:
+  - new Interpolation().angleInterpolation(350, 10, 0.5);
+  syntax:
+    content: public double angleInterpolation(double start, double end, double t)
+    parameters:
+    - id: start
+      type: System.Double
+      description: Start angle in degrees
+    - id: end
+      type: System.Double
+      description: End angle in degrees
+    - id: t
+      type: System.Double
+      description: Interpolation parameter (0 to 1)
+    return:
+      type: System.Double
+    content.vb: Public Function angleInterpolation(start As Double, [end] As Double, t As Double) As Double
+  overload: PlumJsonAnimator.Services.Interpolation.angleInterpolation*
+  nameWithType.vb: Interpolation.angleInterpolation(Double, Double, Double)
+  fullName.vb: PlumJsonAnimator.Services.Interpolation.angleInterpolation(Double, Double, Double)
+  name.vb: angleInterpolation(Double, Double, Double)
+- uid: PlumJsonAnimator.Services.Interpolation.findInterpolateParam(System.Double,System.Double)
+  commentId: M:PlumJsonAnimator.Services.Interpolation.findInterpolateParam(System.Double,System.Double)
+  id: findInterpolateParam(System.Double,System.Double)
+  parent: PlumJsonAnimator.Services.Interpolation
+  langs:
+  - csharp
+  - vb
+  name: findInterpolateParam(double, double)
+  nameWithType: Interpolation.findInterpolateParam(double, double)
+  fullName: PlumJsonAnimator.Services.Interpolation.findInterpolateParam(double, double)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/Interpolations.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: findInterpolateParam
+    path: Services/Interpolations.cs
+    startLine: 46
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  summary: Calculates interpolation parameter t from elapsed time
+  example:
+  - new Interpolation().findInterpolateParam(10, 6); //Returns 0.6
+  syntax:
+    content: public double findInterpolateParam(double segmentDuration, double timeElapsed)
+    parameters:
+    - id: segmentDuration
+      type: System.Double
+      description: Total duration in ms
+    - id: timeElapsed
+      type: System.Double
+      description: Time passed in ms
+    return:
+      type: System.Double
+      description: t value clamped between 0 and 1
+    content.vb: Public Function findInterpolateParam(segmentDuration As Double, timeElapsed As Double) As Double
+  overload: PlumJsonAnimator.Services.Interpolation.findInterpolateParam*
+  nameWithType.vb: Interpolation.findInterpolateParam(Double, Double)
+  fullName.vb: PlumJsonAnimator.Services.Interpolation.findInterpolateParam(Double, Double)
+  name.vb: findInterpolateParam(Double, Double)
+references:
+- uid: PlumJsonAnimator.Services
+  commentId: N:PlumJsonAnimator.Services
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Services
+  nameWithType: PlumJsonAnimator.Services
+  fullName: PlumJsonAnimator.Services
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Services
+    name: Services
+    href: PlumJsonAnimator.Services.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Services
+    name: Services
+    href: PlumJsonAnimator.Services.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: PlumJsonAnimator.Services.Interpolation.linearInterpolation*
+  commentId: Overload:PlumJsonAnimator.Services.Interpolation.linearInterpolation
+  href: PlumJsonAnimator.Services.Interpolation.html#PlumJsonAnimator_Services_Interpolation_linearInterpolation_System_Double_System_Double_System_Double_
+  name: linearInterpolation
+  nameWithType: Interpolation.linearInterpolation
+  fullName: PlumJsonAnimator.Services.Interpolation.linearInterpolation
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.double
+  name: double
+  nameWithType: double
+  fullName: double
+  nameWithType.vb: Double
+  fullName.vb: Double
+  name.vb: Double
+- uid: PlumJsonAnimator.Services.Interpolation.angleInterpolation*
+  commentId: Overload:PlumJsonAnimator.Services.Interpolation.angleInterpolation
+  href: PlumJsonAnimator.Services.Interpolation.html#PlumJsonAnimator_Services_Interpolation_angleInterpolation_System_Double_System_Double_System_Double_
+  name: angleInterpolation
+  nameWithType: Interpolation.angleInterpolation
+  fullName: PlumJsonAnimator.Services.Interpolation.angleInterpolation
+- uid: PlumJsonAnimator.Services.Interpolation.findInterpolateParam*
+  commentId: Overload:PlumJsonAnimator.Services.Interpolation.findInterpolateParam
+  href: PlumJsonAnimator.Services.Interpolation.html#PlumJsonAnimator_Services_Interpolation_findInterpolateParam_System_Double_System_Double_
+  name: findInterpolateParam
+  nameWithType: Interpolation.findInterpolateParam
+  fullName: PlumJsonAnimator.Services.Interpolation.findInterpolateParam

@@ -1,0 +1,961 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Models.Resources.Res
+  commentId: T:PlumJsonAnimator.Models.Resources.Res
+  id: Res
+  parent: PlumJsonAnimator.Models.Resources
+  children:
+  - PlumJsonAnimator.Models.Resources.Res.#ctor(PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Common.Constants.GlobalState)
+  - PlumJsonAnimator.Models.Resources.Res.GetName
+  - PlumJsonAnimator.Models.Resources.Res.Name
+  - PlumJsonAnimator.Models.Resources.Res.Path
+  - PlumJsonAnimator.Models.Resources.Res.Preview
+  - PlumJsonAnimator.Models.Resources.Res.SetName(System.String)
+  - PlumJsonAnimator.Models.Resources.Res.SetPath(System.String)
+  - PlumJsonAnimator.Models.Resources.Res._path
+  - PlumJsonAnimator.Models.Resources.Res.ext
+  - PlumJsonAnimator.Models.Resources.Res.globalState
+  - PlumJsonAnimator.Models.Resources.Res.projectManager
+  langs:
+  - csharp
+  - vb
+  name: Res
+  nameWithType: Res
+  fullName: PlumJsonAnimator.Models.Resources.Res
+  type: Class
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Resources/Resources.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: Res
+    path: Models/Resources/Resources.cs
+    startLine: 12
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Resources
+  summary: Resources -- images, textures etc
+  example: []
+  syntax:
+    content: 'public class Res : INotifyable, INotifyPropertyChanged, IRenamable'
+    content.vb: Public Class Res Inherits INotifyable Implements INotifyPropertyChanged, IRenamable
+  inheritance:
+  - System.Object
+  - PlumJsonAnimator.Models.Interfaces.INotifyable
+  derivedClasses:
+  - PlumJsonAnimator.Models.Resources.ImageRes
+  implements:
+  - System.ComponentModel.INotifyPropertyChanged
+  - PlumJsonAnimator.Models.Interfaces.IRenamable
+  inheritedMembers:
+  - PlumJsonAnimator.Models.Interfaces.INotifyable.PropertyChanged
+  - PlumJsonAnimator.Models.Interfaces.INotifyable.OnPropertyChanged(System.String)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: PlumJsonAnimator.Models.Resources.Res.Name
+  commentId: P:PlumJsonAnimator.Models.Resources.Res.Name
+  id: Name
+  parent: PlumJsonAnimator.Models.Resources.Res
+  langs:
+  - csharp
+  - vb
+  name: Name
+  nameWithType: Res.Name
+  fullName: PlumJsonAnimator.Models.Resources.Res.Name
+  type: Property
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Resources/Resources.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: Name
+    path: Models/Resources/Resources.cs
+    startLine: 15
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Resources
+  syntax:
+    content: public string Name { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Name As String
+  overload: PlumJsonAnimator.Models.Resources.Res.Name*
+- uid: PlumJsonAnimator.Models.Resources.Res.projectManager
+  commentId: F:PlumJsonAnimator.Models.Resources.Res.projectManager
+  id: projectManager
+  parent: PlumJsonAnimator.Models.Resources.Res
+  langs:
+  - csharp
+  - vb
+  name: projectManager
+  nameWithType: Res.projectManager
+  fullName: PlumJsonAnimator.Models.Resources.Res.projectManager
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Resources/Resources.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: projectManager
+    path: Models/Resources/Resources.cs
+    startLine: 28
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Resources
+  syntax:
+    content: protected ProjectManager projectManager
+    return:
+      type: PlumJsonAnimator.Services.ProjectManager
+    content.vb: Protected projectManager As ProjectManager
+- uid: PlumJsonAnimator.Models.Resources.Res.globalState
+  commentId: F:PlumJsonAnimator.Models.Resources.Res.globalState
+  id: globalState
+  parent: PlumJsonAnimator.Models.Resources.Res
+  langs:
+  - csharp
+  - vb
+  name: globalState
+  nameWithType: Res.globalState
+  fullName: PlumJsonAnimator.Models.Resources.Res.globalState
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Resources/Resources.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: globalState
+    path: Models/Resources/Resources.cs
+    startLine: 29
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Resources
+  syntax:
+    content: protected GlobalState globalState
+    return:
+      type: PlumJsonAnimator.Common.Constants.GlobalState
+    content.vb: Protected globalState As GlobalState
+- uid: PlumJsonAnimator.Models.Resources.Res.#ctor(PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Common.Constants.GlobalState)
+  commentId: M:PlumJsonAnimator.Models.Resources.Res.#ctor(PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Common.Constants.GlobalState)
+  id: '#ctor(PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Common.Constants.GlobalState)'
+  parent: PlumJsonAnimator.Models.Resources.Res
+  langs:
+  - csharp
+  - vb
+  name: Res(ProjectManager, GlobalState)
+  nameWithType: Res.Res(ProjectManager, GlobalState)
+  fullName: PlumJsonAnimator.Models.Resources.Res.Res(PlumJsonAnimator.Services.ProjectManager, PlumJsonAnimator.Common.Constants.GlobalState)
+  type: Constructor
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Resources/Resources.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: .ctor
+    path: Models/Resources/Resources.cs
+    startLine: 31
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Resources
+  syntax:
+    content: public Res(ProjectManager projectManager, GlobalState globalState)
+    parameters:
+    - id: projectManager
+      type: PlumJsonAnimator.Services.ProjectManager
+    - id: globalState
+      type: PlumJsonAnimator.Common.Constants.GlobalState
+    content.vb: Public Sub New(projectManager As ProjectManager, globalState As GlobalState)
+  overload: PlumJsonAnimator.Models.Resources.Res.#ctor*
+  nameWithType.vb: Res.New(ProjectManager, GlobalState)
+  fullName.vb: PlumJsonAnimator.Models.Resources.Res.New(PlumJsonAnimator.Services.ProjectManager, PlumJsonAnimator.Common.Constants.GlobalState)
+  name.vb: New(ProjectManager, GlobalState)
+- uid: PlumJsonAnimator.Models.Resources.Res.GetName
+  commentId: P:PlumJsonAnimator.Models.Resources.Res.GetName
+  id: GetName
+  parent: PlumJsonAnimator.Models.Resources.Res
+  langs:
+  - csharp
+  - vb
+  name: GetName
+  nameWithType: Res.GetName
+  fullName: PlumJsonAnimator.Models.Resources.Res.GetName
+  type: Property
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Resources/Resources.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: GetName
+    path: Models/Resources/Resources.cs
+    startLine: 37
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Resources
+  example: []
+  syntax:
+    content: public string GetName { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property GetName As String
+  overload: PlumJsonAnimator.Models.Resources.Res.GetName*
+  implements:
+  - PlumJsonAnimator.Models.Interfaces.IRenamable.GetName
+- uid: PlumJsonAnimator.Models.Resources.Res._path
+  commentId: F:PlumJsonAnimator.Models.Resources.Res._path
+  id: _path
+  parent: PlumJsonAnimator.Models.Resources.Res
+  langs:
+  - csharp
+  - vb
+  name: _path
+  nameWithType: Res._path
+  fullName: PlumJsonAnimator.Models.Resources.Res._path
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Resources/Resources.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: _path
+    path: Models/Resources/Resources.cs
+    startLine: 49
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Resources
+  syntax:
+    content: protected string _path
+    return:
+      type: System.String
+    content.vb: Protected _path As String
+- uid: PlumJsonAnimator.Models.Resources.Res.Path
+  commentId: P:PlumJsonAnimator.Models.Resources.Res.Path
+  id: Path
+  parent: PlumJsonAnimator.Models.Resources.Res
+  langs:
+  - csharp
+  - vb
+  name: Path
+  nameWithType: Res.Path
+  fullName: PlumJsonAnimator.Models.Resources.Res.Path
+  type: Property
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Resources/Resources.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: Path
+    path: Models/Resources/Resources.cs
+    startLine: 50
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Resources
+  syntax:
+    content: public string Path { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Path As String
+  overload: PlumJsonAnimator.Models.Resources.Res.Path*
+- uid: PlumJsonAnimator.Models.Resources.Res.Preview
+  commentId: P:PlumJsonAnimator.Models.Resources.Res.Preview
+  id: Preview
+  parent: PlumJsonAnimator.Models.Resources.Res
+  langs:
+  - csharp
+  - vb
+  name: Preview
+  nameWithType: Res.Preview
+  fullName: PlumJsonAnimator.Models.Resources.Res.Preview
+  type: Property
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Resources/Resources.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: Preview
+    path: Models/Resources/Resources.cs
+    startLine: 65
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Resources
+  syntax:
+    content: public IImage? Preview { get; }
+    parameters: []
+    return:
+      type: Avalonia.Media.IImage
+    content.vb: Public ReadOnly Property Preview As IImage
+  overload: PlumJsonAnimator.Models.Resources.Res.Preview*
+- uid: PlumJsonAnimator.Models.Resources.Res.ext
+  commentId: F:PlumJsonAnimator.Models.Resources.Res.ext
+  id: ext
+  parent: PlumJsonAnimator.Models.Resources.Res
+  langs:
+  - csharp
+  - vb
+  name: ext
+  nameWithType: Res.ext
+  fullName: PlumJsonAnimator.Models.Resources.Res.ext
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Resources/Resources.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: ext
+    path: Models/Resources/Resources.cs
+    startLine: 81
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Resources
+  syntax:
+    content: public string ext
+    return:
+      type: System.String
+    content.vb: Public ext As String
+- uid: PlumJsonAnimator.Models.Resources.Res.SetName(System.String)
+  commentId: M:PlumJsonAnimator.Models.Resources.Res.SetName(System.String)
+  id: SetName(System.String)
+  parent: PlumJsonAnimator.Models.Resources.Res
+  langs:
+  - csharp
+  - vb
+  name: SetName(string?)
+  nameWithType: Res.SetName(string?)
+  fullName: PlumJsonAnimator.Models.Resources.Res.SetName(string?)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Resources/Resources.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: SetName
+    path: Models/Resources/Resources.cs
+    startLine: 83
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Resources
+  example: []
+  syntax:
+    content: public void SetName(string? name)
+    parameters:
+    - id: name
+      type: System.String
+    content.vb: Public Sub SetName(name As String)
+  overload: PlumJsonAnimator.Models.Resources.Res.SetName*
+  implements:
+  - PlumJsonAnimator.Models.Interfaces.IRenamable.SetName(System.String)
+  nameWithType.vb: Res.SetName(String)
+  fullName.vb: PlumJsonAnimator.Models.Resources.Res.SetName(String)
+  name.vb: SetName(String)
+- uid: PlumJsonAnimator.Models.Resources.Res.SetPath(System.String)
+  commentId: M:PlumJsonAnimator.Models.Resources.Res.SetPath(System.String)
+  id: SetPath(System.String)
+  parent: PlumJsonAnimator.Models.Resources.Res
+  langs:
+  - csharp
+  - vb
+  name: SetPath(string)
+  nameWithType: Res.SetPath(string)
+  fullName: PlumJsonAnimator.Models.Resources.Res.SetPath(string)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Resources/Resources.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: SetPath
+    path: Models/Resources/Resources.cs
+    startLine: 99
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Resources
+  syntax:
+    content: public void SetPath(string newProjectPath)
+    parameters:
+    - id: newProjectPath
+      type: System.String
+    content.vb: Public Sub SetPath(newProjectPath As String)
+  overload: PlumJsonAnimator.Models.Resources.Res.SetPath*
+  nameWithType.vb: Res.SetPath(String)
+  fullName.vb: PlumJsonAnimator.Models.Resources.Res.SetPath(String)
+  name.vb: SetPath(String)
+references:
+- uid: PlumJsonAnimator.Models.Resources
+  commentId: N:PlumJsonAnimator.Models.Resources
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Models.Resources
+  nameWithType: PlumJsonAnimator.Models.Resources
+  fullName: PlumJsonAnimator.Models.Resources
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.Resources
+    name: Resources
+    href: PlumJsonAnimator.Models.Resources.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.Resources
+    name: Resources
+    href: PlumJsonAnimator.Models.Resources.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: PlumJsonAnimator.Models.Interfaces.INotifyable
+  commentId: T:PlumJsonAnimator.Models.Interfaces.INotifyable
+  parent: PlumJsonAnimator.Models.Interfaces
+  href: PlumJsonAnimator.Models.Interfaces.INotifyable.html
+  name: INotifyable
+  nameWithType: INotifyable
+  fullName: PlumJsonAnimator.Models.Interfaces.INotifyable
+- uid: System.ComponentModel.INotifyPropertyChanged
+  commentId: T:System.ComponentModel.INotifyPropertyChanged
+  parent: System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged
+  name: INotifyPropertyChanged
+  nameWithType: INotifyPropertyChanged
+  fullName: System.ComponentModel.INotifyPropertyChanged
+- uid: PlumJsonAnimator.Models.Interfaces.IRenamable
+  commentId: T:PlumJsonAnimator.Models.Interfaces.IRenamable
+  parent: PlumJsonAnimator.Models.Interfaces
+  href: PlumJsonAnimator.Models.Interfaces.IRenamable.html
+  name: IRenamable
+  nameWithType: IRenamable
+  fullName: PlumJsonAnimator.Models.Interfaces.IRenamable
+- uid: PlumJsonAnimator.Models.Interfaces.INotifyable.PropertyChanged
+  commentId: E:PlumJsonAnimator.Models.Interfaces.INotifyable.PropertyChanged
+  parent: PlumJsonAnimator.Models.Interfaces.INotifyable
+  href: PlumJsonAnimator.Models.Interfaces.INotifyable.html#PlumJsonAnimator_Models_Interfaces_INotifyable_PropertyChanged
+  name: PropertyChanged
+  nameWithType: INotifyable.PropertyChanged
+  fullName: PlumJsonAnimator.Models.Interfaces.INotifyable.PropertyChanged
+- uid: PlumJsonAnimator.Models.Interfaces.INotifyable.OnPropertyChanged(System.String)
+  commentId: M:PlumJsonAnimator.Models.Interfaces.INotifyable.OnPropertyChanged(System.String)
+  parent: PlumJsonAnimator.Models.Interfaces.INotifyable
+  isExternal: true
+  href: PlumJsonAnimator.Models.Interfaces.INotifyable.html#PlumJsonAnimator_Models_Interfaces_INotifyable_OnPropertyChanged_System_String_
+  name: OnPropertyChanged(string)
+  nameWithType: INotifyable.OnPropertyChanged(string)
+  fullName: PlumJsonAnimator.Models.Interfaces.INotifyable.OnPropertyChanged(string)
+  nameWithType.vb: INotifyable.OnPropertyChanged(String)
+  fullName.vb: PlumJsonAnimator.Models.Interfaces.INotifyable.OnPropertyChanged(String)
+  name.vb: OnPropertyChanged(String)
+  spec.csharp:
+  - uid: PlumJsonAnimator.Models.Interfaces.INotifyable.OnPropertyChanged(System.String)
+    name: OnPropertyChanged
+    href: PlumJsonAnimator.Models.Interfaces.INotifyable.html#PlumJsonAnimator_Models_Interfaces_INotifyable_OnPropertyChanged_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: PlumJsonAnimator.Models.Interfaces.INotifyable.OnPropertyChanged(System.String)
+    name: OnPropertyChanged
+    href: PlumJsonAnimator.Models.Interfaces.INotifyable.html#PlumJsonAnimator_Models_Interfaces_INotifyable_OnPropertyChanged_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: PlumJsonAnimator.Models.Interfaces
+  commentId: N:PlumJsonAnimator.Models.Interfaces
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Models.Interfaces
+  nameWithType: PlumJsonAnimator.Models.Interfaces
+  fullName: PlumJsonAnimator.Models.Interfaces
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.Interfaces
+    name: Interfaces
+    href: PlumJsonAnimator.Models.Interfaces.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.Interfaces
+    name: Interfaces
+    href: PlumJsonAnimator.Models.Interfaces.html
+- uid: System.ComponentModel
+  commentId: N:System.ComponentModel
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.ComponentModel
+  nameWithType: System.ComponentModel
+  fullName: System.ComponentModel
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.ComponentModel
+    name: ComponentModel
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.componentmodel
+- uid: PlumJsonAnimator.Models.Resources.Res.Name*
+  commentId: Overload:PlumJsonAnimator.Models.Resources.Res.Name
+  href: PlumJsonAnimator.Models.Resources.Res.html#PlumJsonAnimator_Models_Resources_Res_Name
+  name: Name
+  nameWithType: Res.Name
+  fullName: PlumJsonAnimator.Models.Resources.Res.Name
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: PlumJsonAnimator.Services.ProjectManager
+  commentId: T:PlumJsonAnimator.Services.ProjectManager
+  parent: PlumJsonAnimator.Services
+  href: PlumJsonAnimator.Services.ProjectManager.html
+  name: ProjectManager
+  nameWithType: ProjectManager
+  fullName: PlumJsonAnimator.Services.ProjectManager
+- uid: PlumJsonAnimator.Services
+  commentId: N:PlumJsonAnimator.Services
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Services
+  nameWithType: PlumJsonAnimator.Services
+  fullName: PlumJsonAnimator.Services
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Services
+    name: Services
+    href: PlumJsonAnimator.Services.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Services
+    name: Services
+    href: PlumJsonAnimator.Services.html
+- uid: PlumJsonAnimator.Common.Constants.GlobalState
+  commentId: T:PlumJsonAnimator.Common.Constants.GlobalState
+  parent: PlumJsonAnimator.Common.Constants
+  href: PlumJsonAnimator.Common.Constants.GlobalState.html
+  name: GlobalState
+  nameWithType: GlobalState
+  fullName: PlumJsonAnimator.Common.Constants.GlobalState
+- uid: PlumJsonAnimator.Common.Constants
+  commentId: N:PlumJsonAnimator.Common.Constants
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Common.Constants
+  nameWithType: PlumJsonAnimator.Common.Constants
+  fullName: PlumJsonAnimator.Common.Constants
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Constants
+    name: Constants
+    href: PlumJsonAnimator.Common.Constants.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Constants
+    name: Constants
+    href: PlumJsonAnimator.Common.Constants.html
+- uid: PlumJsonAnimator.Models.Resources.Res.#ctor*
+  commentId: Overload:PlumJsonAnimator.Models.Resources.Res.#ctor
+  href: PlumJsonAnimator.Models.Resources.Res.html#PlumJsonAnimator_Models_Resources_Res__ctor_PlumJsonAnimator_Services_ProjectManager_PlumJsonAnimator_Common_Constants_GlobalState_
+  name: Res
+  nameWithType: Res.Res
+  fullName: PlumJsonAnimator.Models.Resources.Res.Res
+  nameWithType.vb: Res.New
+  fullName.vb: PlumJsonAnimator.Models.Resources.Res.New
+  name.vb: New
+- uid: PlumJsonAnimator.Models.Resources.Res.GetName*
+  commentId: Overload:PlumJsonAnimator.Models.Resources.Res.GetName
+  href: PlumJsonAnimator.Models.Resources.Res.html#PlumJsonAnimator_Models_Resources_Res_GetName
+  name: GetName
+  nameWithType: Res.GetName
+  fullName: PlumJsonAnimator.Models.Resources.Res.GetName
+- uid: PlumJsonAnimator.Models.Interfaces.IRenamable.GetName
+  commentId: P:PlumJsonAnimator.Models.Interfaces.IRenamable.GetName
+  parent: PlumJsonAnimator.Models.Interfaces.IRenamable
+  href: PlumJsonAnimator.Models.Interfaces.IRenamable.html#PlumJsonAnimator_Models_Interfaces_IRenamable_GetName
+  name: GetName
+  nameWithType: IRenamable.GetName
+  fullName: PlumJsonAnimator.Models.Interfaces.IRenamable.GetName
+- uid: PlumJsonAnimator.Models.Resources.Res.Path*
+  commentId: Overload:PlumJsonAnimator.Models.Resources.Res.Path
+  href: PlumJsonAnimator.Models.Resources.Res.html#PlumJsonAnimator_Models_Resources_Res_Path
+  name: Path
+  nameWithType: Res.Path
+  fullName: PlumJsonAnimator.Models.Resources.Res.Path
+- uid: PlumJsonAnimator.Models.Resources.Res.Preview*
+  commentId: Overload:PlumJsonAnimator.Models.Resources.Res.Preview
+  href: PlumJsonAnimator.Models.Resources.Res.html#PlumJsonAnimator_Models_Resources_Res_Preview
+  name: Preview
+  nameWithType: Res.Preview
+  fullName: PlumJsonAnimator.Models.Resources.Res.Preview
+- uid: Avalonia.Media.IImage
+  commentId: T:Avalonia.Media.IImage
+  parent: Avalonia.Media
+  isExternal: true
+  name: IImage
+  nameWithType: IImage
+  fullName: Avalonia.Media.IImage
+- uid: Avalonia.Media
+  commentId: N:Avalonia.Media
+  isExternal: true
+  name: Avalonia.Media
+  nameWithType: Avalonia.Media
+  fullName: Avalonia.Media
+  spec.csharp:
+  - uid: Avalonia
+    name: Avalonia
+    isExternal: true
+  - name: .
+  - uid: Avalonia.Media
+    name: Media
+    isExternal: true
+  spec.vb:
+  - uid: Avalonia
+    name: Avalonia
+    isExternal: true
+  - name: .
+  - uid: Avalonia.Media
+    name: Media
+    isExternal: true
+- uid: PlumJsonAnimator.Models.Resources.Res.SetName*
+  commentId: Overload:PlumJsonAnimator.Models.Resources.Res.SetName
+  href: PlumJsonAnimator.Models.Resources.Res.html#PlumJsonAnimator_Models_Resources_Res_SetName_System_String_
+  name: SetName
+  nameWithType: Res.SetName
+  fullName: PlumJsonAnimator.Models.Resources.Res.SetName
+- uid: PlumJsonAnimator.Models.Interfaces.IRenamable.SetName(System.String)
+  commentId: M:PlumJsonAnimator.Models.Interfaces.IRenamable.SetName(System.String)
+  parent: PlumJsonAnimator.Models.Interfaces.IRenamable
+  isExternal: true
+  href: PlumJsonAnimator.Models.Interfaces.IRenamable.html#PlumJsonAnimator_Models_Interfaces_IRenamable_SetName_System_String_
+  name: SetName(string)
+  nameWithType: IRenamable.SetName(string)
+  fullName: PlumJsonAnimator.Models.Interfaces.IRenamable.SetName(string)
+  nameWithType.vb: IRenamable.SetName(String)
+  fullName.vb: PlumJsonAnimator.Models.Interfaces.IRenamable.SetName(String)
+  name.vb: SetName(String)
+  spec.csharp:
+  - uid: PlumJsonAnimator.Models.Interfaces.IRenamable.SetName(System.String)
+    name: SetName
+    href: PlumJsonAnimator.Models.Interfaces.IRenamable.html#PlumJsonAnimator_Models_Interfaces_IRenamable_SetName_System_String_
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: PlumJsonAnimator.Models.Interfaces.IRenamable.SetName(System.String)
+    name: SetName
+    href: PlumJsonAnimator.Models.Interfaces.IRenamable.html#PlumJsonAnimator_Models_Interfaces_IRenamable_SetName_System_String_
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: PlumJsonAnimator.Models.Resources.Res.SetPath*
+  commentId: Overload:PlumJsonAnimator.Models.Resources.Res.SetPath
+  href: PlumJsonAnimator.Models.Resources.Res.html#PlumJsonAnimator_Models_Resources_Res_SetPath_System_String_
+  name: SetPath
+  nameWithType: Res.SetPath
+  fullName: PlumJsonAnimator.Models.Resources.Res.SetPath

@@ -1,0 +1,415 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Common.Dialogs.Popups
+  commentId: T:PlumJsonAnimator.Common.Dialogs.Popups
+  id: Popups
+  parent: PlumJsonAnimator.Common.Dialogs
+  children:
+  - PlumJsonAnimator.Common.Dialogs.Popups.ShowPopup(System.String,System.String)
+  - PlumJsonAnimator.Common.Dialogs.Popups.ToastManager
+  langs:
+  - csharp
+  - vb
+  name: Popups
+  nameWithType: Popups
+  fullName: PlumJsonAnimator.Common.Dialogs.Popups
+  type: Class
+  source:
+    remote:
+      path: PlumJsonAnimator/Common/Dialogs/Popups.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: Popups
+    path: Common/Dialogs/Popups.cs
+    startLine: 13
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Common.Dialogs
+  syntax:
+    content: public class Popups
+    content.vb: Public Class Popups
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: PlumJsonAnimator.Common.Dialogs.Popups.ToastManager
+  commentId: F:PlumJsonAnimator.Common.Dialogs.Popups.ToastManager
+  id: ToastManager
+  parent: PlumJsonAnimator.Common.Dialogs.Popups
+  langs:
+  - csharp
+  - vb
+  name: ToastManager
+  nameWithType: Popups.ToastManager
+  fullName: PlumJsonAnimator.Common.Dialogs.Popups.ToastManager
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Common/Dialogs/Popups.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: ToastManager
+    path: Common/Dialogs/Popups.cs
+    startLine: 15
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Common.Dialogs
+  syntax:
+    content: public static ISukiToastManager ToastManager
+    return:
+      type: SukiUI.Toasts.ISukiToastManager
+    content.vb: Public Shared ToastManager As ISukiToastManager
+- uid: PlumJsonAnimator.Common.Dialogs.Popups.ShowPopup(System.String,System.String)
+  commentId: M:PlumJsonAnimator.Common.Dialogs.Popups.ShowPopup(System.String,System.String)
+  id: ShowPopup(System.String,System.String)
+  parent: PlumJsonAnimator.Common.Dialogs.Popups
+  langs:
+  - csharp
+  - vb
+  name: ShowPopup(string, string)
+  nameWithType: Popups.ShowPopup(string, string)
+  fullName: PlumJsonAnimator.Common.Dialogs.Popups.ShowPopup(string, string)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Common/Dialogs/Popups.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: ShowPopup
+    path: Common/Dialogs/Popups.cs
+    startLine: 18
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Common.Dialogs
+  syntax:
+    content: public static void ShowPopup(string message, string title)
+    parameters:
+    - id: message
+      type: System.String
+    - id: title
+      type: System.String
+    content.vb: Public Shared Sub ShowPopup(message As String, title As String)
+  overload: PlumJsonAnimator.Common.Dialogs.Popups.ShowPopup*
+  nameWithType.vb: Popups.ShowPopup(String, String)
+  fullName.vb: PlumJsonAnimator.Common.Dialogs.Popups.ShowPopup(String, String)
+  name.vb: ShowPopup(String, String)
+references:
+- uid: PlumJsonAnimator.Common.Dialogs
+  commentId: N:PlumJsonAnimator.Common.Dialogs
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Common.Dialogs
+  nameWithType: PlumJsonAnimator.Common.Dialogs
+  fullName: PlumJsonAnimator.Common.Dialogs
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Dialogs
+    name: Dialogs
+    href: PlumJsonAnimator.Common.Dialogs.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Dialogs
+    name: Dialogs
+    href: PlumJsonAnimator.Common.Dialogs.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: SukiUI.Toasts.ISukiToastManager
+  commentId: T:SukiUI.Toasts.ISukiToastManager
+  parent: SukiUI.Toasts
+  isExternal: true
+  name: ISukiToastManager
+  nameWithType: ISukiToastManager
+  fullName: SukiUI.Toasts.ISukiToastManager
+- uid: SukiUI.Toasts
+  commentId: N:SukiUI.Toasts
+  isExternal: true
+  name: SukiUI.Toasts
+  nameWithType: SukiUI.Toasts
+  fullName: SukiUI.Toasts
+  spec.csharp:
+  - uid: SukiUI
+    name: SukiUI
+    isExternal: true
+  - name: .
+  - uid: SukiUI.Toasts
+    name: Toasts
+    isExternal: true
+  spec.vb:
+  - uid: SukiUI
+    name: SukiUI
+    isExternal: true
+  - name: .
+  - uid: SukiUI.Toasts
+    name: Toasts
+    isExternal: true
+- uid: PlumJsonAnimator.Common.Dialogs.Popups.ShowPopup*
+  commentId: Overload:PlumJsonAnimator.Common.Dialogs.Popups.ShowPopup
+  href: PlumJsonAnimator.Common.Dialogs.Popups.html#PlumJsonAnimator_Common_Dialogs_Popups_ShowPopup_System_String_System_String_
+  name: ShowPopup
+  nameWithType: Popups.ShowPopup
+  fullName: PlumJsonAnimator.Common.Dialogs.Popups.ShowPopup
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String

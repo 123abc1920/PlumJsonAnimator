@@ -1,0 +1,62 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Models.Interfaces
+  commentId: N:PlumJsonAnimator.Models.Interfaces
+  id: PlumJsonAnimator.Models.Interfaces
+  children:
+  - PlumJsonAnimator.Models.Interfaces.INotifyable
+  - PlumJsonAnimator.Models.Interfaces.IRenamable
+  langs:
+  - csharp
+  - vb
+  name: PlumJsonAnimator.Models.Interfaces
+  nameWithType: PlumJsonAnimator.Models.Interfaces
+  fullName: PlumJsonAnimator.Models.Interfaces
+  type: Namespace
+  assemblies:
+  - PlumJsonAnimator
+references:
+- uid: PlumJsonAnimator.Models.Interfaces.INotifyable
+  commentId: T:PlumJsonAnimator.Models.Interfaces.INotifyable
+  parent: PlumJsonAnimator.Models.Interfaces
+  href: PlumJsonAnimator.Models.Interfaces.INotifyable.html
+  name: INotifyable
+  nameWithType: INotifyable
+  fullName: PlumJsonAnimator.Models.Interfaces.INotifyable
+- uid: PlumJsonAnimator.Models.Interfaces.IRenamable
+  commentId: T:PlumJsonAnimator.Models.Interfaces.IRenamable
+  parent: PlumJsonAnimator.Models.Interfaces
+  href: PlumJsonAnimator.Models.Interfaces.IRenamable.html
+  name: IRenamable
+  nameWithType: IRenamable
+  fullName: PlumJsonAnimator.Models.Interfaces.IRenamable
+- uid: PlumJsonAnimator.Models.Interfaces
+  commentId: N:PlumJsonAnimator.Models.Interfaces
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Models.Interfaces
+  nameWithType: PlumJsonAnimator.Models.Interfaces
+  fullName: PlumJsonAnimator.Models.Interfaces
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.Interfaces
+    name: Interfaces
+    href: PlumJsonAnimator.Models.Interfaces.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.Interfaces
+    name: Interfaces
+    href: PlumJsonAnimator.Models.Interfaces.html

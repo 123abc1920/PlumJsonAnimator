@@ -1,0 +1,30 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator
+  commentId: N:PlumJsonAnimator
+  id: PlumJsonAnimator
+  children:
+  - PlumJsonAnimator.App
+  - PlumJsonAnimator.ViewLocator
+  langs:
+  - csharp
+  - vb
+  name: PlumJsonAnimator
+  nameWithType: PlumJsonAnimator
+  fullName: PlumJsonAnimator
+  type: Namespace
+  assemblies:
+  - PlumJsonAnimator
+references:
+- uid: PlumJsonAnimator.App
+  commentId: T:PlumJsonAnimator.App
+  href: PlumJsonAnimator.App.html
+  name: App
+  nameWithType: App
+  fullName: PlumJsonAnimator.App
+- uid: PlumJsonAnimator.ViewLocator
+  commentId: T:PlumJsonAnimator.ViewLocator
+  href: PlumJsonAnimator.ViewLocator.html
+  name: ViewLocator
+  nameWithType: ViewLocator
+  fullName: PlumJsonAnimator.ViewLocator

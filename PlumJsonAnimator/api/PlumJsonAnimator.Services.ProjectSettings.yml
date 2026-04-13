@@ -1,0 +1,717 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Services.ProjectSettings
+  commentId: T:PlumJsonAnimator.Services.ProjectSettings
+  id: ProjectSettings
+  parent: PlumJsonAnimator.Services
+  children:
+  - PlumJsonAnimator.Services.ProjectSettings.#ctor(PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.JsonCode)
+  - PlumJsonAnimator.Services.ProjectSettings.ExistOrCreateProjectDirs
+  - PlumJsonAnimator.Services.ProjectSettings.GetSettingsData
+  - PlumJsonAnimator.Services.ProjectSettings.ReadSettings
+  - PlumJsonAnimator.Services.ProjectSettings.ReadSettings(System.String)
+  - PlumJsonAnimator.Services.ProjectSettings.UpdateSettings(PlumJsonAnimator.Models.Project)
+  - PlumJsonAnimator.Services.ProjectSettings.WriteAllSettings
+  - PlumJsonAnimator.Services.ProjectSettings.WriteAnim(System.String)
+  - PlumJsonAnimator.Services.ProjectSettings.WriteSettings
+  langs:
+  - csharp
+  - vb
+  name: ProjectSettings
+  nameWithType: ProjectSettings
+  fullName: PlumJsonAnimator.Services.ProjectSettings
+  type: Class
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectSettings.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: ProjectSettings
+    path: Services/ProjectSettings.cs
+    startLine: 8
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public class ProjectSettings
+    content.vb: Public Class ProjectSettings
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: PlumJsonAnimator.Services.ProjectSettings.GetSettingsData
+  commentId: M:PlumJsonAnimator.Services.ProjectSettings.GetSettingsData
+  id: GetSettingsData
+  parent: PlumJsonAnimator.Services.ProjectSettings
+  langs:
+  - csharp
+  - vb
+  name: GetSettingsData()
+  nameWithType: ProjectSettings.GetSettingsData()
+  fullName: PlumJsonAnimator.Services.ProjectSettings.GetSettingsData()
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectSettings.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: GetSettingsData
+    path: Services/ProjectSettings.cs
+    startLine: 20
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public SettingsData GetSettingsData()
+    return:
+      type: PlumJsonAnimator.Services.SettingsData
+    content.vb: Public Function GetSettingsData() As SettingsData
+  overload: PlumJsonAnimator.Services.ProjectSettings.GetSettingsData*
+- uid: PlumJsonAnimator.Services.ProjectSettings.UpdateSettings(PlumJsonAnimator.Models.Project)
+  commentId: M:PlumJsonAnimator.Services.ProjectSettings.UpdateSettings(PlumJsonAnimator.Models.Project)
+  id: UpdateSettings(PlumJsonAnimator.Models.Project)
+  parent: PlumJsonAnimator.Services.ProjectSettings
+  langs:
+  - csharp
+  - vb
+  name: UpdateSettings(Project)
+  nameWithType: ProjectSettings.UpdateSettings(Project)
+  fullName: PlumJsonAnimator.Services.ProjectSettings.UpdateSettings(PlumJsonAnimator.Models.Project)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectSettings.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: UpdateSettings
+    path: Services/ProjectSettings.cs
+    startLine: 25
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public void UpdateSettings(Project project)
+    parameters:
+    - id: project
+      type: PlumJsonAnimator.Models.Project
+    content.vb: Public Sub UpdateSettings(project As Project)
+  overload: PlumJsonAnimator.Services.ProjectSettings.UpdateSettings*
+- uid: PlumJsonAnimator.Services.ProjectSettings.#ctor(PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.JsonCode)
+  commentId: M:PlumJsonAnimator.Services.ProjectSettings.#ctor(PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.JsonCode)
+  id: '#ctor(PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.JsonCode)'
+  parent: PlumJsonAnimator.Services.ProjectSettings
+  langs:
+  - csharp
+  - vb
+  name: ProjectSettings(AppSettings, GlobalState, JsonCode)
+  nameWithType: ProjectSettings.ProjectSettings(AppSettings, GlobalState, JsonCode)
+  fullName: PlumJsonAnimator.Services.ProjectSettings.ProjectSettings(PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.JsonCode)
+  type: Constructor
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectSettings.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: .ctor
+    path: Services/ProjectSettings.cs
+    startLine: 33
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public ProjectSettings(AppSettings appSettings, GlobalState globalState, JsonCode jsonCode)
+    parameters:
+    - id: appSettings
+      type: PlumJsonAnimator.Services.AppSettings
+    - id: globalState
+      type: PlumJsonAnimator.Common.Constants.GlobalState
+    - id: jsonCode
+      type: PlumJsonAnimator.Services.JsonCode
+    content.vb: Public Sub New(appSettings As AppSettings, globalState As GlobalState, jsonCode As JsonCode)
+  overload: PlumJsonAnimator.Services.ProjectSettings.#ctor*
+  nameWithType.vb: ProjectSettings.New(AppSettings, GlobalState, JsonCode)
+  fullName.vb: PlumJsonAnimator.Services.ProjectSettings.New(PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.JsonCode)
+  name.vb: New(AppSettings, GlobalState, JsonCode)
+- uid: PlumJsonAnimator.Services.ProjectSettings.ExistOrCreateProjectDirs
+  commentId: M:PlumJsonAnimator.Services.ProjectSettings.ExistOrCreateProjectDirs
+  id: ExistOrCreateProjectDirs
+  parent: PlumJsonAnimator.Services.ProjectSettings
+  langs:
+  - csharp
+  - vb
+  name: ExistOrCreateProjectDirs()
+  nameWithType: ProjectSettings.ExistOrCreateProjectDirs()
+  fullName: PlumJsonAnimator.Services.ProjectSettings.ExistOrCreateProjectDirs()
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectSettings.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: ExistOrCreateProjectDirs
+    path: Services/ProjectSettings.cs
+    startLine: 52
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public void ExistOrCreateProjectDirs()
+    content.vb: Public Sub ExistOrCreateProjectDirs()
+  overload: PlumJsonAnimator.Services.ProjectSettings.ExistOrCreateProjectDirs*
+- uid: PlumJsonAnimator.Services.ProjectSettings.WriteAllSettings
+  commentId: M:PlumJsonAnimator.Services.ProjectSettings.WriteAllSettings
+  id: WriteAllSettings
+  parent: PlumJsonAnimator.Services.ProjectSettings
+  langs:
+  - csharp
+  - vb
+  name: WriteAllSettings()
+  nameWithType: ProjectSettings.WriteAllSettings()
+  fullName: PlumJsonAnimator.Services.ProjectSettings.WriteAllSettings()
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectSettings.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: WriteAllSettings
+    path: Services/ProjectSettings.cs
+    startLine: 73
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public void WriteAllSettings()
+    content.vb: Public Sub WriteAllSettings()
+  overload: PlumJsonAnimator.Services.ProjectSettings.WriteAllSettings*
+- uid: PlumJsonAnimator.Services.ProjectSettings.WriteSettings
+  commentId: M:PlumJsonAnimator.Services.ProjectSettings.WriteSettings
+  id: WriteSettings
+  parent: PlumJsonAnimator.Services.ProjectSettings
+  langs:
+  - csharp
+  - vb
+  name: WriteSettings()
+  nameWithType: ProjectSettings.WriteSettings()
+  fullName: PlumJsonAnimator.Services.ProjectSettings.WriteSettings()
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectSettings.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: WriteSettings
+    path: Services/ProjectSettings.cs
+    startLine: 96
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public void WriteSettings()
+    content.vb: Public Sub WriteSettings()
+  overload: PlumJsonAnimator.Services.ProjectSettings.WriteSettings*
+- uid: PlumJsonAnimator.Services.ProjectSettings.WriteAnim(System.String)
+  commentId: M:PlumJsonAnimator.Services.ProjectSettings.WriteAnim(System.String)
+  id: WriteAnim(System.String)
+  parent: PlumJsonAnimator.Services.ProjectSettings
+  langs:
+  - csharp
+  - vb
+  name: WriteAnim(string)
+  nameWithType: ProjectSettings.WriteAnim(string)
+  fullName: PlumJsonAnimator.Services.ProjectSettings.WriteAnim(string)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectSettings.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: WriteAnim
+    path: Services/ProjectSettings.cs
+    startLine: 111
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public void WriteAnim(string anim)
+    parameters:
+    - id: anim
+      type: System.String
+    content.vb: Public Sub WriteAnim(anim As String)
+  overload: PlumJsonAnimator.Services.ProjectSettings.WriteAnim*
+  nameWithType.vb: ProjectSettings.WriteAnim(String)
+  fullName.vb: PlumJsonAnimator.Services.ProjectSettings.WriteAnim(String)
+  name.vb: WriteAnim(String)
+- uid: PlumJsonAnimator.Services.ProjectSettings.ReadSettings
+  commentId: M:PlumJsonAnimator.Services.ProjectSettings.ReadSettings
+  id: ReadSettings
+  parent: PlumJsonAnimator.Services.ProjectSettings
+  langs:
+  - csharp
+  - vb
+  name: ReadSettings()
+  nameWithType: ProjectSettings.ReadSettings()
+  fullName: PlumJsonAnimator.Services.ProjectSettings.ReadSettings()
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectSettings.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: ReadSettings
+    path: Services/ProjectSettings.cs
+    startLine: 157
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public void ReadSettings()
+    content.vb: Public Sub ReadSettings()
+  overload: PlumJsonAnimator.Services.ProjectSettings.ReadSettings*
+- uid: PlumJsonAnimator.Services.ProjectSettings.ReadSettings(System.String)
+  commentId: M:PlumJsonAnimator.Services.ProjectSettings.ReadSettings(System.String)
+  id: ReadSettings(System.String)
+  parent: PlumJsonAnimator.Services.ProjectSettings
+  langs:
+  - csharp
+  - vb
+  name: ReadSettings(string?)
+  nameWithType: ProjectSettings.ReadSettings(string?)
+  fullName: PlumJsonAnimator.Services.ProjectSettings.ReadSettings(string?)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectSettings.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: ReadSettings
+    path: Services/ProjectSettings.cs
+    startLine: 167
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public void ReadSettings(string? path)
+    parameters:
+    - id: path
+      type: System.String
+    content.vb: Public Sub ReadSettings(path As String)
+  overload: PlumJsonAnimator.Services.ProjectSettings.ReadSettings*
+  nameWithType.vb: ProjectSettings.ReadSettings(String)
+  fullName.vb: PlumJsonAnimator.Services.ProjectSettings.ReadSettings(String)
+  name.vb: ReadSettings(String)
+references:
+- uid: PlumJsonAnimator.Services
+  commentId: N:PlumJsonAnimator.Services
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Services
+  nameWithType: PlumJsonAnimator.Services
+  fullName: PlumJsonAnimator.Services
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Services
+    name: Services
+    href: PlumJsonAnimator.Services.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Services
+    name: Services
+    href: PlumJsonAnimator.Services.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: PlumJsonAnimator.Services.ProjectSettings.GetSettingsData*
+  commentId: Overload:PlumJsonAnimator.Services.ProjectSettings.GetSettingsData
+  href: PlumJsonAnimator.Services.ProjectSettings.html#PlumJsonAnimator_Services_ProjectSettings_GetSettingsData
+  name: GetSettingsData
+  nameWithType: ProjectSettings.GetSettingsData
+  fullName: PlumJsonAnimator.Services.ProjectSettings.GetSettingsData
+- uid: PlumJsonAnimator.Services.SettingsData
+  commentId: T:PlumJsonAnimator.Services.SettingsData
+  parent: PlumJsonAnimator.Services
+  href: PlumJsonAnimator.Services.SettingsData.html
+  name: SettingsData
+  nameWithType: SettingsData
+  fullName: PlumJsonAnimator.Services.SettingsData
+- uid: PlumJsonAnimator.Services.ProjectSettings.UpdateSettings*
+  commentId: Overload:PlumJsonAnimator.Services.ProjectSettings.UpdateSettings
+  href: PlumJsonAnimator.Services.ProjectSettings.html#PlumJsonAnimator_Services_ProjectSettings_UpdateSettings_PlumJsonAnimator_Models_Project_
+  name: UpdateSettings
+  nameWithType: ProjectSettings.UpdateSettings
+  fullName: PlumJsonAnimator.Services.ProjectSettings.UpdateSettings
+- uid: PlumJsonAnimator.Models.Project
+  commentId: T:PlumJsonAnimator.Models.Project
+  parent: PlumJsonAnimator.Models
+  href: PlumJsonAnimator.Models.Project.html
+  name: Project
+  nameWithType: Project
+  fullName: PlumJsonAnimator.Models.Project
+- uid: PlumJsonAnimator.Models
+  commentId: N:PlumJsonAnimator.Models
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Models
+  nameWithType: PlumJsonAnimator.Models
+  fullName: PlumJsonAnimator.Models
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+- uid: PlumJsonAnimator.Services.ProjectSettings.#ctor*
+  commentId: Overload:PlumJsonAnimator.Services.ProjectSettings.#ctor
+  href: PlumJsonAnimator.Services.ProjectSettings.html#PlumJsonAnimator_Services_ProjectSettings__ctor_PlumJsonAnimator_Services_AppSettings_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_JsonCode_
+  name: ProjectSettings
+  nameWithType: ProjectSettings.ProjectSettings
+  fullName: PlumJsonAnimator.Services.ProjectSettings.ProjectSettings
+  nameWithType.vb: ProjectSettings.New
+  fullName.vb: PlumJsonAnimator.Services.ProjectSettings.New
+  name.vb: New
+- uid: PlumJsonAnimator.Services.AppSettings
+  commentId: T:PlumJsonAnimator.Services.AppSettings
+  parent: PlumJsonAnimator.Services
+  href: PlumJsonAnimator.Services.AppSettings.html
+  name: AppSettings
+  nameWithType: AppSettings
+  fullName: PlumJsonAnimator.Services.AppSettings
+- uid: PlumJsonAnimator.Common.Constants.GlobalState
+  commentId: T:PlumJsonAnimator.Common.Constants.GlobalState
+  parent: PlumJsonAnimator.Common.Constants
+  href: PlumJsonAnimator.Common.Constants.GlobalState.html
+  name: GlobalState
+  nameWithType: GlobalState
+  fullName: PlumJsonAnimator.Common.Constants.GlobalState
+- uid: PlumJsonAnimator.Services.JsonCode
+  commentId: T:PlumJsonAnimator.Services.JsonCode
+  parent: PlumJsonAnimator.Services
+  href: PlumJsonAnimator.Services.JsonCode.html
+  name: JsonCode
+  nameWithType: JsonCode
+  fullName: PlumJsonAnimator.Services.JsonCode
+- uid: PlumJsonAnimator.Common.Constants
+  commentId: N:PlumJsonAnimator.Common.Constants
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Common.Constants
+  nameWithType: PlumJsonAnimator.Common.Constants
+  fullName: PlumJsonAnimator.Common.Constants
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Constants
+    name: Constants
+    href: PlumJsonAnimator.Common.Constants.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Constants
+    name: Constants
+    href: PlumJsonAnimator.Common.Constants.html
+- uid: PlumJsonAnimator.Services.ProjectSettings.ExistOrCreateProjectDirs*
+  commentId: Overload:PlumJsonAnimator.Services.ProjectSettings.ExistOrCreateProjectDirs
+  href: PlumJsonAnimator.Services.ProjectSettings.html#PlumJsonAnimator_Services_ProjectSettings_ExistOrCreateProjectDirs
+  name: ExistOrCreateProjectDirs
+  nameWithType: ProjectSettings.ExistOrCreateProjectDirs
+  fullName: PlumJsonAnimator.Services.ProjectSettings.ExistOrCreateProjectDirs
+- uid: PlumJsonAnimator.Services.ProjectSettings.WriteAllSettings*
+  commentId: Overload:PlumJsonAnimator.Services.ProjectSettings.WriteAllSettings
+  href: PlumJsonAnimator.Services.ProjectSettings.html#PlumJsonAnimator_Services_ProjectSettings_WriteAllSettings
+  name: WriteAllSettings
+  nameWithType: ProjectSettings.WriteAllSettings
+  fullName: PlumJsonAnimator.Services.ProjectSettings.WriteAllSettings
+- uid: PlumJsonAnimator.Services.ProjectSettings.WriteSettings*
+  commentId: Overload:PlumJsonAnimator.Services.ProjectSettings.WriteSettings
+  href: PlumJsonAnimator.Services.ProjectSettings.html#PlumJsonAnimator_Services_ProjectSettings_WriteSettings
+  name: WriteSettings
+  nameWithType: ProjectSettings.WriteSettings
+  fullName: PlumJsonAnimator.Services.ProjectSettings.WriteSettings
+- uid: PlumJsonAnimator.Services.ProjectSettings.WriteAnim*
+  commentId: Overload:PlumJsonAnimator.Services.ProjectSettings.WriteAnim
+  href: PlumJsonAnimator.Services.ProjectSettings.html#PlumJsonAnimator_Services_ProjectSettings_WriteAnim_System_String_
+  name: WriteAnim
+  nameWithType: ProjectSettings.WriteAnim
+  fullName: PlumJsonAnimator.Services.ProjectSettings.WriteAnim
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: PlumJsonAnimator.Services.ProjectSettings.ReadSettings*
+  commentId: Overload:PlumJsonAnimator.Services.ProjectSettings.ReadSettings
+  href: PlumJsonAnimator.Services.ProjectSettings.html#PlumJsonAnimator_Services_ProjectSettings_ReadSettings
+  name: ReadSettings
+  nameWithType: ProjectSettings.ReadSettings
+  fullName: PlumJsonAnimator.Services.ProjectSettings.ReadSettings

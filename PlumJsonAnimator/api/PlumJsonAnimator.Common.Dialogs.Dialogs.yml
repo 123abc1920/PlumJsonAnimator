@@ -1,0 +1,492 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Common.Dialogs.Dialogs
+  commentId: T:PlumJsonAnimator.Common.Dialogs.Dialogs
+  id: Dialogs
+  parent: PlumJsonAnimator.Common.Dialogs
+  children:
+  - PlumJsonAnimator.Common.Dialogs.Dialogs.ShowDialog(System.String,PlumJsonAnimator.ViewModels.ViewModelBase,Avalonia.Controls.Window,PlumJsonAnimator.Common.Dialogs.ViewType)
+  - PlumJsonAnimator.Common.Dialogs.Dialogs.ShowDialog(System.String,PlumJsonAnimator.ViewModels.ViewModelBase,PlumJsonAnimator.Common.Dialogs.ViewType)
+  - PlumJsonAnimator.Common.Dialogs.Dialogs.mainWin
+  langs:
+  - csharp
+  - vb
+  name: Dialogs
+  nameWithType: Dialogs
+  fullName: PlumJsonAnimator.Common.Dialogs.Dialogs
+  type: Class
+  source:
+    remote:
+      path: PlumJsonAnimator/Common/Dialogs/Dialogs.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: Dialogs
+    path: Common/Dialogs/Dialogs.cs
+    startLine: 21
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Common.Dialogs
+  syntax:
+    content: public class Dialogs
+    content.vb: Public Class Dialogs
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: PlumJsonAnimator.Common.Dialogs.Dialogs.ShowDialog(System.String,PlumJsonAnimator.ViewModels.ViewModelBase,Avalonia.Controls.Window,PlumJsonAnimator.Common.Dialogs.ViewType)
+  commentId: M:PlumJsonAnimator.Common.Dialogs.Dialogs.ShowDialog(System.String,PlumJsonAnimator.ViewModels.ViewModelBase,Avalonia.Controls.Window,PlumJsonAnimator.Common.Dialogs.ViewType)
+  id: ShowDialog(System.String,PlumJsonAnimator.ViewModels.ViewModelBase,Avalonia.Controls.Window,PlumJsonAnimator.Common.Dialogs.ViewType)
+  parent: PlumJsonAnimator.Common.Dialogs.Dialogs
+  langs:
+  - csharp
+  - vb
+  name: ShowDialog(string, ViewModelBase, Window, ViewType)
+  nameWithType: Dialogs.ShowDialog(string, ViewModelBase, Window, ViewType)
+  fullName: PlumJsonAnimator.Common.Dialogs.Dialogs.ShowDialog(string, PlumJsonAnimator.ViewModels.ViewModelBase, Avalonia.Controls.Window, PlumJsonAnimator.Common.Dialogs.ViewType)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Common/Dialogs/Dialogs.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: ShowDialog
+    path: Common/Dialogs/Dialogs.cs
+    startLine: 79
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Common.Dialogs
+  syntax:
+    content: public void ShowDialog(string title, ViewModelBase viewModel, Window owner, ViewType viewType)
+    parameters:
+    - id: title
+      type: System.String
+    - id: viewModel
+      type: PlumJsonAnimator.ViewModels.ViewModelBase
+    - id: owner
+      type: Avalonia.Controls.Window
+    - id: viewType
+      type: PlumJsonAnimator.Common.Dialogs.ViewType
+    content.vb: Public Sub ShowDialog(title As String, viewModel As ViewModelBase, owner As Window, viewType As ViewType)
+  overload: PlumJsonAnimator.Common.Dialogs.Dialogs.ShowDialog*
+  nameWithType.vb: Dialogs.ShowDialog(String, ViewModelBase, Window, ViewType)
+  fullName.vb: PlumJsonAnimator.Common.Dialogs.Dialogs.ShowDialog(String, PlumJsonAnimator.ViewModels.ViewModelBase, Avalonia.Controls.Window, PlumJsonAnimator.Common.Dialogs.ViewType)
+  name.vb: ShowDialog(String, ViewModelBase, Window, ViewType)
+- uid: PlumJsonAnimator.Common.Dialogs.Dialogs.mainWin
+  commentId: F:PlumJsonAnimator.Common.Dialogs.Dialogs.mainWin
+  id: mainWin
+  parent: PlumJsonAnimator.Common.Dialogs.Dialogs
+  langs:
+  - csharp
+  - vb
+  name: mainWin
+  nameWithType: Dialogs.mainWin
+  fullName: PlumJsonAnimator.Common.Dialogs.Dialogs.mainWin
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Common/Dialogs/Dialogs.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: mainWin
+    path: Common/Dialogs/Dialogs.cs
+    startLine: 103
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Common.Dialogs
+  syntax:
+    content: public Window mainWin
+    return:
+      type: Avalonia.Controls.Window
+    content.vb: Public mainWin As Window
+- uid: PlumJsonAnimator.Common.Dialogs.Dialogs.ShowDialog(System.String,PlumJsonAnimator.ViewModels.ViewModelBase,PlumJsonAnimator.Common.Dialogs.ViewType)
+  commentId: M:PlumJsonAnimator.Common.Dialogs.Dialogs.ShowDialog(System.String,PlumJsonAnimator.ViewModels.ViewModelBase,PlumJsonAnimator.Common.Dialogs.ViewType)
+  id: ShowDialog(System.String,PlumJsonAnimator.ViewModels.ViewModelBase,PlumJsonAnimator.Common.Dialogs.ViewType)
+  parent: PlumJsonAnimator.Common.Dialogs.Dialogs
+  langs:
+  - csharp
+  - vb
+  name: ShowDialog(string, ViewModelBase, ViewType)
+  nameWithType: Dialogs.ShowDialog(string, ViewModelBase, ViewType)
+  fullName: PlumJsonAnimator.Common.Dialogs.Dialogs.ShowDialog(string, PlumJsonAnimator.ViewModels.ViewModelBase, PlumJsonAnimator.Common.Dialogs.ViewType)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Common/Dialogs/Dialogs.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: ShowDialog
+    path: Common/Dialogs/Dialogs.cs
+    startLine: 105
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Common.Dialogs
+  syntax:
+    content: public void ShowDialog(string title, ViewModelBase viewModel, ViewType viewType)
+    parameters:
+    - id: title
+      type: System.String
+    - id: viewModel
+      type: PlumJsonAnimator.ViewModels.ViewModelBase
+    - id: viewType
+      type: PlumJsonAnimator.Common.Dialogs.ViewType
+    content.vb: Public Sub ShowDialog(title As String, viewModel As ViewModelBase, viewType As ViewType)
+  overload: PlumJsonAnimator.Common.Dialogs.Dialogs.ShowDialog*
+  nameWithType.vb: Dialogs.ShowDialog(String, ViewModelBase, ViewType)
+  fullName.vb: PlumJsonAnimator.Common.Dialogs.Dialogs.ShowDialog(String, PlumJsonAnimator.ViewModels.ViewModelBase, PlumJsonAnimator.Common.Dialogs.ViewType)
+  name.vb: ShowDialog(String, ViewModelBase, ViewType)
+references:
+- uid: PlumJsonAnimator.Common.Dialogs
+  commentId: N:PlumJsonAnimator.Common.Dialogs
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Common.Dialogs
+  nameWithType: PlumJsonAnimator.Common.Dialogs
+  fullName: PlumJsonAnimator.Common.Dialogs
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Dialogs
+    name: Dialogs
+    href: PlumJsonAnimator.Common.Dialogs.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Dialogs
+    name: Dialogs
+    href: PlumJsonAnimator.Common.Dialogs.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: PlumJsonAnimator.Common.Dialogs.Dialogs.ShowDialog*
+  commentId: Overload:PlumJsonAnimator.Common.Dialogs.Dialogs.ShowDialog
+  href: PlumJsonAnimator.Common.Dialogs.Dialogs.html#PlumJsonAnimator_Common_Dialogs_Dialogs_ShowDialog_System_String_PlumJsonAnimator_ViewModels_ViewModelBase_Avalonia_Controls_Window_PlumJsonAnimator_Common_Dialogs_ViewType_
+  name: ShowDialog
+  nameWithType: Dialogs.ShowDialog
+  fullName: PlumJsonAnimator.Common.Dialogs.Dialogs.ShowDialog
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: PlumJsonAnimator.ViewModels.ViewModelBase
+  commentId: T:PlumJsonAnimator.ViewModels.ViewModelBase
+  parent: PlumJsonAnimator.ViewModels
+  href: PlumJsonAnimator.ViewModels.ViewModelBase.html
+  name: ViewModelBase
+  nameWithType: ViewModelBase
+  fullName: PlumJsonAnimator.ViewModels.ViewModelBase
+- uid: Avalonia.Controls.Window
+  commentId: T:Avalonia.Controls.Window
+  parent: Avalonia.Controls
+  isExternal: true
+  name: Window
+  nameWithType: Window
+  fullName: Avalonia.Controls.Window
+- uid: PlumJsonAnimator.Common.Dialogs.ViewType
+  commentId: T:PlumJsonAnimator.Common.Dialogs.ViewType
+  parent: PlumJsonAnimator.Common.Dialogs
+  href: PlumJsonAnimator.Common.Dialogs.ViewType.html
+  name: ViewType
+  nameWithType: ViewType
+  fullName: PlumJsonAnimator.Common.Dialogs.ViewType
+- uid: PlumJsonAnimator.ViewModels
+  commentId: N:PlumJsonAnimator.ViewModels
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.ViewModels
+  nameWithType: PlumJsonAnimator.ViewModels
+  fullName: PlumJsonAnimator.ViewModels
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.ViewModels
+    name: ViewModels
+    href: PlumJsonAnimator.ViewModels.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.ViewModels
+    name: ViewModels
+    href: PlumJsonAnimator.ViewModels.html
+- uid: Avalonia.Controls
+  commentId: N:Avalonia.Controls
+  isExternal: true
+  name: Avalonia.Controls
+  nameWithType: Avalonia.Controls
+  fullName: Avalonia.Controls
+  spec.csharp:
+  - uid: Avalonia
+    name: Avalonia
+    isExternal: true
+  - name: .
+  - uid: Avalonia.Controls
+    name: Controls
+    isExternal: true
+  spec.vb:
+  - uid: Avalonia
+    name: Avalonia
+    isExternal: true
+  - name: .
+  - uid: Avalonia.Controls
+    name: Controls
+    isExternal: true

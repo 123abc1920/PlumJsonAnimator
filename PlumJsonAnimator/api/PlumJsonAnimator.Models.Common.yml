@@ -1,0 +1,100 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Models.Common
+  commentId: N:PlumJsonAnimator.Models.Common
+  id: PlumJsonAnimator.Models.Common
+  children:
+  - PlumJsonAnimator.Models.Common.IKeyframeType
+  - PlumJsonAnimator.Models.Common.IKeyframeTypeData
+  - PlumJsonAnimator.Models.Common.KeyFrameTypes
+  - PlumJsonAnimator.Models.Common.Mode
+  - PlumJsonAnimator.Models.Common.Rotate
+  - PlumJsonAnimator.Models.Common.TransformModesTypes
+  - PlumJsonAnimator.Models.Common.Translate
+  langs:
+  - csharp
+  - vb
+  name: PlumJsonAnimator.Models.Common
+  nameWithType: PlumJsonAnimator.Models.Common
+  fullName: PlumJsonAnimator.Models.Common
+  type: Namespace
+  assemblies:
+  - PlumJsonAnimator
+references:
+- uid: PlumJsonAnimator.Models.Common.KeyFrameTypes
+  commentId: T:PlumJsonAnimator.Models.Common.KeyFrameTypes
+  parent: PlumJsonAnimator.Models.Common
+  href: PlumJsonAnimator.Models.Common.KeyFrameTypes.html
+  name: KeyFrameTypes
+  nameWithType: KeyFrameTypes
+  fullName: PlumJsonAnimator.Models.Common.KeyFrameTypes
+- uid: PlumJsonAnimator.Models.Common.IKeyframeType
+  commentId: T:PlumJsonAnimator.Models.Common.IKeyframeType
+  parent: PlumJsonAnimator.Models.Common
+  href: PlumJsonAnimator.Models.Common.IKeyframeType.html
+  name: IKeyframeType
+  nameWithType: IKeyframeType
+  fullName: PlumJsonAnimator.Models.Common.IKeyframeType
+- uid: PlumJsonAnimator.Models.Common.IKeyframeTypeData
+  commentId: T:PlumJsonAnimator.Models.Common.IKeyframeTypeData
+  parent: PlumJsonAnimator.Models.Common
+  href: PlumJsonAnimator.Models.Common.IKeyframeTypeData.html
+  name: IKeyframeTypeData
+  nameWithType: IKeyframeTypeData
+  fullName: PlumJsonAnimator.Models.Common.IKeyframeTypeData
+- uid: PlumJsonAnimator.Models.Common.Translate
+  commentId: T:PlumJsonAnimator.Models.Common.Translate
+  href: PlumJsonAnimator.Models.Common.Translate.html
+  name: Translate
+  nameWithType: Translate
+  fullName: PlumJsonAnimator.Models.Common.Translate
+- uid: PlumJsonAnimator.Models.Common.Rotate
+  commentId: T:PlumJsonAnimator.Models.Common.Rotate
+  href: PlumJsonAnimator.Models.Common.Rotate.html
+  name: Rotate
+  nameWithType: Rotate
+  fullName: PlumJsonAnimator.Models.Common.Rotate
+- uid: PlumJsonAnimator.Models.Common.TransformModesTypes
+  commentId: T:PlumJsonAnimator.Models.Common.TransformModesTypes
+  parent: PlumJsonAnimator.Models.Common
+  href: PlumJsonAnimator.Models.Common.TransformModesTypes.html
+  name: TransformModesTypes
+  nameWithType: TransformModesTypes
+  fullName: PlumJsonAnimator.Models.Common.TransformModesTypes
+- uid: PlumJsonAnimator.Models.Common.Mode
+  commentId: T:PlumJsonAnimator.Models.Common.Mode
+  parent: PlumJsonAnimator.Models.Common
+  href: PlumJsonAnimator.Models.Common.Mode.html
+  name: Mode
+  nameWithType: Mode
+  fullName: PlumJsonAnimator.Models.Common.Mode
+- uid: PlumJsonAnimator.Models.Common
+  commentId: N:PlumJsonAnimator.Models.Common
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Models.Common
+  nameWithType: PlumJsonAnimator.Models.Common
+  fullName: PlumJsonAnimator.Models.Common
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.Common
+    name: Common
+    href: PlumJsonAnimator.Models.Common.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.Common
+    name: Common
+    href: PlumJsonAnimator.Models.Common.html

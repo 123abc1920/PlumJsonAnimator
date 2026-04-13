@@ -1,0 +1,170 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace
+  commentId: N:PlumJsonAnimator.Models.SkeletonNameSpace
+  id: PlumJsonAnimator.Models.SkeletonNameSpace
+  children:
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Animation
+  - PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Attachment
+  - PlumJsonAnimator.Models.SkeletonNameSpace.AttachmentData
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+  - PlumJsonAnimator.Models.SkeletonNameSpace.BoneData
+  - PlumJsonAnimator.Models.SkeletonNameSpace.BonesListData
+  - PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem
+  - PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderOffset
+  - PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton
+  - PlumJsonAnimator.Models.SkeletonNameSpace.SkeletonData
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  - PlumJsonAnimator.Models.SkeletonNameSpace.SkinData
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+  - PlumJsonAnimator.Models.SkeletonNameSpace.SlotData
+  langs:
+  - csharp
+  - vb
+  name: PlumJsonAnimator.Models.SkeletonNameSpace
+  nameWithType: PlumJsonAnimator.Models.SkeletonNameSpace
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace
+  type: Namespace
+  assemblies:
+  - PlumJsonAnimator
+references:
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Animation
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.Animation
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.html
+  name: Animation
+  nameWithType: Animation
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Animation
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData.html
+  name: AnimationData
+  nameWithType: AnimationData
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.BonesListData
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.BonesListData
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.BonesListData.html
+  name: BonesListData
+  nameWithType: BonesListData
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.BonesListData
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem.html
+  name: DrawOrderItem
+  nameWithType: DrawOrderItem
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderOffset
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderOffset
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderOffset.html
+  name: DrawOrderOffset
+  nameWithType: DrawOrderOffset
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderOffset
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.Attachment
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html
+  name: Attachment
+  nameWithType: Attachment
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.html
+  name: ImageAttachment
+  nameWithType: ImageAttachment
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.AttachmentData
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.AttachmentData
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.AttachmentData.html
+  name: AttachmentData
+  nameWithType: AttachmentData
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.AttachmentData
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html
+  name: Bone
+  nameWithType: Bone
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.BoneData
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.html
+  name: BoneData
+  nameWithType: BoneData
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.html
+  name: Skeleton
+  nameWithType: Skeleton
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.SkeletonData
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.SkeletonData
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.SkeletonData.html
+  name: SkeletonData
+  nameWithType: SkeletonData
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.SkeletonData
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html
+  name: Skin
+  nameWithType: Skin
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.SkinData
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.SkinData
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.SkinData.html
+  name: SkinData
+  nameWithType: SkinData
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.SkinData
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html
+  name: Slot
+  nameWithType: Slot
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.SlotData
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.SlotData
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.SlotData.html
+  name: SlotData
+  nameWithType: SlotData
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.SlotData
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace
+  commentId: N:PlumJsonAnimator.Models.SkeletonNameSpace
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Models.SkeletonNameSpace
+  nameWithType: PlumJsonAnimator.Models.SkeletonNameSpace
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace
+    name: SkeletonNameSpace
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace
+    name: SkeletonNameSpace
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.html

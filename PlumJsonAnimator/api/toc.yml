@@ -1,0 +1,314 @@
+### YamlMime:TableOfContent
+items:
+- uid: Command
+  name: Command
+  type: Namespace
+  items:
+  - uid: Command.Command
+    name: Command
+    type: Class
+- uid: PlumJsonAnimator
+  name: PlumJsonAnimator
+  type: Namespace
+  items:
+  - uid: PlumJsonAnimator.App
+    name: App
+    type: Class
+  - uid: PlumJsonAnimator.ViewLocator
+    name: ViewLocator
+    type: Class
+- uid: PlumJsonAnimator.Common.Constants
+  name: PlumJsonAnimator.Common.Constants
+  type: Namespace
+  items:
+  - uid: PlumJsonAnimator.Common.Constants.AppColors
+    name: AppColors
+    type: Class
+  - uid: PlumJsonAnimator.Common.Constants.Counter
+    name: Counter
+    type: Class
+  - uid: PlumJsonAnimator.Common.Constants.GlobalState
+    name: GlobalState
+    type: Class
+  - uid: PlumJsonAnimator.Common.Constants.TransformModeFactory
+    name: TransformModeFactory
+    type: Class
+- uid: PlumJsonAnimator.Common.Converters
+  name: PlumJsonAnimator.Common.Converters
+  type: Namespace
+  items:
+  - uid: PlumJsonAnimator.Common.Converters.AnimationConverter
+    name: AnimationConverter
+    type: Class
+  - uid: PlumJsonAnimator.Common.Converters.DoubleConverter
+    name: DoubleConverter
+    type: Class
+  - uid: PlumJsonAnimator.Common.Converters.StringToBoolConverter
+    name: StringToBoolConverter
+    type: Class
+- uid: PlumJsonAnimator.Common.Dialogs
+  name: PlumJsonAnimator.Common.Dialogs
+  type: Namespace
+  items:
+  - uid: PlumJsonAnimator.Common.Dialogs.Dialogs
+    name: Dialogs
+    type: Class
+  - uid: PlumJsonAnimator.Common.Dialogs.Popups
+    name: Popups
+    type: Class
+  - uid: PlumJsonAnimator.Common.Dialogs.ViewType
+    name: ViewType
+    type: Enum
+- uid: PlumJsonAnimator.Common.Timeline
+  name: PlumJsonAnimator.Common.Timeline
+  type: Namespace
+  items:
+  - uid: PlumJsonAnimator.Common.Timeline.Keyframe
+    name: Keyframe
+    type: Class
+  - uid: PlumJsonAnimator.Common.Timeline.TimelineControl
+    name: TimelineControl
+    type: Class
+  - uid: PlumJsonAnimator.Common.Timeline.TimelineTrack
+    name: TimelineTrack
+    type: Class
+- uid: PlumJsonAnimator.Models
+  name: PlumJsonAnimator.Models
+  type: Namespace
+  items:
+  - uid: PlumJsonAnimator.Models.BoneAnimation
+    name: BoneAnimation
+    type: Class
+  - uid: PlumJsonAnimator.Models.BoneAnimationData
+    name: BoneAnimationData
+    type: Class
+  - uid: PlumJsonAnimator.Models.CaptureArea
+    name: CaptureArea
+    type: Class
+  - uid: PlumJsonAnimator.Models.ExportResult
+    name: ExportResult
+    type: Enum
+  - uid: PlumJsonAnimator.Models.JsonError
+    name: JsonError
+    type: Class
+  - uid: PlumJsonAnimator.Models.Project
+    name: Project
+    type: Class
+- uid: PlumJsonAnimator.Models.Common
+  name: PlumJsonAnimator.Models.Common
+  type: Namespace
+  items:
+  - uid: PlumJsonAnimator.Models.Common.IKeyframeType
+    name: IKeyframeType
+    type: Class
+  - uid: PlumJsonAnimator.Models.Common.IKeyframeTypeData
+    name: IKeyframeTypeData
+    type: Class
+  - uid: PlumJsonAnimator.Models.Common.KeyFrameTypes
+    name: KeyFrameTypes
+    type: Enum
+  - uid: PlumJsonAnimator.Models.Common.Mode
+    name: Mode
+    type: Class
+  - uid: PlumJsonAnimator.Models.Common.Rotate
+    name: Rotate
+    type: Class
+  - uid: PlumJsonAnimator.Models.Common.TransformModesTypes
+    name: TransformModesTypes
+    type: Enum
+  - uid: PlumJsonAnimator.Models.Common.Translate
+    name: Translate
+    type: Class
+- uid: PlumJsonAnimator.Models.Interfaces
+  name: PlumJsonAnimator.Models.Interfaces
+  type: Namespace
+  items:
+  - uid: PlumJsonAnimator.Models.Interfaces.INotifyable
+    name: INotifyable
+    type: Class
+  - uid: PlumJsonAnimator.Models.Interfaces.IRenamable
+    name: IRenamable
+    type: Interface
+- uid: PlumJsonAnimator.Models.Resources
+  name: PlumJsonAnimator.Models.Resources
+  type: Namespace
+  items:
+  - uid: PlumJsonAnimator.Models.Resources.ImageRes
+    name: ImageRes
+    type: Class
+  - uid: PlumJsonAnimator.Models.Resources.Res
+    name: Res
+    type: Class
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace
+  name: PlumJsonAnimator.Models.SkeletonNameSpace
+  type: Namespace
+  items:
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Animation
+    name: Animation
+    type: Class
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData
+    name: AnimationData
+    type: Class
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment
+    name: Attachment
+    type: Class
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.AttachmentData
+    name: AttachmentData
+    type: Class
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+    name: Bone
+    type: Class
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData
+    name: BoneData
+    type: Class
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.BonesListData
+    name: BonesListData
+    type: Class
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem
+    name: DrawOrderItem
+    type: Class
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderOffset
+    name: DrawOrderOffset
+    type: Class
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment
+    name: ImageAttachment
+    type: Class
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton
+    name: Skeleton
+    type: Class
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.SkeletonData
+    name: SkeletonData
+    type: Class
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
+    name: Skin
+    type: Class
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.SkinData
+    name: SkinData
+    type: Class
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+    name: Slot
+    type: Class
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.SlotData
+    name: SlotData
+    type: Class
+- uid: PlumJsonAnimator.Services
+  name: PlumJsonAnimator.Services
+  type: Namespace
+  items:
+  - uid: PlumJsonAnimator.Services.AppSettings
+    name: AppSettings
+    type: Class
+  - uid: PlumJsonAnimator.Services.AppSettingsData
+    name: AppSettingsData
+    type: Class
+  - uid: PlumJsonAnimator.Services.CodeData
+    name: CodeData
+    type: Class
+  - uid: PlumJsonAnimator.Services.Engine
+    name: Engine
+    type: Class
+  - uid: PlumJsonAnimator.Services.ImageExporter
+    name: ImageExporter
+    type: Class
+  - uid: PlumJsonAnimator.Services.Interpolation
+    name: Interpolation
+    type: Class
+  - uid: PlumJsonAnimator.Services.JsonCode
+    name: JsonCode
+    type: Class
+  - uid: PlumJsonAnimator.Services.JsonExport
+    name: JsonExport
+    type: Class
+  - uid: PlumJsonAnimator.Services.JsonValidator
+    name: JsonValidator
+    type: Class
+  - uid: PlumJsonAnimator.Services.LocalizationConsts
+    name: LocalizationConsts
+    type: Enum
+  - uid: PlumJsonAnimator.Services.LocalizationService
+    name: LocalizationService
+    type: Class
+  - uid: PlumJsonAnimator.Services.Prettify
+    name: Prettify
+    type: Class
+  - uid: PlumJsonAnimator.Services.ProjectManager
+    name: ProjectManager
+    type: Class
+  - uid: PlumJsonAnimator.Services.ProjectSettings
+    name: ProjectSettings
+    type: Class
+  - uid: PlumJsonAnimator.Services.ProjectValidResult
+    name: ProjectValidResult
+    type: Class
+  - uid: PlumJsonAnimator.Services.SettingsData
+    name: SettingsData
+    type: Class
+  - uid: PlumJsonAnimator.Services.ValidResult
+    name: ValidResult
+    type: Class
+- uid: PlumJsonAnimator.ViewModels
+  name: PlumJsonAnimator.ViewModels
+  type: Namespace
+  items:
+  - uid: PlumJsonAnimator.ViewModels.AppSettingsViewModel
+    name: AppSettingsViewModel
+    type: Class
+  - uid: PlumJsonAnimator.ViewModels.ExportPanelGIFViewModel
+    name: ExportPanelGIFViewModel
+    type: Class
+  - uid: PlumJsonAnimator.ViewModels.ExportPanelJPGViewModel
+    name: ExportPanelJPGViewModel
+    type: Class
+  - uid: PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel
+    name: ExportPanelMP4ViewModel
+    type: Class
+  - uid: PlumJsonAnimator.ViewModels.ExportPanelPNGViewModel
+    name: ExportPanelPNGViewModel
+    type: Class
+  - uid: PlumJsonAnimator.ViewModels.MainWindowViewModel
+    name: MainWindowViewModel
+    type: Class
+  - uid: PlumJsonAnimator.ViewModels.NewProjectViewModel
+    name: NewProjectViewModel
+    type: Class
+  - uid: PlumJsonAnimator.ViewModels.RenameViewModel
+    name: RenameViewModel
+    type: Class
+  - uid: PlumJsonAnimator.ViewModels.ViewModelBase
+    name: ViewModelBase
+    type: Class
+- uid: PlumJsonAnimator.Views
+  name: PlumJsonAnimator.Views
+  type: Namespace
+  items:
+  - uid: PlumJsonAnimator.Views.AppSettingsPanel
+    name: AppSettingsPanel
+    type: Class
+  - uid: PlumJsonAnimator.Views.ExportPanelGIF
+    name: ExportPanelGIF
+    type: Class
+  - uid: PlumJsonAnimator.Views.ExportPanelJPG
+    name: ExportPanelJPG
+    type: Class
+  - uid: PlumJsonAnimator.Views.ExportPanelMP4
+    name: ExportPanelMP4
+    type: Class
+  - uid: PlumJsonAnimator.Views.ExportPanelPNG
+    name: ExportPanelPNG
+    type: Class
+  - uid: PlumJsonAnimator.Views.MainWindow
+    name: MainWindow
+    type: Class
+  - uid: PlumJsonAnimator.Views.NewProjectDialog
+    name: NewProjectDialog
+    type: Class
+  - uid: PlumJsonAnimator.Views.ProjectSettingsPanel
+    name: ProjectSettingsPanel
+    type: Class
+  - uid: PlumJsonAnimator.Views.RenameDialog
+    name: RenameDialog
+    type: Class
+  - uid: PlumJsonAnimator.Views.SettingsView
+    name: SettingsView
+    type: Class
+memberLayout: SamePage
