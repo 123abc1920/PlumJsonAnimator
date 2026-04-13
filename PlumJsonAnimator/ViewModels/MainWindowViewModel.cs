@@ -523,9 +523,8 @@ public partial class MainWindowViewModel : ViewModelBase
                 Res selectedRes = resList.SelectedItem as Res;
                 if (selectedRes != null)
                 {
-                    RedactObj = selectedRes;
-                    var viewModel = GetViewModel(ViewType.RENAME);
-                    viewModel.RedactObj = RedactObj;
+                    var viewModel = (RenameViewModel)GetViewModel(ViewType.RENAME);
+                    viewModel.RedactObj = selectedRes;
                     this.dialogs.ShowDialog(
                         GetMessage(LocalizationConsts.RENAME),
                         viewModel,
@@ -557,9 +556,8 @@ public partial class MainWindowViewModel : ViewModelBase
                 Slot selectedSlot = SlotsList.SelectedItem as Slot;
                 if (selectedSlot != null)
                 {
-                    RedactObj = selectedSlot;
-                    var viewModel = GetViewModel(ViewType.RENAME);
-                    viewModel.RedactObj = RedactObj;
+                    var viewModel = (RenameViewModel)GetViewModel(ViewType.RENAME);
+                    viewModel.RedactObj = selectedSlot;
                     this.dialogs.ShowDialog(
                         GetMessage(LocalizationConsts.RENAME),
                         viewModel,
@@ -575,9 +573,8 @@ public partial class MainWindowViewModel : ViewModelBase
                 Bone bone = boneTreeView.SelectedItem as Bone;
                 if (bone != null)
                 {
-                    RedactObj = bone;
-                    var viewModel = GetViewModel(ViewType.RENAME);
-                    viewModel.RedactObj = RedactObj;
+                    var viewModel = (RenameViewModel)GetViewModel(ViewType.RENAME);
+                    viewModel.RedactObj = bone;
                     this.dialogs.ShowDialog(
                         GetMessage(LocalizationConsts.RENAME),
                         viewModel,

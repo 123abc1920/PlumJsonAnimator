@@ -21,7 +21,6 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
     protected LocalizationService localizationService;
     protected ImageExporter imageExporter;
 
-    public IRenamable? RedactObj { get; set; } = null;
     private double _progressValue = 0;
     public double ProgressValue
     {
