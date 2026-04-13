@@ -40,7 +40,7 @@ public partial class App : Application
         services.AddTransient<ExportPanelJPGViewModel>();
         services.AddTransient<ExportPanelMP4ViewModel>();
         services.AddTransient<ExportPanelPNGViewModel>();
-        services.AddTransient<SpinejsonSettingsViewModel>();
+        services.AddTransient<AppSettingsViewModel>();
 
         services.AddSingleton<AppSettings>();
         services.AddSingleton<ProjectSettings>();

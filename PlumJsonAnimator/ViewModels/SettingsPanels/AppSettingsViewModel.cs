@@ -5,7 +5,7 @@ using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.ViewModels;
 
-public partial class SpinejsonSettingsViewModel : ViewModelBase
+public partial class AppSettingsViewModel : ViewModelBase
 {
     public string FfmpegPath
     {
@@ -59,7 +59,7 @@ public partial class SpinejsonSettingsViewModel : ViewModelBase
         );
     }
 
-    public SpinejsonSettingsViewModel(
+    public AppSettingsViewModel(
         GlobalState globalState,
         Dialogs dialogs,
         ProjectSettings projectSettings,

@@ -12,14 +12,14 @@ using SukiUI;
 // TODO: исправить привязки
 namespace PlumJsonAnimator.Views
 {
-    public partial class SpinejsonSettingsPanel : UserControl
+    public partial class AppSettingsPanel : UserControl
     {
-        public SpinejsonSettingsPanel()
+        public AppSettingsPanel()
         {
             InitializeComponent();
         }
 
-        public SpinejsonSettingsPanel(SpinejsonSettingsViewModel viewModel)
+        public AppSettingsPanel(AppSettingsViewModel viewModel)
             : this()
         {
             DataContext = viewModel;
@@ -27,7 +27,7 @@ namespace PlumJsonAnimator.Views
 
         private void SaveSettings(object sender, RoutedEventArgs e)
         {
-            if (DataContext is SpinejsonSettingsViewModel viewModel)
+            if (DataContext is AppSettingsViewModel viewModel)
             {
                 var rect = viewModel.GetCaptureArea().GetRect();
 
@@ -103,7 +103,7 @@ namespace PlumJsonAnimator.Views
             );
 
             var path = result?.FirstOrDefault()?.Path.LocalPath;
-            if (DataContext is SpinejsonSettingsViewModel viewModel)
+            if (DataContext is AppSettingsViewModel viewModel)
             {
                 viewModel.FfmpegPath = path;
             }

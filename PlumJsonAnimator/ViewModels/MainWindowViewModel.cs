@@ -269,7 +269,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
         if (viewType == ViewType.SETTINGS)
         {
-            viewModel = _serviceProvider.GetRequiredService<SpinejsonSettingsViewModel>();
+            viewModel = _serviceProvider.GetRequiredService<AppSettingsViewModel>();
         }
         if (viewType == ViewType.NEWPROJECT)
         {
@@ -321,9 +321,9 @@ public partial class MainWindowViewModel : ViewModelBase
 
         this.projectManager.LoadRes(CurrentProject);
 
-        var spineJsonSettings = (SpinejsonSettingsViewModel)GetViewModel(ViewType.SETTINGS);
-        spineJsonSettings.CurrentTheme = spineJsonSettings.Themes[
-            spineJsonSettings.GetCurrThemeInd(this.appSettings.GetTheme())
+        var appSettingsVM = (AppSettingsViewModel)GetViewModel(ViewType.SETTINGS);
+        appSettingsVM.CurrentTheme = appSettingsVM.Themes[
+            appSettingsVM.GetCurrThemeInd(this.appSettings.GetTheme())
         ];
 
         this.globalState.captureArea = this.appSettings.CreateCaptureArea(
@@ -482,8 +482,8 @@ public partial class MainWindowViewModel : ViewModelBase
         this.jsonValidator = jsonValidator;
         this.engine = engine;
 
-        var spineJsonSettings = (SpinejsonSettingsViewModel)GetViewModel(ViewType.SETTINGS);
-        spineJsonSettings.CurrentTheme = spineJsonSettings.Themes[0];
+        var appSettingsVM = (AppSettingsViewModel)GetViewModel(ViewType.SETTINGS);
+        appSettingsVM.CurrentTheme = appSettingsVM.Themes[0];
 
         this.globalState.TimeUpdated += () =>
         {

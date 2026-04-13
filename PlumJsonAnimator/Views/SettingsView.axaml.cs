@@ -19,17 +19,17 @@ namespace PlumJsonAnimator.Views
 
         private void ShowProjectSettings(object sender, RoutedEventArgs e)
         {
-            if (DataContext is SpinejsonSettingsViewModel viewModel)
+            if (DataContext is AppSettingsViewModel viewModel)
             {
                 SettingsContentControl.Content = new ProjectSettingsPanel(viewModel);
             }
         }
 
-        private void ShowSpinejsonSettings(object sender, RoutedEventArgs e)
+        private void ShowAppSettings(object sender, RoutedEventArgs e)
         {
-            if (DataContext is SpinejsonSettingsViewModel viewModel)
+            if (DataContext is AppSettingsViewModel viewModel)
             {
-                SettingsContentControl.Content = new SpinejsonSettingsPanel(viewModel);
+                SettingsContentControl.Content = new AppSettingsPanel(viewModel);
             }
         }
     }
