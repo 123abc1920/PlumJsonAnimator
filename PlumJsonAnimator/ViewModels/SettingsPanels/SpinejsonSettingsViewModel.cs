@@ -47,6 +47,18 @@ public partial class SpinejsonSettingsViewModel : ViewModelBase
         return 0;
     }
 
+    public void SaveSettings(AppSettingsData data)
+    {
+        this.appSettings.SetSettings(data);
+
+        this.localizationService.LoadLangResorce(data.Lang);
+
+        Popups.ShowPopup(
+            GetMessage(LocalizationConsts.SAVED),
+            GetMessage(LocalizationConsts.INFO_MESSAGE)
+        );
+    }
+
     public SpinejsonSettingsViewModel(
         GlobalState globalState,
         Dialogs dialogs,

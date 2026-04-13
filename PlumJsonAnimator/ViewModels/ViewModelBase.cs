@@ -42,18 +42,6 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
         return this.globalState.captureArea;
     }
 
-    public void SaveSettings(AppSettingsData data)
-    {
-        this.appSettings.SetSettings(data);
-
-        this.localizationService.LoadLangResorce(data.Lang);
-
-        Popups.ShowPopup(
-            GetMessage(LocalizationConsts.SAVED),
-            GetMessage(LocalizationConsts.INFO_MESSAGE)
-        );
-    }
-
     protected ViewModelBase(
         GlobalState globalState,
         Dialogs dialogs,
