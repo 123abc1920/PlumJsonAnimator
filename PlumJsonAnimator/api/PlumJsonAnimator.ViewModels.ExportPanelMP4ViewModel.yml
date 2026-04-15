@@ -5,7 +5,7 @@ items:
   id: ExportPanelMP4ViewModel
   parent: PlumJsonAnimator.ViewModels
   children:
-  - PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ImageExporter,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Services.LocalizationService)
+  - PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ImageExporter,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Services.LocalizationService)
   - PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.ExportAsMp4(System.Double,System.Double,System.String,System.String)
   - PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.ExportPath
   - PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.FfmpegPath
@@ -162,16 +162,16 @@ items:
       type: System.String
     content.vb: Public Property FfmpegPath As String
   overload: PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.FfmpegPath*
-- uid: PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ImageExporter,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Services.LocalizationService)
-  commentId: M:PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ImageExporter,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Services.LocalizationService)
-  id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ImageExporter,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Services.LocalizationService)'
+- uid: PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ImageExporter,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Services.LocalizationService)
+  commentId: M:PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ImageExporter,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Services.LocalizationService)
+  id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ImageExporter,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Services.LocalizationService)'
   parent: PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel
   langs:
   - csharp
   - vb
-  name: ExportPanelMP4ViewModel(GlobalState, Dialogs, ImageExporter, AppSettings, ProjectSettings, ProjectManager, LocalizationService)
-  nameWithType: ExportPanelMP4ViewModel.ExportPanelMP4ViewModel(GlobalState, Dialogs, ImageExporter, AppSettings, ProjectSettings, ProjectManager, LocalizationService)
-  fullName: PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.ExportPanelMP4ViewModel(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Common.Dialogs.Dialogs, PlumJsonAnimator.Services.ImageExporter, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.ProjectManager, PlumJsonAnimator.Services.LocalizationService)
+  name: ExportPanelMP4ViewModel(GlobalState, Dialogs, ImageExporter, AppSettings, ProjectSettings, ProjectFilesManager, LocalizationService)
+  nameWithType: ExportPanelMP4ViewModel.ExportPanelMP4ViewModel(GlobalState, Dialogs, ImageExporter, AppSettings, ProjectSettings, ProjectFilesManager, LocalizationService)
+  fullName: PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.ExportPanelMP4ViewModel(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Common.Dialogs.Dialogs, PlumJsonAnimator.Services.ImageExporter, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.ProjectFilesManager, PlumJsonAnimator.Services.LocalizationService)
   type: Constructor
   source:
     remote:
@@ -185,7 +185,7 @@ items:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
   syntax:
-    content: public ExportPanelMP4ViewModel(GlobalState globalState, Dialogs dialogs, ImageExporter imageExporter, AppSettings appSettings, ProjectSettings projectSettings, ProjectManager projectManager, LocalizationService localizationService)
+    content: public ExportPanelMP4ViewModel(GlobalState globalState, Dialogs dialogs, ImageExporter imageExporter, AppSettings appSettings, ProjectSettings projectSettings, ProjectFilesManager projectManager, LocalizationService localizationService)
     parameters:
     - id: globalState
       type: PlumJsonAnimator.Common.Constants.GlobalState
@@ -198,14 +198,14 @@ items:
     - id: projectSettings
       type: PlumJsonAnimator.Services.ProjectSettings
     - id: projectManager
-      type: PlumJsonAnimator.Services.ProjectManager
+      type: PlumJsonAnimator.Services.ProjectFilesManager
     - id: localizationService
       type: PlumJsonAnimator.Services.LocalizationService
-    content.vb: Public Sub New(globalState As GlobalState, dialogs As Dialogs, imageExporter As ImageExporter, appSettings As AppSettings, projectSettings As ProjectSettings, projectManager As ProjectManager, localizationService As LocalizationService)
+    content.vb: Public Sub New(globalState As GlobalState, dialogs As Dialogs, imageExporter As ImageExporter, appSettings As AppSettings, projectSettings As ProjectSettings, projectManager As ProjectFilesManager, localizationService As LocalizationService)
   overload: PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.#ctor*
-  nameWithType.vb: ExportPanelMP4ViewModel.New(GlobalState, Dialogs, ImageExporter, AppSettings, ProjectSettings, ProjectManager, LocalizationService)
-  fullName.vb: PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Common.Dialogs.Dialogs, PlumJsonAnimator.Services.ImageExporter, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.ProjectManager, PlumJsonAnimator.Services.LocalizationService)
-  name.vb: New(GlobalState, Dialogs, ImageExporter, AppSettings, ProjectSettings, ProjectManager, LocalizationService)
+  nameWithType.vb: ExportPanelMP4ViewModel.New(GlobalState, Dialogs, ImageExporter, AppSettings, ProjectSettings, ProjectFilesManager, LocalizationService)
+  fullName.vb: PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Common.Dialogs.Dialogs, PlumJsonAnimator.Services.ImageExporter, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.ProjectFilesManager, PlumJsonAnimator.Services.LocalizationService)
+  name.vb: New(GlobalState, Dialogs, ImageExporter, AppSettings, ProjectSettings, ProjectFilesManager, LocalizationService)
 - uid: PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.ExportAsMp4(System.Double,System.Double,System.String,System.String)
   commentId: M:PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.ExportAsMp4(System.Double,System.Double,System.String,System.String)
   id: ExportAsMp4(System.Double,System.Double,System.String,System.String)
@@ -2449,7 +2449,7 @@ references:
   fullName: PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.FfmpegPath
 - uid: PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.#ctor*
   commentId: Overload:PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.#ctor
-  href: PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.html#PlumJsonAnimator_ViewModels_ExportPanelMP4ViewModel__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Common_Dialogs_Dialogs_PlumJsonAnimator_Services_ImageExporter_PlumJsonAnimator_Services_AppSettings_PlumJsonAnimator_Services_ProjectSettings_PlumJsonAnimator_Services_ProjectManager_PlumJsonAnimator_Services_LocalizationService_
+  href: PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.html#PlumJsonAnimator_ViewModels_ExportPanelMP4ViewModel__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Common_Dialogs_Dialogs_PlumJsonAnimator_Services_ImageExporter_PlumJsonAnimator_Services_AppSettings_PlumJsonAnimator_Services_ProjectSettings_PlumJsonAnimator_Services_ProjectFilesManager_PlumJsonAnimator_Services_LocalizationService_
   name: ExportPanelMP4ViewModel
   nameWithType: ExportPanelMP4ViewModel.ExportPanelMP4ViewModel
   fullName: PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.ExportPanelMP4ViewModel
@@ -2491,13 +2491,13 @@ references:
   name: ProjectSettings
   nameWithType: ProjectSettings
   fullName: PlumJsonAnimator.Services.ProjectSettings
-- uid: PlumJsonAnimator.Services.ProjectManager
-  commentId: T:PlumJsonAnimator.Services.ProjectManager
+- uid: PlumJsonAnimator.Services.ProjectFilesManager
+  commentId: T:PlumJsonAnimator.Services.ProjectFilesManager
   parent: PlumJsonAnimator.Services
-  href: PlumJsonAnimator.Services.ProjectManager.html
-  name: ProjectManager
-  nameWithType: ProjectManager
-  fullName: PlumJsonAnimator.Services.ProjectManager
+  href: PlumJsonAnimator.Services.ProjectFilesManager.html
+  name: ProjectFilesManager
+  nameWithType: ProjectFilesManager
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager
 - uid: PlumJsonAnimator.Services.LocalizationService
   commentId: T:PlumJsonAnimator.Services.LocalizationService
   parent: PlumJsonAnimator.Services

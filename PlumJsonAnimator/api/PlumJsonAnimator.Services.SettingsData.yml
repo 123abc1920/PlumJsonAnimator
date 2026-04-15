@@ -23,10 +23,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SettingsData
     path: Services/ProjectSettings.cs
-    startLine: 176
+    startLine: 163
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: Contains jsonifyed settings data
+  example: []
   syntax:
     content: public class SettingsData
     content.vb: Public Class SettingsData
@@ -58,7 +60,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Path
     path: Services/ProjectSettings.cs
-    startLine: 178
+    startLine: 165
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -99,7 +101,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Name
     path: Services/ProjectSettings.cs
-    startLine: 181
+    startLine: 168
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -140,7 +142,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Spine
     path: Services/ProjectSettings.cs
-    startLine: 184
+    startLine: 171
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -181,7 +183,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Anim
     path: Services/ProjectSettings.cs
-    startLine: 187
+    startLine: 174
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services

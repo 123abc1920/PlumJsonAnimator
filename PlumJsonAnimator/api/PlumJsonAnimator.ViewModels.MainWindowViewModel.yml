@@ -5,7 +5,7 @@ items:
   id: MainWindowViewModel
   parent: PlumJsonAnimator.ViewModels
   children:
-  - PlumJsonAnimator.ViewModels.MainWindowViewModel.#ctor(System.IServiceProvider,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.JsonCode,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.ImageExporter,PlumJsonAnimator.Common.Constants.TransformModeFactory,PlumJsonAnimator.Services.Prettify,PlumJsonAnimator.Services.JsonExport,PlumJsonAnimator.Services.JsonValidator,PlumJsonAnimator.Services.Engine,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Common.Dialogs.Dialogs)
+  - PlumJsonAnimator.ViewModels.MainWindowViewModel.#ctor(System.IServiceProvider,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.JsonCode,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.ImageExporter,PlumJsonAnimator.Common.Constants.TransformModeFactory,PlumJsonAnimator.Services.Prettify,PlumJsonAnimator.Services.JsonExport,PlumJsonAnimator.Services.JsonValidator,PlumJsonAnimator.Services.Engine,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Common.Dialogs.Dialogs)
   - PlumJsonAnimator.ViewModels.MainWindowViewModel.AddAnimation
   - PlumJsonAnimator.ViewModels.MainWindowViewModel.AddBone(PlumJsonAnimator.Models.SkeletonNameSpace.Bone,PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
   - PlumJsonAnimator.ViewModels.MainWindowViewModel.AddBone(System.String,System.Int32,System.Object)
@@ -74,7 +74,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: MainWindowViewModel
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 25
+    startLine: 26
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -143,7 +143,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Canvas
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 27
+    startLine: 28
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -172,7 +172,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: CanvasWidth
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 40
+    startLine: 41
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -201,7 +201,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: CanvasHeight
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 53
+    startLine: 54
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -230,7 +230,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Timeline
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 66
+    startLine: 67
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -257,7 +257,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: CurrentTime
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 67
+    startLine: 68
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -286,7 +286,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: JsonErrorObj
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 85
+    startLine: 86
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -315,7 +315,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: FPS
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 97
+    startLine: 98
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -344,7 +344,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: DrawBones
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 110
+    startLine: 111
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -373,7 +373,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: CaptureMode
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 123
+    startLine: 124
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -402,7 +402,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: TransformMode
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 137
+    startLine: 138
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -431,7 +431,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: IsTransformModeActive
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 169
+    startLine: 170
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -460,7 +460,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: CurrentBone
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 171
+    startLine: 172
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -489,7 +489,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: CurrentAnimation
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 189
+    startLine: 190
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -518,7 +518,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ZoomCanvas
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 205
+    startLine: 206
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -547,7 +547,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AddBone
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 224
+    startLine: 225
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -583,7 +583,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AddBone
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 232
+    startLine: 233
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -617,7 +617,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: CanGenerateProject
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 240
+    startLine: 241
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -645,7 +645,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Validate
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 255
+    startLine: 256
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -679,7 +679,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SetMainWin
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 260
+    startLine: 261
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -708,7 +708,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ShowDialog
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 301
+    startLine: 302
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -744,7 +744,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GenerateCode
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 307
+    startLine: 308
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -770,7 +770,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: initProgram
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 312
+    startLine: 313
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -796,7 +796,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: exportSpineJson
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 337
+    startLine: 338
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -830,7 +830,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: importSpineJson
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 342
+    startLine: 343
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -864,7 +864,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: WriteSettings
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 347
+    startLine: 348
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -890,7 +890,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AddRes
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 352
+    startLine: 353
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -922,7 +922,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: DropSlotToBone
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 371
+    startLine: 375
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -956,7 +956,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: OpenProject
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 383
+    startLine: 387
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -985,7 +985,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Prettify
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 393
+    startLine: 397
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1019,7 +1019,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AddBoneView
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 415
+    startLine: 419
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1048,7 +1048,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: RenameRes
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 416
+    startLine: 420
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1077,7 +1077,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: DeleteRes
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 417
+    startLine: 421
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1106,7 +1106,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: RenameSlot
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 418
+    startLine: 422
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1135,7 +1135,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: RenameBone
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 419
+    startLine: 423
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1164,7 +1164,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: DeleteBone
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 420
+    startLine: 424
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1193,7 +1193,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SetTransformMode
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 421
+    startLine: 425
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1222,7 +1222,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AddAnimation
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 422
+    startLine: 426
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1251,7 +1251,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AddSkin
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 423
+    startLine: 427
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1280,7 +1280,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: DeleteAnimation
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 424
+    startLine: 428
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1309,7 +1309,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: DeleteSkin
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 425
+    startLine: 429
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1338,7 +1338,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AddSlot
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 426
+    startLine: 430
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1367,7 +1367,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: DeleteSlot
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 427
+    startLine: 431
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1396,7 +1396,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SaveProject
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 428
+    startLine: 432
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1425,7 +1425,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: PrevKeyFrame
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 429
+    startLine: 433
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1454,7 +1454,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: NextKeyFrame
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 430
+    startLine: 434
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1483,7 +1483,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AddKeyFrame
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 431
+    startLine: 435
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1512,7 +1512,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: DeleteKeyFrame
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 432
+    startLine: 436
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1541,7 +1541,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: PlayAnim
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 433
+    startLine: 437
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1570,7 +1570,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ZoomCanvasComm
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 434
+    startLine: 438
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1599,7 +1599,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ToggleTransformModeCommand
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 435
+    startLine: 439
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1628,7 +1628,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: prettify
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 440
+    startLine: 444
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1655,7 +1655,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: jsonExport
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 441
+    startLine: 445
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1682,7 +1682,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: jsonValidator
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 442
+    startLine: 446
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1709,7 +1709,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: engine
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 443
+    startLine: 447
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
@@ -1718,16 +1718,16 @@ items:
     return:
       type: PlumJsonAnimator.Services.Engine
     content.vb: Public engine As Engine
-- uid: PlumJsonAnimator.ViewModels.MainWindowViewModel.#ctor(System.IServiceProvider,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.JsonCode,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.ImageExporter,PlumJsonAnimator.Common.Constants.TransformModeFactory,PlumJsonAnimator.Services.Prettify,PlumJsonAnimator.Services.JsonExport,PlumJsonAnimator.Services.JsonValidator,PlumJsonAnimator.Services.Engine,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Common.Dialogs.Dialogs)
-  commentId: M:PlumJsonAnimator.ViewModels.MainWindowViewModel.#ctor(System.IServiceProvider,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.JsonCode,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.ImageExporter,PlumJsonAnimator.Common.Constants.TransformModeFactory,PlumJsonAnimator.Services.Prettify,PlumJsonAnimator.Services.JsonExport,PlumJsonAnimator.Services.JsonValidator,PlumJsonAnimator.Services.Engine,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Common.Dialogs.Dialogs)
-  id: '#ctor(System.IServiceProvider,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.JsonCode,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.ImageExporter,PlumJsonAnimator.Common.Constants.TransformModeFactory,PlumJsonAnimator.Services.Prettify,PlumJsonAnimator.Services.JsonExport,PlumJsonAnimator.Services.JsonValidator,PlumJsonAnimator.Services.Engine,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Common.Dialogs.Dialogs)'
+- uid: PlumJsonAnimator.ViewModels.MainWindowViewModel.#ctor(System.IServiceProvider,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.JsonCode,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.ImageExporter,PlumJsonAnimator.Common.Constants.TransformModeFactory,PlumJsonAnimator.Services.Prettify,PlumJsonAnimator.Services.JsonExport,PlumJsonAnimator.Services.JsonValidator,PlumJsonAnimator.Services.Engine,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Common.Dialogs.Dialogs)
+  commentId: M:PlumJsonAnimator.ViewModels.MainWindowViewModel.#ctor(System.IServiceProvider,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.JsonCode,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.ImageExporter,PlumJsonAnimator.Common.Constants.TransformModeFactory,PlumJsonAnimator.Services.Prettify,PlumJsonAnimator.Services.JsonExport,PlumJsonAnimator.Services.JsonValidator,PlumJsonAnimator.Services.Engine,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Common.Dialogs.Dialogs)
+  id: '#ctor(System.IServiceProvider,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.JsonCode,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.ImageExporter,PlumJsonAnimator.Common.Constants.TransformModeFactory,PlumJsonAnimator.Services.Prettify,PlumJsonAnimator.Services.JsonExport,PlumJsonAnimator.Services.JsonValidator,PlumJsonAnimator.Services.Engine,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Common.Dialogs.Dialogs)'
   parent: PlumJsonAnimator.ViewModels.MainWindowViewModel
   langs:
   - csharp
   - vb
-  name: MainWindowViewModel(IServiceProvider, AppSettings, ProjectSettings, ProjectManager, GlobalState, JsonCode, Interpolation, ImageExporter, TransformModeFactory, Prettify, JsonExport, JsonValidator, Engine, LocalizationService, Dialogs)
-  nameWithType: MainWindowViewModel.MainWindowViewModel(IServiceProvider, AppSettings, ProjectSettings, ProjectManager, GlobalState, JsonCode, Interpolation, ImageExporter, TransformModeFactory, Prettify, JsonExport, JsonValidator, Engine, LocalizationService, Dialogs)
-  fullName: PlumJsonAnimator.ViewModels.MainWindowViewModel.MainWindowViewModel(System.IServiceProvider, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.ProjectManager, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.JsonCode, PlumJsonAnimator.Services.Interpolation, PlumJsonAnimator.Services.ImageExporter, PlumJsonAnimator.Common.Constants.TransformModeFactory, PlumJsonAnimator.Services.Prettify, PlumJsonAnimator.Services.JsonExport, PlumJsonAnimator.Services.JsonValidator, PlumJsonAnimator.Services.Engine, PlumJsonAnimator.Services.LocalizationService, PlumJsonAnimator.Common.Dialogs.Dialogs)
+  name: MainWindowViewModel(IServiceProvider, AppSettings, ProjectSettings, ProjectFilesManager, GlobalState, JsonCode, Interpolation, ImageExporter, TransformModeFactory, Prettify, JsonExport, JsonValidator, Engine, LocalizationService, Dialogs)
+  nameWithType: MainWindowViewModel.MainWindowViewModel(IServiceProvider, AppSettings, ProjectSettings, ProjectFilesManager, GlobalState, JsonCode, Interpolation, ImageExporter, TransformModeFactory, Prettify, JsonExport, JsonValidator, Engine, LocalizationService, Dialogs)
+  fullName: PlumJsonAnimator.ViewModels.MainWindowViewModel.MainWindowViewModel(System.IServiceProvider, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.ProjectFilesManager, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.JsonCode, PlumJsonAnimator.Services.Interpolation, PlumJsonAnimator.Services.ImageExporter, PlumJsonAnimator.Common.Constants.TransformModeFactory, PlumJsonAnimator.Services.Prettify, PlumJsonAnimator.Services.JsonExport, PlumJsonAnimator.Services.JsonValidator, PlumJsonAnimator.Services.Engine, PlumJsonAnimator.Services.LocalizationService, PlumJsonAnimator.Common.Dialogs.Dialogs)
   type: Constructor
   source:
     remote:
@@ -1736,12 +1736,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: ViewModels/MainWindowViewModel.cs
-    startLine: 447
+    startLine: 451
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
   syntax:
-    content: public MainWindowViewModel(IServiceProvider serviceProvider, AppSettings appSettings, ProjectSettings projectSettings, ProjectManager projectManager, GlobalState globalState, JsonCode jsonCode, Interpolation interpolation, ImageExporter imageExporter, TransformModeFactory transformModeFactory, Prettify prettify, JsonExport jsonExport, JsonValidator jsonValidator, Engine engine, LocalizationService localizationService, Dialogs dialogs)
+    content: public MainWindowViewModel(IServiceProvider serviceProvider, AppSettings appSettings, ProjectSettings projectSettings, ProjectFilesManager projectManager, GlobalState globalState, JsonCode jsonCode, Interpolation interpolation, ImageExporter imageExporter, TransformModeFactory transformModeFactory, Prettify prettify, JsonExport jsonExport, JsonValidator jsonValidator, Engine engine, LocalizationService localizationService, Dialogs dialogs)
     parameters:
     - id: serviceProvider
       type: System.IServiceProvider
@@ -1750,7 +1750,7 @@ items:
     - id: projectSettings
       type: PlumJsonAnimator.Services.ProjectSettings
     - id: projectManager
-      type: PlumJsonAnimator.Services.ProjectManager
+      type: PlumJsonAnimator.Services.ProjectFilesManager
     - id: globalState
       type: PlumJsonAnimator.Common.Constants.GlobalState
     - id: jsonCode
@@ -1773,11 +1773,11 @@ items:
       type: PlumJsonAnimator.Services.LocalizationService
     - id: dialogs
       type: PlumJsonAnimator.Common.Dialogs.Dialogs
-    content.vb: Public Sub New(serviceProvider As IServiceProvider, appSettings As AppSettings, projectSettings As ProjectSettings, projectManager As ProjectManager, globalState As GlobalState, jsonCode As JsonCode, interpolation As Interpolation, imageExporter As ImageExporter, transformModeFactory As TransformModeFactory, prettify As Prettify, jsonExport As JsonExport, jsonValidator As JsonValidator, engine As Engine, localizationService As LocalizationService, dialogs As Dialogs)
+    content.vb: Public Sub New(serviceProvider As IServiceProvider, appSettings As AppSettings, projectSettings As ProjectSettings, projectManager As ProjectFilesManager, globalState As GlobalState, jsonCode As JsonCode, interpolation As Interpolation, imageExporter As ImageExporter, transformModeFactory As TransformModeFactory, prettify As Prettify, jsonExport As JsonExport, jsonValidator As JsonValidator, engine As Engine, localizationService As LocalizationService, dialogs As Dialogs)
   overload: PlumJsonAnimator.ViewModels.MainWindowViewModel.#ctor*
-  nameWithType.vb: MainWindowViewModel.New(IServiceProvider, AppSettings, ProjectSettings, ProjectManager, GlobalState, JsonCode, Interpolation, ImageExporter, TransformModeFactory, Prettify, JsonExport, JsonValidator, Engine, LocalizationService, Dialogs)
-  fullName.vb: PlumJsonAnimator.ViewModels.MainWindowViewModel.New(System.IServiceProvider, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.ProjectManager, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.JsonCode, PlumJsonAnimator.Services.Interpolation, PlumJsonAnimator.Services.ImageExporter, PlumJsonAnimator.Common.Constants.TransformModeFactory, PlumJsonAnimator.Services.Prettify, PlumJsonAnimator.Services.JsonExport, PlumJsonAnimator.Services.JsonValidator, PlumJsonAnimator.Services.Engine, PlumJsonAnimator.Services.LocalizationService, PlumJsonAnimator.Common.Dialogs.Dialogs)
-  name.vb: New(IServiceProvider, AppSettings, ProjectSettings, ProjectManager, GlobalState, JsonCode, Interpolation, ImageExporter, TransformModeFactory, Prettify, JsonExport, JsonValidator, Engine, LocalizationService, Dialogs)
+  nameWithType.vb: MainWindowViewModel.New(IServiceProvider, AppSettings, ProjectSettings, ProjectFilesManager, GlobalState, JsonCode, Interpolation, ImageExporter, TransformModeFactory, Prettify, JsonExport, JsonValidator, Engine, LocalizationService, Dialogs)
+  fullName.vb: PlumJsonAnimator.ViewModels.MainWindowViewModel.New(System.IServiceProvider, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.ProjectFilesManager, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.JsonCode, PlumJsonAnimator.Services.Interpolation, PlumJsonAnimator.Services.ImageExporter, PlumJsonAnimator.Common.Constants.TransformModeFactory, PlumJsonAnimator.Services.Prettify, PlumJsonAnimator.Services.JsonExport, PlumJsonAnimator.Services.JsonValidator, PlumJsonAnimator.Services.Engine, PlumJsonAnimator.Services.LocalizationService, PlumJsonAnimator.Common.Dialogs.Dialogs)
+  name.vb: New(IServiceProvider, AppSettings, ProjectSettings, ProjectFilesManager, GlobalState, JsonCode, Interpolation, ImageExporter, TransformModeFactory, Prettify, JsonExport, JsonValidator, Engine, LocalizationService, Dialogs)
 references:
 - uid: PlumJsonAnimator.ViewModels
   commentId: N:PlumJsonAnimator.ViewModels
@@ -4618,7 +4618,7 @@ references:
   fullName: PlumJsonAnimator.Services.Engine
 - uid: PlumJsonAnimator.ViewModels.MainWindowViewModel.#ctor*
   commentId: Overload:PlumJsonAnimator.ViewModels.MainWindowViewModel.#ctor
-  href: PlumJsonAnimator.ViewModels.MainWindowViewModel.html#PlumJsonAnimator_ViewModels_MainWindowViewModel__ctor_System_IServiceProvider_PlumJsonAnimator_Services_AppSettings_PlumJsonAnimator_Services_ProjectSettings_PlumJsonAnimator_Services_ProjectManager_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_JsonCode_PlumJsonAnimator_Services_Interpolation_PlumJsonAnimator_Services_ImageExporter_PlumJsonAnimator_Common_Constants_TransformModeFactory_PlumJsonAnimator_Services_Prettify_PlumJsonAnimator_Services_JsonExport_PlumJsonAnimator_Services_JsonValidator_PlumJsonAnimator_Services_Engine_PlumJsonAnimator_Services_LocalizationService_PlumJsonAnimator_Common_Dialogs_Dialogs_
+  href: PlumJsonAnimator.ViewModels.MainWindowViewModel.html#PlumJsonAnimator_ViewModels_MainWindowViewModel__ctor_System_IServiceProvider_PlumJsonAnimator_Services_AppSettings_PlumJsonAnimator_Services_ProjectSettings_PlumJsonAnimator_Services_ProjectFilesManager_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_JsonCode_PlumJsonAnimator_Services_Interpolation_PlumJsonAnimator_Services_ImageExporter_PlumJsonAnimator_Common_Constants_TransformModeFactory_PlumJsonAnimator_Services_Prettify_PlumJsonAnimator_Services_JsonExport_PlumJsonAnimator_Services_JsonValidator_PlumJsonAnimator_Services_Engine_PlumJsonAnimator_Services_LocalizationService_PlumJsonAnimator_Common_Dialogs_Dialogs_
   name: MainWindowViewModel
   nameWithType: MainWindowViewModel.MainWindowViewModel
   fullName: PlumJsonAnimator.ViewModels.MainWindowViewModel.MainWindowViewModel
@@ -4647,13 +4647,13 @@ references:
   name: ProjectSettings
   nameWithType: ProjectSettings
   fullName: PlumJsonAnimator.Services.ProjectSettings
-- uid: PlumJsonAnimator.Services.ProjectManager
-  commentId: T:PlumJsonAnimator.Services.ProjectManager
+- uid: PlumJsonAnimator.Services.ProjectFilesManager
+  commentId: T:PlumJsonAnimator.Services.ProjectFilesManager
   parent: PlumJsonAnimator.Services
-  href: PlumJsonAnimator.Services.ProjectManager.html
-  name: ProjectManager
-  nameWithType: ProjectManager
-  fullName: PlumJsonAnimator.Services.ProjectManager
+  href: PlumJsonAnimator.Services.ProjectFilesManager.html
+  name: ProjectFilesManager
+  nameWithType: ProjectFilesManager
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager
 - uid: PlumJsonAnimator.Common.Constants.GlobalState
   commentId: T:PlumJsonAnimator.Common.Constants.GlobalState
   parent: PlumJsonAnimator.Common.Constants

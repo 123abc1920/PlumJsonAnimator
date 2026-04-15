@@ -40,7 +40,7 @@ public partial class ExportPanelPNGViewModel : ViewModelBase
         Dialogs dialogs,
         ImageExporter imageExporter,
         ProjectSettings projectSettings,
-        ProjectManager projectManager,
+        ProjectFilesManager projectManager,
         AppSettings appSettings,
         LocalizationService localizationService
     )

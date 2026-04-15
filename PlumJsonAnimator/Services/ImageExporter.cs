@@ -17,10 +17,24 @@ using SixLabors.ImageSharp.PixelFormats;
 
 namespace PlumJsonAnimator.Services
 {
+    /// <summary>
+    /// Provides methods for exporting animations
+    /// </summary>
     public class ImageExporter
     {
         public string ExportPath = "";
-        public Canvas? canvas = null;
+        private Canvas? _canvas = null;
+        public Canvas? Canvas
+        {
+            get => _canvas;
+            set
+            {
+                if (_canvas != value)
+                {
+                    _canvas = value;
+                }
+            }
+        }
 
         private GlobalState globalState;
 
@@ -29,6 +43,10 @@ namespace PlumJsonAnimator.Services
             this.globalState = globalState;
         }
 
+        /// <summary>
+        /// Catches canvas bitmap
+        /// </summary>
+        /// <param name="canvas">Canvas that contains graphics</param>
         private RenderTargetBitmap CatchCanvas(Canvas? canvas)
         {
             var captureBounds = this.globalState.captureArea!.GetRect();
@@ -61,6 +79,12 @@ namespace PlumJsonAnimator.Services
 
         public event EventHandler<int>? ProgressChanged;
 
+        /// <summary>
+        /// Exports animation into array of png images
+        /// </summary>
+        /// <param name="start">Start animation time</param>
+        /// <param name="end">End animation time</param>
+        /// <param name="outputFolder">Folder with array of images</param>
         public async Task<ExportResult> ExportAsPng(double start, double end, string outputFolder)
         {
             if (Directory.Exists(outputFolder))
@@ -81,7 +105,7 @@ namespace PlumJsonAnimator.Services
                 this.globalState.captureMode = false;
                 while (this.globalState.CurrentProject.CurrentAnimation.currentTime <= endTime)
                 {
-                    using (RenderTargetBitmap bitmap = CatchCanvas(canvas))
+                    using (RenderTargetBitmap bitmap = CatchCanvas(_canvas))
                     {
                         var fileName = Path.Combine(outputFolder, $"{i:D8}.png");
                         using (var fileStream = File.Create(fileName))
@@ -96,7 +120,7 @@ namespace PlumJsonAnimator.Services
                     ProgressChanged?.Invoke(this, percent);
 
                     this.globalState.CurrentProject.CurrentAnimation.step();
-                    canvas!.InvalidateVisual();
+                    _canvas!.InvalidateVisual();
                     await Task.Delay(30);
                     i++;
                 }
@@ -111,6 +135,12 @@ namespace PlumJsonAnimator.Services
             return ExportResult.NO_FOLDER;
         }
 
+        /// <summary>
+        /// Exports animation into array of jpg images
+        /// </summary>
+        /// <param name="start">Start animation time</param>
+        /// <param name="end">End animation time</param>
+        /// <param name="outputFolder">Folder with array of images</param>
         public async Task<ExportResult> ExportAsJpg(double start, double end, string outputFolder)
         {
             if (Directory.Exists(outputFolder))
@@ -131,7 +161,7 @@ namespace PlumJsonAnimator.Services
                 this.globalState.captureMode = false;
                 while (this.globalState.CurrentProject.CurrentAnimation.currentTime <= endTime)
                 {
-                    using (RenderTargetBitmap bitmap = CatchCanvas(canvas))
+                    using (RenderTargetBitmap bitmap = CatchCanvas(_canvas))
                     {
                         var fileName = Path.Combine(outputFolder, $"{i:D8}.jpg");
                         using (var fileStream = File.Create(fileName))
@@ -146,7 +176,7 @@ namespace PlumJsonAnimator.Services
                     ProgressChanged?.Invoke(this, percent);
 
                     this.globalState.CurrentProject.CurrentAnimation.step();
-                    canvas!.InvalidateVisual();
+                    _canvas!.InvalidateVisual();
                     await Task.Delay(30);
                     i++;
                 }
@@ -161,6 +191,12 @@ namespace PlumJsonAnimator.Services
             return ExportResult.NO_FOLDER;
         }
 
+        /// <summary>
+        /// Exports animation into gif file
+        /// </summary>
+        /// <param name="start">Start animation time</param>
+        /// <param name="end">End animation time</param>
+        /// <param name="outputFile">Gif file</param>
         public async Task<ExportResult> ExportAsGif(double start, double end, string outputFile)
         {
             if (!File.Exists(outputFile))
@@ -186,10 +222,10 @@ namespace PlumJsonAnimator.Services
                 List<Image<Rgba32>> frames = new List<Image<Rgba32>>();
                 while (this.globalState.CurrentProject.CurrentAnimation.currentTime <= endTime)
                 {
-                    canvas!.InvalidateVisual();
-                    canvas.UpdateLayout();
+                    _canvas!.InvalidateVisual();
+                    _canvas.UpdateLayout();
 
-                    using (RenderTargetBitmap bitmap = CatchCanvas(canvas))
+                    using (RenderTargetBitmap bitmap = CatchCanvas(_canvas))
                     {
                         var pixelSize = bitmap.PixelSize;
                         var image = new Image<Rgba32>(pixelSize.Width, pixelSize.Height);
@@ -209,7 +245,7 @@ namespace PlumJsonAnimator.Services
                     }
 
                     this.globalState.CurrentProject.CurrentAnimation.step();
-                    canvas!.InvalidateVisual();
+                    _canvas!.InvalidateVisual();
                     await Task.Delay(30);
                 }
 
@@ -250,6 +286,13 @@ namespace PlumJsonAnimator.Services
             return ExportResult.NO_FOLDER;
         }
 
+        /// <summary>
+        /// Exports animation into mp4 file
+        /// </summary>
+        /// <param name="start">Start animation time</param>
+        /// <param name="end">End animayion time</param>
+        /// <param name="outputFile">Output MP4 file</param>
+        /// <param name="ffmpegPath">Path to ffmpeg exe</param>
         public async Task<ExportResult> ExportAsMp4(
             double start,
             double end,
@@ -263,7 +306,7 @@ namespace PlumJsonAnimator.Services
                 return ExportResult.NO_FFMPEG;
             }
 
-            using (var testBitmap = CatchCanvas(canvas))
+            using (var testBitmap = CatchCanvas(_canvas))
             {
                 if (testBitmap == null)
                 {
@@ -340,7 +383,7 @@ namespace PlumJsonAnimator.Services
 
                     while (this.globalState.CurrentProject.CurrentAnimation.currentTime <= endTime)
                     {
-                        using (RenderTargetBitmap bitmap = CatchCanvas(canvas))
+                        using (RenderTargetBitmap bitmap = CatchCanvas(_canvas))
                         {
                             var currentSize = bitmap.PixelSize;
 
@@ -389,7 +432,7 @@ namespace PlumJsonAnimator.Services
                         }
 
                         this.globalState.CurrentProject.CurrentAnimation.step();
-                        canvas!.InvalidateVisual();
+                        _canvas!.InvalidateVisual();
                         await Task.Delay(30);
                     }
 

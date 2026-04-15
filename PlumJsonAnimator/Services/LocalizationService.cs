@@ -9,11 +9,14 @@ using PlumJsonAnimator.Models.Interfaces;
 
 namespace PlumJsonAnimator.Services
 {
+    /// <summary>
+    /// Provides methods for localize application
+    /// </summary>
     public class LocalizationService : INotifyable
     {
         public const string START_LANG = "ru-RU";
 
-        private string LocPath;
+        private string LocalizationFilesPath;
 
         public List<string> langs = new List<string>();
         public string currentLang = START_LANG;
@@ -22,19 +25,22 @@ namespace PlumJsonAnimator.Services
 
         public LocalizationService()
         {
-            LocPath = Path.Combine(
+            LocalizationFilesPath = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                 "PlumJsonAnimator",
                 "langs"
             );
 
-            if (!Directory.Exists(LocPath))
+            if (!Directory.Exists(LocalizationFilesPath))
             {
-                Directory.CreateDirectory(LocPath);
+                Directory.CreateDirectory(LocalizationFilesPath);
                 CopyDefaultTranslations();
             }
         }
 
+        /// <summary>
+        /// Copy default ru-RU and en-US files to user PC
+        /// </summary>
         private void CopyDefaultTranslations()
         {
             var assembly = Assembly.GetExecutingAssembly();
@@ -55,15 +61,18 @@ namespace PlumJsonAnimator.Services
                     using var reader = new StreamReader(stream);
                     string content = reader.ReadToEnd();
 
-                    string destPath = Path.Combine(LocPath, fileName);
+                    string destPath = Path.Combine(LocalizationFilesPath, fileName);
                     File.WriteAllText(destPath, content);
                 }
             }
         }
 
+        /// <summary>
+        /// Reads all files in LocalizationFilesPath and collect them into this.langs
+        /// </summary>
         public void LoadLangs()
         {
-            var jsonFiles = Directory.GetFiles(LocPath, "*.json");
+            var jsonFiles = Directory.GetFiles(LocalizationFilesPath, "*.json");
 
             foreach (var filePath in jsonFiles)
             {
@@ -72,15 +81,19 @@ namespace PlumJsonAnimator.Services
             }
         }
 
+        /// <summary>
+        /// Sets current language resources into ResourceDictionary
+        /// </summary>
+        /// <param name="lang">Lang that has to be loaded</param>
         private void loadLangRes(string lang)
         {
             this.currentLang = lang;
 
-            string filePath = Path.Combine(LocPath, $"{lang}.json");
+            string filePath = Path.Combine(LocalizationFilesPath, $"{lang}.json");
 
             if (!File.Exists(filePath))
             {
-                filePath = Path.Combine(LocPath, $"{START_LANG}.json");
+                filePath = Path.Combine(LocalizationFilesPath, $"{START_LANG}.json");
                 if (!File.Exists(filePath))
                 {
                     return;
@@ -116,6 +129,10 @@ namespace PlumJsonAnimator.Services
             loadLangRes(START_LANG);
         }
 
+        /// <summary>
+        /// Returns localizated data, needs word code
+        /// </summary>
+        /// <param name="constStr">Word code</param>
         public string GetMessage(LocalizationConsts constStr)
         {
             var key = constStr switch
@@ -157,6 +174,9 @@ namespace PlumJsonAnimator.Services
         }
     }
 
+    /// <summary>
+    /// All word codes
+    /// </summary>
     public enum LocalizationConsts
     {
         EXPORT_AS_GIF,

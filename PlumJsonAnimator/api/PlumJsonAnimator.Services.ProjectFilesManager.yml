@@ -1,0 +1,1050 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Services.ProjectFilesManager
+  commentId: T:PlumJsonAnimator.Services.ProjectFilesManager
+  id: ProjectFilesManager
+  parent: PlumJsonAnimator.Services
+  children:
+  - PlumJsonAnimator.Services.ProjectFilesManager.#ctor(PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)
+  - PlumJsonAnimator.Services.ProjectFilesManager.CopyDir(System.String,System.String)
+  - PlumJsonAnimator.Services.ProjectFilesManager.CopyRes(System.String,System.String,PlumJsonAnimator.Models.Project)
+  - PlumJsonAnimator.Services.ProjectFilesManager.DeleteResource(System.String,System.String,PlumJsonAnimator.Models.Project)
+  - PlumJsonAnimator.Services.ProjectFilesManager.GetProjectDir(PlumJsonAnimator.Models.Project)
+  - PlumJsonAnimator.Services.ProjectFilesManager.LoadRes(PlumJsonAnimator.Models.Project)
+  - PlumJsonAnimator.Services.ProjectFilesManager.MoveRes(PlumJsonAnimator.Models.Project)
+  - PlumJsonAnimator.Services.ProjectFilesManager.NewProject(System.String,System.String)
+  - PlumJsonAnimator.Services.ProjectFilesManager.OpenProject(System.String)
+  - PlumJsonAnimator.Services.ProjectFilesManager.OpenProjectDialog(Avalonia.Controls.Window)
+  - PlumJsonAnimator.Services.ProjectFilesManager.RenameFile(System.String,System.String)
+  - PlumJsonAnimator.Services.ProjectFilesManager.RenameProject(System.String,System.String)
+  langs:
+  - csharp
+  - vb
+  name: ProjectFilesManager
+  nameWithType: ProjectFilesManager
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager
+  type: Class
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectFilesManager.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: ProjectFilesManager
+    path: Services/ProjectFilesManager.cs
+    startLine: 16
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  summary: Provides methods for work with project files
+  example: []
+  syntax:
+    content: public class ProjectFilesManager
+    content.vb: Public Class ProjectFilesManager
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.#ctor(PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)
+  commentId: M:PlumJsonAnimator.Services.ProjectFilesManager.#ctor(PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)
+  id: '#ctor(PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)'
+  parent: PlumJsonAnimator.Services.ProjectFilesManager
+  langs:
+  - csharp
+  - vb
+  name: ProjectFilesManager(ProjectSettings, AppSettings, GlobalState, Interpolation)
+  nameWithType: ProjectFilesManager.ProjectFilesManager(ProjectSettings, AppSettings, GlobalState, Interpolation)
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.ProjectFilesManager(PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation)
+  type: Constructor
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectFilesManager.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: .ctor
+    path: Services/ProjectFilesManager.cs
+    startLine: 23
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public ProjectFilesManager(ProjectSettings projectSettings, AppSettings appSettings, GlobalState globalState, Interpolation interpolation)
+    parameters:
+    - id: projectSettings
+      type: PlumJsonAnimator.Services.ProjectSettings
+    - id: appSettings
+      type: PlumJsonAnimator.Services.AppSettings
+    - id: globalState
+      type: PlumJsonAnimator.Common.Constants.GlobalState
+    - id: interpolation
+      type: PlumJsonAnimator.Services.Interpolation
+    content.vb: Public Sub New(projectSettings As ProjectSettings, appSettings As AppSettings, globalState As GlobalState, interpolation As Interpolation)
+  overload: PlumJsonAnimator.Services.ProjectFilesManager.#ctor*
+  nameWithType.vb: ProjectFilesManager.New(ProjectSettings, AppSettings, GlobalState, Interpolation)
+  fullName.vb: PlumJsonAnimator.Services.ProjectFilesManager.New(PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation)
+  name.vb: New(ProjectSettings, AppSettings, GlobalState, Interpolation)
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.OpenProjectDialog(Avalonia.Controls.Window)
+  commentId: M:PlumJsonAnimator.Services.ProjectFilesManager.OpenProjectDialog(Avalonia.Controls.Window)
+  id: OpenProjectDialog(Avalonia.Controls.Window)
+  parent: PlumJsonAnimator.Services.ProjectFilesManager
+  langs:
+  - csharp
+  - vb
+  name: OpenProjectDialog(Window)
+  nameWithType: ProjectFilesManager.OpenProjectDialog(Window)
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.OpenProjectDialog(Avalonia.Controls.Window)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectFilesManager.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: OpenProjectDialog
+    path: Services/ProjectFilesManager.cs
+    startLine: 40
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  summary: Open dialog for open existing projects
+  example: []
+  syntax:
+    content: public Task<string?> OpenProjectDialog(Window window)
+    parameters:
+    - id: window
+      type: Avalonia.Controls.Window
+      description: Width of main canvas
+    return:
+      type: System.Threading.Tasks.Task{System.String}
+    content.vb: Public Function OpenProjectDialog(window As Window) As Task(Of String)
+  overload: PlumJsonAnimator.Services.ProjectFilesManager.OpenProjectDialog*
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.OpenProject(System.String)
+  commentId: M:PlumJsonAnimator.Services.ProjectFilesManager.OpenProject(System.String)
+  id: OpenProject(System.String)
+  parent: PlumJsonAnimator.Services.ProjectFilesManager
+  langs:
+  - csharp
+  - vb
+  name: OpenProject(string?)
+  nameWithType: ProjectFilesManager.OpenProject(string?)
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.OpenProject(string?)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectFilesManager.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: OpenProject
+    path: Services/ProjectFilesManager.cs
+    startLine: 64
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public Project? OpenProject(string? path)
+    parameters:
+    - id: path
+      type: System.String
+    return:
+      type: PlumJsonAnimator.Models.Project
+    content.vb: Public Function OpenProject(path As String) As Project
+  overload: PlumJsonAnimator.Services.ProjectFilesManager.OpenProject*
+  nameWithType.vb: ProjectFilesManager.OpenProject(String)
+  fullName.vb: PlumJsonAnimator.Services.ProjectFilesManager.OpenProject(String)
+  name.vb: OpenProject(String)
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.NewProject(System.String,System.String)
+  commentId: M:PlumJsonAnimator.Services.ProjectFilesManager.NewProject(System.String,System.String)
+  id: NewProject(System.String,System.String)
+  parent: PlumJsonAnimator.Services.ProjectFilesManager
+  langs:
+  - csharp
+  - vb
+  name: NewProject(string?, string?)
+  nameWithType: ProjectFilesManager.NewProject(string?, string?)
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.NewProject(string?, string?)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectFilesManager.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: NewProject
+    path: Services/ProjectFilesManager.cs
+    startLine: 88
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public Project? NewProject(string? projectName, string? projectPath)
+    parameters:
+    - id: projectName
+      type: System.String
+    - id: projectPath
+      type: System.String
+    return:
+      type: PlumJsonAnimator.Models.Project
+    content.vb: Public Function NewProject(projectName As String, projectPath As String) As Project
+  overload: PlumJsonAnimator.Services.ProjectFilesManager.NewProject*
+  nameWithType.vb: ProjectFilesManager.NewProject(String, String)
+  fullName.vb: PlumJsonAnimator.Services.ProjectFilesManager.NewProject(String, String)
+  name.vb: NewProject(String, String)
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.GetProjectDir(PlumJsonAnimator.Models.Project)
+  commentId: M:PlumJsonAnimator.Services.ProjectFilesManager.GetProjectDir(PlumJsonAnimator.Models.Project)
+  id: GetProjectDir(PlumJsonAnimator.Models.Project)
+  parent: PlumJsonAnimator.Services.ProjectFilesManager
+  langs:
+  - csharp
+  - vb
+  name: GetProjectDir(Project?)
+  nameWithType: ProjectFilesManager.GetProjectDir(Project?)
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.GetProjectDir(PlumJsonAnimator.Models.Project?)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectFilesManager.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: GetProjectDir
+    path: Services/ProjectFilesManager.cs
+    startLine: 116
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  summary: Return real project directory in file system
+  example: []
+  syntax:
+    content: public string GetProjectDir(Project? project)
+    parameters:
+    - id: project
+      type: PlumJsonAnimator.Models.Project
+      description: Project
+    return:
+      type: System.String
+    content.vb: Public Function GetProjectDir(project As Project) As String
+  overload: PlumJsonAnimator.Services.ProjectFilesManager.GetProjectDir*
+  nameWithType.vb: ProjectFilesManager.GetProjectDir(Project)
+  fullName.vb: PlumJsonAnimator.Services.ProjectFilesManager.GetProjectDir(PlumJsonAnimator.Models.Project)
+  name.vb: GetProjectDir(Project)
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.CopyRes(System.String,System.String,PlumJsonAnimator.Models.Project)
+  commentId: M:PlumJsonAnimator.Services.ProjectFilesManager.CopyRes(System.String,System.String,PlumJsonAnimator.Models.Project)
+  id: CopyRes(System.String,System.String,PlumJsonAnimator.Models.Project)
+  parent: PlumJsonAnimator.Services.ProjectFilesManager
+  langs:
+  - csharp
+  - vb
+  name: CopyRes(string, string, Project?)
+  nameWithType: ProjectFilesManager.CopyRes(string, string, Project?)
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.CopyRes(string, string, PlumJsonAnimator.Models.Project?)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectFilesManager.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: CopyRes
+    path: Services/ProjectFilesManager.cs
+    startLine: 137
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public string CopyRes(string resName, string filePath, Project? project)
+    parameters:
+    - id: resName
+      type: System.String
+    - id: filePath
+      type: System.String
+    - id: project
+      type: PlumJsonAnimator.Models.Project
+    return:
+      type: System.String
+    content.vb: Public Function CopyRes(resName As String, filePath As String, project As Project) As String
+  overload: PlumJsonAnimator.Services.ProjectFilesManager.CopyRes*
+  nameWithType.vb: ProjectFilesManager.CopyRes(String, String, Project)
+  fullName.vb: PlumJsonAnimator.Services.ProjectFilesManager.CopyRes(String, String, PlumJsonAnimator.Models.Project)
+  name.vb: CopyRes(String, String, Project)
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.DeleteResource(System.String,System.String,PlumJsonAnimator.Models.Project)
+  commentId: M:PlumJsonAnimator.Services.ProjectFilesManager.DeleteResource(System.String,System.String,PlumJsonAnimator.Models.Project)
+  id: DeleteResource(System.String,System.String,PlumJsonAnimator.Models.Project)
+  parent: PlumJsonAnimator.Services.ProjectFilesManager
+  langs:
+  - csharp
+  - vb
+  name: DeleteResource(string, string, Project?)
+  nameWithType: ProjectFilesManager.DeleteResource(string, string, Project?)
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.DeleteResource(string, string, PlumJsonAnimator.Models.Project?)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectFilesManager.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: DeleteResource
+    path: Services/ProjectFilesManager.cs
+    startLine: 162
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public bool DeleteResource(string name, string ext, Project? project)
+    parameters:
+    - id: name
+      type: System.String
+    - id: ext
+      type: System.String
+    - id: project
+      type: PlumJsonAnimator.Models.Project
+    return:
+      type: System.Boolean
+    content.vb: Public Function DeleteResource(name As String, ext As String, project As Project) As Boolean
+  overload: PlumJsonAnimator.Services.ProjectFilesManager.DeleteResource*
+  nameWithType.vb: ProjectFilesManager.DeleteResource(String, String, Project)
+  fullName.vb: PlumJsonAnimator.Services.ProjectFilesManager.DeleteResource(String, String, PlumJsonAnimator.Models.Project)
+  name.vb: DeleteResource(String, String, Project)
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.RenameProject(System.String,System.String)
+  commentId: M:PlumJsonAnimator.Services.ProjectFilesManager.RenameProject(System.String,System.String)
+  id: RenameProject(System.String,System.String)
+  parent: PlumJsonAnimator.Services.ProjectFilesManager
+  langs:
+  - csharp
+  - vb
+  name: RenameProject(string, string)
+  nameWithType: ProjectFilesManager.RenameProject(string, string)
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.RenameProject(string, string)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectFilesManager.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: RenameProject
+    path: Services/ProjectFilesManager.cs
+    startLine: 189
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public void RenameProject(string oldDir, string newDir)
+    parameters:
+    - id: oldDir
+      type: System.String
+    - id: newDir
+      type: System.String
+    content.vb: Public Sub RenameProject(oldDir As String, newDir As String)
+  overload: PlumJsonAnimator.Services.ProjectFilesManager.RenameProject*
+  nameWithType.vb: ProjectFilesManager.RenameProject(String, String)
+  fullName.vb: PlumJsonAnimator.Services.ProjectFilesManager.RenameProject(String, String)
+  name.vb: RenameProject(String, String)
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.MoveRes(PlumJsonAnimator.Models.Project)
+  commentId: M:PlumJsonAnimator.Services.ProjectFilesManager.MoveRes(PlumJsonAnimator.Models.Project)
+  id: MoveRes(PlumJsonAnimator.Models.Project)
+  parent: PlumJsonAnimator.Services.ProjectFilesManager
+  langs:
+  - csharp
+  - vb
+  name: MoveRes(Project)
+  nameWithType: ProjectFilesManager.MoveRes(Project)
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.MoveRes(PlumJsonAnimator.Models.Project)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectFilesManager.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: MoveRes
+    path: Services/ProjectFilesManager.cs
+    startLine: 201
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  summary: Sets new pathes to project resource objects after moving project into another directory
+  example: []
+  syntax:
+    content: public void MoveRes(Project project)
+    parameters:
+    - id: project
+      type: PlumJsonAnimator.Models.Project
+      description: ''
+    content.vb: Public Sub MoveRes(project As Project)
+  overload: PlumJsonAnimator.Services.ProjectFilesManager.MoveRes*
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.RenameFile(System.String,System.String)
+  commentId: M:PlumJsonAnimator.Services.ProjectFilesManager.RenameFile(System.String,System.String)
+  id: RenameFile(System.String,System.String)
+  parent: PlumJsonAnimator.Services.ProjectFilesManager
+  langs:
+  - csharp
+  - vb
+  name: RenameFile(string, string)
+  nameWithType: ProjectFilesManager.RenameFile(string, string)
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.RenameFile(string, string)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectFilesManager.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: RenameFile
+    path: Services/ProjectFilesManager.cs
+    startLine: 209
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public void RenameFile(string oldFile, string newFile)
+    parameters:
+    - id: oldFile
+      type: System.String
+    - id: newFile
+      type: System.String
+    content.vb: Public Sub RenameFile(oldFile As String, newFile As String)
+  overload: PlumJsonAnimator.Services.ProjectFilesManager.RenameFile*
+  nameWithType.vb: ProjectFilesManager.RenameFile(String, String)
+  fullName.vb: PlumJsonAnimator.Services.ProjectFilesManager.RenameFile(String, String)
+  name.vb: RenameFile(String, String)
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.CopyDir(System.String,System.String)
+  commentId: M:PlumJsonAnimator.Services.ProjectFilesManager.CopyDir(System.String,System.String)
+  id: CopyDir(System.String,System.String)
+  parent: PlumJsonAnimator.Services.ProjectFilesManager
+  langs:
+  - csharp
+  - vb
+  name: CopyDir(string, string)
+  nameWithType: ProjectFilesManager.CopyDir(string, string)
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.CopyDir(string, string)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectFilesManager.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: CopyDir
+    path: Services/ProjectFilesManager.cs
+    startLine: 222
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  summary: Cipies all project files into new directory
+  example: []
+  syntax:
+    content: public void CopyDir(string oldDir, string newDir)
+    parameters:
+    - id: oldDir
+      type: System.String
+      description: ''
+    - id: newDir
+      type: System.String
+      description: ''
+    content.vb: Public Sub CopyDir(oldDir As String, newDir As String)
+  overload: PlumJsonAnimator.Services.ProjectFilesManager.CopyDir*
+  nameWithType.vb: ProjectFilesManager.CopyDir(String, String)
+  fullName.vb: PlumJsonAnimator.Services.ProjectFilesManager.CopyDir(String, String)
+  name.vb: CopyDir(String, String)
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.LoadRes(PlumJsonAnimator.Models.Project)
+  commentId: M:PlumJsonAnimator.Services.ProjectFilesManager.LoadRes(PlumJsonAnimator.Models.Project)
+  id: LoadRes(PlumJsonAnimator.Models.Project)
+  parent: PlumJsonAnimator.Services.ProjectFilesManager
+  langs:
+  - csharp
+  - vb
+  name: LoadRes(Project)
+  nameWithType: ProjectFilesManager.LoadRes(Project)
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.LoadRes(PlumJsonAnimator.Models.Project)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/ProjectFilesManager.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: LoadRes
+    path: Services/ProjectFilesManager.cs
+    startLine: 263
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  summary: Load all resources into project
+  example: []
+  syntax:
+    content: public void LoadRes(Project project)
+    parameters:
+    - id: project
+      type: PlumJsonAnimator.Models.Project
+      description: ''
+    content.vb: Public Sub LoadRes(project As Project)
+  overload: PlumJsonAnimator.Services.ProjectFilesManager.LoadRes*
+references:
+- uid: PlumJsonAnimator.Services
+  commentId: N:PlumJsonAnimator.Services
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Services
+  nameWithType: PlumJsonAnimator.Services
+  fullName: PlumJsonAnimator.Services
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Services
+    name: Services
+    href: PlumJsonAnimator.Services.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Services
+    name: Services
+    href: PlumJsonAnimator.Services.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.#ctor*
+  commentId: Overload:PlumJsonAnimator.Services.ProjectFilesManager.#ctor
+  href: PlumJsonAnimator.Services.ProjectFilesManager.html#PlumJsonAnimator_Services_ProjectFilesManager__ctor_PlumJsonAnimator_Services_ProjectSettings_PlumJsonAnimator_Services_AppSettings_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_Interpolation_
+  name: ProjectFilesManager
+  nameWithType: ProjectFilesManager.ProjectFilesManager
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.ProjectFilesManager
+  nameWithType.vb: ProjectFilesManager.New
+  fullName.vb: PlumJsonAnimator.Services.ProjectFilesManager.New
+  name.vb: New
+- uid: PlumJsonAnimator.Services.ProjectSettings
+  commentId: T:PlumJsonAnimator.Services.ProjectSettings
+  parent: PlumJsonAnimator.Services
+  href: PlumJsonAnimator.Services.ProjectSettings.html
+  name: ProjectSettings
+  nameWithType: ProjectSettings
+  fullName: PlumJsonAnimator.Services.ProjectSettings
+- uid: PlumJsonAnimator.Services.AppSettings
+  commentId: T:PlumJsonAnimator.Services.AppSettings
+  parent: PlumJsonAnimator.Services
+  href: PlumJsonAnimator.Services.AppSettings.html
+  name: AppSettings
+  nameWithType: AppSettings
+  fullName: PlumJsonAnimator.Services.AppSettings
+- uid: PlumJsonAnimator.Common.Constants.GlobalState
+  commentId: T:PlumJsonAnimator.Common.Constants.GlobalState
+  parent: PlumJsonAnimator.Common.Constants
+  href: PlumJsonAnimator.Common.Constants.GlobalState.html
+  name: GlobalState
+  nameWithType: GlobalState
+  fullName: PlumJsonAnimator.Common.Constants.GlobalState
+- uid: PlumJsonAnimator.Services.Interpolation
+  commentId: T:PlumJsonAnimator.Services.Interpolation
+  parent: PlumJsonAnimator.Services
+  href: PlumJsonAnimator.Services.Interpolation.html
+  name: Interpolation
+  nameWithType: Interpolation
+  fullName: PlumJsonAnimator.Services.Interpolation
+- uid: PlumJsonAnimator.Common.Constants
+  commentId: N:PlumJsonAnimator.Common.Constants
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Common.Constants
+  nameWithType: PlumJsonAnimator.Common.Constants
+  fullName: PlumJsonAnimator.Common.Constants
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Constants
+    name: Constants
+    href: PlumJsonAnimator.Common.Constants.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Common
+    name: Common
+    href: PlumJsonAnimator.Common.html
+  - name: .
+  - uid: PlumJsonAnimator.Common.Constants
+    name: Constants
+    href: PlumJsonAnimator.Common.Constants.html
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.OpenProjectDialog*
+  commentId: Overload:PlumJsonAnimator.Services.ProjectFilesManager.OpenProjectDialog
+  href: PlumJsonAnimator.Services.ProjectFilesManager.html#PlumJsonAnimator_Services_ProjectFilesManager_OpenProjectDialog_Avalonia_Controls_Window_
+  name: OpenProjectDialog
+  nameWithType: ProjectFilesManager.OpenProjectDialog
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.OpenProjectDialog
+- uid: Avalonia.Controls.Window
+  commentId: T:Avalonia.Controls.Window
+  parent: Avalonia.Controls
+  isExternal: true
+  name: Window
+  nameWithType: Window
+  fullName: Avalonia.Controls.Window
+- uid: System.Threading.Tasks.Task{System.String}
+  commentId: T:System.Threading.Tasks.Task{System.String}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<string>
+  nameWithType: Task<string>
+  fullName: System.Threading.Tasks.Task<string>
+  nameWithType.vb: Task(Of String)
+  fullName.vb: System.Threading.Tasks.Task(Of String)
+  name.vb: Task(Of String)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: Avalonia.Controls
+  commentId: N:Avalonia.Controls
+  isExternal: true
+  name: Avalonia.Controls
+  nameWithType: Avalonia.Controls
+  fullName: Avalonia.Controls
+  spec.csharp:
+  - uid: Avalonia
+    name: Avalonia
+    isExternal: true
+  - name: .
+  - uid: Avalonia.Controls
+    name: Controls
+    isExternal: true
+  spec.vb:
+  - uid: Avalonia
+    name: Avalonia
+    isExternal: true
+  - name: .
+  - uid: Avalonia.Controls
+    name: Controls
+    isExternal: true
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.OpenProject*
+  commentId: Overload:PlumJsonAnimator.Services.ProjectFilesManager.OpenProject
+  href: PlumJsonAnimator.Services.ProjectFilesManager.html#PlumJsonAnimator_Services_ProjectFilesManager_OpenProject_System_String_
+  name: OpenProject
+  nameWithType: ProjectFilesManager.OpenProject
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.OpenProject
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: PlumJsonAnimator.Models.Project
+  commentId: T:PlumJsonAnimator.Models.Project
+  parent: PlumJsonAnimator.Models
+  href: PlumJsonAnimator.Models.Project.html
+  name: Project
+  nameWithType: Project
+  fullName: PlumJsonAnimator.Models.Project
+- uid: PlumJsonAnimator.Models
+  commentId: N:PlumJsonAnimator.Models
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Models
+  nameWithType: PlumJsonAnimator.Models
+  fullName: PlumJsonAnimator.Models
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.NewProject*
+  commentId: Overload:PlumJsonAnimator.Services.ProjectFilesManager.NewProject
+  href: PlumJsonAnimator.Services.ProjectFilesManager.html#PlumJsonAnimator_Services_ProjectFilesManager_NewProject_System_String_System_String_
+  name: NewProject
+  nameWithType: ProjectFilesManager.NewProject
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.NewProject
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.GetProjectDir*
+  commentId: Overload:PlumJsonAnimator.Services.ProjectFilesManager.GetProjectDir
+  href: PlumJsonAnimator.Services.ProjectFilesManager.html#PlumJsonAnimator_Services_ProjectFilesManager_GetProjectDir_PlumJsonAnimator_Models_Project_
+  name: GetProjectDir
+  nameWithType: ProjectFilesManager.GetProjectDir
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.GetProjectDir
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.CopyRes*
+  commentId: Overload:PlumJsonAnimator.Services.ProjectFilesManager.CopyRes
+  href: PlumJsonAnimator.Services.ProjectFilesManager.html#PlumJsonAnimator_Services_ProjectFilesManager_CopyRes_System_String_System_String_PlumJsonAnimator_Models_Project_
+  name: CopyRes
+  nameWithType: ProjectFilesManager.CopyRes
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.CopyRes
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.DeleteResource*
+  commentId: Overload:PlumJsonAnimator.Services.ProjectFilesManager.DeleteResource
+  href: PlumJsonAnimator.Services.ProjectFilesManager.html#PlumJsonAnimator_Services_ProjectFilesManager_DeleteResource_System_String_System_String_PlumJsonAnimator_Models_Project_
+  name: DeleteResource
+  nameWithType: ProjectFilesManager.DeleteResource
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.DeleteResource
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.RenameProject*
+  commentId: Overload:PlumJsonAnimator.Services.ProjectFilesManager.RenameProject
+  href: PlumJsonAnimator.Services.ProjectFilesManager.html#PlumJsonAnimator_Services_ProjectFilesManager_RenameProject_System_String_System_String_
+  name: RenameProject
+  nameWithType: ProjectFilesManager.RenameProject
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.RenameProject
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.MoveRes*
+  commentId: Overload:PlumJsonAnimator.Services.ProjectFilesManager.MoveRes
+  href: PlumJsonAnimator.Services.ProjectFilesManager.html#PlumJsonAnimator_Services_ProjectFilesManager_MoveRes_PlumJsonAnimator_Models_Project_
+  name: MoveRes
+  nameWithType: ProjectFilesManager.MoveRes
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.MoveRes
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.RenameFile*
+  commentId: Overload:PlumJsonAnimator.Services.ProjectFilesManager.RenameFile
+  href: PlumJsonAnimator.Services.ProjectFilesManager.html#PlumJsonAnimator_Services_ProjectFilesManager_RenameFile_System_String_System_String_
+  name: RenameFile
+  nameWithType: ProjectFilesManager.RenameFile
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.RenameFile
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.CopyDir*
+  commentId: Overload:PlumJsonAnimator.Services.ProjectFilesManager.CopyDir
+  href: PlumJsonAnimator.Services.ProjectFilesManager.html#PlumJsonAnimator_Services_ProjectFilesManager_CopyDir_System_String_System_String_
+  name: CopyDir
+  nameWithType: ProjectFilesManager.CopyDir
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.CopyDir
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.LoadRes*
+  commentId: Overload:PlumJsonAnimator.Services.ProjectFilesManager.LoadRes
+  href: PlumJsonAnimator.Services.ProjectFilesManager.html#PlumJsonAnimator_Services_ProjectFilesManager_LoadRes_PlumJsonAnimator_Models_Project_
+  name: LoadRes
+  nameWithType: ProjectFilesManager.LoadRes
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.LoadRes

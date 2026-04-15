@@ -5,8 +5,8 @@ items:
   id: ViewModelBase
   parent: PlumJsonAnimator.ViewModels
   children:
-  - PlumJsonAnimator.ViewModels.ViewModelBase.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Services.AppSettings)
-  - PlumJsonAnimator.ViewModels.ViewModelBase.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Services.ImageExporter)
+  - PlumJsonAnimator.ViewModels.ViewModelBase.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Services.AppSettings)
+  - PlumJsonAnimator.ViewModels.ViewModelBase.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Services.ImageExporter)
   - PlumJsonAnimator.ViewModels.ViewModelBase.CurrentLang
   - PlumJsonAnimator.ViewModels.ViewModelBase.CurrentProject
   - PlumJsonAnimator.ViewModels.ViewModelBase.GetCaptureArea
@@ -184,10 +184,10 @@ items:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
   syntax:
-    content: protected ProjectManager projectManager
+    content: protected ProjectFilesManager projectManager
     return:
-      type: PlumJsonAnimator.Services.ProjectManager
-    content.vb: Protected projectManager As ProjectManager
+      type: PlumJsonAnimator.Services.ProjectFilesManager
+    content.vb: Protected projectManager As ProjectFilesManager
 - uid: PlumJsonAnimator.ViewModels.ViewModelBase.appSettings
   commentId: F:PlumJsonAnimator.ViewModels.ViewModelBase.appSettings
   id: appSettings
@@ -355,16 +355,16 @@ items:
       type: PlumJsonAnimator.Models.CaptureArea
     content.vb: Public Function GetCaptureArea() As CaptureArea
   overload: PlumJsonAnimator.ViewModels.ViewModelBase.GetCaptureArea*
-- uid: PlumJsonAnimator.ViewModels.ViewModelBase.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Services.ImageExporter)
-  commentId: M:PlumJsonAnimator.ViewModels.ViewModelBase.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Services.ImageExporter)
-  id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Services.ImageExporter)'
+- uid: PlumJsonAnimator.ViewModels.ViewModelBase.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Services.ImageExporter)
+  commentId: M:PlumJsonAnimator.ViewModels.ViewModelBase.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Services.ImageExporter)
+  id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Services.ImageExporter)'
   parent: PlumJsonAnimator.ViewModels.ViewModelBase
   langs:
   - csharp
   - vb
-  name: ViewModelBase(GlobalState, Dialogs, ProjectSettings, ProjectManager, AppSettings, LocalizationService, ImageExporter)
-  nameWithType: ViewModelBase.ViewModelBase(GlobalState, Dialogs, ProjectSettings, ProjectManager, AppSettings, LocalizationService, ImageExporter)
-  fullName: PlumJsonAnimator.ViewModels.ViewModelBase.ViewModelBase(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Common.Dialogs.Dialogs, PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.ProjectManager, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Services.LocalizationService, PlumJsonAnimator.Services.ImageExporter)
+  name: ViewModelBase(GlobalState, Dialogs, ProjectSettings, ProjectFilesManager, AppSettings, LocalizationService, ImageExporter)
+  nameWithType: ViewModelBase.ViewModelBase(GlobalState, Dialogs, ProjectSettings, ProjectFilesManager, AppSettings, LocalizationService, ImageExporter)
+  fullName: PlumJsonAnimator.ViewModels.ViewModelBase.ViewModelBase(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Common.Dialogs.Dialogs, PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.ProjectFilesManager, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Services.LocalizationService, PlumJsonAnimator.Services.ImageExporter)
   type: Constructor
   source:
     remote:
@@ -378,7 +378,7 @@ items:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
   syntax:
-    content: protected ViewModelBase(GlobalState globalState, Dialogs dialogs, ProjectSettings projectSettings, ProjectManager projectManager, AppSettings appSettings, LocalizationService localizationService, ImageExporter imageExporter)
+    content: protected ViewModelBase(GlobalState globalState, Dialogs dialogs, ProjectSettings projectSettings, ProjectFilesManager projectManager, AppSettings appSettings, LocalizationService localizationService, ImageExporter imageExporter)
     parameters:
     - id: globalState
       type: PlumJsonAnimator.Common.Constants.GlobalState
@@ -387,28 +387,28 @@ items:
     - id: projectSettings
       type: PlumJsonAnimator.Services.ProjectSettings
     - id: projectManager
-      type: PlumJsonAnimator.Services.ProjectManager
+      type: PlumJsonAnimator.Services.ProjectFilesManager
     - id: appSettings
       type: PlumJsonAnimator.Services.AppSettings
     - id: localizationService
       type: PlumJsonAnimator.Services.LocalizationService
     - id: imageExporter
       type: PlumJsonAnimator.Services.ImageExporter
-    content.vb: Protected Sub New(globalState As GlobalState, dialogs As Dialogs, projectSettings As ProjectSettings, projectManager As ProjectManager, appSettings As AppSettings, localizationService As LocalizationService, imageExporter As ImageExporter)
+    content.vb: Protected Sub New(globalState As GlobalState, dialogs As Dialogs, projectSettings As ProjectSettings, projectManager As ProjectFilesManager, appSettings As AppSettings, localizationService As LocalizationService, imageExporter As ImageExporter)
   overload: PlumJsonAnimator.ViewModels.ViewModelBase.#ctor*
-  nameWithType.vb: ViewModelBase.New(GlobalState, Dialogs, ProjectSettings, ProjectManager, AppSettings, LocalizationService, ImageExporter)
-  fullName.vb: PlumJsonAnimator.ViewModels.ViewModelBase.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Common.Dialogs.Dialogs, PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.ProjectManager, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Services.LocalizationService, PlumJsonAnimator.Services.ImageExporter)
-  name.vb: New(GlobalState, Dialogs, ProjectSettings, ProjectManager, AppSettings, LocalizationService, ImageExporter)
-- uid: PlumJsonAnimator.ViewModels.ViewModelBase.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Services.AppSettings)
-  commentId: M:PlumJsonAnimator.ViewModels.ViewModelBase.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Services.AppSettings)
-  id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Services.AppSettings)'
+  nameWithType.vb: ViewModelBase.New(GlobalState, Dialogs, ProjectSettings, ProjectFilesManager, AppSettings, LocalizationService, ImageExporter)
+  fullName.vb: PlumJsonAnimator.ViewModels.ViewModelBase.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Common.Dialogs.Dialogs, PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.ProjectFilesManager, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Services.LocalizationService, PlumJsonAnimator.Services.ImageExporter)
+  name.vb: New(GlobalState, Dialogs, ProjectSettings, ProjectFilesManager, AppSettings, LocalizationService, ImageExporter)
+- uid: PlumJsonAnimator.ViewModels.ViewModelBase.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Services.AppSettings)
+  commentId: M:PlumJsonAnimator.ViewModels.ViewModelBase.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Services.AppSettings)
+  id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Services.AppSettings)'
   parent: PlumJsonAnimator.ViewModels.ViewModelBase
   langs:
   - csharp
   - vb
-  name: ViewModelBase(GlobalState, Dialogs, ProjectSettings, ProjectManager, AppSettings)
-  nameWithType: ViewModelBase.ViewModelBase(GlobalState, Dialogs, ProjectSettings, ProjectManager, AppSettings)
-  fullName: PlumJsonAnimator.ViewModels.ViewModelBase.ViewModelBase(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Common.Dialogs.Dialogs, PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.ProjectManager, PlumJsonAnimator.Services.AppSettings)
+  name: ViewModelBase(GlobalState, Dialogs, ProjectSettings, ProjectFilesManager, AppSettings)
+  nameWithType: ViewModelBase.ViewModelBase(GlobalState, Dialogs, ProjectSettings, ProjectFilesManager, AppSettings)
+  fullName: PlumJsonAnimator.ViewModels.ViewModelBase.ViewModelBase(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Common.Dialogs.Dialogs, PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.ProjectFilesManager, PlumJsonAnimator.Services.AppSettings)
   type: Constructor
   source:
     remote:
@@ -422,7 +422,7 @@ items:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
   syntax:
-    content: public ViewModelBase(GlobalState globalState, Dialogs dialogs, ProjectSettings projectSettings, ProjectManager projectManager, AppSettings appSettings)
+    content: public ViewModelBase(GlobalState globalState, Dialogs dialogs, ProjectSettings projectSettings, ProjectFilesManager projectManager, AppSettings appSettings)
     parameters:
     - id: globalState
       type: PlumJsonAnimator.Common.Constants.GlobalState
@@ -431,14 +431,14 @@ items:
     - id: projectSettings
       type: PlumJsonAnimator.Services.ProjectSettings
     - id: projectManager
-      type: PlumJsonAnimator.Services.ProjectManager
+      type: PlumJsonAnimator.Services.ProjectFilesManager
     - id: appSettings
       type: PlumJsonAnimator.Services.AppSettings
-    content.vb: Public Sub New(globalState As GlobalState, dialogs As Dialogs, projectSettings As ProjectSettings, projectManager As ProjectManager, appSettings As AppSettings)
+    content.vb: Public Sub New(globalState As GlobalState, dialogs As Dialogs, projectSettings As ProjectSettings, projectManager As ProjectFilesManager, appSettings As AppSettings)
   overload: PlumJsonAnimator.ViewModels.ViewModelBase.#ctor*
-  nameWithType.vb: ViewModelBase.New(GlobalState, Dialogs, ProjectSettings, ProjectManager, AppSettings)
-  fullName.vb: PlumJsonAnimator.ViewModels.ViewModelBase.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Common.Dialogs.Dialogs, PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.ProjectManager, PlumJsonAnimator.Services.AppSettings)
-  name.vb: New(GlobalState, Dialogs, ProjectSettings, ProjectManager, AppSettings)
+  nameWithType.vb: ViewModelBase.New(GlobalState, Dialogs, ProjectSettings, ProjectFilesManager, AppSettings)
+  fullName.vb: PlumJsonAnimator.ViewModels.ViewModelBase.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Common.Dialogs.Dialogs, PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.ProjectFilesManager, PlumJsonAnimator.Services.AppSettings)
+  name.vb: New(GlobalState, Dialogs, ProjectSettings, ProjectFilesManager, AppSettings)
 - uid: PlumJsonAnimator.ViewModels.ViewModelBase.CurrentProject
   commentId: P:PlumJsonAnimator.ViewModels.ViewModelBase.CurrentProject
   id: CurrentProject
@@ -2606,13 +2606,13 @@ references:
   - uid: PlumJsonAnimator.Services
     name: Services
     href: PlumJsonAnimator.Services.html
-- uid: PlumJsonAnimator.Services.ProjectManager
-  commentId: T:PlumJsonAnimator.Services.ProjectManager
+- uid: PlumJsonAnimator.Services.ProjectFilesManager
+  commentId: T:PlumJsonAnimator.Services.ProjectFilesManager
   parent: PlumJsonAnimator.Services
-  href: PlumJsonAnimator.Services.ProjectManager.html
-  name: ProjectManager
-  nameWithType: ProjectManager
-  fullName: PlumJsonAnimator.Services.ProjectManager
+  href: PlumJsonAnimator.Services.ProjectFilesManager.html
+  name: ProjectFilesManager
+  nameWithType: ProjectFilesManager
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager
 - uid: PlumJsonAnimator.Services.AppSettings
   commentId: T:PlumJsonAnimator.Services.AppSettings
   parent: PlumJsonAnimator.Services
@@ -2794,7 +2794,7 @@ references:
     href: PlumJsonAnimator.Models.html
 - uid: PlumJsonAnimator.ViewModels.ViewModelBase.#ctor*
   commentId: Overload:PlumJsonAnimator.ViewModels.ViewModelBase.#ctor
-  href: PlumJsonAnimator.ViewModels.ViewModelBase.html#PlumJsonAnimator_ViewModels_ViewModelBase__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Common_Dialogs_Dialogs_PlumJsonAnimator_Services_ProjectSettings_PlumJsonAnimator_Services_ProjectManager_PlumJsonAnimator_Services_AppSettings_PlumJsonAnimator_Services_LocalizationService_PlumJsonAnimator_Services_ImageExporter_
+  href: PlumJsonAnimator.ViewModels.ViewModelBase.html#PlumJsonAnimator_ViewModels_ViewModelBase__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Common_Dialogs_Dialogs_PlumJsonAnimator_Services_ProjectSettings_PlumJsonAnimator_Services_ProjectFilesManager_PlumJsonAnimator_Services_AppSettings_PlumJsonAnimator_Services_LocalizationService_PlumJsonAnimator_Services_ImageExporter_
   name: ViewModelBase
   nameWithType: ViewModelBase.ViewModelBase
   fullName: PlumJsonAnimator.ViewModels.ViewModelBase.ViewModelBase

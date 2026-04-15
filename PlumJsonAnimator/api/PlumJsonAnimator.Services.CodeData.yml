@@ -24,10 +24,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: CodeData
     path: Services/JsonCode.cs
-    startLine: 348
+    startLine: 437
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: Jsonifyed project
+  example: []
   syntax:
     content: public class CodeData
     content.vb: Public Class CodeData
@@ -59,7 +61,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Skeleton
     path: Services/JsonCode.cs
-    startLine: 350
+    startLine: 439
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -100,7 +102,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Bones
     path: Services/JsonCode.cs
-    startLine: 353
+    startLine: 442
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -141,7 +143,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Slots
     path: Services/JsonCode.cs
-    startLine: 356
+    startLine: 445
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -182,7 +184,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Skins
     path: Services/JsonCode.cs
-    startLine: 359
+    startLine: 448
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -223,7 +225,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Animations
     path: Services/JsonCode.cs
-    startLine: 362
+    startLine: 451
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services

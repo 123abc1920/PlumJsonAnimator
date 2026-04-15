@@ -4,42 +4,11 @@ using Newtonsoft.Json.Linq;
 
 namespace PlumJsonAnimator.Services
 {
+    /// <summary>
+    /// Validates json code
+    /// </summary>
     public class JsonValidator
     {
-        /*private static String schemaJson =
-            @"{
-    '$schema': 'http://json-schema.org/draft-07/schema#',
-    'type': 'object',
-    'required': ['skeleton', 'bones'],
-    'properties': {
-        'skeleton': {
-            'type': 'object',
-            'required': ['spine']
-        },
-        'bones': {
-            'type': 'array',
-            'items': {
-                'type': 'object',
-                'required': ['name']
-            }
-        },
-        'slots': {
-            'type': 'array',
-            'items': {
-                'type': 'object'
-            }
-        },
-        'skins': {
-            'type': 'array',
-            'items': {
-                'type': 'object'
-            }
-        },
-        'animations': {
-            'type': 'object'
-        }
-    }
-}";*/
         private LocalizationService localizationService;
 
         public JsonValidator(LocalizationService localizationService)
@@ -47,7 +16,15 @@ namespace PlumJsonAnimator.Services
             this.localizationService = localizationService;
         }
 
-        public string validate(String text)
+        /// <summary>
+        /// Validates text. Finds error line and position
+        /// </summary>
+        /// <param name="text">Text which has to be validated</param>
+        /// <example>
+        /// new Interpolation().linearInterpolation(20, 40, 0.5);
+        /// </example>
+        /// <returns>Information about errors</returns>
+        public string Validate(String text)
         {
             try
             {
@@ -60,6 +37,14 @@ namespace PlumJsonAnimator.Services
             }
         }
 
+        /// <summary>
+        /// Linear interpolation between two values
+        /// </summary>
+        /// <param name="json">Json string</param>
+        /// <param name="errorLine">Error line</param>
+        /// <param name="errorPos">Error position</param>
+        /// <param name="errorMessage">Error message</param>
+        /// <returns>Text with info about errors</returns>
         private string GetErrorWithContext(
             string json,
             int errorLine,

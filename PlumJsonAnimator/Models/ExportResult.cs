@@ -7,5 +7,6 @@ namespace PlumJsonAnimator.Models
         INCORRECT_JSON,
         NO_FFMPEG,
         FFMPEG_ERROR,
+        PROJECT_IS_NULL,
     }
 }

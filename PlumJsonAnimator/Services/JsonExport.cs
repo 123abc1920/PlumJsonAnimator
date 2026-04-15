@@ -5,6 +5,9 @@ using PlumJsonAnimator.Models;
 
 namespace PlumJsonAnimator.Services
 {
+    /// <summary>
+    /// Provides methods for exporting and importing json code from file
+    /// </summary>
     public class JsonExport
     {
         private JsonValidator jsonValidator;
@@ -25,19 +28,26 @@ namespace PlumJsonAnimator.Services
             this.localizationService = localizationService;
         }
 
-        public ExportResult exportSpineJson(string outFolder)
+        /// <summary>
+        /// Exports current project into json code
+        /// </summary>
+        /// <param name="outFolder">The path to output folder</param>
+        /// <param name="project">Project that has to be exported</param>
+        public ExportResult exportSpineJson(string outFolder, Project? project)
         {
+            if (project == null)
+            {
+                return ExportResult.PROJECT_IS_NULL;
+            }
+
             string output = JsonConvert.SerializeObject(
-                this.jsonCode.generateJSONData(this.globalState.CurrentProject),
+                this.jsonCode.generateJSONData(project),
                 this.globalState.jsonSettings
             );
 
             if (Directory.Exists(outFolder))
             {
-                var filePath = Path.Combine(
-                    outFolder,
-                    $"{this.globalState.CurrentProject.Name}.json"
-                );
+                var filePath = Path.Combine(outFolder, $"{project.Name}.json");
                 if (!File.Exists(filePath))
                 {
                     File.Create(filePath).Close();
@@ -49,12 +59,16 @@ namespace PlumJsonAnimator.Services
             return ExportResult.NO_FOLDER;
         }
 
+        /// <summary>
+        /// Import json code from file
+        /// </summary>
+        /// <param name="inputFile">Project</param>
         public ExportResult importSpineJson(string inputFile)
         {
             if (File.Exists(inputFile))
             {
                 string text = File.ReadAllText(inputFile);
-                string result = this.jsonValidator.validate(text);
+                string result = this.jsonValidator.Validate(text);
                 if (result == this.localizationService.GetMessage(LocalizationConsts.JSON_VALID))
                 {
                     this.globalState.CurrentProject!.Code = text;

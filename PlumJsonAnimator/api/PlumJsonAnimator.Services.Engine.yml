@@ -6,7 +6,7 @@ items:
   parent: PlumJsonAnimator.Services
   children:
   - PlumJsonAnimator.Services.Engine.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
-  - PlumJsonAnimator.Services.Engine.runAnimation
+  - PlumJsonAnimator.Services.Engine.runAnimation(PlumJsonAnimator.Models.SkeletonNameSpace.Animation)
   langs:
   - csharp
   - vb
@@ -16,15 +16,17 @@ items:
   type: Class
   source:
     remote:
-      path: PlumJsonAnimator/Services/MainEngine.cs
+      path: PlumJsonAnimator/Services/Engine.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Engine
-    path: Services/MainEngine.cs
-    startLine: 6
+    path: Services/Engine.cs
+    startLine: 10
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: Plays animation and update time
+  example: []
   syntax:
     content: public class Engine
     content.vb: Public Class Engine
@@ -51,12 +53,12 @@ items:
   type: Constructor
   source:
     remote:
-      path: PlumJsonAnimator/Services/MainEngine.cs
+      path: PlumJsonAnimator/Services/Engine.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
-    path: Services/MainEngine.cs
-    startLine: 12
+    path: Services/Engine.cs
+    startLine: 17
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -70,32 +72,41 @@ items:
   nameWithType.vb: Engine.New(GlobalState)
   fullName.vb: PlumJsonAnimator.Services.Engine.New(PlumJsonAnimator.Common.Constants.GlobalState)
   name.vb: New(GlobalState)
-- uid: PlumJsonAnimator.Services.Engine.runAnimation
-  commentId: M:PlumJsonAnimator.Services.Engine.runAnimation
-  id: runAnimation
+- uid: PlumJsonAnimator.Services.Engine.runAnimation(PlumJsonAnimator.Models.SkeletonNameSpace.Animation)
+  commentId: M:PlumJsonAnimator.Services.Engine.runAnimation(PlumJsonAnimator.Models.SkeletonNameSpace.Animation)
+  id: runAnimation(PlumJsonAnimator.Models.SkeletonNameSpace.Animation)
   parent: PlumJsonAnimator.Services.Engine
   langs:
   - csharp
   - vb
-  name: runAnimation()
-  nameWithType: Engine.runAnimation()
-  fullName: PlumJsonAnimator.Services.Engine.runAnimation()
+  name: runAnimation(Animation?)
+  nameWithType: Engine.runAnimation(Animation?)
+  fullName: PlumJsonAnimator.Services.Engine.runAnimation(PlumJsonAnimator.Models.SkeletonNameSpace.Animation?)
   type: Method
   source:
     remote:
-      path: PlumJsonAnimator/Services/MainEngine.cs
+      path: PlumJsonAnimator/Services/Engine.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: runAnimation
-    path: Services/MainEngine.cs
-    startLine: 26
+    path: Services/Engine.cs
+    startLine: 38
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: Starts or stops animation and set it in MainEngine
+  example: []
   syntax:
-    content: public void runAnimation()
-    content.vb: Public Sub runAnimation()
+    content: public void runAnimation(Animation? animation)
+    parameters:
+    - id: animation
+      type: PlumJsonAnimator.Models.SkeletonNameSpace.Animation
+      description: Runned animation
+    content.vb: Public Sub runAnimation(animation As Animation)
   overload: PlumJsonAnimator.Services.Engine.runAnimation*
+  nameWithType.vb: Engine.runAnimation(Animation)
+  fullName.vb: PlumJsonAnimator.Services.Engine.runAnimation(PlumJsonAnimator.Models.SkeletonNameSpace.Animation)
+  name.vb: runAnimation(Animation)
 references:
 - uid: PlumJsonAnimator.Services
   commentId: N:PlumJsonAnimator.Services
@@ -404,7 +415,44 @@ references:
     href: PlumJsonAnimator.Common.Constants.html
 - uid: PlumJsonAnimator.Services.Engine.runAnimation*
   commentId: Overload:PlumJsonAnimator.Services.Engine.runAnimation
-  href: PlumJsonAnimator.Services.Engine.html#PlumJsonAnimator_Services_Engine_runAnimation
+  href: PlumJsonAnimator.Services.Engine.html#PlumJsonAnimator_Services_Engine_runAnimation_PlumJsonAnimator_Models_SkeletonNameSpace_Animation_
   name: runAnimation
   nameWithType: Engine.runAnimation
   fullName: PlumJsonAnimator.Services.Engine.runAnimation
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Animation
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.Animation
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.html
+  name: Animation
+  nameWithType: Animation
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Animation
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace
+  commentId: N:PlumJsonAnimator.Models.SkeletonNameSpace
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Models.SkeletonNameSpace
+  nameWithType: PlumJsonAnimator.Models.SkeletonNameSpace
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace
+    name: SkeletonNameSpace
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  - name: .
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace
+    name: SkeletonNameSpace
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.html

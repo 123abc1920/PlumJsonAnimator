@@ -1,35 +1,36 @@
 ### YamlMime:ManagedReference
 items:
-- uid: PlumJsonAnimator.Services.JsonValidator
-  commentId: T:PlumJsonAnimator.Services.JsonValidator
-  id: JsonValidator
+- uid: PlumJsonAnimator.Services.JsonCode.ValidResult
+  commentId: T:PlumJsonAnimator.Services.JsonCode.ValidResult
+  id: JsonCode.ValidResult
   parent: PlumJsonAnimator.Services
   children:
-  - PlumJsonAnimator.Services.JsonValidator.#ctor(PlumJsonAnimator.Services.LocalizationService)
-  - PlumJsonAnimator.Services.JsonValidator.Validate(System.String)
+  - PlumJsonAnimator.Services.JsonCode.ValidResult.IsOk
+  - PlumJsonAnimator.Services.JsonCode.ValidResult.Message
+  - PlumJsonAnimator.Services.JsonCode.ValidResult.UpdatedArray
   langs:
   - csharp
   - vb
-  name: JsonValidator
-  nameWithType: JsonValidator
-  fullName: PlumJsonAnimator.Services.JsonValidator
+  name: JsonCode.ValidResult
+  nameWithType: JsonCode.ValidResult
+  fullName: PlumJsonAnimator.Services.JsonCode.ValidResult
   type: Class
   source:
     remote:
-      path: PlumJsonAnimator/Services/JsonValidator.cs
+      path: PlumJsonAnimator/Services/JsonCode.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: JsonValidator
-    path: Services/JsonValidator.cs
-    startLine: 9
+    id: ValidResult
+    path: Services/JsonCode.cs
+    startLine: 21
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
-  summary: Validates json code
+  summary: Contains information about json validation and provides updated validated data
   example: []
   syntax:
-    content: public class JsonValidator
-    content.vb: Public Class JsonValidator
+    content: public class JsonCode.ValidResult
+    content.vb: Public Class JsonCode.ValidResult
   inheritance:
   - System.Object
   inheritedMembers:
@@ -40,77 +41,93 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-- uid: PlumJsonAnimator.Services.JsonValidator.#ctor(PlumJsonAnimator.Services.LocalizationService)
-  commentId: M:PlumJsonAnimator.Services.JsonValidator.#ctor(PlumJsonAnimator.Services.LocalizationService)
-  id: '#ctor(PlumJsonAnimator.Services.LocalizationService)'
-  parent: PlumJsonAnimator.Services.JsonValidator
+- uid: PlumJsonAnimator.Services.JsonCode.ValidResult.Message
+  commentId: P:PlumJsonAnimator.Services.JsonCode.ValidResult.Message
+  id: Message
+  parent: PlumJsonAnimator.Services.JsonCode.ValidResult
   langs:
   - csharp
   - vb
-  name: JsonValidator(LocalizationService)
-  nameWithType: JsonValidator.JsonValidator(LocalizationService)
-  fullName: PlumJsonAnimator.Services.JsonValidator.JsonValidator(PlumJsonAnimator.Services.LocalizationService)
-  type: Constructor
+  name: Message
+  nameWithType: JsonCode.ValidResult.Message
+  fullName: PlumJsonAnimator.Services.JsonCode.ValidResult.Message
+  type: Property
   source:
     remote:
-      path: PlumJsonAnimator/Services/JsonValidator.cs
+      path: PlumJsonAnimator/Services/JsonCode.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: .ctor
-    path: Services/JsonValidator.cs
-    startLine: 13
+    id: Message
+    path: Services/JsonCode.cs
+    startLine: 23
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
   syntax:
-    content: public JsonValidator(LocalizationService localizationService)
-    parameters:
-    - id: localizationService
-      type: PlumJsonAnimator.Services.LocalizationService
-    content.vb: Public Sub New(localizationService As LocalizationService)
-  overload: PlumJsonAnimator.Services.JsonValidator.#ctor*
-  nameWithType.vb: JsonValidator.New(LocalizationService)
-  fullName.vb: PlumJsonAnimator.Services.JsonValidator.New(PlumJsonAnimator.Services.LocalizationService)
-  name.vb: New(LocalizationService)
-- uid: PlumJsonAnimator.Services.JsonValidator.Validate(System.String)
-  commentId: M:PlumJsonAnimator.Services.JsonValidator.Validate(System.String)
-  id: Validate(System.String)
-  parent: PlumJsonAnimator.Services.JsonValidator
-  langs:
-  - csharp
-  - vb
-  name: Validate(string)
-  nameWithType: JsonValidator.Validate(string)
-  fullName: PlumJsonAnimator.Services.JsonValidator.Validate(string)
-  type: Method
-  source:
-    remote:
-      path: PlumJsonAnimator/Services/JsonValidator.cs
-      branch: main
-      repo: https://github.com/123abc1920/PlumAnimation.git
-    id: Validate
-    path: Services/JsonValidator.cs
-    startLine: 26
-  assemblies:
-  - PlumJsonAnimator
-  namespace: PlumJsonAnimator.Services
-  summary: Validates text. Finds error line and position
-  example:
-  - new Interpolation().linearInterpolation(20, 40, 0.5);
-  syntax:
-    content: public string Validate(string text)
-    parameters:
-    - id: text
-      type: System.String
-      description: Text which has to be validated
+    content: public required string Message { get; set; }
+    parameters: []
     return:
       type: System.String
-      description: Information about errors
-    content.vb: Public Function Validate(text As String) As String
-  overload: PlumJsonAnimator.Services.JsonValidator.Validate*
-  nameWithType.vb: JsonValidator.Validate(String)
-  fullName.vb: PlumJsonAnimator.Services.JsonValidator.Validate(String)
-  name.vb: Validate(String)
+    content.vb: Public Property Message As String
+  overload: PlumJsonAnimator.Services.JsonCode.ValidResult.Message*
+- uid: PlumJsonAnimator.Services.JsonCode.ValidResult.IsOk
+  commentId: P:PlumJsonAnimator.Services.JsonCode.ValidResult.IsOk
+  id: IsOk
+  parent: PlumJsonAnimator.Services.JsonCode.ValidResult
+  langs:
+  - csharp
+  - vb
+  name: IsOk
+  nameWithType: JsonCode.ValidResult.IsOk
+  fullName: PlumJsonAnimator.Services.JsonCode.ValidResult.IsOk
+  type: Property
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/JsonCode.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: IsOk
+    path: Services/JsonCode.cs
+    startLine: 24
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public bool IsOk { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property IsOk As Boolean
+  overload: PlumJsonAnimator.Services.JsonCode.ValidResult.IsOk*
+- uid: PlumJsonAnimator.Services.JsonCode.ValidResult.UpdatedArray
+  commentId: P:PlumJsonAnimator.Services.JsonCode.ValidResult.UpdatedArray
+  id: UpdatedArray
+  parent: PlumJsonAnimator.Services.JsonCode.ValidResult
+  langs:
+  - csharp
+  - vb
+  name: UpdatedArray
+  nameWithType: JsonCode.ValidResult.UpdatedArray
+  fullName: PlumJsonAnimator.Services.JsonCode.ValidResult.UpdatedArray
+  type: Property
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/JsonCode.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: UpdatedArray
+    path: Services/JsonCode.cs
+    startLine: 25
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: public object? UpdatedArray { get; set; }
+    parameters: []
+    return:
+      type: System.Object
+    content.vb: Public Property UpdatedArray As Object
+  overload: PlumJsonAnimator.Services.JsonCode.ValidResult.UpdatedArray*
 references:
 - uid: PlumJsonAnimator.Services
   commentId: N:PlumJsonAnimator.Services
@@ -371,28 +388,12 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: PlumJsonAnimator.Services.JsonValidator.#ctor*
-  commentId: Overload:PlumJsonAnimator.Services.JsonValidator.#ctor
-  href: PlumJsonAnimator.Services.JsonValidator.html#PlumJsonAnimator_Services_JsonValidator__ctor_PlumJsonAnimator_Services_LocalizationService_
-  name: JsonValidator
-  nameWithType: JsonValidator.JsonValidator
-  fullName: PlumJsonAnimator.Services.JsonValidator.JsonValidator
-  nameWithType.vb: JsonValidator.New
-  fullName.vb: PlumJsonAnimator.Services.JsonValidator.New
-  name.vb: New
-- uid: PlumJsonAnimator.Services.LocalizationService
-  commentId: T:PlumJsonAnimator.Services.LocalizationService
-  parent: PlumJsonAnimator.Services
-  href: PlumJsonAnimator.Services.LocalizationService.html
-  name: LocalizationService
-  nameWithType: LocalizationService
-  fullName: PlumJsonAnimator.Services.LocalizationService
-- uid: PlumJsonAnimator.Services.JsonValidator.Validate*
-  commentId: Overload:PlumJsonAnimator.Services.JsonValidator.Validate
-  href: PlumJsonAnimator.Services.JsonValidator.html#PlumJsonAnimator_Services_JsonValidator_Validate_System_String_
-  name: Validate
-  nameWithType: JsonValidator.Validate
-  fullName: PlumJsonAnimator.Services.JsonValidator.Validate
+- uid: PlumJsonAnimator.Services.JsonCode.ValidResult.Message*
+  commentId: Overload:PlumJsonAnimator.Services.JsonCode.ValidResult.Message
+  href: PlumJsonAnimator.Services.JsonCode.ValidResult.html#PlumJsonAnimator_Services_JsonCode_ValidResult_Message
+  name: Message
+  nameWithType: JsonCode.ValidResult.Message
+  fullName: PlumJsonAnimator.Services.JsonCode.ValidResult.Message
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -404,3 +405,26 @@ references:
   nameWithType.vb: String
   fullName.vb: String
   name.vb: String
+- uid: PlumJsonAnimator.Services.JsonCode.ValidResult.IsOk*
+  commentId: Overload:PlumJsonAnimator.Services.JsonCode.ValidResult.IsOk
+  href: PlumJsonAnimator.Services.JsonCode.ValidResult.html#PlumJsonAnimator_Services_JsonCode_ValidResult_IsOk
+  name: IsOk
+  nameWithType: JsonCode.ValidResult.IsOk
+  fullName: PlumJsonAnimator.Services.JsonCode.ValidResult.IsOk
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: PlumJsonAnimator.Services.JsonCode.ValidResult.UpdatedArray*
+  commentId: Overload:PlumJsonAnimator.Services.JsonCode.ValidResult.UpdatedArray
+  href: PlumJsonAnimator.Services.JsonCode.ValidResult.html#PlumJsonAnimator_Services_JsonCode_ValidResult_UpdatedArray
+  name: UpdatedArray
+  nameWithType: JsonCode.ValidResult.UpdatedArray
+  fullName: PlumJsonAnimator.Services.JsonCode.ValidResult.UpdatedArray

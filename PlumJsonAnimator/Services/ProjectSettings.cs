@@ -6,6 +6,9 @@ using PlumJsonAnimator.Models;
 
 namespace PlumJsonAnimator.Services
 {
+    /// <summary>
+    /// Provides methods for work with project settings. It is in "{projectDir}/{projectName}/settings.plmjsn: ususally.
+    /// </summary>
     public class ProjectSettings
     {
         private AppSettings appSettings;
@@ -23,6 +26,10 @@ namespace PlumJsonAnimator.Services
             return this.settingsData;
         }
 
+        /// <summary>
+        /// Sets settings from this project
+        /// </summary>
+        /// <param name="project"></param>
         public void UpdateSettings(Project project)
         {
             this.settingsData.Name = project.Name;
@@ -71,29 +78,6 @@ namespace PlumJsonAnimator.Services
             }
         }
 
-        public void WriteAllSettings()
-        {
-            string settingsPath = Path.Combine(
-                this.appSettings.appSettings!.Workspace,
-                settingsName
-            );
-
-            /*settings.Path = this.globalState.currentProject.ProjectPath;
-            settings.Name = this.globalState.currentProject.Name;
-            settings.Spine = this.globalState.currentProject.MetaData.Spine;
-            settings.Anim = JsonConvert.SerializeObject(
-                this.jsonCode.generateJSONData(this.globalState.currentProject),
-                this.globalState.jsonSettings
-            );*/
-
-            ExistOrCreateProjectDirs();
-
-            File.WriteAllText(
-                settingsPath,
-                JsonConvert.SerializeObject(this.settingsData, this.globalState.jsonSettings)
-            );
-        }
-
         public void WriteSettings()
         {
             string settingsPath = Path.Combine(
@@ -109,7 +93,7 @@ namespace PlumJsonAnimator.Services
             );
         }
 
-        public void WriteAnim(string anim)
+        public void WriteAnimation(string anim)
         {
             string settingsPath = Path.Combine(
                 this.appSettings.appSettings!.Workspace,
@@ -132,7 +116,7 @@ namespace PlumJsonAnimator.Services
         {
             if (!File.Exists(settingsPath))
             {
-                WriteAllSettings();
+                WriteSettings();
                 return;
             }
 
@@ -151,7 +135,7 @@ namespace PlumJsonAnimator.Services
             }
             else
             {
-                WriteAllSettings();
+                WriteSettings();
             }
         }
 
@@ -174,6 +158,9 @@ namespace PlumJsonAnimator.Services
         }
     }
 
+    /// <summary>
+    /// Contains jsonifyed settings data
+    /// </summary>
     public class SettingsData
     {
         [JsonProperty("project_path")]

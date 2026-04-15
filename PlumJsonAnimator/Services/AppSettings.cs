@@ -10,6 +10,9 @@ using SukiUI;
 // TODO: отделить настройки отдельного проекта от его json кода
 namespace PlumJsonAnimator.Services
 {
+    /// <summary>
+    /// Provides app settings. It is in "C:\Users\username\AppData\Roaming\PlumJsonAnimator\settings.plmjsn" usually
+    /// </summary>
     public class AppSettings
     {
         private string AppSettingsPath;
@@ -57,6 +60,10 @@ namespace PlumJsonAnimator.Services
             SaveSettings();
         }
 
+        /// <summary>
+        /// Updates capture area parameters and saves them into settingd file
+        /// </summary>
+        /// <param name="rect">New capture area form</param>
         public void SetCaptureArea(Rect rect)
         {
             this.appSettings!.CaptureX = (int)rect.X;
@@ -167,6 +174,11 @@ namespace PlumJsonAnimator.Services
             return this.appSettings!.Theme;
         }
 
+        /// <summary>
+        /// Sets parameters for capture area
+        /// </summary>
+        /// <param name="canvasWidth">Width of main canvas</param>
+        /// <param name="canvasHeight">Height of main canvas</param>
         public CaptureArea CreateCaptureArea(int canvasWidth, int canvasHeight)
         {
             return new CaptureArea(
@@ -180,6 +192,9 @@ namespace PlumJsonAnimator.Services
         }
     }
 
+    /// <summary>
+    /// Contains jsonifyed app settings
+    /// </summary>
     public class AppSettingsData()
     {
         [JsonProperty("last_dir")]

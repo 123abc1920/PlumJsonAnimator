@@ -11,8 +11,7 @@ items:
   - PlumJsonAnimator.Services.ProjectSettings.ReadSettings
   - PlumJsonAnimator.Services.ProjectSettings.ReadSettings(System.String)
   - PlumJsonAnimator.Services.ProjectSettings.UpdateSettings(PlumJsonAnimator.Models.Project)
-  - PlumJsonAnimator.Services.ProjectSettings.WriteAllSettings
-  - PlumJsonAnimator.Services.ProjectSettings.WriteAnim(System.String)
+  - PlumJsonAnimator.Services.ProjectSettings.WriteAnimation(System.String)
   - PlumJsonAnimator.Services.ProjectSettings.WriteSettings
   langs:
   - csharp
@@ -28,10 +27,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ProjectSettings
     path: Services/ProjectSettings.cs
-    startLine: 8
+    startLine: 11
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: 'Provides methods for work with project settings. It is in "{projectDir}/{projectName}/settings.plmjsn: ususally.'
+  example: []
   syntax:
     content: public class ProjectSettings
     content.vb: Public Class ProjectSettings
@@ -63,7 +64,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetSettingsData
     path: Services/ProjectSettings.cs
-    startLine: 20
+    startLine: 23
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -91,15 +92,18 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: UpdateSettings
     path: Services/ProjectSettings.cs
-    startLine: 25
+    startLine: 32
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: Sets settings from this project
+  example: []
   syntax:
     content: public void UpdateSettings(Project project)
     parameters:
     - id: project
       type: PlumJsonAnimator.Models.Project
+      description: ''
     content.vb: Public Sub UpdateSettings(project As Project)
   overload: PlumJsonAnimator.Services.ProjectSettings.UpdateSettings*
 - uid: PlumJsonAnimator.Services.ProjectSettings.#ctor(PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.JsonCode)
@@ -120,7 +124,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Services/ProjectSettings.cs
-    startLine: 33
+    startLine: 40
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -156,7 +160,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ExistOrCreateProjectDirs
     path: Services/ProjectSettings.cs
-    startLine: 52
+    startLine: 59
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -164,32 +168,6 @@ items:
     content: public void ExistOrCreateProjectDirs()
     content.vb: Public Sub ExistOrCreateProjectDirs()
   overload: PlumJsonAnimator.Services.ProjectSettings.ExistOrCreateProjectDirs*
-- uid: PlumJsonAnimator.Services.ProjectSettings.WriteAllSettings
-  commentId: M:PlumJsonAnimator.Services.ProjectSettings.WriteAllSettings
-  id: WriteAllSettings
-  parent: PlumJsonAnimator.Services.ProjectSettings
-  langs:
-  - csharp
-  - vb
-  name: WriteAllSettings()
-  nameWithType: ProjectSettings.WriteAllSettings()
-  fullName: PlumJsonAnimator.Services.ProjectSettings.WriteAllSettings()
-  type: Method
-  source:
-    remote:
-      path: PlumJsonAnimator/Services/ProjectSettings.cs
-      branch: main
-      repo: https://github.com/123abc1920/PlumAnimation.git
-    id: WriteAllSettings
-    path: Services/ProjectSettings.cs
-    startLine: 73
-  assemblies:
-  - PlumJsonAnimator
-  namespace: PlumJsonAnimator.Services
-  syntax:
-    content: public void WriteAllSettings()
-    content.vb: Public Sub WriteAllSettings()
-  overload: PlumJsonAnimator.Services.ProjectSettings.WriteAllSettings*
 - uid: PlumJsonAnimator.Services.ProjectSettings.WriteSettings
   commentId: M:PlumJsonAnimator.Services.ProjectSettings.WriteSettings
   id: WriteSettings
@@ -208,7 +186,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: WriteSettings
     path: Services/ProjectSettings.cs
-    startLine: 96
+    startLine: 80
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -216,38 +194,38 @@ items:
     content: public void WriteSettings()
     content.vb: Public Sub WriteSettings()
   overload: PlumJsonAnimator.Services.ProjectSettings.WriteSettings*
-- uid: PlumJsonAnimator.Services.ProjectSettings.WriteAnim(System.String)
-  commentId: M:PlumJsonAnimator.Services.ProjectSettings.WriteAnim(System.String)
-  id: WriteAnim(System.String)
+- uid: PlumJsonAnimator.Services.ProjectSettings.WriteAnimation(System.String)
+  commentId: M:PlumJsonAnimator.Services.ProjectSettings.WriteAnimation(System.String)
+  id: WriteAnimation(System.String)
   parent: PlumJsonAnimator.Services.ProjectSettings
   langs:
   - csharp
   - vb
-  name: WriteAnim(string)
-  nameWithType: ProjectSettings.WriteAnim(string)
-  fullName: PlumJsonAnimator.Services.ProjectSettings.WriteAnim(string)
+  name: WriteAnimation(string)
+  nameWithType: ProjectSettings.WriteAnimation(string)
+  fullName: PlumJsonAnimator.Services.ProjectSettings.WriteAnimation(string)
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Services/ProjectSettings.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: WriteAnim
+    id: WriteAnimation
     path: Services/ProjectSettings.cs
-    startLine: 111
+    startLine: 95
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
   syntax:
-    content: public void WriteAnim(string anim)
+    content: public void WriteAnimation(string anim)
     parameters:
     - id: anim
       type: System.String
-    content.vb: Public Sub WriteAnim(anim As String)
-  overload: PlumJsonAnimator.Services.ProjectSettings.WriteAnim*
-  nameWithType.vb: ProjectSettings.WriteAnim(String)
-  fullName.vb: PlumJsonAnimator.Services.ProjectSettings.WriteAnim(String)
-  name.vb: WriteAnim(String)
+    content.vb: Public Sub WriteAnimation(anim As String)
+  overload: PlumJsonAnimator.Services.ProjectSettings.WriteAnimation*
+  nameWithType.vb: ProjectSettings.WriteAnimation(String)
+  fullName.vb: PlumJsonAnimator.Services.ProjectSettings.WriteAnimation(String)
+  name.vb: WriteAnimation(String)
 - uid: PlumJsonAnimator.Services.ProjectSettings.ReadSettings
   commentId: M:PlumJsonAnimator.Services.ProjectSettings.ReadSettings
   id: ReadSettings
@@ -266,7 +244,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ReadSettings
     path: Services/ProjectSettings.cs
-    startLine: 157
+    startLine: 141
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -292,7 +270,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ReadSettings
     path: Services/ProjectSettings.cs
-    startLine: 167
+    startLine: 151
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -680,24 +658,18 @@ references:
   name: ExistOrCreateProjectDirs
   nameWithType: ProjectSettings.ExistOrCreateProjectDirs
   fullName: PlumJsonAnimator.Services.ProjectSettings.ExistOrCreateProjectDirs
-- uid: PlumJsonAnimator.Services.ProjectSettings.WriteAllSettings*
-  commentId: Overload:PlumJsonAnimator.Services.ProjectSettings.WriteAllSettings
-  href: PlumJsonAnimator.Services.ProjectSettings.html#PlumJsonAnimator_Services_ProjectSettings_WriteAllSettings
-  name: WriteAllSettings
-  nameWithType: ProjectSettings.WriteAllSettings
-  fullName: PlumJsonAnimator.Services.ProjectSettings.WriteAllSettings
 - uid: PlumJsonAnimator.Services.ProjectSettings.WriteSettings*
   commentId: Overload:PlumJsonAnimator.Services.ProjectSettings.WriteSettings
   href: PlumJsonAnimator.Services.ProjectSettings.html#PlumJsonAnimator_Services_ProjectSettings_WriteSettings
   name: WriteSettings
   nameWithType: ProjectSettings.WriteSettings
   fullName: PlumJsonAnimator.Services.ProjectSettings.WriteSettings
-- uid: PlumJsonAnimator.Services.ProjectSettings.WriteAnim*
-  commentId: Overload:PlumJsonAnimator.Services.ProjectSettings.WriteAnim
-  href: PlumJsonAnimator.Services.ProjectSettings.html#PlumJsonAnimator_Services_ProjectSettings_WriteAnim_System_String_
-  name: WriteAnim
-  nameWithType: ProjectSettings.WriteAnim
-  fullName: PlumJsonAnimator.Services.ProjectSettings.WriteAnim
+- uid: PlumJsonAnimator.Services.ProjectSettings.WriteAnimation*
+  commentId: Overload:PlumJsonAnimator.Services.ProjectSettings.WriteAnimation
+  href: PlumJsonAnimator.Services.ProjectSettings.html#PlumJsonAnimator_Services_ProjectSettings_WriteAnimation_System_String_
+  name: WriteAnimation
+  nameWithType: ProjectSettings.WriteAnimation
+  fullName: PlumJsonAnimator.Services.ProjectSettings.WriteAnimation
 - uid: System.String
   commentId: T:System.String
   parent: System

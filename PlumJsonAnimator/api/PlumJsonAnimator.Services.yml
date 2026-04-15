@@ -11,16 +11,15 @@ items:
   - PlumJsonAnimator.Services.ImageExporter
   - PlumJsonAnimator.Services.Interpolation
   - PlumJsonAnimator.Services.JsonCode
+  - PlumJsonAnimator.Services.JsonCode.ValidResult
   - PlumJsonAnimator.Services.JsonExport
   - PlumJsonAnimator.Services.JsonValidator
   - PlumJsonAnimator.Services.LocalizationConsts
   - PlumJsonAnimator.Services.LocalizationService
   - PlumJsonAnimator.Services.Prettify
-  - PlumJsonAnimator.Services.ProjectManager
+  - PlumJsonAnimator.Services.ProjectFilesManager
   - PlumJsonAnimator.Services.ProjectSettings
-  - PlumJsonAnimator.Services.ProjectValidResult
   - PlumJsonAnimator.Services.SettingsData
-  - PlumJsonAnimator.Services.ValidResult
   langs:
   - csharp
   - vb
@@ -45,6 +44,13 @@ references:
   name: AppSettingsData
   nameWithType: AppSettingsData
   fullName: PlumJsonAnimator.Services.AppSettingsData
+- uid: PlumJsonAnimator.Services.Engine
+  commentId: T:PlumJsonAnimator.Services.Engine
+  parent: PlumJsonAnimator.Services
+  href: PlumJsonAnimator.Services.Engine.html
+  name: Engine
+  nameWithType: Engine
+  fullName: PlumJsonAnimator.Services.Engine
 - uid: PlumJsonAnimator.Services.ImageExporter
   commentId: T:PlumJsonAnimator.Services.ImageExporter
   parent: PlumJsonAnimator.Services
@@ -59,20 +65,6 @@ references:
   name: Interpolation
   nameWithType: Interpolation
   fullName: PlumJsonAnimator.Services.Interpolation
-- uid: PlumJsonAnimator.Services.ValidResult
-  commentId: T:PlumJsonAnimator.Services.ValidResult
-  parent: PlumJsonAnimator.Services
-  href: PlumJsonAnimator.Services.ValidResult.html
-  name: ValidResult
-  nameWithType: ValidResult
-  fullName: PlumJsonAnimator.Services.ValidResult
-- uid: PlumJsonAnimator.Services.ProjectValidResult
-  commentId: T:PlumJsonAnimator.Services.ProjectValidResult
-  parent: PlumJsonAnimator.Services
-  href: PlumJsonAnimator.Services.ProjectValidResult.html
-  name: ProjectValidResult
-  nameWithType: ProjectValidResult
-  fullName: PlumJsonAnimator.Services.ProjectValidResult
 - uid: PlumJsonAnimator.Services.JsonCode
   commentId: T:PlumJsonAnimator.Services.JsonCode
   parent: PlumJsonAnimator.Services
@@ -80,6 +72,29 @@ references:
   name: JsonCode
   nameWithType: JsonCode
   fullName: PlumJsonAnimator.Services.JsonCode
+- uid: PlumJsonAnimator.Services.JsonCode.ValidResult
+  commentId: T:PlumJsonAnimator.Services.JsonCode.ValidResult
+  parent: PlumJsonAnimator.Services
+  href: PlumJsonAnimator.Services.JsonCode.html
+  name: JsonCode.ValidResult
+  nameWithType: JsonCode.ValidResult
+  fullName: PlumJsonAnimator.Services.JsonCode.ValidResult
+  spec.csharp:
+  - uid: PlumJsonAnimator.Services.JsonCode
+    name: JsonCode
+    href: PlumJsonAnimator.Services.JsonCode.html
+  - name: .
+  - uid: PlumJsonAnimator.Services.JsonCode.ValidResult
+    name: ValidResult
+    href: PlumJsonAnimator.Services.JsonCode.ValidResult.html
+  spec.vb:
+  - uid: PlumJsonAnimator.Services.JsonCode
+    name: JsonCode
+    href: PlumJsonAnimator.Services.JsonCode.html
+  - name: .
+  - uid: PlumJsonAnimator.Services.JsonCode.ValidResult
+    name: ValidResult
+    href: PlumJsonAnimator.Services.JsonCode.ValidResult.html
 - uid: PlumJsonAnimator.Services.CodeData
   commentId: T:PlumJsonAnimator.Services.CodeData
   parent: PlumJsonAnimator.Services
@@ -115,13 +130,6 @@ references:
   name: LocalizationConsts
   nameWithType: LocalizationConsts
   fullName: PlumJsonAnimator.Services.LocalizationConsts
-- uid: PlumJsonAnimator.Services.Engine
-  commentId: T:PlumJsonAnimator.Services.Engine
-  parent: PlumJsonAnimator.Services
-  href: PlumJsonAnimator.Services.Engine.html
-  name: Engine
-  nameWithType: Engine
-  fullName: PlumJsonAnimator.Services.Engine
 - uid: PlumJsonAnimator.Services.Prettify
   commentId: T:PlumJsonAnimator.Services.Prettify
   parent: PlumJsonAnimator.Services
@@ -129,13 +137,13 @@ references:
   name: Prettify
   nameWithType: Prettify
   fullName: PlumJsonAnimator.Services.Prettify
-- uid: PlumJsonAnimator.Services.ProjectManager
-  commentId: T:PlumJsonAnimator.Services.ProjectManager
+- uid: PlumJsonAnimator.Services.ProjectFilesManager
+  commentId: T:PlumJsonAnimator.Services.ProjectFilesManager
   parent: PlumJsonAnimator.Services
-  href: PlumJsonAnimator.Services.ProjectManager.html
-  name: ProjectManager
-  nameWithType: ProjectManager
-  fullName: PlumJsonAnimator.Services.ProjectManager
+  href: PlumJsonAnimator.Services.ProjectFilesManager.html
+  name: ProjectFilesManager
+  nameWithType: ProjectFilesManager
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager
 - uid: PlumJsonAnimator.Services.ProjectSettings
   commentId: T:PlumJsonAnimator.Services.ProjectSettings
   parent: PlumJsonAnimator.Services

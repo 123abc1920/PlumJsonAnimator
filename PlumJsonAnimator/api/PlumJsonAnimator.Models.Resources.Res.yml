@@ -5,7 +5,7 @@ items:
   id: Res
   parent: PlumJsonAnimator.Models.Resources
   children:
-  - PlumJsonAnimator.Models.Resources.Res.#ctor(PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Common.Constants.GlobalState)
+  - PlumJsonAnimator.Models.Resources.Res.#ctor(PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Common.Constants.GlobalState)
   - PlumJsonAnimator.Models.Resources.Res.GetName
   - PlumJsonAnimator.Models.Resources.Res.Name
   - PlumJsonAnimator.Models.Resources.Res.Path
@@ -109,10 +109,10 @@ items:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Resources
   syntax:
-    content: protected ProjectManager projectManager
+    content: protected ProjectFilesManager projectManager
     return:
-      type: PlumJsonAnimator.Services.ProjectManager
-    content.vb: Protected projectManager As ProjectManager
+      type: PlumJsonAnimator.Services.ProjectFilesManager
+    content.vb: Protected projectManager As ProjectFilesManager
 - uid: PlumJsonAnimator.Models.Resources.Res.globalState
   commentId: F:PlumJsonAnimator.Models.Resources.Res.globalState
   id: globalState
@@ -140,16 +140,16 @@ items:
     return:
       type: PlumJsonAnimator.Common.Constants.GlobalState
     content.vb: Protected globalState As GlobalState
-- uid: PlumJsonAnimator.Models.Resources.Res.#ctor(PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Common.Constants.GlobalState)
-  commentId: M:PlumJsonAnimator.Models.Resources.Res.#ctor(PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Common.Constants.GlobalState)
-  id: '#ctor(PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Common.Constants.GlobalState)'
+- uid: PlumJsonAnimator.Models.Resources.Res.#ctor(PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Common.Constants.GlobalState)
+  commentId: M:PlumJsonAnimator.Models.Resources.Res.#ctor(PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Common.Constants.GlobalState)
+  id: '#ctor(PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Common.Constants.GlobalState)'
   parent: PlumJsonAnimator.Models.Resources.Res
   langs:
   - csharp
   - vb
-  name: Res(ProjectManager, GlobalState)
-  nameWithType: Res.Res(ProjectManager, GlobalState)
-  fullName: PlumJsonAnimator.Models.Resources.Res.Res(PlumJsonAnimator.Services.ProjectManager, PlumJsonAnimator.Common.Constants.GlobalState)
+  name: Res(ProjectFilesManager, GlobalState)
+  nameWithType: Res.Res(ProjectFilesManager, GlobalState)
+  fullName: PlumJsonAnimator.Models.Resources.Res.Res(PlumJsonAnimator.Services.ProjectFilesManager, PlumJsonAnimator.Common.Constants.GlobalState)
   type: Constructor
   source:
     remote:
@@ -163,17 +163,17 @@ items:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Resources
   syntax:
-    content: public Res(ProjectManager projectManager, GlobalState globalState)
+    content: public Res(ProjectFilesManager projectManager, GlobalState globalState)
     parameters:
     - id: projectManager
-      type: PlumJsonAnimator.Services.ProjectManager
+      type: PlumJsonAnimator.Services.ProjectFilesManager
     - id: globalState
       type: PlumJsonAnimator.Common.Constants.GlobalState
-    content.vb: Public Sub New(projectManager As ProjectManager, globalState As GlobalState)
+    content.vb: Public Sub New(projectManager As ProjectFilesManager, globalState As GlobalState)
   overload: PlumJsonAnimator.Models.Resources.Res.#ctor*
-  nameWithType.vb: Res.New(ProjectManager, GlobalState)
-  fullName.vb: PlumJsonAnimator.Models.Resources.Res.New(PlumJsonAnimator.Services.ProjectManager, PlumJsonAnimator.Common.Constants.GlobalState)
-  name.vb: New(ProjectManager, GlobalState)
+  nameWithType.vb: Res.New(ProjectFilesManager, GlobalState)
+  fullName.vb: PlumJsonAnimator.Models.Resources.Res.New(PlumJsonAnimator.Services.ProjectFilesManager, PlumJsonAnimator.Common.Constants.GlobalState)
+  name.vb: New(ProjectFilesManager, GlobalState)
 - uid: PlumJsonAnimator.Models.Resources.Res.GetName
   commentId: P:PlumJsonAnimator.Models.Resources.Res.GetName
   id: GetName
@@ -787,13 +787,13 @@ references:
   nameWithType.vb: String
   fullName.vb: String
   name.vb: String
-- uid: PlumJsonAnimator.Services.ProjectManager
-  commentId: T:PlumJsonAnimator.Services.ProjectManager
+- uid: PlumJsonAnimator.Services.ProjectFilesManager
+  commentId: T:PlumJsonAnimator.Services.ProjectFilesManager
   parent: PlumJsonAnimator.Services
-  href: PlumJsonAnimator.Services.ProjectManager.html
-  name: ProjectManager
-  nameWithType: ProjectManager
-  fullName: PlumJsonAnimator.Services.ProjectManager
+  href: PlumJsonAnimator.Services.ProjectFilesManager.html
+  name: ProjectFilesManager
+  nameWithType: ProjectFilesManager
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager
 - uid: PlumJsonAnimator.Services
   commentId: N:PlumJsonAnimator.Services
   href: PlumJsonAnimator.html
@@ -855,7 +855,7 @@ references:
     href: PlumJsonAnimator.Common.Constants.html
 - uid: PlumJsonAnimator.Models.Resources.Res.#ctor*
   commentId: Overload:PlumJsonAnimator.Models.Resources.Res.#ctor
-  href: PlumJsonAnimator.Models.Resources.Res.html#PlumJsonAnimator_Models_Resources_Res__ctor_PlumJsonAnimator_Services_ProjectManager_PlumJsonAnimator_Common_Constants_GlobalState_
+  href: PlumJsonAnimator.Models.Resources.Res.html#PlumJsonAnimator_Models_Resources_Res__ctor_PlumJsonAnimator_Services_ProjectFilesManager_PlumJsonAnimator_Common_Constants_GlobalState_
   name: Res
   nameWithType: Res.Res
   fullName: PlumJsonAnimator.Models.Resources.Res.Res

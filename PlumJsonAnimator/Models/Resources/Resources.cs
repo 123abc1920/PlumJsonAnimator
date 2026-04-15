@@ -26,10 +26,10 @@ namespace PlumJsonAnimator.Models.Resources
             }
         }
 
-        protected ProjectManager projectManager;
+        protected ProjectFilesManager projectManager;
         protected GlobalState globalState;
 
-        public Res(ProjectManager projectManager, GlobalState globalState)
+        public Res(ProjectFilesManager projectManager, GlobalState globalState)
         {
             this.projectManager = projectManager;
             this.globalState = globalState;
@@ -111,11 +111,11 @@ namespace PlumJsonAnimator.Models.Resources
         public int width;
         public int height;
 
-        public ImageRes(ProjectManager projectManager, GlobalState globalState)
+        public ImageRes(ProjectFilesManager projectManager, GlobalState globalState)
             : base(projectManager, globalState) { }
 
         public ImageRes(
-            ProjectManager projectManager,
+            ProjectFilesManager projectManager,
             GlobalState globalState,
             string _path,
             string name,

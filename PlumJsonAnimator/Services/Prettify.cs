@@ -3,8 +3,12 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PlumJsonAnimator.Common.Constants;
 
+// TODO: remove repitition with get error context
 namespace PlumJsonAnimator.Services
 {
+    /// <summary>
+    /// Provides mwthods for prettifying json
+    /// </summary>
     public class Prettify
     {
         private GlobalState globalState;
@@ -14,6 +18,11 @@ namespace PlumJsonAnimator.Services
             this.globalState = globalState;
         }
 
+        /// <summary>
+        /// Prettifyes json code
+        /// </summary>
+        /// <param name="text">Json string</param>
+        /// <returns>Prettifyed text</returns>
         public String prettify(String text)
         {
             try
@@ -33,6 +42,14 @@ namespace PlumJsonAnimator.Services
             }
         }
 
+        /// <summary>
+        /// Linear interpolation between two values
+        /// </summary>
+        /// <param name="json">Json string</param>
+        /// <param name="errorLine">Error line</param>
+        /// <param name="errorPos">Error position</param>
+        /// <param name="errorMessage">Error message</param>
+        /// <returns>Text with info about errors</returns>
         private string GetErrorWithContext(
             string json,
             int errorLine,

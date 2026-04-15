@@ -54,7 +54,7 @@ public partial class ExportPanelMP4ViewModel : ViewModelBase
         ImageExporter imageExporter,
         AppSettings appSettings,
         ProjectSettings projectSettings,
-        ProjectManager projectManager,
+        ProjectFilesManager projectManager,
         LocalizationService localizationService
     )
         : base(

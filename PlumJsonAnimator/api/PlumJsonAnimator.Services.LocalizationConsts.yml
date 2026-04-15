@@ -46,10 +46,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: LocalizationConsts
     path: Services/LocalizationService.cs
-    startLine: 159
+    startLine: 179
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: All word codes
+  example: []
   syntax:
     content: public enum LocalizationConsts
     content.vb: Public Enum LocalizationConsts
@@ -71,7 +73,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: EXPORT_AS_GIF
     path: Services/LocalizationService.cs
-    startLine: 161
+    startLine: 181
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -97,7 +99,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: EXPORT_AS_MP4
     path: Services/LocalizationService.cs
-    startLine: 162
+    startLine: 182
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -123,7 +125,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: EXPORT_AS_PNG
     path: Services/LocalizationService.cs
-    startLine: 163
+    startLine: 183
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -149,7 +151,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: EXPORT_AS_JPG
     path: Services/LocalizationService.cs
-    startLine: 164
+    startLine: 184
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -175,7 +177,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SETTINGS
     path: Services/LocalizationService.cs
-    startLine: 165
+    startLine: 185
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -201,7 +203,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: NEW_PROJECT
     path: Services/LocalizationService.cs
-    startLine: 166
+    startLine: 186
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -227,7 +229,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ANIM_SUCCESS
     path: Services/LocalizationService.cs
-    startLine: 167
+    startLine: 187
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -253,7 +255,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: FOLDER_ERROR
     path: Services/LocalizationService.cs
-    startLine: 168
+    startLine: 188
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -279,7 +281,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: FILE_NOT_EXIST
     path: Services/LocalizationService.cs
-    startLine: 169
+    startLine: 189
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -305,7 +307,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: FILE_DAMAGED
     path: Services/LocalizationService.cs
-    startLine: 170
+    startLine: 190
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -331,7 +333,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: IMPORT_SUCCESS
     path: Services/LocalizationService.cs
-    startLine: 171
+    startLine: 191
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -357,7 +359,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: EXPORT_SUCCESS
     path: Services/LocalizationService.cs
-    startLine: 172
+    startLine: 192
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -383,7 +385,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: INCORRECT_TIME
     path: Services/LocalizationService.cs
-    startLine: 173
+    startLine: 193
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -409,7 +411,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: INPUT_NAME
     path: Services/LocalizationService.cs
-    startLine: 174
+    startLine: 194
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -435,7 +437,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: INPUT_FOLDER
     path: Services/LocalizationService.cs
-    startLine: 175
+    startLine: 195
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -461,7 +463,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: FOLDER_NOT_EXIST
     path: Services/LocalizationService.cs
-    startLine: 176
+    startLine: 196
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -487,7 +489,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: FFMPEG_NOT_EXIST
     path: Services/LocalizationService.cs
-    startLine: 177
+    startLine: 197
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -513,7 +515,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: INPUT_FFMPEG
     path: Services/LocalizationService.cs
-    startLine: 178
+    startLine: 198
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -539,7 +541,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ERROR
     path: Services/LocalizationService.cs
-    startLine: 179
+    startLine: 199
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -565,7 +567,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: JSON_VALID
     path: Services/LocalizationService.cs
-    startLine: 180
+    startLine: 200
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -591,7 +593,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: JSON_ERROR_STR
     path: Services/LocalizationService.cs
-    startLine: 181
+    startLine: 201
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -617,7 +619,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: JSON_ERROR_POS
     path: Services/LocalizationService.cs
-    startLine: 182
+    startLine: 202
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -643,7 +645,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: JSON_CONTEXT
     path: Services/LocalizationService.cs
-    startLine: 183
+    startLine: 203
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -669,7 +671,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: RENAME
     path: Services/LocalizationService.cs
-    startLine: 184
+    startLine: 204
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -695,7 +697,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: INFO_MESSAGE
     path: Services/LocalizationService.cs
-    startLine: 185
+    startLine: 205
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -721,7 +723,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SAVED
     path: Services/LocalizationService.cs
-    startLine: 186
+    startLine: 206
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -747,7 +749,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: REGENERATE_ERROR
     path: Services/LocalizationService.cs
-    startLine: 187
+    startLine: 207
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services

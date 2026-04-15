@@ -28,10 +28,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AppSettings
     path: Services/AppSettings.cs
-    startLine: 12
+    startLine: 15
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: Provides app settings. It is in "C:\Users\username\AppData\Roaming\PlumJsonAnimator\settings.plmjsn" usually
+  example: []
   syntax:
     content: public class AppSettings
     content.vb: Public Class AppSettings
@@ -63,7 +65,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: appSettings
     path: Services/AppSettings.cs
-    startLine: 16
+    startLine: 19
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -90,7 +92,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Services/AppSettings.cs
-    startLine: 21
+    startLine: 24
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -124,7 +126,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SetSettings
     path: Services/AppSettings.cs
-    startLine: 53
+    startLine: 56
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -153,15 +155,18 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SetCaptureArea
     path: Services/AppSettings.cs
-    startLine: 59
+    startLine: 66
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: Updates capture area parameters and saves them into settingd file
+  example: []
   syntax:
     content: public void SetCaptureArea(Rect rect)
     parameters:
     - id: rect
       type: Avalonia.Rect
+      description: New capture area form
     content.vb: Public Sub SetCaptureArea(rect As Rect)
   overload: PlumJsonAnimator.Services.AppSettings.SetCaptureArea*
 - uid: PlumJsonAnimator.Services.AppSettings.ChangeProject(System.String)
@@ -182,7 +187,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ChangeProject
     path: Services/AppSettings.cs
-    startLine: 69
+    startLine: 76
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -214,7 +219,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SaveSettings
     path: Services/AppSettings.cs
-    startLine: 75
+    startLine: 82
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -240,7 +245,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ReadSettings
     path: Services/AppSettings.cs
-    startLine: 93
+    startLine: 100
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -266,7 +271,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetTheme
     path: Services/AppSettings.cs
-    startLine: 164
+    startLine: 171
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -294,17 +299,21 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: CreateCaptureArea
     path: Services/AppSettings.cs
-    startLine: 169
+    startLine: 181
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: Sets parameters for capture area
+  example: []
   syntax:
     content: public CaptureArea CreateCaptureArea(int canvasWidth, int canvasHeight)
     parameters:
     - id: canvasWidth
       type: System.Int32
+      description: Width of main canvas
     - id: canvasHeight
       type: System.Int32
+      description: Height of main canvas
     return:
       type: PlumJsonAnimator.Models.CaptureArea
     content.vb: Public Function CreateCaptureArea(canvasWidth As Integer, canvasHeight As Integer) As CaptureArea

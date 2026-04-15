@@ -6,7 +6,7 @@ items:
   parent: PlumJsonAnimator.Services
   children:
   - PlumJsonAnimator.Services.JsonExport.#ctor(PlumJsonAnimator.Services.JsonValidator,PlumJsonAnimator.Services.JsonCode,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.LocalizationService)
-  - PlumJsonAnimator.Services.JsonExport.exportSpineJson(System.String)
+  - PlumJsonAnimator.Services.JsonExport.exportSpineJson(System.String,PlumJsonAnimator.Models.Project)
   - PlumJsonAnimator.Services.JsonExport.importSpineJson(System.String)
   langs:
   - csharp
@@ -22,10 +22,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: JsonExport
     path: Services/JsonExport.cs
-    startLine: 7
+    startLine: 10
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: Provides methods for exporting and importing json code from file
+  example: []
   syntax:
     content: public class JsonExport
     content.vb: Public Class JsonExport
@@ -57,7 +59,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Services/JsonExport.cs
-    startLine: 14
+    startLine: 17
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -77,16 +79,16 @@ items:
   nameWithType.vb: JsonExport.New(JsonValidator, JsonCode, GlobalState, LocalizationService)
   fullName.vb: PlumJsonAnimator.Services.JsonExport.New(PlumJsonAnimator.Services.JsonValidator, PlumJsonAnimator.Services.JsonCode, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.LocalizationService)
   name.vb: New(JsonValidator, JsonCode, GlobalState, LocalizationService)
-- uid: PlumJsonAnimator.Services.JsonExport.exportSpineJson(System.String)
-  commentId: M:PlumJsonAnimator.Services.JsonExport.exportSpineJson(System.String)
-  id: exportSpineJson(System.String)
+- uid: PlumJsonAnimator.Services.JsonExport.exportSpineJson(System.String,PlumJsonAnimator.Models.Project)
+  commentId: M:PlumJsonAnimator.Services.JsonExport.exportSpineJson(System.String,PlumJsonAnimator.Models.Project)
+  id: exportSpineJson(System.String,PlumJsonAnimator.Models.Project)
   parent: PlumJsonAnimator.Services.JsonExport
   langs:
   - csharp
   - vb
-  name: exportSpineJson(string)
-  nameWithType: JsonExport.exportSpineJson(string)
-  fullName: PlumJsonAnimator.Services.JsonExport.exportSpineJson(string)
+  name: exportSpineJson(string, Project?)
+  nameWithType: JsonExport.exportSpineJson(string, Project?)
+  fullName: PlumJsonAnimator.Services.JsonExport.exportSpineJson(string, PlumJsonAnimator.Models.Project?)
   type: Method
   source:
     remote:
@@ -95,22 +97,28 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: exportSpineJson
     path: Services/JsonExport.cs
-    startLine: 27
+    startLine: 35
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: Exports current project into json code
+  example: []
   syntax:
-    content: public ExportResult exportSpineJson(string outFolder)
+    content: public ExportResult exportSpineJson(string outFolder, Project? project)
     parameters:
     - id: outFolder
       type: System.String
+      description: The path to output folder
+    - id: project
+      type: PlumJsonAnimator.Models.Project
+      description: Project that has to be exported
     return:
       type: PlumJsonAnimator.Models.ExportResult
-    content.vb: Public Function exportSpineJson(outFolder As String) As ExportResult
+    content.vb: Public Function exportSpineJson(outFolder As String, project As Project) As ExportResult
   overload: PlumJsonAnimator.Services.JsonExport.exportSpineJson*
-  nameWithType.vb: JsonExport.exportSpineJson(String)
-  fullName.vb: PlumJsonAnimator.Services.JsonExport.exportSpineJson(String)
-  name.vb: exportSpineJson(String)
+  nameWithType.vb: JsonExport.exportSpineJson(String, Project)
+  fullName.vb: PlumJsonAnimator.Services.JsonExport.exportSpineJson(String, PlumJsonAnimator.Models.Project)
+  name.vb: exportSpineJson(String, Project)
 - uid: PlumJsonAnimator.Services.JsonExport.importSpineJson(System.String)
   commentId: M:PlumJsonAnimator.Services.JsonExport.importSpineJson(System.String)
   id: importSpineJson(System.String)
@@ -129,15 +137,18 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: importSpineJson
     path: Services/JsonExport.cs
-    startLine: 51
+    startLine: 65
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: Import json code from file
+  example: []
   syntax:
     content: public ExportResult importSpineJson(string inputFile)
     parameters:
     - id: inputFile
       type: System.String
+      description: Project
     return:
       type: PlumJsonAnimator.Models.ExportResult
     content.vb: Public Function importSpineJson(inputFile As String) As ExportResult
@@ -474,7 +485,7 @@ references:
     href: PlumJsonAnimator.Common.Constants.html
 - uid: PlumJsonAnimator.Services.JsonExport.exportSpineJson*
   commentId: Overload:PlumJsonAnimator.Services.JsonExport.exportSpineJson
-  href: PlumJsonAnimator.Services.JsonExport.html#PlumJsonAnimator_Services_JsonExport_exportSpineJson_System_String_
+  href: PlumJsonAnimator.Services.JsonExport.html#PlumJsonAnimator_Services_JsonExport_exportSpineJson_System_String_PlumJsonAnimator_Models_Project_
   name: exportSpineJson
   nameWithType: JsonExport.exportSpineJson
   fullName: PlumJsonAnimator.Services.JsonExport.exportSpineJson
@@ -489,6 +500,13 @@ references:
   nameWithType.vb: String
   fullName.vb: String
   name.vb: String
+- uid: PlumJsonAnimator.Models.Project
+  commentId: T:PlumJsonAnimator.Models.Project
+  parent: PlumJsonAnimator.Models
+  href: PlumJsonAnimator.Models.Project.html
+  name: Project
+  nameWithType: Project
+  fullName: PlumJsonAnimator.Models.Project
 - uid: PlumJsonAnimator.Models.ExportResult
   commentId: T:PlumJsonAnimator.Models.ExportResult
   parent: PlumJsonAnimator.Models

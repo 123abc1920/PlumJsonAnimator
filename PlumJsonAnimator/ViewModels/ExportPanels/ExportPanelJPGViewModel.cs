@@ -39,7 +39,7 @@ public partial class ExportPanelJPGViewModel : ViewModelBase
         GlobalState globalState,
         Dialogs dialogs,
         ImageExporter imageExporter,
-        ProjectManager projectManager,
+        ProjectFilesManager projectManager,
         ProjectSettings projectSettings,
         AppSettings appSettings,
         LocalizationService localizationService

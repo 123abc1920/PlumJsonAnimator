@@ -15,7 +15,7 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
     protected GlobalState globalState;
     protected Dialogs dialogs;
     protected ProjectSettings projectSettings;
-    protected ProjectManager projectManager;
+    protected ProjectFilesManager projectManager;
     protected AppSettings appSettings;
     protected LocalizationService localizationService;
     protected ImageExporter imageExporter;
@@ -46,7 +46,7 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
         GlobalState globalState,
         Dialogs dialogs,
         ProjectSettings projectSettings,
-        ProjectManager projectManager,
+        ProjectFilesManager projectManager,
         AppSettings appSettings,
         LocalizationService localizationService,
         ImageExporter imageExporter
@@ -73,7 +73,7 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
         GlobalState globalState,
         Dialogs dialogs,
         ProjectSettings projectSettings,
-        ProjectManager projectManager,
+        ProjectFilesManager projectManager,
         AppSettings appSettings
     )
     {

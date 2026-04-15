@@ -6,13 +6,13 @@ items:
   parent: PlumJsonAnimator.Services
   children:
   - PlumJsonAnimator.Services.ImageExporter.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
+  - PlumJsonAnimator.Services.ImageExporter.Canvas
   - PlumJsonAnimator.Services.ImageExporter.ExportAsGif(System.Double,System.Double,System.String)
   - PlumJsonAnimator.Services.ImageExporter.ExportAsJpg(System.Double,System.Double,System.String)
   - PlumJsonAnimator.Services.ImageExporter.ExportAsMp4(System.Double,System.Double,System.String,System.String)
   - PlumJsonAnimator.Services.ImageExporter.ExportAsPng(System.Double,System.Double,System.String)
   - PlumJsonAnimator.Services.ImageExporter.ExportPath
   - PlumJsonAnimator.Services.ImageExporter.ProgressChanged
-  - PlumJsonAnimator.Services.ImageExporter.canvas
   langs:
   - csharp
   - vb
@@ -27,10 +27,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ImageExporter
     path: Services/ImageExporter.cs
-    startLine: 19
+    startLine: 22
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: Provides methods for exporting animations
+  example: []
   syntax:
     content: public class ImageExporter
     content.vb: Public Class ImageExporter
@@ -62,7 +64,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ExportPath
     path: Services/ImageExporter.cs
-    startLine: 21
+    startLine: 24
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -71,33 +73,35 @@ items:
     return:
       type: System.String
     content.vb: Public ExportPath As String
-- uid: PlumJsonAnimator.Services.ImageExporter.canvas
-  commentId: F:PlumJsonAnimator.Services.ImageExporter.canvas
-  id: canvas
+- uid: PlumJsonAnimator.Services.ImageExporter.Canvas
+  commentId: P:PlumJsonAnimator.Services.ImageExporter.Canvas
+  id: Canvas
   parent: PlumJsonAnimator.Services.ImageExporter
   langs:
   - csharp
   - vb
-  name: canvas
-  nameWithType: ImageExporter.canvas
-  fullName: PlumJsonAnimator.Services.ImageExporter.canvas
-  type: Field
+  name: Canvas
+  nameWithType: ImageExporter.Canvas
+  fullName: PlumJsonAnimator.Services.ImageExporter.Canvas
+  type: Property
   source:
     remote:
       path: PlumJsonAnimator/Services/ImageExporter.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: canvas
+    id: Canvas
     path: Services/ImageExporter.cs
-    startLine: 22
+    startLine: 26
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
   syntax:
-    content: public Canvas? canvas
+    content: public Canvas? Canvas { get; set; }
+    parameters: []
     return:
       type: Avalonia.Controls.Canvas
-    content.vb: Public canvas As Canvas
+    content.vb: Public Property Canvas As Canvas
+  overload: PlumJsonAnimator.Services.ImageExporter.Canvas*
 - uid: PlumJsonAnimator.Services.ImageExporter.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
   commentId: M:PlumJsonAnimator.Services.ImageExporter.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
   id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState)'
@@ -116,7 +120,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Services/ImageExporter.cs
-    startLine: 26
+    startLine: 40
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -148,7 +152,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ProgressChanged
     path: Services/ImageExporter.cs
-    startLine: 61
+    startLine: 79
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -175,19 +179,24 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ExportAsPng
     path: Services/ImageExporter.cs
-    startLine: 63
+    startLine: 87
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: Exports animation into array of png images
+  example: []
   syntax:
     content: public Task<ExportResult> ExportAsPng(double start, double end, string outputFolder)
     parameters:
     - id: start
       type: System.Double
+      description: Start animation time
     - id: end
       type: System.Double
+      description: End animation time
     - id: outputFolder
       type: System.String
+      description: Folder with array of images
     return:
       type: System.Threading.Tasks.Task{PlumJsonAnimator.Models.ExportResult}
     content.vb: Public Function ExportAsPng(start As Double, [end] As Double, outputFolder As String) As Task(Of ExportResult)
@@ -213,19 +222,24 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ExportAsJpg
     path: Services/ImageExporter.cs
-    startLine: 113
+    startLine: 143
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: Exports animation into array of jpg images
+  example: []
   syntax:
     content: public Task<ExportResult> ExportAsJpg(double start, double end, string outputFolder)
     parameters:
     - id: start
       type: System.Double
+      description: Start animation time
     - id: end
       type: System.Double
+      description: End animation time
     - id: outputFolder
       type: System.String
+      description: Folder with array of images
     return:
       type: System.Threading.Tasks.Task{PlumJsonAnimator.Models.ExportResult}
     content.vb: Public Function ExportAsJpg(start As Double, [end] As Double, outputFolder As String) As Task(Of ExportResult)
@@ -251,19 +265,24 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ExportAsGif
     path: Services/ImageExporter.cs
-    startLine: 163
+    startLine: 199
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: Exports animation into gif file
+  example: []
   syntax:
     content: public Task<ExportResult> ExportAsGif(double start, double end, string outputFile)
     parameters:
     - id: start
       type: System.Double
+      description: Start animation time
     - id: end
       type: System.Double
+      description: End animation time
     - id: outputFile
       type: System.String
+      description: Gif file
     return:
       type: System.Threading.Tasks.Task{PlumJsonAnimator.Models.ExportResult}
     content.vb: Public Function ExportAsGif(start As Double, [end] As Double, outputFile As String) As Task(Of ExportResult)
@@ -289,21 +308,27 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ExportAsMp4
     path: Services/ImageExporter.cs
-    startLine: 252
+    startLine: 295
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: Exports animation into mp4 file
+  example: []
   syntax:
     content: public Task<ExportResult> ExportAsMp4(double start, double end, string outputFile, string ffmpegPath)
     parameters:
     - id: start
       type: System.Double
+      description: Start animation time
     - id: end
       type: System.Double
+      description: End animayion time
     - id: outputFile
       type: System.String
+      description: Output MP4 file
     - id: ffmpegPath
       type: System.String
+      description: Path to ffmpeg exe
     return:
       type: System.Threading.Tasks.Task{PlumJsonAnimator.Models.ExportResult}
     content.vb: Public Function ExportAsMp4(start As Double, [end] As Double, outputFile As String, ffmpegPath As String) As Task(Of ExportResult)
@@ -582,6 +607,12 @@ references:
   nameWithType.vb: String
   fullName.vb: String
   name.vb: String
+- uid: PlumJsonAnimator.Services.ImageExporter.Canvas*
+  commentId: Overload:PlumJsonAnimator.Services.ImageExporter.Canvas
+  href: PlumJsonAnimator.Services.ImageExporter.html#PlumJsonAnimator_Services_ImageExporter_Canvas
+  name: Canvas
+  nameWithType: ImageExporter.Canvas
+  fullName: PlumJsonAnimator.Services.ImageExporter.Canvas
 - uid: Avalonia.Controls.Canvas
   commentId: T:Avalonia.Controls.Canvas
   parent: Avalonia.Controls

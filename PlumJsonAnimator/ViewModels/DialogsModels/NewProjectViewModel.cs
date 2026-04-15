@@ -8,10 +8,10 @@ namespace PlumJsonAnimator.ViewModels;
 // TODO: rename dialogs localization
 public partial class NewProjectViewModel : ViewModelBase
 {
-    private ProjectManager projectManager;
+    private ProjectFilesManager projectManager;
 
     public NewProjectViewModel(
-        ProjectManager projectManager,
+        ProjectFilesManager projectManager,
         GlobalState globalState,
         Dialogs dialogs,
         ProjectSettings projectSettings,

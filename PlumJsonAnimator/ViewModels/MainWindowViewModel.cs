@@ -19,6 +19,7 @@ using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
 using PlumJsonAnimator.Views;
+using static PlumJsonAnimator.Services.JsonCode;
 
 namespace PlumJsonAnimator.ViewModels;
 
@@ -27,12 +28,12 @@ public partial class MainWindowViewModel : ViewModelBase
 {
     public Canvas? Canvas
     {
-        get { return this.imageExporter.canvas; }
+        get { return this.imageExporter.Canvas; }
         set
         {
-            if (this.imageExporter.canvas != value)
+            if (this.imageExporter.Canvas != value)
             {
-                this.imageExporter.canvas = value;
+                this.imageExporter.Canvas = value;
                 OnPropertyChanged(nameof(CurrentProject));
             }
         }
@@ -243,7 +244,7 @@ public partial class MainWindowViewModel : ViewModelBase
         JsonErrorObj.ErrorText = Validate(CurrentProject.Code);
         if (JsonErrorObj.isOk)
         {
-            ProjectValidResult validateResult = this.jsonCode.regenerate(CurrentProject);
+            ValidResult validateResult = this.jsonCode.regenerate(CurrentProject);
             if (!validateResult.IsOk)
             {
                 JsonErrorObj.ErrorText = validateResult.Message;
@@ -255,7 +256,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public string Validate(string text)
     {
-        return this.jsonValidator.validate(text);
+        return this.jsonValidator.Validate(text);
     }
 
     public void SetMainWin(Window window)
@@ -331,13 +332,13 @@ public partial class MainWindowViewModel : ViewModelBase
             CanvasHeight
         );
 
-        ProjectValidResult validateResult = this.jsonCode.regenerate(CurrentProject);
+        ValidResult validateResult = this.jsonCode.regenerate(CurrentProject);
         this.JsonErrorObj.isOk = validateResult.IsOk;
     }
 
     public ExportResult exportSpineJson(string outFolder)
     {
-        return this.jsonExport.exportSpineJson(outFolder);
+        return this.jsonExport.exportSpineJson(outFolder, CurrentProject);
     }
 
     public ExportResult importSpineJson(string inputFile)
@@ -352,20 +353,23 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public void AddRes(string[] paths)
     {
-        this.projectManager.CreateProjectDir();
+        this.projectManager.GetProjectDir(CurrentProject);
 
         foreach (string p in paths)
         {
-            string resName = "img" + CurrentProject.Resources.Count.ToString();
-            string ext = this.projectManager.CopyRes(resName, p);
-            ImageRes image = new ImageRes(
-                this.projectManager,
-                this.globalState,
-                Path.Combine(CurrentProject.GetProjectPath(), "res", $"{resName}{ext}"),
-                resName,
-                ext
-            );
-            CurrentProject.Resources.Add(image);
+            string resName = "img" + CurrentProject?.Resources.Count.ToString();
+            string ext = this.projectManager.CopyRes(resName, p, CurrentProject);
+            if (ext != "")
+            {
+                ImageRes image = new ImageRes(
+                    this.projectManager,
+                    this.globalState,
+                    Path.Combine(CurrentProject?.GetProjectPath(), "res", $"{resName}{ext}"),
+                    resName,
+                    ext
+                );
+                CurrentProject.Resources.Add(image);
+            }
         }
     }
 
@@ -449,7 +453,7 @@ public partial class MainWindowViewModel : ViewModelBase
         IServiceProvider serviceProvider,
         AppSettings appSettings,
         ProjectSettings projectSettings,
-        ProjectManager projectManager,
+        ProjectFilesManager projectManager,
         GlobalState globalState,
         JsonCode jsonCode,
         Interpolation interpolation,
@@ -549,7 +553,7 @@ public partial class MainWindowViewModel : ViewModelBase
                         s.ContainsAndRemoveRes(res);
                     }
                     CurrentProject.Resources.Remove(res);
-                    this.projectManager.DeleteResource(res.Name, res.ext);
+                    this.projectManager.DeleteResource(res.Name, res.ext, CurrentProject);
                 }
             }
         });
@@ -639,7 +643,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 this.jsonCode.generateJSONData(CurrentProject),
                 this.globalState.jsonSettings
             );
-            this.projectSettings.WriteAnim(anim);
+            this.projectSettings.WriteAnimation(anim);
             Popups.ShowPopup(
                 GetMessage(LocalizationConsts.SAVED),
                 GetMessage(LocalizationConsts.INFO_MESSAGE)
@@ -684,7 +688,7 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             if (CurrentBone != null)
             {
-                CurrentProject.CurrentAnimation.DeleteKeyFrame(
+                CurrentProject?.CurrentAnimation?.DeleteKeyFrame(
                     CurrentBone,
                     CurrentProject.currentMode.type
                 );
@@ -693,7 +697,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
         PlayAnim = new Command.Command(_ =>
         {
-            this.engine.runAnimation();
+            this.engine.runAnimation(this?.CurrentProject?.CurrentAnimation);
         });
 
         ZoomCanvasComm = new Command.Command(parameter =>

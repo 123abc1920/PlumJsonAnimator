@@ -44,7 +44,7 @@ public partial class App : Application
 
         services.AddSingleton<AppSettings>();
         services.AddSingleton<ProjectSettings>();
-        services.AddSingleton<ProjectManager>();
+        services.AddSingleton<ProjectFilesManager>();
         services.AddSingleton<Interpolation>();
         services.AddSingleton<Prettify>();
         services.AddSingleton<JsonCode>();

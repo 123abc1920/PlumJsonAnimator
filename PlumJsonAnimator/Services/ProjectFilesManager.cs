@@ -8,16 +8,20 @@ using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Resources;
 
+// TODO: need localization
 namespace PlumJsonAnimator.Services
 {
-    public class ProjectManager
+    /// <summary>
+    /// Provides methods for work with project files
+    /// </summary>
+    public class ProjectFilesManager
     {
         private ProjectSettings projectSettings;
         private AppSettings appSettings;
         private GlobalState globalState;
         private Interpolation interpolation;
 
-        public ProjectManager(
+        public ProjectFilesManager(
             ProjectSettings projectSettings,
             AppSettings appSettings,
             GlobalState globalState,
@@ -30,6 +34,10 @@ namespace PlumJsonAnimator.Services
             this.interpolation = interpolation;
         }
 
+        /// <summary>
+        /// Open dialog for open existing projects
+        /// </summary>
+        /// <param name="window">Width of main canvas</param>
         public async Task<string?> OpenProjectDialog(Window window)
         {
             var storageProvider = window.StorageProvider;
@@ -69,7 +77,7 @@ namespace PlumJsonAnimator.Services
                     this.interpolation
                 );
 
-                this.projectSettings.WriteAllSettings();
+                this.projectSettings.WriteSettings();
                 this.appSettings.SaveSettings();
                 LoadRes(newProject);
 
@@ -82,7 +90,7 @@ namespace PlumJsonAnimator.Services
         {
             if (projectName != null && projectPath != null)
             {
-                this.projectSettings.WriteAllSettings();
+                this.projectSettings.WriteSettings();
                 this.appSettings.ChangeProject(Path.Combine(projectPath, projectName));
 
                 Project newProject = new Project(
@@ -93,7 +101,7 @@ namespace PlumJsonAnimator.Services
                 );
 
                 this.projectSettings.UpdateSettings(newProject);
-                this.projectSettings.WriteAllSettings();
+                this.projectSettings.WriteSettings();
                 this.appSettings.SaveSettings();
                 LoadRes(newProject);
 
@@ -102,12 +110,18 @@ namespace PlumJsonAnimator.Services
             return null;
         }
 
-        public string CreateProjectDir()
+        /// <summary>
+        /// Return real project directory in file system
+        /// </summary>
+        /// <param name="project">Project</param>
+        public string GetProjectDir(Project? project)
         {
-            string projectPath = Path.Combine(
-                this.globalState.CurrentProject!.ProjectPath,
-                this.globalState.CurrentProject.Name
-            );
+            if (project == null)
+            {
+                return "";
+            }
+
+            string projectPath = Path.Combine(project.ProjectPath, project.Name);
 
             if (!Directory.Exists(projectPath))
             {
@@ -121,8 +135,13 @@ namespace PlumJsonAnimator.Services
             return projectPath;
         }
 
-        public string CopyRes(string resName, string filePath)
+        public string CopyRes(string resName, string filePath, Project? project)
         {
+            if (project == null)
+            {
+                return "";
+            }
+
             string projectPath = Path.Combine(
                 this.globalState.CurrentProject!.ProjectPath,
                 this.globalState.CurrentProject.Name
@@ -141,14 +160,16 @@ namespace PlumJsonAnimator.Services
             return "";
         }
 
-        public bool DeleteResource(string name, string ext)
+        public bool DeleteResource(string name, string ext, Project? project)
         {
+            if (project == null)
+            {
+                return false;
+            }
+
             try
             {
-                string projectPath = Path.Combine(
-                    this.globalState.CurrentProject!.ProjectPath,
-                    this.globalState.CurrentProject.Name
-                );
+                string projectPath = Path.Combine(project.ProjectPath, project.Name);
                 string resDir = Path.Combine(projectPath, "res");
                 string resPath = Path.Combine(resDir, $"{name}{ext}");
 
@@ -174,6 +195,10 @@ namespace PlumJsonAnimator.Services
             }
         }
 
+        /// <summary>
+        /// Sets new pathes to project resource objects after moving project into another directory
+        /// </summary>
+        /// <param name="project"></param>
         public void MoveRes(Project project)
         {
             foreach (Res res in project.Resources)
@@ -190,6 +215,11 @@ namespace PlumJsonAnimator.Services
             }
         }
 
+        /// <summary>
+        /// Cipies all project files into new directory
+        /// </summary>
+        /// <param name="oldDir"></param>
+        /// <param name="newDir"></param>
         public void CopyDir(string oldDir, string newDir)
         {
             if (Directory.Exists(oldDir) && oldDir != newDir)
@@ -227,6 +257,10 @@ namespace PlumJsonAnimator.Services
             }
         }
 
+        /// <summary>
+        /// Load all resources into project
+        /// </summary>
+        /// <param name="project"></param>
         public void LoadRes(Project project)
         {
             string directoryPath = Path.Combine(project.ProjectPath, project.Name, "res");

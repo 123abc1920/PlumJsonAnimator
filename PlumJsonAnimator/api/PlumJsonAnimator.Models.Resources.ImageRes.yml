@@ -5,8 +5,8 @@ items:
   id: ImageRes
   parent: PlumJsonAnimator.Models.Resources
   children:
-  - PlumJsonAnimator.Models.Resources.ImageRes.#ctor(PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Common.Constants.GlobalState)
-  - PlumJsonAnimator.Models.Resources.ImageRes.#ctor(PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Common.Constants.GlobalState,System.String,System.String,System.String)
+  - PlumJsonAnimator.Models.Resources.ImageRes.#ctor(PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Common.Constants.GlobalState)
+  - PlumJsonAnimator.Models.Resources.ImageRes.#ctor(PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Common.Constants.GlobalState,System.String,System.String,System.String)
   - PlumJsonAnimator.Models.Resources.ImageRes.height
   - PlumJsonAnimator.Models.Resources.ImageRes.width
   langs:
@@ -113,16 +113,16 @@ items:
     return:
       type: System.Int32
     content.vb: Public height As Integer
-- uid: PlumJsonAnimator.Models.Resources.ImageRes.#ctor(PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Common.Constants.GlobalState)
-  commentId: M:PlumJsonAnimator.Models.Resources.ImageRes.#ctor(PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Common.Constants.GlobalState)
-  id: '#ctor(PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Common.Constants.GlobalState)'
+- uid: PlumJsonAnimator.Models.Resources.ImageRes.#ctor(PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Common.Constants.GlobalState)
+  commentId: M:PlumJsonAnimator.Models.Resources.ImageRes.#ctor(PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Common.Constants.GlobalState)
+  id: '#ctor(PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Common.Constants.GlobalState)'
   parent: PlumJsonAnimator.Models.Resources.ImageRes
   langs:
   - csharp
   - vb
-  name: ImageRes(ProjectManager, GlobalState)
-  nameWithType: ImageRes.ImageRes(ProjectManager, GlobalState)
-  fullName: PlumJsonAnimator.Models.Resources.ImageRes.ImageRes(PlumJsonAnimator.Services.ProjectManager, PlumJsonAnimator.Common.Constants.GlobalState)
+  name: ImageRes(ProjectFilesManager, GlobalState)
+  nameWithType: ImageRes.ImageRes(ProjectFilesManager, GlobalState)
+  fullName: PlumJsonAnimator.Models.Resources.ImageRes.ImageRes(PlumJsonAnimator.Services.ProjectFilesManager, PlumJsonAnimator.Common.Constants.GlobalState)
   type: Constructor
   source:
     remote:
@@ -136,27 +136,27 @@ items:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Resources
   syntax:
-    content: public ImageRes(ProjectManager projectManager, GlobalState globalState)
+    content: public ImageRes(ProjectFilesManager projectManager, GlobalState globalState)
     parameters:
     - id: projectManager
-      type: PlumJsonAnimator.Services.ProjectManager
+      type: PlumJsonAnimator.Services.ProjectFilesManager
     - id: globalState
       type: PlumJsonAnimator.Common.Constants.GlobalState
-    content.vb: Public Sub New(projectManager As ProjectManager, globalState As GlobalState)
+    content.vb: Public Sub New(projectManager As ProjectFilesManager, globalState As GlobalState)
   overload: PlumJsonAnimator.Models.Resources.ImageRes.#ctor*
-  nameWithType.vb: ImageRes.New(ProjectManager, GlobalState)
-  fullName.vb: PlumJsonAnimator.Models.Resources.ImageRes.New(PlumJsonAnimator.Services.ProjectManager, PlumJsonAnimator.Common.Constants.GlobalState)
-  name.vb: New(ProjectManager, GlobalState)
-- uid: PlumJsonAnimator.Models.Resources.ImageRes.#ctor(PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Common.Constants.GlobalState,System.String,System.String,System.String)
-  commentId: M:PlumJsonAnimator.Models.Resources.ImageRes.#ctor(PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Common.Constants.GlobalState,System.String,System.String,System.String)
-  id: '#ctor(PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Common.Constants.GlobalState,System.String,System.String,System.String)'
+  nameWithType.vb: ImageRes.New(ProjectFilesManager, GlobalState)
+  fullName.vb: PlumJsonAnimator.Models.Resources.ImageRes.New(PlumJsonAnimator.Services.ProjectFilesManager, PlumJsonAnimator.Common.Constants.GlobalState)
+  name.vb: New(ProjectFilesManager, GlobalState)
+- uid: PlumJsonAnimator.Models.Resources.ImageRes.#ctor(PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Common.Constants.GlobalState,System.String,System.String,System.String)
+  commentId: M:PlumJsonAnimator.Models.Resources.ImageRes.#ctor(PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Common.Constants.GlobalState,System.String,System.String,System.String)
+  id: '#ctor(PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Common.Constants.GlobalState,System.String,System.String,System.String)'
   parent: PlumJsonAnimator.Models.Resources.ImageRes
   langs:
   - csharp
   - vb
-  name: ImageRes(ProjectManager, GlobalState, string, string, string)
-  nameWithType: ImageRes.ImageRes(ProjectManager, GlobalState, string, string, string)
-  fullName: PlumJsonAnimator.Models.Resources.ImageRes.ImageRes(PlumJsonAnimator.Services.ProjectManager, PlumJsonAnimator.Common.Constants.GlobalState, string, string, string)
+  name: ImageRes(ProjectFilesManager, GlobalState, string, string, string)
+  nameWithType: ImageRes.ImageRes(ProjectFilesManager, GlobalState, string, string, string)
+  fullName: PlumJsonAnimator.Models.Resources.ImageRes.ImageRes(PlumJsonAnimator.Services.ProjectFilesManager, PlumJsonAnimator.Common.Constants.GlobalState, string, string, string)
   type: Constructor
   source:
     remote:
@@ -170,10 +170,10 @@ items:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Resources
   syntax:
-    content: public ImageRes(ProjectManager projectManager, GlobalState globalState, string _path, string name, string _ext)
+    content: public ImageRes(ProjectFilesManager projectManager, GlobalState globalState, string _path, string name, string _ext)
     parameters:
     - id: projectManager
-      type: PlumJsonAnimator.Services.ProjectManager
+      type: PlumJsonAnimator.Services.ProjectFilesManager
     - id: globalState
       type: PlumJsonAnimator.Common.Constants.GlobalState
     - id: _path
@@ -182,11 +182,11 @@ items:
       type: System.String
     - id: _ext
       type: System.String
-    content.vb: Public Sub New(projectManager As ProjectManager, globalState As GlobalState, _path As String, name As String, _ext As String)
+    content.vb: Public Sub New(projectManager As ProjectFilesManager, globalState As GlobalState, _path As String, name As String, _ext As String)
   overload: PlumJsonAnimator.Models.Resources.ImageRes.#ctor*
-  nameWithType.vb: ImageRes.New(ProjectManager, GlobalState, String, String, String)
-  fullName.vb: PlumJsonAnimator.Models.Resources.ImageRes.New(PlumJsonAnimator.Services.ProjectManager, PlumJsonAnimator.Common.Constants.GlobalState, String, String, String)
-  name.vb: New(ProjectManager, GlobalState, String, String, String)
+  nameWithType.vb: ImageRes.New(ProjectFilesManager, GlobalState, String, String, String)
+  fullName.vb: PlumJsonAnimator.Models.Resources.ImageRes.New(PlumJsonAnimator.Services.ProjectFilesManager, PlumJsonAnimator.Common.Constants.GlobalState, String, String, String)
+  name.vb: New(ProjectFilesManager, GlobalState, String, String, String)
 references:
 - uid: PlumJsonAnimator.Models.Resources
   commentId: N:PlumJsonAnimator.Models.Resources
@@ -710,20 +710,20 @@ references:
   name.vb: Integer
 - uid: PlumJsonAnimator.Models.Resources.ImageRes.#ctor*
   commentId: Overload:PlumJsonAnimator.Models.Resources.ImageRes.#ctor
-  href: PlumJsonAnimator.Models.Resources.ImageRes.html#PlumJsonAnimator_Models_Resources_ImageRes__ctor_PlumJsonAnimator_Services_ProjectManager_PlumJsonAnimator_Common_Constants_GlobalState_
+  href: PlumJsonAnimator.Models.Resources.ImageRes.html#PlumJsonAnimator_Models_Resources_ImageRes__ctor_PlumJsonAnimator_Services_ProjectFilesManager_PlumJsonAnimator_Common_Constants_GlobalState_
   name: ImageRes
   nameWithType: ImageRes.ImageRes
   fullName: PlumJsonAnimator.Models.Resources.ImageRes.ImageRes
   nameWithType.vb: ImageRes.New
   fullName.vb: PlumJsonAnimator.Models.Resources.ImageRes.New
   name.vb: New
-- uid: PlumJsonAnimator.Services.ProjectManager
-  commentId: T:PlumJsonAnimator.Services.ProjectManager
+- uid: PlumJsonAnimator.Services.ProjectFilesManager
+  commentId: T:PlumJsonAnimator.Services.ProjectFilesManager
   parent: PlumJsonAnimator.Services
-  href: PlumJsonAnimator.Services.ProjectManager.html
-  name: ProjectManager
-  nameWithType: ProjectManager
-  fullName: PlumJsonAnimator.Services.ProjectManager
+  href: PlumJsonAnimator.Services.ProjectFilesManager.html
+  name: ProjectFilesManager
+  nameWithType: ProjectFilesManager
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager
 - uid: PlumJsonAnimator.Common.Constants.GlobalState
   commentId: T:PlumJsonAnimator.Common.Constants.GlobalState
   parent: PlumJsonAnimator.Common.Constants

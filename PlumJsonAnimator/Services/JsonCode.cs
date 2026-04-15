@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text.Json;
 using Newtonsoft.Json;
@@ -8,23 +6,26 @@ using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 
+// TODO: localizate valid results
+// TODO: replace repetitions
+// TODO: Logging
 namespace PlumJsonAnimator.Services
 {
-    public class ValidResult
-    {
-        public required string Message { get; set; }
-        public bool IsOk { get; set; }
-        public object? UpdatedArray { get; set; }
-    }
-
-    public class ProjectValidResult
-    {
-        public required string Message { get; set; }
-        public bool IsOk { get; set; }
-    }
-
+    /// <summary>
+    /// Provides methods for converting project into json code
+    /// </summary>
     public class JsonCode
     {
+        /// <summary>
+        /// Contains information about json validation and provides updated validated data
+        /// </summary>
+        public class ValidResult
+        {
+            public required string Message { get; set; }
+            public bool IsOk { get; set; }
+            public object? UpdatedArray { get; set; }
+        }
+
         private Prettify prettify;
 
         private GlobalState globalState;
@@ -35,11 +36,12 @@ namespace PlumJsonAnimator.Services
             this.prettify = prettify;
         }
 
-        public JsonCode(Prettify prettify)
-        {
-            this.prettify = prettify;
-        }
-
+        /// <summary>
+        /// Replaces irrelevant bones with relevant
+        /// </summary>
+        /// <param name="newBones">Dictionary obtained from the json code</param>
+        /// <param name="oldBones">Dictionary obtained from the project</param>
+        /// <returns>A dictionary containing only relevant data. The keys are names, the values are BoneData</returns>
         private Dictionary<string, BoneData> regenerateBones(
             Dictionary<string, BoneData> newBones,
             Dictionary<string, BoneData> oldBones
@@ -59,6 +61,12 @@ namespace PlumJsonAnimator.Services
             return oldBones;
         }
 
+        /// <summary>
+        /// Replaces irrelevant slots with relevant
+        /// </summary>
+        /// <param name="newSlots">Dictionary obtained from the json code</param>
+        /// <param name="oldSlots">Dictionary obtained from the project</param>
+        /// <returns>A dictionary containing only relevant data. The keys are names, the values are SlotData</returns>
         private Dictionary<string, SlotData> regenerateSlots(
             Dictionary<string, SlotData> newSlots,
             Dictionary<string, SlotData> oldSlots
@@ -77,6 +85,12 @@ namespace PlumJsonAnimator.Services
             return oldSlots;
         }
 
+        /// <summary>
+        /// Replaces irrelevant skins with relevant
+        /// </summary>
+        /// <param name="newSkins">Dictionary obtained from the json code</param>
+        /// <param name="oldSkins">Dictionary obtained from the project</param>
+        /// <returns>A dictionary containing only relevant data. The keys are names, the values are SkinData</returns>
         private Dictionary<string, SkinData> regenerateSkins(
             Dictionary<string, SkinData> newSkins,
             Dictionary<string, SkinData> oldSkins
@@ -95,6 +109,12 @@ namespace PlumJsonAnimator.Services
             return oldSkins;
         }
 
+        /// <summary>
+        /// Replaces irrelevant animations with relevant
+        /// </summary>
+        /// <param name="newAnimations">Dictionary obtained from the json code</param>
+        /// <param name="oldAnimations">Dictionary obtained from the project</param>
+        /// <returns>A dictionary containing only relevant data. The keys are names, the values are AnimayionData</returns>
         private Dictionary<string, AnimationData> regenerateAnimations(
             Dictionary<string, AnimationData> newAnimations,
             Dictionary<string, AnimationData> oldAnimations
@@ -113,6 +133,11 @@ namespace PlumJsonAnimator.Services
             return oldAnimations;
         }
 
+        /// <summary>
+        /// Generates project json data
+        /// </summary>
+        /// <param name="project">The project which have to be converted into json</param>
+        /// <returns>CodeData</returns>
         public CodeData generateJSONData(Project project)
         {
             Dictionary<string, AnimationData> animations = new Dictionary<string, AnimationData>();
@@ -140,6 +165,10 @@ namespace PlumJsonAnimator.Services
             };
         }
 
+        /// <summary>
+        /// Sets the project json data to project
+        /// </summary>
+        /// <param name="project">Project that has to get data</param>
         public void generateCode(Project project)
         {
             var _text = JsonConvert.SerializeObject(
@@ -151,7 +180,18 @@ namespace PlumJsonAnimator.Services
             project.Code = _text;
         }
 
-        public ValidResult regenerateBones(List<BoneData> bones)
+        /// <summary>
+        /// Regenerates bones from json
+        /// </summary>
+        /// <param name="bones">Dictionary with bones data. The keys are bones names, values are bones jsonifyed data.</param>
+        /// ValidResult result=regenerateBones(bones);
+        /// if (!result.IsOk)
+        /// {
+        ///     //DO SOMETHING
+        /// }
+        /// </example>
+        /// <returns>ValoidResult, where UpdatedArray is selected bones</returns>
+        private ValidResult regenerateBones(List<BoneData> bones)
         {
             List<BoneData> newBones = bones;
             List<BoneData> oldBones =
@@ -219,7 +259,18 @@ namespace PlumJsonAnimator.Services
             };
         }
 
-        public ValidResult regenerateSlots(List<SlotData> slots)
+        /// <summary>
+        /// Regenerates slots from json
+        /// </summary>
+        /// <param name="slots">Dictionary with slots data. The keys are slots names, values are slots jsonifyed data.</param>
+        /// ValidResult result=regenerateSlots(slots);
+        /// if (!result.IsOk)
+        /// {
+        ///     //DO SOMETHING
+        /// }
+        /// </example>
+        /// <returns>ValoidResult, where UpdatedArray is selected slots</returns>
+        private ValidResult regenerateSlots(List<SlotData> slots)
         {
             List<SlotData> newSlots = slots;
             List<SlotData> oldSlots = this.globalState.CurrentProject!.generateSlotsJSONData();
@@ -249,7 +300,18 @@ namespace PlumJsonAnimator.Services
             };
         }
 
-        public ValidResult regenerateSkins(List<SkinData> skins)
+        /// <summary>
+        /// Regenerates skins from json
+        /// </summary>
+        /// <param name="skins">Dictionary with skins data. The keys are skins names, values are skins jsonifyed data.</param>
+        /// ValidResult result=regenerateSkins(skins);
+        /// if (!result.IsOk)
+        /// {
+        ///     //DO SOMETHING
+        /// }
+        /// </example>
+        /// <returns>ValoidResult, where UpdatedArray is selected skins</returns>
+        private ValidResult regenerateSkins(List<SkinData> skins)
         {
             List<SkinData> newSkins = skins;
             List<SkinData> oldSkins = this.globalState.CurrentProject!.generateSkinsJSONData();
@@ -279,7 +341,19 @@ namespace PlumJsonAnimator.Services
             };
         }
 
-        public ValidResult regenerateAnimations(Dictionary<string, AnimationData> animations)
+        /// <summary>
+        /// Regenerates animations from json
+        /// </summary>
+        /// <param name="animations">Dictionary with animations data. The keys are animations names, values are animations jsonifyed data.</param>
+        /// <example>
+        /// ValidResult result=regenerateAnimations(animations);
+        /// if (!result.IsOk)
+        /// {
+        ///     //DO SOMETHING
+        /// }
+        /// </example>
+        /// <returns>ValoidResult, where UpdatedArray is selected animations</returns>
+        private ValidResult regenerateAnimations(Dictionary<string, AnimationData> animations)
         {
             Dictionary<string, AnimationData> newAnimations = animations;
             Dictionary<string, AnimationData> oldAnimations =
@@ -297,42 +371,54 @@ namespace PlumJsonAnimator.Services
             };
         }
 
-        public ProjectValidResult regenerate(Project project)
+        /// <summary>
+        /// Regenerates project from its json code
+        /// </summary>
+        /// <param name="project">Project</param>
+        /// <example>
+        /// ValidResult result=regenerate(project);
+        /// if (!result.IsOk)
+        /// {
+        ///     //DO SOMETHING
+        /// }
+        /// </example>
+        /// <returns>ValoidResult, where UpdatedArray is empty</returns>
+        public ValidResult regenerate(Project project)
         {
             if (project.Code == null || project.Code == "")
             {
-                return new ProjectValidResult { Message = "Empty json code", IsOk = false };
+                return new ValidResult { Message = "Empty json code", IsOk = false };
             }
 
             var codeData = JsonConvert.DeserializeObject<CodeData>(project.Code);
 
             if (codeData == null)
             {
-                return new ProjectValidResult { Message = "", IsOk = false };
+                return new ValidResult { Message = "", IsOk = false };
             }
 
             var boneResult = regenerateBones(codeData.Bones);
             if (!boneResult.IsOk)
             {
-                return new ProjectValidResult { Message = boneResult.Message, IsOk = false };
+                return new ValidResult { Message = boneResult.Message, IsOk = false };
             }
 
             var slotResult = regenerateSlots(codeData.Slots);
             if (!slotResult.IsOk)
             {
-                return new ProjectValidResult { Message = slotResult.Message, IsOk = false };
+                return new ValidResult { Message = slotResult.Message, IsOk = false };
             }
 
             var skinResult = regenerateSkins(codeData.Skins);
             if (!skinResult.IsOk)
             {
-                return new ProjectValidResult { Message = skinResult.Message, IsOk = false };
+                return new ValidResult { Message = skinResult.Message, IsOk = false };
             }
 
             var animationResult = regenerateAnimations(codeData.Animations);
             if (!animationResult.IsOk)
             {
-                return new ProjectValidResult { Message = animationResult.Message, IsOk = false };
+                return new ValidResult { Message = animationResult.Message, IsOk = false };
             }
 
             this.globalState.CurrentProject?.regenerateProject(
@@ -342,10 +428,13 @@ namespace PlumJsonAnimator.Services
                 (Dictionary<string, AnimationData>)animationResult.UpdatedArray
             );
 
-            return new ProjectValidResult { Message = "", IsOk = true };
+            return new ValidResult { Message = "", IsOk = true };
         }
     }
 
+    /// <summary>
+    /// Jsonifyed project
+    /// </summary>
     public class CodeData
     {
         [JsonProperty("skeleton")]

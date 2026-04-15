@@ -5,7 +5,7 @@ items:
   id: RenameViewModel
   parent: PlumJsonAnimator.ViewModels
   children:
-  - PlumJsonAnimator.ViewModels.RenameViewModel.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Services.ImageExporter)
+  - PlumJsonAnimator.ViewModels.RenameViewModel.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Services.ImageExporter)
   - PlumJsonAnimator.ViewModels.RenameViewModel.RedactObj
   langs:
   - csharp
@@ -101,16 +101,16 @@ items:
       type: PlumJsonAnimator.Models.Interfaces.IRenamable
     content.vb: Public Property RedactObj As IRenamable
   overload: PlumJsonAnimator.ViewModels.RenameViewModel.RedactObj*
-- uid: PlumJsonAnimator.ViewModels.RenameViewModel.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Services.ImageExporter)
-  commentId: M:PlumJsonAnimator.ViewModels.RenameViewModel.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Services.ImageExporter)
-  id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectManager,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Services.ImageExporter)'
+- uid: PlumJsonAnimator.ViewModels.RenameViewModel.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Services.ImageExporter)
+  commentId: M:PlumJsonAnimator.ViewModels.RenameViewModel.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Services.ImageExporter)
+  id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Services.ImageExporter)'
   parent: PlumJsonAnimator.ViewModels.RenameViewModel
   langs:
   - csharp
   - vb
-  name: RenameViewModel(GlobalState, Dialogs, ProjectSettings, ProjectManager, AppSettings, LocalizationService, ImageExporter)
-  nameWithType: RenameViewModel.RenameViewModel(GlobalState, Dialogs, ProjectSettings, ProjectManager, AppSettings, LocalizationService, ImageExporter)
-  fullName: PlumJsonAnimator.ViewModels.RenameViewModel.RenameViewModel(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Common.Dialogs.Dialogs, PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.ProjectManager, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Services.LocalizationService, PlumJsonAnimator.Services.ImageExporter)
+  name: RenameViewModel(GlobalState, Dialogs, ProjectSettings, ProjectFilesManager, AppSettings, LocalizationService, ImageExporter)
+  nameWithType: RenameViewModel.RenameViewModel(GlobalState, Dialogs, ProjectSettings, ProjectFilesManager, AppSettings, LocalizationService, ImageExporter)
+  fullName: PlumJsonAnimator.ViewModels.RenameViewModel.RenameViewModel(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Common.Dialogs.Dialogs, PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.ProjectFilesManager, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Services.LocalizationService, PlumJsonAnimator.Services.ImageExporter)
   type: Constructor
   source:
     remote:
@@ -124,7 +124,7 @@ items:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
   syntax:
-    content: public RenameViewModel(GlobalState globalState, Dialogs dialogs, ProjectSettings projectSettings, ProjectManager projectManager, AppSettings appSettings, LocalizationService localizationService, ImageExporter imageExporter)
+    content: public RenameViewModel(GlobalState globalState, Dialogs dialogs, ProjectSettings projectSettings, ProjectFilesManager projectManager, AppSettings appSettings, LocalizationService localizationService, ImageExporter imageExporter)
     parameters:
     - id: globalState
       type: PlumJsonAnimator.Common.Constants.GlobalState
@@ -133,18 +133,18 @@ items:
     - id: projectSettings
       type: PlumJsonAnimator.Services.ProjectSettings
     - id: projectManager
-      type: PlumJsonAnimator.Services.ProjectManager
+      type: PlumJsonAnimator.Services.ProjectFilesManager
     - id: appSettings
       type: PlumJsonAnimator.Services.AppSettings
     - id: localizationService
       type: PlumJsonAnimator.Services.LocalizationService
     - id: imageExporter
       type: PlumJsonAnimator.Services.ImageExporter
-    content.vb: Public Sub New(globalState As GlobalState, dialogs As Dialogs, projectSettings As ProjectSettings, projectManager As ProjectManager, appSettings As AppSettings, localizationService As LocalizationService, imageExporter As ImageExporter)
+    content.vb: Public Sub New(globalState As GlobalState, dialogs As Dialogs, projectSettings As ProjectSettings, projectManager As ProjectFilesManager, appSettings As AppSettings, localizationService As LocalizationService, imageExporter As ImageExporter)
   overload: PlumJsonAnimator.ViewModels.RenameViewModel.#ctor*
-  nameWithType.vb: RenameViewModel.New(GlobalState, Dialogs, ProjectSettings, ProjectManager, AppSettings, LocalizationService, ImageExporter)
-  fullName.vb: PlumJsonAnimator.ViewModels.RenameViewModel.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Common.Dialogs.Dialogs, PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.ProjectManager, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Services.LocalizationService, PlumJsonAnimator.Services.ImageExporter)
-  name.vb: New(GlobalState, Dialogs, ProjectSettings, ProjectManager, AppSettings, LocalizationService, ImageExporter)
+  nameWithType.vb: RenameViewModel.New(GlobalState, Dialogs, ProjectSettings, ProjectFilesManager, AppSettings, LocalizationService, ImageExporter)
+  fullName.vb: PlumJsonAnimator.ViewModels.RenameViewModel.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Common.Dialogs.Dialogs, PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.ProjectFilesManager, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Services.LocalizationService, PlumJsonAnimator.Services.ImageExporter)
+  name.vb: New(GlobalState, Dialogs, ProjectSettings, ProjectFilesManager, AppSettings, LocalizationService, ImageExporter)
 references:
 - uid: PlumJsonAnimator.ViewModels
   commentId: N:PlumJsonAnimator.ViewModels
@@ -2351,7 +2351,7 @@ references:
     href: PlumJsonAnimator.Models.Interfaces.html
 - uid: PlumJsonAnimator.ViewModels.RenameViewModel.#ctor*
   commentId: Overload:PlumJsonAnimator.ViewModels.RenameViewModel.#ctor
-  href: PlumJsonAnimator.ViewModels.RenameViewModel.html#PlumJsonAnimator_ViewModels_RenameViewModel__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Common_Dialogs_Dialogs_PlumJsonAnimator_Services_ProjectSettings_PlumJsonAnimator_Services_ProjectManager_PlumJsonAnimator_Services_AppSettings_PlumJsonAnimator_Services_LocalizationService_PlumJsonAnimator_Services_ImageExporter_
+  href: PlumJsonAnimator.ViewModels.RenameViewModel.html#PlumJsonAnimator_ViewModels_RenameViewModel__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Common_Dialogs_Dialogs_PlumJsonAnimator_Services_ProjectSettings_PlumJsonAnimator_Services_ProjectFilesManager_PlumJsonAnimator_Services_AppSettings_PlumJsonAnimator_Services_LocalizationService_PlumJsonAnimator_Services_ImageExporter_
   name: RenameViewModel
   nameWithType: RenameViewModel.RenameViewModel
   fullName: PlumJsonAnimator.ViewModels.RenameViewModel.RenameViewModel
@@ -2379,13 +2379,13 @@ references:
   name: ProjectSettings
   nameWithType: ProjectSettings
   fullName: PlumJsonAnimator.Services.ProjectSettings
-- uid: PlumJsonAnimator.Services.ProjectManager
-  commentId: T:PlumJsonAnimator.Services.ProjectManager
+- uid: PlumJsonAnimator.Services.ProjectFilesManager
+  commentId: T:PlumJsonAnimator.Services.ProjectFilesManager
   parent: PlumJsonAnimator.Services
-  href: PlumJsonAnimator.Services.ProjectManager.html
-  name: ProjectManager
-  nameWithType: ProjectManager
-  fullName: PlumJsonAnimator.Services.ProjectManager
+  href: PlumJsonAnimator.Services.ProjectFilesManager.html
+  name: ProjectFilesManager
+  nameWithType: ProjectFilesManager
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager
 - uid: PlumJsonAnimator.Services.AppSettings
   commentId: T:PlumJsonAnimator.Services.AppSettings
   parent: PlumJsonAnimator.Services

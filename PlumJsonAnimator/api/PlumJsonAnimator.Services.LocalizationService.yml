@@ -28,10 +28,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: LocalizationService
     path: Services/LocalizationService.cs
-    startLine: 11
+    startLine: 14
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: Provides methods for localize application
+  example: []
   syntax:
     content: 'public class LocalizationService : INotifyable, INotifyPropertyChanged'
     content.vb: Public Class LocalizationService Inherits INotifyable Implements INotifyPropertyChanged
@@ -68,7 +70,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: START_LANG
     path: Services/LocalizationService.cs
-    startLine: 13
+    startLine: 16
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -95,7 +97,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: langs
     path: Services/LocalizationService.cs
-    startLine: 17
+    startLine: 20
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -122,7 +124,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: currentLang
     path: Services/LocalizationService.cs
-    startLine: 18
+    startLine: 21
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -149,7 +151,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: LangResources
     path: Services/LocalizationService.cs
-    startLine: 20
+    startLine: 23
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -176,7 +178,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Services/LocalizationService.cs
-    startLine: 22
+    startLine: 25
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -205,10 +207,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: LoadLangs
     path: Services/LocalizationService.cs
-    startLine: 63
+    startLine: 72
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: Reads all files in LocalizationFilesPath and collect them into this.langs
+  example: []
   syntax:
     content: public void LoadLangs()
     content.vb: Public Sub LoadLangs()
@@ -231,7 +235,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: LoadLangResorce
     path: Services/LocalizationService.cs
-    startLine: 108
+    startLine: 121
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -263,7 +267,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: LoadLangResorce
     path: Services/LocalizationService.cs
-    startLine: 113
+    startLine: 126
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -289,15 +293,18 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetMessage
     path: Services/LocalizationService.cs
-    startLine: 118
+    startLine: 135
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: Returns localizated data, needs word code
+  example: []
   syntax:
     content: public string GetMessage(LocalizationConsts constStr)
     parameters:
     - id: constStr
       type: PlumJsonAnimator.Services.LocalizationConsts
+      description: Word code
     return:
       type: System.String
     content.vb: Public Function GetMessage(constStr As LocalizationConsts) As String

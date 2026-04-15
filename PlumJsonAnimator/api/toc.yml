@@ -216,6 +216,9 @@ items:
   - uid: PlumJsonAnimator.Services.JsonCode
     name: JsonCode
     type: Class
+  - uid: PlumJsonAnimator.Services.JsonCode.ValidResult
+    name: JsonCode.ValidResult
+    type: Class
   - uid: PlumJsonAnimator.Services.JsonExport
     name: JsonExport
     type: Class
@@ -231,20 +234,14 @@ items:
   - uid: PlumJsonAnimator.Services.Prettify
     name: Prettify
     type: Class
-  - uid: PlumJsonAnimator.Services.ProjectManager
-    name: ProjectManager
+  - uid: PlumJsonAnimator.Services.ProjectFilesManager
+    name: ProjectFilesManager
     type: Class
   - uid: PlumJsonAnimator.Services.ProjectSettings
     name: ProjectSettings
     type: Class
-  - uid: PlumJsonAnimator.Services.ProjectValidResult
-    name: ProjectValidResult
-    type: Class
   - uid: PlumJsonAnimator.Services.SettingsData
     name: SettingsData
-    type: Class
-  - uid: PlumJsonAnimator.Services.ValidResult
-    name: ValidResult
     type: Class
 - uid: PlumJsonAnimator.ViewModels
   name: PlumJsonAnimator.ViewModels

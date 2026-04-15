@@ -21,10 +21,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Prettify
     path: Services/Prettify.cs
-    startLine: 7
+    startLine: 11
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: Provides mwthods for prettifying json
+  example: []
   syntax:
     content: public class Prettify
     content.vb: Public Class Prettify
@@ -56,7 +58,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Services/Prettify.cs
-    startLine: 11
+    startLine: 15
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -88,17 +90,21 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: prettify
     path: Services/Prettify.cs
-    startLine: 16
+    startLine: 25
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
+  summary: Prettifyes json code
+  example: []
   syntax:
     content: public string prettify(string text)
     parameters:
     - id: text
       type: System.String
+      description: Json string
     return:
       type: System.String
+      description: Prettifyed text
     content.vb: Public Function prettify(text As String) As String
   overload: PlumJsonAnimator.Services.Prettify.prettify*
   nameWithType.vb: Prettify.prettify(String)
