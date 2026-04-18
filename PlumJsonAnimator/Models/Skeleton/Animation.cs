@@ -55,7 +55,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             this.globalState = globalState;
             this.interpolation = interpolation;
-            this.Name = $"{name}{Counter.GenerateName()}";
+            this.Name = $"{name}{Counter.GenerateNamePostfix()}";
         }
 
         public void SetupBones()

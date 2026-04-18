@@ -210,7 +210,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this.x = 0;
             this.y = 0;
 
-            this.Name = $"{Path.GetFileNameWithoutExtension(path)}{Counter.GenerateName()}";
+            this.Name = $"{Path.GetFileNameWithoutExtension(path)}{Counter.GenerateNamePostfix()}";
 
             this.globalState = globalState;
             UpdateAttachment();
@@ -226,7 +226,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public Slot(GlobalState globalState, Bone b)
         {
-            this.Name = $"tesr{Counter.GenerateName()}";
+            this.Name = $"tesr{Counter.GenerateNamePostfix()}";
             this.BoundedBone = b;
             this.globalState = globalState;
             UpdateAttachment();

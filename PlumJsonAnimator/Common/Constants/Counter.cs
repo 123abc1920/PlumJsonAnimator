@@ -2,13 +2,20 @@ using System;
 
 namespace PlumJsonAnimator.Common.Constants
 {
+    /// <summary>
+    /// Generates unique names
+    /// </summary>
     public class Counter()
     {
         private static Random _random = new Random();
 
-        public static string GenerateName()
+        /// <summary>
+        /// Genearate postfix that can be joined with the common name
+        /// </summary>
+        /// <returns>Postfix string</returns>
+        public static string GenerateNamePostfix()
         {
-            return $"Slot_{DateTime.Now.Ticks}_{_random.Next(1000, 9999)}";
+            return $"_{DateTime.Now.Ticks}_{_random.Next(1000, 9999)}";
         }
     }
 }

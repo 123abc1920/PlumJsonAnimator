@@ -8,7 +8,10 @@ using SukiUI.Controls;
 
 namespace PlumJsonAnimator.Common.Dialogs
 {
-    public enum ViewType
+    /// <summary>
+    /// Dialogs types
+    /// </summary>
+    public enum DialogType
     {
         SETTINGS = 0,
         NEWPROJECT,
@@ -19,6 +22,9 @@ namespace PlumJsonAnimator.Common.Dialogs
         EXPORT_MP4,
     }
 
+    /// <summary>
+    /// Provides methods for opening dialogs
+    /// </summary>
     public class Dialogs
     {
         private class DialogSize
@@ -33,7 +39,7 @@ namespace PlumJsonAnimator.Common.Dialogs
             }
         }
 
-        private List<DialogSize> sizes = new List<DialogSize>
+        private List<DialogSize> _sizes = new List<DialogSize>
         {
             new DialogSize(600, 400),
             new DialogSize(600, 400),
@@ -44,33 +50,33 @@ namespace PlumJsonAnimator.Common.Dialogs
             new DialogSize(600, 400),
         };
 
-        private UserControl userControlFactory(ViewType viewType, ViewModelBase viewModel)
+        private UserControl UserControlFactory(DialogType viewType, ViewModelBase viewModel)
         {
-            if (viewType == ViewType.SETTINGS)
+            if (viewType == DialogType.SETTINGS)
             {
                 return new SettingsView(viewModel);
             }
-            if (viewType == ViewType.NEWPROJECT)
+            if (viewType == DialogType.NEWPROJECT)
             {
                 return new NewProjectDialog(viewModel);
             }
-            if (viewType == ViewType.RENAME)
+            if (viewType == DialogType.RENAME)
             {
                 return new RenameDialog(viewModel);
             }
-            if (viewType == ViewType.EXPORT_JPG)
+            if (viewType == DialogType.EXPORT_JPG)
             {
                 return new ExportPanelJPG(viewModel);
             }
-            if (viewType == ViewType.EXPORT_PNG)
+            if (viewType == DialogType.EXPORT_PNG)
             {
                 return new ExportPanelPNG(viewModel);
             }
-            if (viewType == ViewType.EXPORT_GIF)
+            if (viewType == DialogType.EXPORT_GIF)
             {
                 return new ExportPanelGIF(viewModel);
             }
-            if (viewType == ViewType.EXPORT_MP4)
+            if (viewType == DialogType.EXPORT_MP4)
             {
                 return new ExportPanelMP4(viewModel);
             }
@@ -81,10 +87,10 @@ namespace PlumJsonAnimator.Common.Dialogs
             string title,
             ViewModelBase viewModel,
             Window owner,
-            ViewType viewType
+            DialogType viewType
         )
         {
-            DialogSize size = sizes[(int)viewType];
+            DialogSize size = _sizes[(int)viewType];
 
             var window = new SukiWindow
             {
@@ -94,7 +100,7 @@ namespace PlumJsonAnimator.Common.Dialogs
                     AssetLoader.Open(new Uri("avares://PlumJsonAnimator/Assets/logo.ico"))
                 ),
                 Height = size.height,
-                Content = userControlFactory(viewType, viewModel),
+                Content = UserControlFactory(viewType, viewModel),
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
             };
 
@@ -103,9 +109,9 @@ namespace PlumJsonAnimator.Common.Dialogs
 
         public Window mainWin;
 
-        public async void ShowDialog(string title, ViewModelBase viewModel, ViewType viewType)
+        public async void ShowDialog(string title, ViewModelBase viewModel, DialogType viewType)
         {
-            DialogSize size = sizes[(int)viewType];
+            DialogSize size = _sizes[(int)viewType];
 
             var window = new SukiWindow
             {
@@ -115,7 +121,7 @@ namespace PlumJsonAnimator.Common.Dialogs
                     AssetLoader.Open(new Uri("avares://PlumJsonAnimator/Assets/logo.ico"))
                 ),
                 Height = size.height,
-                Content = userControlFactory(viewType, viewModel),
+                Content = UserControlFactory(viewType, viewModel),
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
             };
 

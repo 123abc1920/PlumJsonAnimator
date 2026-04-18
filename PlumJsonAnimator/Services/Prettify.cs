@@ -43,7 +43,7 @@ namespace PlumJsonAnimator.Services
         }
 
         /// <summary>
-        /// Linear interpolation between two values
+        /// Retirns info about errors
         /// </summary>
         /// <param name="json">Json string</param>
         /// <param name="errorLine">Error line</param>

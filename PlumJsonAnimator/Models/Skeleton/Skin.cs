@@ -37,7 +37,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public Skin(string name, GlobalState globalState)
         {
-            this.Name = $"{name}{Counter.GenerateName()}";
+            this.Name = $"{name}{Counter.GenerateNamePostfix()}";
             this.globalState = globalState;
         }
 

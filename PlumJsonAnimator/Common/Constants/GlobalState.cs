@@ -9,6 +9,9 @@ using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.Common.Constants
 {
+    /// <summary>
+    /// Data exchange service
+    /// </summary>
     public class GlobalState : INotifyable
     {
         private Project? _currentProject;
@@ -34,14 +37,13 @@ namespace PlumJsonAnimator.Common.Constants
             DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
         };
         public int FPS = 60;
+
         public event Action TimeUpdated;
 
         public void OnTimeUpdated()
         {
             TimeUpdated?.Invoke();
         }
-
-        public Dialogs.Dialogs dialogs;
 
         public Bone? currentBone = null;
         public string theme = "light";
@@ -65,7 +67,7 @@ namespace PlumJsonAnimator.Common.Constants
             return parallelOptions;
         }
 
-        public IImmutableBrush getDotBoneColor(Bone b)
+        public IImmutableBrush GetDotBoneColor(Bone b)
         {
             if (this.currentBone == b && this.currentBone.IsBone == true)
             {
@@ -77,7 +79,7 @@ namespace PlumJsonAnimator.Common.Constants
             }
         }
 
-        public IImmutableBrush getLineBoneColor(Bone b)
+        public IImmutableBrush GetLineBoneColor(Bone b)
         {
             if (this.currentBone == b && this.currentBone.IsBone == true)
             {
@@ -101,10 +103,8 @@ namespace PlumJsonAnimator.Common.Constants
             return false;
         }
 
-        public GlobalState(Dialogs.Dialogs dialogs, LocalizationService localizationService)
+        public GlobalState(LocalizationService localizationService)
         {
-            this.dialogs = dialogs;
-
             this.jsonError = new JsonError(localizationService);
         }
     }

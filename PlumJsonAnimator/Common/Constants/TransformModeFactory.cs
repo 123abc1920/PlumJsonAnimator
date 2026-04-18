@@ -1,48 +1,37 @@
-using PlumJsonAnimator.Common.Constants;
+using System.Collections.Generic;
 using PlumJsonAnimator.Models.Common;
 
 namespace PlumJsonAnimator.Common.Constants
 {
+    /// <summary>
+    /// Creates transform modes
+    /// </summary>
     public class TransformModeFactory
     {
-        private GlobalState globalState;
-        private Mode[] modes;
+        private GlobalState _globalState;
+        private readonly Dictionary<TransformModesTypes, Mode> _modes;
 
         public TransformModeFactory(GlobalState globalState)
         {
-            this.globalState = globalState;
+            this._globalState = globalState;
 
-            modes = new Mode[]
+            _modes = new Dictionary<TransformModesTypes, Mode>
             {
-                new NoMode(globalState),
-                new TransformMode(globalState),
-                new RotateMode(globalState),
-                new ScaleMode(globalState),
+                [TransformModesTypes.NO] = new NoMode(globalState),
+                [TransformModesTypes.TRANSLATE] = new TransformMode(globalState),
+                [TransformModesTypes.ROTATE] = new RotateMode(globalState),
+                [TransformModesTypes.SCALE] = new ScaleMode(globalState),
             };
         }
 
-        public Mode createMode(Mode old, TransformModesTypes type)
+        public Mode CreateMode(Mode old, TransformModesTypes type)
         {
             if (old.type == type)
             {
-                return new NoMode(this.globalState);
+                return _modes[TransformModesTypes.NO];
             }
-            else
-            {
-                if (type == TransformModesTypes.TRANSLATE)
-                {
-                    return new TransformMode(this.globalState);
-                }
-                else if (type == TransformModesTypes.ROTATE)
-                {
-                    return new RotateMode(this.globalState);
-                }
-                else if (type == TransformModesTypes.SCALE)
-                {
-                    return new ScaleMode(this.globalState);
-                }
-            }
-            return new NoMode(this.globalState);
+
+            return _modes.TryGetValue(type, out var mode) ? mode : _modes[TransformModesTypes.NO];
         }
     }
 }

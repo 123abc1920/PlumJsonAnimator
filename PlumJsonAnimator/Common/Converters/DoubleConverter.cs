@@ -4,6 +4,9 @@ using Avalonia.Data.Converters;
 
 namespace PlumJsonAnimator.Common.Converters
 {
+    /// <summary>
+    /// Converter for double values in UI
+    /// </summary>
     public class DoubleConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

@@ -264,35 +264,35 @@ public partial class MainWindowViewModel : ViewModelBase
         this.dialogs.mainWin = window;
     }
 
-    private ViewModelBase GetViewModel(ViewType viewType)
+    private ViewModelBase GetViewModel(DialogType viewType)
     {
         ViewModelBase viewModel = this;
 
-        if (viewType == ViewType.SETTINGS)
+        if (viewType == DialogType.SETTINGS)
         {
             viewModel = _serviceProvider.GetRequiredService<AppSettingsViewModel>();
         }
-        if (viewType == ViewType.NEWPROJECT)
+        if (viewType == DialogType.NEWPROJECT)
         {
             viewModel = _serviceProvider.GetRequiredService<NewProjectViewModel>();
         }
-        if (viewType == ViewType.RENAME)
+        if (viewType == DialogType.RENAME)
         {
             viewModel = _serviceProvider.GetRequiredService<RenameViewModel>();
         }
-        if (viewType == ViewType.EXPORT_JPG)
+        if (viewType == DialogType.EXPORT_JPG)
         {
             viewModel = _serviceProvider.GetRequiredService<ExportPanelJPGViewModel>();
         }
-        if (viewType == ViewType.EXPORT_PNG)
+        if (viewType == DialogType.EXPORT_PNG)
         {
             viewModel = _serviceProvider.GetRequiredService<ExportPanelPNGViewModel>();
         }
-        if (viewType == ViewType.EXPORT_GIF)
+        if (viewType == DialogType.EXPORT_GIF)
         {
             viewModel = _serviceProvider.GetRequiredService<ExportPanelGIFViewModel>();
         }
-        if (viewType == ViewType.EXPORT_MP4)
+        if (viewType == DialogType.EXPORT_MP4)
         {
             viewModel = _serviceProvider.GetRequiredService<ExportPanelMP4ViewModel>();
         }
@@ -300,7 +300,7 @@ public partial class MainWindowViewModel : ViewModelBase
         return viewModel;
     }
 
-    public async void ShowDialog(string title, Window owner, ViewType viewType)
+    public async void ShowDialog(string title, Window owner, DialogType viewType)
     {
         ViewModelBase viewModel = GetViewModel(viewType);
         this.dialogs.ShowDialog(title, viewModel, owner, viewType);
@@ -322,7 +322,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
         this.projectManager.LoadRes(CurrentProject);
 
-        var appSettingsVM = (AppSettingsViewModel)GetViewModel(ViewType.SETTINGS);
+        var appSettingsVM = (AppSettingsViewModel)GetViewModel(DialogType.SETTINGS);
         appSettingsVM.CurrentTheme = appSettingsVM.Themes[
             appSettingsVM.GetCurrThemeInd(this.appSettings.GetTheme())
         ];
@@ -486,7 +486,7 @@ public partial class MainWindowViewModel : ViewModelBase
         this.jsonValidator = jsonValidator;
         this.engine = engine;
 
-        var appSettingsVM = (AppSettingsViewModel)GetViewModel(ViewType.SETTINGS);
+        var appSettingsVM = (AppSettingsViewModel)GetViewModel(DialogType.SETTINGS);
         appSettingsVM.CurrentTheme = appSettingsVM.Themes[0];
 
         this.globalState.TimeUpdated += () =>
@@ -531,12 +531,12 @@ public partial class MainWindowViewModel : ViewModelBase
                 Res selectedRes = resList.SelectedItem as Res;
                 if (selectedRes != null)
                 {
-                    var viewModel = (RenameViewModel)GetViewModel(ViewType.RENAME);
+                    var viewModel = (RenameViewModel)GetViewModel(DialogType.RENAME);
                     viewModel.RedactObj = selectedRes;
                     this.dialogs.ShowDialog(
                         GetMessage(LocalizationConsts.RENAME),
                         viewModel,
-                        ViewType.RENAME
+                        DialogType.RENAME
                     );
                 }
             }
@@ -564,12 +564,12 @@ public partial class MainWindowViewModel : ViewModelBase
                 Slot selectedSlot = SlotsList.SelectedItem as Slot;
                 if (selectedSlot != null)
                 {
-                    var viewModel = (RenameViewModel)GetViewModel(ViewType.RENAME);
+                    var viewModel = (RenameViewModel)GetViewModel(DialogType.RENAME);
                     viewModel.RedactObj = selectedSlot;
                     this.dialogs.ShowDialog(
                         GetMessage(LocalizationConsts.RENAME),
                         viewModel,
-                        ViewType.RENAME
+                        DialogType.RENAME
                     );
                 }
             }
@@ -581,12 +581,12 @@ public partial class MainWindowViewModel : ViewModelBase
                 Bone bone = boneTreeView.SelectedItem as Bone;
                 if (bone != null)
                 {
-                    var viewModel = (RenameViewModel)GetViewModel(ViewType.RENAME);
+                    var viewModel = (RenameViewModel)GetViewModel(DialogType.RENAME);
                     viewModel.RedactObj = bone;
                     this.dialogs.ShowDialog(
                         GetMessage(LocalizationConsts.RENAME),
                         viewModel,
-                        ViewType.RENAME
+                        DialogType.RENAME
                     );
                 }
             }

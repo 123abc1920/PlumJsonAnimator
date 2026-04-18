@@ -5,6 +5,9 @@ using IconPacks.Avalonia.BootstrapIcons;
 
 namespace PlumJsonAnimator.Common.Converters
 {
+    /// <summary>
+    /// Converter fo play button image
+    /// </summary>
     public class AnimationConverter : IValueConverter
     {
         public PackIconBootstrapIconsKind PlayIcon => PackIconBootstrapIconsKind.PlayFill;

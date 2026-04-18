@@ -339,7 +339,7 @@ public partial class MainWindow : SukiWindow
             viewModel.ShowDialog(
                 viewModel.GetMessage(LocalizationConsts.SETTINGS),
                 this,
-                ViewType.SETTINGS
+                DialogType.SETTINGS
             );
         }
     }
@@ -359,7 +359,7 @@ public partial class MainWindow : SukiWindow
             viewModel.ShowDialog(
                 viewModel.GetMessage(LocalizationConsts.NEW_PROJECT),
                 this,
-                ViewType.NEWPROJECT
+                DialogType.NEWPROJECT
             );
         }
     }
@@ -520,7 +520,7 @@ public partial class MainWindow : SukiWindow
             viewModel.ShowDialog(
                 viewModel.GetMessage(LocalizationConsts.EXPORT_AS_PNG),
                 this,
-                ViewType.EXPORT_PNG
+                DialogType.EXPORT_PNG
             );
         }
     }
@@ -532,7 +532,7 @@ public partial class MainWindow : SukiWindow
             viewModel.ShowDialog(
                 viewModel.GetMessage(LocalizationConsts.EXPORT_AS_JPG),
                 this,
-                ViewType.EXPORT_JPG
+                DialogType.EXPORT_JPG
             );
         }
     }
@@ -544,7 +544,7 @@ public partial class MainWindow : SukiWindow
             viewModel.ShowDialog(
                 viewModel.GetMessage(LocalizationConsts.EXPORT_AS_GIF),
                 this,
-                ViewType.EXPORT_GIF
+                DialogType.EXPORT_GIF
             );
         }
     }
@@ -556,7 +556,7 @@ public partial class MainWindow : SukiWindow
             viewModel.ShowDialog(
                 viewModel.GetMessage(LocalizationConsts.EXPORT_AS_MP4),
                 this,
-                ViewType.EXPORT_MP4
+                DialogType.EXPORT_MP4
             );
         }
     }

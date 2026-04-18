@@ -157,7 +157,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this._x = 100;
             this._y = 100;
             string name = "bone";
-            this.Name = $"{name}{Counter.GenerateName()}";
+            this.Name = $"{name}{Counter.GenerateNamePostfix()}";
 
             this.globalState = globalState;
         }
@@ -176,7 +176,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this._a = a;
             this._x = x;
             this._y = y;
-            this.Name = $"{name}{Counter.GenerateName()}";
+            this.Name = $"{name}{Counter.GenerateNamePostfix()}";
             this.Parent = parent;
 
             this.globalState = globalState;
@@ -190,7 +190,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this._y = 100;
 
             string name = "bone";
-            this.Name = $"{name}{Counter.GenerateName()}";
+            this.Name = $"{name}{Counter.GenerateNamePostfix()}";
 
             double angleRad = this.a * Math.PI / 180;
             this.endX = this.x + lengthX * Math.Cos(angleRad);
@@ -343,7 +343,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 StartPoint = start,
                 EndPoint = end,
-                Stroke = this.globalState.getLineBoneColor(this),
+                Stroke = this.globalState.GetLineBoneColor(this),
                 StrokeThickness = 3,
             };
 
@@ -351,7 +351,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 Width = 8,
                 Height = 8,
-                Fill = this.globalState.getDotBoneColor(this),
+                Fill = this.globalState.GetDotBoneColor(this),
             };
 
             Canvas.SetLeft(joint, start.X - 4);

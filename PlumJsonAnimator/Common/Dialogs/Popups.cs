@@ -1,16 +1,11 @@
 using System;
-using System.Threading.Tasks;
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
-using Avalonia.Layout;
-using Avalonia.Media;
-using Avalonia.Styling;
-using Avalonia.Threading;
 using SukiUI.Toasts;
 
 namespace PlumJsonAnimator.Common.Dialogs
 {
+    /// <summary>
+    /// Procides popups
+    /// </summary>
     public class Popups
     {
         public static ISukiToastManager ToastManager;

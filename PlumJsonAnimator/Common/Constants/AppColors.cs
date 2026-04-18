@@ -2,6 +2,9 @@ using Avalonia.Media;
 
 namespace PlumJsonAnimator.Common.Constants
 {
+    /// <summary>
+    /// App color palette
+    /// </summary>
     public class AppColors
     {
         private static string _appColor = "#ff003b";
