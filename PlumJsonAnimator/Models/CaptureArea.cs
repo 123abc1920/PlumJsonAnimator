@@ -8,6 +8,9 @@ using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.Models
 {
+    /// <summary>
+    /// Provides methods for work with capture area. This area renders into exported images, gifs, videos and other images.
+    /// </summary>
     public class CaptureArea
     {
         private class Point
@@ -22,48 +25,38 @@ namespace PlumJsonAnimator.Models
             }
         }
 
-        private Point a;
-        private Point b;
-        private Point c;
-        private Point d;
+        private Point _a;
+        private Point _b;
+        private Point _c;
+        private Point _d;
 
-        private Point[] points;
+        private Point[] _points;
+        private Point? _selectedPoint = null;
 
-        private Point? selectedPoint = null;
-
-        private AppSettings appSettings;
-        private GlobalState globalState;
+        private AppSettings _appSettings;
 
         private const int NEAR_REGION = 20;
 
-        public CaptureArea(
-            int x,
-            int y,
-            int width,
-            int height,
-            AppSettings appSettings,
-            GlobalState globalState
-        )
+        public CaptureArea(int x, int y, int width, int height, AppSettings appSettings)
         {
-            this.a = new Point(x, y);
-            this.b = new Point(x + width, y);
-            this.c = new Point(x + width, y + height);
-            this.d = new Point(x, y + height);
+            this._a = new Point(x, y);
+            this._b = new Point(x + width, y);
+            this._c = new Point(x + width, y + height);
+            this._d = new Point(x, y + height);
 
-            points = new Point[4] { this.a, this.b, this.c, this.d };
+            _points = new Point[4] { this._a, this._b, this._c, this._d };
 
-            this.appSettings = appSettings;
-            this.globalState = globalState;
+            this._appSettings = appSettings;
 
-            foreach (Point p in points)
-            {
-                validatePoint(p);
-            }
+            ValidatePoints();
         }
 
-        private void validatePoint(Point p)
+        /// <summary>
+        /// Validates all capture area corner points
+        /// </summary>
+        private void ValidatePoints()
         {
-            foreach (Point point in points)
+            foreach (Point point in _points)
             {
                 point.x = Math.Max(0, Math.Min(GlobalState.BASE_CANVAS_SIZE, point.x));
                 point.y = Math.Max(0, Math.Min(GlobalState.BASE_CANVAS_SIZE, point.y));
@@ -72,10 +65,10 @@ namespace PlumJsonAnimator.Models
             int minWidth = NEAR_REGION * 2;
             int minHeight = NEAR_REGION * 2;
 
-            int left = Math.Min(a.x, Math.Min(b.x, Math.Min(c.x, d.x)));
-            int top = Math.Min(a.y, Math.Min(b.y, Math.Min(c.y, d.y)));
-            int right = Math.Max(a.x, Math.Max(b.x, Math.Max(c.x, d.x)));
-            int bottom = Math.Max(a.y, Math.Max(b.y, Math.Max(c.y, d.y)));
+            int left = Math.Min(_a.x, Math.Min(_b.x, Math.Min(_c.x, _d.x)));
+            int top = Math.Min(_a.y, Math.Min(_b.y, Math.Min(_c.y, _d.y)));
+            int right = Math.Max(_a.x, Math.Max(_b.x, Math.Max(_c.x, _d.x)));
+            int bottom = Math.Max(_a.y, Math.Max(_b.y, Math.Max(_c.y, _d.y)));
 
             if (right - left < minWidth)
             {
@@ -86,88 +79,99 @@ namespace PlumJsonAnimator.Models
                 bottom = top + minHeight;
             }
 
-            a.x = left;
-            a.y = top;
+            _a.x = left;
+            _a.y = top;
 
-            b.x = right;
-            b.y = top;
+            _b.x = right;
+            _b.y = top;
 
-            c.x = right;
-            c.y = bottom;
+            _c.x = right;
+            _c.y = bottom;
 
-            d.x = left;
-            d.y = bottom;
+            _d.x = left;
+            _d.y = bottom;
 
-            foreach (Point point in points)
+            foreach (Point point in _points)
             {
                 point.x = Math.Max(0, Math.Min(GlobalState.BASE_CANVAS_SIZE, point.x));
                 point.y = Math.Max(0, Math.Min(GlobalState.BASE_CANVAS_SIZE, point.y));
             }
         }
 
+        /// <summary>
+        /// Selects point near the click location
+        /// </summary>
+        /// <param name="x">X click coordinate</param>
+        /// <param name="y">Y click coordinate</param>
         public void SelectPoint(int x, int y)
         {
             double realX = x;
             double realY = y;
 
-            foreach (Point p in points)
+            foreach (Point p in _points)
             {
                 double dx = Math.Abs(p.x - realX);
                 double dy = Math.Abs(p.y - realY);
 
                 if (dx < NEAR_REGION && dy < NEAR_REGION)
                 {
-                    this.selectedPoint = p;
+                    this._selectedPoint = p;
                     break;
                 }
             }
         }
 
-        public void MovePoint(int x, int y)
+        /// <summary>
+        /// Moves the selected point into new location
+        /// </summary>
+        /// <param name="x">X click coordinate</param>
+        /// <param name="y">Y click coordinate</param>
+        public void MoveSelectedPoint(int x, int y)
         {
-            if (this.selectedPoint != null)
+            if (this._selectedPoint != null)
             {
-                var oldx = this.selectedPoint.x;
-                var oldy = this.selectedPoint.y;
+                var oldx = this._selectedPoint.x;
+                var oldy = this._selectedPoint.y;
 
-                this.selectedPoint.x = x;
-                this.selectedPoint.y = y;
+                this._selectedPoint.x = x;
+                this._selectedPoint.y = y;
 
-                foreach (Point p in points)
+                foreach (Point p in _points)
                 {
                     if (p.x == oldx)
                     {
-                        p.x = this.selectedPoint.x;
+                        p.x = this._selectedPoint.x;
                     }
                     if (p.y == oldy)
                     {
-                        p.y = this.selectedPoint.y;
+                        p.y = this._selectedPoint.y;
                     }
                 }
             }
 
-            foreach (Point p in points)
-            {
-                validatePoint(p);
-            }
+            ValidatePoints();
         }
 
+        /// <summary>
+        /// Unselects point and saves capture area into app settings file
+        /// </summary>
         public void UnSelectPoint()
         {
-            this.selectedPoint = null;
+            this._selectedPoint = null;
 
-            foreach (Point p in points)
-            {
-                validatePoint(p);
-            }
+            ValidatePoints();
 
-            this.appSettings.SetCaptureArea(GetRect());
+            this._appSettings.SetCaptureArea(GetRect());
         }
 
+        /// <summary>
+        /// Returns bounds of capture area
+        /// </summary>
+        /// <returns>Bound rect</returns>
         public Rect GetRect()
         {
-            var width = Math.Abs(this.b.x - this.a.x);
-            var height = Math.Abs(this.d.y - this.a.y);
+            var width = Math.Abs(this._b.x - this._a.x);
+            var height = Math.Abs(this._d.y - this._a.y);
 
             if (width % 2 != 0)
             {
@@ -179,14 +183,14 @@ namespace PlumJsonAnimator.Models
             }
 
             return new Rect(
-                Math.Floor((double)this.a.x),
-                Math.Floor((double)this.a.y),
+                Math.Floor((double)this._a.x),
+                Math.Floor((double)this._a.y),
                 width,
                 height
             );
         }
 
-        public void Draw(Canvas canvas)
+        public void DrawCaptureArea(Canvas canvas)
         {
             var rect = GetRect();
 
@@ -202,8 +206,8 @@ namespace PlumJsonAnimator.Models
             Canvas.SetTop(rectangle, rect.Y);
             canvas.Children.Add(rectangle);
 
-            var width = this.b.x - this.a.x;
-            var height = this.d.y - this.a.y;
+            var width = this._b.x - this._a.x;
+            var height = this._d.y - this._a.y;
             var sizeText = new TextBlock
             {
                 Text = $"{width:F0} x {height:F0}",
@@ -217,12 +221,18 @@ namespace PlumJsonAnimator.Models
             Canvas.SetTop(sizeText, rect.Y);
             canvas.Children.Add(sizeText);
 
-            DrawPoint(canvas, this.a.x, this.a.y);
-            DrawPoint(canvas, this.b.x, this.b.y);
-            DrawPoint(canvas, this.c.x, this.c.y);
-            DrawPoint(canvas, this.d.x, this.d.y);
+            DrawPoint(canvas, this._a.x, this._a.y);
+            DrawPoint(canvas, this._b.x, this._b.y);
+            DrawPoint(canvas, this._c.x, this._c.y);
+            DrawPoint(canvas, this._d.x, this._d.y);
         }
 
+        /// <summary>
+        /// Draws corner point and its bounds
+        /// </summary>
+        /// <param name="canvas">Canvas for drawing</param>
+        /// <param name="x">Point x coordinate</param>
+        /// <param name="y">Point y coordinate</param>
         private void DrawPoint(Canvas canvas, double x, double y)
         {
             var point = new Ellipse

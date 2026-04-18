@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Avalonia.Controls;
@@ -9,10 +8,12 @@ using PlumJsonAnimator.Models.Resources;
 
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
+    /// <summary>
+    /// Provides methods for work with skin
+    /// </summary>
     public class Skin : INotifyable
     {
         private string _name = "default";
-
         public string Name
         {
             get => _name;
@@ -28,19 +29,24 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public Dictionary<Slot, Attachment?> SlotAttachmentBinding =
             new Dictionary<Slot, Attachment?>();
 
-        private GlobalState globalState;
+        private GlobalState _globalState;
 
         public Skin(GlobalState globalState)
         {
-            this.globalState = globalState;
+            this._globalState = globalState;
         }
 
         public Skin(string name, GlobalState globalState)
         {
             this.Name = $"{name}{Counter.GenerateNamePostfix()}";
-            this.globalState = globalState;
+            this._globalState = globalState;
         }
 
+        /// <summary>
+        /// Binds slot and attachment in current skin
+        /// </summary>
+        /// <param name="s">New slot</param>
+        /// <param name="a">New attachment</param>
         public void BindSlotAttachment(Slot s, Attachment a)
         {
             if (s == null)
@@ -63,7 +69,6 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// Adds slots to skin without binding
         /// </summary>
         /// <param name="s"></param>
-        /// <param name="a"></param>
         public void AddSlot(Slot s)
         {
             if (SlotAttachmentBinding.ContainsKey(s))
@@ -94,7 +99,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 Slot s in SlotAttachmentBinding.Keys.OrderBy(slot => slot.CurrentDrawOrderOffset)
             )
             {
-                s.drawSlot(canvas);
+                s.DrawSlot(canvas);
             }
         }
 
@@ -115,7 +120,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             return false;
         }
 
-        public bool ContainsAndRemoveRes(Res res)
+        /// <summary>
+        /// Tries to remove resource from skin
+        /// </summary>
+        /// <param name="res">Target resource</param>
+        public void RemoveResIfContains(Res res)
         {
             foreach (Slot s in SlotAttachmentBinding.Keys)
             {
@@ -123,12 +132,15 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 {
                     SlotAttachmentBinding[s] = null;
                     s.UpdateAttachment();
-                    return true;
+                    return;
                 }
             }
-            return false;
         }
 
+        /// <summary>
+        /// Returns path to slot resource
+        /// </summary>
+        /// <param name="s">Target slot</param>
         public string GetImagePath(Slot s)
         {
             if (SlotAttachmentBinding.ContainsKey(s) && SlotAttachmentBinding[s] != null)
@@ -164,7 +176,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// </summary>
         /// <param name="s"></param>
         /// <returns>Returns true, if slot can be drawn</returns>
-        public bool isSlotDrawable(Slot s)
+        public bool IsSlotDrawable(Slot s)
         {
             if (SlotAttachmentBinding.ContainsKey(s) && SlotAttachmentBinding[s] != null)
             {
@@ -182,7 +194,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             return null;
         }
 
-        public SkinData generateJSONData()
+        public SkinData GenerateJSONData()
         {
             Dictionary<string, Dictionary<string, AttachmentData>> attachments =
                 new Dictionary<string, Dictionary<string, AttachmentData>>();
@@ -200,12 +212,15 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             return new SkinData { Name = this.Name, Attachments = attachments };
         }
 
-        public string generateCode()
+        public string GenerateCode()
         {
-            return JsonConvert.SerializeObject(generateJSONData(), this.globalState.jsonSettings);
+            return JsonConvert.SerializeObject(GenerateJSONData(), this._globalState.jsonSettings);
         }
     }
 
+    /// <summary>
+    /// Skin JSON data
+    /// </summary>
     public class SkinData
     {
         [JsonProperty("name")]

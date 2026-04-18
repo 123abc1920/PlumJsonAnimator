@@ -7,6 +7,7 @@ using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
 
+// TODO: Remove repetitions
 namespace PlumJsonAnimator.Models
 {
     /// <summary>
@@ -14,101 +15,65 @@ namespace PlumJsonAnimator.Models
     /// </summary>
     public class BoneAnimation
     {
-        public SortedDictionary<double, IKeyframeType> rotateKeyframes =
+        private SortedDictionary<double, IKeyframeType> _rotateKeyframes =
             new SortedDictionary<double, IKeyframeType>();
-        public SortedDictionary<double, IKeyframeType> translateKeyframes =
+        private SortedDictionary<double, IKeyframeType> _translateKeyframes =
             new SortedDictionary<double, IKeyframeType>();
-        public SortedDictionary<double, IKeyframeType> shearKeyframes =
+        private SortedDictionary<double, IKeyframeType> _shearKeyframes =
             new SortedDictionary<double, IKeyframeType>();
-        public SortedDictionary<double, IKeyframeType> scaleKeyframes =
+        private SortedDictionary<double, IKeyframeType> _scaleKeyframes =
             new SortedDictionary<double, IKeyframeType>();
 
-        private double rotateStart,
-            rotateEnd;
-        private double translateStart,
-            translateEnd;
-        private double scaleStart,
-            scaleEnd;
-        private double shearStart,
-            shearEnd;
+        private double _rotateStart,
+            _rotateEnd;
+        private double _translateStart,
+            _translateEnd;
+        private double _scaleStart,
+            _scaleEnd;
+        private double _shearStart,
+            _shearEnd;
 
-        private GlobalState globalState;
-        private Interpolation interpolation;
+        private GlobalState _globalState;
+        private Interpolation _interpolation;
 
         public BoneAnimation(GlobalState globalState, Interpolation interpolation)
         {
-            this.globalState = globalState;
-            this.interpolation = interpolation;
+            this._globalState = globalState;
+            this._interpolation = interpolation;
         }
 
         /// <summary>
-        /// Add translate keyframe to bone
+        /// Adds translate keyframe to bone
         /// </summary>
         /// <param name="time"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void addTranslateFrame(double time, double x, double y)
+        public void AddTranslateFrame(double time, double x, double y)
         {
-            if (translateKeyframes.ContainsKey(time))
+            if (_translateKeyframes.ContainsKey(time))
             {
-                translateKeyframes[time] = new Translate(this.globalState, time, x, y);
+                _translateKeyframes[time] = new Translate(this._globalState, time, x, y);
             }
             else
             {
-                translateKeyframes.Add(time, new Translate(this.globalState, time, x, y));
+                _translateKeyframes.Add(time, new Translate(this._globalState, time, x, y));
             }
         }
 
         /// <summary>
-        /// Add rotate keyframe to bone
+        /// Adds rotate keyframe to bone
         /// </summary>
         /// <param name="time"></param>
         /// <param name="value"></param>
-        public void addRotateFrame(double time, double value)
+        public void AddRotateFrame(double time, double value)
         {
-            if (rotateKeyframes.ContainsKey(time))
+            if (_rotateKeyframes.ContainsKey(time))
             {
-                rotateKeyframes[time] = new Rotate(this.globalState, time, value);
+                _rotateKeyframes[time] = new Rotate(this._globalState, time, value);
             }
             else
             {
-                rotateKeyframes.Add(time, new Rotate(this.globalState, time, value));
-            }
-        }
-
-        /// <summary>
-        /// Add scale keyframe to bone
-        /// </summary>
-        /// <param name="time"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void addScaleFrame(double time, double x, double y)
-        {
-            if (scaleKeyframes.ContainsKey(time))
-            {
-                scaleKeyframes[time] = new Scale(this.globalState, time, x, y);
-            }
-            else
-            {
-                scaleKeyframes.Add(time, new Scale(this.globalState, time, x, y));
-            }
-        }
-
-        /// <summary>
-        /// Add shear keyframe to bone
-        /// </summary>
-        /// <param name="time"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        public void addShearFrame(double time, double x, double y)
-        {
-            if (shearKeyframes.ContainsKey(time))
-            {
-                shearKeyframes[time] = new Shear(this.globalState, time, x, y);
-            }
-            else
-            {
-                shearKeyframes.Add(time, new Shear(this.globalState, time, x, y));
+                _rotateKeyframes.Add(time, new Rotate(this._globalState, time, value));
             }
         }
 
@@ -117,34 +82,34 @@ namespace PlumJsonAnimator.Models
         /// </summary>
         /// <param name="time"></param>
         /// <param name="keyFrameType"></param>
-        public void deleteKeyFrame(double time, TransformModesTypes keyFrameType)
+        public void DeleteKeyFrame(double time, TransformModesTypes keyFrameType)
         {
             if (keyFrameType == TransformModesTypes.TRANSLATE)
             {
-                if (translateKeyframes.ContainsKey(time))
+                if (_translateKeyframes.ContainsKey(time))
                 {
-                    translateKeyframes.Remove(time);
+                    _translateKeyframes.Remove(time);
                 }
             }
             else if (keyFrameType == TransformModesTypes.ROTATE)
             {
-                if (rotateKeyframes.ContainsKey(time))
+                if (_rotateKeyframes.ContainsKey(time))
                 {
-                    rotateKeyframes.Remove(time);
+                    _rotateKeyframes.Remove(time);
                 }
             }
             else if (keyFrameType == TransformModesTypes.SHEAR)
             {
-                if (shearKeyframes.ContainsKey(time))
+                if (_shearKeyframes.ContainsKey(time))
                 {
-                    shearKeyframes.Remove(time);
+                    _shearKeyframes.Remove(time);
                 }
             }
             else if (keyFrameType == TransformModesTypes.SCALE)
             {
-                if (scaleKeyframes.ContainsKey(time))
+                if (_scaleKeyframes.ContainsKey(time))
                 {
-                    scaleKeyframes.Remove(time);
+                    _scaleKeyframes.Remove(time);
                 }
             }
         }
@@ -154,7 +119,7 @@ namespace PlumJsonAnimator.Models
             Dictionary<double, Dictionary<KeyFrameTypes, bool>> result =
                 new Dictionary<double, Dictionary<KeyFrameTypes, bool>>();
 
-            foreach (double time in rotateKeyframes.Keys)
+            foreach (double time in _rotateKeyframes.Keys)
             {
                 if (!result.ContainsKey(time))
                 {
@@ -163,7 +128,7 @@ namespace PlumJsonAnimator.Models
                 result[time].Add(KeyFrameTypes.ROTATE, true);
             }
 
-            foreach (double time in translateKeyframes.Keys)
+            foreach (double time in _translateKeyframes.Keys)
             {
                 if (!result.ContainsKey(time))
                 {
@@ -172,7 +137,7 @@ namespace PlumJsonAnimator.Models
                 result[time].Add(KeyFrameTypes.TRANSLATE, true);
             }
 
-            foreach (double time in scaleKeyframes.Keys)
+            foreach (double time in _scaleKeyframes.Keys)
             {
                 if (!result.ContainsKey(time))
                 {
@@ -181,7 +146,7 @@ namespace PlumJsonAnimator.Models
                 result[time].Add(KeyFrameTypes.SCALE, true);
             }
 
-            foreach (double time in shearKeyframes.Keys)
+            foreach (double time in _shearKeyframes.Keys)
             {
                 if (!result.ContainsKey(time))
                 {
@@ -194,7 +159,7 @@ namespace PlumJsonAnimator.Models
         }
 
         /// <summary>
-        /// Finds current time segment
+        /// Finds current segment using time
         /// </summary>
         /// <param name="currTime"></param>
         /// <param name="keyFrameType"></param>
@@ -202,11 +167,11 @@ namespace PlumJsonAnimator.Models
         {
             if (keyFrameType == KeyFrameTypes.TRANSLATE)
             {
-                for (int i = 0; i < translateKeyframes.Keys.Count - 1; i++)
+                for (int i = 0; i < _translateKeyframes.Keys.Count - 1; i++)
                 {
-                    translateStart = translateKeyframes.Keys.ElementAt(i);
-                    translateEnd = translateKeyframes.Keys.ElementAt(i + 1);
-                    if (currTime <= translateEnd && currTime >= translateStart)
+                    _translateStart = _translateKeyframes.Keys.ElementAt(i);
+                    _translateEnd = _translateKeyframes.Keys.ElementAt(i + 1);
+                    if (currTime <= _translateEnd && currTime >= _translateStart)
                     {
                         return;
                     }
@@ -214,11 +179,11 @@ namespace PlumJsonAnimator.Models
             }
             else if (keyFrameType == KeyFrameTypes.ROTATE)
             {
-                for (int i = 0; i < rotateKeyframes.Keys.Count - 1; i++)
+                for (int i = 0; i < _rotateKeyframes.Keys.Count - 1; i++)
                 {
-                    rotateStart = rotateKeyframes.Keys.ElementAt(i);
-                    rotateEnd = rotateKeyframes.Keys.ElementAt(i + 1);
-                    if (currTime <= rotateEnd && currTime >= rotateStart)
+                    _rotateStart = _rotateKeyframes.Keys.ElementAt(i);
+                    _rotateEnd = _rotateKeyframes.Keys.ElementAt(i + 1);
+                    if (currTime <= _rotateEnd && currTime >= _rotateStart)
                     {
                         return;
                     }
@@ -226,11 +191,11 @@ namespace PlumJsonAnimator.Models
             }
             else if (keyFrameType == KeyFrameTypes.SCALE)
             {
-                for (int i = 0; i < scaleKeyframes.Keys.Count - 1; i++)
+                for (int i = 0; i < _scaleKeyframes.Keys.Count - 1; i++)
                 {
-                    scaleStart = scaleKeyframes.Keys.ElementAt(i);
-                    scaleEnd = scaleKeyframes.Keys.ElementAt(i + 1);
-                    if (currTime <= scaleEnd && currTime >= scaleStart)
+                    _scaleStart = _scaleKeyframes.Keys.ElementAt(i);
+                    _scaleEnd = _scaleKeyframes.Keys.ElementAt(i + 1);
+                    if (currTime <= _scaleEnd && currTime >= _scaleStart)
                     {
                         return;
                     }
@@ -238,11 +203,11 @@ namespace PlumJsonAnimator.Models
             }
             else if (keyFrameType == KeyFrameTypes.SHEAR)
             {
-                for (int i = 0; i < shearKeyframes.Keys.Count - 1; i++)
+                for (int i = 0; i < _shearKeyframes.Keys.Count - 1; i++)
                 {
-                    shearStart = shearKeyframes.Keys.ElementAt(i);
-                    shearEnd = shearKeyframes.Keys.ElementAt(i + 1);
-                    if (currTime <= shearEnd && currTime >= shearStart)
+                    _shearStart = _shearKeyframes.Keys.ElementAt(i);
+                    _shearEnd = _shearKeyframes.Keys.ElementAt(i + 1);
+                    if (currTime <= _shearEnd && currTime >= _shearStart)
                     {
                         return;
                     }
@@ -250,81 +215,96 @@ namespace PlumJsonAnimator.Models
             }
         }
 
+        /// <summary>
+        /// Translates bone according current time
+        /// </summary>
+        /// <param name="b">Bone</param>
+        /// <param name="time">Current time</param>
         private void TranslateStep(Bone b, double time)
         {
-            if (translateKeyframes.Count < 2)
+            if (_translateKeyframes.Count < 2)
             {
                 return;
             }
             FindSegment(time, KeyFrameTypes.TRANSLATE);
 
-            double t = this.interpolation.findInterpolateParam(
-                translateEnd - translateStart,
-                time - translateStart
+            double t = this._interpolation.findInterpolateParam(
+                _translateEnd - _translateStart,
+                time - _translateStart
             );
 
-            double interpolatedX = this.interpolation.linearInterpolation(
-                ((Translate)translateKeyframes[translateStart]).x,
-                ((Translate)translateKeyframes[translateEnd]).x,
+            double interpolatedX = this._interpolation.linearInterpolation(
+                ((Translate)_translateKeyframes[_translateStart]).x,
+                ((Translate)_translateKeyframes[_translateEnd]).x,
                 t
             );
-            double interpolatedY = this.interpolation.linearInterpolation(
-                ((Translate)translateKeyframes[translateStart]).y,
-                ((Translate)translateKeyframes[translateEnd]).y,
+            double interpolatedY = this._interpolation.linearInterpolation(
+                ((Translate)_translateKeyframes[_translateStart]).y,
+                ((Translate)_translateKeyframes[_translateEnd]).y,
                 t
             );
 
             b.Move(interpolatedX, interpolatedY);
         }
 
+        /// <summary>
+        /// Rotates bone according current time
+        /// </summary>
+        /// <param name="b">Bone</param>
+        /// <param name="time">Current time</param>
         private void RotateStep(Bone b, double time)
         {
-            if (rotateKeyframes.Count < 2)
+            if (_rotateKeyframes.Count < 2)
             {
                 return;
             }
             FindSegment(time, KeyFrameTypes.ROTATE);
 
-            double t = this.interpolation.findInterpolateParam(
-                rotateEnd - rotateStart,
-                time - rotateStart
+            double t = this._interpolation.findInterpolateParam(
+                _rotateEnd - _rotateStart,
+                time - _rotateStart
             );
 
-            double interpolatedA = this.interpolation.angleInterpolation(
-                ((Rotate)rotateKeyframes[rotateStart]).value,
-                ((Rotate)rotateKeyframes[rotateEnd]).value,
+            double interpolatedA = this._interpolation.angleInterpolation(
+                ((Rotate)_rotateKeyframes[_rotateStart]).value,
+                ((Rotate)_rotateKeyframes[_rotateEnd]).value,
                 t
             );
 
             b.Rotate(interpolatedA);
         }
 
+        /// <summary>
+        /// Sets the bone to the desired state according current time
+        /// </summary>
+        /// <param name="b">Bone</param>
+        /// <param name="time">Current time</param>
         public void BoneStep(Bone b, double time)
         {
             TranslateStep(b, time);
             RotateStep(b, time);
         }
 
-        public BoneAnimationData generateJSONData()
+        public BoneAnimationData GenerateJSONData()
         {
             List<IKeyframeTypeData> translatesJSON = new List<IKeyframeTypeData>();
             List<IKeyframeTypeData> rotatesJSON = new List<IKeyframeTypeData>();
             List<IKeyframeTypeData> scalesJSON = new List<IKeyframeTypeData>();
             List<IKeyframeTypeData> shearsJSON = new List<IKeyframeTypeData>();
 
-            foreach (IKeyframeType frame in translateKeyframes.Values)
+            foreach (IKeyframeType frame in _translateKeyframes.Values)
             {
                 translatesJSON.Add(frame.GenerateJSONData());
             }
-            foreach (IKeyframeType frame in rotateKeyframes.Values)
+            foreach (IKeyframeType frame in _rotateKeyframes.Values)
             {
                 rotatesJSON.Add(frame.GenerateJSONData());
             }
-            foreach (IKeyframeType frame in scaleKeyframes.Values)
+            foreach (IKeyframeType frame in _scaleKeyframes.Values)
             {
                 scalesJSON.Add(frame.GenerateJSONData());
             }
-            foreach (IKeyframeType frame in shearKeyframes.Values)
+            foreach (IKeyframeType frame in _shearKeyframes.Values)
             {
                 shearsJSON.Add(frame.GenerateJSONData());
             }
@@ -338,29 +318,36 @@ namespace PlumJsonAnimator.Models
             };
         }
 
-        public string generateCode()
+        public string GenerateCode()
         {
-            return JsonConvert.SerializeObject(generateJSONData(), this.globalState.jsonSettings);
+            return JsonConvert.SerializeObject(GenerateJSONData(), this._globalState.jsonSettings);
         }
 
+        /// <summary>
+        /// Finds time of the next or the previous keyframe
+        /// </summary>
+        /// <param name="time">Current time</param>
+        /// <param name="type">Type of target keyframe</param>
+        /// <param name="isNext">Search for the next or the previous keyframe</param>
+        /// <returns>Double, time of the target keyframe</returns>
         public double FindTime(double time, TransformModesTypes type, bool isNext)
         {
             SortedDictionary<double, IKeyframeType>? keyframes = null;
             if (type == TransformModesTypes.TRANSLATE)
             {
-                keyframes = translateKeyframes;
+                keyframes = _translateKeyframes;
             }
             if (type == TransformModesTypes.ROTATE)
             {
-                keyframes = rotateKeyframes;
+                keyframes = _rotateKeyframes;
             }
             if (type == TransformModesTypes.SCALE)
             {
-                keyframes = scaleKeyframes;
+                keyframes = _scaleKeyframes;
             }
             if (type == TransformModesTypes.SHEAR)
             {
-                keyframes = shearKeyframes;
+                keyframes = _shearKeyframes;
             }
 
             if (keyframes == null || keyframes.Count == 0)
@@ -389,7 +376,12 @@ namespace PlumJsonAnimator.Models
             return time;
         }
 
-        private double findMax(SortedDictionary<double, IKeyframeType> dict)
+        /// <summary>
+        /// Finds the last keyframe time
+        /// </summary>
+        /// <param name="dict">Dictionary in which to find the last keyframe time</param>
+        /// <returns>Double, time of the last keyframe</returns>
+        private double FindMax(SortedDictionary<double, IKeyframeType> dict)
         {
             if (dict.Count > 0)
             {
@@ -399,17 +391,23 @@ namespace PlumJsonAnimator.Models
             return 0.0;
         }
 
+        /// <summary>
+        /// Finds the longest time from all keyframe dictionary
+        /// </summary>
         public double MaxTime()
         {
-            double maxRotate = findMax(rotateKeyframes);
-            double maxTranslate = findMax(translateKeyframes);
-            double maxScale = findMax(scaleKeyframes);
-            double maxShear = findMax(shearKeyframes);
+            double maxRotate = FindMax(_rotateKeyframes);
+            double maxTranslate = FindMax(_translateKeyframes);
+            double maxScale = FindMax(_scaleKeyframes);
+            double maxShear = FindMax(_shearKeyframes);
 
             return Math.Max(Math.Max(maxRotate, maxTranslate), Math.Max(maxScale, maxShear));
         }
     }
 
+    /// <summary>
+    /// BoneAnimation JSON data
+    /// </summary>
     public class BoneAnimationData
     {
         [JsonProperty("translate")]

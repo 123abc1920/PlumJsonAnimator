@@ -74,10 +74,10 @@ public partial class MainWindow : SukiWindow
             mainCanvas.Children.Clear();
             if (DataContext is MainWindowViewModel viewModel)
             {
-                viewModel.CurrentProject?.drawSlots(mainCanvas);
+                viewModel.CurrentProject?.DrawSlots(mainCanvas);
                 if (viewModel.DrawBones)
                 {
-                    viewModel.CurrentProject?.MainSkeleton?.drawSkeleton(mainCanvas);
+                    viewModel.CurrentProject?.MainSkeleton?.DrawSkeleton(mainCanvas);
                     if (viewModel.CurrentBone?.IsBone == true)
                     {
                         viewModel.CurrentBone?.DrawBone(mainCanvas);
@@ -86,7 +86,7 @@ public partial class MainWindow : SukiWindow
                 }
                 if (viewModel.CaptureMode)
                 {
-                    viewModel.GetCaptureArea()?.Draw(mainCanvas);
+                    viewModel.GetCaptureArea()?.DrawCaptureArea(mainCanvas);
                 }
             }
         }
@@ -175,7 +175,7 @@ public partial class MainWindow : SukiWindow
         {
             if (viewModel.CaptureMode == true)
             {
-                viewModel.GetCaptureArea()?.MovePoint((int)(point.X), (int)(point.Y));
+                viewModel.GetCaptureArea()?.MoveSelectedPoint((int)(point.X), (int)(point.Y));
                 return;
             }
 

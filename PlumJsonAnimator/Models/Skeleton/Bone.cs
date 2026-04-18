@@ -100,6 +100,10 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public ObservableCollection<Bone> Children { get; set; } = new ObservableCollection<Bone>();
         public Bone? Parent { get; set; } = null;
+
+        /// <summary>
+        /// Returns name of the IRenamable object
+        /// </summary>
         public string GetName
         {
             get => this.Name;
@@ -165,26 +169,6 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this._globalState = globalState;
         }
 
-        public Bone(
-            GlobalState globalState,
-            int _id,
-            Bone parent,
-            String name,
-            double x,
-            double y,
-            double a
-        )
-        {
-            this.id = _id;
-            this._a = a;
-            this._x = x;
-            this._y = y;
-            this.Name = $"{name}{Counter.GenerateNamePostfix()}";
-            this.Parent = parent;
-
-            this._globalState = globalState;
-        }
-
         public Bone(GlobalState globalState, Bone parent)
         {
             this._a = -100;
@@ -231,6 +215,12 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         }
 
         private bool _isMoving = false;
+
+        /// <summary>
+        /// Moves bone and all its children and slots to new position
+        /// </summary>
+        /// <param name="x">Target x coordinate</param>
+        /// <param name="y">Target y coordinate</param>
         public virtual void Move(double x, double y)
         {
             if (_isMoving)
@@ -273,6 +263,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         }
 
         private bool _isRotating = false;
+
+        /// <summary>
+        /// Rotates bone to new angle
+        /// </summary>
+        /// <param name="a">Target angle</param>
         public virtual void Rotate(double a)
         {
             if (_isRotating)
@@ -330,11 +325,20 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             _isRotating = false;
         }
 
+        /// <summary>
+        /// Changes bone`s length
+        /// </summary>
+        /// <param name="x">Click x coordinate</param>
+        /// <param name="y">Click y coordinate</param>
         public virtual void Scale(double x, double y)
         {
             this.LengthX = Math.Sqrt((x - this.x) * (x - this.x) + (y - this.y) * (y - this.y));
         }
 
+        /// <summary>
+        /// Draws bone
+        /// </summary>
+        /// <param name="canvas">Target canvas</param>
         public void DrawBone(Canvas canvas)
         {
             Point start = new Point(canvas.Width / 2 + this.x, canvas.Height / 2 + this.y);
@@ -362,6 +366,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             canvas.Children.Add(joint);
         }
 
+        /// <summary>
+        /// Returns JSON data
+        /// </summary>
         public BoneData GenerateJSONData()
         {
             return new BoneData
@@ -373,11 +380,18 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             };
         }
 
+        /// <summary>
+        /// Returns JSON string
+        /// </summary>
         public string GenerateCode()
         {
             return JsonConvert.SerializeObject(GenerateJSONData(), this._globalState.jsonSettings);
         }
 
+        /// <summary>
+        /// Sets new name to IRenamable object
+        /// </summary>
+        /// <param name="name">New name</param>
         public void SetName(string? name)
         {
             if (name != null)

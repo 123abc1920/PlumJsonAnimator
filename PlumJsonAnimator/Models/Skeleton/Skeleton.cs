@@ -8,16 +8,17 @@ using PlumJsonAnimator.Models.Interfaces;
 
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
+    /// <summary>
+    /// Provides methods for work with skeleton
+    /// </summary>
     public class Skeleton : INotifyable
     {
-        public string name = "default";
         public ObservableCollection<Bone> Bones { get; set; } = new ObservableCollection<Bone>();
         public ObservableCollection<Bone> RootBones { get; set; } =
             new ObservableCollection<Bone>();
 
-        private int ids = 0;
-
-        private GlobalState globalState;
+        private int _last_bone_id = 0;
+        private GlobalState _globalState;
 
         public Skeleton(GlobalState globalState)
         {
@@ -25,33 +26,41 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             Bones.Add(root);
             RootBones.Add(root);
 
-            ids++;
+            _last_bone_id++;
 
-            this.globalState = globalState;
+            this._globalState = globalState;
         }
 
-        public void addBone(int id)
+        /// <summary>
+        /// Adds new bone into skeleton. Binds it with existing parent bone
+        /// </summary>
+        /// <param name="parentId">Parent bone id</param>
+        public void AddBoneToParent(int parentId)
         {
-            Bone new_bone = new Bone(this.globalState, ids);
+            Bone new_bone = new Bone(this._globalState, _last_bone_id);
             this.Bones.Add(new_bone);
             foreach (Bone b in this.Bones)
             {
-                if (b.id == id)
+                if (b.id == parentId)
                 {
                     b.AddChildren(new_bone);
                 }
             }
-            ids++;
+            _last_bone_id++;
         }
 
-        public void addBone(Bone b)
+        /// <summary>
+        /// Adds new bone into skeleton
+        /// </summary>
+        /// <param name="b">New bone</param>
+        public void AddBone(Bone b)
         {
             this.Bones.Add(b);
-            b.id = ids;
-            ids++;
+            b.id = _last_bone_id;
+            _last_bone_id++;
         }
 
-        public Bone? getBone(int id)
+        public Bone? GetBoneById(int id)
         {
             foreach (Bone b in this.Bones)
             {
@@ -63,7 +72,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             return null;
         }
 
-        public Bone? getBone(string? name)
+        public Bone? GetBoneByName(string? name)
         {
             foreach (Bone b in this.Bones)
             {
@@ -75,7 +84,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             return null;
         }
 
-        public void drawSkeleton(Canvas canvas)
+        public void DrawSkeleton(Canvas canvas)
         {
             foreach (Bone b in this.Bones)
             {
@@ -83,7 +92,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
-        public List<BoneData> generateJSONData()
+        public List<BoneData> GenerateJSONData()
         {
             List<BoneData> result = new List<BoneData>();
 
@@ -95,12 +104,15 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             return result;
         }
 
-        public String generateCode()
+        public String GenerateCode()
         {
-            return JsonConvert.SerializeObject(generateJSONData(), this.globalState.jsonSettings);
+            return JsonConvert.SerializeObject(GenerateJSONData(), this._globalState.jsonSettings);
         }
     }
 
+    /// <summary>
+    /// Skeleton JSON data
+    /// </summary>
     public class SkeletonData
     {
         [JsonProperty("bones")]

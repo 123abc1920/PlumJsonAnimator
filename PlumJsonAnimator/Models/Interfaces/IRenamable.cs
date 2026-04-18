@@ -7,6 +7,6 @@ namespace PlumJsonAnimator.Models.Interfaces
     {
         string GetName { get; set; }
 
-        public abstract void SetName(string? name);
+        public void SetName(string? name);
     }
 }

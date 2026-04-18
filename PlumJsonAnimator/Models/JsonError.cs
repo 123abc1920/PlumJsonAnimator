@@ -4,10 +4,12 @@ using PlumJsonAnimator.Services;
 // TODO: should fix json error logic
 namespace PlumJsonAnimator.Models
 {
+    /// <summary>
+    /// Json error objects
+    /// </summary>
     public class JsonError : INotifyable
     {
-        private LocalizationService localizationService;
-
+        private LocalizationService _localizationService;
         private string _errorText = "";
 
         public string ErrorText
@@ -16,7 +18,7 @@ namespace PlumJsonAnimator.Models
             set
             {
                 _errorText = value;
-                if (value == this.localizationService.GetMessage(LocalizationConsts.JSON_VALID))
+                if (value == this._localizationService.GetMessage(LocalizationConsts.JSON_VALID))
                 {
                     this.isOk = true;
                 }
@@ -32,7 +34,7 @@ namespace PlumJsonAnimator.Models
 
         public JsonError(LocalizationService localizationService)
         {
-            this.localizationService = localizationService;
+            this._localizationService = localizationService;
         }
     }
 }

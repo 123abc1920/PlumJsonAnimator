@@ -375,7 +375,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public void DropSlotToBone(int id, Res res)
     {
-        Bone bone = CurrentProject.MainSkeleton.getBone(id);
+        Bone bone = CurrentProject.MainSkeleton.GetBoneById(id);
         if (bone != null)
         {
             Slot s = new Slot(this.globalState, bone);
@@ -520,7 +520,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 Bone? selectedItem = treeView.SelectedItem as Bone;
                 if (selectedItem != null && selectedItem.IsBone)
                 {
-                    CurrentProject?.MainSkeleton?.addBone(selectedItem.id);
+                    CurrentProject?.MainSkeleton?.AddBoneToParent(selectedItem.id);
                 }
             }
         });
@@ -550,7 +550,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 {
                     foreach (Skin s in CurrentProject.Skins)
                     {
-                        s.ContainsAndRemoveRes(res);
+                        s.RemoveResIfContains(res);
                     }
                     CurrentProject.Resources.Remove(res);
                     this.projectManager.DeleteResource(res.Name, res.ext, CurrentProject);

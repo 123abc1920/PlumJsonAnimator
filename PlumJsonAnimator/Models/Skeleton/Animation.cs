@@ -90,7 +90,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             var boneListData = new BonesListData();
             foreach (Bone b in BoneAnimationBinding.Keys)
             {
-                boneListData.Add(b.Name, BoneAnimationBinding[b].generateJSONData());
+                boneListData.Add(b.Name, BoneAnimationBinding[b].GenerateJSONData());
             }
             animationData.Bones = boneListData;
 
@@ -195,7 +195,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             if (x != null && y != null)
             {
                 AnimateBone(b);
-                BoneAnimationBinding[b].addTranslateFrame(currentTime, (double)x, (double)y);
+                BoneAnimationBinding[b].AddTranslateFrame(currentTime, (double)x, (double)y);
             }
         }
 
@@ -211,7 +211,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             if (x != null && y != null && currTime != null)
             {
                 AnimateBone(b);
-                BoneAnimationBinding[b].addTranslateFrame((double)currTime, (double)x, (double)y);
+                BoneAnimationBinding[b].AddTranslateFrame((double)currTime, (double)x, (double)y);
             }
         }
 
@@ -225,7 +225,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             if (value != null)
             {
                 AnimateBone(b);
-                BoneAnimationBinding[b].addRotateFrame(currentTime, (double)value);
+                BoneAnimationBinding[b].AddRotateFrame(currentTime, (double)value);
             }
         }
 
@@ -240,7 +240,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             if (value != null && currTime != null)
             {
                 AnimateBone(b);
-                BoneAnimationBinding[b].addRotateFrame((double)currTime, (double)value);
+                BoneAnimationBinding[b].AddRotateFrame((double)currTime, (double)value);
             }
         }
 
@@ -294,7 +294,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 if (BoneAnimationBinding.ContainsKey(b))
                 {
                     BoneAnimation ba = BoneAnimationBinding[b];
-                    ba.deleteKeyFrame(currentTime, type);
+                    ba.DeleteKeyFrame(currentTime, type);
                 }
             }
         }

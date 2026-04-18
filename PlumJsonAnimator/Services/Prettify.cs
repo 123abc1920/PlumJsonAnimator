@@ -43,7 +43,7 @@ namespace PlumJsonAnimator.Services
         }
 
         /// <summary>
-        /// Retirns info about errors
+        /// Returns info about errors
         /// </summary>
         /// <param name="json">Json string</param>
         /// <param name="errorLine">Error line</param>

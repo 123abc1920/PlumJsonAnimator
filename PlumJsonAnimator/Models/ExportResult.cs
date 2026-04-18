@@ -1,5 +1,8 @@
 namespace PlumJsonAnimator.Models
 {
+    /// <summary>
+    /// All possible results of export
+    /// </summary>
     public enum ExportResult
     {
         SUCCESS = 0,

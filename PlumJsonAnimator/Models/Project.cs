@@ -43,8 +43,8 @@ namespace PlumJsonAnimator.Models
         private Skin _currentSkin;
         private Animation? _currentAnimation;
 
-        private GlobalState globalState;
-        private Interpolation interpolation;
+        private GlobalState _globalState;
+        private Interpolation _interpolation;
 
         public Skin CurrentSkin
         {
@@ -100,8 +100,8 @@ namespace PlumJsonAnimator.Models
 
             this.currentMode = new NoMode(globalState);
 
-            this.globalState = globalState;
-            this.interpolation = interpolation;
+            this._globalState = globalState;
+            this._interpolation = interpolation;
         }
 
         public Project(
@@ -124,7 +124,7 @@ namespace PlumJsonAnimator.Models
             this.Code = settingsData.Anim;
         }
 
-        public Animation? GetAnimation()
+        public Animation? GetCurrentAnimation()
         {
             return CurrentAnimation;
         }
@@ -133,8 +133,8 @@ namespace PlumJsonAnimator.Models
         {
             this.Animations.Add(
                 new Animation(
-                    this.globalState,
-                    this.interpolation,
+                    this._globalState,
+                    this._interpolation,
                     "anim" + Animations.Count.ToString()
                 )
             );
@@ -151,7 +151,7 @@ namespace PlumJsonAnimator.Models
 
         public void AddSkin()
         {
-            this.Skins.Add(new Skin("skin" + Skins.Count.ToString(), this.globalState));
+            this.Skins.Add(new Skin("skin" + Skins.Count.ToString(), this._globalState));
         }
 
         public void DeleteSkin()
@@ -163,20 +163,7 @@ namespace PlumJsonAnimator.Models
             }
         }
 
-        public Bone? GetSlot(int id)
-        {
-            foreach (Slot s in Slots)
-            {
-                if (id == s.id)
-                {
-                    return s;
-                }
-            }
-
-            return null;
-        }
-
-        public Slot? GetSlot(string name)
+        public Slot? GetSlotByName(string name)
         {
             foreach (Slot s in Slots)
             {
@@ -189,7 +176,7 @@ namespace PlumJsonAnimator.Models
             return null;
         }
 
-        public void drawSlots(Canvas c)
+        public void DrawSlots(Canvas c)
         {
             CurrentSkin.DrawSkin(c);
         }
@@ -199,32 +186,44 @@ namespace PlumJsonAnimator.Models
             return Path.Combine(this.ProjectPath, this.Name);
         }
 
-        public MetaData generateMetaData()
+        /// <summary>
+        /// Generates JSON object of metadata
+        /// </summary>
+        public MetaData GenerateMetaData()
         {
             return this.MetaData;
         }
 
-        public List<SkinData> generateSkinsJSONData()
+        /// <summary>
+        /// Returns list of JSON objects of skins
+        /// </summary>
+        public List<SkinData> GenerateSkinsJSONData()
         {
             List<SkinData> skinData = new List<SkinData>();
             foreach (Skin s in Skins)
             {
-                skinData.Add(s.generateJSONData());
+                skinData.Add(s.GenerateJSONData());
             }
             return skinData;
         }
 
-        public List<SlotData> generateSlotsJSONData()
+        /// <summary>
+        /// Returns list of JSON objects of slots
+        /// </summary>
+        public List<SlotData> GenerateSlotsJSONData()
         {
             List<SlotData> slotData = new List<SlotData>();
             foreach (Slot s in Slots)
             {
-                slotData.Add(s.generateJSONData());
+                slotData.Add(s.GenerateJSONData());
             }
             return slotData;
         }
 
-        public Dictionary<string, AnimationData> generateAnimationsJSONData()
+        /// <summary>
+        /// Returns list of JSON objects of animations
+        /// </summary>
+        public Dictionary<string, AnimationData> GenerateAnimationsJSONData()
         {
             Dictionary<string, AnimationData> animData = new Dictionary<string, AnimationData>();
 
@@ -236,7 +235,7 @@ namespace PlumJsonAnimator.Models
             return animData;
         }
 
-        public Res? FindRes(string name)
+        public Res? GetResByName(string name)
         {
             foreach (Res res in this.Resources)
             {
@@ -248,7 +247,10 @@ namespace PlumJsonAnimator.Models
             return null;
         }
 
-        public void regenerateProject(
+        /// <summary>
+        /// Regenerates project from JSON objects
+        /// </summary>
+        public void RegenerateProject(
             Dictionary<string, BoneData> bones,
             Dictionary<string, SlotData> slots,
             Dictionary<string, SkinData> skins,
@@ -266,7 +268,7 @@ namespace PlumJsonAnimator.Models
                     {
                         b.x = boneData.X;
                         b.y = boneData.Y;
-                        b.Parent = this.MainSkeleton.getBone(boneData.Parent);
+                        b.Parent = this.MainSkeleton.GetBoneByName(boneData.Parent);
                     }
                     bones.Remove(b.Name);
                 }
@@ -278,16 +280,16 @@ namespace PlumJsonAnimator.Models
 
             foreach (var bone in bones)
             {
-                Bone b = new Bone(this.globalState, bone.Key, null);
-                this.MainSkeleton.addBone(b);
+                Bone b = new Bone(this._globalState, bone.Key, null);
+                this.MainSkeleton.AddBone(b);
             }
 
             foreach (var bone in bones)
             {
                 if (!string.IsNullOrEmpty(bone.Value.Parent))
                 {
-                    var childBone = MainSkeleton.getBone(bone.Key);
-                    var parentBone = MainSkeleton.getBone(bone.Value.Parent);
+                    var childBone = MainSkeleton.GetBoneByName(bone.Key);
+                    var parentBone = MainSkeleton.GetBoneByName(bone.Value.Parent);
 
                     if (childBone != null && parentBone != null)
                     {
@@ -310,7 +312,7 @@ namespace PlumJsonAnimator.Models
 
             if (this.MainSkeleton.Bones.Count <= 0)
             {
-                this.MainSkeleton.Bones.Add(new Bone(this.globalState));
+                this.MainSkeleton.Bones.Add(new Bone(this._globalState));
                 this.MainSkeleton.RootBones = new ObservableCollection<Bone>()
                 {
                     this.MainSkeleton.Bones[0],
@@ -324,9 +326,9 @@ namespace PlumJsonAnimator.Models
             {
                 if (slots.TryGetValue(b.Name, out SlotData slotData))
                 {
-                    if (b.generateJSONData() != slotData)
+                    if (b.GenerateJSONData() != slotData)
                     {
-                        b.BoundedBone = this.MainSkeleton.getBone(slotData.Bone);
+                        b.BoundedBone = this.MainSkeleton.GetBoneByName(slotData.Bone);
                     }
                     slots.Remove(b.Name);
                 }
@@ -339,9 +341,9 @@ namespace PlumJsonAnimator.Models
             foreach (var slot in slots)
             {
                 Slot s = new Slot(
-                    this.globalState,
+                    this._globalState,
                     slot.Key,
-                    this.MainSkeleton.getBone(slot.Value.Bone)
+                    this.MainSkeleton.GetBoneByName(slot.Value.Bone)
                 );
                 this.Slots.Add(s);
             }
@@ -358,7 +360,7 @@ namespace PlumJsonAnimator.Models
             {
                 if (skins.TryGetValue(b.Name, out SkinData skinData))
                 {
-                    if (b.generateJSONData() != skinData)
+                    if (b.GenerateJSONData() != skinData)
                     {
                         b.SlotAttachmentBinding = new Dictionary<Slot, Attachment>();
                         foreach (string slotName in skinData.Attachments.Keys)
@@ -370,10 +372,10 @@ namespace PlumJsonAnimator.Models
                             {
                                 var attach = attachs[attachName];
                                 ImageAttachment a = new ImageAttachment(
-                                    (ImageRes)this.FindRes(attach.Name),
+                                    (ImageRes)this.GetResByName(attach.Name),
                                     attach
                                 );
-                                b.BindSlotAttachment(this.GetSlot(slotName), a);
+                                b.BindSlotAttachment(this.GetSlotByName(slotName), a);
                             }
                         }
                     }
@@ -387,7 +389,7 @@ namespace PlumJsonAnimator.Models
 
             foreach (var skin in skins)
             {
-                Skin s = new Skin(skin.Key, this.globalState);
+                Skin s = new Skin(skin.Key, this._globalState);
                 var skinData = skin.Value;
                 s.SlotAttachmentBinding = new Dictionary<Slot, Attachment>();
                 foreach (string slotName in skinData.Attachments.Keys)
@@ -397,10 +399,10 @@ namespace PlumJsonAnimator.Models
                     {
                         var attach = attachs[attachName];
                         ImageAttachment a = new ImageAttachment(
-                            (ImageRes)this.FindRes(attach.Name),
+                            (ImageRes)this.GetResByName(attach.Name),
                             attach
                         );
-                        s.BindSlotAttachment(this.GetSlot(slotName), a);
+                        s.BindSlotAttachment(this.GetSlotByName(slotName), a);
                     }
                 }
                 this.Skins.Add(s);
@@ -424,7 +426,7 @@ namespace PlumJsonAnimator.Models
                         foreach (string name in animationData.Bones.Keys)
                         {
                             var boneAnimation = animationData.Bones[name];
-                            Bone bone = this.MainSkeleton.getBone(name);
+                            Bone bone = this.MainSkeleton.GetBoneByName(name);
                             foreach (IKeyframeTypeData keyframe in boneAnimation.rotate)
                             {
                                 b.RotateBone(bone, keyframe.Value, keyframe.Time);
@@ -440,7 +442,7 @@ namespace PlumJsonAnimator.Models
                             {
                                 foreach (DrawOrderOffset drawOrderOffset in item.Offsets)
                                 {
-                                    Slot s = this!.GetSlot(drawOrderOffset.Slot);
+                                    Slot s = this!.GetSlotByName(drawOrderOffset.Slot);
                                     if (s != null)
                                     {
                                         if (s.drawOrders.ContainsKey((double)item.Time))
@@ -454,9 +456,9 @@ namespace PlumJsonAnimator.Models
 
                                         if (item.Time == 0)
                                         {
-                                            s._isUpdatingFromCode = true;
+                                            s.isUpdatingFromCode = true;
                                             s.CurrentDrawOrderOffset = drawOrderOffset.Offset;
-                                            s._isUpdatingFromCode = false;
+                                            s.isUpdatingFromCode = false;
                                         }
                                     }
                                 }
@@ -473,14 +475,14 @@ namespace PlumJsonAnimator.Models
 
             foreach (var animation in animations)
             {
-                Animation a = new Animation(this.globalState, this.interpolation, animation.Key);
+                Animation a = new Animation(this._globalState, this._interpolation, animation.Key);
                 a.BoneAnimationBinding = new Dictionary<Bone, BoneAnimation>();
                 var animationData = animation.Value;
 
                 foreach (string name in animationData.Bones.Keys)
                 {
                     var boneAnimation = animationData.Bones[name];
-                    Bone bone = this.MainSkeleton.getBone(name);
+                    Bone bone = this.MainSkeleton.GetBoneByName(name);
                     foreach (IKeyframeTypeData keyframe in boneAnimation.rotate)
                     {
                         a.RotateBone(bone, keyframe.Value, keyframe.Time);
@@ -494,7 +496,7 @@ namespace PlumJsonAnimator.Models
                 {
                     foreach (DrawOrderOffset drawOrderOffset in item.Offsets)
                     {
-                        Slot s = this!.GetSlot(drawOrderOffset.Slot);
+                        Slot s = this!.GetSlotByName(drawOrderOffset.Slot);
                         if (s != null)
                         {
                             if (s.drawOrders.ContainsKey((double)item.Time))
@@ -508,9 +510,9 @@ namespace PlumJsonAnimator.Models
 
                             if (item.Time == 0)
                             {
-                                s._isUpdatingFromCode = true;
+                                s.isUpdatingFromCode = true;
                                 s.CurrentDrawOrderOffset = drawOrderOffset.Offset;
-                                s._isUpdatingFromCode = false;
+                                s.isUpdatingFromCode = false;
                             }
                         }
                     }
@@ -525,21 +527,24 @@ namespace PlumJsonAnimator.Models
 
             if (Skins.Count <= 0)
             {
-                Skins.Add(new Skin(this.globalState));
+                Skins.Add(new Skin(this._globalState));
             }
             if (Animations.Count <= 0)
             {
-                Animations.Add(new Animation(this.globalState, this.interpolation));
+                Animations.Add(new Animation(this._globalState, this._interpolation));
             }
 
             this.CurrentSkin = Skins[0];
             this.CurrentAnimation = Animations[0];
         }
     }
-}
 
-public class MetaData
-{
-    [JsonProperty("spine")]
-    public string? Spine { get; set; }
+    /// <summary>
+    /// Jsonifyed project metadata
+    /// </summary>
+    public class MetaData
+    {
+        [JsonProperty("spine")]
+        public string? Spine { get; set; }
+    }
 }

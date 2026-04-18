@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using Avalonia;
 using Avalonia.Controls;
@@ -9,10 +8,12 @@ using Avalonia.Media.Imaging;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
-using Tmds.DBus.Protocol;
 
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
+    /// <summary>
+    /// Provides methods for work with slots
+    /// </summary>
     public class Slot : Bone, IRenamable
     {
         public override bool IsBone
@@ -80,6 +81,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
+        /// <summary>
+        /// Sets actual attachment to slot according current skin
+        /// </summary>
         public void UpdateAttachment()
         {
             CurrentAttachment = this._globalState.CurrentProject!.CurrentSkin.GetAttachment(this);
@@ -99,8 +103,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public SortedDictionary<double, DrawOrderOffset> drawOrders =
             new SortedDictionary<double, DrawOrderOffset>();
 
+        public bool isUpdatingFromCode;
         private int _currentDrawOrderOffset;
-        public bool _isUpdatingFromCode;
         public int CurrentDrawOrderOffset
         {
             get => _currentDrawOrderOffset;
@@ -114,7 +118,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 }
 
                 _currentDrawOrderOffset = value;
-                if (!_isUpdatingFromCode)
+                if (!isUpdatingFromCode)
                 {
                     double currTime = this._globalState.CurrentProject.CurrentAnimation.currentTime;
                     if (drawOrders.Keys.Contains(currTime))
@@ -133,6 +137,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
+        /// <summary>
+        /// Updates draw order offset according current animation time
+        /// </summary>
         public void UpdateDrawOrderOffset()
         {
             double currTime = this._globalState.CurrentProject.CurrentAnimation.currentTime;
@@ -149,42 +156,42 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             var value = foundKey.HasValue ? drawOrders[foundKey.Value] : null;
             if (value != null)
             {
-                _isUpdatingFromCode = true;
+                isUpdatingFromCode = true;
                 this.CurrentDrawOrderOffset = value.Offset;
-                _isUpdatingFromCode = false;
+                isUpdatingFromCode = false;
             }
             else
             {
-                _isUpdatingFromCode = true;
+                isUpdatingFromCode = true;
                 this.CurrentDrawOrderOffset = 0;
-                _isUpdatingFromCode = false;
+                isUpdatingFromCode = false;
             }
         }
 
         public double parentA = 0;
-        private double lengthX = 100;
-        private double lengthY = 100;
+        private double _lengthX = 100;
+
         public override double LengthX
         {
-            get => lengthX;
+            get => _lengthX;
             set
             {
-                if (lengthX != value && value > 0)
+                if (_lengthX != value && value > 0)
                 {
-                    lengthX = value;
+                    _lengthX = value;
                     OnPropertyChanged(nameof(LengthX));
                 }
             }
         }
-
+        private double _lengthY = 100;
         public override double LengthY
         {
-            get => lengthY;
+            get => _lengthY;
             set
             {
-                if (lengthY != value && value > 0)
+                if (_lengthY != value && value > 0)
                 {
-                    lengthY = value;
+                    _lengthY = value;
                     OnPropertyChanged(nameof(LengthY));
                 }
             }
@@ -198,6 +205,10 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 if (_boundedBone != value)
                 {
                     _boundedBone = value;
+                    if (value != null)
+                    {
+                        Move(value.x, value.y);
+                    }
                     OnPropertyChanged();
                 }
             }
@@ -232,16 +243,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             UpdateAttachment();
         }
 
-        public void setBone(Bone? b)
-        {
-            this.BoundedBone = b;
-            if (b != null)
-            {
-                this.x = b.x;
-                this.y = b.y;
-            }
-        }
-
+        /// <summary>
+        /// Moves slot to target position
+        /// </summary>
+        /// <param name="x">Target x coordinate</param>
+        /// <param name="y">Target y coordinate</param>
         public override void Move(double x, double y)
         {
             this.x = x;
@@ -250,6 +256,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             CurrentAttachment?.SetPos(this.x, this.y, this.a);
         }
 
+        /// <summary>
+        /// Changes slot size
+        /// </summary>
+        /// <param name="x">X click coordinate</param>
+        /// <param name="y">Y click coordinate</param>
         public override void Scale(double x, double y)
         {
             if (this.CurrentAttachment != null)
@@ -261,6 +272,10 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
+        /// <summary>
+        /// Rotates slot
+        /// </summary>
+        /// <param name="a">Target angle</param>
         public override void Rotate(double a)
         {
             this.a = a;
@@ -271,16 +286,18 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         private Bitmap _cachedBitmap;
         private string _cachedPath;
 
-        public void drawSlot(Canvas canvas)
+        public void DrawSlot(Canvas canvas)
         {
-            if (!this._globalState.CurrentProject!.CurrentSkin.isSlotDrawable(this))
+            if (!this._globalState.CurrentProject!.CurrentSkin.IsSlotDrawable(this))
             {
                 return;
             }
 
             try
             {
-                string currentPath = this._globalState.CurrentProject.CurrentSkin.GetImagePath(this);
+                string currentPath = this._globalState.CurrentProject.CurrentSkin.GetImagePath(
+                    this
+                );
 
                 if (_cachedBitmap == null || _cachedPath != currentPath)
                 {
@@ -296,8 +313,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 var image = new Image
                 {
                     Source = _cachedBitmap,
-                    Width = lengthX,
-                    Height = lengthY,
+                    Width = _lengthX,
+                    Height = _lengthY,
                     RenderTransform = new RotateTransform(this.a + this.parentA),
                 };
 
@@ -334,12 +351,15 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
-        public void Dispose()
+        /// <summary>
+        /// Disposes cached bitmap
+        /// </summary>
+        private void Dispose()
         {
             _cachedBitmap?.Dispose();
         }
 
-        public new SlotData generateJSONData()
+        public new SlotData GenerateJSONData()
         {
             return new SlotData
             {
@@ -349,53 +369,15 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             };
         }
 
-        public new string generateCode()
+        public new string GenerateCode()
         {
-            return JsonConvert.SerializeObject(generateJSONData(), this._globalState.jsonSettings);
+            return JsonConvert.SerializeObject(GenerateJSONData(), this._globalState.jsonSettings);
         }
 
-        public Slot regenerate(string json, string imagesFolder = "")
-        {
-            try
-            {
-                var data = JsonConvert.DeserializeObject<SlotData>(
-                    json,
-                    this._globalState.jsonSettings
-                );
-
-                if (data == null)
-                    return new Slot(this._globalState, 0, "default.png");
-
-                string imagePath;
-                if (!string.IsNullOrEmpty(imagesFolder) && Directory.Exists(imagesFolder))
-                {
-                    var possibleExtensions = new[] { ".png", ".jpg", ".jpeg" };
-                    foreach (var ext in possibleExtensions)
-                    {
-                        var fullPath = imagesFolder + data.Attachment + ext;
-                        if (File.Exists(fullPath))
-                        {
-                            imagePath = fullPath;
-                            break;
-                        }
-                    }
-                    imagePath = imagesFolder + data.Attachment + ".png";
-                }
-                else
-                {
-                    imagePath = data.Attachment + ".png";
-                }
-
-                var slot = new Slot(this._globalState, 0, imagePath) { Name = data.Name };
-
-                return slot;
-            }
-            catch
-            {
-                return new Slot(this._globalState, 0, "default.png");
-            }
-        }
-
+        /// <summary>
+        /// Sets name to IRenamble object
+        /// </summary>
+        /// <param name="name">New name</param>
         public new void SetName(string? name)
         {
             if (name != null)
@@ -417,6 +399,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         }
     }
 
+    /// <summary>
+    /// Slot JSON data
+    /// </summary>
     public class SlotData
     {
         [JsonProperty("name")]
