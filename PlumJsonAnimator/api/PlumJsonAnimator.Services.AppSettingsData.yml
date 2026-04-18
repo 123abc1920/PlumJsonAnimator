@@ -29,7 +29,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AppSettingsData
     path: Services/AppSettings.cs
-    startLine: 197
+    startLine: 196
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -66,7 +66,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Services/AppSettings.cs
-    startLine: 197
+    startLine: 196
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -97,7 +97,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: LastDir
     path: Services/AppSettings.cs
-    startLine: 199
+    startLine: 198
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -138,7 +138,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Workspace
     path: Services/AppSettings.cs
-    startLine: 202
+    startLine: 201
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -179,7 +179,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Theme
     path: Services/AppSettings.cs
-    startLine: 205
+    startLine: 204
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -220,7 +220,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Lang
     path: Services/AppSettings.cs
-    startLine: 208
+    startLine: 207
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -261,7 +261,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Ffmpeg
     path: Services/AppSettings.cs
-    startLine: 211
+    startLine: 210
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -302,7 +302,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: CaptureX
     path: Services/AppSettings.cs
-    startLine: 214
+    startLine: 213
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -343,7 +343,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: CaptureY
     path: Services/AppSettings.cs
-    startLine: 217
+    startLine: 216
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -384,7 +384,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: CaptureWidth
     path: Services/AppSettings.cs
-    startLine: 220
+    startLine: 219
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -425,7 +425,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: CaptureHeight
     path: Services/AppSettings.cs
-    startLine: 223
+    startLine: 222
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services

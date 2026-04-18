@@ -16,15 +16,17 @@ items:
   type: Interface
   source:
     remote:
-      path: PlumJsonAnimator/Models/Interfaces/IRenameble.cs
+      path: PlumJsonAnimator/Models/Interfaces/IRenamable.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: IRenamable
-    path: Models/Interfaces/IRenameble.cs
-    startLine: 2
+    path: Models/Interfaces/IRenamable.cs
+    startLine: 5
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Interfaces
+  summary: Interface for al objects which can be renamed from UI
+  example: []
   syntax:
     content: public interface IRenamable
     content.vb: Public Interface IRenamable
@@ -46,12 +48,12 @@ items:
   type: Property
   source:
     remote:
-      path: PlumJsonAnimator/Models/Interfaces/IRenameble.cs
+      path: PlumJsonAnimator/Models/Interfaces/IRenamable.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetName
-    path: Models/Interfaces/IRenameble.cs
-    startLine: 4
+    path: Models/Interfaces/IRenamable.cs
+    startLine: 7
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Interfaces
@@ -75,12 +77,12 @@ items:
   type: Method
   source:
     remote:
-      path: PlumJsonAnimator/Models/Interfaces/IRenameble.cs
+      path: PlumJsonAnimator/Models/Interfaces/IRenamable.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SetName
-    path: Models/Interfaces/IRenameble.cs
-    startLine: 6
+    path: Models/Interfaces/IRenamable.cs
+    startLine: 9
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Interfaces

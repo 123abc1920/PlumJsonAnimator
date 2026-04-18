@@ -7,10 +7,10 @@ items:
   children:
   - PlumJsonAnimator.Services.ImageExporter.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
   - PlumJsonAnimator.Services.ImageExporter.Canvas
-  - PlumJsonAnimator.Services.ImageExporter.ExportAsGif(System.Double,System.Double,System.String)
-  - PlumJsonAnimator.Services.ImageExporter.ExportAsJpg(System.Double,System.Double,System.String)
-  - PlumJsonAnimator.Services.ImageExporter.ExportAsMp4(System.Double,System.Double,System.String,System.String)
-  - PlumJsonAnimator.Services.ImageExporter.ExportAsPng(System.Double,System.Double,System.String)
+  - PlumJsonAnimator.Services.ImageExporter.ExportAsGif(System.Double,System.Double,System.String,PlumJsonAnimator.Models.Project)
+  - PlumJsonAnimator.Services.ImageExporter.ExportAsJpg(System.Double,System.Double,System.String,PlumJsonAnimator.Models.Project)
+  - PlumJsonAnimator.Services.ImageExporter.ExportAsMp4(System.Double,System.Double,System.String,System.String,PlumJsonAnimator.Models.Project)
+  - PlumJsonAnimator.Services.ImageExporter.ExportAsPng(System.Double,System.Double,System.String,PlumJsonAnimator.Models.Project)
   - PlumJsonAnimator.Services.ImageExporter.ExportPath
   - PlumJsonAnimator.Services.ImageExporter.ProgressChanged
   langs:
@@ -161,16 +161,16 @@ items:
     return:
       type: System.EventHandler{System.Int32}
     content.vb: Public Event ProgressChanged As EventHandler(Of Integer)
-- uid: PlumJsonAnimator.Services.ImageExporter.ExportAsPng(System.Double,System.Double,System.String)
-  commentId: M:PlumJsonAnimator.Services.ImageExporter.ExportAsPng(System.Double,System.Double,System.String)
-  id: ExportAsPng(System.Double,System.Double,System.String)
+- uid: PlumJsonAnimator.Services.ImageExporter.ExportAsPng(System.Double,System.Double,System.String,PlumJsonAnimator.Models.Project)
+  commentId: M:PlumJsonAnimator.Services.ImageExporter.ExportAsPng(System.Double,System.Double,System.String,PlumJsonAnimator.Models.Project)
+  id: ExportAsPng(System.Double,System.Double,System.String,PlumJsonAnimator.Models.Project)
   parent: PlumJsonAnimator.Services.ImageExporter
   langs:
   - csharp
   - vb
-  name: ExportAsPng(double, double, string)
-  nameWithType: ImageExporter.ExportAsPng(double, double, string)
-  fullName: PlumJsonAnimator.Services.ImageExporter.ExportAsPng(double, double, string)
+  name: ExportAsPng(double, double, string, Project)
+  nameWithType: ImageExporter.ExportAsPng(double, double, string, Project)
+  fullName: PlumJsonAnimator.Services.ImageExporter.ExportAsPng(double, double, string, PlumJsonAnimator.Models.Project)
   type: Method
   source:
     remote:
@@ -179,14 +179,14 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ExportAsPng
     path: Services/ImageExporter.cs
-    startLine: 87
+    startLine: 88
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
   summary: Exports animation into array of png images
   example: []
   syntax:
-    content: public Task<ExportResult> ExportAsPng(double start, double end, string outputFolder)
+    content: public Task<ExportResult> ExportAsPng(double start, double end, string outputFolder, Project project)
     parameters:
     - id: start
       type: System.Double
@@ -197,23 +197,26 @@ items:
     - id: outputFolder
       type: System.String
       description: Folder with array of images
+    - id: project
+      type: PlumJsonAnimator.Models.Project
+      description: ''
     return:
       type: System.Threading.Tasks.Task{PlumJsonAnimator.Models.ExportResult}
-    content.vb: Public Function ExportAsPng(start As Double, [end] As Double, outputFolder As String) As Task(Of ExportResult)
+    content.vb: Public Function ExportAsPng(start As Double, [end] As Double, outputFolder As String, project As Project) As Task(Of ExportResult)
   overload: PlumJsonAnimator.Services.ImageExporter.ExportAsPng*
-  nameWithType.vb: ImageExporter.ExportAsPng(Double, Double, String)
-  fullName.vb: PlumJsonAnimator.Services.ImageExporter.ExportAsPng(Double, Double, String)
-  name.vb: ExportAsPng(Double, Double, String)
-- uid: PlumJsonAnimator.Services.ImageExporter.ExportAsJpg(System.Double,System.Double,System.String)
-  commentId: M:PlumJsonAnimator.Services.ImageExporter.ExportAsJpg(System.Double,System.Double,System.String)
-  id: ExportAsJpg(System.Double,System.Double,System.String)
+  nameWithType.vb: ImageExporter.ExportAsPng(Double, Double, String, Project)
+  fullName.vb: PlumJsonAnimator.Services.ImageExporter.ExportAsPng(Double, Double, String, PlumJsonAnimator.Models.Project)
+  name.vb: ExportAsPng(Double, Double, String, Project)
+- uid: PlumJsonAnimator.Services.ImageExporter.ExportAsJpg(System.Double,System.Double,System.String,PlumJsonAnimator.Models.Project)
+  commentId: M:PlumJsonAnimator.Services.ImageExporter.ExportAsJpg(System.Double,System.Double,System.String,PlumJsonAnimator.Models.Project)
+  id: ExportAsJpg(System.Double,System.Double,System.String,PlumJsonAnimator.Models.Project)
   parent: PlumJsonAnimator.Services.ImageExporter
   langs:
   - csharp
   - vb
-  name: ExportAsJpg(double, double, string)
-  nameWithType: ImageExporter.ExportAsJpg(double, double, string)
-  fullName: PlumJsonAnimator.Services.ImageExporter.ExportAsJpg(double, double, string)
+  name: ExportAsJpg(double, double, string, Project)
+  nameWithType: ImageExporter.ExportAsJpg(double, double, string, Project)
+  fullName: PlumJsonAnimator.Services.ImageExporter.ExportAsJpg(double, double, string, PlumJsonAnimator.Models.Project)
   type: Method
   source:
     remote:
@@ -222,14 +225,14 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ExportAsJpg
     path: Services/ImageExporter.cs
-    startLine: 143
+    startLine: 147
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
   summary: Exports animation into array of jpg images
   example: []
   syntax:
-    content: public Task<ExportResult> ExportAsJpg(double start, double end, string outputFolder)
+    content: public Task<ExportResult> ExportAsJpg(double start, double end, string outputFolder, Project project)
     parameters:
     - id: start
       type: System.Double
@@ -240,23 +243,26 @@ items:
     - id: outputFolder
       type: System.String
       description: Folder with array of images
+    - id: project
+      type: PlumJsonAnimator.Models.Project
+      description: ''
     return:
       type: System.Threading.Tasks.Task{PlumJsonAnimator.Models.ExportResult}
-    content.vb: Public Function ExportAsJpg(start As Double, [end] As Double, outputFolder As String) As Task(Of ExportResult)
+    content.vb: Public Function ExportAsJpg(start As Double, [end] As Double, outputFolder As String, project As Project) As Task(Of ExportResult)
   overload: PlumJsonAnimator.Services.ImageExporter.ExportAsJpg*
-  nameWithType.vb: ImageExporter.ExportAsJpg(Double, Double, String)
-  fullName.vb: PlumJsonAnimator.Services.ImageExporter.ExportAsJpg(Double, Double, String)
-  name.vb: ExportAsJpg(Double, Double, String)
-- uid: PlumJsonAnimator.Services.ImageExporter.ExportAsGif(System.Double,System.Double,System.String)
-  commentId: M:PlumJsonAnimator.Services.ImageExporter.ExportAsGif(System.Double,System.Double,System.String)
-  id: ExportAsGif(System.Double,System.Double,System.String)
+  nameWithType.vb: ImageExporter.ExportAsJpg(Double, Double, String, Project)
+  fullName.vb: PlumJsonAnimator.Services.ImageExporter.ExportAsJpg(Double, Double, String, PlumJsonAnimator.Models.Project)
+  name.vb: ExportAsJpg(Double, Double, String, Project)
+- uid: PlumJsonAnimator.Services.ImageExporter.ExportAsGif(System.Double,System.Double,System.String,PlumJsonAnimator.Models.Project)
+  commentId: M:PlumJsonAnimator.Services.ImageExporter.ExportAsGif(System.Double,System.Double,System.String,PlumJsonAnimator.Models.Project)
+  id: ExportAsGif(System.Double,System.Double,System.String,PlumJsonAnimator.Models.Project)
   parent: PlumJsonAnimator.Services.ImageExporter
   langs:
   - csharp
   - vb
-  name: ExportAsGif(double, double, string)
-  nameWithType: ImageExporter.ExportAsGif(double, double, string)
-  fullName: PlumJsonAnimator.Services.ImageExporter.ExportAsGif(double, double, string)
+  name: ExportAsGif(double, double, string, Project)
+  nameWithType: ImageExporter.ExportAsGif(double, double, string, Project)
+  fullName: PlumJsonAnimator.Services.ImageExporter.ExportAsGif(double, double, string, PlumJsonAnimator.Models.Project)
   type: Method
   source:
     remote:
@@ -265,14 +271,14 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ExportAsGif
     path: Services/ImageExporter.cs
-    startLine: 199
+    startLine: 206
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
   summary: Exports animation into gif file
   example: []
   syntax:
-    content: public Task<ExportResult> ExportAsGif(double start, double end, string outputFile)
+    content: public Task<ExportResult> ExportAsGif(double start, double end, string outputFile, Project project)
     parameters:
     - id: start
       type: System.Double
@@ -283,23 +289,26 @@ items:
     - id: outputFile
       type: System.String
       description: Gif file
+    - id: project
+      type: PlumJsonAnimator.Models.Project
+      description: ''
     return:
       type: System.Threading.Tasks.Task{PlumJsonAnimator.Models.ExportResult}
-    content.vb: Public Function ExportAsGif(start As Double, [end] As Double, outputFile As String) As Task(Of ExportResult)
+    content.vb: Public Function ExportAsGif(start As Double, [end] As Double, outputFile As String, project As Project) As Task(Of ExportResult)
   overload: PlumJsonAnimator.Services.ImageExporter.ExportAsGif*
-  nameWithType.vb: ImageExporter.ExportAsGif(Double, Double, String)
-  fullName.vb: PlumJsonAnimator.Services.ImageExporter.ExportAsGif(Double, Double, String)
-  name.vb: ExportAsGif(Double, Double, String)
-- uid: PlumJsonAnimator.Services.ImageExporter.ExportAsMp4(System.Double,System.Double,System.String,System.String)
-  commentId: M:PlumJsonAnimator.Services.ImageExporter.ExportAsMp4(System.Double,System.Double,System.String,System.String)
-  id: ExportAsMp4(System.Double,System.Double,System.String,System.String)
+  nameWithType.vb: ImageExporter.ExportAsGif(Double, Double, String, Project)
+  fullName.vb: PlumJsonAnimator.Services.ImageExporter.ExportAsGif(Double, Double, String, PlumJsonAnimator.Models.Project)
+  name.vb: ExportAsGif(Double, Double, String, Project)
+- uid: PlumJsonAnimator.Services.ImageExporter.ExportAsMp4(System.Double,System.Double,System.String,System.String,PlumJsonAnimator.Models.Project)
+  commentId: M:PlumJsonAnimator.Services.ImageExporter.ExportAsMp4(System.Double,System.Double,System.String,System.String,PlumJsonAnimator.Models.Project)
+  id: ExportAsMp4(System.Double,System.Double,System.String,System.String,PlumJsonAnimator.Models.Project)
   parent: PlumJsonAnimator.Services.ImageExporter
   langs:
   - csharp
   - vb
-  name: ExportAsMp4(double, double, string, string)
-  nameWithType: ImageExporter.ExportAsMp4(double, double, string, string)
-  fullName: PlumJsonAnimator.Services.ImageExporter.ExportAsMp4(double, double, string, string)
+  name: ExportAsMp4(double, double, string, string, Project)
+  nameWithType: ImageExporter.ExportAsMp4(double, double, string, string, Project)
+  fullName: PlumJsonAnimator.Services.ImageExporter.ExportAsMp4(double, double, string, string, PlumJsonAnimator.Models.Project)
   type: Method
   source:
     remote:
@@ -308,14 +317,14 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ExportAsMp4
     path: Services/ImageExporter.cs
-    startLine: 295
+    startLine: 305
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
   summary: Exports animation into mp4 file
   example: []
   syntax:
-    content: public Task<ExportResult> ExportAsMp4(double start, double end, string outputFile, string ffmpegPath)
+    content: public Task<ExportResult> ExportAsMp4(double start, double end, string outputFile, string ffmpegPath, Project project)
     parameters:
     - id: start
       type: System.Double
@@ -329,13 +338,16 @@ items:
     - id: ffmpegPath
       type: System.String
       description: Path to ffmpeg exe
+    - id: project
+      type: PlumJsonAnimator.Models.Project
+      description: ''
     return:
       type: System.Threading.Tasks.Task{PlumJsonAnimator.Models.ExportResult}
-    content.vb: Public Function ExportAsMp4(start As Double, [end] As Double, outputFile As String, ffmpegPath As String) As Task(Of ExportResult)
+    content.vb: Public Function ExportAsMp4(start As Double, [end] As Double, outputFile As String, ffmpegPath As String, project As Project) As Task(Of ExportResult)
   overload: PlumJsonAnimator.Services.ImageExporter.ExportAsMp4*
-  nameWithType.vb: ImageExporter.ExportAsMp4(Double, Double, String, String)
-  fullName.vb: PlumJsonAnimator.Services.ImageExporter.ExportAsMp4(Double, Double, String, String)
-  name.vb: ExportAsMp4(Double, Double, String, String)
+  nameWithType.vb: ImageExporter.ExportAsMp4(Double, Double, String, String, Project)
+  fullName.vb: PlumJsonAnimator.Services.ImageExporter.ExportAsMp4(Double, Double, String, String, PlumJsonAnimator.Models.Project)
+  name.vb: ExportAsMp4(Double, Double, String, String, Project)
 references:
 - uid: PlumJsonAnimator.Services
   commentId: N:PlumJsonAnimator.Services
@@ -753,7 +765,7 @@ references:
   - name: )
 - uid: PlumJsonAnimator.Services.ImageExporter.ExportAsPng*
   commentId: Overload:PlumJsonAnimator.Services.ImageExporter.ExportAsPng
-  href: PlumJsonAnimator.Services.ImageExporter.html#PlumJsonAnimator_Services_ImageExporter_ExportAsPng_System_Double_System_Double_System_String_
+  href: PlumJsonAnimator.Services.ImageExporter.html#PlumJsonAnimator_Services_ImageExporter_ExportAsPng_System_Double_System_Double_System_String_PlumJsonAnimator_Models_Project_
   name: ExportAsPng
   nameWithType: ImageExporter.ExportAsPng
   fullName: PlumJsonAnimator.Services.ImageExporter.ExportAsPng
@@ -768,6 +780,13 @@ references:
   nameWithType.vb: Double
   fullName.vb: Double
   name.vb: Double
+- uid: PlumJsonAnimator.Models.Project
+  commentId: T:PlumJsonAnimator.Models.Project
+  parent: PlumJsonAnimator.Models
+  href: PlumJsonAnimator.Models.Project.html
+  name: Project
+  nameWithType: Project
+  fullName: PlumJsonAnimator.Models.Project
 - uid: System.Threading.Tasks.Task{PlumJsonAnimator.Models.ExportResult}
   commentId: T:System.Threading.Tasks.Task{PlumJsonAnimator.Models.ExportResult}
   parent: System.Threading.Tasks
@@ -801,6 +820,28 @@ references:
     name: ExportResult
     href: PlumJsonAnimator.Models.ExportResult.html
   - name: )
+- uid: PlumJsonAnimator.Models
+  commentId: N:PlumJsonAnimator.Models
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Models
+  nameWithType: PlumJsonAnimator.Models
+  fullName: PlumJsonAnimator.Models
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
 - uid: System.Threading.Tasks.Task`1
   commentId: T:System.Threading.Tasks.Task`1
   isExternal: true
@@ -868,19 +909,19 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
 - uid: PlumJsonAnimator.Services.ImageExporter.ExportAsJpg*
   commentId: Overload:PlumJsonAnimator.Services.ImageExporter.ExportAsJpg
-  href: PlumJsonAnimator.Services.ImageExporter.html#PlumJsonAnimator_Services_ImageExporter_ExportAsJpg_System_Double_System_Double_System_String_
+  href: PlumJsonAnimator.Services.ImageExporter.html#PlumJsonAnimator_Services_ImageExporter_ExportAsJpg_System_Double_System_Double_System_String_PlumJsonAnimator_Models_Project_
   name: ExportAsJpg
   nameWithType: ImageExporter.ExportAsJpg
   fullName: PlumJsonAnimator.Services.ImageExporter.ExportAsJpg
 - uid: PlumJsonAnimator.Services.ImageExporter.ExportAsGif*
   commentId: Overload:PlumJsonAnimator.Services.ImageExporter.ExportAsGif
-  href: PlumJsonAnimator.Services.ImageExporter.html#PlumJsonAnimator_Services_ImageExporter_ExportAsGif_System_Double_System_Double_System_String_
+  href: PlumJsonAnimator.Services.ImageExporter.html#PlumJsonAnimator_Services_ImageExporter_ExportAsGif_System_Double_System_Double_System_String_PlumJsonAnimator_Models_Project_
   name: ExportAsGif
   nameWithType: ImageExporter.ExportAsGif
   fullName: PlumJsonAnimator.Services.ImageExporter.ExportAsGif
 - uid: PlumJsonAnimator.Services.ImageExporter.ExportAsMp4*
   commentId: Overload:PlumJsonAnimator.Services.ImageExporter.ExportAsMp4
-  href: PlumJsonAnimator.Services.ImageExporter.html#PlumJsonAnimator_Services_ImageExporter_ExportAsMp4_System_Double_System_Double_System_String_System_String_
+  href: PlumJsonAnimator.Services.ImageExporter.html#PlumJsonAnimator_Services_ImageExporter_ExportAsMp4_System_Double_System_Double_System_String_System_String_PlumJsonAnimator_Models_Project_
   name: ExportAsMp4
   nameWithType: ImageExporter.ExportAsMp4
   fullName: PlumJsonAnimator.Services.ImageExporter.ExportAsMp4

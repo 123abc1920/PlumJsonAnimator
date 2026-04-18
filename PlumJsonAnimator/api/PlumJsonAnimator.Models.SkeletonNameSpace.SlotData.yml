@@ -22,10 +22,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SlotData
     path: Models/Skeleton/Slot.cs
-    startLine: 419
+    startLine: 404
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  summary: Slot JSON data
+  example: []
   syntax:
     content: public class SlotData
     content.vb: Public Class SlotData
@@ -57,7 +59,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Name
     path: Models/Skeleton/Slot.cs
-    startLine: 421
+    startLine: 406
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -98,7 +100,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Bone
     path: Models/Skeleton/Slot.cs
-    startLine: 424
+    startLine: 409
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -143,7 +145,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Attachment
     path: Models/Skeleton/Slot.cs
-    startLine: 427
+    startLine: 412
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace

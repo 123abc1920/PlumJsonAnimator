@@ -24,7 +24,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: IKeyframeTypeData
     path: Models/Common/AnimTransformations.cs
-    startLine: 33
+    startLine: 36
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common
@@ -59,7 +59,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Models/Common/AnimTransformations.cs
-    startLine: 33
+    startLine: 36
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common
@@ -88,7 +88,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Time
     path: Models/Common/AnimTransformations.cs
-    startLine: 35
+    startLine: 38
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common
@@ -129,7 +129,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: X
     path: Models/Common/AnimTransformations.cs
-    startLine: 38
+    startLine: 41
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common
@@ -174,7 +174,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Y
     path: Models/Common/AnimTransformations.cs
-    startLine: 41
+    startLine: 44
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common
@@ -219,7 +219,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Value
     path: Models/Common/AnimTransformations.cs
-    startLine: 44
+    startLine: 47
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common

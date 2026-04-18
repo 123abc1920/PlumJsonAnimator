@@ -21,10 +21,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: DoubleConverter
     path: Common/Converters/DoubleConverter.cs
-    startLine: 6
+    startLine: 9
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Converters
+  summary: Converter for double values in UI
+  example: []
   syntax:
     content: 'public class DoubleConverter : IValueConverter'
     content.vb: Public Class DoubleConverter Implements IValueConverter
@@ -58,7 +60,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Convert
     path: Common/Converters/DoubleConverter.cs
-    startLine: 8
+    startLine: 11
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Converters
@@ -113,7 +115,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ConvertBack
     path: Common/Converters/DoubleConverter.cs
-    startLine: 29
+    startLine: 32
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Converters

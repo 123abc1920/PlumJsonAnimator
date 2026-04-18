@@ -15,11 +15,11 @@ items:
   type: Class
   source:
     remote:
-      path: PlumJsonAnimator/Common/TimeLine/TimeLine.cs
+      path: PlumJsonAnimator/Common/TimeLine/TimeLineTrack.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: TimelineTrack
-    path: Common/TimeLine/TimeLine.cs
+    path: Common/TimeLine/TimeLineTrack.cs
     startLine: 2
   assemblies:
   - PlumJsonAnimator
@@ -50,11 +50,11 @@ items:
   type: Property
   source:
     remote:
-      path: PlumJsonAnimator/Common/TimeLine/TimeLine.cs
+      path: PlumJsonAnimator/Common/TimeLine/TimeLineTrack.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Name
-    path: Common/TimeLine/TimeLine.cs
+    path: Common/TimeLine/TimeLineTrack.cs
     startLine: 4
   assemblies:
   - PlumJsonAnimator

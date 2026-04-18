@@ -12,10 +12,10 @@ items:
   - PlumJsonAnimator.Models.Resources.Res.Preview
   - PlumJsonAnimator.Models.Resources.Res.SetName(System.String)
   - PlumJsonAnimator.Models.Resources.Res.SetPath(System.String)
+  - PlumJsonAnimator.Models.Resources.Res._globalState
   - PlumJsonAnimator.Models.Resources.Res._path
+  - PlumJsonAnimator.Models.Resources.Res._projectManager
   - PlumJsonAnimator.Models.Resources.Res.ext
-  - PlumJsonAnimator.Models.Resources.Res.globalState
-  - PlumJsonAnimator.Models.Resources.Res.projectManager
   langs:
   - csharp
   - vb
@@ -30,7 +30,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Res
     path: Models/Resources/Resources.cs
-    startLine: 12
+    startLine: 13
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Resources
@@ -75,7 +75,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Name
     path: Models/Resources/Resources.cs
-    startLine: 15
+    startLine: 16
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Resources
@@ -86,60 +86,60 @@ items:
       type: System.String
     content.vb: Public Property Name As String
   overload: PlumJsonAnimator.Models.Resources.Res.Name*
-- uid: PlumJsonAnimator.Models.Resources.Res.projectManager
-  commentId: F:PlumJsonAnimator.Models.Resources.Res.projectManager
-  id: projectManager
+- uid: PlumJsonAnimator.Models.Resources.Res._projectManager
+  commentId: F:PlumJsonAnimator.Models.Resources.Res._projectManager
+  id: _projectManager
   parent: PlumJsonAnimator.Models.Resources.Res
   langs:
   - csharp
   - vb
-  name: projectManager
-  nameWithType: Res.projectManager
-  fullName: PlumJsonAnimator.Models.Resources.Res.projectManager
+  name: _projectManager
+  nameWithType: Res._projectManager
+  fullName: PlumJsonAnimator.Models.Resources.Res._projectManager
   type: Field
   source:
     remote:
       path: PlumJsonAnimator/Models/Resources/Resources.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: projectManager
-    path: Models/Resources/Resources.cs
-    startLine: 28
-  assemblies:
-  - PlumJsonAnimator
-  namespace: PlumJsonAnimator.Models.Resources
-  syntax:
-    content: protected ProjectFilesManager projectManager
-    return:
-      type: PlumJsonAnimator.Services.ProjectFilesManager
-    content.vb: Protected projectManager As ProjectFilesManager
-- uid: PlumJsonAnimator.Models.Resources.Res.globalState
-  commentId: F:PlumJsonAnimator.Models.Resources.Res.globalState
-  id: globalState
-  parent: PlumJsonAnimator.Models.Resources.Res
-  langs:
-  - csharp
-  - vb
-  name: globalState
-  nameWithType: Res.globalState
-  fullName: PlumJsonAnimator.Models.Resources.Res.globalState
-  type: Field
-  source:
-    remote:
-      path: PlumJsonAnimator/Models/Resources/Resources.cs
-      branch: main
-      repo: https://github.com/123abc1920/PlumAnimation.git
-    id: globalState
+    id: _projectManager
     path: Models/Resources/Resources.cs
     startLine: 29
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Resources
   syntax:
-    content: protected GlobalState globalState
+    content: protected ProjectFilesManager _projectManager
+    return:
+      type: PlumJsonAnimator.Services.ProjectFilesManager
+    content.vb: Protected _projectManager As ProjectFilesManager
+- uid: PlumJsonAnimator.Models.Resources.Res._globalState
+  commentId: F:PlumJsonAnimator.Models.Resources.Res._globalState
+  id: _globalState
+  parent: PlumJsonAnimator.Models.Resources.Res
+  langs:
+  - csharp
+  - vb
+  name: _globalState
+  nameWithType: Res._globalState
+  fullName: PlumJsonAnimator.Models.Resources.Res._globalState
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Resources/Resources.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: _globalState
+    path: Models/Resources/Resources.cs
+    startLine: 30
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.Resources
+  syntax:
+    content: protected GlobalState _globalState
     return:
       type: PlumJsonAnimator.Common.Constants.GlobalState
-    content.vb: Protected globalState As GlobalState
+    content.vb: Protected _globalState As GlobalState
 - uid: PlumJsonAnimator.Models.Resources.Res.#ctor(PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Common.Constants.GlobalState)
   commentId: M:PlumJsonAnimator.Models.Resources.Res.#ctor(PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Common.Constants.GlobalState)
   id: '#ctor(PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Common.Constants.GlobalState)'
@@ -158,7 +158,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Models/Resources/Resources.cs
-    startLine: 31
+    startLine: 32
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Resources
@@ -192,7 +192,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetName
     path: Models/Resources/Resources.cs
-    startLine: 37
+    startLine: 38
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Resources
@@ -224,7 +224,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: _path
     path: Models/Resources/Resources.cs
-    startLine: 49
+    startLine: 50
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Resources
@@ -251,7 +251,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Path
     path: Models/Resources/Resources.cs
-    startLine: 50
+    startLine: 51
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Resources
@@ -280,7 +280,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Preview
     path: Models/Resources/Resources.cs
-    startLine: 65
+    startLine: 66
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Resources
@@ -309,7 +309,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ext
     path: Models/Resources/Resources.cs
-    startLine: 81
+    startLine: 82
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Resources
@@ -336,7 +336,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SetName
     path: Models/Resources/Resources.cs
-    startLine: 83
+    startLine: 84
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Resources
@@ -371,7 +371,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SetPath
     path: Models/Resources/Resources.cs
-    startLine: 99
+    startLine: 100
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Resources

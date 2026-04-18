@@ -9,6 +9,7 @@ items:
   - PlumJsonAnimator.Models.CaptureArea
   - PlumJsonAnimator.Models.ExportResult
   - PlumJsonAnimator.Models.JsonError
+  - PlumJsonAnimator.Models.MetaData
   - PlumJsonAnimator.Models.Project
   langs:
   - csharp
@@ -61,6 +62,13 @@ references:
   name: Project
   nameWithType: Project
   fullName: PlumJsonAnimator.Models.Project
+- uid: PlumJsonAnimator.Models.MetaData
+  commentId: T:PlumJsonAnimator.Models.MetaData
+  parent: PlumJsonAnimator.Models
+  href: PlumJsonAnimator.Models.MetaData.html
+  name: MetaData
+  nameWithType: MetaData
+  fullName: PlumJsonAnimator.Models.MetaData
 - uid: PlumJsonAnimator.Models
   commentId: N:PlumJsonAnimator.Models
   href: PlumJsonAnimator.html

@@ -1,0 +1,26 @@
+apiRules:
+  - exclude:
+      uidRegex: ^PlumJsonAnimator\.Views.
+  - exclude:
+      uidRegex: ^PlumJsonAnimator\.ViewModels\.
+
+  - exclude:
+      uidRegex: ^PlumJsonAnimator\.Common\.Converters\.[^\.]+$
+      type: Class
+  - exclude:
+      uidRegex: ^PlumJsonAnimator\.Common\.Timeline\.[^\.]+$
+      type: Class
+  - exclude:
+      uidRegex: ^PlumJsonAnimator\.Common\.Constants\.Command\.[^\.]+$
+      type: Class
+
+  - exclude:
+      uidRegex: ^PlumJsonAnimator\.[^\.]+$
+      type: Class
+
+  - exclude:
+      hasAttribute:
+        uid: System.Runtime.CompilerServices.CompilerGeneratedAttribute
+
+  - include:
+      uidRegex: .*

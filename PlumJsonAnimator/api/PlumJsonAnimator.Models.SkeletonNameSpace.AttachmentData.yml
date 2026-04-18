@@ -25,10 +25,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AttachmentData
     path: Models/Skeleton/Attachment.cs
-    startLine: 95
+    startLine: 105
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  summary: Jsonifyed attachment data
+  example: []
   syntax:
     content: public class AttachmentData
     content.vb: Public Class AttachmentData
@@ -60,7 +62,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Name
     path: Models/Skeleton/Attachment.cs
-    startLine: 97
+    startLine: 107
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -101,7 +103,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Width
     path: Models/Skeleton/Attachment.cs
-    startLine: 100
+    startLine: 110
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -146,7 +148,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Height
     path: Models/Skeleton/Attachment.cs
-    startLine: 103
+    startLine: 113
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -191,7 +193,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: X
     path: Models/Skeleton/Attachment.cs
-    startLine: 106
+    startLine: 116
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -236,7 +238,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Y
     path: Models/Skeleton/Attachment.cs
-    startLine: 109
+    startLine: 119
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -281,7 +283,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: A
     path: Models/Skeleton/Attachment.cs
-    startLine: 112
+    startLine: 122
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace

@@ -72,7 +72,7 @@ items:
       public required MetaData Skeleton { get; set; }
     parameters: []
     return:
-      type: MetaData
+      type: PlumJsonAnimator.Models.MetaData
     content.vb: >-
       <JsonProperty("skeleton")>
 
@@ -514,12 +514,35 @@ references:
   name: Skeleton
   nameWithType: CodeData.Skeleton
   fullName: PlumJsonAnimator.Services.CodeData.Skeleton
-- uid: MetaData
-  commentId: T:MetaData
-  href: MetaData.html
+- uid: PlumJsonAnimator.Models.MetaData
+  commentId: T:PlumJsonAnimator.Models.MetaData
+  parent: PlumJsonAnimator.Models
+  href: PlumJsonAnimator.Models.MetaData.html
   name: MetaData
   nameWithType: MetaData
-  fullName: MetaData
+  fullName: PlumJsonAnimator.Models.MetaData
+- uid: PlumJsonAnimator.Models
+  commentId: N:PlumJsonAnimator.Models
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Models
+  nameWithType: PlumJsonAnimator.Models
+  fullName: PlumJsonAnimator.Models
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
 - uid: PlumJsonAnimator.Services.CodeData.Bones*
   commentId: Overload:PlumJsonAnimator.Services.CodeData.Bones
   href: PlumJsonAnimator.Services.CodeData.html#PlumJsonAnimator_Services_CodeData_Bones

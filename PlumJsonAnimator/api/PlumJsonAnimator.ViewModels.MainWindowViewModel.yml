@@ -45,7 +45,7 @@ items:
   - PlumJsonAnimator.ViewModels.MainWindowViewModel.SaveProject
   - PlumJsonAnimator.ViewModels.MainWindowViewModel.SetMainWin(Avalonia.Controls.Window)
   - PlumJsonAnimator.ViewModels.MainWindowViewModel.SetTransformMode
-  - PlumJsonAnimator.ViewModels.MainWindowViewModel.ShowDialog(System.String,Avalonia.Controls.Window,PlumJsonAnimator.Common.Dialogs.ViewType)
+  - PlumJsonAnimator.ViewModels.MainWindowViewModel.ShowDialog(System.String,Avalonia.Controls.Window,PlumJsonAnimator.Common.Dialogs.DialogType)
   - PlumJsonAnimator.ViewModels.MainWindowViewModel.Timeline
   - PlumJsonAnimator.ViewModels.MainWindowViewModel.ToggleTransformModeCommand
   - PlumJsonAnimator.ViewModels.MainWindowViewModel.TransformMode
@@ -690,16 +690,16 @@ items:
       type: Avalonia.Controls.Window
     content.vb: Public Sub SetMainWin(window As Window)
   overload: PlumJsonAnimator.ViewModels.MainWindowViewModel.SetMainWin*
-- uid: PlumJsonAnimator.ViewModels.MainWindowViewModel.ShowDialog(System.String,Avalonia.Controls.Window,PlumJsonAnimator.Common.Dialogs.ViewType)
-  commentId: M:PlumJsonAnimator.ViewModels.MainWindowViewModel.ShowDialog(System.String,Avalonia.Controls.Window,PlumJsonAnimator.Common.Dialogs.ViewType)
-  id: ShowDialog(System.String,Avalonia.Controls.Window,PlumJsonAnimator.Common.Dialogs.ViewType)
+- uid: PlumJsonAnimator.ViewModels.MainWindowViewModel.ShowDialog(System.String,Avalonia.Controls.Window,PlumJsonAnimator.Common.Dialogs.DialogType)
+  commentId: M:PlumJsonAnimator.ViewModels.MainWindowViewModel.ShowDialog(System.String,Avalonia.Controls.Window,PlumJsonAnimator.Common.Dialogs.DialogType)
+  id: ShowDialog(System.String,Avalonia.Controls.Window,PlumJsonAnimator.Common.Dialogs.DialogType)
   parent: PlumJsonAnimator.ViewModels.MainWindowViewModel
   langs:
   - csharp
   - vb
-  name: ShowDialog(string, Window, ViewType)
-  nameWithType: MainWindowViewModel.ShowDialog(string, Window, ViewType)
-  fullName: PlumJsonAnimator.ViewModels.MainWindowViewModel.ShowDialog(string, Avalonia.Controls.Window, PlumJsonAnimator.Common.Dialogs.ViewType)
+  name: ShowDialog(string, Window, DialogType)
+  nameWithType: MainWindowViewModel.ShowDialog(string, Window, DialogType)
+  fullName: PlumJsonAnimator.ViewModels.MainWindowViewModel.ShowDialog(string, Avalonia.Controls.Window, PlumJsonAnimator.Common.Dialogs.DialogType)
   type: Method
   source:
     remote:
@@ -713,19 +713,19 @@ items:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.ViewModels
   syntax:
-    content: public void ShowDialog(string title, Window owner, ViewType viewType)
+    content: public void ShowDialog(string title, Window owner, DialogType viewType)
     parameters:
     - id: title
       type: System.String
     - id: owner
       type: Avalonia.Controls.Window
     - id: viewType
-      type: PlumJsonAnimator.Common.Dialogs.ViewType
-    content.vb: Public Sub ShowDialog(title As String, owner As Window, viewType As ViewType)
+      type: PlumJsonAnimator.Common.Dialogs.DialogType
+    content.vb: Public Sub ShowDialog(title As String, owner As Window, viewType As DialogType)
   overload: PlumJsonAnimator.ViewModels.MainWindowViewModel.ShowDialog*
-  nameWithType.vb: MainWindowViewModel.ShowDialog(String, Window, ViewType)
-  fullName.vb: PlumJsonAnimator.ViewModels.MainWindowViewModel.ShowDialog(String, Avalonia.Controls.Window, PlumJsonAnimator.Common.Dialogs.ViewType)
-  name.vb: ShowDialog(String, Window, ViewType)
+  nameWithType.vb: MainWindowViewModel.ShowDialog(String, Window, DialogType)
+  fullName.vb: PlumJsonAnimator.ViewModels.MainWindowViewModel.ShowDialog(String, Avalonia.Controls.Window, PlumJsonAnimator.Common.Dialogs.DialogType)
+  name.vb: ShowDialog(String, Window, DialogType)
 - uid: PlumJsonAnimator.ViewModels.MainWindowViewModel.GenerateCode
   commentId: M:PlumJsonAnimator.ViewModels.MainWindowViewModel.GenerateCode
   id: GenerateCode
@@ -4233,17 +4233,17 @@ references:
   fullName: Avalonia.Controls.Window
 - uid: PlumJsonAnimator.ViewModels.MainWindowViewModel.ShowDialog*
   commentId: Overload:PlumJsonAnimator.ViewModels.MainWindowViewModel.ShowDialog
-  href: PlumJsonAnimator.ViewModels.MainWindowViewModel.html#PlumJsonAnimator_ViewModels_MainWindowViewModel_ShowDialog_System_String_Avalonia_Controls_Window_PlumJsonAnimator_Common_Dialogs_ViewType_
+  href: PlumJsonAnimator.ViewModels.MainWindowViewModel.html#PlumJsonAnimator_ViewModels_MainWindowViewModel_ShowDialog_System_String_Avalonia_Controls_Window_PlumJsonAnimator_Common_Dialogs_DialogType_
   name: ShowDialog
   nameWithType: MainWindowViewModel.ShowDialog
   fullName: PlumJsonAnimator.ViewModels.MainWindowViewModel.ShowDialog
-- uid: PlumJsonAnimator.Common.Dialogs.ViewType
-  commentId: T:PlumJsonAnimator.Common.Dialogs.ViewType
+- uid: PlumJsonAnimator.Common.Dialogs.DialogType
+  commentId: T:PlumJsonAnimator.Common.Dialogs.DialogType
   parent: PlumJsonAnimator.Common.Dialogs
-  href: PlumJsonAnimator.Common.Dialogs.ViewType.html
-  name: ViewType
-  nameWithType: ViewType
-  fullName: PlumJsonAnimator.Common.Dialogs.ViewType
+  href: PlumJsonAnimator.Common.Dialogs.DialogType.html
+  name: DialogType
+  nameWithType: DialogType
+  fullName: PlumJsonAnimator.Common.Dialogs.DialogType
 - uid: PlumJsonAnimator.Common.Dialogs
   commentId: N:PlumJsonAnimator.Common.Dialogs
   href: PlumJsonAnimator.html

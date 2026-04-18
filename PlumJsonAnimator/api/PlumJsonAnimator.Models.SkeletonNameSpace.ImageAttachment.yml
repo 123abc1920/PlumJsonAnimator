@@ -7,9 +7,9 @@ items:
   children:
   - PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.#ctor(PlumJsonAnimator.Models.Resources.ImageRes)
   - PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.#ctor(PlumJsonAnimator.Models.Resources.ImageRes,PlumJsonAnimator.Models.SkeletonNameSpace.AttachmentData)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.GenerateJSONData
+  - PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.GetPath
   - PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.GetRes
-  - PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.generateJSONData
-  - PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.getPath
   langs:
   - csharp
   - vb
@@ -24,10 +24,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ImageAttachment
     path: Models/Skeleton/Attachment.cs
-    startLine: 48
+    startLine: 55
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  summary: Binds slot and res
+  example: []
   syntax:
     content: 'public class ImageAttachment : Attachment, INotifyPropertyChanged'
     content.vb: Public Class ImageAttachment Inherits Attachment Implements INotifyPropertyChanged
@@ -42,11 +44,11 @@ items:
   - PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.x
   - PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.y
   - PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.a
-  - PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.width
-  - PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.height
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Attachment._width
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Attachment._height
   - PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.SetPos(System.Double,System.Double,System.Double)
-  - PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.setSize(System.Double,System.Double)
-  - PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.getSize
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.SetSize(System.Double,System.Double)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.GetSize
   - PlumJsonAnimator.Models.Interfaces.INotifyable.PropertyChanged
   - PlumJsonAnimator.Models.Interfaces.INotifyable.OnPropertyChanged(System.String)
   - System.Object.Equals(System.Object)
@@ -74,7 +76,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Models/Skeleton/Attachment.cs
-    startLine: 52
+    startLine: 59
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -106,7 +108,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Models/Skeleton/Attachment.cs
-    startLine: 58
+    startLine: 65
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -122,64 +124,64 @@ items:
   nameWithType.vb: ImageAttachment.New(ImageRes, AttachmentData)
   fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.New(PlumJsonAnimator.Models.Resources.ImageRes, PlumJsonAnimator.Models.SkeletonNameSpace.AttachmentData)
   name.vb: New(ImageRes, AttachmentData)
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.getPath
-  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.getPath
-  id: getPath
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.GetPath
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.GetPath
+  id: GetPath
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment
   langs:
   - csharp
   - vb
-  name: getPath()
-  nameWithType: ImageAttachment.getPath()
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.getPath()
+  name: GetPath()
+  nameWithType: ImageAttachment.GetPath()
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.GetPath()
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Skeleton/Attachment.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: getPath
+    id: GetPath
     path: Models/Skeleton/Attachment.cs
-    startLine: 71
+    startLine: 78
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
   syntax:
-    content: public string getPath()
+    content: public string GetPath()
     return:
       type: System.String
-    content.vb: Public Function getPath() As String
-  overload: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.getPath*
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.generateJSONData
-  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.generateJSONData
-  id: generateJSONData
+    content.vb: Public Function GetPath() As String
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.GetPath*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.GenerateJSONData
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.GenerateJSONData
+  id: GenerateJSONData
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment
   langs:
   - csharp
   - vb
-  name: generateJSONData()
-  nameWithType: ImageAttachment.generateJSONData()
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.generateJSONData()
+  name: GenerateJSONData()
+  nameWithType: ImageAttachment.GenerateJSONData()
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.GenerateJSONData()
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Skeleton/Attachment.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: generateJSONData
+    id: GenerateJSONData
     path: Models/Skeleton/Attachment.cs
-    startLine: 76
+    startLine: 83
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
   example: []
   syntax:
-    content: public override AttachmentData generateJSONData()
+    content: public override AttachmentData GenerateJSONData()
     return:
       type: PlumJsonAnimator.Models.SkeletonNameSpace.AttachmentData
-    content.vb: Public Overrides Function generateJSONData() As AttachmentData
-  overridden: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.generateJSONData
-  overload: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.generateJSONData*
+    content.vb: Public Overrides Function GenerateJSONData() As AttachmentData
+  overridden: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.GenerateJSONData
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.GenerateJSONData*
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.GetRes
   commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.GetRes
   id: GetRes
@@ -198,7 +200,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetRes
     path: Models/Skeleton/Attachment.cs
-    startLine: 89
+    startLine: 96
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -302,20 +304,20 @@ references:
   name: a
   nameWithType: Attachment.a
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.a
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.width
-  commentId: F:PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.width
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment._width
+  commentId: F:PlumJsonAnimator.Models.SkeletonNameSpace.Attachment._width
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_Attachment_width
-  name: width
-  nameWithType: Attachment.width
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.width
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.height
-  commentId: F:PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.height
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_Attachment__width
+  name: _width
+  nameWithType: Attachment._width
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment._width
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment._height
+  commentId: F:PlumJsonAnimator.Models.SkeletonNameSpace.Attachment._height
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_Attachment_height
-  name: height
-  nameWithType: Attachment.height
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.height
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_Attachment__height
+  name: _height
+  nameWithType: Attachment._height
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment._height
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.SetPos(System.Double,System.Double,System.Double)
   commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.SetPos(System.Double,System.Double,System.Double)
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment
@@ -371,21 +373,21 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.double
   - name: )
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.setSize(System.Double,System.Double)
-  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.setSize(System.Double,System.Double)
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.SetSize(System.Double,System.Double)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.SetSize(System.Double,System.Double)
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment
   isExternal: true
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_Attachment_setSize_System_Double_System_Double_
-  name: setSize(double, double)
-  nameWithType: Attachment.setSize(double, double)
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.setSize(double, double)
-  nameWithType.vb: Attachment.setSize(Double, Double)
-  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.setSize(Double, Double)
-  name.vb: setSize(Double, Double)
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_Attachment_SetSize_System_Double_System_Double_
+  name: SetSize(double, double)
+  nameWithType: Attachment.SetSize(double, double)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.SetSize(double, double)
+  nameWithType.vb: Attachment.SetSize(Double, Double)
+  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.SetSize(Double, Double)
+  name.vb: SetSize(Double, Double)
   spec.csharp:
-  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.setSize(System.Double,System.Double)
-    name: setSize
-    href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_Attachment_setSize_System_Double_System_Double_
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.SetSize(System.Double,System.Double)
+    name: SetSize
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_Attachment_SetSize_System_Double_System_Double_
   - name: (
   - uid: System.Double
     name: double
@@ -399,9 +401,9 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.double
   - name: )
   spec.vb:
-  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.setSize(System.Double,System.Double)
-    name: setSize
-    href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_Attachment_setSize_System_Double_System_Double_
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.SetSize(System.Double,System.Double)
+    name: SetSize
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_Attachment_SetSize_System_Double_System_Double_
   - name: (
   - uid: System.Double
     name: Double
@@ -414,23 +416,23 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.double
   - name: )
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.getSize
-  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.getSize
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.GetSize
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.GetSize
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_Attachment_getSize
-  name: getSize()
-  nameWithType: Attachment.getSize()
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.getSize()
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_Attachment_GetSize
+  name: GetSize()
+  nameWithType: Attachment.GetSize()
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.GetSize()
   spec.csharp:
-  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.getSize
-    name: getSize
-    href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_Attachment_getSize
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.GetSize
+    name: GetSize
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_Attachment_GetSize
   - name: (
   - name: )
   spec.vb:
-  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.getSize
-    name: getSize
-    href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_Attachment_getSize
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.GetSize
+    name: GetSize
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_Attachment_GetSize
   - name: (
   - name: )
 - uid: PlumJsonAnimator.Models.Interfaces.INotifyable.PropertyChanged
@@ -807,12 +809,12 @@ references:
   name: AttachmentData
   nameWithType: AttachmentData
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.AttachmentData
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.getPath*
-  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.getPath
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_ImageAttachment_getPath
-  name: getPath
-  nameWithType: ImageAttachment.getPath
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.getPath
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.GetPath*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.GetPath
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_ImageAttachment_GetPath
+  name: GetPath
+  nameWithType: ImageAttachment.GetPath
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.GetPath
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -824,31 +826,31 @@ references:
   nameWithType.vb: String
   fullName.vb: String
   name.vb: String
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.generateJSONData
-  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.generateJSONData
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.GenerateJSONData
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.GenerateJSONData
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_Attachment_generateJSONData
-  name: generateJSONData()
-  nameWithType: Attachment.generateJSONData()
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.generateJSONData()
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_Attachment_GenerateJSONData
+  name: GenerateJSONData()
+  nameWithType: Attachment.GenerateJSONData()
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.GenerateJSONData()
   spec.csharp:
-  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.generateJSONData
-    name: generateJSONData
-    href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_Attachment_generateJSONData
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.GenerateJSONData
+    name: GenerateJSONData
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_Attachment_GenerateJSONData
   - name: (
   - name: )
   spec.vb:
-  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.generateJSONData
-    name: generateJSONData
-    href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_Attachment_generateJSONData
+  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.GenerateJSONData
+    name: GenerateJSONData
+    href: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_Attachment_GenerateJSONData
   - name: (
   - name: )
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.generateJSONData*
-  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.generateJSONData
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_ImageAttachment_generateJSONData
-  name: generateJSONData
-  nameWithType: ImageAttachment.generateJSONData
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.generateJSONData
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.GenerateJSONData*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.GenerateJSONData
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.html#PlumJsonAnimator_Models_SkeletonNameSpace_ImageAttachment_GenerateJSONData
+  name: GenerateJSONData
+  nameWithType: ImageAttachment.GenerateJSONData
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.GenerateJSONData
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.GetRes
   commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.GetRes
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment

@@ -15,26 +15,25 @@ items:
   - PlumJsonAnimator.Models.Project.CurrentSkin
   - PlumJsonAnimator.Models.Project.DeleteAnimation
   - PlumJsonAnimator.Models.Project.DeleteSkin
-  - PlumJsonAnimator.Models.Project.FindRes(System.String)
-  - PlumJsonAnimator.Models.Project.GetAnimation
+  - PlumJsonAnimator.Models.Project.DrawSlots(Avalonia.Controls.Canvas)
+  - PlumJsonAnimator.Models.Project.GenerateAnimationsJSONData
+  - PlumJsonAnimator.Models.Project.GenerateMetaData
+  - PlumJsonAnimator.Models.Project.GenerateSkinsJSONData
+  - PlumJsonAnimator.Models.Project.GenerateSlotsJSONData
+  - PlumJsonAnimator.Models.Project.GetCurrentAnimation
   - PlumJsonAnimator.Models.Project.GetProjectPath
-  - PlumJsonAnimator.Models.Project.GetSlot(System.Int32)
-  - PlumJsonAnimator.Models.Project.GetSlot(System.String)
+  - PlumJsonAnimator.Models.Project.GetResByName(System.String)
+  - PlumJsonAnimator.Models.Project.GetSlotByName(System.String)
   - PlumJsonAnimator.Models.Project.MainSkeleton
   - PlumJsonAnimator.Models.Project.MetaData
   - PlumJsonAnimator.Models.Project.Name
   - PlumJsonAnimator.Models.Project.ProjectPath
+  - PlumJsonAnimator.Models.Project.RegenerateProject(System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.BoneData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SlotData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SkinData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData})
   - PlumJsonAnimator.Models.Project.Resources
   - PlumJsonAnimator.Models.Project.SetupProjectSettings(PlumJsonAnimator.Services.SettingsData)
   - PlumJsonAnimator.Models.Project.Skins
   - PlumJsonAnimator.Models.Project.Slots
   - PlumJsonAnimator.Models.Project.currentMode
-  - PlumJsonAnimator.Models.Project.drawSlots(Avalonia.Controls.Canvas)
-  - PlumJsonAnimator.Models.Project.generateAnimationsJSONData
-  - PlumJsonAnimator.Models.Project.generateMetaData
-  - PlumJsonAnimator.Models.Project.generateSkinsJSONData
-  - PlumJsonAnimator.Models.Project.generateSlotsJSONData
-  - PlumJsonAnimator.Models.Project.regenerateProject(System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.BoneData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SlotData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SkinData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData})
   langs:
   - csharp
   - vb
@@ -155,7 +154,7 @@ items:
     content: public MetaData MetaData { get; set; }
     parameters: []
     return:
-      type: MetaData
+      type: PlumJsonAnimator.Models.MetaData
     content.vb: Public Property MetaData As MetaData
   overload: PlumJsonAnimator.Models.Project.MetaData*
 - uid: PlumJsonAnimator.Models.Project.currentMode
@@ -518,34 +517,34 @@ items:
       type: PlumJsonAnimator.Services.SettingsData
     content.vb: Public Sub SetupProjectSettings(settingsData As SettingsData)
   overload: PlumJsonAnimator.Models.Project.SetupProjectSettings*
-- uid: PlumJsonAnimator.Models.Project.GetAnimation
-  commentId: M:PlumJsonAnimator.Models.Project.GetAnimation
-  id: GetAnimation
+- uid: PlumJsonAnimator.Models.Project.GetCurrentAnimation
+  commentId: M:PlumJsonAnimator.Models.Project.GetCurrentAnimation
+  id: GetCurrentAnimation
   parent: PlumJsonAnimator.Models.Project
   langs:
   - csharp
   - vb
-  name: GetAnimation()
-  nameWithType: Project.GetAnimation()
-  fullName: PlumJsonAnimator.Models.Project.GetAnimation()
+  name: GetCurrentAnimation()
+  nameWithType: Project.GetCurrentAnimation()
+  fullName: PlumJsonAnimator.Models.Project.GetCurrentAnimation()
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Project.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: GetAnimation
+    id: GetCurrentAnimation
     path: Models/Project.cs
     startLine: 126
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
   syntax:
-    content: public Animation? GetAnimation()
+    content: public Animation? GetCurrentAnimation()
     return:
       type: PlumJsonAnimator.Models.SkeletonNameSpace.Animation
-    content.vb: Public Function GetAnimation() As Animation
-  overload: PlumJsonAnimator.Models.Project.GetAnimation*
+    content.vb: Public Function GetCurrentAnimation() As Animation
+  overload: PlumJsonAnimator.Models.Project.GetCurrentAnimation*
 - uid: PlumJsonAnimator.Models.Project.AddAnimation
   commentId: M:PlumJsonAnimator.Models.Project.AddAnimation
   id: AddAnimation
@@ -650,103 +649,69 @@ items:
     content: public void DeleteSkin()
     content.vb: Public Sub DeleteSkin()
   overload: PlumJsonAnimator.Models.Project.DeleteSkin*
-- uid: PlumJsonAnimator.Models.Project.GetSlot(System.Int32)
-  commentId: M:PlumJsonAnimator.Models.Project.GetSlot(System.Int32)
-  id: GetSlot(System.Int32)
+- uid: PlumJsonAnimator.Models.Project.GetSlotByName(System.String)
+  commentId: M:PlumJsonAnimator.Models.Project.GetSlotByName(System.String)
+  id: GetSlotByName(System.String)
   parent: PlumJsonAnimator.Models.Project
   langs:
   - csharp
   - vb
-  name: GetSlot(int)
-  nameWithType: Project.GetSlot(int)
-  fullName: PlumJsonAnimator.Models.Project.GetSlot(int)
+  name: GetSlotByName(string)
+  nameWithType: Project.GetSlotByName(string)
+  fullName: PlumJsonAnimator.Models.Project.GetSlotByName(string)
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Project.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: GetSlot
+    id: GetSlotByName
     path: Models/Project.cs
     startLine: 165
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
   syntax:
-    content: public Bone? GetSlot(int id)
+    content: public Slot? GetSlotByName(string name)
     parameters:
-    - id: id
-      type: System.Int32
+    - id: name
+      type: System.String
     return:
-      type: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
-    content.vb: Public Function GetSlot(id As Integer) As Bone
-  overload: PlumJsonAnimator.Models.Project.GetSlot*
-  nameWithType.vb: Project.GetSlot(Integer)
-  fullName.vb: PlumJsonAnimator.Models.Project.GetSlot(Integer)
-  name.vb: GetSlot(Integer)
-- uid: PlumJsonAnimator.Models.Project.GetSlot(System.String)
-  commentId: M:PlumJsonAnimator.Models.Project.GetSlot(System.String)
-  id: GetSlot(System.String)
+      type: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+    content.vb: Public Function GetSlotByName(name As String) As Slot
+  overload: PlumJsonAnimator.Models.Project.GetSlotByName*
+  nameWithType.vb: Project.GetSlotByName(String)
+  fullName.vb: PlumJsonAnimator.Models.Project.GetSlotByName(String)
+  name.vb: GetSlotByName(String)
+- uid: PlumJsonAnimator.Models.Project.DrawSlots(Avalonia.Controls.Canvas)
+  commentId: M:PlumJsonAnimator.Models.Project.DrawSlots(Avalonia.Controls.Canvas)
+  id: DrawSlots(Avalonia.Controls.Canvas)
   parent: PlumJsonAnimator.Models.Project
   langs:
   - csharp
   - vb
-  name: GetSlot(string)
-  nameWithType: Project.GetSlot(string)
-  fullName: PlumJsonAnimator.Models.Project.GetSlot(string)
+  name: DrawSlots(Canvas)
+  nameWithType: Project.DrawSlots(Canvas)
+  fullName: PlumJsonAnimator.Models.Project.DrawSlots(Avalonia.Controls.Canvas)
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Project.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: GetSlot
+    id: DrawSlots
     path: Models/Project.cs
     startLine: 178
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
   syntax:
-    content: public Slot? GetSlot(string name)
-    parameters:
-    - id: name
-      type: System.String
-    return:
-      type: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
-    content.vb: Public Function GetSlot(name As String) As Slot
-  overload: PlumJsonAnimator.Models.Project.GetSlot*
-  nameWithType.vb: Project.GetSlot(String)
-  fullName.vb: PlumJsonAnimator.Models.Project.GetSlot(String)
-  name.vb: GetSlot(String)
-- uid: PlumJsonAnimator.Models.Project.drawSlots(Avalonia.Controls.Canvas)
-  commentId: M:PlumJsonAnimator.Models.Project.drawSlots(Avalonia.Controls.Canvas)
-  id: drawSlots(Avalonia.Controls.Canvas)
-  parent: PlumJsonAnimator.Models.Project
-  langs:
-  - csharp
-  - vb
-  name: drawSlots(Canvas)
-  nameWithType: Project.drawSlots(Canvas)
-  fullName: PlumJsonAnimator.Models.Project.drawSlots(Avalonia.Controls.Canvas)
-  type: Method
-  source:
-    remote:
-      path: PlumJsonAnimator/Models/Project.cs
-      branch: main
-      repo: https://github.com/123abc1920/PlumAnimation.git
-    id: drawSlots
-    path: Models/Project.cs
-    startLine: 191
-  assemblies:
-  - PlumJsonAnimator
-  namespace: PlumJsonAnimator.Models
-  syntax:
-    content: public void drawSlots(Canvas c)
+    content: public void DrawSlots(Canvas c)
     parameters:
     - id: c
       type: Avalonia.Controls.Canvas
-    content.vb: Public Sub drawSlots(c As Canvas)
-  overload: PlumJsonAnimator.Models.Project.drawSlots*
+    content.vb: Public Sub DrawSlots(c As Canvas)
+  overload: PlumJsonAnimator.Models.Project.DrawSlots*
 - uid: PlumJsonAnimator.Models.Project.GetProjectPath
   commentId: M:PlumJsonAnimator.Models.Project.GetProjectPath
   id: GetProjectPath
@@ -765,7 +730,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetProjectPath
     path: Models/Project.cs
-    startLine: 196
+    startLine: 183
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -775,176 +740,186 @@ items:
       type: System.String
     content.vb: Public Function GetProjectPath() As String
   overload: PlumJsonAnimator.Models.Project.GetProjectPath*
-- uid: PlumJsonAnimator.Models.Project.generateMetaData
-  commentId: M:PlumJsonAnimator.Models.Project.generateMetaData
-  id: generateMetaData
+- uid: PlumJsonAnimator.Models.Project.GenerateMetaData
+  commentId: M:PlumJsonAnimator.Models.Project.GenerateMetaData
+  id: GenerateMetaData
   parent: PlumJsonAnimator.Models.Project
   langs:
   - csharp
   - vb
-  name: generateMetaData()
-  nameWithType: Project.generateMetaData()
-  fullName: PlumJsonAnimator.Models.Project.generateMetaData()
+  name: GenerateMetaData()
+  nameWithType: Project.GenerateMetaData()
+  fullName: PlumJsonAnimator.Models.Project.GenerateMetaData()
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Project.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: generateMetaData
+    id: GenerateMetaData
     path: Models/Project.cs
-    startLine: 201
+    startLine: 191
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
+  summary: Generates JSON object of metadata
+  example: []
   syntax:
-    content: public MetaData generateMetaData()
+    content: public MetaData GenerateMetaData()
     return:
-      type: MetaData
-    content.vb: Public Function generateMetaData() As MetaData
-  overload: PlumJsonAnimator.Models.Project.generateMetaData*
-- uid: PlumJsonAnimator.Models.Project.generateSkinsJSONData
-  commentId: M:PlumJsonAnimator.Models.Project.generateSkinsJSONData
-  id: generateSkinsJSONData
+      type: PlumJsonAnimator.Models.MetaData
+    content.vb: Public Function GenerateMetaData() As MetaData
+  overload: PlumJsonAnimator.Models.Project.GenerateMetaData*
+- uid: PlumJsonAnimator.Models.Project.GenerateSkinsJSONData
+  commentId: M:PlumJsonAnimator.Models.Project.GenerateSkinsJSONData
+  id: GenerateSkinsJSONData
   parent: PlumJsonAnimator.Models.Project
   langs:
   - csharp
   - vb
-  name: generateSkinsJSONData()
-  nameWithType: Project.generateSkinsJSONData()
-  fullName: PlumJsonAnimator.Models.Project.generateSkinsJSONData()
+  name: GenerateSkinsJSONData()
+  nameWithType: Project.GenerateSkinsJSONData()
+  fullName: PlumJsonAnimator.Models.Project.GenerateSkinsJSONData()
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Project.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: generateSkinsJSONData
+    id: GenerateSkinsJSONData
     path: Models/Project.cs
-    startLine: 206
+    startLine: 199
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
+  summary: Returns list of JSON objects of skins
+  example: []
   syntax:
-    content: public List<SkinData> generateSkinsJSONData()
+    content: public List<SkinData> GenerateSkinsJSONData()
     return:
       type: System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.SkinData}
-    content.vb: Public Function generateSkinsJSONData() As List(Of SkinData)
-  overload: PlumJsonAnimator.Models.Project.generateSkinsJSONData*
-- uid: PlumJsonAnimator.Models.Project.generateSlotsJSONData
-  commentId: M:PlumJsonAnimator.Models.Project.generateSlotsJSONData
-  id: generateSlotsJSONData
+    content.vb: Public Function GenerateSkinsJSONData() As List(Of SkinData)
+  overload: PlumJsonAnimator.Models.Project.GenerateSkinsJSONData*
+- uid: PlumJsonAnimator.Models.Project.GenerateSlotsJSONData
+  commentId: M:PlumJsonAnimator.Models.Project.GenerateSlotsJSONData
+  id: GenerateSlotsJSONData
   parent: PlumJsonAnimator.Models.Project
   langs:
   - csharp
   - vb
-  name: generateSlotsJSONData()
-  nameWithType: Project.generateSlotsJSONData()
-  fullName: PlumJsonAnimator.Models.Project.generateSlotsJSONData()
+  name: GenerateSlotsJSONData()
+  nameWithType: Project.GenerateSlotsJSONData()
+  fullName: PlumJsonAnimator.Models.Project.GenerateSlotsJSONData()
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Project.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: generateSlotsJSONData
+    id: GenerateSlotsJSONData
     path: Models/Project.cs
-    startLine: 216
+    startLine: 212
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
+  summary: Returns list of JSON objects of slots
+  example: []
   syntax:
-    content: public List<SlotData> generateSlotsJSONData()
+    content: public List<SlotData> GenerateSlotsJSONData()
     return:
       type: System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.SlotData}
-    content.vb: Public Function generateSlotsJSONData() As List(Of SlotData)
-  overload: PlumJsonAnimator.Models.Project.generateSlotsJSONData*
-- uid: PlumJsonAnimator.Models.Project.generateAnimationsJSONData
-  commentId: M:PlumJsonAnimator.Models.Project.generateAnimationsJSONData
-  id: generateAnimationsJSONData
+    content.vb: Public Function GenerateSlotsJSONData() As List(Of SlotData)
+  overload: PlumJsonAnimator.Models.Project.GenerateSlotsJSONData*
+- uid: PlumJsonAnimator.Models.Project.GenerateAnimationsJSONData
+  commentId: M:PlumJsonAnimator.Models.Project.GenerateAnimationsJSONData
+  id: GenerateAnimationsJSONData
   parent: PlumJsonAnimator.Models.Project
   langs:
   - csharp
   - vb
-  name: generateAnimationsJSONData()
-  nameWithType: Project.generateAnimationsJSONData()
-  fullName: PlumJsonAnimator.Models.Project.generateAnimationsJSONData()
+  name: GenerateAnimationsJSONData()
+  nameWithType: Project.GenerateAnimationsJSONData()
+  fullName: PlumJsonAnimator.Models.Project.GenerateAnimationsJSONData()
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Project.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: generateAnimationsJSONData
+    id: GenerateAnimationsJSONData
     path: Models/Project.cs
-    startLine: 226
+    startLine: 225
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
+  summary: Returns list of JSON objects of animations
+  example: []
   syntax:
-    content: public Dictionary<string, AnimationData> generateAnimationsJSONData()
+    content: public Dictionary<string, AnimationData> GenerateAnimationsJSONData()
     return:
       type: System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData}
-    content.vb: Public Function generateAnimationsJSONData() As Dictionary(Of String, AnimationData)
-  overload: PlumJsonAnimator.Models.Project.generateAnimationsJSONData*
-- uid: PlumJsonAnimator.Models.Project.FindRes(System.String)
-  commentId: M:PlumJsonAnimator.Models.Project.FindRes(System.String)
-  id: FindRes(System.String)
+    content.vb: Public Function GenerateAnimationsJSONData() As Dictionary(Of String, AnimationData)
+  overload: PlumJsonAnimator.Models.Project.GenerateAnimationsJSONData*
+- uid: PlumJsonAnimator.Models.Project.GetResByName(System.String)
+  commentId: M:PlumJsonAnimator.Models.Project.GetResByName(System.String)
+  id: GetResByName(System.String)
   parent: PlumJsonAnimator.Models.Project
   langs:
   - csharp
   - vb
-  name: FindRes(string)
-  nameWithType: Project.FindRes(string)
-  fullName: PlumJsonAnimator.Models.Project.FindRes(string)
+  name: GetResByName(string)
+  nameWithType: Project.GetResByName(string)
+  fullName: PlumJsonAnimator.Models.Project.GetResByName(string)
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Project.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: FindRes
+    id: GetResByName
     path: Models/Project.cs
-    startLine: 238
+    startLine: 237
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
   syntax:
-    content: public Res? FindRes(string name)
+    content: public Res? GetResByName(string name)
     parameters:
     - id: name
       type: System.String
     return:
       type: PlumJsonAnimator.Models.Resources.Res
-    content.vb: Public Function FindRes(name As String) As Res
-  overload: PlumJsonAnimator.Models.Project.FindRes*
-  nameWithType.vb: Project.FindRes(String)
-  fullName.vb: PlumJsonAnimator.Models.Project.FindRes(String)
-  name.vb: FindRes(String)
-- uid: PlumJsonAnimator.Models.Project.regenerateProject(System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.BoneData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SlotData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SkinData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData})
-  commentId: M:PlumJsonAnimator.Models.Project.regenerateProject(System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.BoneData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SlotData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SkinData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData})
-  id: regenerateProject(System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.BoneData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SlotData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SkinData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData})
+    content.vb: Public Function GetResByName(name As String) As Res
+  overload: PlumJsonAnimator.Models.Project.GetResByName*
+  nameWithType.vb: Project.GetResByName(String)
+  fullName.vb: PlumJsonAnimator.Models.Project.GetResByName(String)
+  name.vb: GetResByName(String)
+- uid: PlumJsonAnimator.Models.Project.RegenerateProject(System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.BoneData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SlotData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SkinData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData})
+  commentId: M:PlumJsonAnimator.Models.Project.RegenerateProject(System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.BoneData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SlotData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SkinData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData})
+  id: RegenerateProject(System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.BoneData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SlotData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SkinData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData})
   parent: PlumJsonAnimator.Models.Project
   langs:
   - csharp
   - vb
-  name: regenerateProject(Dictionary<string, BoneData>, Dictionary<string, SlotData>, Dictionary<string, SkinData>, Dictionary<string, AnimationData>)
-  nameWithType: Project.regenerateProject(Dictionary<string, BoneData>, Dictionary<string, SlotData>, Dictionary<string, SkinData>, Dictionary<string, AnimationData>)
-  fullName: PlumJsonAnimator.Models.Project.regenerateProject(System.Collections.Generic.Dictionary<string, PlumJsonAnimator.Models.SkeletonNameSpace.BoneData>, System.Collections.Generic.Dictionary<string, PlumJsonAnimator.Models.SkeletonNameSpace.SlotData>, System.Collections.Generic.Dictionary<string, PlumJsonAnimator.Models.SkeletonNameSpace.SkinData>, System.Collections.Generic.Dictionary<string, PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData>)
+  name: RegenerateProject(Dictionary<string, BoneData>, Dictionary<string, SlotData>, Dictionary<string, SkinData>, Dictionary<string, AnimationData>)
+  nameWithType: Project.RegenerateProject(Dictionary<string, BoneData>, Dictionary<string, SlotData>, Dictionary<string, SkinData>, Dictionary<string, AnimationData>)
+  fullName: PlumJsonAnimator.Models.Project.RegenerateProject(System.Collections.Generic.Dictionary<string, PlumJsonAnimator.Models.SkeletonNameSpace.BoneData>, System.Collections.Generic.Dictionary<string, PlumJsonAnimator.Models.SkeletonNameSpace.SlotData>, System.Collections.Generic.Dictionary<string, PlumJsonAnimator.Models.SkeletonNameSpace.SkinData>, System.Collections.Generic.Dictionary<string, PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData>)
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Project.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: regenerateProject
+    id: RegenerateProject
     path: Models/Project.cs
-    startLine: 250
+    startLine: 252
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
+  summary: Regenerates project from JSON objects
+  example: []
   syntax:
-    content: public void regenerateProject(Dictionary<string, BoneData> bones, Dictionary<string, SlotData> slots, Dictionary<string, SkinData> skins, Dictionary<string, AnimationData> animations)
+    content: public void RegenerateProject(Dictionary<string, BoneData> bones, Dictionary<string, SlotData> slots, Dictionary<string, SkinData> skins, Dictionary<string, AnimationData> animations)
     parameters:
     - id: bones
       type: System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.BoneData}
@@ -954,11 +929,11 @@ items:
       type: System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SkinData}
     - id: animations
       type: System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData}
-    content.vb: Public Sub regenerateProject(bones As Dictionary(Of String, BoneData), slots As Dictionary(Of String, SlotData), skins As Dictionary(Of String, SkinData), animations As Dictionary(Of String, AnimationData))
-  overload: PlumJsonAnimator.Models.Project.regenerateProject*
-  nameWithType.vb: Project.regenerateProject(Dictionary(Of String, BoneData), Dictionary(Of String, SlotData), Dictionary(Of String, SkinData), Dictionary(Of String, AnimationData))
-  fullName.vb: PlumJsonAnimator.Models.Project.regenerateProject(System.Collections.Generic.Dictionary(Of String, PlumJsonAnimator.Models.SkeletonNameSpace.BoneData), System.Collections.Generic.Dictionary(Of String, PlumJsonAnimator.Models.SkeletonNameSpace.SlotData), System.Collections.Generic.Dictionary(Of String, PlumJsonAnimator.Models.SkeletonNameSpace.SkinData), System.Collections.Generic.Dictionary(Of String, PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData))
-  name.vb: regenerateProject(Dictionary(Of String, BoneData), Dictionary(Of String, SlotData), Dictionary(Of String, SkinData), Dictionary(Of String, AnimationData))
+    content.vb: Public Sub RegenerateProject(bones As Dictionary(Of String, BoneData), slots As Dictionary(Of String, SlotData), skins As Dictionary(Of String, SkinData), animations As Dictionary(Of String, AnimationData))
+  overload: PlumJsonAnimator.Models.Project.RegenerateProject*
+  nameWithType.vb: Project.RegenerateProject(Dictionary(Of String, BoneData), Dictionary(Of String, SlotData), Dictionary(Of String, SkinData), Dictionary(Of String, AnimationData))
+  fullName.vb: PlumJsonAnimator.Models.Project.RegenerateProject(System.Collections.Generic.Dictionary(Of String, PlumJsonAnimator.Models.SkeletonNameSpace.BoneData), System.Collections.Generic.Dictionary(Of String, PlumJsonAnimator.Models.SkeletonNameSpace.SlotData), System.Collections.Generic.Dictionary(Of String, PlumJsonAnimator.Models.SkeletonNameSpace.SkinData), System.Collections.Generic.Dictionary(Of String, PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData))
+  name.vb: RegenerateProject(Dictionary(Of String, BoneData), Dictionary(Of String, SlotData), Dictionary(Of String, SkinData), Dictionary(Of String, AnimationData))
 references:
 - uid: PlumJsonAnimator.Models
   commentId: N:PlumJsonAnimator.Models
@@ -1358,12 +1333,13 @@ references:
   name: MetaData
   nameWithType: Project.MetaData
   fullName: PlumJsonAnimator.Models.Project.MetaData
-- uid: MetaData
-  commentId: T:MetaData
-  href: MetaData.html
+- uid: PlumJsonAnimator.Models.MetaData
+  commentId: T:PlumJsonAnimator.Models.MetaData
+  parent: PlumJsonAnimator.Models
+  href: PlumJsonAnimator.Models.MetaData.html
   name: MetaData
   nameWithType: MetaData
-  fullName: MetaData
+  fullName: PlumJsonAnimator.Models.MetaData
 - uid: PlumJsonAnimator.Models.Common.Mode
   commentId: T:PlumJsonAnimator.Models.Common.Mode
   parent: PlumJsonAnimator.Models.Common
@@ -1785,12 +1761,12 @@ references:
   name: SettingsData
   nameWithType: SettingsData
   fullName: PlumJsonAnimator.Services.SettingsData
-- uid: PlumJsonAnimator.Models.Project.GetAnimation*
-  commentId: Overload:PlumJsonAnimator.Models.Project.GetAnimation
-  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_GetAnimation
-  name: GetAnimation
-  nameWithType: Project.GetAnimation
-  fullName: PlumJsonAnimator.Models.Project.GetAnimation
+- uid: PlumJsonAnimator.Models.Project.GetCurrentAnimation*
+  commentId: Overload:PlumJsonAnimator.Models.Project.GetCurrentAnimation
+  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_GetCurrentAnimation
+  name: GetCurrentAnimation
+  nameWithType: Project.GetCurrentAnimation
+  fullName: PlumJsonAnimator.Models.Project.GetCurrentAnimation
 - uid: PlumJsonAnimator.Models.Project.AddAnimation*
   commentId: Overload:PlumJsonAnimator.Models.Project.AddAnimation
   href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_AddAnimation
@@ -1815,30 +1791,12 @@ references:
   name: DeleteSkin
   nameWithType: Project.DeleteSkin
   fullName: PlumJsonAnimator.Models.Project.DeleteSkin
-- uid: PlumJsonAnimator.Models.Project.GetSlot*
-  commentId: Overload:PlumJsonAnimator.Models.Project.GetSlot
-  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_GetSlot_System_Int32_
-  name: GetSlot
-  nameWithType: Project.GetSlot
-  fullName: PlumJsonAnimator.Models.Project.GetSlot
-- uid: System.Int32
-  commentId: T:System.Int32
-  parent: System
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.int32
-  name: int
-  nameWithType: int
-  fullName: int
-  nameWithType.vb: Integer
-  fullName.vb: Integer
-  name.vb: Integer
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
-  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.Bone
-  parent: PlumJsonAnimator.Models.SkeletonNameSpace
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html
-  name: Bone
-  nameWithType: Bone
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+- uid: PlumJsonAnimator.Models.Project.GetSlotByName*
+  commentId: Overload:PlumJsonAnimator.Models.Project.GetSlotByName
+  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_GetSlotByName_System_String_
+  name: GetSlotByName
+  nameWithType: Project.GetSlotByName
+  fullName: PlumJsonAnimator.Models.Project.GetSlotByName
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
   commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.Slot
   parent: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -1846,12 +1804,12 @@ references:
   name: Slot
   nameWithType: Slot
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
-- uid: PlumJsonAnimator.Models.Project.drawSlots*
-  commentId: Overload:PlumJsonAnimator.Models.Project.drawSlots
-  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_drawSlots_Avalonia_Controls_Canvas_
-  name: drawSlots
-  nameWithType: Project.drawSlots
-  fullName: PlumJsonAnimator.Models.Project.drawSlots
+- uid: PlumJsonAnimator.Models.Project.DrawSlots*
+  commentId: Overload:PlumJsonAnimator.Models.Project.DrawSlots
+  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_DrawSlots_Avalonia_Controls_Canvas_
+  name: DrawSlots
+  nameWithType: Project.DrawSlots
+  fullName: PlumJsonAnimator.Models.Project.DrawSlots
 - uid: Avalonia.Controls.Canvas
   commentId: T:Avalonia.Controls.Canvas
   parent: Avalonia.Controls
@@ -1887,18 +1845,18 @@ references:
   name: GetProjectPath
   nameWithType: Project.GetProjectPath
   fullName: PlumJsonAnimator.Models.Project.GetProjectPath
-- uid: PlumJsonAnimator.Models.Project.generateMetaData*
-  commentId: Overload:PlumJsonAnimator.Models.Project.generateMetaData
-  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_generateMetaData
-  name: generateMetaData
-  nameWithType: Project.generateMetaData
-  fullName: PlumJsonAnimator.Models.Project.generateMetaData
-- uid: PlumJsonAnimator.Models.Project.generateSkinsJSONData*
-  commentId: Overload:PlumJsonAnimator.Models.Project.generateSkinsJSONData
-  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_generateSkinsJSONData
-  name: generateSkinsJSONData
-  nameWithType: Project.generateSkinsJSONData
-  fullName: PlumJsonAnimator.Models.Project.generateSkinsJSONData
+- uid: PlumJsonAnimator.Models.Project.GenerateMetaData*
+  commentId: Overload:PlumJsonAnimator.Models.Project.GenerateMetaData
+  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_GenerateMetaData
+  name: GenerateMetaData
+  nameWithType: Project.GenerateMetaData
+  fullName: PlumJsonAnimator.Models.Project.GenerateMetaData
+- uid: PlumJsonAnimator.Models.Project.GenerateSkinsJSONData*
+  commentId: Overload:PlumJsonAnimator.Models.Project.GenerateSkinsJSONData
+  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_GenerateSkinsJSONData
+  name: GenerateSkinsJSONData
+  nameWithType: Project.GenerateSkinsJSONData
+  fullName: PlumJsonAnimator.Models.Project.GenerateSkinsJSONData
 - uid: System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.SkinData}
   commentId: T:System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.SkinData}
   parent: System.Collections.Generic
@@ -1997,12 +1955,12 @@ references:
     name: Generic
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.collections.generic
-- uid: PlumJsonAnimator.Models.Project.generateSlotsJSONData*
-  commentId: Overload:PlumJsonAnimator.Models.Project.generateSlotsJSONData
-  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_generateSlotsJSONData
-  name: generateSlotsJSONData
-  nameWithType: Project.generateSlotsJSONData
-  fullName: PlumJsonAnimator.Models.Project.generateSlotsJSONData
+- uid: PlumJsonAnimator.Models.Project.GenerateSlotsJSONData*
+  commentId: Overload:PlumJsonAnimator.Models.Project.GenerateSlotsJSONData
+  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_GenerateSlotsJSONData
+  name: GenerateSlotsJSONData
+  nameWithType: Project.GenerateSlotsJSONData
+  fullName: PlumJsonAnimator.Models.Project.GenerateSlotsJSONData
 - uid: System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.SlotData}
   commentId: T:System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.SlotData}
   parent: System.Collections.Generic
@@ -2036,12 +1994,12 @@ references:
     name: SlotData
     href: PlumJsonAnimator.Models.SkeletonNameSpace.SlotData.html
   - name: )
-- uid: PlumJsonAnimator.Models.Project.generateAnimationsJSONData*
-  commentId: Overload:PlumJsonAnimator.Models.Project.generateAnimationsJSONData
-  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_generateAnimationsJSONData
-  name: generateAnimationsJSONData
-  nameWithType: Project.generateAnimationsJSONData
-  fullName: PlumJsonAnimator.Models.Project.generateAnimationsJSONData
+- uid: PlumJsonAnimator.Models.Project.GenerateAnimationsJSONData*
+  commentId: Overload:PlumJsonAnimator.Models.Project.GenerateAnimationsJSONData
+  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_GenerateAnimationsJSONData
+  name: GenerateAnimationsJSONData
+  nameWithType: Project.GenerateAnimationsJSONData
+  fullName: PlumJsonAnimator.Models.Project.GenerateAnimationsJSONData
 - uid: System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData}
   commentId: T:System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData}
   parent: System.Collections.Generic
@@ -2121,12 +2079,12 @@ references:
   - name: " "
   - name: TValue
   - name: )
-- uid: PlumJsonAnimator.Models.Project.FindRes*
-  commentId: Overload:PlumJsonAnimator.Models.Project.FindRes
-  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_FindRes_System_String_
-  name: FindRes
-  nameWithType: Project.FindRes
-  fullName: PlumJsonAnimator.Models.Project.FindRes
+- uid: PlumJsonAnimator.Models.Project.GetResByName*
+  commentId: Overload:PlumJsonAnimator.Models.Project.GetResByName
+  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_GetResByName_System_String_
+  name: GetResByName
+  nameWithType: Project.GetResByName
+  fullName: PlumJsonAnimator.Models.Project.GetResByName
 - uid: PlumJsonAnimator.Models.Resources.Res
   commentId: T:PlumJsonAnimator.Models.Resources.Res
   parent: PlumJsonAnimator.Models.Resources
@@ -2164,12 +2122,12 @@ references:
   - uid: PlumJsonAnimator.Models.Resources
     name: Resources
     href: PlumJsonAnimator.Models.Resources.html
-- uid: PlumJsonAnimator.Models.Project.regenerateProject*
-  commentId: Overload:PlumJsonAnimator.Models.Project.regenerateProject
-  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_regenerateProject_System_Collections_Generic_Dictionary_System_String_PlumJsonAnimator_Models_SkeletonNameSpace_BoneData__System_Collections_Generic_Dictionary_System_String_PlumJsonAnimator_Models_SkeletonNameSpace_SlotData__System_Collections_Generic_Dictionary_System_String_PlumJsonAnimator_Models_SkeletonNameSpace_SkinData__System_Collections_Generic_Dictionary_System_String_PlumJsonAnimator_Models_SkeletonNameSpace_AnimationData__
-  name: regenerateProject
-  nameWithType: Project.regenerateProject
-  fullName: PlumJsonAnimator.Models.Project.regenerateProject
+- uid: PlumJsonAnimator.Models.Project.RegenerateProject*
+  commentId: Overload:PlumJsonAnimator.Models.Project.RegenerateProject
+  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_RegenerateProject_System_Collections_Generic_Dictionary_System_String_PlumJsonAnimator_Models_SkeletonNameSpace_BoneData__System_Collections_Generic_Dictionary_System_String_PlumJsonAnimator_Models_SkeletonNameSpace_SlotData__System_Collections_Generic_Dictionary_System_String_PlumJsonAnimator_Models_SkeletonNameSpace_SkinData__System_Collections_Generic_Dictionary_System_String_PlumJsonAnimator_Models_SkeletonNameSpace_AnimationData__
+  name: RegenerateProject
+  nameWithType: Project.RegenerateProject
+  fullName: PlumJsonAnimator.Models.Project.RegenerateProject
 - uid: System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.BoneData}
   commentId: T:System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.BoneData}
   parent: System.Collections.Generic

@@ -6,16 +6,15 @@ items:
   parent: PlumJsonAnimator.Models.SkeletonNameSpace
   children:
   - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBone(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBoneToParent(System.Int32)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.Bones
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.DrawSkeleton(Avalonia.Controls.Canvas)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GenerateCode
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GenerateJSONData
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GetBoneById(System.Int32)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GetBoneByName(System.String)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.RootBones
-  - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.addBone(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
-  - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.addBone(System.Int32)
-  - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.drawSkeleton(Avalonia.Controls.Canvas)
-  - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.generateCode
-  - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.generateJSONData
-  - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.getBone(System.Int32)
-  - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.getBone(System.String)
-  - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.name
   langs:
   - csharp
   - vb
@@ -30,10 +29,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Skeleton
     path: Models/Skeleton/Skeleton.cs
-    startLine: 10
+    startLine: 13
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  summary: Provides methods for work with skeleton
+  example: []
   syntax:
     content: 'public class Skeleton : INotifyable, INotifyPropertyChanged'
     content.vb: Public Class Skeleton Inherits INotifyable Implements INotifyPropertyChanged
@@ -52,33 +53,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.name
-  commentId: F:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.name
-  id: name
-  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton
-  langs:
-  - csharp
-  - vb
-  name: name
-  nameWithType: Skeleton.name
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.name
-  type: Field
-  source:
-    remote:
-      path: PlumJsonAnimator/Models/Skeleton/Skeleton.cs
-      branch: main
-      repo: https://github.com/123abc1920/PlumAnimation.git
-    id: name
-    path: Models/Skeleton/Skeleton.cs
-    startLine: 12
-  assemblies:
-  - PlumJsonAnimator
-  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
-  syntax:
-    content: public string name
-    return:
-      type: System.String
-    content.vb: Public name As String
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.Bones
   commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.Bones
   id: Bones
@@ -97,7 +71,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Bones
     path: Models/Skeleton/Skeleton.cs
-    startLine: 13
+    startLine: 15
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -126,7 +100,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: RootBones
     path: Models/Skeleton/Skeleton.cs
-    startLine: 14
+    startLine: 16
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -155,7 +129,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Models/Skeleton/Skeleton.cs
-    startLine: 21
+    startLine: 22
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -169,220 +143,226 @@ items:
   nameWithType.vb: Skeleton.New(GlobalState)
   fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.New(PlumJsonAnimator.Common.Constants.GlobalState)
   name.vb: New(GlobalState)
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.addBone(System.Int32)
-  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.addBone(System.Int32)
-  id: addBone(System.Int32)
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBoneToParent(System.Int32)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBoneToParent(System.Int32)
+  id: AddBoneToParent(System.Int32)
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton
   langs:
   - csharp
   - vb
-  name: addBone(int)
-  nameWithType: Skeleton.addBone(int)
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.addBone(int)
+  name: AddBoneToParent(int)
+  nameWithType: Skeleton.AddBoneToParent(int)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBoneToParent(int)
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Skeleton/Skeleton.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: addBone
+    id: AddBoneToParent
     path: Models/Skeleton/Skeleton.cs
-    startLine: 32
+    startLine: 37
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  summary: Adds new bone into skeleton. Binds it with existing parent bone
+  example: []
   syntax:
-    content: public void addBone(int id)
+    content: public void AddBoneToParent(int parentId)
     parameters:
-    - id: id
+    - id: parentId
       type: System.Int32
-    content.vb: Public Sub addBone(id As Integer)
-  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.addBone*
-  nameWithType.vb: Skeleton.addBone(Integer)
-  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.addBone(Integer)
-  name.vb: addBone(Integer)
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.addBone(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
-  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.addBone(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
-  id: addBone(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+      description: Parent bone id
+    content.vb: Public Sub AddBoneToParent(parentId As Integer)
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBoneToParent*
+  nameWithType.vb: Skeleton.AddBoneToParent(Integer)
+  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBoneToParent(Integer)
+  name.vb: AddBoneToParent(Integer)
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBone(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBone(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  id: AddBone(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton
   langs:
   - csharp
   - vb
-  name: addBone(Bone)
-  nameWithType: Skeleton.addBone(Bone)
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.addBone(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  name: AddBone(Bone)
+  nameWithType: Skeleton.AddBone(Bone)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBone(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Skeleton/Skeleton.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: addBone
+    id: AddBone
     path: Models/Skeleton/Skeleton.cs
-    startLine: 46
+    startLine: 55
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  summary: Adds new bone into skeleton
+  example: []
   syntax:
-    content: public void addBone(Bone b)
+    content: public void AddBone(Bone b)
     parameters:
     - id: b
       type: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
-    content.vb: Public Sub addBone(b As Bone)
-  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.addBone*
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.getBone(System.Int32)
-  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.getBone(System.Int32)
-  id: getBone(System.Int32)
+      description: New bone
+    content.vb: Public Sub AddBone(b As Bone)
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBone*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GetBoneById(System.Int32)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GetBoneById(System.Int32)
+  id: GetBoneById(System.Int32)
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton
   langs:
   - csharp
   - vb
-  name: getBone(int)
-  nameWithType: Skeleton.getBone(int)
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.getBone(int)
+  name: GetBoneById(int)
+  nameWithType: Skeleton.GetBoneById(int)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GetBoneById(int)
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Skeleton/Skeleton.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: getBone
+    id: GetBoneById
     path: Models/Skeleton/Skeleton.cs
-    startLine: 53
+    startLine: 62
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
   syntax:
-    content: public Bone? getBone(int id)
+    content: public Bone? GetBoneById(int id)
     parameters:
     - id: id
       type: System.Int32
     return:
       type: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
-    content.vb: Public Function getBone(id As Integer) As Bone
-  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.getBone*
-  nameWithType.vb: Skeleton.getBone(Integer)
-  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.getBone(Integer)
-  name.vb: getBone(Integer)
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.getBone(System.String)
-  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.getBone(System.String)
-  id: getBone(System.String)
+    content.vb: Public Function GetBoneById(id As Integer) As Bone
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GetBoneById*
+  nameWithType.vb: Skeleton.GetBoneById(Integer)
+  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GetBoneById(Integer)
+  name.vb: GetBoneById(Integer)
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GetBoneByName(System.String)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GetBoneByName(System.String)
+  id: GetBoneByName(System.String)
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton
   langs:
   - csharp
   - vb
-  name: getBone(string?)
-  nameWithType: Skeleton.getBone(string?)
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.getBone(string?)
+  name: GetBoneByName(string?)
+  nameWithType: Skeleton.GetBoneByName(string?)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GetBoneByName(string?)
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Skeleton/Skeleton.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: getBone
+    id: GetBoneByName
     path: Models/Skeleton/Skeleton.cs
-    startLine: 65
+    startLine: 74
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
   syntax:
-    content: public Bone? getBone(string? name)
+    content: public Bone? GetBoneByName(string? name)
     parameters:
     - id: name
       type: System.String
     return:
       type: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
-    content.vb: Public Function getBone(name As String) As Bone
-  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.getBone*
-  nameWithType.vb: Skeleton.getBone(String)
-  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.getBone(String)
-  name.vb: getBone(String)
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.drawSkeleton(Avalonia.Controls.Canvas)
-  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.drawSkeleton(Avalonia.Controls.Canvas)
-  id: drawSkeleton(Avalonia.Controls.Canvas)
+    content.vb: Public Function GetBoneByName(name As String) As Bone
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GetBoneByName*
+  nameWithType.vb: Skeleton.GetBoneByName(String)
+  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GetBoneByName(String)
+  name.vb: GetBoneByName(String)
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.DrawSkeleton(Avalonia.Controls.Canvas)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.DrawSkeleton(Avalonia.Controls.Canvas)
+  id: DrawSkeleton(Avalonia.Controls.Canvas)
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton
   langs:
   - csharp
   - vb
-  name: drawSkeleton(Canvas)
-  nameWithType: Skeleton.drawSkeleton(Canvas)
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.drawSkeleton(Avalonia.Controls.Canvas)
+  name: DrawSkeleton(Canvas)
+  nameWithType: Skeleton.DrawSkeleton(Canvas)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.DrawSkeleton(Avalonia.Controls.Canvas)
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Skeleton/Skeleton.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: drawSkeleton
+    id: DrawSkeleton
     path: Models/Skeleton/Skeleton.cs
-    startLine: 77
+    startLine: 86
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
   syntax:
-    content: public void drawSkeleton(Canvas canvas)
+    content: public void DrawSkeleton(Canvas canvas)
     parameters:
     - id: canvas
       type: Avalonia.Controls.Canvas
-    content.vb: Public Sub drawSkeleton(canvas As Canvas)
-  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.drawSkeleton*
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.generateJSONData
-  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.generateJSONData
-  id: generateJSONData
+    content.vb: Public Sub DrawSkeleton(canvas As Canvas)
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.DrawSkeleton*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GenerateJSONData
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GenerateJSONData
+  id: GenerateJSONData
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton
   langs:
   - csharp
   - vb
-  name: generateJSONData()
-  nameWithType: Skeleton.generateJSONData()
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.generateJSONData()
+  name: GenerateJSONData()
+  nameWithType: Skeleton.GenerateJSONData()
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GenerateJSONData()
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Skeleton/Skeleton.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: generateJSONData
+    id: GenerateJSONData
     path: Models/Skeleton/Skeleton.cs
-    startLine: 85
+    startLine: 94
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
   syntax:
-    content: public List<BoneData> generateJSONData()
+    content: public List<BoneData> GenerateJSONData()
     return:
       type: System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.BoneData}
-    content.vb: Public Function generateJSONData() As List(Of BoneData)
-  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.generateJSONData*
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.generateCode
-  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.generateCode
-  id: generateCode
+    content.vb: Public Function GenerateJSONData() As List(Of BoneData)
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GenerateJSONData*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GenerateCode
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GenerateCode
+  id: GenerateCode
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton
   langs:
   - csharp
   - vb
-  name: generateCode()
-  nameWithType: Skeleton.generateCode()
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.generateCode()
+  name: GenerateCode()
+  nameWithType: Skeleton.GenerateCode()
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GenerateCode()
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Skeleton/Skeleton.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: generateCode
+    id: GenerateCode
     path: Models/Skeleton/Skeleton.cs
-    startLine: 97
+    startLine: 106
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
   syntax:
-    content: public string generateCode()
+    content: public string GenerateCode()
     return:
       type: System.String
-    content.vb: Public Function generateCode() As String
-  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.generateCode*
+    content.vb: Public Function GenerateCode() As String
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GenerateCode*
 references:
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace
   commentId: N:PlumJsonAnimator.Models.SkeletonNameSpace
@@ -761,17 +741,6 @@ references:
     name: ComponentModel
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.componentmodel
-- uid: System.String
-  commentId: T:System.String
-  parent: System
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.string
-  name: string
-  nameWithType: string
-  fullName: string
-  nameWithType.vb: String
-  fullName.vb: String
-  name.vb: String
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.Bones*
   commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.Bones
   href: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skeleton_Bones
@@ -928,12 +897,12 @@ references:
   - uid: PlumJsonAnimator.Common.Constants
     name: Constants
     href: PlumJsonAnimator.Common.Constants.html
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.addBone*
-  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.addBone
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skeleton_addBone_System_Int32_
-  name: addBone
-  nameWithType: Skeleton.addBone
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.addBone
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBoneToParent*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBoneToParent
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skeleton_AddBoneToParent_System_Int32_
+  name: AddBoneToParent
+  nameWithType: Skeleton.AddBoneToParent
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBoneToParent
 - uid: System.Int32
   commentId: T:System.Int32
   parent: System
@@ -945,6 +914,12 @@ references:
   nameWithType.vb: Integer
   fullName.vb: Integer
   name.vb: Integer
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBone*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBone
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skeleton_AddBone_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_
+  name: AddBone
+  nameWithType: Skeleton.AddBone
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBone
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
   commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.Bone
   parent: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -952,18 +927,35 @@ references:
   name: Bone
   nameWithType: Bone
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.getBone*
-  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.getBone
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skeleton_getBone_System_Int32_
-  name: getBone
-  nameWithType: Skeleton.getBone
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.getBone
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.drawSkeleton*
-  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.drawSkeleton
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skeleton_drawSkeleton_Avalonia_Controls_Canvas_
-  name: drawSkeleton
-  nameWithType: Skeleton.drawSkeleton
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.drawSkeleton
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GetBoneById*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GetBoneById
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skeleton_GetBoneById_System_Int32_
+  name: GetBoneById
+  nameWithType: Skeleton.GetBoneById
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GetBoneById
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GetBoneByName*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GetBoneByName
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skeleton_GetBoneByName_System_String_
+  name: GetBoneByName
+  nameWithType: Skeleton.GetBoneByName
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GetBoneByName
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.DrawSkeleton*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.DrawSkeleton
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skeleton_DrawSkeleton_Avalonia_Controls_Canvas_
+  name: DrawSkeleton
+  nameWithType: Skeleton.DrawSkeleton
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.DrawSkeleton
 - uid: Avalonia.Controls.Canvas
   commentId: T:Avalonia.Controls.Canvas
   parent: Avalonia.Controls
@@ -993,12 +985,12 @@ references:
   - uid: Avalonia.Controls
     name: Controls
     isExternal: true
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.generateJSONData*
-  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.generateJSONData
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skeleton_generateJSONData
-  name: generateJSONData
-  nameWithType: Skeleton.generateJSONData
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.generateJSONData
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GenerateJSONData*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GenerateJSONData
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skeleton_GenerateJSONData
+  name: GenerateJSONData
+  nameWithType: Skeleton.GenerateJSONData
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GenerateJSONData
 - uid: System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.BoneData}
   commentId: T:System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.BoneData}
   parent: System.Collections.Generic
@@ -1097,9 +1089,9 @@ references:
     name: Generic
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.collections.generic
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.generateCode*
-  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.generateCode
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skeleton_generateCode
-  name: generateCode
-  nameWithType: Skeleton.generateCode
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.generateCode
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GenerateCode*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GenerateCode
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skeleton_GenerateCode
+  name: GenerateCode
+  nameWithType: Skeleton.GenerateCode
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.GenerateCode

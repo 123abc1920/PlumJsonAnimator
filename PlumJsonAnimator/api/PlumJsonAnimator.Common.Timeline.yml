@@ -4,7 +4,6 @@ items:
   commentId: N:PlumJsonAnimator.Common.Timeline
   id: PlumJsonAnimator.Common.Timeline
   children:
-  - PlumJsonAnimator.Common.Timeline.Keyframe
   - PlumJsonAnimator.Common.Timeline.TimelineControl
   - PlumJsonAnimator.Common.Timeline.TimelineTrack
   langs:
@@ -17,52 +16,15 @@ items:
   assemblies:
   - PlumJsonAnimator
 references:
+- uid: PlumJsonAnimator.Common.Timeline.TimelineControl
+  commentId: T:PlumJsonAnimator.Common.Timeline.TimelineControl
+  href: PlumJsonAnimator.Common.Timeline.TimelineControl.html
+  name: TimelineControl
+  nameWithType: TimelineControl
+  fullName: PlumJsonAnimator.Common.Timeline.TimelineControl
 - uid: PlumJsonAnimator.Common.Timeline.TimelineTrack
   commentId: T:PlumJsonAnimator.Common.Timeline.TimelineTrack
   href: PlumJsonAnimator.Common.Timeline.TimelineTrack.html
   name: TimelineTrack
   nameWithType: TimelineTrack
   fullName: PlumJsonAnimator.Common.Timeline.TimelineTrack
-- uid: PlumJsonAnimator.Common.Timeline.Keyframe
-  commentId: T:PlumJsonAnimator.Common.Timeline.Keyframe
-  href: PlumJsonAnimator.Common.Timeline.Keyframe.html
-  name: Keyframe
-  nameWithType: Keyframe
-  fullName: PlumJsonAnimator.Common.Timeline.Keyframe
-- uid: PlumJsonAnimator.Common.Timeline.TimelineControl
-  commentId: T:PlumJsonAnimator.Common.Timeline.TimelineControl
-  parent: PlumJsonAnimator.Common.Timeline
-  href: PlumJsonAnimator.Common.Timeline.TimelineControl.html
-  name: TimelineControl
-  nameWithType: TimelineControl
-  fullName: PlumJsonAnimator.Common.Timeline.TimelineControl
-- uid: PlumJsonAnimator.Common.Timeline
-  commentId: N:PlumJsonAnimator.Common.Timeline
-  href: PlumJsonAnimator.html
-  name: PlumJsonAnimator.Common.Timeline
-  nameWithType: PlumJsonAnimator.Common.Timeline
-  fullName: PlumJsonAnimator.Common.Timeline
-  spec.csharp:
-  - uid: PlumJsonAnimator
-    name: PlumJsonAnimator
-    href: PlumJsonAnimator.html
-  - name: .
-  - uid: PlumJsonAnimator.Common
-    name: Common
-    href: PlumJsonAnimator.Common.html
-  - name: .
-  - uid: PlumJsonAnimator.Common.Timeline
-    name: Timeline
-    href: PlumJsonAnimator.Common.Timeline.html
-  spec.vb:
-  - uid: PlumJsonAnimator
-    name: PlumJsonAnimator
-    href: PlumJsonAnimator.html
-  - name: .
-  - uid: PlumJsonAnimator.Common
-    name: Common
-    href: PlumJsonAnimator.Common.html
-  - name: .
-  - uid: PlumJsonAnimator.Common.Timeline
-    name: Timeline
-    href: PlumJsonAnimator.Common.Timeline.html

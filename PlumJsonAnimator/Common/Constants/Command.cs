@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Input;
 
-namespace Command
+namespace PlumJsonAnimator.Common.Constants.Command
 {
     public class Command : ICommand
     {

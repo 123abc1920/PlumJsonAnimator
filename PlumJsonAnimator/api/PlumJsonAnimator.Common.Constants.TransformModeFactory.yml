@@ -6,7 +6,7 @@ items:
   parent: PlumJsonAnimator.Common.Constants
   children:
   - PlumJsonAnimator.Common.Constants.TransformModeFactory.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
-  - PlumJsonAnimator.Common.Constants.TransformModeFactory.createMode(PlumJsonAnimator.Models.Common.Mode,PlumJsonAnimator.Models.Common.TransformModesTypes)
+  - PlumJsonAnimator.Common.Constants.TransformModeFactory.CreateMode(PlumJsonAnimator.Models.Common.Mode,PlumJsonAnimator.Models.Common.TransformModesTypes)
   langs:
   - csharp
   - vb
@@ -21,10 +21,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: TransformModeFactory
     path: Common/Constants/TransformModeFactory.cs
-    startLine: 5
+    startLine: 8
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
+  summary: Creates transform modes
+  example: []
   syntax:
     content: public class TransformModeFactory
     content.vb: Public Class TransformModeFactory
@@ -56,7 +58,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Common/Constants/TransformModeFactory.cs
-    startLine: 10
+    startLine: 13
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -70,30 +72,30 @@ items:
   nameWithType.vb: TransformModeFactory.New(GlobalState)
   fullName.vb: PlumJsonAnimator.Common.Constants.TransformModeFactory.New(PlumJsonAnimator.Common.Constants.GlobalState)
   name.vb: New(GlobalState)
-- uid: PlumJsonAnimator.Common.Constants.TransformModeFactory.createMode(PlumJsonAnimator.Models.Common.Mode,PlumJsonAnimator.Models.Common.TransformModesTypes)
-  commentId: M:PlumJsonAnimator.Common.Constants.TransformModeFactory.createMode(PlumJsonAnimator.Models.Common.Mode,PlumJsonAnimator.Models.Common.TransformModesTypes)
-  id: createMode(PlumJsonAnimator.Models.Common.Mode,PlumJsonAnimator.Models.Common.TransformModesTypes)
+- uid: PlumJsonAnimator.Common.Constants.TransformModeFactory.CreateMode(PlumJsonAnimator.Models.Common.Mode,PlumJsonAnimator.Models.Common.TransformModesTypes)
+  commentId: M:PlumJsonAnimator.Common.Constants.TransformModeFactory.CreateMode(PlumJsonAnimator.Models.Common.Mode,PlumJsonAnimator.Models.Common.TransformModesTypes)
+  id: CreateMode(PlumJsonAnimator.Models.Common.Mode,PlumJsonAnimator.Models.Common.TransformModesTypes)
   parent: PlumJsonAnimator.Common.Constants.TransformModeFactory
   langs:
   - csharp
   - vb
-  name: createMode(Mode, TransformModesTypes)
-  nameWithType: TransformModeFactory.createMode(Mode, TransformModesTypes)
-  fullName: PlumJsonAnimator.Common.Constants.TransformModeFactory.createMode(PlumJsonAnimator.Models.Common.Mode, PlumJsonAnimator.Models.Common.TransformModesTypes)
+  name: CreateMode(Mode, TransformModesTypes)
+  nameWithType: TransformModeFactory.CreateMode(Mode, TransformModesTypes)
+  fullName: PlumJsonAnimator.Common.Constants.TransformModeFactory.CreateMode(PlumJsonAnimator.Models.Common.Mode, PlumJsonAnimator.Models.Common.TransformModesTypes)
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Common/Constants/TransformModeFactory.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: createMode
+    id: CreateMode
     path: Common/Constants/TransformModeFactory.cs
-    startLine: 23
+    startLine: 26
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
   syntax:
-    content: public Mode createMode(Mode old, TransformModesTypes type)
+    content: public Mode CreateMode(Mode old, TransformModesTypes type)
     parameters:
     - id: old
       type: PlumJsonAnimator.Models.Common.Mode
@@ -101,8 +103,8 @@ items:
       type: PlumJsonAnimator.Models.Common.TransformModesTypes
     return:
       type: PlumJsonAnimator.Models.Common.Mode
-    content.vb: Public Function createMode(old As Mode, type As TransformModesTypes) As Mode
-  overload: PlumJsonAnimator.Common.Constants.TransformModeFactory.createMode*
+    content.vb: Public Function CreateMode(old As Mode, type As TransformModesTypes) As Mode
+  overload: PlumJsonAnimator.Common.Constants.TransformModeFactory.CreateMode*
 references:
 - uid: PlumJsonAnimator.Common.Constants
   commentId: N:PlumJsonAnimator.Common.Constants
@@ -387,12 +389,12 @@ references:
   name: GlobalState
   nameWithType: GlobalState
   fullName: PlumJsonAnimator.Common.Constants.GlobalState
-- uid: PlumJsonAnimator.Common.Constants.TransformModeFactory.createMode*
-  commentId: Overload:PlumJsonAnimator.Common.Constants.TransformModeFactory.createMode
-  href: PlumJsonAnimator.Common.Constants.TransformModeFactory.html#PlumJsonAnimator_Common_Constants_TransformModeFactory_createMode_PlumJsonAnimator_Models_Common_Mode_PlumJsonAnimator_Models_Common_TransformModesTypes_
-  name: createMode
-  nameWithType: TransformModeFactory.createMode
-  fullName: PlumJsonAnimator.Common.Constants.TransformModeFactory.createMode
+- uid: PlumJsonAnimator.Common.Constants.TransformModeFactory.CreateMode*
+  commentId: Overload:PlumJsonAnimator.Common.Constants.TransformModeFactory.CreateMode
+  href: PlumJsonAnimator.Common.Constants.TransformModeFactory.html#PlumJsonAnimator_Common_Constants_TransformModeFactory_CreateMode_PlumJsonAnimator_Models_Common_Mode_PlumJsonAnimator_Models_Common_TransformModesTypes_
+  name: CreateMode
+  nameWithType: TransformModeFactory.CreateMode
+  fullName: PlumJsonAnimator.Common.Constants.TransformModeFactory.CreateMode
 - uid: PlumJsonAnimator.Models.Common.Mode
   commentId: T:PlumJsonAnimator.Models.Common.Mode
   parent: PlumJsonAnimator.Models.Common

@@ -23,10 +23,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: KeyFrameTypes
     path: Models/Common/AnimTransformations.cs
-    startLine: 6
+    startLine: 9
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common
+  summary: Key frames types. Not transform modes, transform modes provides transformation.
+  example: []
   syntax:
     content: public enum KeyFrameTypes
     content.vb: Public Enum KeyFrameTypes
@@ -48,7 +50,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: TRANSLATE
     path: Models/Common/AnimTransformations.cs
-    startLine: 8
+    startLine: 11
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common
@@ -74,7 +76,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ROTATE
     path: Models/Common/AnimTransformations.cs
-    startLine: 9
+    startLine: 12
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common
@@ -100,7 +102,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SCALE
     path: Models/Common/AnimTransformations.cs
-    startLine: 10
+    startLine: 13
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common
@@ -126,7 +128,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SHEAR
     path: Models/Common/AnimTransformations.cs
-    startLine: 11
+    startLine: 14
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common

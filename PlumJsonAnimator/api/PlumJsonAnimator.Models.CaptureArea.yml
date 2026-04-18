@@ -5,10 +5,10 @@ items:
   id: CaptureArea
   parent: PlumJsonAnimator.Models
   children:
-  - PlumJsonAnimator.Models.CaptureArea.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState)
-  - PlumJsonAnimator.Models.CaptureArea.Draw(Avalonia.Controls.Canvas)
+  - PlumJsonAnimator.Models.CaptureArea.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,PlumJsonAnimator.Services.AppSettings)
+  - PlumJsonAnimator.Models.CaptureArea.DrawCaptureArea(Avalonia.Controls.Canvas)
   - PlumJsonAnimator.Models.CaptureArea.GetRect
-  - PlumJsonAnimator.Models.CaptureArea.MovePoint(System.Int32,System.Int32)
+  - PlumJsonAnimator.Models.CaptureArea.MoveSelectedPoint(System.Int32,System.Int32)
   - PlumJsonAnimator.Models.CaptureArea.SelectPoint(System.Int32,System.Int32)
   - PlumJsonAnimator.Models.CaptureArea.UnSelectPoint
   langs:
@@ -25,10 +25,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: CaptureArea
     path: Models/CaptureArea.cs
-    startLine: 10
+    startLine: 13
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
+  summary: Provides methods for work with capture area. This area renders into exported images, gifs, videos and other images.
+  example: []
   syntax:
     content: public class CaptureArea
     content.vb: Public Class CaptureArea
@@ -42,16 +44,16 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-- uid: PlumJsonAnimator.Models.CaptureArea.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState)
-  commentId: M:PlumJsonAnimator.Models.CaptureArea.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState)
-  id: '#ctor(System.Int32,System.Int32,System.Int32,System.Int32,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState)'
+- uid: PlumJsonAnimator.Models.CaptureArea.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,PlumJsonAnimator.Services.AppSettings)
+  commentId: M:PlumJsonAnimator.Models.CaptureArea.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,PlumJsonAnimator.Services.AppSettings)
+  id: '#ctor(System.Int32,System.Int32,System.Int32,System.Int32,PlumJsonAnimator.Services.AppSettings)'
   parent: PlumJsonAnimator.Models.CaptureArea
   langs:
   - csharp
   - vb
-  name: CaptureArea(int, int, int, int, AppSettings, GlobalState)
-  nameWithType: CaptureArea.CaptureArea(int, int, int, int, AppSettings, GlobalState)
-  fullName: PlumJsonAnimator.Models.CaptureArea.CaptureArea(int, int, int, int, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Common.Constants.GlobalState)
+  name: CaptureArea(int, int, int, int, AppSettings)
+  nameWithType: CaptureArea.CaptureArea(int, int, int, int, AppSettings)
+  fullName: PlumJsonAnimator.Models.CaptureArea.CaptureArea(int, int, int, int, PlumJsonAnimator.Services.AppSettings)
   type: Constructor
   source:
     remote:
@@ -60,12 +62,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Models/CaptureArea.cs
-    startLine: 38
+    startLine: 39
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
   syntax:
-    content: public CaptureArea(int x, int y, int width, int height, AppSettings appSettings, GlobalState globalState)
+    content: public CaptureArea(int x, int y, int width, int height, AppSettings appSettings)
     parameters:
     - id: x
       type: System.Int32
@@ -77,13 +79,11 @@ items:
       type: System.Int32
     - id: appSettings
       type: PlumJsonAnimator.Services.AppSettings
-    - id: globalState
-      type: PlumJsonAnimator.Common.Constants.GlobalState
-    content.vb: Public Sub New(x As Integer, y As Integer, width As Integer, height As Integer, appSettings As AppSettings, globalState As GlobalState)
+    content.vb: Public Sub New(x As Integer, y As Integer, width As Integer, height As Integer, appSettings As AppSettings)
   overload: PlumJsonAnimator.Models.CaptureArea.#ctor*
-  nameWithType.vb: CaptureArea.New(Integer, Integer, Integer, Integer, AppSettings, GlobalState)
-  fullName.vb: PlumJsonAnimator.Models.CaptureArea.New(Integer, Integer, Integer, Integer, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Common.Constants.GlobalState)
-  name.vb: New(Integer, Integer, Integer, Integer, AppSettings, GlobalState)
+  nameWithType.vb: CaptureArea.New(Integer, Integer, Integer, Integer, AppSettings)
+  fullName.vb: PlumJsonAnimator.Models.CaptureArea.New(Integer, Integer, Integer, Integer, PlumJsonAnimator.Services.AppSettings)
+  name.vb: New(Integer, Integer, Integer, Integer, AppSettings)
 - uid: PlumJsonAnimator.Models.CaptureArea.SelectPoint(System.Int32,System.Int32)
   commentId: M:PlumJsonAnimator.Models.CaptureArea.SelectPoint(System.Int32,System.Int32)
   id: SelectPoint(System.Int32,System.Int32)
@@ -102,56 +102,64 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SelectPoint
     path: Models/CaptureArea.cs
-    startLine: 107
+    startLine: 105
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
+  summary: Selects point near the click location
+  example: []
   syntax:
     content: public void SelectPoint(int x, int y)
     parameters:
     - id: x
       type: System.Int32
+      description: X click coordinate
     - id: y
       type: System.Int32
+      description: Y click coordinate
     content.vb: Public Sub SelectPoint(x As Integer, y As Integer)
   overload: PlumJsonAnimator.Models.CaptureArea.SelectPoint*
   nameWithType.vb: CaptureArea.SelectPoint(Integer, Integer)
   fullName.vb: PlumJsonAnimator.Models.CaptureArea.SelectPoint(Integer, Integer)
   name.vb: SelectPoint(Integer, Integer)
-- uid: PlumJsonAnimator.Models.CaptureArea.MovePoint(System.Int32,System.Int32)
-  commentId: M:PlumJsonAnimator.Models.CaptureArea.MovePoint(System.Int32,System.Int32)
-  id: MovePoint(System.Int32,System.Int32)
+- uid: PlumJsonAnimator.Models.CaptureArea.MoveSelectedPoint(System.Int32,System.Int32)
+  commentId: M:PlumJsonAnimator.Models.CaptureArea.MoveSelectedPoint(System.Int32,System.Int32)
+  id: MoveSelectedPoint(System.Int32,System.Int32)
   parent: PlumJsonAnimator.Models.CaptureArea
   langs:
   - csharp
   - vb
-  name: MovePoint(int, int)
-  nameWithType: CaptureArea.MovePoint(int, int)
-  fullName: PlumJsonAnimator.Models.CaptureArea.MovePoint(int, int)
+  name: MoveSelectedPoint(int, int)
+  nameWithType: CaptureArea.MoveSelectedPoint(int, int)
+  fullName: PlumJsonAnimator.Models.CaptureArea.MoveSelectedPoint(int, int)
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/CaptureArea.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: MovePoint
+    id: MoveSelectedPoint
     path: Models/CaptureArea.cs
-    startLine: 125
+    startLine: 128
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
+  summary: Moves the selected point into new location
+  example: []
   syntax:
-    content: public void MovePoint(int x, int y)
+    content: public void MoveSelectedPoint(int x, int y)
     parameters:
     - id: x
       type: System.Int32
+      description: X click coordinate
     - id: y
       type: System.Int32
-    content.vb: Public Sub MovePoint(x As Integer, y As Integer)
-  overload: PlumJsonAnimator.Models.CaptureArea.MovePoint*
-  nameWithType.vb: CaptureArea.MovePoint(Integer, Integer)
-  fullName.vb: PlumJsonAnimator.Models.CaptureArea.MovePoint(Integer, Integer)
-  name.vb: MovePoint(Integer, Integer)
+      description: Y click coordinate
+    content.vb: Public Sub MoveSelectedPoint(x As Integer, y As Integer)
+  overload: PlumJsonAnimator.Models.CaptureArea.MoveSelectedPoint*
+  nameWithType.vb: CaptureArea.MoveSelectedPoint(Integer, Integer)
+  fullName.vb: PlumJsonAnimator.Models.CaptureArea.MoveSelectedPoint(Integer, Integer)
+  name.vb: MoveSelectedPoint(Integer, Integer)
 - uid: PlumJsonAnimator.Models.CaptureArea.UnSelectPoint
   commentId: M:PlumJsonAnimator.Models.CaptureArea.UnSelectPoint
   id: UnSelectPoint
@@ -170,10 +178,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: UnSelectPoint
     path: Models/CaptureArea.cs
-    startLine: 154
+    startLine: 157
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
+  summary: Unselects point and saves capture area into app settings file
+  example: []
   syntax:
     content: public void UnSelectPoint()
     content.vb: Public Sub UnSelectPoint()
@@ -196,45 +206,48 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetRect
     path: Models/CaptureArea.cs
-    startLine: 166
+    startLine: 170
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
+  summary: Returns bounds of capture area
+  example: []
   syntax:
     content: public Rect GetRect()
     return:
       type: Avalonia.Rect
+      description: Bound rect
     content.vb: Public Function GetRect() As Rect
   overload: PlumJsonAnimator.Models.CaptureArea.GetRect*
-- uid: PlumJsonAnimator.Models.CaptureArea.Draw(Avalonia.Controls.Canvas)
-  commentId: M:PlumJsonAnimator.Models.CaptureArea.Draw(Avalonia.Controls.Canvas)
-  id: Draw(Avalonia.Controls.Canvas)
+- uid: PlumJsonAnimator.Models.CaptureArea.DrawCaptureArea(Avalonia.Controls.Canvas)
+  commentId: M:PlumJsonAnimator.Models.CaptureArea.DrawCaptureArea(Avalonia.Controls.Canvas)
+  id: DrawCaptureArea(Avalonia.Controls.Canvas)
   parent: PlumJsonAnimator.Models.CaptureArea
   langs:
   - csharp
   - vb
-  name: Draw(Canvas)
-  nameWithType: CaptureArea.Draw(Canvas)
-  fullName: PlumJsonAnimator.Models.CaptureArea.Draw(Avalonia.Controls.Canvas)
+  name: DrawCaptureArea(Canvas)
+  nameWithType: CaptureArea.DrawCaptureArea(Canvas)
+  fullName: PlumJsonAnimator.Models.CaptureArea.DrawCaptureArea(Avalonia.Controls.Canvas)
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/CaptureArea.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: Draw
+    id: DrawCaptureArea
     path: Models/CaptureArea.cs
-    startLine: 188
+    startLine: 192
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
   syntax:
-    content: public void Draw(Canvas canvas)
+    content: public void DrawCaptureArea(Canvas canvas)
     parameters:
     - id: canvas
       type: Avalonia.Controls.Canvas
-    content.vb: Public Sub Draw(canvas As Canvas)
-  overload: PlumJsonAnimator.Models.CaptureArea.Draw*
+    content.vb: Public Sub DrawCaptureArea(canvas As Canvas)
+  overload: PlumJsonAnimator.Models.CaptureArea.DrawCaptureArea*
 references:
 - uid: PlumJsonAnimator.Models
   commentId: N:PlumJsonAnimator.Models
@@ -497,7 +510,7 @@ references:
   fullName: System
 - uid: PlumJsonAnimator.Models.CaptureArea.#ctor*
   commentId: Overload:PlumJsonAnimator.Models.CaptureArea.#ctor
-  href: PlumJsonAnimator.Models.CaptureArea.html#PlumJsonAnimator_Models_CaptureArea__ctor_System_Int32_System_Int32_System_Int32_System_Int32_PlumJsonAnimator_Services_AppSettings_PlumJsonAnimator_Common_Constants_GlobalState_
+  href: PlumJsonAnimator.Models.CaptureArea.html#PlumJsonAnimator_Models_CaptureArea__ctor_System_Int32_System_Int32_System_Int32_System_Int32_PlumJsonAnimator_Services_AppSettings_
   name: CaptureArea
   nameWithType: CaptureArea.CaptureArea
   fullName: PlumJsonAnimator.Models.CaptureArea.CaptureArea
@@ -522,13 +535,6 @@ references:
   name: AppSettings
   nameWithType: AppSettings
   fullName: PlumJsonAnimator.Services.AppSettings
-- uid: PlumJsonAnimator.Common.Constants.GlobalState
-  commentId: T:PlumJsonAnimator.Common.Constants.GlobalState
-  parent: PlumJsonAnimator.Common.Constants
-  href: PlumJsonAnimator.Common.Constants.GlobalState.html
-  name: GlobalState
-  nameWithType: GlobalState
-  fullName: PlumJsonAnimator.Common.Constants.GlobalState
 - uid: PlumJsonAnimator.Services
   commentId: N:PlumJsonAnimator.Services
   href: PlumJsonAnimator.html
@@ -551,48 +557,18 @@ references:
   - uid: PlumJsonAnimator.Services
     name: Services
     href: PlumJsonAnimator.Services.html
-- uid: PlumJsonAnimator.Common.Constants
-  commentId: N:PlumJsonAnimator.Common.Constants
-  href: PlumJsonAnimator.html
-  name: PlumJsonAnimator.Common.Constants
-  nameWithType: PlumJsonAnimator.Common.Constants
-  fullName: PlumJsonAnimator.Common.Constants
-  spec.csharp:
-  - uid: PlumJsonAnimator
-    name: PlumJsonAnimator
-    href: PlumJsonAnimator.html
-  - name: .
-  - uid: PlumJsonAnimator.Common
-    name: Common
-    href: PlumJsonAnimator.Common.html
-  - name: .
-  - uid: PlumJsonAnimator.Common.Constants
-    name: Constants
-    href: PlumJsonAnimator.Common.Constants.html
-  spec.vb:
-  - uid: PlumJsonAnimator
-    name: PlumJsonAnimator
-    href: PlumJsonAnimator.html
-  - name: .
-  - uid: PlumJsonAnimator.Common
-    name: Common
-    href: PlumJsonAnimator.Common.html
-  - name: .
-  - uid: PlumJsonAnimator.Common.Constants
-    name: Constants
-    href: PlumJsonAnimator.Common.Constants.html
 - uid: PlumJsonAnimator.Models.CaptureArea.SelectPoint*
   commentId: Overload:PlumJsonAnimator.Models.CaptureArea.SelectPoint
   href: PlumJsonAnimator.Models.CaptureArea.html#PlumJsonAnimator_Models_CaptureArea_SelectPoint_System_Int32_System_Int32_
   name: SelectPoint
   nameWithType: CaptureArea.SelectPoint
   fullName: PlumJsonAnimator.Models.CaptureArea.SelectPoint
-- uid: PlumJsonAnimator.Models.CaptureArea.MovePoint*
-  commentId: Overload:PlumJsonAnimator.Models.CaptureArea.MovePoint
-  href: PlumJsonAnimator.Models.CaptureArea.html#PlumJsonAnimator_Models_CaptureArea_MovePoint_System_Int32_System_Int32_
-  name: MovePoint
-  nameWithType: CaptureArea.MovePoint
-  fullName: PlumJsonAnimator.Models.CaptureArea.MovePoint
+- uid: PlumJsonAnimator.Models.CaptureArea.MoveSelectedPoint*
+  commentId: Overload:PlumJsonAnimator.Models.CaptureArea.MoveSelectedPoint
+  href: PlumJsonAnimator.Models.CaptureArea.html#PlumJsonAnimator_Models_CaptureArea_MoveSelectedPoint_System_Int32_System_Int32_
+  name: MoveSelectedPoint
+  nameWithType: CaptureArea.MoveSelectedPoint
+  fullName: PlumJsonAnimator.Models.CaptureArea.MoveSelectedPoint
 - uid: PlumJsonAnimator.Models.CaptureArea.UnSelectPoint*
   commentId: Overload:PlumJsonAnimator.Models.CaptureArea.UnSelectPoint
   href: PlumJsonAnimator.Models.CaptureArea.html#PlumJsonAnimator_Models_CaptureArea_UnSelectPoint
@@ -618,12 +594,12 @@ references:
   name: Avalonia
   nameWithType: Avalonia
   fullName: Avalonia
-- uid: PlumJsonAnimator.Models.CaptureArea.Draw*
-  commentId: Overload:PlumJsonAnimator.Models.CaptureArea.Draw
-  href: PlumJsonAnimator.Models.CaptureArea.html#PlumJsonAnimator_Models_CaptureArea_Draw_Avalonia_Controls_Canvas_
-  name: Draw
-  nameWithType: CaptureArea.Draw
-  fullName: PlumJsonAnimator.Models.CaptureArea.Draw
+- uid: PlumJsonAnimator.Models.CaptureArea.DrawCaptureArea*
+  commentId: Overload:PlumJsonAnimator.Models.CaptureArea.DrawCaptureArea
+  href: PlumJsonAnimator.Models.CaptureArea.html#PlumJsonAnimator_Models_CaptureArea_DrawCaptureArea_Avalonia_Controls_Canvas_
+  name: DrawCaptureArea
+  nameWithType: CaptureArea.DrawCaptureArea
+  fullName: PlumJsonAnimator.Models.CaptureArea.DrawCaptureArea
 - uid: Avalonia.Controls.Canvas
   commentId: T:Avalonia.Controls.Canvas
   parent: Avalonia.Controls

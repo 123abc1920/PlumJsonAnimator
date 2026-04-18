@@ -21,10 +21,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AnimationData
     path: Models/Skeleton/Animation.cs
-    startLine: 302
+    startLine: 321
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  summary: Animation data
+  example: []
   syntax:
     content: public class AnimationData
     content.vb: Public Class AnimationData
@@ -56,7 +58,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Bones
     path: Models/Skeleton/Animation.cs
-    startLine: 304
+    startLine: 323
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -97,7 +99,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: DrawOrder
     path: Models/Skeleton/Animation.cs
-    startLine: 307
+    startLine: 326
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace

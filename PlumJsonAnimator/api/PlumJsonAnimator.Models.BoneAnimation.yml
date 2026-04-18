@@ -6,21 +6,15 @@ items:
   parent: PlumJsonAnimator.Models
   children:
   - PlumJsonAnimator.Models.BoneAnimation.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)
+  - PlumJsonAnimator.Models.BoneAnimation.AddRotateFrame(System.Double,System.Double)
+  - PlumJsonAnimator.Models.BoneAnimation.AddTranslateFrame(System.Double,System.Double,System.Double)
   - PlumJsonAnimator.Models.BoneAnimation.BoneStep(PlumJsonAnimator.Models.SkeletonNameSpace.Bone,System.Double)
+  - PlumJsonAnimator.Models.BoneAnimation.DeleteKeyFrame(System.Double,PlumJsonAnimator.Models.Common.TransformModesTypes)
   - PlumJsonAnimator.Models.BoneAnimation.FindTime(System.Double,PlumJsonAnimator.Models.Common.TransformModesTypes,System.Boolean)
+  - PlumJsonAnimator.Models.BoneAnimation.GenerateCode
+  - PlumJsonAnimator.Models.BoneAnimation.GenerateJSONData
   - PlumJsonAnimator.Models.BoneAnimation.GetKeyFeamesMarks
   - PlumJsonAnimator.Models.BoneAnimation.MaxTime
-  - PlumJsonAnimator.Models.BoneAnimation.addRotateFrame(System.Double,System.Double)
-  - PlumJsonAnimator.Models.BoneAnimation.addScaleFrame(System.Double,System.Double,System.Double)
-  - PlumJsonAnimator.Models.BoneAnimation.addShearFrame(System.Double,System.Double,System.Double)
-  - PlumJsonAnimator.Models.BoneAnimation.addTranslateFrame(System.Double,System.Double,System.Double)
-  - PlumJsonAnimator.Models.BoneAnimation.deleteKeyFrame(System.Double,PlumJsonAnimator.Models.Common.TransformModesTypes)
-  - PlumJsonAnimator.Models.BoneAnimation.generateCode
-  - PlumJsonAnimator.Models.BoneAnimation.generateJSONData
-  - PlumJsonAnimator.Models.BoneAnimation.rotateKeyframes
-  - PlumJsonAnimator.Models.BoneAnimation.scaleKeyframes
-  - PlumJsonAnimator.Models.BoneAnimation.shearKeyframes
-  - PlumJsonAnimator.Models.BoneAnimation.translateKeyframes
   langs:
   - csharp
   - vb
@@ -35,7 +29,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: BoneAnimation
     path: Models/BoneAnimation.cs
-    startLine: 14
+    startLine: 15
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -54,114 +48,6 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-- uid: PlumJsonAnimator.Models.BoneAnimation.rotateKeyframes
-  commentId: F:PlumJsonAnimator.Models.BoneAnimation.rotateKeyframes
-  id: rotateKeyframes
-  parent: PlumJsonAnimator.Models.BoneAnimation
-  langs:
-  - csharp
-  - vb
-  name: rotateKeyframes
-  nameWithType: BoneAnimation.rotateKeyframes
-  fullName: PlumJsonAnimator.Models.BoneAnimation.rotateKeyframes
-  type: Field
-  source:
-    remote:
-      path: PlumJsonAnimator/Models/BoneAnimation.cs
-      branch: main
-      repo: https://github.com/123abc1920/PlumAnimation.git
-    id: rotateKeyframes
-    path: Models/BoneAnimation.cs
-    startLine: 16
-  assemblies:
-  - PlumJsonAnimator
-  namespace: PlumJsonAnimator.Models
-  syntax:
-    content: public SortedDictionary<double, IKeyframeType> rotateKeyframes
-    return:
-      type: System.Collections.Generic.SortedDictionary{System.Double,PlumJsonAnimator.Models.Common.IKeyframeType}
-    content.vb: Public rotateKeyframes As SortedDictionary(Of Double, IKeyframeType)
-- uid: PlumJsonAnimator.Models.BoneAnimation.translateKeyframes
-  commentId: F:PlumJsonAnimator.Models.BoneAnimation.translateKeyframes
-  id: translateKeyframes
-  parent: PlumJsonAnimator.Models.BoneAnimation
-  langs:
-  - csharp
-  - vb
-  name: translateKeyframes
-  nameWithType: BoneAnimation.translateKeyframes
-  fullName: PlumJsonAnimator.Models.BoneAnimation.translateKeyframes
-  type: Field
-  source:
-    remote:
-      path: PlumJsonAnimator/Models/BoneAnimation.cs
-      branch: main
-      repo: https://github.com/123abc1920/PlumAnimation.git
-    id: translateKeyframes
-    path: Models/BoneAnimation.cs
-    startLine: 18
-  assemblies:
-  - PlumJsonAnimator
-  namespace: PlumJsonAnimator.Models
-  syntax:
-    content: public SortedDictionary<double, IKeyframeType> translateKeyframes
-    return:
-      type: System.Collections.Generic.SortedDictionary{System.Double,PlumJsonAnimator.Models.Common.IKeyframeType}
-    content.vb: Public translateKeyframes As SortedDictionary(Of Double, IKeyframeType)
-- uid: PlumJsonAnimator.Models.BoneAnimation.shearKeyframes
-  commentId: F:PlumJsonAnimator.Models.BoneAnimation.shearKeyframes
-  id: shearKeyframes
-  parent: PlumJsonAnimator.Models.BoneAnimation
-  langs:
-  - csharp
-  - vb
-  name: shearKeyframes
-  nameWithType: BoneAnimation.shearKeyframes
-  fullName: PlumJsonAnimator.Models.BoneAnimation.shearKeyframes
-  type: Field
-  source:
-    remote:
-      path: PlumJsonAnimator/Models/BoneAnimation.cs
-      branch: main
-      repo: https://github.com/123abc1920/PlumAnimation.git
-    id: shearKeyframes
-    path: Models/BoneAnimation.cs
-    startLine: 20
-  assemblies:
-  - PlumJsonAnimator
-  namespace: PlumJsonAnimator.Models
-  syntax:
-    content: public SortedDictionary<double, IKeyframeType> shearKeyframes
-    return:
-      type: System.Collections.Generic.SortedDictionary{System.Double,PlumJsonAnimator.Models.Common.IKeyframeType}
-    content.vb: Public shearKeyframes As SortedDictionary(Of Double, IKeyframeType)
-- uid: PlumJsonAnimator.Models.BoneAnimation.scaleKeyframes
-  commentId: F:PlumJsonAnimator.Models.BoneAnimation.scaleKeyframes
-  id: scaleKeyframes
-  parent: PlumJsonAnimator.Models.BoneAnimation
-  langs:
-  - csharp
-  - vb
-  name: scaleKeyframes
-  nameWithType: BoneAnimation.scaleKeyframes
-  fullName: PlumJsonAnimator.Models.BoneAnimation.scaleKeyframes
-  type: Field
-  source:
-    remote:
-      path: PlumJsonAnimator/Models/BoneAnimation.cs
-      branch: main
-      repo: https://github.com/123abc1920/PlumAnimation.git
-    id: scaleKeyframes
-    path: Models/BoneAnimation.cs
-    startLine: 22
-  assemblies:
-  - PlumJsonAnimator
-  namespace: PlumJsonAnimator.Models
-  syntax:
-    content: public SortedDictionary<double, IKeyframeType> scaleKeyframes
-    return:
-      type: System.Collections.Generic.SortedDictionary{System.Double,PlumJsonAnimator.Models.Common.IKeyframeType}
-    content.vb: Public scaleKeyframes As SortedDictionary(Of Double, IKeyframeType)
 - uid: PlumJsonAnimator.Models.BoneAnimation.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)
   commentId: M:PlumJsonAnimator.Models.BoneAnimation.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)
   id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)'
@@ -180,7 +66,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Models/BoneAnimation.cs
-    startLine: 37
+    startLine: 38
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -196,32 +82,32 @@ items:
   nameWithType.vb: BoneAnimation.New(GlobalState, Interpolation)
   fullName.vb: PlumJsonAnimator.Models.BoneAnimation.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation)
   name.vb: New(GlobalState, Interpolation)
-- uid: PlumJsonAnimator.Models.BoneAnimation.addTranslateFrame(System.Double,System.Double,System.Double)
-  commentId: M:PlumJsonAnimator.Models.BoneAnimation.addTranslateFrame(System.Double,System.Double,System.Double)
-  id: addTranslateFrame(System.Double,System.Double,System.Double)
+- uid: PlumJsonAnimator.Models.BoneAnimation.AddTranslateFrame(System.Double,System.Double,System.Double)
+  commentId: M:PlumJsonAnimator.Models.BoneAnimation.AddTranslateFrame(System.Double,System.Double,System.Double)
+  id: AddTranslateFrame(System.Double,System.Double,System.Double)
   parent: PlumJsonAnimator.Models.BoneAnimation
   langs:
   - csharp
   - vb
-  name: addTranslateFrame(double, double, double)
-  nameWithType: BoneAnimation.addTranslateFrame(double, double, double)
-  fullName: PlumJsonAnimator.Models.BoneAnimation.addTranslateFrame(double, double, double)
+  name: AddTranslateFrame(double, double, double)
+  nameWithType: BoneAnimation.AddTranslateFrame(double, double, double)
+  fullName: PlumJsonAnimator.Models.BoneAnimation.AddTranslateFrame(double, double, double)
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/BoneAnimation.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: addTranslateFrame
+    id: AddTranslateFrame
     path: Models/BoneAnimation.cs
-    startLine: 49
+    startLine: 50
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
-  summary: Add translate keyframe to bone
+  summary: Adds translate keyframe to bone
   example: []
   syntax:
-    content: public void addTranslateFrame(double time, double x, double y)
+    content: public void AddTranslateFrame(double time, double x, double y)
     parameters:
     - id: time
       type: System.Double
@@ -232,37 +118,37 @@ items:
     - id: y
       type: System.Double
       description: ''
-    content.vb: Public Sub addTranslateFrame(time As Double, x As Double, y As Double)
-  overload: PlumJsonAnimator.Models.BoneAnimation.addTranslateFrame*
-  nameWithType.vb: BoneAnimation.addTranslateFrame(Double, Double, Double)
-  fullName.vb: PlumJsonAnimator.Models.BoneAnimation.addTranslateFrame(Double, Double, Double)
-  name.vb: addTranslateFrame(Double, Double, Double)
-- uid: PlumJsonAnimator.Models.BoneAnimation.addRotateFrame(System.Double,System.Double)
-  commentId: M:PlumJsonAnimator.Models.BoneAnimation.addRotateFrame(System.Double,System.Double)
-  id: addRotateFrame(System.Double,System.Double)
+    content.vb: Public Sub AddTranslateFrame(time As Double, x As Double, y As Double)
+  overload: PlumJsonAnimator.Models.BoneAnimation.AddTranslateFrame*
+  nameWithType.vb: BoneAnimation.AddTranslateFrame(Double, Double, Double)
+  fullName.vb: PlumJsonAnimator.Models.BoneAnimation.AddTranslateFrame(Double, Double, Double)
+  name.vb: AddTranslateFrame(Double, Double, Double)
+- uid: PlumJsonAnimator.Models.BoneAnimation.AddRotateFrame(System.Double,System.Double)
+  commentId: M:PlumJsonAnimator.Models.BoneAnimation.AddRotateFrame(System.Double,System.Double)
+  id: AddRotateFrame(System.Double,System.Double)
   parent: PlumJsonAnimator.Models.BoneAnimation
   langs:
   - csharp
   - vb
-  name: addRotateFrame(double, double)
-  nameWithType: BoneAnimation.addRotateFrame(double, double)
-  fullName: PlumJsonAnimator.Models.BoneAnimation.addRotateFrame(double, double)
+  name: AddRotateFrame(double, double)
+  nameWithType: BoneAnimation.AddRotateFrame(double, double)
+  fullName: PlumJsonAnimator.Models.BoneAnimation.AddRotateFrame(double, double)
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/BoneAnimation.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: addRotateFrame
+    id: AddRotateFrame
     path: Models/BoneAnimation.cs
-    startLine: 66
+    startLine: 67
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
-  summary: Add rotate keyframe to bone
+  summary: Adds rotate keyframe to bone
   example: []
   syntax:
-    content: public void addRotateFrame(double time, double value)
+    content: public void AddRotateFrame(double time, double value)
     parameters:
     - id: time
       type: System.Double
@@ -270,119 +156,37 @@ items:
     - id: value
       type: System.Double
       description: ''
-    content.vb: Public Sub addRotateFrame(time As Double, value As Double)
-  overload: PlumJsonAnimator.Models.BoneAnimation.addRotateFrame*
-  nameWithType.vb: BoneAnimation.addRotateFrame(Double, Double)
-  fullName.vb: PlumJsonAnimator.Models.BoneAnimation.addRotateFrame(Double, Double)
-  name.vb: addRotateFrame(Double, Double)
-- uid: PlumJsonAnimator.Models.BoneAnimation.addScaleFrame(System.Double,System.Double,System.Double)
-  commentId: M:PlumJsonAnimator.Models.BoneAnimation.addScaleFrame(System.Double,System.Double,System.Double)
-  id: addScaleFrame(System.Double,System.Double,System.Double)
+    content.vb: Public Sub AddRotateFrame(time As Double, value As Double)
+  overload: PlumJsonAnimator.Models.BoneAnimation.AddRotateFrame*
+  nameWithType.vb: BoneAnimation.AddRotateFrame(Double, Double)
+  fullName.vb: PlumJsonAnimator.Models.BoneAnimation.AddRotateFrame(Double, Double)
+  name.vb: AddRotateFrame(Double, Double)
+- uid: PlumJsonAnimator.Models.BoneAnimation.DeleteKeyFrame(System.Double,PlumJsonAnimator.Models.Common.TransformModesTypes)
+  commentId: M:PlumJsonAnimator.Models.BoneAnimation.DeleteKeyFrame(System.Double,PlumJsonAnimator.Models.Common.TransformModesTypes)
+  id: DeleteKeyFrame(System.Double,PlumJsonAnimator.Models.Common.TransformModesTypes)
   parent: PlumJsonAnimator.Models.BoneAnimation
   langs:
   - csharp
   - vb
-  name: addScaleFrame(double, double, double)
-  nameWithType: BoneAnimation.addScaleFrame(double, double, double)
-  fullName: PlumJsonAnimator.Models.BoneAnimation.addScaleFrame(double, double, double)
+  name: DeleteKeyFrame(double, TransformModesTypes)
+  nameWithType: BoneAnimation.DeleteKeyFrame(double, TransformModesTypes)
+  fullName: PlumJsonAnimator.Models.BoneAnimation.DeleteKeyFrame(double, PlumJsonAnimator.Models.Common.TransformModesTypes)
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/BoneAnimation.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: addScaleFrame
+    id: DeleteKeyFrame
     path: Models/BoneAnimation.cs
     startLine: 84
-  assemblies:
-  - PlumJsonAnimator
-  namespace: PlumJsonAnimator.Models
-  summary: Add scale keyframe to bone
-  example: []
-  syntax:
-    content: public void addScaleFrame(double time, double x, double y)
-    parameters:
-    - id: time
-      type: System.Double
-      description: ''
-    - id: x
-      type: System.Double
-      description: ''
-    - id: y
-      type: System.Double
-      description: ''
-    content.vb: Public Sub addScaleFrame(time As Double, x As Double, y As Double)
-  overload: PlumJsonAnimator.Models.BoneAnimation.addScaleFrame*
-  nameWithType.vb: BoneAnimation.addScaleFrame(Double, Double, Double)
-  fullName.vb: PlumJsonAnimator.Models.BoneAnimation.addScaleFrame(Double, Double, Double)
-  name.vb: addScaleFrame(Double, Double, Double)
-- uid: PlumJsonAnimator.Models.BoneAnimation.addShearFrame(System.Double,System.Double,System.Double)
-  commentId: M:PlumJsonAnimator.Models.BoneAnimation.addShearFrame(System.Double,System.Double,System.Double)
-  id: addShearFrame(System.Double,System.Double,System.Double)
-  parent: PlumJsonAnimator.Models.BoneAnimation
-  langs:
-  - csharp
-  - vb
-  name: addShearFrame(double, double, double)
-  nameWithType: BoneAnimation.addShearFrame(double, double, double)
-  fullName: PlumJsonAnimator.Models.BoneAnimation.addShearFrame(double, double, double)
-  type: Method
-  source:
-    remote:
-      path: PlumJsonAnimator/Models/BoneAnimation.cs
-      branch: main
-      repo: https://github.com/123abc1920/PlumAnimation.git
-    id: addShearFrame
-    path: Models/BoneAnimation.cs
-    startLine: 102
-  assemblies:
-  - PlumJsonAnimator
-  namespace: PlumJsonAnimator.Models
-  summary: Add shear keyframe to bone
-  example: []
-  syntax:
-    content: public void addShearFrame(double time, double x, double y)
-    parameters:
-    - id: time
-      type: System.Double
-      description: ''
-    - id: x
-      type: System.Double
-      description: ''
-    - id: y
-      type: System.Double
-      description: ''
-    content.vb: Public Sub addShearFrame(time As Double, x As Double, y As Double)
-  overload: PlumJsonAnimator.Models.BoneAnimation.addShearFrame*
-  nameWithType.vb: BoneAnimation.addShearFrame(Double, Double, Double)
-  fullName.vb: PlumJsonAnimator.Models.BoneAnimation.addShearFrame(Double, Double, Double)
-  name.vb: addShearFrame(Double, Double, Double)
-- uid: PlumJsonAnimator.Models.BoneAnimation.deleteKeyFrame(System.Double,PlumJsonAnimator.Models.Common.TransformModesTypes)
-  commentId: M:PlumJsonAnimator.Models.BoneAnimation.deleteKeyFrame(System.Double,PlumJsonAnimator.Models.Common.TransformModesTypes)
-  id: deleteKeyFrame(System.Double,PlumJsonAnimator.Models.Common.TransformModesTypes)
-  parent: PlumJsonAnimator.Models.BoneAnimation
-  langs:
-  - csharp
-  - vb
-  name: deleteKeyFrame(double, TransformModesTypes)
-  nameWithType: BoneAnimation.deleteKeyFrame(double, TransformModesTypes)
-  fullName: PlumJsonAnimator.Models.BoneAnimation.deleteKeyFrame(double, PlumJsonAnimator.Models.Common.TransformModesTypes)
-  type: Method
-  source:
-    remote:
-      path: PlumJsonAnimator/Models/BoneAnimation.cs
-      branch: main
-      repo: https://github.com/123abc1920/PlumAnimation.git
-    id: deleteKeyFrame
-    path: Models/BoneAnimation.cs
-    startLine: 119
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
   summary: Delete keyframe
   example: []
   syntax:
-    content: public void deleteKeyFrame(double time, TransformModesTypes keyFrameType)
+    content: public void DeleteKeyFrame(double time, TransformModesTypes keyFrameType)
     parameters:
     - id: time
       type: System.Double
@@ -390,11 +194,11 @@ items:
     - id: keyFrameType
       type: PlumJsonAnimator.Models.Common.TransformModesTypes
       description: ''
-    content.vb: Public Sub deleteKeyFrame(time As Double, keyFrameType As TransformModesTypes)
-  overload: PlumJsonAnimator.Models.BoneAnimation.deleteKeyFrame*
-  nameWithType.vb: BoneAnimation.deleteKeyFrame(Double, TransformModesTypes)
-  fullName.vb: PlumJsonAnimator.Models.BoneAnimation.deleteKeyFrame(Double, PlumJsonAnimator.Models.Common.TransformModesTypes)
-  name.vb: deleteKeyFrame(Double, TransformModesTypes)
+    content.vb: Public Sub DeleteKeyFrame(time As Double, keyFrameType As TransformModesTypes)
+  overload: PlumJsonAnimator.Models.BoneAnimation.DeleteKeyFrame*
+  nameWithType.vb: BoneAnimation.DeleteKeyFrame(Double, TransformModesTypes)
+  fullName.vb: PlumJsonAnimator.Models.BoneAnimation.DeleteKeyFrame(Double, PlumJsonAnimator.Models.Common.TransformModesTypes)
+  name.vb: DeleteKeyFrame(Double, TransformModesTypes)
 - uid: PlumJsonAnimator.Models.BoneAnimation.GetKeyFeamesMarks
   commentId: M:PlumJsonAnimator.Models.BoneAnimation.GetKeyFeamesMarks
   id: GetKeyFeamesMarks
@@ -413,7 +217,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetKeyFeamesMarks
     path: Models/BoneAnimation.cs
-    startLine: 151
+    startLine: 116
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -441,78 +245,82 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: BoneStep
     path: Models/BoneAnimation.cs
-    startLine: 301
+    startLine: 281
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
+  summary: Sets the bone to the desired state according current time
+  example: []
   syntax:
     content: public void BoneStep(Bone b, double time)
     parameters:
     - id: b
       type: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+      description: Bone
     - id: time
       type: System.Double
+      description: Current time
     content.vb: Public Sub BoneStep(b As Bone, time As Double)
   overload: PlumJsonAnimator.Models.BoneAnimation.BoneStep*
   nameWithType.vb: BoneAnimation.BoneStep(Bone, Double)
   fullName.vb: PlumJsonAnimator.Models.BoneAnimation.BoneStep(PlumJsonAnimator.Models.SkeletonNameSpace.Bone, Double)
   name.vb: BoneStep(Bone, Double)
-- uid: PlumJsonAnimator.Models.BoneAnimation.generateJSONData
-  commentId: M:PlumJsonAnimator.Models.BoneAnimation.generateJSONData
-  id: generateJSONData
+- uid: PlumJsonAnimator.Models.BoneAnimation.GenerateJSONData
+  commentId: M:PlumJsonAnimator.Models.BoneAnimation.GenerateJSONData
+  id: GenerateJSONData
   parent: PlumJsonAnimator.Models.BoneAnimation
   langs:
   - csharp
   - vb
-  name: generateJSONData()
-  nameWithType: BoneAnimation.generateJSONData()
-  fullName: PlumJsonAnimator.Models.BoneAnimation.generateJSONData()
+  name: GenerateJSONData()
+  nameWithType: BoneAnimation.GenerateJSONData()
+  fullName: PlumJsonAnimator.Models.BoneAnimation.GenerateJSONData()
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/BoneAnimation.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: generateJSONData
+    id: GenerateJSONData
     path: Models/BoneAnimation.cs
-    startLine: 307
+    startLine: 287
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
   syntax:
-    content: public BoneAnimationData generateJSONData()
+    content: public BoneAnimationData GenerateJSONData()
     return:
       type: PlumJsonAnimator.Models.BoneAnimationData
-    content.vb: Public Function generateJSONData() As BoneAnimationData
-  overload: PlumJsonAnimator.Models.BoneAnimation.generateJSONData*
-- uid: PlumJsonAnimator.Models.BoneAnimation.generateCode
-  commentId: M:PlumJsonAnimator.Models.BoneAnimation.generateCode
-  id: generateCode
+    content.vb: Public Function GenerateJSONData() As BoneAnimationData
+  overload: PlumJsonAnimator.Models.BoneAnimation.GenerateJSONData*
+- uid: PlumJsonAnimator.Models.BoneAnimation.GenerateCode
+  commentId: M:PlumJsonAnimator.Models.BoneAnimation.GenerateCode
+  id: GenerateCode
   parent: PlumJsonAnimator.Models.BoneAnimation
   langs:
   - csharp
   - vb
-  name: generateCode()
-  nameWithType: BoneAnimation.generateCode()
-  fullName: PlumJsonAnimator.Models.BoneAnimation.generateCode()
+  name: GenerateCode()
+  nameWithType: BoneAnimation.GenerateCode()
+  fullName: PlumJsonAnimator.Models.BoneAnimation.GenerateCode()
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/BoneAnimation.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: generateCode
+    id: GenerateCode
     path: Models/BoneAnimation.cs
-    startLine: 340
+    startLine: 320
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
   syntax:
-    content: public string generateCode()
+    content: public string GenerateCode()
     return:
       type: System.String
-    content.vb: Public Function generateCode() As String
-  overload: PlumJsonAnimator.Models.BoneAnimation.generateCode*
+    content.vb: Public Function GenerateCode() As String
+  overload: PlumJsonAnimator.Models.BoneAnimation.GenerateCode*
 - uid: PlumJsonAnimator.Models.BoneAnimation.FindTime(System.Double,PlumJsonAnimator.Models.Common.TransformModesTypes,System.Boolean)
   commentId: M:PlumJsonAnimator.Models.BoneAnimation.FindTime(System.Double,PlumJsonAnimator.Models.Common.TransformModesTypes,System.Boolean)
   id: FindTime(System.Double,PlumJsonAnimator.Models.Common.TransformModesTypes,System.Boolean)
@@ -531,21 +339,27 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: FindTime
     path: Models/BoneAnimation.cs
-    startLine: 345
+    startLine: 332
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
+  summary: Finds time of the next or the previous keyframe
+  example: []
   syntax:
     content: public double FindTime(double time, TransformModesTypes type, bool isNext)
     parameters:
     - id: time
       type: System.Double
+      description: Current time
     - id: type
       type: PlumJsonAnimator.Models.Common.TransformModesTypes
+      description: Type of target keyframe
     - id: isNext
       type: System.Boolean
+      description: Search for the next or the previous keyframe
     return:
       type: System.Double
+      description: Double, time of the target keyframe
     content.vb: Public Function FindTime(time As Double, type As TransformModesTypes, isNext As Boolean) As Double
   overload: PlumJsonAnimator.Models.BoneAnimation.FindTime*
   nameWithType.vb: BoneAnimation.FindTime(Double, TransformModesTypes, Boolean)
@@ -569,10 +383,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: MaxTime
     path: Models/BoneAnimation.cs
-    startLine: 401
+    startLine: 396
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
+  summary: Finds the longest time from all keyframe dictionary
+  example: []
   syntax:
     content: public double MaxTime()
     return:
@@ -839,122 +655,6 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: System.Collections.Generic.SortedDictionary{System.Double,PlumJsonAnimator.Models.Common.IKeyframeType}
-  commentId: T:System.Collections.Generic.SortedDictionary{System.Double,PlumJsonAnimator.Models.Common.IKeyframeType}
-  parent: System.Collections.Generic
-  definition: System.Collections.Generic.SortedDictionary`2
-  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2
-  name: SortedDictionary<double, IKeyframeType>
-  nameWithType: SortedDictionary<double, IKeyframeType>
-  fullName: System.Collections.Generic.SortedDictionary<double, PlumJsonAnimator.Models.Common.IKeyframeType>
-  nameWithType.vb: SortedDictionary(Of Double, IKeyframeType)
-  fullName.vb: System.Collections.Generic.SortedDictionary(Of Double, PlumJsonAnimator.Models.Common.IKeyframeType)
-  name.vb: SortedDictionary(Of Double, IKeyframeType)
-  spec.csharp:
-  - uid: System.Collections.Generic.SortedDictionary`2
-    name: SortedDictionary
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2
-  - name: <
-  - uid: System.Double
-    name: double
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.double
-  - name: ','
-  - name: " "
-  - uid: PlumJsonAnimator.Models.Common.IKeyframeType
-    name: IKeyframeType
-    href: PlumJsonAnimator.Models.Common.IKeyframeType.html
-  - name: '>'
-  spec.vb:
-  - uid: System.Collections.Generic.SortedDictionary`2
-    name: SortedDictionary
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2
-  - name: (
-  - name: Of
-  - name: " "
-  - uid: System.Double
-    name: Double
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.double
-  - name: ','
-  - name: " "
-  - uid: PlumJsonAnimator.Models.Common.IKeyframeType
-    name: IKeyframeType
-    href: PlumJsonAnimator.Models.Common.IKeyframeType.html
-  - name: )
-- uid: System.Collections.Generic.SortedDictionary`2
-  commentId: T:System.Collections.Generic.SortedDictionary`2
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2
-  name: SortedDictionary<TKey, TValue>
-  nameWithType: SortedDictionary<TKey, TValue>
-  fullName: System.Collections.Generic.SortedDictionary<TKey, TValue>
-  nameWithType.vb: SortedDictionary(Of TKey, TValue)
-  fullName.vb: System.Collections.Generic.SortedDictionary(Of TKey, TValue)
-  name.vb: SortedDictionary(Of TKey, TValue)
-  spec.csharp:
-  - uid: System.Collections.Generic.SortedDictionary`2
-    name: SortedDictionary
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2
-  - name: <
-  - name: TKey
-  - name: ','
-  - name: " "
-  - name: TValue
-  - name: '>'
-  spec.vb:
-  - uid: System.Collections.Generic.SortedDictionary`2
-    name: SortedDictionary
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.sorteddictionary-2
-  - name: (
-  - name: Of
-  - name: " "
-  - name: TKey
-  - name: ','
-  - name: " "
-  - name: TValue
-  - name: )
-- uid: System.Collections.Generic
-  commentId: N:System.Collections.Generic
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system
-  name: System.Collections.Generic
-  nameWithType: System.Collections.Generic
-  fullName: System.Collections.Generic
-  spec.csharp:
-  - uid: System
-    name: System
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system
-  - name: .
-  - uid: System.Collections
-    name: Collections
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections
-  - name: .
-  - uid: System.Collections.Generic
-    name: Generic
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
-  spec.vb:
-  - uid: System
-    name: System
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system
-  - name: .
-  - uid: System.Collections
-    name: Collections
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections
-  - name: .
-  - uid: System.Collections.Generic
-    name: Generic
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
 - uid: PlumJsonAnimator.Models.BoneAnimation.#ctor*
   commentId: Overload:PlumJsonAnimator.Models.BoneAnimation.#ctor
   href: PlumJsonAnimator.Models.BoneAnimation.html#PlumJsonAnimator_Models_BoneAnimation__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_Interpolation_
@@ -1030,12 +730,12 @@ references:
   - uid: PlumJsonAnimator.Services
     name: Services
     href: PlumJsonAnimator.Services.html
-- uid: PlumJsonAnimator.Models.BoneAnimation.addTranslateFrame*
-  commentId: Overload:PlumJsonAnimator.Models.BoneAnimation.addTranslateFrame
-  href: PlumJsonAnimator.Models.BoneAnimation.html#PlumJsonAnimator_Models_BoneAnimation_addTranslateFrame_System_Double_System_Double_System_Double_
-  name: addTranslateFrame
-  nameWithType: BoneAnimation.addTranslateFrame
-  fullName: PlumJsonAnimator.Models.BoneAnimation.addTranslateFrame
+- uid: PlumJsonAnimator.Models.BoneAnimation.AddTranslateFrame*
+  commentId: Overload:PlumJsonAnimator.Models.BoneAnimation.AddTranslateFrame
+  href: PlumJsonAnimator.Models.BoneAnimation.html#PlumJsonAnimator_Models_BoneAnimation_AddTranslateFrame_System_Double_System_Double_System_Double_
+  name: AddTranslateFrame
+  nameWithType: BoneAnimation.AddTranslateFrame
+  fullName: PlumJsonAnimator.Models.BoneAnimation.AddTranslateFrame
 - uid: System.Double
   commentId: T:System.Double
   parent: System
@@ -1047,30 +747,18 @@ references:
   nameWithType.vb: Double
   fullName.vb: Double
   name.vb: Double
-- uid: PlumJsonAnimator.Models.BoneAnimation.addRotateFrame*
-  commentId: Overload:PlumJsonAnimator.Models.BoneAnimation.addRotateFrame
-  href: PlumJsonAnimator.Models.BoneAnimation.html#PlumJsonAnimator_Models_BoneAnimation_addRotateFrame_System_Double_System_Double_
-  name: addRotateFrame
-  nameWithType: BoneAnimation.addRotateFrame
-  fullName: PlumJsonAnimator.Models.BoneAnimation.addRotateFrame
-- uid: PlumJsonAnimator.Models.BoneAnimation.addScaleFrame*
-  commentId: Overload:PlumJsonAnimator.Models.BoneAnimation.addScaleFrame
-  href: PlumJsonAnimator.Models.BoneAnimation.html#PlumJsonAnimator_Models_BoneAnimation_addScaleFrame_System_Double_System_Double_System_Double_
-  name: addScaleFrame
-  nameWithType: BoneAnimation.addScaleFrame
-  fullName: PlumJsonAnimator.Models.BoneAnimation.addScaleFrame
-- uid: PlumJsonAnimator.Models.BoneAnimation.addShearFrame*
-  commentId: Overload:PlumJsonAnimator.Models.BoneAnimation.addShearFrame
-  href: PlumJsonAnimator.Models.BoneAnimation.html#PlumJsonAnimator_Models_BoneAnimation_addShearFrame_System_Double_System_Double_System_Double_
-  name: addShearFrame
-  nameWithType: BoneAnimation.addShearFrame
-  fullName: PlumJsonAnimator.Models.BoneAnimation.addShearFrame
-- uid: PlumJsonAnimator.Models.BoneAnimation.deleteKeyFrame*
-  commentId: Overload:PlumJsonAnimator.Models.BoneAnimation.deleteKeyFrame
-  href: PlumJsonAnimator.Models.BoneAnimation.html#PlumJsonAnimator_Models_BoneAnimation_deleteKeyFrame_System_Double_PlumJsonAnimator_Models_Common_TransformModesTypes_
-  name: deleteKeyFrame
-  nameWithType: BoneAnimation.deleteKeyFrame
-  fullName: PlumJsonAnimator.Models.BoneAnimation.deleteKeyFrame
+- uid: PlumJsonAnimator.Models.BoneAnimation.AddRotateFrame*
+  commentId: Overload:PlumJsonAnimator.Models.BoneAnimation.AddRotateFrame
+  href: PlumJsonAnimator.Models.BoneAnimation.html#PlumJsonAnimator_Models_BoneAnimation_AddRotateFrame_System_Double_System_Double_
+  name: AddRotateFrame
+  nameWithType: BoneAnimation.AddRotateFrame
+  fullName: PlumJsonAnimator.Models.BoneAnimation.AddRotateFrame
+- uid: PlumJsonAnimator.Models.BoneAnimation.DeleteKeyFrame*
+  commentId: Overload:PlumJsonAnimator.Models.BoneAnimation.DeleteKeyFrame
+  href: PlumJsonAnimator.Models.BoneAnimation.html#PlumJsonAnimator_Models_BoneAnimation_DeleteKeyFrame_System_Double_PlumJsonAnimator_Models_Common_TransformModesTypes_
+  name: DeleteKeyFrame
+  nameWithType: BoneAnimation.DeleteKeyFrame
+  fullName: PlumJsonAnimator.Models.BoneAnimation.DeleteKeyFrame
 - uid: PlumJsonAnimator.Models.Common.TransformModesTypes
   commentId: T:PlumJsonAnimator.Models.Common.TransformModesTypes
   parent: PlumJsonAnimator.Models.Common
@@ -1219,6 +907,43 @@ references:
   - name: " "
   - name: TValue
   - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
 - uid: PlumJsonAnimator.Models.BoneAnimation.BoneStep*
   commentId: Overload:PlumJsonAnimator.Models.BoneAnimation.BoneStep
   href: PlumJsonAnimator.Models.BoneAnimation.html#PlumJsonAnimator_Models_BoneAnimation_BoneStep_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_System_Double_
@@ -1262,12 +987,12 @@ references:
   - uid: PlumJsonAnimator.Models.SkeletonNameSpace
     name: SkeletonNameSpace
     href: PlumJsonAnimator.Models.SkeletonNameSpace.html
-- uid: PlumJsonAnimator.Models.BoneAnimation.generateJSONData*
-  commentId: Overload:PlumJsonAnimator.Models.BoneAnimation.generateJSONData
-  href: PlumJsonAnimator.Models.BoneAnimation.html#PlumJsonAnimator_Models_BoneAnimation_generateJSONData
-  name: generateJSONData
-  nameWithType: BoneAnimation.generateJSONData
-  fullName: PlumJsonAnimator.Models.BoneAnimation.generateJSONData
+- uid: PlumJsonAnimator.Models.BoneAnimation.GenerateJSONData*
+  commentId: Overload:PlumJsonAnimator.Models.BoneAnimation.GenerateJSONData
+  href: PlumJsonAnimator.Models.BoneAnimation.html#PlumJsonAnimator_Models_BoneAnimation_GenerateJSONData
+  name: GenerateJSONData
+  nameWithType: BoneAnimation.GenerateJSONData
+  fullName: PlumJsonAnimator.Models.BoneAnimation.GenerateJSONData
 - uid: PlumJsonAnimator.Models.BoneAnimationData
   commentId: T:PlumJsonAnimator.Models.BoneAnimationData
   parent: PlumJsonAnimator.Models
@@ -1275,12 +1000,12 @@ references:
   name: BoneAnimationData
   nameWithType: BoneAnimationData
   fullName: PlumJsonAnimator.Models.BoneAnimationData
-- uid: PlumJsonAnimator.Models.BoneAnimation.generateCode*
-  commentId: Overload:PlumJsonAnimator.Models.BoneAnimation.generateCode
-  href: PlumJsonAnimator.Models.BoneAnimation.html#PlumJsonAnimator_Models_BoneAnimation_generateCode
-  name: generateCode
-  nameWithType: BoneAnimation.generateCode
-  fullName: PlumJsonAnimator.Models.BoneAnimation.generateCode
+- uid: PlumJsonAnimator.Models.BoneAnimation.GenerateCode*
+  commentId: Overload:PlumJsonAnimator.Models.BoneAnimation.GenerateCode
+  href: PlumJsonAnimator.Models.BoneAnimation.html#PlumJsonAnimator_Models_BoneAnimation_GenerateCode
+  name: GenerateCode
+  nameWithType: BoneAnimation.GenerateCode
+  fullName: PlumJsonAnimator.Models.BoneAnimation.GenerateCode
 - uid: System.String
   commentId: T:System.String
   parent: System

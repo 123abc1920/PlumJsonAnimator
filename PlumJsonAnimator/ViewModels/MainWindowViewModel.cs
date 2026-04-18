@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Media;
-using Avalonia.Media.Imaging;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Common.Constants.Command;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Common.Timeline;
 using PlumJsonAnimator.Models;
@@ -18,7 +14,6 @@ using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
-using PlumJsonAnimator.Views;
 using static PlumJsonAnimator.Services.JsonCode;
 
 namespace PlumJsonAnimator.ViewModels;
@@ -498,7 +493,7 @@ public partial class MainWindowViewModel : ViewModelBase
             OnPropertyChanged(nameof(CurrentTime));
         };
 
-        ToggleTransformModeCommand = new Command.Command(parameter =>
+        ToggleTransformModeCommand = new Command(parameter =>
         {
             if (parameter is string mode)
             {
@@ -513,7 +508,7 @@ public partial class MainWindowViewModel : ViewModelBase
             }
         });
 
-        AddBoneView = new Command.Command(parameter =>
+        AddBoneView = new Command(parameter =>
         {
             if (parameter is TreeView treeView)
             {
@@ -524,7 +519,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 }
             }
         });
-        RenameRes = new Command.Command(parameter =>
+        RenameRes = new Command(parameter =>
         {
             if (parameter is ListBox resList)
             {
@@ -541,7 +536,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 }
             }
         });
-        DeleteRes = new Command.Command(parameter =>
+        DeleteRes = new Command(parameter =>
         {
             if (parameter is ListBox resList)
             {
@@ -557,7 +552,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 }
             }
         });
-        RenameSlot = new Command.Command(parameter =>
+        RenameSlot = new Command(parameter =>
         {
             if (parameter is ListBox SlotsList)
             {
@@ -574,7 +569,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 }
             }
         });
-        RenameBone = new Command.Command(parameter =>
+        RenameBone = new Command(parameter =>
         {
             if (parameter is TreeView boneTreeView)
             {
@@ -591,28 +586,28 @@ public partial class MainWindowViewModel : ViewModelBase
                 }
             }
         });
-        DeleteBone = new Command.Command(_ =>
+        DeleteBone = new Command(_ =>
         {
             Bone bone = CurrentBone;
             DeleteBoneReqursion(bone);
         });
-        AddAnimation = new Command.Command(_ =>
+        AddAnimation = new Command(_ =>
         {
             CurrentProject?.AddAnimation();
         });
-        AddSkin = new Command.Command(_ =>
+        AddSkin = new Command(_ =>
         {
             CurrentProject?.AddSkin();
         });
-        DeleteAnimation = new Command.Command(_ =>
+        DeleteAnimation = new Command(_ =>
         {
             CurrentProject?.DeleteAnimation();
         });
-        DeleteSkin = new Command.Command(_ =>
+        DeleteSkin = new Command(_ =>
         {
             CurrentProject?.DeleteSkin();
         });
-        AddSlot = new Command.Command(_ =>
+        AddSlot = new Command(_ =>
         {
             Bone bone = CurrentBone;
             if (bone != null)
@@ -623,7 +618,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 bone.UpdateSlots();
             }
         });
-        DeleteSlot = new Command.Command(parameter =>
+        DeleteSlot = new Command(parameter =>
         {
             if (parameter is ListBox SlotsList)
             {
@@ -637,7 +632,7 @@ public partial class MainWindowViewModel : ViewModelBase
             }
         });
 
-        SaveProject = new Command.Command(_ =>
+        SaveProject = new Command(_ =>
         {
             string anim = JsonConvert.SerializeObject(
                 this.jsonCode.generateJSONData(CurrentProject),
@@ -650,7 +645,7 @@ public partial class MainWindowViewModel : ViewModelBase
             );
         });
 
-        PrevKeyFrame = new Command.Command(_ =>
+        PrevKeyFrame = new Command(_ =>
         {
             if (CurrentBone != null)
             {
@@ -662,7 +657,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 );
             }
         });
-        NextKeyFrame = new Command.Command(_ =>
+        NextKeyFrame = new Command(_ =>
         {
             if (CurrentBone != null)
             {
@@ -674,7 +669,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 );
             }
         });
-        AddKeyFrame = new Command.Command(_ =>
+        AddKeyFrame = new Command(_ =>
         {
             if (CurrentBone != null)
             {
@@ -684,7 +679,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 );
             }
         });
-        DeleteKeyFrame = new Command.Command(_ =>
+        DeleteKeyFrame = new Command(_ =>
         {
             if (CurrentBone != null)
             {
@@ -695,12 +690,12 @@ public partial class MainWindowViewModel : ViewModelBase
             }
         });
 
-        PlayAnim = new Command.Command(_ =>
+        PlayAnim = new Command(_ =>
         {
             this.engine.runAnimation(this?.CurrentProject?.CurrentAnimation);
         });
 
-        ZoomCanvasComm = new Command.Command(parameter =>
+        ZoomCanvasComm = new Command(parameter =>
         {
             if (parameter is string isZoomPlus)
             {

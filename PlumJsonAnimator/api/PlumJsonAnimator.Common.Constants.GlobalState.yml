@@ -5,10 +5,12 @@ items:
   id: GlobalState
   parent: PlumJsonAnimator.Common.Constants
   children:
-  - PlumJsonAnimator.Common.Constants.GlobalState.#ctor(PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.LocalizationService)
+  - PlumJsonAnimator.Common.Constants.GlobalState.#ctor(PlumJsonAnimator.Services.LocalizationService)
   - PlumJsonAnimator.Common.Constants.GlobalState.BASE_CANVAS_SIZE
   - PlumJsonAnimator.Common.Constants.GlobalState.CurrentProject
   - PlumJsonAnimator.Common.Constants.GlobalState.FPS
+  - PlumJsonAnimator.Common.Constants.GlobalState.GetDotBoneColor(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  - PlumJsonAnimator.Common.Constants.GlobalState.GetLineBoneColor(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
   - PlumJsonAnimator.Common.Constants.GlobalState.GetParallelOptions
   - PlumJsonAnimator.Common.Constants.GlobalState.IsSlotSelected(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
   - PlumJsonAnimator.Common.Constants.GlobalState.OnTimeUpdated
@@ -18,10 +20,7 @@ items:
   - PlumJsonAnimator.Common.Constants.GlobalState.captureArea
   - PlumJsonAnimator.Common.Constants.GlobalState.captureMode
   - PlumJsonAnimator.Common.Constants.GlobalState.currentBone
-  - PlumJsonAnimator.Common.Constants.GlobalState.dialogs
   - PlumJsonAnimator.Common.Constants.GlobalState.drawBones
-  - PlumJsonAnimator.Common.Constants.GlobalState.getDotBoneColor(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
-  - PlumJsonAnimator.Common.Constants.GlobalState.getLineBoneColor(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
   - PlumJsonAnimator.Common.Constants.GlobalState.jsonError
   - PlumJsonAnimator.Common.Constants.GlobalState.jsonSettings
   - PlumJsonAnimator.Common.Constants.GlobalState.programExt
@@ -42,10 +41,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GlobalState
     path: Common/Constants/GlobalState.cs
-    startLine: 11
+    startLine: 14
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
+  summary: Data exchange service
+  example: []
   syntax:
     content: 'public class GlobalState : INotifyable, INotifyPropertyChanged'
     content.vb: Public Class GlobalState Inherits INotifyable Implements INotifyPropertyChanged
@@ -82,7 +83,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: CurrentProject
     path: Common/Constants/GlobalState.cs
-    startLine: 15
+    startLine: 18
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -111,7 +112,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: jsonError
     path: Common/Constants/GlobalState.cs
-    startLine: 28
+    startLine: 31
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -138,7 +139,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: jsonSettings
     path: Common/Constants/GlobalState.cs
-    startLine: 29
+    startLine: 32
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -165,7 +166,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: FPS
     path: Common/Constants/GlobalState.cs
-    startLine: 35
+    startLine: 38
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -192,7 +193,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: TimeUpdated
     path: Common/Constants/GlobalState.cs
-    startLine: 36
+    startLine: 40
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -219,7 +220,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: OnTimeUpdated
     path: Common/Constants/GlobalState.cs
-    startLine: 38
+    startLine: 42
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -227,33 +228,6 @@ items:
     content: public void OnTimeUpdated()
     content.vb: Public Sub OnTimeUpdated()
   overload: PlumJsonAnimator.Common.Constants.GlobalState.OnTimeUpdated*
-- uid: PlumJsonAnimator.Common.Constants.GlobalState.dialogs
-  commentId: F:PlumJsonAnimator.Common.Constants.GlobalState.dialogs
-  id: dialogs
-  parent: PlumJsonAnimator.Common.Constants.GlobalState
-  langs:
-  - csharp
-  - vb
-  name: dialogs
-  nameWithType: GlobalState.dialogs
-  fullName: PlumJsonAnimator.Common.Constants.GlobalState.dialogs
-  type: Field
-  source:
-    remote:
-      path: PlumJsonAnimator/Common/Constants/GlobalState.cs
-      branch: main
-      repo: https://github.com/123abc1920/PlumAnimation.git
-    id: dialogs
-    path: Common/Constants/GlobalState.cs
-    startLine: 43
-  assemblies:
-  - PlumJsonAnimator
-  namespace: PlumJsonAnimator.Common.Constants
-  syntax:
-    content: public Dialogs dialogs
-    return:
-      type: PlumJsonAnimator.Common.Dialogs.Dialogs
-    content.vb: Public dialogs As Dialogs
 - uid: PlumJsonAnimator.Common.Constants.GlobalState.currentBone
   commentId: F:PlumJsonAnimator.Common.Constants.GlobalState.currentBone
   id: currentBone
@@ -272,7 +246,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: currentBone
     path: Common/Constants/GlobalState.cs
-    startLine: 45
+    startLine: 47
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -299,7 +273,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: theme
     path: Common/Constants/GlobalState.cs
-    startLine: 46
+    startLine: 48
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -326,7 +300,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: drawBones
     path: Common/Constants/GlobalState.cs
-    startLine: 47
+    startLine: 49
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -353,7 +327,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: captureMode
     path: Common/Constants/GlobalState.cs
-    startLine: 48
+    startLine: 50
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -380,7 +354,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: workspace
     path: Common/Constants/GlobalState.cs
-    startLine: 49
+    startLine: 51
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -407,7 +381,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: programExt
     path: Common/Constants/GlobalState.cs
-    startLine: 50
+    startLine: 52
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -434,7 +408,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: BASE_CANVAS_SIZE
     path: Common/Constants/GlobalState.cs
-    startLine: 52
+    startLine: 54
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -461,7 +435,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: canvasHeight
     path: Common/Constants/GlobalState.cs
-    startLine: 53
+    startLine: 55
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -488,7 +462,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: canvasWidth
     path: Common/Constants/GlobalState.cs
-    startLine: 54
+    startLine: 56
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -515,7 +489,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: zoomCanvas
     path: Common/Constants/GlobalState.cs
-    startLine: 56
+    startLine: 58
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -542,7 +516,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: captureArea
     path: Common/Constants/GlobalState.cs
-    startLine: 58
+    startLine: 60
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -569,7 +543,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetParallelOptions
     path: Common/Constants/GlobalState.cs
-    startLine: 60
+    startLine: 62
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -579,68 +553,68 @@ items:
       type: System.Threading.Tasks.ParallelOptions
     content.vb: Public Function GetParallelOptions() As ParallelOptions
   overload: PlumJsonAnimator.Common.Constants.GlobalState.GetParallelOptions*
-- uid: PlumJsonAnimator.Common.Constants.GlobalState.getDotBoneColor(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
-  commentId: M:PlumJsonAnimator.Common.Constants.GlobalState.getDotBoneColor(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
-  id: getDotBoneColor(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+- uid: PlumJsonAnimator.Common.Constants.GlobalState.GetDotBoneColor(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  commentId: M:PlumJsonAnimator.Common.Constants.GlobalState.GetDotBoneColor(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  id: GetDotBoneColor(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
   parent: PlumJsonAnimator.Common.Constants.GlobalState
   langs:
   - csharp
   - vb
-  name: getDotBoneColor(Bone)
-  nameWithType: GlobalState.getDotBoneColor(Bone)
-  fullName: PlumJsonAnimator.Common.Constants.GlobalState.getDotBoneColor(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  name: GetDotBoneColor(Bone)
+  nameWithType: GlobalState.GetDotBoneColor(Bone)
+  fullName: PlumJsonAnimator.Common.Constants.GlobalState.GetDotBoneColor(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Common/Constants/GlobalState.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: getDotBoneColor
+    id: GetDotBoneColor
     path: Common/Constants/GlobalState.cs
-    startLine: 67
+    startLine: 69
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
   syntax:
-    content: public IImmutableBrush getDotBoneColor(Bone b)
+    content: public IImmutableBrush GetDotBoneColor(Bone b)
     parameters:
     - id: b
       type: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
     return:
       type: Avalonia.Media.IImmutableBrush
-    content.vb: Public Function getDotBoneColor(b As Bone) As IImmutableBrush
-  overload: PlumJsonAnimator.Common.Constants.GlobalState.getDotBoneColor*
-- uid: PlumJsonAnimator.Common.Constants.GlobalState.getLineBoneColor(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
-  commentId: M:PlumJsonAnimator.Common.Constants.GlobalState.getLineBoneColor(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
-  id: getLineBoneColor(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+    content.vb: Public Function GetDotBoneColor(b As Bone) As IImmutableBrush
+  overload: PlumJsonAnimator.Common.Constants.GlobalState.GetDotBoneColor*
+- uid: PlumJsonAnimator.Common.Constants.GlobalState.GetLineBoneColor(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  commentId: M:PlumJsonAnimator.Common.Constants.GlobalState.GetLineBoneColor(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  id: GetLineBoneColor(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
   parent: PlumJsonAnimator.Common.Constants.GlobalState
   langs:
   - csharp
   - vb
-  name: getLineBoneColor(Bone)
-  nameWithType: GlobalState.getLineBoneColor(Bone)
-  fullName: PlumJsonAnimator.Common.Constants.GlobalState.getLineBoneColor(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  name: GetLineBoneColor(Bone)
+  nameWithType: GlobalState.GetLineBoneColor(Bone)
+  fullName: PlumJsonAnimator.Common.Constants.GlobalState.GetLineBoneColor(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Common/Constants/GlobalState.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: getLineBoneColor
+    id: GetLineBoneColor
     path: Common/Constants/GlobalState.cs
-    startLine: 79
+    startLine: 81
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
   syntax:
-    content: public IImmutableBrush getLineBoneColor(Bone b)
+    content: public IImmutableBrush GetLineBoneColor(Bone b)
     parameters:
     - id: b
       type: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
     return:
       type: Avalonia.Media.IImmutableBrush
-    content.vb: Public Function getLineBoneColor(b As Bone) As IImmutableBrush
-  overload: PlumJsonAnimator.Common.Constants.GlobalState.getLineBoneColor*
+    content.vb: Public Function GetLineBoneColor(b As Bone) As IImmutableBrush
+  overload: PlumJsonAnimator.Common.Constants.GlobalState.GetLineBoneColor*
 - uid: PlumJsonAnimator.Common.Constants.GlobalState.IsSlotSelected(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
   commentId: M:PlumJsonAnimator.Common.Constants.GlobalState.IsSlotSelected(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
   id: IsSlotSelected(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
@@ -659,7 +633,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: IsSlotSelected
     path: Common/Constants/GlobalState.cs
-    startLine: 91
+    startLine: 93
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -672,16 +646,16 @@ items:
       type: System.Boolean
     content.vb: Public Function IsSlotSelected(slot As Slot) As Boolean
   overload: PlumJsonAnimator.Common.Constants.GlobalState.IsSlotSelected*
-- uid: PlumJsonAnimator.Common.Constants.GlobalState.#ctor(PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.LocalizationService)
-  commentId: M:PlumJsonAnimator.Common.Constants.GlobalState.#ctor(PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.LocalizationService)
-  id: '#ctor(PlumJsonAnimator.Common.Dialogs.Dialogs,PlumJsonAnimator.Services.LocalizationService)'
+- uid: PlumJsonAnimator.Common.Constants.GlobalState.#ctor(PlumJsonAnimator.Services.LocalizationService)
+  commentId: M:PlumJsonAnimator.Common.Constants.GlobalState.#ctor(PlumJsonAnimator.Services.LocalizationService)
+  id: '#ctor(PlumJsonAnimator.Services.LocalizationService)'
   parent: PlumJsonAnimator.Common.Constants.GlobalState
   langs:
   - csharp
   - vb
-  name: GlobalState(Dialogs, LocalizationService)
-  nameWithType: GlobalState.GlobalState(Dialogs, LocalizationService)
-  fullName: PlumJsonAnimator.Common.Constants.GlobalState.GlobalState(PlumJsonAnimator.Common.Dialogs.Dialogs, PlumJsonAnimator.Services.LocalizationService)
+  name: GlobalState(LocalizationService)
+  nameWithType: GlobalState.GlobalState(LocalizationService)
+  fullName: PlumJsonAnimator.Common.Constants.GlobalState.GlobalState(PlumJsonAnimator.Services.LocalizationService)
   type: Constructor
   source:
     remote:
@@ -690,22 +664,20 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Common/Constants/GlobalState.cs
-    startLine: 103
+    startLine: 105
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
   syntax:
-    content: public GlobalState(Dialogs dialogs, LocalizationService localizationService)
+    content: public GlobalState(LocalizationService localizationService)
     parameters:
-    - id: dialogs
-      type: PlumJsonAnimator.Common.Dialogs.Dialogs
     - id: localizationService
       type: PlumJsonAnimator.Services.LocalizationService
-    content.vb: Public Sub New(dialogs As Dialogs, localizationService As LocalizationService)
+    content.vb: Public Sub New(localizationService As LocalizationService)
   overload: PlumJsonAnimator.Common.Constants.GlobalState.#ctor*
-  nameWithType.vb: GlobalState.New(Dialogs, LocalizationService)
-  fullName.vb: PlumJsonAnimator.Common.Constants.GlobalState.New(PlumJsonAnimator.Common.Dialogs.Dialogs, PlumJsonAnimator.Services.LocalizationService)
-  name.vb: New(Dialogs, LocalizationService)
+  nameWithType.vb: GlobalState.New(LocalizationService)
+  fullName.vb: PlumJsonAnimator.Common.Constants.GlobalState.New(PlumJsonAnimator.Services.LocalizationService)
+  name.vb: New(LocalizationService)
 references:
 - uid: PlumJsonAnimator.Common.Constants
   commentId: N:PlumJsonAnimator.Common.Constants
@@ -1180,43 +1152,6 @@ references:
   name: OnTimeUpdated
   nameWithType: GlobalState.OnTimeUpdated
   fullName: PlumJsonAnimator.Common.Constants.GlobalState.OnTimeUpdated
-- uid: PlumJsonAnimator.Common.Dialogs.Dialogs
-  commentId: T:PlumJsonAnimator.Common.Dialogs.Dialogs
-  parent: PlumJsonAnimator.Common.Dialogs
-  href: PlumJsonAnimator.Common.Dialogs.Dialogs.html
-  name: Dialogs
-  nameWithType: Dialogs
-  fullName: PlumJsonAnimator.Common.Dialogs.Dialogs
-- uid: PlumJsonAnimator.Common.Dialogs
-  commentId: N:PlumJsonAnimator.Common.Dialogs
-  href: PlumJsonAnimator.html
-  name: PlumJsonAnimator.Common.Dialogs
-  nameWithType: PlumJsonAnimator.Common.Dialogs
-  fullName: PlumJsonAnimator.Common.Dialogs
-  spec.csharp:
-  - uid: PlumJsonAnimator
-    name: PlumJsonAnimator
-    href: PlumJsonAnimator.html
-  - name: .
-  - uid: PlumJsonAnimator.Common
-    name: Common
-    href: PlumJsonAnimator.Common.html
-  - name: .
-  - uid: PlumJsonAnimator.Common.Dialogs
-    name: Dialogs
-    href: PlumJsonAnimator.Common.Dialogs.html
-  spec.vb:
-  - uid: PlumJsonAnimator
-    name: PlumJsonAnimator
-    href: PlumJsonAnimator.html
-  - name: .
-  - uid: PlumJsonAnimator.Common
-    name: Common
-    href: PlumJsonAnimator.Common.html
-  - name: .
-  - uid: PlumJsonAnimator.Common.Dialogs
-    name: Dialogs
-    href: PlumJsonAnimator.Common.Dialogs.html
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
   commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.Bone
   parent: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -1345,12 +1280,12 @@ references:
     name: Tasks
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
-- uid: PlumJsonAnimator.Common.Constants.GlobalState.getDotBoneColor*
-  commentId: Overload:PlumJsonAnimator.Common.Constants.GlobalState.getDotBoneColor
-  href: PlumJsonAnimator.Common.Constants.GlobalState.html#PlumJsonAnimator_Common_Constants_GlobalState_getDotBoneColor_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_
-  name: getDotBoneColor
-  nameWithType: GlobalState.getDotBoneColor
-  fullName: PlumJsonAnimator.Common.Constants.GlobalState.getDotBoneColor
+- uid: PlumJsonAnimator.Common.Constants.GlobalState.GetDotBoneColor*
+  commentId: Overload:PlumJsonAnimator.Common.Constants.GlobalState.GetDotBoneColor
+  href: PlumJsonAnimator.Common.Constants.GlobalState.html#PlumJsonAnimator_Common_Constants_GlobalState_GetDotBoneColor_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_
+  name: GetDotBoneColor
+  nameWithType: GlobalState.GetDotBoneColor
+  fullName: PlumJsonAnimator.Common.Constants.GlobalState.GetDotBoneColor
 - uid: Avalonia.Media.IImmutableBrush
   commentId: T:Avalonia.Media.IImmutableBrush
   parent: Avalonia.Media
@@ -1380,12 +1315,12 @@ references:
   - uid: Avalonia.Media
     name: Media
     isExternal: true
-- uid: PlumJsonAnimator.Common.Constants.GlobalState.getLineBoneColor*
-  commentId: Overload:PlumJsonAnimator.Common.Constants.GlobalState.getLineBoneColor
-  href: PlumJsonAnimator.Common.Constants.GlobalState.html#PlumJsonAnimator_Common_Constants_GlobalState_getLineBoneColor_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_
-  name: getLineBoneColor
-  nameWithType: GlobalState.getLineBoneColor
-  fullName: PlumJsonAnimator.Common.Constants.GlobalState.getLineBoneColor
+- uid: PlumJsonAnimator.Common.Constants.GlobalState.GetLineBoneColor*
+  commentId: Overload:PlumJsonAnimator.Common.Constants.GlobalState.GetLineBoneColor
+  href: PlumJsonAnimator.Common.Constants.GlobalState.html#PlumJsonAnimator_Common_Constants_GlobalState_GetLineBoneColor_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_
+  name: GetLineBoneColor
+  nameWithType: GlobalState.GetLineBoneColor
+  fullName: PlumJsonAnimator.Common.Constants.GlobalState.GetLineBoneColor
 - uid: PlumJsonAnimator.Common.Constants.GlobalState.IsSlotSelected*
   commentId: Overload:PlumJsonAnimator.Common.Constants.GlobalState.IsSlotSelected
   href: PlumJsonAnimator.Common.Constants.GlobalState.html#PlumJsonAnimator_Common_Constants_GlobalState_IsSlotSelected_PlumJsonAnimator_Models_SkeletonNameSpace_Slot_
@@ -1401,7 +1336,7 @@ references:
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
 - uid: PlumJsonAnimator.Common.Constants.GlobalState.#ctor*
   commentId: Overload:PlumJsonAnimator.Common.Constants.GlobalState.#ctor
-  href: PlumJsonAnimator.Common.Constants.GlobalState.html#PlumJsonAnimator_Common_Constants_GlobalState__ctor_PlumJsonAnimator_Common_Dialogs_Dialogs_PlumJsonAnimator_Services_LocalizationService_
+  href: PlumJsonAnimator.Common.Constants.GlobalState.html#PlumJsonAnimator_Common_Constants_GlobalState__ctor_PlumJsonAnimator_Services_LocalizationService_
   name: GlobalState
   nameWithType: GlobalState.GlobalState
   fullName: PlumJsonAnimator.Common.Constants.GlobalState.GlobalState

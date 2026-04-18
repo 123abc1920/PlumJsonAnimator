@@ -21,10 +21,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: INotifyable
     path: Models/Interfaces/INotifyable.cs
-    startLine: 5
+    startLine: 8
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Interfaces
+  summary: Interface for all observable objects
+  example: []
   syntax:
     content: 'public abstract class INotifyable : INotifyPropertyChanged'
     content.vb: Public MustInherit Class INotifyable Implements INotifyPropertyChanged
@@ -69,7 +71,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: PropertyChanged
     path: Models/Interfaces/INotifyable.cs
-    startLine: 7
+    startLine: 10
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Interfaces
@@ -100,7 +102,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: OnPropertyChanged
     path: Models/Interfaces/INotifyable.cs
-    startLine: 9
+    startLine: 12
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Interfaces

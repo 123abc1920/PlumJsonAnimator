@@ -24,10 +24,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AppColors
     path: Common/Constants/AppColors.cs
-    startLine: 4
+    startLine: 7
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
+  summary: App color palette
+  example: []
   syntax:
     content: public class AppColors
     content.vb: Public Class AppColors
@@ -59,7 +61,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AppColor
     path: Common/Constants/AppColors.cs
-    startLine: 7
+    startLine: 10
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -88,7 +90,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Red
     path: Common/Constants/AppColors.cs
-    startLine: 12
+    startLine: 15
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -115,7 +117,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Green
     path: Common/Constants/AppColors.cs
-    startLine: 13
+    startLine: 16
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -142,7 +144,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Blue
     path: Common/Constants/AppColors.cs
-    startLine: 14
+    startLine: 17
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -169,7 +171,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Aqua
     path: Common/Constants/AppColors.cs
-    startLine: 15
+    startLine: 18
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants

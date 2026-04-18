@@ -21,10 +21,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: StringToBoolConverter
     path: Common/Converters/StringToBoolConverter.cs
-    startLine: 6
+    startLine: 9
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Converters
+  summary: Converter for toggle transform modes buttons
+  example: []
   syntax:
     content: 'public class StringToBoolConverter : IValueConverter'
     content.vb: Public Class StringToBoolConverter Implements IValueConverter
@@ -58,7 +60,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Convert
     path: Common/Converters/StringToBoolConverter.cs
-    startLine: 8
+    startLine: 11
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Converters
@@ -113,7 +115,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ConvertBack
     path: Common/Converters/StringToBoolConverter.cs
-    startLine: 17
+    startLine: 20
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Converters

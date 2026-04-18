@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: PlumJsonAnimator.Common.Constants.Command
+  commentId: N:PlumJsonAnimator.Common.Constants.Command
+  id: PlumJsonAnimator.Common.Constants.Command
+  children:
+  - PlumJsonAnimator.Common.Constants.Command.Command
+  langs:
+  - csharp
+  - vb
+  name: PlumJsonAnimator.Common.Constants.Command
+  nameWithType: PlumJsonAnimator.Common.Constants.Command
+  fullName: PlumJsonAnimator.Common.Constants.Command
+  type: Namespace
+  assemblies:
+  - PlumJsonAnimator
+references:
+- uid: PlumJsonAnimator.Common.Constants.Command.Command
+  commentId: T:PlumJsonAnimator.Common.Constants.Command.Command
+  href: PlumJsonAnimator.Common.Constants.Command.Command.html
+  name: Command
+  nameWithType: Command
+  fullName: PlumJsonAnimator.Common.Constants.Command.Command

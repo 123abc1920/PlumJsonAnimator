@@ -21,10 +21,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Popups
     path: Common/Dialogs/Popups.cs
-    startLine: 13
+    startLine: 8
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Dialogs
+  summary: Procides popups
+  example: []
   syntax:
     content: public class Popups
     content.vb: Public Class Popups
@@ -56,7 +58,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ToastManager
     path: Common/Dialogs/Popups.cs
-    startLine: 15
+    startLine: 10
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Dialogs
@@ -83,7 +85,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ShowPopup
     path: Common/Dialogs/Popups.cs
-    startLine: 18
+    startLine: 13
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Dialogs

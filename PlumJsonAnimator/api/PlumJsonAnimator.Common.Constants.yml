@@ -39,7 +39,6 @@ references:
   fullName: PlumJsonAnimator.Common.Constants.GlobalState
 - uid: PlumJsonAnimator.Common.Constants.TransformModeFactory
   commentId: T:PlumJsonAnimator.Common.Constants.TransformModeFactory
-  parent: PlumJsonAnimator.Common.Constants
   href: PlumJsonAnimator.Common.Constants.TransformModeFactory.html
   name: TransformModeFactory
   nameWithType: TransformModeFactory

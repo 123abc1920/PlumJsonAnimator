@@ -1,35 +1,34 @@
 ### YamlMime:ManagedReference
 items:
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem
-  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem
-  id: DrawOrderItem
-  parent: PlumJsonAnimator.Models.SkeletonNameSpace
+- uid: PlumJsonAnimator.Models.MetaData
+  commentId: T:PlumJsonAnimator.Models.MetaData
+  id: MetaData
+  parent: PlumJsonAnimator.Models
   children:
-  - PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem.Offsets
-  - PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem.Time
+  - PlumJsonAnimator.Models.MetaData.Spine
   langs:
   - csharp
   - vb
-  name: DrawOrderItem
-  nameWithType: DrawOrderItem
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem
+  name: MetaData
+  nameWithType: MetaData
+  fullName: PlumJsonAnimator.Models.MetaData
   type: Class
   source:
     remote:
-      path: PlumJsonAnimator/Models/Skeleton/Animation.cs
+      path: PlumJsonAnimator/Models/Project.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: DrawOrderItem
-    path: Models/Skeleton/Animation.cs
-    startLine: 338
+    id: MetaData
+    path: Models/Project.cs
+    startLine: 544
   assemblies:
   - PlumJsonAnimator
-  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
-  summary: Draw order list
+  namespace: PlumJsonAnimator.Models
+  summary: Jsonifyed project metadata
   example: []
   syntax:
-    content: public class DrawOrderItem
-    content.vb: Public Class DrawOrderItem
+    content: public class MetaData
+    content.vb: Public Class MetaData
   inheritance:
   - System.Object
   inheritedMembers:
@@ -40,95 +39,54 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem.Time
-  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem.Time
-  id: Time
-  parent: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem
+- uid: PlumJsonAnimator.Models.MetaData.Spine
+  commentId: P:PlumJsonAnimator.Models.MetaData.Spine
+  id: Spine
+  parent: PlumJsonAnimator.Models.MetaData
   langs:
   - csharp
   - vb
-  name: Time
-  nameWithType: DrawOrderItem.Time
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem.Time
+  name: Spine
+  nameWithType: MetaData.Spine
+  fullName: PlumJsonAnimator.Models.MetaData.Spine
   type: Property
   source:
     remote:
-      path: PlumJsonAnimator/Models/Skeleton/Animation.cs
+      path: PlumJsonAnimator/Models/Project.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: Time
-    path: Models/Skeleton/Animation.cs
-    startLine: 340
+    id: Spine
+    path: Models/Project.cs
+    startLine: 546
   assemblies:
   - PlumJsonAnimator
-  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  namespace: PlumJsonAnimator.Models
   syntax:
     content: >-
-      [JsonProperty("time")]
+      [JsonProperty("spine")]
 
-      public float? Time { get; set; }
+      public string? Spine { get; set; }
     parameters: []
     return:
-      type: System.Nullable{System.Single}
+      type: System.String
     content.vb: >-
-      <JsonProperty("time")>
+      <JsonProperty("spine")>
 
-      Public Property Time As Single?
-  overload: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem.Time*
+      Public Property Spine As String
+  overload: PlumJsonAnimator.Models.MetaData.Spine*
   attributes:
   - type: Newtonsoft.Json.JsonPropertyAttribute
     ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
     arguments:
     - type: System.String
-      value: time
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem.Offsets
-  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem.Offsets
-  id: Offsets
-  parent: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem
-  langs:
-  - csharp
-  - vb
-  name: Offsets
-  nameWithType: DrawOrderItem.Offsets
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem.Offsets
-  type: Property
-  source:
-    remote:
-      path: PlumJsonAnimator/Models/Skeleton/Animation.cs
-      branch: main
-      repo: https://github.com/123abc1920/PlumAnimation.git
-    id: Offsets
-    path: Models/Skeleton/Animation.cs
-    startLine: 343
-  assemblies:
-  - PlumJsonAnimator
-  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
-  syntax:
-    content: >-
-      [JsonProperty("offsets")]
-
-      public List<DrawOrderOffset>? Offsets { get; set; }
-    parameters: []
-    return:
-      type: System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderOffset}
-    content.vb: >-
-      <JsonProperty("offsets")>
-
-      Public Property Offsets As List(Of DrawOrderOffset)
-  overload: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem.Offsets*
-  attributes:
-  - type: Newtonsoft.Json.JsonPropertyAttribute
-    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
-    arguments:
-    - type: System.String
-      value: offsets
+      value: spine
 references:
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace
-  commentId: N:PlumJsonAnimator.Models.SkeletonNameSpace
+- uid: PlumJsonAnimator.Models
+  commentId: N:PlumJsonAnimator.Models
   href: PlumJsonAnimator.html
-  name: PlumJsonAnimator.Models.SkeletonNameSpace
-  nameWithType: PlumJsonAnimator.Models.SkeletonNameSpace
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace
+  name: PlumJsonAnimator.Models
+  nameWithType: PlumJsonAnimator.Models
+  fullName: PlumJsonAnimator.Models
   spec.csharp:
   - uid: PlumJsonAnimator
     name: PlumJsonAnimator
@@ -137,10 +95,6 @@ references:
   - uid: PlumJsonAnimator.Models
     name: Models
     href: PlumJsonAnimator.Models.html
-  - name: .
-  - uid: PlumJsonAnimator.Models.SkeletonNameSpace
-    name: SkeletonNameSpace
-    href: PlumJsonAnimator.Models.SkeletonNameSpace.html
   spec.vb:
   - uid: PlumJsonAnimator
     name: PlumJsonAnimator
@@ -149,10 +103,6 @@ references:
   - uid: PlumJsonAnimator.Models
     name: Models
     href: PlumJsonAnimator.Models.html
-  - name: .
-  - uid: PlumJsonAnimator.Models.SkeletonNameSpace
-    name: SkeletonNameSpace
-    href: PlumJsonAnimator.Models.SkeletonNameSpace.html
 - uid: System.Object
   commentId: T:System.Object
   parent: System
@@ -390,164 +340,20 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem.Time*
-  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem.Time
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem.html#PlumJsonAnimator_Models_SkeletonNameSpace_DrawOrderItem_Time
-  name: Time
-  nameWithType: DrawOrderItem.Time
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem.Time
-- uid: System.Nullable{System.Single}
-  commentId: T:System.Nullable{System.Single}
+- uid: PlumJsonAnimator.Models.MetaData.Spine*
+  commentId: Overload:PlumJsonAnimator.Models.MetaData.Spine
+  href: PlumJsonAnimator.Models.MetaData.html#PlumJsonAnimator_Models_MetaData_Spine
+  name: Spine
+  nameWithType: MetaData.Spine
+  fullName: PlumJsonAnimator.Models.MetaData.Spine
+- uid: System.String
+  commentId: T:System.String
   parent: System
-  definition: System.Nullable`1
-  href: https://learn.microsoft.com/dotnet/api/system.single
-  name: float?
-  nameWithType: float?
-  fullName: float?
-  nameWithType.vb: Single?
-  fullName.vb: Single?
-  name.vb: Single?
-  spec.csharp:
-  - uid: System.Single
-    name: float
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.single
-  - name: '?'
-  spec.vb:
-  - uid: System.Single
-    name: Single
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.single
-  - name: '?'
-- uid: System.Nullable`1
-  commentId: T:System.Nullable`1
   isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
-  name: Nullable<T>
-  nameWithType: Nullable<T>
-  fullName: System.Nullable<T>
-  nameWithType.vb: Nullable(Of T)
-  fullName.vb: System.Nullable(Of T)
-  name.vb: Nullable(Of T)
-  spec.csharp:
-  - uid: System.Nullable`1
-    name: Nullable
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
-  - name: <
-  - name: T
-  - name: '>'
-  spec.vb:
-  - uid: System.Nullable`1
-    name: Nullable
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
-  - name: (
-  - name: Of
-  - name: " "
-  - name: T
-  - name: )
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem.Offsets*
-  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem.Offsets
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem.html#PlumJsonAnimator_Models_SkeletonNameSpace_DrawOrderItem_Offsets
-  name: Offsets
-  nameWithType: DrawOrderItem.Offsets
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem.Offsets
-- uid: System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderOffset}
-  commentId: T:System.Collections.Generic.List{PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderOffset}
-  parent: System.Collections.Generic
-  definition: System.Collections.Generic.List`1
-  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
-  name: List<DrawOrderOffset>
-  nameWithType: List<DrawOrderOffset>
-  fullName: System.Collections.Generic.List<PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderOffset>
-  nameWithType.vb: List(Of DrawOrderOffset)
-  fullName.vb: System.Collections.Generic.List(Of PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderOffset)
-  name.vb: List(Of DrawOrderOffset)
-  spec.csharp:
-  - uid: System.Collections.Generic.List`1
-    name: List
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
-  - name: <
-  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderOffset
-    name: DrawOrderOffset
-    href: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderOffset.html
-  - name: '>'
-  spec.vb:
-  - uid: System.Collections.Generic.List`1
-    name: List
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
-  - name: (
-  - name: Of
-  - name: " "
-  - uid: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderOffset
-    name: DrawOrderOffset
-    href: PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderOffset.html
-  - name: )
-- uid: System.Collections.Generic.List`1
-  commentId: T:System.Collections.Generic.List`1
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
-  name: List<T>
-  nameWithType: List<T>
-  fullName: System.Collections.Generic.List<T>
-  nameWithType.vb: List(Of T)
-  fullName.vb: System.Collections.Generic.List(Of T)
-  name.vb: List(Of T)
-  spec.csharp:
-  - uid: System.Collections.Generic.List`1
-    name: List
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
-  - name: <
-  - name: T
-  - name: '>'
-  spec.vb:
-  - uid: System.Collections.Generic.List`1
-    name: List
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
-  - name: (
-  - name: Of
-  - name: " "
-  - name: T
-  - name: )
-- uid: System.Collections.Generic
-  commentId: N:System.Collections.Generic
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system
-  name: System.Collections.Generic
-  nameWithType: System.Collections.Generic
-  fullName: System.Collections.Generic
-  spec.csharp:
-  - uid: System
-    name: System
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system
-  - name: .
-  - uid: System.Collections
-    name: Collections
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections
-  - name: .
-  - uid: System.Collections.Generic
-    name: Generic
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
-  spec.vb:
-  - uid: System
-    name: System
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system
-  - name: .
-  - uid: System.Collections
-    name: Collections
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections
-  - name: .
-  - uid: System.Collections.Generic
-    name: Generic
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String

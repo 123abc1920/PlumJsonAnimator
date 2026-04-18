@@ -4,9 +4,9 @@ items:
   commentId: N:PlumJsonAnimator.Common.Dialogs
   id: PlumJsonAnimator.Common.Dialogs
   children:
+  - PlumJsonAnimator.Common.Dialogs.DialogType
   - PlumJsonAnimator.Common.Dialogs.Dialogs
   - PlumJsonAnimator.Common.Dialogs.Popups
-  - PlumJsonAnimator.Common.Dialogs.ViewType
   langs:
   - csharp
   - vb
@@ -17,16 +17,15 @@ items:
   assemblies:
   - PlumJsonAnimator
 references:
-- uid: PlumJsonAnimator.Common.Dialogs.ViewType
-  commentId: T:PlumJsonAnimator.Common.Dialogs.ViewType
+- uid: PlumJsonAnimator.Common.Dialogs.DialogType
+  commentId: T:PlumJsonAnimator.Common.Dialogs.DialogType
   parent: PlumJsonAnimator.Common.Dialogs
-  href: PlumJsonAnimator.Common.Dialogs.ViewType.html
-  name: ViewType
-  nameWithType: ViewType
-  fullName: PlumJsonAnimator.Common.Dialogs.ViewType
+  href: PlumJsonAnimator.Common.Dialogs.DialogType.html
+  name: DialogType
+  nameWithType: DialogType
+  fullName: PlumJsonAnimator.Common.Dialogs.DialogType
 - uid: PlumJsonAnimator.Common.Dialogs.Dialogs
   commentId: T:PlumJsonAnimator.Common.Dialogs.Dialogs
-  parent: PlumJsonAnimator.Common.Dialogs
   href: PlumJsonAnimator.Common.Dialogs.Dialogs.html
   name: Dialogs
   nameWithType: Dialogs

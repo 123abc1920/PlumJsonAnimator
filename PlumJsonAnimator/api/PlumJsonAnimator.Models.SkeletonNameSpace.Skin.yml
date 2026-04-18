@@ -9,19 +9,19 @@ items:
   - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.#ctor(System.String,PlumJsonAnimator.Common.Constants.GlobalState)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.AddSlot(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.BindSlotAttachment(PlumJsonAnimator.Models.SkeletonNameSpace.Slot,PlumJsonAnimator.Models.SkeletonNameSpace.Attachment)
-  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsAndRemoveRes(PlumJsonAnimator.Models.Resources.Res)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsRes(PlumJsonAnimator.Models.Resources.Res)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsSlot(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.DeleteSlot(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.DrawSkin(Avalonia.Controls.Canvas)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GenerateCode
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GenerateJSONData
   - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetAttachment(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetImagePath(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetSlots(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.IsSlotDrawable(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.Name
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.RemoveResIfContains(PlumJsonAnimator.Models.Resources.Res)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.SlotAttachmentBinding
-  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateCode
-  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateJSONData
-  - PlumJsonAnimator.Models.SkeletonNameSpace.Skin.isSlotDrawable(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
   langs:
   - csharp
   - vb
@@ -36,10 +36,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Skin
     path: Models/Skeleton/Skin.cs
-    startLine: 11
+    startLine: 13
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  summary: Provides methods for work with skin
+  example: []
   syntax:
     content: 'public class Skin : INotifyable, INotifyPropertyChanged'
     content.vb: Public Class Skin Inherits INotifyable Implements INotifyPropertyChanged
@@ -76,7 +78,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Name
     path: Models/Skeleton/Skin.cs
-    startLine: 15
+    startLine: 16
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -105,7 +107,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SlotAttachmentBinding
     path: Models/Skeleton/Skin.cs
-    startLine: 27
+    startLine: 28
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -132,7 +134,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Models/Skeleton/Skin.cs
-    startLine: 32
+    startLine: 33
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -164,7 +166,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Models/Skeleton/Skin.cs
-    startLine: 37
+    startLine: 38
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -198,17 +200,21 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: BindSlotAttachment
     path: Models/Skeleton/Skin.cs
-    startLine: 43
+    startLine: 49
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  summary: Binds slot and attachment in current skin
+  example: []
   syntax:
     content: public void BindSlotAttachment(Slot s, Attachment a)
     parameters:
     - id: s
       type: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+      description: New slot
     - id: a
       type: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment
+      description: New attachment
     content.vb: Public Sub BindSlotAttachment(s As Slot, a As Attachment)
   overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.BindSlotAttachment*
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.AddSlot(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
@@ -229,7 +235,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AddSlot
     path: Models/Skeleton/Skin.cs
-    startLine: 66
+    startLine: 71
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -261,7 +267,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: DeleteSlot
     path: Models/Skeleton/Skin.cs
-    startLine: 78
+    startLine: 83
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -290,7 +296,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: DrawSkin
     path: Models/Skeleton/Skin.cs
-    startLine: 90
+    startLine: 95
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -322,7 +328,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ContainsSlot
     path: Models/Skeleton/Skin.cs
-    startLine: 100
+    startLine: 105
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -353,7 +359,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ContainsRes
     path: Models/Skeleton/Skin.cs
-    startLine: 105
+    startLine: 110
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -366,37 +372,38 @@ items:
       type: System.Boolean
     content.vb: Public Function ContainsRes(res As Res) As Boolean
   overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsRes*
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsAndRemoveRes(PlumJsonAnimator.Models.Resources.Res)
-  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsAndRemoveRes(PlumJsonAnimator.Models.Resources.Res)
-  id: ContainsAndRemoveRes(PlumJsonAnimator.Models.Resources.Res)
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.RemoveResIfContains(PlumJsonAnimator.Models.Resources.Res)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.RemoveResIfContains(PlumJsonAnimator.Models.Resources.Res)
+  id: RemoveResIfContains(PlumJsonAnimator.Models.Resources.Res)
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
   langs:
   - csharp
   - vb
-  name: ContainsAndRemoveRes(Res)
-  nameWithType: Skin.ContainsAndRemoveRes(Res)
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsAndRemoveRes(PlumJsonAnimator.Models.Resources.Res)
+  name: RemoveResIfContains(Res)
+  nameWithType: Skin.RemoveResIfContains(Res)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.RemoveResIfContains(PlumJsonAnimator.Models.Resources.Res)
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Skeleton/Skin.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: ContainsAndRemoveRes
+    id: RemoveResIfContains
     path: Models/Skeleton/Skin.cs
-    startLine: 117
+    startLine: 126
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  summary: Tries to remove resource from skin
+  example: []
   syntax:
-    content: public bool ContainsAndRemoveRes(Res res)
+    content: public void RemoveResIfContains(Res res)
     parameters:
     - id: res
       type: PlumJsonAnimator.Models.Resources.Res
-    return:
-      type: System.Boolean
-    content.vb: Public Function ContainsAndRemoveRes(res As Res) As Boolean
-  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsAndRemoveRes*
+      description: Target resource
+    content.vb: Public Sub RemoveResIfContains(res As Res)
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.RemoveResIfContains*
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetImagePath(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
   commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetImagePath(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
   id: GetImagePath(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
@@ -415,15 +422,18 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetImagePath
     path: Models/Skeleton/Skin.cs
-    startLine: 131
+    startLine: 143
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  summary: Returns path to slot resource
+  example: []
   syntax:
     content: public string GetImagePath(Slot s)
     parameters:
     - id: s
       type: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+      description: Target slot
     return:
       type: System.String
     content.vb: Public Function GetImagePath(s As Slot) As String
@@ -446,7 +456,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetSlots
     path: Models/Skeleton/Skin.cs
-    startLine: 148
+    startLine: 160
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -463,32 +473,32 @@ items:
       description: A list of slots
     content.vb: Public Function GetSlots(b As Bone) As List(Of Slot)
   overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetSlots*
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.isSlotDrawable(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
-  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.isSlotDrawable(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
-  id: isSlotDrawable(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.IsSlotDrawable(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.IsSlotDrawable(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  id: IsSlotDrawable(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
   langs:
   - csharp
   - vb
-  name: isSlotDrawable(Slot)
-  nameWithType: Skin.isSlotDrawable(Slot)
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.isSlotDrawable(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  name: IsSlotDrawable(Slot)
+  nameWithType: Skin.IsSlotDrawable(Slot)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.IsSlotDrawable(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Skeleton/Skin.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: isSlotDrawable
+    id: IsSlotDrawable
     path: Models/Skeleton/Skin.cs
-    startLine: 166
+    startLine: 178
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
   summary: Checks whether the slot can be drawn
   example: []
   syntax:
-    content: public bool isSlotDrawable(Slot s)
+    content: public bool IsSlotDrawable(Slot s)
     parameters:
     - id: s
       type: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
@@ -496,8 +506,8 @@ items:
     return:
       type: System.Boolean
       description: Returns true, if slot can be drawn
-    content.vb: Public Function isSlotDrawable(s As Slot) As Boolean
-  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.isSlotDrawable*
+    content.vb: Public Function IsSlotDrawable(s As Slot) As Boolean
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.IsSlotDrawable*
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetAttachment(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
   commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetAttachment(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
   id: GetAttachment(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
@@ -516,7 +526,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetAttachment
     path: Models/Skeleton/Skin.cs
-    startLine: 175
+    startLine: 187
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -529,62 +539,62 @@ items:
       type: PlumJsonAnimator.Models.SkeletonNameSpace.Attachment
     content.vb: Public Function GetAttachment(s As Slot) As Attachment
   overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetAttachment*
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateJSONData
-  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateJSONData
-  id: generateJSONData
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GenerateJSONData
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GenerateJSONData
+  id: GenerateJSONData
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
   langs:
   - csharp
   - vb
-  name: generateJSONData()
-  nameWithType: Skin.generateJSONData()
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateJSONData()
+  name: GenerateJSONData()
+  nameWithType: Skin.GenerateJSONData()
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GenerateJSONData()
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Skeleton/Skin.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: generateJSONData
+    id: GenerateJSONData
     path: Models/Skeleton/Skin.cs
-    startLine: 184
+    startLine: 196
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
   syntax:
-    content: public SkinData generateJSONData()
+    content: public SkinData GenerateJSONData()
     return:
       type: PlumJsonAnimator.Models.SkeletonNameSpace.SkinData
-    content.vb: Public Function generateJSONData() As SkinData
-  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateJSONData*
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateCode
-  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateCode
-  id: generateCode
+    content.vb: Public Function GenerateJSONData() As SkinData
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GenerateJSONData*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GenerateCode
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GenerateCode
+  id: GenerateCode
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skin
   langs:
   - csharp
   - vb
-  name: generateCode()
-  nameWithType: Skin.generateCode()
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateCode()
+  name: GenerateCode()
+  nameWithType: Skin.GenerateCode()
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GenerateCode()
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Skeleton/Skin.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: generateCode
+    id: GenerateCode
     path: Models/Skeleton/Skin.cs
-    startLine: 202
+    startLine: 214
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
   syntax:
-    content: public string generateCode()
+    content: public string GenerateCode()
     return:
       type: System.String
-    content.vb: Public Function generateCode() As String
-  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateCode*
+    content.vb: Public Function GenerateCode() As String
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GenerateCode*
 references:
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace
   commentId: N:PlumJsonAnimator.Models.SkeletonNameSpace
@@ -1267,12 +1277,12 @@ references:
   - uid: PlumJsonAnimator.Models.Resources
     name: Resources
     href: PlumJsonAnimator.Models.Resources.html
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsAndRemoveRes*
-  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsAndRemoveRes
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_ContainsAndRemoveRes_PlumJsonAnimator_Models_Resources_Res_
-  name: ContainsAndRemoveRes
-  nameWithType: Skin.ContainsAndRemoveRes
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.ContainsAndRemoveRes
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.RemoveResIfContains*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.RemoveResIfContains
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_RemoveResIfContains_PlumJsonAnimator_Models_Resources_Res_
+  name: RemoveResIfContains
+  nameWithType: Skin.RemoveResIfContains
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.RemoveResIfContains
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetImagePath*
   commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetImagePath
   href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_GetImagePath_PlumJsonAnimator_Models_SkeletonNameSpace_Slot_
@@ -1353,24 +1363,24 @@ references:
   - name: " "
   - name: T
   - name: )
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.isSlotDrawable*
-  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.isSlotDrawable
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_isSlotDrawable_PlumJsonAnimator_Models_SkeletonNameSpace_Slot_
-  name: isSlotDrawable
-  nameWithType: Skin.isSlotDrawable
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.isSlotDrawable
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.IsSlotDrawable*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.IsSlotDrawable
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_IsSlotDrawable_PlumJsonAnimator_Models_SkeletonNameSpace_Slot_
+  name: IsSlotDrawable
+  nameWithType: Skin.IsSlotDrawable
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.IsSlotDrawable
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetAttachment*
   commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetAttachment
   href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_GetAttachment_PlumJsonAnimator_Models_SkeletonNameSpace_Slot_
   name: GetAttachment
   nameWithType: Skin.GetAttachment
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetAttachment
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateJSONData*
-  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateJSONData
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_generateJSONData
-  name: generateJSONData
-  nameWithType: Skin.generateJSONData
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateJSONData
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GenerateJSONData*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GenerateJSONData
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_GenerateJSONData
+  name: GenerateJSONData
+  nameWithType: Skin.GenerateJSONData
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GenerateJSONData
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.SkinData
   commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.SkinData
   parent: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -1378,9 +1388,9 @@ references:
   name: SkinData
   nameWithType: SkinData
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.SkinData
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateCode*
-  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateCode
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_generateCode
-  name: generateCode
-  nameWithType: Skin.generateCode
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.generateCode
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GenerateCode*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GenerateCode
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_GenerateCode
+  name: GenerateCode
+  nameWithType: Skin.GenerateCode
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GenerateCode

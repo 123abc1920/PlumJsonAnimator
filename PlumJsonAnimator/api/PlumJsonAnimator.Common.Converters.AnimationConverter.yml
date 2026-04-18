@@ -23,10 +23,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AnimationConverter
     path: Common/Converters/AnimationConverter.cs
-    startLine: 7
+    startLine: 10
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Converters
+  summary: Converter fo play button image
+  example: []
   syntax:
     content: 'public class AnimationConverter : IValueConverter'
     content.vb: Public Class AnimationConverter Implements IValueConverter
@@ -60,7 +62,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: PlayIcon
     path: Common/Converters/AnimationConverter.cs
-    startLine: 9
+    startLine: 12
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Converters
@@ -89,7 +91,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: PauseIcon
     path: Common/Converters/AnimationConverter.cs
-    startLine: 11
+    startLine: 14
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Converters
@@ -118,7 +120,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Convert
     path: Common/Converters/AnimationConverter.cs
-    startLine: 13
+    startLine: 16
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Converters
@@ -173,7 +175,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ConvertBack
     path: Common/Converters/AnimationConverter.cs
-    startLine: 22
+    startLine: 25
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Converters

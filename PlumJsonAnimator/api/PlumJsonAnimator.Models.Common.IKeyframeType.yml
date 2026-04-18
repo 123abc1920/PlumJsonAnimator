@@ -6,9 +6,9 @@ items:
   parent: PlumJsonAnimator.Models.Common
   children:
   - PlumJsonAnimator.Models.Common.IKeyframeType.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
-  - PlumJsonAnimator.Models.Common.IKeyframeType.generateCode
-  - PlumJsonAnimator.Models.Common.IKeyframeType.generateJSONData
-  - PlumJsonAnimator.Models.Common.IKeyframeType.globalState
+  - PlumJsonAnimator.Models.Common.IKeyframeType.GenerateCode
+  - PlumJsonAnimator.Models.Common.IKeyframeType.GenerateJSONData
+  - PlumJsonAnimator.Models.Common.IKeyframeType._globalState
   - PlumJsonAnimator.Models.Common.IKeyframeType.time
   langs:
   - csharp
@@ -24,7 +24,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: IKeyframeType
     path: Models/Common/AnimTransformations.cs
-    startLine: 14
+    startLine: 17
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common
@@ -62,7 +62,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: time
     path: Models/Common/AnimTransformations.cs
-    startLine: 16
+    startLine: 19
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common
@@ -71,61 +71,61 @@ items:
     return:
       type: System.Double
     content.vb: Public time As Double
-- uid: PlumJsonAnimator.Models.Common.IKeyframeType.generateJSONData
-  commentId: M:PlumJsonAnimator.Models.Common.IKeyframeType.generateJSONData
-  id: generateJSONData
+- uid: PlumJsonAnimator.Models.Common.IKeyframeType.GenerateJSONData
+  commentId: M:PlumJsonAnimator.Models.Common.IKeyframeType.GenerateJSONData
+  id: GenerateJSONData
   parent: PlumJsonAnimator.Models.Common.IKeyframeType
   langs:
   - csharp
   - vb
-  name: generateJSONData()
-  nameWithType: IKeyframeType.generateJSONData()
-  fullName: PlumJsonAnimator.Models.Common.IKeyframeType.generateJSONData()
+  name: GenerateJSONData()
+  nameWithType: IKeyframeType.GenerateJSONData()
+  fullName: PlumJsonAnimator.Models.Common.IKeyframeType.GenerateJSONData()
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Common/AnimTransformations.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: generateJSONData
+    id: GenerateJSONData
     path: Models/Common/AnimTransformations.cs
-    startLine: 18
+    startLine: 21
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common
   syntax:
-    content: public abstract IKeyframeTypeData generateJSONData()
+    content: public abstract IKeyframeTypeData GenerateJSONData()
     return:
       type: PlumJsonAnimator.Models.Common.IKeyframeTypeData
-    content.vb: Public MustOverride Function generateJSONData() As IKeyframeTypeData
-  overload: PlumJsonAnimator.Models.Common.IKeyframeType.generateJSONData*
-- uid: PlumJsonAnimator.Models.Common.IKeyframeType.globalState
-  commentId: F:PlumJsonAnimator.Models.Common.IKeyframeType.globalState
-  id: globalState
+    content.vb: Public MustOverride Function GenerateJSONData() As IKeyframeTypeData
+  overload: PlumJsonAnimator.Models.Common.IKeyframeType.GenerateJSONData*
+- uid: PlumJsonAnimator.Models.Common.IKeyframeType._globalState
+  commentId: F:PlumJsonAnimator.Models.Common.IKeyframeType._globalState
+  id: _globalState
   parent: PlumJsonAnimator.Models.Common.IKeyframeType
   langs:
   - csharp
   - vb
-  name: globalState
-  nameWithType: IKeyframeType.globalState
-  fullName: PlumJsonAnimator.Models.Common.IKeyframeType.globalState
+  name: _globalState
+  nameWithType: IKeyframeType._globalState
+  fullName: PlumJsonAnimator.Models.Common.IKeyframeType._globalState
   type: Field
   source:
     remote:
       path: PlumJsonAnimator/Models/Common/AnimTransformations.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: globalState
+    id: _globalState
     path: Models/Common/AnimTransformations.cs
-    startLine: 20
+    startLine: 23
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common
   syntax:
-    content: protected GlobalState globalState
+    content: protected GlobalState _globalState
     return:
       type: PlumJsonAnimator.Common.Constants.GlobalState
-    content.vb: Protected globalState As GlobalState
+    content.vb: Protected _globalState As GlobalState
 - uid: PlumJsonAnimator.Models.Common.IKeyframeType.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
   commentId: M:PlumJsonAnimator.Models.Common.IKeyframeType.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
   id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState)'
@@ -144,7 +144,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Models/Common/AnimTransformations.cs
-    startLine: 22
+    startLine: 25
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common
@@ -158,34 +158,34 @@ items:
   nameWithType.vb: IKeyframeType.New(GlobalState)
   fullName.vb: PlumJsonAnimator.Models.Common.IKeyframeType.New(PlumJsonAnimator.Common.Constants.GlobalState)
   name.vb: New(GlobalState)
-- uid: PlumJsonAnimator.Models.Common.IKeyframeType.generateCode
-  commentId: M:PlumJsonAnimator.Models.Common.IKeyframeType.generateCode
-  id: generateCode
+- uid: PlumJsonAnimator.Models.Common.IKeyframeType.GenerateCode
+  commentId: M:PlumJsonAnimator.Models.Common.IKeyframeType.GenerateCode
+  id: GenerateCode
   parent: PlumJsonAnimator.Models.Common.IKeyframeType
   langs:
   - csharp
   - vb
-  name: generateCode()
-  nameWithType: IKeyframeType.generateCode()
-  fullName: PlumJsonAnimator.Models.Common.IKeyframeType.generateCode()
+  name: GenerateCode()
+  nameWithType: IKeyframeType.GenerateCode()
+  fullName: PlumJsonAnimator.Models.Common.IKeyframeType.GenerateCode()
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Common/AnimTransformations.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: generateCode
+    id: GenerateCode
     path: Models/Common/AnimTransformations.cs
-    startLine: 27
+    startLine: 30
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common
   syntax:
-    content: public string generateCode()
+    content: public string GenerateCode()
     return:
       type: System.String
-    content.vb: Public Function generateCode() As String
-  overload: PlumJsonAnimator.Models.Common.IKeyframeType.generateCode*
+    content.vb: Public Function GenerateCode() As String
+  overload: PlumJsonAnimator.Models.Common.IKeyframeType.GenerateCode*
 references:
 - uid: PlumJsonAnimator.Models.Common
   commentId: N:PlumJsonAnimator.Models.Common
@@ -465,12 +465,12 @@ references:
   nameWithType.vb: Double
   fullName.vb: Double
   name.vb: Double
-- uid: PlumJsonAnimator.Models.Common.IKeyframeType.generateJSONData*
-  commentId: Overload:PlumJsonAnimator.Models.Common.IKeyframeType.generateJSONData
-  href: PlumJsonAnimator.Models.Common.IKeyframeType.html#PlumJsonAnimator_Models_Common_IKeyframeType_generateJSONData
-  name: generateJSONData
-  nameWithType: IKeyframeType.generateJSONData
-  fullName: PlumJsonAnimator.Models.Common.IKeyframeType.generateJSONData
+- uid: PlumJsonAnimator.Models.Common.IKeyframeType.GenerateJSONData*
+  commentId: Overload:PlumJsonAnimator.Models.Common.IKeyframeType.GenerateJSONData
+  href: PlumJsonAnimator.Models.Common.IKeyframeType.html#PlumJsonAnimator_Models_Common_IKeyframeType_GenerateJSONData
+  name: GenerateJSONData
+  nameWithType: IKeyframeType.GenerateJSONData
+  fullName: PlumJsonAnimator.Models.Common.IKeyframeType.GenerateJSONData
 - uid: PlumJsonAnimator.Models.Common.IKeyframeTypeData
   commentId: T:PlumJsonAnimator.Models.Common.IKeyframeTypeData
   parent: PlumJsonAnimator.Models.Common
@@ -524,12 +524,12 @@ references:
   nameWithType.vb: IKeyframeType.New
   fullName.vb: PlumJsonAnimator.Models.Common.IKeyframeType.New
   name.vb: New
-- uid: PlumJsonAnimator.Models.Common.IKeyframeType.generateCode*
-  commentId: Overload:PlumJsonAnimator.Models.Common.IKeyframeType.generateCode
-  href: PlumJsonAnimator.Models.Common.IKeyframeType.html#PlumJsonAnimator_Models_Common_IKeyframeType_generateCode
-  name: generateCode
-  nameWithType: IKeyframeType.generateCode
-  fullName: PlumJsonAnimator.Models.Common.IKeyframeType.generateCode
+- uid: PlumJsonAnimator.Models.Common.IKeyframeType.GenerateCode*
+  commentId: Overload:PlumJsonAnimator.Models.Common.IKeyframeType.GenerateCode
+  href: PlumJsonAnimator.Models.Common.IKeyframeType.html#PlumJsonAnimator_Models_Common_IKeyframeType_GenerateCode
+  name: GenerateCode
+  nameWithType: IKeyframeType.GenerateCode
+  fullName: PlumJsonAnimator.Models.Common.IKeyframeType.GenerateCode
 - uid: System.String
   commentId: T:System.String
   parent: System

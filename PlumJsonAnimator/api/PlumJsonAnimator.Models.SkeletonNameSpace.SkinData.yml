@@ -21,10 +21,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SkinData
     path: Models/Skeleton/Skin.cs
-    startLine: 208
+    startLine: 223
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  summary: Skin JSON data
+  example: []
   syntax:
     content: public class SkinData
     content.vb: Public Class SkinData
@@ -56,7 +58,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Name
     path: Models/Skeleton/Skin.cs
-    startLine: 210
+    startLine: 225
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -97,7 +99,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Attachments
     path: Models/Skeleton/Skin.cs
-    startLine: 213
+    startLine: 228
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace

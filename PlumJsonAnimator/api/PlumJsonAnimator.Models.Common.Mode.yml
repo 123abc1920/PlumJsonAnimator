@@ -6,10 +6,10 @@ items:
   parent: PlumJsonAnimator.Models.Common
   children:
   - PlumJsonAnimator.Models.Common.Mode.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
-  - PlumJsonAnimator.Models.Common.Mode.clearMode
+  - PlumJsonAnimator.Models.Common.Mode.ClearMode
+  - PlumJsonAnimator.Models.Common.Mode.Transform(PlumJsonAnimator.Models.SkeletonNameSpace.Bone,System.Double,System.Double)
   - PlumJsonAnimator.Models.Common.Mode.globalState
   - PlumJsonAnimator.Models.Common.Mode.name
-  - PlumJsonAnimator.Models.Common.Mode.transform(PlumJsonAnimator.Models.SkeletonNameSpace.Bone,System.Double,System.Double)
   - PlumJsonAnimator.Models.Common.Mode.type
   langs:
   - csharp
@@ -25,10 +25,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Mode
     path: Models/Common/TransformModes.cs
-    startLine: 15
+    startLine: 21
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common
+  summary: Mode for no transformations
+  example: []
   syntax:
     content: public abstract class Mode
     content.vb: Public MustInherit Class Mode
@@ -60,7 +62,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: type
     path: Models/Common/TransformModes.cs
-    startLine: 17
+    startLine: 23
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common
@@ -87,7 +89,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: name
     path: Models/Common/TransformModes.cs
-    startLine: 18
+    startLine: 24
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common
@@ -114,7 +116,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: globalState
     path: Models/Common/TransformModes.cs
-    startLine: 20
+    startLine: 26
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common
@@ -141,7 +143,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Models/Common/TransformModes.cs
-    startLine: 22
+    startLine: 28
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common
@@ -155,56 +157,56 @@ items:
   nameWithType.vb: Mode.New(GlobalState)
   fullName.vb: PlumJsonAnimator.Models.Common.Mode.New(PlumJsonAnimator.Common.Constants.GlobalState)
   name.vb: New(GlobalState)
-- uid: PlumJsonAnimator.Models.Common.Mode.clearMode
-  commentId: M:PlumJsonAnimator.Models.Common.Mode.clearMode
-  id: clearMode
+- uid: PlumJsonAnimator.Models.Common.Mode.ClearMode
+  commentId: M:PlumJsonAnimator.Models.Common.Mode.ClearMode
+  id: ClearMode
   parent: PlumJsonAnimator.Models.Common.Mode
   langs:
   - csharp
   - vb
-  name: clearMode()
-  nameWithType: Mode.clearMode()
-  fullName: PlumJsonAnimator.Models.Common.Mode.clearMode()
+  name: ClearMode()
+  nameWithType: Mode.ClearMode()
+  fullName: PlumJsonAnimator.Models.Common.Mode.ClearMode()
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Common/TransformModes.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: clearMode
+    id: ClearMode
     path: Models/Common/TransformModes.cs
-    startLine: 27
+    startLine: 33
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common
   syntax:
-    content: public abstract void clearMode()
-    content.vb: Public MustOverride Sub clearMode()
-  overload: PlumJsonAnimator.Models.Common.Mode.clearMode*
-- uid: PlumJsonAnimator.Models.Common.Mode.transform(PlumJsonAnimator.Models.SkeletonNameSpace.Bone,System.Double,System.Double)
-  commentId: M:PlumJsonAnimator.Models.Common.Mode.transform(PlumJsonAnimator.Models.SkeletonNameSpace.Bone,System.Double,System.Double)
-  id: transform(PlumJsonAnimator.Models.SkeletonNameSpace.Bone,System.Double,System.Double)
+    content: public abstract void ClearMode()
+    content.vb: Public MustOverride Sub ClearMode()
+  overload: PlumJsonAnimator.Models.Common.Mode.ClearMode*
+- uid: PlumJsonAnimator.Models.Common.Mode.Transform(PlumJsonAnimator.Models.SkeletonNameSpace.Bone,System.Double,System.Double)
+  commentId: M:PlumJsonAnimator.Models.Common.Mode.Transform(PlumJsonAnimator.Models.SkeletonNameSpace.Bone,System.Double,System.Double)
+  id: Transform(PlumJsonAnimator.Models.SkeletonNameSpace.Bone,System.Double,System.Double)
   parent: PlumJsonAnimator.Models.Common.Mode
   langs:
   - csharp
   - vb
-  name: transform(Bone, double, double)
-  nameWithType: Mode.transform(Bone, double, double)
-  fullName: PlumJsonAnimator.Models.Common.Mode.transform(PlumJsonAnimator.Models.SkeletonNameSpace.Bone, double, double)
+  name: Transform(Bone, double, double)
+  nameWithType: Mode.Transform(Bone, double, double)
+  fullName: PlumJsonAnimator.Models.Common.Mode.Transform(PlumJsonAnimator.Models.SkeletonNameSpace.Bone, double, double)
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Models/Common/TransformModes.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: transform
+    id: Transform
     path: Models/Common/TransformModes.cs
-    startLine: 29
+    startLine: 35
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Common
   syntax:
-    content: public abstract void transform(Bone bone, double a, double b)
+    content: public abstract void Transform(Bone bone, double a, double b)
     parameters:
     - id: bone
       type: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
@@ -212,11 +214,11 @@ items:
       type: System.Double
     - id: b
       type: System.Double
-    content.vb: Public MustOverride Sub transform(bone As Bone, a As Double, b As Double)
-  overload: PlumJsonAnimator.Models.Common.Mode.transform*
-  nameWithType.vb: Mode.transform(Bone, Double, Double)
-  fullName.vb: PlumJsonAnimator.Models.Common.Mode.transform(PlumJsonAnimator.Models.SkeletonNameSpace.Bone, Double, Double)
-  name.vb: transform(Bone, Double, Double)
+    content.vb: Public MustOverride Sub Transform(bone As Bone, a As Double, b As Double)
+  overload: PlumJsonAnimator.Models.Common.Mode.Transform*
+  nameWithType.vb: Mode.Transform(Bone, Double, Double)
+  fullName.vb: PlumJsonAnimator.Models.Common.Mode.Transform(PlumJsonAnimator.Models.SkeletonNameSpace.Bone, Double, Double)
+  name.vb: Transform(Bone, Double, Double)
 references:
 - uid: PlumJsonAnimator.Models.Common
   commentId: N:PlumJsonAnimator.Models.Common
@@ -549,18 +551,18 @@ references:
   nameWithType.vb: Mode.New
   fullName.vb: PlumJsonAnimator.Models.Common.Mode.New
   name.vb: New
-- uid: PlumJsonAnimator.Models.Common.Mode.clearMode*
-  commentId: Overload:PlumJsonAnimator.Models.Common.Mode.clearMode
-  href: PlumJsonAnimator.Models.Common.Mode.html#PlumJsonAnimator_Models_Common_Mode_clearMode
-  name: clearMode
-  nameWithType: Mode.clearMode
-  fullName: PlumJsonAnimator.Models.Common.Mode.clearMode
-- uid: PlumJsonAnimator.Models.Common.Mode.transform*
-  commentId: Overload:PlumJsonAnimator.Models.Common.Mode.transform
-  href: PlumJsonAnimator.Models.Common.Mode.html#PlumJsonAnimator_Models_Common_Mode_transform_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_System_Double_System_Double_
-  name: transform
-  nameWithType: Mode.transform
-  fullName: PlumJsonAnimator.Models.Common.Mode.transform
+- uid: PlumJsonAnimator.Models.Common.Mode.ClearMode*
+  commentId: Overload:PlumJsonAnimator.Models.Common.Mode.ClearMode
+  href: PlumJsonAnimator.Models.Common.Mode.html#PlumJsonAnimator_Models_Common_Mode_ClearMode
+  name: ClearMode
+  nameWithType: Mode.ClearMode
+  fullName: PlumJsonAnimator.Models.Common.Mode.ClearMode
+- uid: PlumJsonAnimator.Models.Common.Mode.Transform*
+  commentId: Overload:PlumJsonAnimator.Models.Common.Mode.Transform
+  href: PlumJsonAnimator.Models.Common.Mode.html#PlumJsonAnimator_Models_Common_Mode_Transform_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_System_Double_System_Double_
+  name: Transform
+  nameWithType: Mode.Transform
+  fullName: PlumJsonAnimator.Models.Common.Mode.Transform
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
   commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.Bone
   parent: PlumJsonAnimator.Models.SkeletonNameSpace

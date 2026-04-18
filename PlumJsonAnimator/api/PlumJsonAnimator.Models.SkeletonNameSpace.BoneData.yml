@@ -23,10 +23,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: BoneData
     path: Models/Skeleton/Bone.cs
-    startLine: 388
+    startLine: 406
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  summary: Jsonifyed bone data
+  example: []
   syntax:
     content: public class BoneData
     content.vb: Public Class BoneData
@@ -58,7 +60,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Name
     path: Models/Skeleton/Bone.cs
-    startLine: 390
+    startLine: 408
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -99,7 +101,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Parent
     path: Models/Skeleton/Bone.cs
-    startLine: 393
+    startLine: 411
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -144,7 +146,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: X
     path: Models/Skeleton/Bone.cs
-    startLine: 396
+    startLine: 414
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -189,7 +191,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Y
     path: Models/Skeleton/Bone.cs
-    startLine: 399
+    startLine: 417
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace

@@ -25,10 +25,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ExportResult
     path: Models/ExportResult.cs
-    startLine: 2
+    startLine: 5
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
+  summary: All possible results of export
+  example: []
   syntax:
     content: public enum ExportResult
     content.vb: Public Enum ExportResult
@@ -50,7 +52,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SUCCESS
     path: Models/ExportResult.cs
-    startLine: 4
+    startLine: 7
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -76,7 +78,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: NO_FOLDER
     path: Models/ExportResult.cs
-    startLine: 5
+    startLine: 8
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -102,7 +104,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: INCORRECT_JSON
     path: Models/ExportResult.cs
-    startLine: 6
+    startLine: 9
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -128,7 +130,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: NO_FFMPEG
     path: Models/ExportResult.cs
-    startLine: 7
+    startLine: 10
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -154,7 +156,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: FFMPEG_ERROR
     path: Models/ExportResult.cs
-    startLine: 8
+    startLine: 11
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -180,7 +182,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: PROJECT_IS_NULL
     path: Models/ExportResult.cs
-    startLine: 9
+    startLine: 12
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models

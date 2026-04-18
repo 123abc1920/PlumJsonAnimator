@@ -19,10 +19,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: BonesListData
     path: Models/Skeleton/Animation.cs
-    startLine: 311
+    startLine: 333
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  summary: List of bones
+  example: []
   syntax:
     content: 'public class BonesListData : Dictionary<string, BoneAnimationData>, IDictionary<string, BoneAnimationData>, ICollection<KeyValuePair<string, BoneAnimationData>>, IReadOnlyDictionary<string, BoneAnimationData>, IReadOnlyCollection<KeyValuePair<string, BoneAnimationData>>, IEnumerable<KeyValuePair<string, BoneAnimationData>>, IDictionary, ICollection, IEnumerable, IDeserializationCallback, ISerializable'
     content.vb: Public Class BonesListData Inherits Dictionary(Of String, BoneAnimationData) Implements IDictionary(Of String, BoneAnimationData), ICollection(Of KeyValuePair(Of String, BoneAnimationData)), IReadOnlyDictionary(Of String, BoneAnimationData), IReadOnlyCollection(Of KeyValuePair(Of String, BoneAnimationData)), IEnumerable(Of KeyValuePair(Of String, BoneAnimationData)), IDictionary, ICollection, IEnumerable, IDeserializationCallback, ISerializable
@@ -48,6 +50,7 @@ items:
   - System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.BoneAnimationData}.EnsureCapacity(System.Int32)
   - System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.BoneAnimationData}.GetAlternateLookup``1
   - System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.BoneAnimationData}.GetEnumerator
+  - System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.BoneAnimationData}.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
   - System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.BoneAnimationData}.OnDeserialization(System.Object)
   - System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.BoneAnimationData}.Remove(System.String)
   - System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.BoneAnimationData}.Remove(System.String,PlumJsonAnimator.Models.BoneAnimationData@)
@@ -682,6 +685,50 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.getenumerator
   - name: (
+  - name: )
+- uid: System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.BoneAnimationData}.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  commentId: M:System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.BoneAnimationData}.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  parent: System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.BoneAnimationData}
+  definition: System.Collections.Generic.Dictionary`2.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.getobjectdata
+  name: GetObjectData(SerializationInfo, StreamingContext)
+  nameWithType: Dictionary<string, BoneAnimationData>.GetObjectData(SerializationInfo, StreamingContext)
+  fullName: System.Collections.Generic.Dictionary<string, PlumJsonAnimator.Models.BoneAnimationData>.GetObjectData(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)
+  nameWithType.vb: Dictionary(Of String, BoneAnimationData).GetObjectData(SerializationInfo, StreamingContext)
+  fullName.vb: System.Collections.Generic.Dictionary(Of String, PlumJsonAnimator.Models.BoneAnimationData).GetObjectData(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.BoneAnimationData}.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+    name: GetObjectData
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.getobjectdata
+  - name: (
+  - uid: System.Runtime.Serialization.SerializationInfo
+    name: SerializationInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime.serialization.serializationinfo
+  - name: ','
+  - name: " "
+  - uid: System.Runtime.Serialization.StreamingContext
+    name: StreamingContext
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime.serialization.streamingcontext
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.BoneAnimationData}.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+    name: GetObjectData
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.getobjectdata
+  - name: (
+  - uid: System.Runtime.Serialization.SerializationInfo
+    name: SerializationInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime.serialization.serializationinfo
+  - name: ','
+  - name: " "
+  - uid: System.Runtime.Serialization.StreamingContext
+    name: StreamingContext
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime.serialization.streamingcontext
   - name: )
 - uid: System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.BoneAnimationData}.OnDeserialization(System.Object)
   commentId: M:System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.BoneAnimationData}.OnDeserialization(System.Object)
@@ -1773,6 +1820,49 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.getenumerator
   - name: (
+  - name: )
+- uid: System.Collections.Generic.Dictionary`2.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  commentId: M:System.Collections.Generic.Dictionary`2.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.getobjectdata
+  name: GetObjectData(SerializationInfo, StreamingContext)
+  nameWithType: Dictionary<TKey, TValue>.GetObjectData(SerializationInfo, StreamingContext)
+  fullName: System.Collections.Generic.Dictionary<TKey, TValue>.GetObjectData(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)
+  nameWithType.vb: Dictionary(Of TKey, TValue).GetObjectData(SerializationInfo, StreamingContext)
+  fullName.vb: System.Collections.Generic.Dictionary(Of TKey, TValue).GetObjectData(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+    name: GetObjectData
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.getobjectdata
+  - name: (
+  - uid: System.Runtime.Serialization.SerializationInfo
+    name: SerializationInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime.serialization.serializationinfo
+  - name: ','
+  - name: " "
+  - uid: System.Runtime.Serialization.StreamingContext
+    name: StreamingContext
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime.serialization.streamingcontext
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+    name: GetObjectData
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2.getobjectdata
+  - name: (
+  - uid: System.Runtime.Serialization.SerializationInfo
+    name: SerializationInfo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime.serialization.serializationinfo
+  - name: ','
+  - name: " "
+  - uid: System.Runtime.Serialization.StreamingContext
+    name: StreamingContext
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime.serialization.streamingcontext
   - name: )
 - uid: System.Collections.Generic.Dictionary`2.OnDeserialization(System.Object)
   commentId: M:System.Collections.Generic.Dictionary`2.OnDeserialization(System.Object)

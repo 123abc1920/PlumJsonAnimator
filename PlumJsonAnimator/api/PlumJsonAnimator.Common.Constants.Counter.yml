@@ -6,7 +6,7 @@ items:
   parent: PlumJsonAnimator.Common.Constants
   children:
   - PlumJsonAnimator.Common.Constants.Counter.#ctor
-  - PlumJsonAnimator.Common.Constants.Counter.GenerateName
+  - PlumJsonAnimator.Common.Constants.Counter.GenerateNamePostfix
   langs:
   - csharp
   - vb
@@ -21,10 +21,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Counter
     path: Common/Constants/Counter.cs
-    startLine: 4
+    startLine: 7
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
+  summary: Generates unique names
+  example: []
   syntax:
     content: public class Counter
     content.vb: Public Class Counter
@@ -56,10 +58,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Common/Constants/Counter.cs
-    startLine: 4
+    startLine: 7
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
+  summary: Generates unique names
+  example: []
   syntax:
     content: public Counter()
     content.vb: Public Sub New()
@@ -67,34 +71,37 @@ items:
   nameWithType.vb: Counter.New()
   fullName.vb: PlumJsonAnimator.Common.Constants.Counter.New()
   name.vb: New()
-- uid: PlumJsonAnimator.Common.Constants.Counter.GenerateName
-  commentId: M:PlumJsonAnimator.Common.Constants.Counter.GenerateName
-  id: GenerateName
+- uid: PlumJsonAnimator.Common.Constants.Counter.GenerateNamePostfix
+  commentId: M:PlumJsonAnimator.Common.Constants.Counter.GenerateNamePostfix
+  id: GenerateNamePostfix
   parent: PlumJsonAnimator.Common.Constants.Counter
   langs:
   - csharp
   - vb
-  name: GenerateName()
-  nameWithType: Counter.GenerateName()
-  fullName: PlumJsonAnimator.Common.Constants.Counter.GenerateName()
+  name: GenerateNamePostfix()
+  nameWithType: Counter.GenerateNamePostfix()
+  fullName: PlumJsonAnimator.Common.Constants.Counter.GenerateNamePostfix()
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Common/Constants/Counter.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: GenerateName
+    id: GenerateNamePostfix
     path: Common/Constants/Counter.cs
-    startLine: 8
+    startLine: 15
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
+  summary: Genearate postfix that can be joined with the common name
+  example: []
   syntax:
-    content: public static string GenerateName()
+    content: public static string GenerateNamePostfix()
     return:
       type: System.String
-    content.vb: Public Shared Function GenerateName() As String
-  overload: PlumJsonAnimator.Common.Constants.Counter.GenerateName*
+      description: Postfix string
+    content.vb: Public Shared Function GenerateNamePostfix() As String
+  overload: PlumJsonAnimator.Common.Constants.Counter.GenerateNamePostfix*
 references:
 - uid: PlumJsonAnimator.Common.Constants
   commentId: N:PlumJsonAnimator.Common.Constants
@@ -372,12 +379,12 @@ references:
   nameWithType.vb: Counter.New
   fullName.vb: PlumJsonAnimator.Common.Constants.Counter.New
   name.vb: New
-- uid: PlumJsonAnimator.Common.Constants.Counter.GenerateName*
-  commentId: Overload:PlumJsonAnimator.Common.Constants.Counter.GenerateName
-  href: PlumJsonAnimator.Common.Constants.Counter.html#PlumJsonAnimator_Common_Constants_Counter_GenerateName
-  name: GenerateName
-  nameWithType: Counter.GenerateName
-  fullName: PlumJsonAnimator.Common.Constants.Counter.GenerateName
+- uid: PlumJsonAnimator.Common.Constants.Counter.GenerateNamePostfix*
+  commentId: Overload:PlumJsonAnimator.Common.Constants.Counter.GenerateNamePostfix
+  href: PlumJsonAnimator.Common.Constants.Counter.html#PlumJsonAnimator_Common_Constants_Counter_GenerateNamePostfix
+  name: GenerateNamePostfix
+  nameWithType: Counter.GenerateNamePostfix
+  fullName: PlumJsonAnimator.Common.Constants.Counter.GenerateNamePostfix
 - uid: System.String
   commentId: T:System.String
   parent: System
