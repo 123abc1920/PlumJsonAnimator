@@ -85,15 +85,18 @@ namespace PlumJsonAnimator.Services
         /// <param name="start">Start animation time</param>
         /// <param name="end">End animation time</param>
         /// <param name="outputFolder">Folder with array of images</param>
-        public async Task<ExportResult> ExportAsPng(double start, double end, string outputFolder)
+        /// <param name="project"></param>
+        public async Task<ExportResult> ExportAsPng(
+            double start,
+            double end,
+            string outputFolder,
+            Project project
+        )
         {
             if (Directory.Exists(outputFolder))
             {
-                this.globalState.CurrentProject!.CurrentAnimation!.currentTime = start;
-                double endTime = Math.Min(
-                    this.globalState.CurrentProject.CurrentAnimation.MaxTime(),
-                    end
-                );
+                project!.CurrentAnimation!.currentTime = start;
+                double endTime = Math.Min(project.CurrentAnimation.MaxTime(), end);
 
                 var totalFrames = (int)((endTime - start) * this.globalState.FPS) + 1;
                 int frameCount = 0;
@@ -103,7 +106,7 @@ namespace PlumJsonAnimator.Services
                 var captureMode = this.globalState.captureMode;
                 this.globalState.drawBones = false;
                 this.globalState.captureMode = false;
-                while (this.globalState.CurrentProject.CurrentAnimation.currentTime <= endTime)
+                while (project.CurrentAnimation.currentTime <= endTime)
                 {
                     using (RenderTargetBitmap bitmap = CatchCanvas(_canvas))
                     {
@@ -119,7 +122,7 @@ namespace PlumJsonAnimator.Services
                     var percent = (int)((double)frameCount / totalFrames * 100);
                     ProgressChanged?.Invoke(this, percent);
 
-                    this.globalState.CurrentProject.CurrentAnimation.step();
+                    project.CurrentAnimation.step();
                     _canvas!.InvalidateVisual();
                     await Task.Delay(30);
                     i++;
@@ -141,15 +144,18 @@ namespace PlumJsonAnimator.Services
         /// <param name="start">Start animation time</param>
         /// <param name="end">End animation time</param>
         /// <param name="outputFolder">Folder with array of images</param>
-        public async Task<ExportResult> ExportAsJpg(double start, double end, string outputFolder)
+        /// <param name="project"></param>
+        public async Task<ExportResult> ExportAsJpg(
+            double start,
+            double end,
+            string outputFolder,
+            Project project
+        )
         {
             if (Directory.Exists(outputFolder))
             {
-                this.globalState.CurrentProject!.CurrentAnimation!.currentTime = start;
-                double endTime = Math.Min(
-                    this.globalState.CurrentProject.CurrentAnimation.MaxTime(),
-                    end
-                );
+                project!.CurrentAnimation!.currentTime = start;
+                double endTime = Math.Min(project.CurrentAnimation.MaxTime(), end);
 
                 var totalFrames = (int)((endTime - start) * this.globalState.FPS) + 1;
                 int frameCount = 0;
@@ -159,7 +165,7 @@ namespace PlumJsonAnimator.Services
                 var captureMode = this.globalState.captureMode;
                 this.globalState.drawBones = false;
                 this.globalState.captureMode = false;
-                while (this.globalState.CurrentProject.CurrentAnimation.currentTime <= endTime)
+                while (project.CurrentAnimation.currentTime <= endTime)
                 {
                     using (RenderTargetBitmap bitmap = CatchCanvas(_canvas))
                     {
@@ -175,7 +181,7 @@ namespace PlumJsonAnimator.Services
                     var percent = (int)((double)frameCount / totalFrames * 100);
                     ProgressChanged?.Invoke(this, percent);
 
-                    this.globalState.CurrentProject.CurrentAnimation.step();
+                    project.CurrentAnimation.step();
                     _canvas!.InvalidateVisual();
                     await Task.Delay(30);
                     i++;
@@ -197,7 +203,13 @@ namespace PlumJsonAnimator.Services
         /// <param name="start">Start animation time</param>
         /// <param name="end">End animation time</param>
         /// <param name="outputFile">Gif file</param>
-        public async Task<ExportResult> ExportAsGif(double start, double end, string outputFile)
+        /// <param name="project"></param>
+        public async Task<ExportResult> ExportAsGif(
+            double start,
+            double end,
+            string outputFile,
+            Project project
+        )
         {
             if (!File.Exists(outputFile))
             {
@@ -206,11 +218,8 @@ namespace PlumJsonAnimator.Services
 
             if (File.Exists(outputFile))
             {
-                this.globalState.CurrentProject!.CurrentAnimation!.currentTime = start;
-                double endTime = Math.Min(
-                    this.globalState.CurrentProject.CurrentAnimation.MaxTime(),
-                    end
-                );
+                project!.CurrentAnimation!.currentTime = start;
+                double endTime = Math.Min(project.CurrentAnimation.MaxTime(), end);
 
                 var totalFrames = (int)((endTime - start) * this.globalState.FPS) + 1;
                 int frameCount = 0;
@@ -220,7 +229,7 @@ namespace PlumJsonAnimator.Services
                 this.globalState.drawBones = false;
                 this.globalState.captureMode = false;
                 List<Image<Rgba32>> frames = new List<Image<Rgba32>>();
-                while (this.globalState.CurrentProject.CurrentAnimation.currentTime <= endTime)
+                while (project.CurrentAnimation.currentTime <= endTime)
                 {
                     _canvas!.InvalidateVisual();
                     _canvas.UpdateLayout();
@@ -244,7 +253,7 @@ namespace PlumJsonAnimator.Services
                         }
                     }
 
-                    this.globalState.CurrentProject.CurrentAnimation.step();
+                    project.CurrentAnimation.step();
                     _canvas!.InvalidateVisual();
                     await Task.Delay(30);
                 }
@@ -293,11 +302,13 @@ namespace PlumJsonAnimator.Services
         /// <param name="end">End animayion time</param>
         /// <param name="outputFile">Output MP4 file</param>
         /// <param name="ffmpegPath">Path to ffmpeg exe</param>
+        /// <param name="project"></param>
         public async Task<ExportResult> ExportAsMp4(
             double start,
             double end,
             string outputFile,
-            string ffmpegPath
+            string ffmpegPath,
+            Project project
         )
         {
             if (!File.Exists(ffmpegPath))
@@ -370,18 +381,15 @@ namespace PlumJsonAnimator.Services
                 this.globalState.captureMode = false;
                 using (var stdin = process.StandardInput.BaseStream)
                 {
-                    this.globalState.CurrentProject!.CurrentAnimation!.currentTime = start;
-                    double endTime = Math.Min(
-                        this.globalState.CurrentProject.CurrentAnimation.MaxTime(),
-                        end
-                    );
+                    project!.CurrentAnimation!.currentTime = start;
+                    double endTime = Math.Min(project.CurrentAnimation.MaxTime(), end);
 
                     int frameCount = 0;
                     bool error = false;
 
                     var totalFrames = (int)((endTime - start) * this.globalState.FPS) + 1;
 
-                    while (this.globalState.CurrentProject.CurrentAnimation.currentTime <= endTime)
+                    while (project.CurrentAnimation.currentTime <= endTime)
                     {
                         using (RenderTargetBitmap bitmap = CatchCanvas(_canvas))
                         {
@@ -431,7 +439,7 @@ namespace PlumJsonAnimator.Services
                             }
                         }
 
-                        this.globalState.CurrentProject.CurrentAnimation.step();
+                        project.CurrentAnimation.step();
                         _canvas!.InvalidateVisual();
                         await Task.Delay(30);
                     }

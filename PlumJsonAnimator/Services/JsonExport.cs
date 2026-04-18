@@ -63,7 +63,8 @@ namespace PlumJsonAnimator.Services
         /// Import json code from file
         /// </summary>
         /// <param name="inputFile">Project</param>
-        public ExportResult importSpineJson(string inputFile)
+        /// <param name="project"></param>
+        public ExportResult importSpineJson(string inputFile, Project project)
         {
             if (File.Exists(inputFile))
             {
@@ -71,7 +72,7 @@ namespace PlumJsonAnimator.Services
                 string result = this.jsonValidator.Validate(text);
                 if (result == this.localizationService.GetMessage(LocalizationConsts.JSON_VALID))
                 {
-                    this.globalState.CurrentProject!.Code = text;
+                    project!.Code = text;
                     return ExportResult.SUCCESS;
                 }
                 else

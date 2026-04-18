@@ -84,7 +84,8 @@ public partial class ExportPanelMP4ViewModel : ViewModelBase
             start,
             end,
             outputFile,
-            ffmpegPath
+            ffmpegPath,
+            this.globalState.CurrentProject
         );
         return result;
     }

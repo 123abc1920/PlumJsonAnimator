@@ -4,10 +4,4 @@ namespace PlumJsonAnimator.Common.Timeline
     {
         public string Name { get; set; } = "Track";
     }
-
-    public class Keyframe
-    {
-        public double Time { get; set; }
-        public bool IsSelected { get; set; }
-    }
 }

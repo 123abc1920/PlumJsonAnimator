@@ -62,7 +62,12 @@ public partial class ExportPanelJPGViewModel : ViewModelBase
 
     public async Task<ExportResult> ExportAsJpg(double start, double end, string outputFolder)
     {
-        ExportResult result = await this.imageExporter.ExportAsJpg(start, end, outputFolder);
+        ExportResult result = await this.imageExporter.ExportAsJpg(
+            start,
+            end,
+            outputFolder,
+            this.globalState.CurrentProject
+        );
         return result;
     }
 }

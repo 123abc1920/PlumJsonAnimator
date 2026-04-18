@@ -343,7 +343,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public ExportResult importSpineJson(string inputFile)
     {
-        return this.jsonExport.importSpineJson(inputFile);
+        return this.jsonExport.importSpineJson(inputFile, CurrentProject);
     }
 
     public void WriteSettings()
