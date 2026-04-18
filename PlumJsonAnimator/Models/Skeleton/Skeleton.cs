@@ -38,7 +38,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 if (b.id == id)
                 {
-                    b.addChildren(new_bone);
+                    b.AddChildren(new_bone);
                 }
             }
             ids++;
@@ -79,7 +79,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             foreach (Bone b in this.Bones)
             {
-                b.drawBone(canvas);
+                b.DrawBone(canvas);
             }
         }
 
@@ -89,7 +89,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
             foreach (Bone bone in Bones)
             {
-                result.Add(bone.generateJSONData());
+                result.Add(bone.GenerateJSONData());
             }
 
             return result;

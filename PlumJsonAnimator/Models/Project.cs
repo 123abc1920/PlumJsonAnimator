@@ -230,7 +230,7 @@ namespace PlumJsonAnimator.Models
 
             foreach (Animation a in Animations)
             {
-                animData.Add(a.Name, a.generateJSONData());
+                animData.Add(a.Name, a.GenerateJSONData());
             }
 
             return animData;
@@ -262,7 +262,7 @@ namespace PlumJsonAnimator.Models
             {
                 if (bones.TryGetValue(b.Name, out BoneData? boneData))
                 {
-                    if (b.generateJSONData() != boneData)
+                    if (b.GenerateJSONData() != boneData)
                     {
                         b.x = boneData.X;
                         b.y = boneData.Y;
@@ -292,7 +292,7 @@ namespace PlumJsonAnimator.Models
                     if (childBone != null && parentBone != null)
                     {
                         childBone.Parent = parentBone;
-                        parentBone.addChildren(childBone);
+                        parentBone.AddChildren(childBone);
                     }
                     else
                     {
@@ -418,7 +418,7 @@ namespace PlumJsonAnimator.Models
             {
                 if (animations.TryGetValue(b.Name, out AnimationData animationData))
                 {
-                    if (b.generateJSONData() != animationData)
+                    if (b.GenerateJSONData() != animationData)
                     {
                         b.BoneAnimationBinding = new Dictionary<Bone, BoneAnimation>();
                         foreach (string name in animationData.Bones.Keys)

@@ -27,7 +27,7 @@ namespace PlumJsonAnimator.Services
         {
             if (this.currentAnimation != null)
             {
-                this.currentAnimation.step();
+                this.currentAnimation.Step();
                 this.globalState.OnTimeUpdated();
             }
         }

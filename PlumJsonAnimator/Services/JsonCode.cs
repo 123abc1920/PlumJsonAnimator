@@ -145,7 +145,7 @@ namespace PlumJsonAnimator.Services
             {
                 animations.Add(
                     project.Animations[i].Name,
-                    project.Animations[i].generateJSONData()
+                    project.Animations[i].GenerateJSONData()
                 );
             }
 

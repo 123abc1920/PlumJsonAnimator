@@ -122,7 +122,7 @@ namespace PlumJsonAnimator.Services
                     var percent = (int)((double)frameCount / totalFrames * 100);
                     ProgressChanged?.Invoke(this, percent);
 
-                    project.CurrentAnimation.step();
+                    project.CurrentAnimation.Step();
                     _canvas!.InvalidateVisual();
                     await Task.Delay(30);
                     i++;
@@ -181,7 +181,7 @@ namespace PlumJsonAnimator.Services
                     var percent = (int)((double)frameCount / totalFrames * 100);
                     ProgressChanged?.Invoke(this, percent);
 
-                    project.CurrentAnimation.step();
+                    project.CurrentAnimation.Step();
                     _canvas!.InvalidateVisual();
                     await Task.Delay(30);
                     i++;
@@ -253,7 +253,7 @@ namespace PlumJsonAnimator.Services
                         }
                     }
 
-                    project.CurrentAnimation.step();
+                    project.CurrentAnimation.Step();
                     _canvas!.InvalidateVisual();
                     await Task.Delay(30);
                 }
@@ -439,7 +439,7 @@ namespace PlumJsonAnimator.Services
                             }
                         }
 
-                        project.CurrentAnimation.step();
+                        project.CurrentAnimation.Step();
                         _canvas!.InvalidateVisual();
                         await Task.Delay(30);
                     }

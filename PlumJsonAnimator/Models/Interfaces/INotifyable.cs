@@ -3,6 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace PlumJsonAnimator.Models.Interfaces
 {
+    /// <summary>
+    /// Interface for all observable objects
+    /// </summary>
     public abstract class INotifyable : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;

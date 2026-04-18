@@ -227,7 +227,7 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         if (selectedBone is Bone selectedNode)
         {
-            selectedNode.addChildren(new Bone(this.globalState, selectedNode));
+            selectedNode.AddChildren(new Bone(this.globalState, selectedNode));
         }
     }
 

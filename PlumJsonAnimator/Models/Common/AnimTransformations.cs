@@ -4,6 +4,9 @@ using PlumJsonAnimator.Common.Constants;
 
 namespace PlumJsonAnimator.Models.Common
 {
+    /// <summary>
+    /// Key frames types. Not transform modes, transform modes provides transformation.
+    /// </summary>
     public enum KeyFrameTypes
     {
         TRANSLATE = 0,
@@ -16,18 +19,18 @@ namespace PlumJsonAnimator.Models.Common
     {
         public double time;
 
-        public abstract IKeyframeTypeData generateJSONData();
+        public abstract IKeyframeTypeData GenerateJSONData();
 
-        protected GlobalState globalState;
+        protected GlobalState _globalState;
 
         public IKeyframeType(GlobalState globalState)
         {
-            this.globalState = globalState;
+            this._globalState = globalState;
         }
 
-        public String generateCode()
+        public String GenerateCode()
         {
-            return JsonConvert.SerializeObject(generateJSONData(), this.globalState.jsonSettings);
+            return JsonConvert.SerializeObject(GenerateJSONData(), this._globalState.jsonSettings);
         }
     }
 
@@ -59,7 +62,7 @@ namespace PlumJsonAnimator.Models.Common
             this.y = _y;
         }
 
-        public override IKeyframeTypeData generateJSONData()
+        public override IKeyframeTypeData GenerateJSONData()
         {
             return new IKeyframeTypeData
             {
@@ -82,7 +85,7 @@ namespace PlumJsonAnimator.Models.Common
             this.value = _value;
         }
 
-        public override IKeyframeTypeData generateJSONData()
+        public override IKeyframeTypeData GenerateJSONData()
         {
             return new IKeyframeTypeData
             {
@@ -107,7 +110,7 @@ namespace PlumJsonAnimator.Models.Common
             this.y = _y;
         }
 
-        public override IKeyframeTypeData generateJSONData()
+        public override IKeyframeTypeData GenerateJSONData()
         {
             return new IKeyframeTypeData
             {
@@ -132,7 +135,7 @@ namespace PlumJsonAnimator.Models.Common
             this.y = _y;
         }
 
-        public override IKeyframeTypeData generateJSONData()
+        public override IKeyframeTypeData GenerateJSONData()
         {
             return new IKeyframeTypeData
             {

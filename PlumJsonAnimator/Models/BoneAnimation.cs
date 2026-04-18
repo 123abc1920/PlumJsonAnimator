@@ -274,7 +274,7 @@ namespace PlumJsonAnimator.Models
                 t
             );
 
-            b.move(interpolatedX, interpolatedY);
+            b.Move(interpolatedX, interpolatedY);
         }
 
         private void RotateStep(Bone b, double time)
@@ -296,7 +296,7 @@ namespace PlumJsonAnimator.Models
                 t
             );
 
-            b.rotate(interpolatedA);
+            b.Rotate(interpolatedA);
         }
 
         public void BoneStep(Bone b, double time)
@@ -314,19 +314,19 @@ namespace PlumJsonAnimator.Models
 
             foreach (IKeyframeType frame in translateKeyframes.Values)
             {
-                translatesJSON.Add(frame.generateJSONData());
+                translatesJSON.Add(frame.GenerateJSONData());
             }
             foreach (IKeyframeType frame in rotateKeyframes.Values)
             {
-                rotatesJSON.Add(frame.generateJSONData());
+                rotatesJSON.Add(frame.GenerateJSONData());
             }
             foreach (IKeyframeType frame in scaleKeyframes.Values)
             {
-                scalesJSON.Add(frame.generateJSONData());
+                scalesJSON.Add(frame.GenerateJSONData());
             }
             foreach (IKeyframeType frame in shearKeyframes.Values)
             {
-                shearsJSON.Add(frame.generateJSONData());
+                shearsJSON.Add(frame.GenerateJSONData());
             }
 
             return new BoneAnimationData

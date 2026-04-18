@@ -80,7 +80,7 @@ public partial class MainWindow : SukiWindow
                     viewModel.CurrentProject?.MainSkeleton?.drawSkeleton(mainCanvas);
                     if (viewModel.CurrentBone?.IsBone == true)
                     {
-                        viewModel.CurrentBone?.drawBone(mainCanvas);
+                        viewModel.CurrentBone?.DrawBone(mainCanvas);
                     }
                     viewModel.GenerateCode();
                 }
@@ -183,7 +183,7 @@ public partial class MainWindow : SukiWindow
             {
                 if (viewModel.CurrentBone != null)
                 {
-                    viewModel.CurrentProject?.currentMode.transform(
+                    viewModel.CurrentProject?.currentMode.Transform(
                         viewModel.CurrentBone,
                         point.X - canvas.Width / 2,
                         point.Y - canvas.Height / 2
@@ -208,7 +208,7 @@ public partial class MainWindow : SukiWindow
 
         if (DataContext is MainWindowViewModel viewModel)
         {
-            viewModel.CurrentProject?.currentMode.clearMode();
+            viewModel.CurrentProject?.currentMode.ClearMode();
         }
     }
 

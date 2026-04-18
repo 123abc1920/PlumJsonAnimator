@@ -11,6 +11,9 @@ using PlumJsonAnimator.Models.Interfaces;
 
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
+    /// <summary>
+    /// Bone data
+    /// </summary>
     public class Bone : INotifyable, IRenamable
     {
         public int id;
@@ -43,7 +46,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 if (Math.Abs(_x - value) > double.Epsilon)
                 {
-                    move(value, _y);
+                    Move(value, _y);
                     _x = value;
                     OnPropertyChanged(nameof(x));
                 }
@@ -57,7 +60,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 if (Math.Abs(_y - value) > double.Epsilon)
                 {
-                    move(_x, value);
+                    Move(_x, value);
                     _y = value;
                     OnPropertyChanged(nameof(y));
                 }
@@ -71,7 +74,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 if (Math.Abs(_a - value) > double.Epsilon)
                 {
-                    rotate(value);
+                    Rotate(value);
                     _a = value;
                     OnPropertyChanged(nameof(a));
                 }
@@ -85,7 +88,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             _slots.Clear();
 
-            var newSlots = this.globalState.CurrentProject?.CurrentSkin?.GetSlots(this);
+            var newSlots = this._globalState.CurrentProject?.CurrentSkin?.GetSlots(this);
             if (newSlots != null)
             {
                 foreach (var slot in newSlots)
@@ -130,7 +133,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public virtual double LengthY { get; set; } = 0;
 
-        protected GlobalState globalState;
+        protected GlobalState _globalState;
 
         protected Bone() { }
 
@@ -147,7 +150,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this.endX = this._x + lengthX * Math.Cos(angleRad);
             this.endY = this._y + lengthX * Math.Sin(angleRad);
 
-            this.globalState = globalState;
+            this._globalState = globalState;
         }
 
         public Bone(GlobalState globalState, int _id)
@@ -159,7 +162,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             string name = "bone";
             this.Name = $"{name}{Counter.GenerateNamePostfix()}";
 
-            this.globalState = globalState;
+            this._globalState = globalState;
         }
 
         public Bone(
@@ -179,7 +182,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this.Name = $"{name}{Counter.GenerateNamePostfix()}";
             this.Parent = parent;
 
-            this.globalState = globalState;
+            this._globalState = globalState;
         }
 
         public Bone(GlobalState globalState, Bone parent)
@@ -199,7 +202,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this.Parent = parent;
             this.id = 100;
 
-            this.globalState = globalState;
+            this._globalState = globalState;
         }
 
         public Bone(GlobalState globalState, string name, Bone parent)
@@ -218,18 +221,17 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this.Parent = parent;
             this.id = 100;
 
-            this.globalState = globalState;
+            this._globalState = globalState;
         }
 
-        public void addChildren(Bone bone)
+        public void AddChildren(Bone bone)
         {
             this.Children.Add(bone);
             bone.Parent = this;
         }
 
         private bool _isMoving = false;
-
-        public virtual void move(double x, double y)
+        public virtual void Move(double x, double y)
         {
             if (_isMoving)
             {
@@ -253,17 +255,17 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
             foreach (Bone c in this.Children)
             {
-                c.move(c.x - deltaX, c.y - deltaY);
+                c.Move(c.x - deltaX, c.y - deltaY);
             }
 
-            List<Slot> slots = this.globalState.CurrentProject!.CurrentSkin.GetSlots(this);
-            var options = this.globalState.GetParallelOptions();
+            List<Slot> slots = this._globalState.CurrentProject!.CurrentSkin.GetSlots(this);
+            var options = this._globalState.GetParallelOptions();
             Parallel.ForEach(
                 slots,
                 options,
                 slot =>
                 {
-                    slot.move(slot.x - deltaX, slot.y - deltaY);
+                    slot.Move(slot.x - deltaX, slot.y - deltaY);
                 }
             );
 
@@ -271,8 +273,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         }
 
         private bool _isRotating = false;
-
-        public virtual void rotate(double a)
+        public virtual void Rotate(double a)
         {
             if (_isRotating)
             {
@@ -300,11 +301,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 child.x = this.x + newDx;
                 child.y = this.y + newDy;
 
-                child.rotate(child.a + (a - oldA));
+                child.Rotate(child.a + (a - oldA));
             }
 
-            List<Slot> slots = this.globalState.CurrentProject!.CurrentSkin.GetSlots(this);
-            var options = this.globalState.GetParallelOptions();
+            List<Slot> slots = this._globalState.CurrentProject!.CurrentSkin.GetSlots(this);
+            var options = this._globalState.GetParallelOptions();
             Parallel.ForEach(
                 slots,
                 options,
@@ -329,12 +330,12 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             _isRotating = false;
         }
 
-        public virtual void scale(double x, double y)
+        public virtual void Scale(double x, double y)
         {
             this.LengthX = Math.Sqrt((x - this.x) * (x - this.x) + (y - this.y) * (y - this.y));
         }
 
-        public void drawBone(Canvas canvas)
+        public void DrawBone(Canvas canvas)
         {
             Point start = new Point(canvas.Width / 2 + this.x, canvas.Height / 2 + this.y);
             Point end = new Point(canvas.Width / 2 + this.endX, canvas.Height / 2 + this.endY);
@@ -343,7 +344,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 StartPoint = start,
                 EndPoint = end,
-                Stroke = this.globalState.GetLineBoneColor(this),
+                Stroke = this._globalState.GetLineBoneColor(this),
                 StrokeThickness = 3,
             };
 
@@ -351,7 +352,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 Width = 8,
                 Height = 8,
-                Fill = this.globalState.GetDotBoneColor(this),
+                Fill = this._globalState.GetDotBoneColor(this),
             };
 
             Canvas.SetLeft(joint, start.X - 4);
@@ -361,7 +362,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             canvas.Children.Add(joint);
         }
 
-        public BoneData generateJSONData()
+        public BoneData GenerateJSONData()
         {
             return new BoneData
             {
@@ -372,9 +373,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             };
         }
 
-        public string generateCode()
+        public string GenerateCode()
         {
-            return JsonConvert.SerializeObject(generateJSONData(), this.globalState.jsonSettings);
+            return JsonConvert.SerializeObject(GenerateJSONData(), this._globalState.jsonSettings);
         }
 
         public void SetName(string? name)
@@ -386,6 +387,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         }
     }
 
+    /// <summary>
+    /// Jsonifyed bone data
+    /// </summary>
     public class BoneData
     {
         [JsonProperty("name")]

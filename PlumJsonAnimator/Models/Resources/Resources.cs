@@ -5,6 +5,7 @@ using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Services;
 
+// TODO: fix Name GetName SetName
 namespace PlumJsonAnimator.Models.Resources
 {
     /// <summary>
@@ -26,13 +27,13 @@ namespace PlumJsonAnimator.Models.Resources
             }
         }
 
-        protected ProjectFilesManager projectManager;
-        protected GlobalState globalState;
+        protected ProjectFilesManager _projectManager;
+        protected GlobalState _globalState;
 
         public Res(ProjectFilesManager projectManager, GlobalState globalState)
         {
-            this.projectManager = projectManager;
-            this.globalState = globalState;
+            this._projectManager = projectManager;
+            this._globalState = globalState;
         }
 
         public string GetName
@@ -86,10 +87,10 @@ namespace PlumJsonAnimator.Models.Resources
             if (name != null)
             {
                 this.Name = name;
-                this.projectManager.RenameFile(
+                this._projectManager.RenameFile(
                     Path,
                     System.IO.Path.Combine(
-                        this.globalState.CurrentProject!.GetProjectPath(),
+                        this._globalState.CurrentProject!.GetProjectPath(),
                         "res",
                         $"{this.Name}{ext}"
                     )

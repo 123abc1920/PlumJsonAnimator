@@ -133,7 +133,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             if (SlotAttachmentBinding.ContainsKey(s) && SlotAttachmentBinding[s] != null)
             {
-                return ((ImageAttachment)SlotAttachmentBinding[s]).getPath();
+                return ((ImageAttachment)SlotAttachmentBinding[s]).GetPath();
             }
             else
             {
@@ -193,7 +193,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 if (SlotAttachmentBinding[s] != null)
                 {
                     attachments[s.Name][SlotAttachmentBinding[s].Name] = SlotAttachmentBinding[s]
-                        .generateJSONData();
+                        .GenerateJSONData();
                 }
             }
 

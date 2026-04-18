@@ -8,10 +8,12 @@ using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
+    /// <summary>
+    /// Provides methods for work with animations
+    /// </summary>
     public class Animation : INotifyable
     {
         private string _name = "anim0";
-
         public string Name
         {
             get => _name;
@@ -42,43 +44,46 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public Dictionary<Bone, BoneAnimation> BoneAnimationBinding =
             new Dictionary<Bone, BoneAnimation>();
 
-        private GlobalState globalState;
-        private Interpolation interpolation;
+        private GlobalState _globalState;
+        private Interpolation _interpolation;
 
         public Animation(GlobalState globalState, Interpolation interpolation)
         {
-            this.globalState = globalState;
-            this.interpolation = interpolation;
+            this._globalState = globalState;
+            this._interpolation = interpolation;
         }
 
         public Animation(GlobalState globalState, Interpolation interpolation, string name)
         {
-            this.globalState = globalState;
-            this.interpolation = interpolation;
+            this._globalState = globalState;
+            this._interpolation = interpolation;
             this.Name = $"{name}{Counter.GenerateNamePostfix()}";
         }
 
+        /// <summary>
+        /// Sets all bones according to the current time
+        /// </summary>
         public void SetupBones()
         {
-            /*var parallelOptions = this.globalState.GetParallelOptions();
-            Parallel.ForEach(
-                BoneAnimationBinding.Keys,
-                parallelOptions,
-                b => BoneAnimationBinding[b].BoneStep(b, currentTime)
-            );*/
             foreach (Bone b in BoneAnimationBinding.Keys)
             {
                 BoneAnimationBinding[b].BoneStep(b, currentTime);
             }
         }
 
-        public void step()
+        /// <summary>
+        /// Makes animation step
+        /// </summary>
+        public void Step()
         {
-            this.currentTime += 1.0 / (double)this.globalState.FPS;
+            this.currentTime += 1.0 / (double)this._globalState.FPS;
             SetupBones();
         }
 
-        public AnimationData generateJSONData()
+        /// <summary>
+        /// Turn animation data into JSON object
+        /// </summary>
+        public AnimationData GenerateJSONData()
         {
             var animationData = new AnimationData();
 
@@ -133,9 +138,12 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             return animationData;
         }
 
-        public String generateCode()
+        /// <summary>
+        /// Turn animation JSON object into JSON string
+        /// </summary>
+        public String GenerateCode()
         {
-            return JsonConvert.SerializeObject(generateJSONData(), this.globalState.jsonSettings);
+            return JsonConvert.SerializeObject(GenerateJSONData(), this._globalState.jsonSettings);
         }
 
         /// <summary>
@@ -171,11 +179,17 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 BoneAnimationBinding.Add(
                     b,
-                    new BoneAnimation(this.globalState, this.interpolation)
+                    new BoneAnimation(this._globalState, this._interpolation)
                 );
             }
         }
 
+        /// <summary>
+        /// Add bone translating into current animation
+        /// </summary>
+        /// <param name="b">Bone that has to be moved</param>
+        /// <param name="x">Target x coordinate</param>
+        /// <param name="y">Target y coordinate</param>
         public void TranslateBone(Bone b, double? x, double? y)
         {
             if (x != null && y != null)
@@ -185,6 +199,13 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
+        /// <summary>
+        /// Add bone translating into current animation
+        /// </summary>
+        /// <param name="b">Bone that has to be moved</param>
+        /// <param name="x">Target x coordinate</param>
+        /// <param name="y">Target y coordinate</param>
+        /// <param name="currTime">Target time</param>
         public void TranslateBone(Bone b, double? x, double? y, double? currTime)
         {
             if (x != null && y != null && currTime != null)
@@ -194,6 +215,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
+        /// <summary>
+        /// Add bone rotating into current animation
+        /// </summary>
+        /// <param name="b">Bone that has to be moved</param>
+        /// <param name="value">Target angle</param>
         public void RotateBone(Bone b, double? value)
         {
             if (value != null)
@@ -203,6 +229,12 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
+        /// <summary>
+        /// Add bone translating into current animation
+        /// </summary>
+        /// <param name="b">Bone that has to be moved</param>
+        /// <param name="value">Target angle</param>
+        /// <param name="currTime">Target time</param>
         public void RotateBone(Bone b, double? value, double? currTime)
         {
             if (value != null && currTime != null)
@@ -212,42 +244,13 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
-        public void ScaleBone(Bone b, double? x, double? y)
-        {
-            if (x != null && y != null)
-            {
-                AnimateBone(b);
-                BoneAnimationBinding[b].addScaleFrame(currentTime, (double)x, (double)y);
-            }
-        }
-
-        public void ScaleBone(Bone b, double? x, double? y, double? currTime)
-        {
-            if (x != null && y != null && currTime != null)
-            {
-                AnimateBone(b);
-                BoneAnimationBinding[b].addScaleFrame((double)currTime, (double)x, (double)y);
-            }
-        }
-
-        public void ShearBone(Bone b, double? x, double? y)
-        {
-            if (x != null && y != null)
-            {
-                AnimateBone(b);
-                BoneAnimationBinding[b].addShearFrame(currentTime, (double)x, (double)y);
-            }
-        }
-
-        public void ShearBone(Bone b, double? x, double? y, double? currTime)
-        {
-            if (x != null && y != null && currTime != null)
-            {
-                AnimateBone(b);
-                BoneAnimationBinding[b].addShearFrame((double)currTime, (double)x, (double)y);
-            }
-        }
-
+        /// <summary>
+        /// Find current keyframes
+        /// </summary>
+        /// <param name="b">Bone</param>
+        /// <param name="time">Current time</param>
+        /// <param name="type">Current transform type</param>
+        /// <param name="isNext">Next or previous keyframe</param>
         public double FindKeyFrame(Bone b, double time, TransformModesTypes type, bool isNext)
         {
             if (BoneAnimationBinding.ContainsKey(b) && type != TransformModesTypes.NO)
@@ -257,6 +260,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             return time;
         }
 
+        /// <summary>
+        /// Add keyframe to animation via UI
+        /// </summary>
+        /// <param name="b">Bone</param>
+        /// <param name="type">Current transform type</param>
         public void AddKeyFrame(Bone b, TransformModesTypes type)
         {
             if (b != null && b.IsBone && type != TransformModesTypes.NO)
@@ -274,6 +282,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
+        /// <summary>
+        /// Delete keyframe
+        /// </summary>
+        /// <param name="b">Bone</param>
+        /// <param name="type">Current transform type</param>
         public void DeleteKeyFrame(Bone b, TransformModesTypes type)
         {
             if (b != null && b.IsBone && type != TransformModesTypes.NO)
@@ -286,6 +299,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
+        /// <summary>
+        /// Animation end time
+        /// </summary>
         public double MaxTime()
         {
             double maxTime = 0.0;
@@ -300,6 +316,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         }
     }
 
+    /// <summary>
+    /// Animation data
+    /// </summary>
     public class AnimationData
     {
         [JsonProperty("bones")]
@@ -309,8 +328,14 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public List<DrawOrderItem>? DrawOrder { get; set; }
     }
 
+    /// <summary>
+    /// List of bones
+    /// </summary>
     public class BonesListData : Dictionary<string, BoneAnimationData> { }
 
+    /// <summary>
+    /// Draw order list
+    /// </summary>
     public class DrawOrderItem
     {
         [JsonProperty("time")]
@@ -320,6 +345,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public List<DrawOrderOffset>? Offsets { get; set; }
     }
 
+    /// <summary>
+    /// Draw order list item
+    /// </summary>
     public class DrawOrderOffset
     {
         [JsonProperty("slot")]

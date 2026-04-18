@@ -4,6 +4,9 @@ using PlumJsonAnimator.Models.SkeletonNameSpace;
 
 namespace PlumJsonAnimator.Models.Common
 {
+    /// <summary>
+    /// Transform modes types. Not IKeyFrameTypes, IKeyFrameTypes are only for storage information about transformations
+    /// </summary>
     public enum TransformModesTypes
     {
         NO = 0,
@@ -13,6 +16,9 @@ namespace PlumJsonAnimator.Models.Common
         SHEAR,
     }
 
+    /// <summary>
+    /// Mode for no transformations
+    /// </summary>
     public abstract class Mode
     {
         public TransformModesTypes type;
@@ -25,9 +31,9 @@ namespace PlumJsonAnimator.Models.Common
             this.globalState = globalState;
         }
 
-        public abstract void clearMode();
+        public abstract void ClearMode();
 
-        public abstract void transform(Bone bone, double a, double b);
+        public abstract void Transform(Bone bone, double a, double b);
     }
 
     class NoMode : Mode
@@ -39,9 +45,9 @@ namespace PlumJsonAnimator.Models.Common
             name = "";
         }
 
-        public override void clearMode() { }
+        public override void ClearMode() { }
 
-        public override void transform(Bone bone, double a, double b)
+        public override void Transform(Bone bone, double a, double b)
         {
             return;
         }
@@ -56,11 +62,11 @@ namespace PlumJsonAnimator.Models.Common
             name = "transform";
         }
 
-        public override void clearMode() { }
+        public override void ClearMode() { }
 
-        public override void transform(Bone bone, double x, double y)
+        public override void Transform(Bone bone, double x, double y)
         {
-            bone.move(x, y);
+            bone.Move(x, y);
             var animation = this.globalState.CurrentProject?.GetAnimation();
             if (animation != null && !animation.IsRun && bone.IsBone == true)
             {
@@ -81,13 +87,13 @@ namespace PlumJsonAnimator.Models.Common
             name = "scale";
         }
 
-        public override void clearMode()
+        public override void ClearMode()
         {
             startX = null;
             startY = null;
         }
 
-        public override void transform(Bone bone, double x, double y)
+        public override void Transform(Bone bone, double x, double y)
         {
             if (startX == null || startY == null)
             {
@@ -99,7 +105,7 @@ namespace PlumJsonAnimator.Models.Common
             double deltaY = (double)startY - y;
             startX = x;
             startY = y;
-            bone.scale(x, y);
+            bone.Scale(x, y);
         }
     }
 
@@ -124,9 +130,9 @@ namespace PlumJsonAnimator.Models.Common
             name = "rotate";
         }
 
-        public override void clearMode() { }
+        public override void ClearMode() { }
 
-        public override void transform(Bone bone, double x, double y)
+        public override void Transform(Bone bone, double x, double y)
         {
             double xx = x - bone.x;
             Point av = new Point(xx, y - bone.y);
@@ -137,7 +143,7 @@ namespace PlumJsonAnimator.Models.Common
             double angleRad = Math.Atan2(det, dot);
             double angleDeg = angleRad * 180 / Math.PI;
 
-            bone.rotate(-angleDeg);
+            bone.Rotate(-angleDeg);
 
             var animation = this.globalState.CurrentProject?.GetAnimation();
             if (animation != null && !animation.IsRun && bone.IsBone == true)

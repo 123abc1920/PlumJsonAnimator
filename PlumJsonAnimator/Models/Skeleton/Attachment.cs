@@ -3,8 +3,12 @@ using Newtonsoft.Json;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
 
+// TODO: fix SetSize GetSize Size
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
+    /// <summary>
+    /// Attachment class. Helps to bind slot and res or another functions
+    /// </summary>
     public abstract class Attachment : INotifyable
     {
         public string? Name { get; set; }
@@ -13,8 +17,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public double y;
         public double a;
 
-        protected int? width = null;
-        protected int? height = null;
+        protected int? _width = null;
+        protected int? _height = null;
 
         public void SetPos(double x, double y, double a)
         {
@@ -28,59 +32,62 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             return null;
         }
 
-        public abstract AttachmentData generateJSONData();
+        public abstract AttachmentData GenerateJSONData();
 
-        public void setSize(double width, double height)
+        public void SetSize(double width, double height)
         {
-            this.width = (int)width;
-            this.height = (int)height;
+            this._width = (int)width;
+            this._height = (int)height;
         }
 
-        public Dictionary<string, int?> getSize()
+        public Dictionary<string, int?> GetSize()
         {
             return new Dictionary<string, int?>()
             {
-                ["width"] = this.width,
-                ["height"] = this.height,
+                ["width"] = this._width,
+                ["height"] = this._height,
             };
         }
     }
 
+    /// <summary>
+    /// Binds slot and res
+    /// </summary>
     public class ImageAttachment : Attachment
     {
-        private ImageRes image;
+        private ImageRes _image;
 
         public ImageAttachment(ImageRes res)
         {
-            this.image = res;
+            this._image = res;
             this.Name = res.Name;
         }
 
         public ImageAttachment(ImageRes res, AttachmentData data)
         {
-            this.image = res;
+            this._image = res;
             this.Name = res.Name;
 
             this.x = data.X;
             this.y = data.Y;
             this.a = data.A;
 
-            this.width = data.Width;
-            this.height = data.Height;
+            this._width = data.Width;
+            this._height = data.Height;
         }
 
-        public string getPath()
+        public string GetPath()
         {
-            return this.image.Path;
+            return this._image.Path;
         }
 
-        public override AttachmentData generateJSONData()
+        public override AttachmentData GenerateJSONData()
         {
             return new AttachmentData
             {
-                Name = this.image.Name,
-                Width = this.width,
-                Height = this.height,
+                Name = this._image.Name,
+                Width = this._width,
+                Height = this._height,
                 X = this.x,
                 Y = this.y,
                 A = this.a,
@@ -89,10 +96,13 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public override Res GetRes()
         {
-            return this.image;
+            return this._image;
         }
     }
 
+    /// <summary>
+    /// Jsonifyed attachment data
+    /// </summary>
     public class AttachmentData
     {
         [JsonProperty("name")]

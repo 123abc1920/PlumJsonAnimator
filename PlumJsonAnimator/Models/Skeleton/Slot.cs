@@ -31,7 +31,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 if (Math.Abs(_x - value) > double.Epsilon)
                 {
                     _x = value;
-                    move(_x, _y);
+                    Move(_x, _y);
                     OnPropertyChanged(nameof(x));
                 }
             }
@@ -45,7 +45,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 if (Math.Abs(_y - value) > double.Epsilon)
                 {
                     _y = value;
-                    move(_x, _y);
+                    Move(_x, _y);
                     OnPropertyChanged(nameof(y));
                 }
             }
@@ -59,7 +59,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 if (Math.Abs(_a - value) > double.Epsilon)
                 {
                     _a = value;
-                    rotate(_a);
+                    Rotate(_a);
                     OnPropertyChanged(nameof(a));
                 }
             }
@@ -82,7 +82,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public void UpdateAttachment()
         {
-            CurrentAttachment = this.globalState.CurrentProject!.CurrentSkin.GetAttachment(this);
+            CurrentAttachment = this._globalState.CurrentProject!.CurrentSkin.GetAttachment(this);
 
             if (CurrentAttachment != null)
             {
@@ -90,7 +90,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 this._y = CurrentAttachment.y;
                 this._a = CurrentAttachment.a;
 
-                Dictionary<string, int?> size = CurrentAttachment.getSize();
+                Dictionary<string, int?> size = CurrentAttachment.GetSize();
                 this.LengthX = size["width"] ?? this.LengthX;
                 this.LengthY = size["height"] ?? this.LengthY;
             }
@@ -116,7 +116,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 _currentDrawOrderOffset = value;
                 if (!_isUpdatingFromCode)
                 {
-                    double currTime = this.globalState.CurrentProject.CurrentAnimation.currentTime;
+                    double currTime = this._globalState.CurrentProject.CurrentAnimation.currentTime;
                     if (drawOrders.Keys.Contains(currTime))
                     {
                         drawOrders[currTime].Offset = value;
@@ -135,7 +135,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public void UpdateDrawOrderOffset()
         {
-            double currTime = this.globalState.CurrentProject.CurrentAnimation.currentTime;
+            double currTime = this._globalState.CurrentProject.CurrentAnimation.currentTime;
 
             double? foundKey = null;
             foreach (var key in drawOrders.Keys)
@@ -212,7 +212,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
             this.Name = $"{Path.GetFileNameWithoutExtension(path)}{Counter.GenerateNamePostfix()}";
 
-            this.globalState = globalState;
+            this._globalState = globalState;
             UpdateAttachment();
         }
 
@@ -220,7 +220,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             this.Name = name;
             this.BoundedBone = b;
-            this.globalState = globalState;
+            this._globalState = globalState;
             UpdateAttachment();
         }
 
@@ -228,7 +228,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             this.Name = $"tesr{Counter.GenerateNamePostfix()}";
             this.BoundedBone = b;
-            this.globalState = globalState;
+            this._globalState = globalState;
             UpdateAttachment();
         }
 
@@ -242,7 +242,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
-        public override void move(double x, double y)
+        public override void Move(double x, double y)
         {
             this.x = x;
             this.y = y;
@@ -250,18 +250,18 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             CurrentAttachment?.SetPos(this.x, this.y, this.a);
         }
 
-        public override void scale(double x, double y)
+        public override void Scale(double x, double y)
         {
             if (this.CurrentAttachment != null)
             {
                 this.LengthX = Math.Abs(x - this.x) * 5;
                 this.LengthY = Math.Abs(y - this.y) * 5;
 
-                this.CurrentAttachment.setSize(this.LengthX, this.LengthY);
+                this.CurrentAttachment.SetSize(this.LengthX, this.LengthY);
             }
         }
 
-        public override void rotate(double a)
+        public override void Rotate(double a)
         {
             this.a = a;
 
@@ -273,14 +273,14 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public void drawSlot(Canvas canvas)
         {
-            if (!this.globalState.CurrentProject!.CurrentSkin.isSlotDrawable(this))
+            if (!this._globalState.CurrentProject!.CurrentSkin.isSlotDrawable(this))
             {
                 return;
             }
 
             try
             {
-                string currentPath = this.globalState.CurrentProject.CurrentSkin.GetImagePath(this);
+                string currentPath = this._globalState.CurrentProject.CurrentSkin.GetImagePath(this);
 
                 if (_cachedBitmap == null || _cachedPath != currentPath)
                 {
@@ -309,7 +309,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
                 canvas.Children.Add(image);
 
-                if (this.globalState.IsSlotSelected(this))
+                if (this._globalState.IsSlotSelected(this))
                 {
                     int SELECTION = 10;
 
@@ -351,7 +351,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public new string generateCode()
         {
-            return JsonConvert.SerializeObject(generateJSONData(), this.globalState.jsonSettings);
+            return JsonConvert.SerializeObject(generateJSONData(), this._globalState.jsonSettings);
         }
 
         public Slot regenerate(string json, string imagesFolder = "")
@@ -360,11 +360,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 var data = JsonConvert.DeserializeObject<SlotData>(
                     json,
-                    this.globalState.jsonSettings
+                    this._globalState.jsonSettings
                 );
 
                 if (data == null)
-                    return new Slot(this.globalState, 0, "default.png");
+                    return new Slot(this._globalState, 0, "default.png");
 
                 string imagePath;
                 if (!string.IsNullOrEmpty(imagesFolder) && Directory.Exists(imagesFolder))
@@ -386,13 +386,13 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                     imagePath = data.Attachment + ".png";
                 }
 
-                var slot = new Slot(this.globalState, 0, imagePath) { Name = data.Name };
+                var slot = new Slot(this._globalState, 0, imagePath) { Name = data.Name };
 
                 return slot;
             }
             catch
             {
-                return new Slot(this.globalState, 0, "default.png");
+                return new Slot(this._globalState, 0, "default.png");
             }
         }
 
