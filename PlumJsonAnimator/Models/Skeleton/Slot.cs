@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
 
+// TODO: UI bug with animation and skin name length
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
     /// <summary>
@@ -88,11 +89,13 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             CurrentAttachment = this._globalState.CurrentProject!.CurrentSkin.GetAttachment(this);
 
-            if (CurrentAttachment != null)
+            if (CurrentAttachment != null && this.BoundedBone != null)
             {
-                this._x = CurrentAttachment.x;
-                this._y = CurrentAttachment.y;
-                this._a = CurrentAttachment.a;
+                this._x = this.BoundedBone.x + CurrentAttachment.x;
+                this._y = this.BoundedBone.y + CurrentAttachment.y;
+                this._a = CurrentAttachment.a + this.BoundedBone.a;
+
+                this.parentA = this.BoundedBone.a;
 
                 Dictionary<string, int?> size = CurrentAttachment.GetSize();
                 this.LengthX = size["width"] ?? this.LengthX;
@@ -253,7 +256,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this.x = x;
             this.y = y;
 
-            CurrentAttachment?.SetPos(this.x, this.y, this.a);
+            CurrentAttachment?.SetPos(
+                this.x - this.BoundedBone!.x,
+                this.y - this.BoundedBone.y,
+                this.a - this.BoundedBone.a
+            );
         }
 
         /// <summary>
@@ -273,14 +280,18 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         }
 
         /// <summary>
-        /// Rotates slot
+        /// Rotates slot ONLY FROM UI!
         /// </summary>
         /// <param name="a">Target angle</param>
         public override void Rotate(double a)
         {
             this.a = a;
 
-            CurrentAttachment?.SetPos(this.x, this.y, this.a);
+            CurrentAttachment?.SetPos(
+                this.x - this.BoundedBone!.x,
+                this.y - this.BoundedBone.y,
+                this.a - this.BoundedBone.a
+            );
         }
 
         private Bitmap _cachedBitmap;

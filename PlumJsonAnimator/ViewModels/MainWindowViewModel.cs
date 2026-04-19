@@ -19,6 +19,7 @@ using static PlumJsonAnimator.Services.JsonCode;
 namespace PlumJsonAnimator.ViewModels;
 
 // TODO: docs
+// TODO: slots not deleting when bones
 public partial class MainWindowViewModel : ViewModelBase
 {
     public Canvas? Canvas

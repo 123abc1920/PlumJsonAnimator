@@ -315,8 +315,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                     double slotnewDy =
                         slotdx * Math.Sin(slotangleDiff) + slotdy * Math.Cos(slotangleDiff);
 
-                    slot.x = this.x + slotnewDx;
-                    slot.y = this.y + slotnewDy;
+                    slot.Move(this.x + slotnewDx, this.y + slotnewDy);
 
                     slot.parentA = slot.parentA + (a - oldA);
                 }

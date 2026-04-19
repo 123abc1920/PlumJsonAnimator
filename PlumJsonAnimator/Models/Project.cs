@@ -353,66 +353,6 @@ namespace PlumJsonAnimator.Models
                 this.Slots.Remove(slot);
             }
 
-            // recreate skins and slot-bone bounding
-            List<Skin> skinsToRemove = new List<Skin>();
-
-            foreach (Skin b in this.Skins)
-            {
-                if (skins.TryGetValue(b.Name, out SkinData skinData))
-                {
-                    if (b.GenerateJSONData() != skinData)
-                    {
-                        b.SlotAttachmentBinding = new Dictionary<Slot, Attachment>();
-                        foreach (string slotName in skinData.Attachments.Keys)
-                        {
-                            Dictionary<string, AttachmentData> attachs = skinData.Attachments[
-                                slotName
-                            ];
-                            foreach (string attachName in attachs.Keys)
-                            {
-                                var attach = attachs[attachName];
-                                ImageAttachment a = new ImageAttachment(
-                                    (ImageRes)this.GetResByName(attach.Name),
-                                    attach
-                                );
-                                b.BindSlotAttachment(this.GetSlotByName(slotName), a);
-                            }
-                        }
-                    }
-                    skins.Remove(b.Name);
-                }
-                else
-                {
-                    skinsToRemove.Add(b);
-                }
-            }
-
-            foreach (var skin in skins)
-            {
-                Skin s = new Skin(skin.Key, this._globalState);
-                var skinData = skin.Value;
-                s.SlotAttachmentBinding = new Dictionary<Slot, Attachment>();
-                foreach (string slotName in skinData.Attachments.Keys)
-                {
-                    Dictionary<string, AttachmentData> attachs = skinData.Attachments[slotName];
-                    foreach (string attachName in attachs.Keys)
-                    {
-                        var attach = attachs[attachName];
-                        ImageAttachment a = new ImageAttachment(
-                            (ImageRes)this.GetResByName(attach.Name),
-                            attach
-                        );
-                        s.BindSlotAttachment(this.GetSlotByName(slotName), a);
-                    }
-                }
-                this.Skins.Add(s);
-            }
-
-            foreach (var skin in skinsToRemove)
-            {
-                this.Skins.Remove(skin);
-            }
-
             // recreate animations
             List<Animation> animationsToRemove = new List<Animation>();
 
@@ -525,17 +465,78 @@ namespace PlumJsonAnimator.Models
                 this.Animations.Remove(animation);
             }
 
-            if (Skins.Count <= 0)
-            {
-                Skins.Add(new Skin(this._globalState));
-            }
             if (Animations.Count <= 0)
             {
                 Animations.Add(new Animation(this._globalState, this._interpolation));
             }
-
-            this.CurrentSkin = Skins[0];
             this.CurrentAnimation = Animations[0];
+            this.CurrentAnimation.SetupBones();
+
+            // recreate skins and slot-bone bounding
+            List<Skin> skinsToRemove = new List<Skin>();
+
+            foreach (Skin b in this.Skins)
+            {
+                if (skins.TryGetValue(b.Name, out SkinData skinData))
+                {
+                    if (b.GenerateJSONData() != skinData)
+                    {
+                        b.SlotAttachmentBinding = new Dictionary<Slot, Attachment>();
+                        foreach (string slotName in skinData.Attachments.Keys)
+                        {
+                            Dictionary<string, AttachmentData> attachs = skinData.Attachments[
+                                slotName
+                            ];
+                            foreach (string attachName in attachs.Keys)
+                            {
+                                var attach = attachs[attachName];
+                                ImageAttachment a = new ImageAttachment(
+                                    (ImageRes)this.GetResByName(attach.Name),
+                                    attach
+                                );
+                                b.BindSlotAttachment(this.GetSlotByName(slotName), a);
+                            }
+                        }
+                    }
+                    skins.Remove(b.Name);
+                }
+                else
+                {
+                    skinsToRemove.Add(b);
+                }
+            }
+
+            foreach (var skin in skins)
+            {
+                Skin s = new Skin(skin.Key, this._globalState);
+                var skinData = skin.Value;
+                s.SlotAttachmentBinding = new Dictionary<Slot, Attachment>();
+                foreach (string slotName in skinData.Attachments.Keys)
+                {
+                    Dictionary<string, AttachmentData> attachs = skinData.Attachments[slotName];
+                    foreach (string attachName in attachs.Keys)
+                    {
+                        var attach = attachs[attachName];
+                        ImageAttachment a = new ImageAttachment(
+                            (ImageRes)this.GetResByName(attach.Name),
+                            attach
+                        );
+                        s.BindSlotAttachment(this.GetSlotByName(slotName), a);
+                    }
+                }
+                this.Skins.Add(s);
+            }
+
+            foreach (var skin in skinsToRemove)
+            {
+                this.Skins.Remove(skin);
+            }
+
+            if (Skins.Count <= 0)
+            {
+                Skins.Add(new Skin(this._globalState));
+            }
+            this.CurrentSkin = Skins[0];
         }
     }
 

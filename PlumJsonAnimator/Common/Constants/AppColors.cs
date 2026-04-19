@@ -1,5 +1,6 @@
 using Avalonia.Media;
 
+// TODO: message before closing
 namespace PlumJsonAnimator.Common.Constants
 {
     /// <summary>
