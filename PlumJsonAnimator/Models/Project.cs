@@ -322,19 +322,20 @@ namespace PlumJsonAnimator.Models
             // recreate slots
             List<Slot> slotsToRemove = new List<Slot>();
 
-            foreach (Slot b in this.Slots)
+            foreach (Slot slot in this.Slots)
             {
-                if (slots.TryGetValue(b.Name, out SlotData slotData))
+                if (slots.TryGetValue(slot.Name, out SlotData slotData))
                 {
-                    if (b.GenerateJSONData() != slotData)
+                    if (slot.GenerateJSONData() != slotData)
                     {
-                        b.BoundedBone = this.MainSkeleton.GetBoneByName(slotData.Bone);
+                        slot.BoundedBone = this.MainSkeleton.GetBoneByName(slotData.Bone);
+                        slot.BoundedBone?.Slots.Add(slot);
                     }
-                    slots.Remove(b.Name);
+                    slots.Remove(slot.Name);
                 }
                 else
                 {
-                    slotsToRemove.Add(b);
+                    slotsToRemove.Add(slot);
                 }
             }
 
@@ -345,35 +346,37 @@ namespace PlumJsonAnimator.Models
                     slot.Key,
                     this.MainSkeleton.GetBoneByName(slot.Value.Bone)
                 );
+                this.MainSkeleton.GetBoneByName(slot.Value.Bone)?.Slots.Add(s);
                 this.Slots.Add(s);
             }
 
             foreach (var slot in slotsToRemove)
             {
+                slot.BoundedBone?.Slots.Remove(slot);
                 this.Slots.Remove(slot);
             }
 
             // recreate animations
             List<Animation> animationsToRemove = new List<Animation>();
 
-            foreach (Animation b in this.Animations)
+            foreach (Animation animation in this.Animations)
             {
-                if (animations.TryGetValue(b.Name, out AnimationData animationData))
+                if (animations.TryGetValue(animation.Name, out AnimationData animationData))
                 {
-                    if (b.GenerateJSONData() != animationData)
+                    if (animation.GenerateJSONData() != animationData)
                     {
-                        b.BoneAnimationBinding = new Dictionary<Bone, BoneAnimation>();
+                        animation.BoneAnimationBinding = new Dictionary<Bone, BoneAnimation>();
                         foreach (string name in animationData.Bones.Keys)
                         {
                             var boneAnimation = animationData.Bones[name];
                             Bone bone = this.MainSkeleton.GetBoneByName(name);
                             foreach (IKeyframeTypeData keyframe in boneAnimation.rotate)
                             {
-                                b.RotateBone(bone, keyframe.Value, keyframe.Time);
+                                animation.RotateBone(bone, keyframe.Value, keyframe.Time);
                             }
                             foreach (IKeyframeTypeData keyframe in boneAnimation.translate)
                             {
-                                b.TranslateBone(bone, keyframe.X, keyframe.Y, keyframe.Time);
+                                animation.TranslateBone(bone, keyframe.X, keyframe.Y, keyframe.Time);
                             }
                         }
                         if (animationData.DrawOrder != null && animationData != null)
@@ -405,11 +408,11 @@ namespace PlumJsonAnimator.Models
                             }
                         }
                     }
-                    animations.Remove(b.Name);
+                    animations.Remove(animation.Name);
                 }
                 else
                 {
-                    animationsToRemove.Add(b);
+                    animationsToRemove.Add(animation);
                 }
             }
 
@@ -475,13 +478,13 @@ namespace PlumJsonAnimator.Models
             // recreate skins and slot-bone bounding
             List<Skin> skinsToRemove = new List<Skin>();
 
-            foreach (Skin b in this.Skins)
+            foreach (Skin skin in this.Skins)
             {
-                if (skins.TryGetValue(b.Name, out SkinData skinData))
+                if (skins.TryGetValue(skin.Name, out SkinData skinData))
                 {
-                    if (b.GenerateJSONData() != skinData)
+                    if (skin.GenerateJSONData() != skinData)
                     {
-                        b.SlotAttachmentBinding = new Dictionary<Slot, Attachment>();
+                        skin.SlotAttachmentBinding = new Dictionary<Slot, Attachment>();
                         foreach (string slotName in skinData.Attachments.Keys)
                         {
                             Dictionary<string, AttachmentData> attachs = skinData.Attachments[
@@ -494,15 +497,15 @@ namespace PlumJsonAnimator.Models
                                     (ImageRes)this.GetResByName(attach.Name),
                                     attach
                                 );
-                                b.BindSlotAttachment(this.GetSlotByName(slotName), a);
+                                skin.BindSlotAttachment(this.GetSlotByName(slotName), a);
                             }
                         }
                     }
-                    skins.Remove(b.Name);
+                    skins.Remove(skin.Name);
                 }
                 else
                 {
-                    skinsToRemove.Add(b);
+                    skinsToRemove.Add(skin);
                 }
             }
 
