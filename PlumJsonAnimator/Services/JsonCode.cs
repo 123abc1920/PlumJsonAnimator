@@ -6,7 +6,6 @@ using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 
-// TODO: localizate valid results
 // TODO: replace repetitions
 // TODO: Logging
 namespace PlumJsonAnimator.Services
@@ -26,14 +25,19 @@ namespace PlumJsonAnimator.Services
             public object? UpdatedArray { get; set; }
         }
 
-        private Prettify prettify;
+        private Prettify _prettify;
+        private GlobalState _globalState;
+        private LocalizationService _localizationService;
 
-        private GlobalState globalState;
-
-        public JsonCode(GlobalState globalState, Prettify prettify)
+        public JsonCode(
+            GlobalState globalState,
+            Prettify prettify,
+            LocalizationService localizationService
+        )
         {
-            this.globalState = globalState;
-            this.prettify = prettify;
+            this._globalState = globalState;
+            this._prettify = prettify;
+            this._localizationService = localizationService;
         }
 
         /// <summary>
@@ -150,18 +154,18 @@ namespace PlumJsonAnimator.Services
             }
 
             List<SlotData> slots = new List<SlotData>();
-            foreach (Slot s in this.globalState.CurrentProject!.Slots)
+            foreach (Slot s in this._globalState.CurrentProject!.Slots)
             {
                 slots.Add(s.GenerateJSONData());
             }
 
             return new CodeData
             {
-                Skeleton = this.globalState.CurrentProject.GenerateMetaData(),
+                Skeleton = this._globalState.CurrentProject.GenerateMetaData(),
                 Bones = project.MainSkeleton!.GenerateJSONData(),
                 Slots = slots,
                 Animations = animations,
-                Skins = this.globalState.CurrentProject.GenerateSkinsJSONData(),
+                Skins = this._globalState.CurrentProject.GenerateSkinsJSONData(),
             };
         }
 
@@ -173,10 +177,10 @@ namespace PlumJsonAnimator.Services
         {
             var _text = JsonConvert.SerializeObject(
                 generateJSONData(project),
-                this.globalState.jsonSettings
+                this._globalState.jsonSettings
             );
 
-            _text = this.prettify.prettify(_text);
+            _text = this._prettify.prettify(_text);
             project.Code = _text;
         }
 
@@ -195,7 +199,7 @@ namespace PlumJsonAnimator.Services
         {
             List<BoneData> newBones = bones;
             List<BoneData> oldBones =
-                this.globalState.CurrentProject!.MainSkeleton!.GenerateJSONData();
+                this._globalState.CurrentProject!.MainSkeleton!.GenerateJSONData();
             Dictionary<string, BoneData> updatedBones = regenerateBones(
                 newBones.ToDictionary(b => b.Name, b => b),
                 oldBones.ToDictionary(b => b.Name, b => b)
@@ -208,7 +212,8 @@ namespace PlumJsonAnimator.Services
                 {
                     return new ValidResult
                     {
-                        Message = "Ошибка: У одной из костей не установлено имя",
+                        Message =
+                            $"{this._localizationService.GetMessage(LocalizationConsts.ERROR)}: {this._localizationService.GetMessage(LocalizationConsts.BONE_NULL_NAME_ERROR)}",
                         IsOk = false,
                         UpdatedArray = null,
                     };
@@ -222,9 +227,13 @@ namespace PlumJsonAnimator.Services
                     bool parent = updatedBones.ContainsKey(b.Parent);
                     if (parent == false)
                     {
+                        var template = this._localizationService.GetMessage(
+                            LocalizationConsts.BONE_PARENT_NULL_ERROR
+                        );
                         return new ValidResult
                         {
-                            Message = $"Ошибка: Кость {b.Name} имеет недействительного родителя",
+                            Message =
+                                $"{this._localizationService.GetMessage(LocalizationConsts.ERROR)}: {string.Format(template, b.Name)}",
                             IsOk = false,
                             UpdatedArray = null,
                         };
@@ -236,7 +245,8 @@ namespace PlumJsonAnimator.Services
             {
                 return new ValidResult
                 {
-                    Message = "Ошибка: Несколько root костей!",
+                    Message =
+                        $"{this._localizationService.GetMessage(LocalizationConsts.ERROR)}: {this._localizationService.GetMessage(LocalizationConsts.SEVERAL_ROOT_BONES)}",
                     IsOk = false,
                     UpdatedArray = null,
                 };
@@ -245,7 +255,8 @@ namespace PlumJsonAnimator.Services
             {
                 return new ValidResult
                 {
-                    Message = "Ошибка: Нет root кости!",
+                    Message =
+                        $"{this._localizationService.GetMessage(LocalizationConsts.ERROR)}: {this._localizationService.GetMessage(LocalizationConsts.NO_ROOT_BONE)}",
                     IsOk = false,
                     UpdatedArray = null,
                 };
@@ -273,7 +284,7 @@ namespace PlumJsonAnimator.Services
         private ValidResult regenerateSlots(List<SlotData> slots)
         {
             List<SlotData> newSlots = slots;
-            List<SlotData> oldSlots = this.globalState.CurrentProject!.GenerateSlotsJSONData();
+            List<SlotData> oldSlots = this._globalState.CurrentProject!.GenerateSlotsJSONData();
             Dictionary<string, SlotData> updatedSlots = regenerateSlots(
                 newSlots.ToDictionary(b => b.Name, b => b),
                 oldSlots.ToDictionary(b => b.Name, b => b)
@@ -285,7 +296,8 @@ namespace PlumJsonAnimator.Services
                 {
                     return new ValidResult
                     {
-                        Message = "У одного из слотов не установлено имя!",
+                        Message =
+                            $"{this._localizationService.GetMessage(LocalizationConsts.SLOT_NULL_NAME)}",
                         IsOk = false,
                         UpdatedArray = null,
                     };
@@ -314,7 +326,7 @@ namespace PlumJsonAnimator.Services
         private ValidResult regenerateSkins(List<SkinData> skins)
         {
             List<SkinData> newSkins = skins;
-            List<SkinData> oldSkins = this.globalState.CurrentProject!.GenerateSkinsJSONData();
+            List<SkinData> oldSkins = this._globalState.CurrentProject!.GenerateSkinsJSONData();
             Dictionary<string, SkinData> updatedSkins = regenerateSkins(
                 newSkins.ToDictionary(b => b.Name, b => b),
                 oldSkins.ToDictionary(b => b.Name, b => b)
@@ -326,7 +338,8 @@ namespace PlumJsonAnimator.Services
                 {
                     return new ValidResult
                     {
-                        Message = "У одного из скинов не установлено имя!",
+                        Message =
+                            $"{this._localizationService.GetMessage(LocalizationConsts.SLOT_NULL_NAME)}",
                         IsOk = false,
                         UpdatedArray = null,
                     };
@@ -357,7 +370,7 @@ namespace PlumJsonAnimator.Services
         {
             Dictionary<string, AnimationData> newAnimations = animations;
             Dictionary<string, AnimationData> oldAnimations =
-                this.globalState.CurrentProject!.GenerateAnimationsJSONData();
+                this._globalState.CurrentProject!.GenerateAnimationsJSONData();
             Dictionary<string, AnimationData> updatedAnimations = regenerateAnimations(
                 newAnimations,
                 oldAnimations
@@ -387,7 +400,12 @@ namespace PlumJsonAnimator.Services
         {
             if (project.Code == null || project.Code == "")
             {
-                return new ValidResult { Message = "Empty json code", IsOk = false };
+                return new ValidResult
+                {
+                    Message =
+                        $"{this._localizationService.GetMessage(LocalizationConsts.EMPTY_JSON)}",
+                    IsOk = false,
+                };
             }
 
             var codeData = JsonConvert.DeserializeObject<CodeData>(project.Code);
@@ -421,7 +439,7 @@ namespace PlumJsonAnimator.Services
                 return new ValidResult { Message = animationResult.Message, IsOk = false };
             }
 
-            this.globalState.CurrentProject?.RegenerateProject(
+            this._globalState.CurrentProject?.RegenerateProject(
                 (Dictionary<string, BoneData>)boneResult.UpdatedArray,
                 (Dictionary<string, SlotData>)slotResult.UpdatedArray,
                 (Dictionary<string, SkinData>)skinResult.UpdatedArray,

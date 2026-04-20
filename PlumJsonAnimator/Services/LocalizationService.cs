@@ -164,6 +164,16 @@ namespace PlumJsonAnimator.Services
                 LocalizationConsts.INFO_MESSAGE => "info_message",
                 LocalizationConsts.SAVED => "saved",
                 LocalizationConsts.REGENERATE_ERROR => "regenerate_error",
+                LocalizationConsts.BONE_NULL_NAME_ERROR => "bone_null_name_error",
+                LocalizationConsts.BONE_PARENT_NULL_ERROR => "bone_parent_null_error",
+                LocalizationConsts.SEVERAL_ROOT_BONES => "several_root_bones",
+                LocalizationConsts.NO_ROOT_BONE => "no_root_bone",
+                LocalizationConsts.DELETE_ERROR => "delete_error",
+                LocalizationConsts.SELECT_SETTINGS_FILE => "select_settings_file",
+                LocalizationConsts.SELECT_FOLDER => "select_folder",
+                LocalizationConsts.SELECT_FFMPEG => "select_ffmpeg",
+                LocalizationConsts.SLOT_NULL_NAME => "slot_null_name",
+                LocalizationConsts.EMPTY_JSON => "empty_json",
 
                 _ => null,
             };
@@ -206,5 +216,15 @@ namespace PlumJsonAnimator.Services
         INFO_MESSAGE,
         SAVED,
         REGENERATE_ERROR,
+        BONE_NULL_NAME_ERROR,
+        BONE_PARENT_NULL_ERROR,
+        SEVERAL_ROOT_BONES,
+        NO_ROOT_BONE,
+        DELETE_ERROR,
+        SELECT_SETTINGS_FILE,
+        SELECT_FOLDER,
+        SELECT_FFMPEG,
+        SLOT_NULL_NAME,
+        EMPTY_JSON,
     }
 }

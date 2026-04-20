@@ -31,15 +31,19 @@ namespace PlumJsonAnimator.Views
 
         private async void SelectFolder(object sender, RoutedEventArgs e)
         {
-            var topLevel = TopLevel.GetTopLevel(this);
-            var storageProvider = topLevel.StorageProvider;
-            var folder = await storageProvider.OpenFolderPickerAsync(
-                new FolderPickerOpenOptions { Title = "Выберите папку", AllowMultiple = false }
-            );
-
-            if (folder.Count > 0)
+            if (DataContext is ExportPanelJPGViewModel viewModel)
             {
-                if (DataContext is ExportPanelJPGViewModel viewModel)
+                var topLevel = TopLevel.GetTopLevel(this);
+                var storageProvider = topLevel.StorageProvider;
+                var folder = await storageProvider.OpenFolderPickerAsync(
+                    new FolderPickerOpenOptions
+                    {
+                        Title = $"{viewModel.GetMessage(LocalizationConsts.SELECT_FOLDER)}",
+                        AllowMultiple = false,
+                    }
+                );
+
+                if (folder.Count > 0)
                 {
                     viewModel.ExportPath = folder[0].Path.LocalPath;
                     this.FindControl<TextBox>("path").Text = viewModel.ExportPath;

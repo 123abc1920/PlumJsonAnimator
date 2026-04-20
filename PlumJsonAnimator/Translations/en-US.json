@@ -57,11 +57,21 @@
     "input_ffmpeg": "Enter the path to ffmpeg.exe",
     "error": "Error",
     "json_valid": "JSON is valid",
-    "json_error_str": "Error in the line",
+    "json_error_str": "Error is on line",
     "json_error_pos": "position",
     "json_context": "Context",
     "rename": "Rename",
     "info_message": "Message",
     "saved": "Saved",
-    "regenerate_error": "There are problems in the json code, it is impossible to restore the project"
+    "regenerate_error": "There are problems in the json code, it is impossible to restore the project",
+    "bone_null_name_error": "One of the bones has not been named",
+    "bone_parent_null_error": "Bone {0} has an invalid parent",
+    "several_root_bones": "There are several root bones!",
+    "no_root_bone": "No root bone!",
+    "delete_error": "Deletion error",
+    "select_settings_file": "Select the project settings file",
+    "select_folder": "Select a folder",
+    "select_ffmpeg": "Select ffmpeg.exe file",
+    "slot_null_name": "One of the skins does not have a name set!",
+    "empty_json": "Empty json code"
 }

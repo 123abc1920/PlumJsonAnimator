@@ -63,5 +63,15 @@
     "rename": "Переименовать",
     "info_message": "Сообщение",
     "saved": "Сохранено",
-    "regenerate_error": "Возникли проблемы в json коде, невозможно восстановить проект"
+    "regenerate_error": "Возникли проблемы в json коде, невозможно восстановить проект",
+    "bone_null_name_error": "У одной из костей не установлено имя",
+    "bone_parent_null_error": "Кость {0} имеет недействительного родителя",
+    "several_root_bones": "Несколько root костей!",
+    "no_root_bone": "Нет root кости!",
+    "delete_error": "Ошибка удаления",
+    "select_settings_file": "Выберите файл настроек проекта",
+    "select_folder": "Выберите папку",
+    "select_ffmpeg": "Выберите файл ffmpeg.exe",
+    "slot_null_name": "У одного из скинов не установлено имя!",
+    "empty_json": "Json код пуст"
 }

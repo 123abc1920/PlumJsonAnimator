@@ -45,6 +45,7 @@ namespace PlumJsonAnimator.Models
 
         private GlobalState _globalState;
         private Interpolation _interpolation;
+        private LocalizationService _localizationService;
 
         public Skin CurrentSkin
         {
@@ -90,9 +91,13 @@ namespace PlumJsonAnimator.Models
             }
         }
 
-        public Project(GlobalState globalState, Interpolation interpolation)
+        public Project(
+            GlobalState globalState,
+            Interpolation interpolation,
+            LocalizationService localizationService
+        )
         {
-            MainSkeleton = new Skeleton(globalState);
+            MainSkeleton = new Skeleton(globalState, localizationService);
             Animations.Add(new Animation(globalState, interpolation));
             CurrentAnimation = Animations[0];
             Skins.Add(new Skin(globalState));
@@ -102,15 +107,17 @@ namespace PlumJsonAnimator.Models
 
             this._globalState = globalState;
             this._interpolation = interpolation;
+            this._localizationService = localizationService;
         }
 
         public Project(
             string name,
             string path,
             GlobalState globalState,
-            Interpolation interpolation
+            Interpolation interpolation,
+            LocalizationService localizationService
         )
-            : this(globalState, interpolation)
+            : this(globalState, interpolation, localizationService)
         {
             this.Name = name;
             this.ProjectPath = path;
@@ -179,6 +186,10 @@ namespace PlumJsonAnimator.Models
         public void DrawSlots(Canvas c)
         {
             CurrentSkin.DrawSkin(c);
+            if (this._globalState.currentBone?.IsBone == false)
+            {
+                ((Slot)this._globalState.currentBone).DrawSlot(c);
+            }
         }
 
         public string GetProjectPath()
@@ -302,7 +313,7 @@ namespace PlumJsonAnimator.Models
 
             foreach (var bone in bones)
             {
-                Bone b = new Bone(this._globalState, bone.Key, null);
+                Bone b = new Bone(this._globalState, bone.Key, null, this._localizationService);
                 this.MainSkeleton.AddBone(b);
             }
 
@@ -334,7 +345,7 @@ namespace PlumJsonAnimator.Models
 
             if (this.MainSkeleton.Bones.Count <= 0)
             {
-                this.MainSkeleton.Bones.Add(new Bone(this._globalState));
+                this.MainSkeleton.Bones.Add(new Bone(this._globalState, this._localizationService));
                 this.MainSkeleton.RootBones = new ObservableCollection<Bone>()
                 {
                     this.MainSkeleton.Bones[0],

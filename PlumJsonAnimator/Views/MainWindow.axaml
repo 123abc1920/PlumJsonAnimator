@@ -102,7 +102,7 @@
                     <RowDefinition Height="6" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="6" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="2*" />
                 </Grid.RowDefinitions>
                 <ScrollViewer
                     Grid.Row="0"

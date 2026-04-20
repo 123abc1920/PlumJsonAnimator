@@ -8,6 +8,7 @@ using Avalonia.Media.Imaging;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
+using PlumJsonAnimator.Services;
 
 // TODO: UI bug with animation and skin name length -- fixed but need improve
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
@@ -285,7 +286,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public void DrawSlot(Canvas canvas)
         {
             if (!_globalState.CurrentProject!.CurrentSkin.IsSlotDrawable(this))
+            {
                 return;
+            }
 
             try
             {
@@ -334,7 +337,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Ошибка: {ex.Message}");
+                Console.WriteLine(
+                    $"{this._localizationService.GetMessage(LocalizationConsts.ERROR)}: {ex.Message}"
+                );
             }
         }
 

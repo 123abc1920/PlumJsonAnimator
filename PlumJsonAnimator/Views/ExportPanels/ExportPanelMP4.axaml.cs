@@ -33,27 +33,27 @@ namespace PlumJsonAnimator.Views
 
         private async void SelectFfmpeg(object sender, RoutedEventArgs e)
         {
-            var topLevel = TopLevel.GetTopLevel(this);
-            var storageProvider = topLevel.StorageProvider;
-            var fileTypeFilter = new FilePickerFileType[]
+            if (DataContext is ExportPanelMP4ViewModel viewModel)
             {
-                new("*.exe") { Patterns = new[] { "*.exe" } },
-            };
-
-            var result = await storageProvider.OpenFilePickerAsync(
-                new FilePickerOpenOptions
+                var topLevel = TopLevel.GetTopLevel(this);
+                var storageProvider = topLevel.StorageProvider;
+                var fileTypeFilter = new FilePickerFileType[]
                 {
-                    Title = "Выберите файл ffmpeg.exe",
-                    AllowMultiple = false,
-                    FileTypeFilter = fileTypeFilter,
-                }
-            );
+                    new("*.exe") { Patterns = new[] { "*.exe" } },
+                };
 
-            var filePath = result?.FirstOrDefault()?.Path.LocalPath;
+                var result = await storageProvider.OpenFilePickerAsync(
+                    new FilePickerOpenOptions
+                    {
+                        Title = $"{viewModel.GetMessage(LocalizationConsts.SELECT_FFMPEG)}",
+                        AllowMultiple = false,
+                        FileTypeFilter = fileTypeFilter,
+                    }
+                );
 
-            if (filePath != null && filePath != "")
-            {
-                if (DataContext is ExportPanelMP4ViewModel viewModel)
+                var filePath = result?.FirstOrDefault()?.Path.LocalPath;
+
+                if (filePath != null && filePath != "")
                 {
                     viewModel.FfmpegPath = filePath;
                 }
@@ -62,15 +62,19 @@ namespace PlumJsonAnimator.Views
 
         private async void SelectFolder(object sender, RoutedEventArgs e)
         {
-            var topLevel = TopLevel.GetTopLevel(this);
-            var storageProvider = topLevel.StorageProvider;
-            var folder = await storageProvider.OpenFolderPickerAsync(
-                new FolderPickerOpenOptions { Title = "Выберите папку", AllowMultiple = false }
-            );
-
-            if (folder.Count > 0)
+            if (DataContext is ExportPanelMP4ViewModel viewModel)
             {
-                if (DataContext is ExportPanelMP4ViewModel viewModel)
+                var topLevel = TopLevel.GetTopLevel(this);
+                var storageProvider = topLevel.StorageProvider;
+                var folder = await storageProvider.OpenFolderPickerAsync(
+                    new FolderPickerOpenOptions
+                    {
+                        Title = $"{viewModel.GetMessage(LocalizationConsts.SELECT_FOLDER)}",
+                        AllowMultiple = false,
+                    }
+                );
+
+                if (folder.Count > 0)
                 {
                     viewModel.ExportPath = folder[0].Path.LocalPath;
                     this.FindControl<TextBox>("path").Text = viewModel.ExportPath;

@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
+using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
 
 namespace PlumJsonAnimator.Views
@@ -48,20 +49,27 @@ namespace PlumJsonAnimator.Views
 
         private async void SelectFolder(object sender, RoutedEventArgs e)
         {
-            var topLevel = TopLevel.GetTopLevel(this);
-            var storageProvider = topLevel!.StorageProvider;
-
-            var folders = await storageProvider.OpenFolderPickerAsync(
-                new FolderPickerOpenOptions { Title = "Выберите папку", AllowMultiple = false }
-            );
-
-            if (folders.Count > 0)
+            if (DataContext is NewProjectViewModel viewModel)
             {
-                string folderPath = folders[0].Path.LocalPath;
+                var topLevel = TopLevel.GetTopLevel(this);
+                var storageProvider = topLevel!.StorageProvider;
 
-                if (this.FindControl<TextBox>("workspace") is TextBox pathTextBox)
+                var folders = await storageProvider.OpenFolderPickerAsync(
+                    new FolderPickerOpenOptions
+                    {
+                        Title = $"{viewModel.GetMessage(LocalizationConsts.SELECT_FOLDER)}",
+                        AllowMultiple = false,
+                    }
+                );
+
+                if (folders.Count > 0)
                 {
-                    pathTextBox.Text = folderPath;
+                    string folderPath = folders[0].Path.LocalPath;
+
+                    if (this.FindControl<TextBox>("workspace") is TextBox pathTextBox)
+                    {
+                        pathTextBox.Text = folderPath;
+                    }
                 }
             }
         }

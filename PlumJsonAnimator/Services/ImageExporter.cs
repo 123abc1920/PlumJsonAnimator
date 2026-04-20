@@ -36,11 +36,13 @@ namespace PlumJsonAnimator.Services
             }
         }
 
-        private GlobalState globalState;
+        private GlobalState _globalState;
+        private LocalizationService _localizationService;
 
-        public ImageExporter(GlobalState globalState)
+        public ImageExporter(GlobalState globalState, LocalizationService localizationService)
         {
-            this.globalState = globalState;
+            this._globalState = globalState;
+            this._localizationService = localizationService;
         }
 
         /// <summary>
@@ -49,7 +51,7 @@ namespace PlumJsonAnimator.Services
         /// <param name="canvas">Canvas that contains graphics</param>
         private RenderTargetBitmap CatchCanvas(Canvas? canvas)
         {
-            var captureBounds = this.globalState.captureArea!.GetRect();
+            var captureBounds = this._globalState.captureArea!.GetRect();
 
             var result = new RenderTargetBitmap(
                 new PixelSize((int)captureBounds.Width, (int)captureBounds.Height),
@@ -98,14 +100,14 @@ namespace PlumJsonAnimator.Services
                 project!.CurrentAnimation!.currentTime = start;
                 double endTime = Math.Min(project.CurrentAnimation.MaxTime(), end);
 
-                var totalFrames = (int)((endTime - start) * this.globalState.FPS) + 1;
+                var totalFrames = (int)((endTime - start) * this._globalState.FPS) + 1;
                 int frameCount = 0;
 
                 var i = 0;
-                var drawBones = this.globalState.drawBones;
-                var captureMode = this.globalState.captureMode;
-                this.globalState.drawBones = false;
-                this.globalState.captureMode = false;
+                var drawBones = this._globalState.drawBones;
+                var captureMode = this._globalState.captureMode;
+                this._globalState.drawBones = false;
+                this._globalState.captureMode = false;
                 while (project.CurrentAnimation.currentTime <= endTime)
                 {
                     using (RenderTargetBitmap bitmap = CatchCanvas(_canvas))
@@ -127,8 +129,8 @@ namespace PlumJsonAnimator.Services
                     await Task.Delay(30);
                     i++;
                 }
-                this.globalState.drawBones = drawBones;
-                this.globalState.captureMode = captureMode;
+                this._globalState.drawBones = drawBones;
+                this._globalState.captureMode = captureMode;
 
                 ProgressChanged?.Invoke(this, 0);
                 return ExportResult.SUCCESS;
@@ -157,14 +159,14 @@ namespace PlumJsonAnimator.Services
                 project!.CurrentAnimation!.currentTime = start;
                 double endTime = Math.Min(project.CurrentAnimation.MaxTime(), end);
 
-                var totalFrames = (int)((endTime - start) * this.globalState.FPS) + 1;
+                var totalFrames = (int)((endTime - start) * this._globalState.FPS) + 1;
                 int frameCount = 0;
 
                 var i = 0;
-                var drawBones = this.globalState.drawBones;
-                var captureMode = this.globalState.captureMode;
-                this.globalState.drawBones = false;
-                this.globalState.captureMode = false;
+                var drawBones = this._globalState.drawBones;
+                var captureMode = this._globalState.captureMode;
+                this._globalState.drawBones = false;
+                this._globalState.captureMode = false;
                 while (project.CurrentAnimation.currentTime <= endTime)
                 {
                     using (RenderTargetBitmap bitmap = CatchCanvas(_canvas))
@@ -186,8 +188,8 @@ namespace PlumJsonAnimator.Services
                     await Task.Delay(30);
                     i++;
                 }
-                this.globalState.drawBones = drawBones;
-                this.globalState.captureMode = captureMode;
+                this._globalState.drawBones = drawBones;
+                this._globalState.captureMode = captureMode;
 
                 ProgressChanged?.Invoke(this, 0);
                 return ExportResult.SUCCESS;
@@ -221,13 +223,13 @@ namespace PlumJsonAnimator.Services
                 project!.CurrentAnimation!.currentTime = start;
                 double endTime = Math.Min(project.CurrentAnimation.MaxTime(), end);
 
-                var totalFrames = (int)((endTime - start) * this.globalState.FPS) + 1;
+                var totalFrames = (int)((endTime - start) * this._globalState.FPS) + 1;
                 int frameCount = 0;
 
-                var drawBones = this.globalState.drawBones;
-                var captureMode = this.globalState.captureMode;
-                this.globalState.drawBones = false;
-                this.globalState.captureMode = false;
+                var drawBones = this._globalState.drawBones;
+                var captureMode = this._globalState.captureMode;
+                this._globalState.drawBones = false;
+                this._globalState.captureMode = false;
                 List<Image<Rgba32>> frames = new List<Image<Rgba32>>();
                 while (project.CurrentAnimation.currentTime <= endTime)
                 {
@@ -284,8 +286,8 @@ namespace PlumJsonAnimator.Services
                     frame.Dispose();
                 }
 
-                this.globalState.drawBones = drawBones;
-                this.globalState.captureMode = captureMode;
+                this._globalState.drawBones = drawBones;
+                this._globalState.captureMode = captureMode;
 
                 ProgressChanged?.Invoke(this, 0);
                 return ExportResult.SUCCESS;
@@ -339,7 +341,7 @@ namespace PlumJsonAnimator.Services
                 string arguments =
                     $"-f rawvideo -pix_fmt bgra "
                     + $"-s {width}x{height} "
-                    + $"-r {this.globalState.FPS} "
+                    + $"-r {this._globalState.FPS} "
                     + $"-i - "
                     + $"-c:v libx264 "
                     + $"-preset fast "
@@ -375,10 +377,10 @@ namespace PlumJsonAnimator.Services
                 process.Start();
                 process.BeginErrorReadLine();
 
-                var drawBones = this.globalState.drawBones;
-                var captureMode = this.globalState.captureMode;
-                this.globalState.drawBones = false;
-                this.globalState.captureMode = false;
+                var drawBones = this._globalState.drawBones;
+                var captureMode = this._globalState.captureMode;
+                this._globalState.drawBones = false;
+                this._globalState.captureMode = false;
                 using (var stdin = process.StandardInput.BaseStream)
                 {
                     project!.CurrentAnimation!.currentTime = start;
@@ -387,7 +389,7 @@ namespace PlumJsonAnimator.Services
                     int frameCount = 0;
                     bool error = false;
 
-                    var totalFrames = (int)((endTime - start) * this.globalState.FPS) + 1;
+                    var totalFrames = (int)((endTime - start) * this._globalState.FPS) + 1;
 
                     while (project.CurrentAnimation.currentTime <= endTime)
                     {
@@ -433,7 +435,9 @@ namespace PlumJsonAnimator.Services
                             }
                             catch (Exception ex)
                             {
-                                Console.WriteLine($"Ошибка записи: {ex.Message}");
+                                Console.WriteLine(
+                                    $"{this._localizationService.GetMessage(LocalizationConsts.ERROR)}: {ex.Message}"
+                                );
                                 error = true;
                                 break;
                             }
@@ -449,8 +453,8 @@ namespace PlumJsonAnimator.Services
                         stdin.Flush();
                     }
                 }
-                this.globalState.drawBones = drawBones;
-                this.globalState.captureMode = captureMode;
+                this._globalState.drawBones = drawBones;
+                this._globalState.captureMode = captureMode;
 
                 if (!process.WaitForExit(10000))
                 {

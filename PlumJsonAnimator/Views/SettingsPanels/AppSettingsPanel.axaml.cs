@@ -69,42 +69,50 @@ namespace PlumJsonAnimator.Views
 
         private async void SelectFolder(object sender, RoutedEventArgs e)
         {
-            var topLevel = TopLevel.GetTopLevel(this);
-            var storageProvider = topLevel.StorageProvider;
-
-            var folders = await storageProvider.OpenFolderPickerAsync(
-                new FolderPickerOpenOptions { Title = "Выберите папку", AllowMultiple = false }
-            );
-
-            if (folders.Count > 0)
+            if (DataContext is AppSettingsViewModel viewModel)
             {
-                string folderPath = folders[0].Path.LocalPath;
-                pathTextBox.Text = folderPath;
+                var topLevel = TopLevel.GetTopLevel(this);
+                var storageProvider = topLevel.StorageProvider;
+
+                var folders = await storageProvider.OpenFolderPickerAsync(
+                    new FolderPickerOpenOptions
+                    {
+                        Title = $"{viewModel.GetMessage(LocalizationConsts.SELECT_FOLDER)}",
+                        AllowMultiple = false,
+                    }
+                );
+
+                if (folders.Count > 0)
+                {
+                    string folderPath = folders[0].Path.LocalPath;
+                    pathTextBox.Text = folderPath;
+                }
             }
         }
 
         private async void SelectFfmpeg(object sender, RoutedEventArgs e)
         {
-            var topLevel = TopLevel.GetTopLevel(this);
-            var storageProvider = topLevel.StorageProvider;
-
-            var fileTypeFilter = new FilePickerFileType[]
-            {
-                new($"*exe") { Patterns = new[] { $"*exe" } },
-            };
-
-            var result = await storageProvider.OpenFilePickerAsync(
-                new FilePickerOpenOptions
-                {
-                    Title = "Выберите файл ffmpeg.exe",
-                    AllowMultiple = false,
-                    FileTypeFilter = fileTypeFilter,
-                }
-            );
-
-            var path = result?.FirstOrDefault()?.Path.LocalPath;
             if (DataContext is AppSettingsViewModel viewModel)
             {
+                var topLevel = TopLevel.GetTopLevel(this);
+                var storageProvider = topLevel.StorageProvider;
+
+                var fileTypeFilter = new FilePickerFileType[]
+                {
+                    new($"*exe") { Patterns = new[] { $"*exe" } },
+                };
+
+                var result = await storageProvider.OpenFilePickerAsync(
+                    new FilePickerOpenOptions
+                    {
+                        Title = $"{viewModel.GetMessage(LocalizationConsts.SELECT_FFMPEG)}",
+                        AllowMultiple = false,
+                        FileTypeFilter = fileTypeFilter,
+                    }
+                );
+
+                var path = result?.FirstOrDefault()?.Path.LocalPath;
+
                 viewModel.FfmpegPath = path;
             }
         }

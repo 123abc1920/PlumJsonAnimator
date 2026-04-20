@@ -430,17 +430,21 @@ public partial class MainWindow : SukiWindow
 
     private async void ExportAnim(object sender, RoutedEventArgs e)
     {
-        var topLevel = TopLevel.GetTopLevel(this);
-        var storageProvider = topLevel.StorageProvider;
-        var folder = await storageProvider.OpenFolderPickerAsync(
-            new FolderPickerOpenOptions { Title = "Выберите папку", AllowMultiple = false }
-        );
-
-        if (folder.Count > 0)
+        if (DataContext is MainWindowViewModel viewModel)
         {
-            ExportResult result = ExportResult.NO_FOLDER;
-            if (DataContext is MainWindowViewModel viewModel)
+            var topLevel = TopLevel.GetTopLevel(this);
+            var storageProvider = topLevel.StorageProvider;
+            var folder = await storageProvider.OpenFolderPickerAsync(
+                new FolderPickerOpenOptions
+                {
+                    Title = $"{viewModel.GetMessage(LocalizationConsts.SELECT_FOLDER)}",
+                    AllowMultiple = false,
+                }
+            );
+
+            if (folder.Count > 0)
             {
+                ExportResult result = ExportResult.NO_FOLDER;
                 result = viewModel.exportSpineJson(folder[0].Path.LocalPath);
 
                 if (result == ExportResult.SUCCESS)

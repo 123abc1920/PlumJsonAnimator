@@ -8,6 +8,7 @@ using Avalonia.Controls.Shapes;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
+using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
@@ -138,10 +139,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public virtual double LengthY { get; set; } = 0;
 
         protected GlobalState _globalState;
+        protected LocalizationService _localizationService;
 
         protected Bone() { }
 
-        public Bone(GlobalState globalState)
+        public Bone(GlobalState globalState, LocalizationService localizationService)
         {
             this.Name = "root";
 
@@ -155,9 +157,10 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this.endY = this._y + lengthX * Math.Sin(angleRad);
 
             this._globalState = globalState;
+            this._localizationService = localizationService;
         }
 
-        public Bone(GlobalState globalState, int _id)
+        public Bone(GlobalState globalState, int _id, LocalizationService localizationService)
         {
             this.id = _id;
             this._a = -100;
@@ -167,9 +170,10 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this.Name = $"{name}{Counter.GenerateNamePostfix()}";
 
             this._globalState = globalState;
+            this._localizationService = localizationService;
         }
 
-        public Bone(GlobalState globalState, Bone parent)
+        public Bone(GlobalState globalState, Bone parent, LocalizationService localizationService)
         {
             this._a = -100;
             this.id = 0;
@@ -187,9 +191,15 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this.id = 100;
 
             this._globalState = globalState;
+            this._localizationService = localizationService;
         }
 
-        public Bone(GlobalState globalState, string name, Bone parent)
+        public Bone(
+            GlobalState globalState,
+            string name,
+            Bone parent,
+            LocalizationService localizationService
+        )
         {
             this._a = -100;
             this.id = 0;
@@ -206,6 +216,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this.id = 100;
 
             this._globalState = globalState;
+            this._localizationService = localizationService;
         }
 
         public void AddChildren(Bone bone)

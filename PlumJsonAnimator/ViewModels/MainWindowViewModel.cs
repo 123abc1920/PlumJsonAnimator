@@ -19,6 +19,7 @@ using static PlumJsonAnimator.Services.JsonCode;
 namespace PlumJsonAnimator.ViewModels;
 
 // TODO: docs
+// TODO: add factory pattern
 public partial class MainWindowViewModel : ViewModelBase
 {
     public Canvas? Canvas
@@ -222,7 +223,9 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         if (selectedBone is Bone selectedNode)
         {
-            selectedNode.AddChildren(new Bone(this.globalState, selectedNode));
+            selectedNode.AddChildren(
+                new Bone(this.globalState, selectedNode, this.localizationService)
+            );
         }
     }
 
@@ -308,7 +311,11 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public void initProgram()
     {
-        this.CurrentProject = new Project(this.globalState, this.interpolation);
+        this.CurrentProject = new Project(
+            this.globalState,
+            this.interpolation,
+            this.localizationService
+        );
 
         this.appSettings.ReadSettings();
         this.projectSettings.ReadSettings();

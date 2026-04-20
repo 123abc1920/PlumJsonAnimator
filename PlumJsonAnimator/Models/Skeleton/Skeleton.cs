@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
+using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
@@ -19,16 +20,18 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         private int _last_bone_id = 0;
         private GlobalState _globalState;
+        private LocalizationService _localizationService;
 
-        public Skeleton(GlobalState globalState)
+        public Skeleton(GlobalState globalState, LocalizationService localizationService)
         {
-            var root = new Bone(globalState);
+            var root = new Bone(globalState, localizationService);
             Bones.Add(root);
             RootBones.Add(root);
 
             _last_bone_id++;
 
             this._globalState = globalState;
+            this._localizationService = localizationService;
         }
 
         /// <summary>
@@ -37,7 +40,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="parentId">Parent bone id</param>
         public void AddBoneToParent(int parentId)
         {
-            Bone new_bone = new Bone(this._globalState, _last_bone_id);
+            Bone new_bone = new Bone(this._globalState, _last_bone_id, this._localizationService);
             this.Bones.Add(new_bone);
             foreach (Bone b in this.Bones)
             {
