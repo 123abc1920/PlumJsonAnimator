@@ -21,49 +21,46 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             get { return false; }
         }
-        private double _x = 0;
-        private double _y = 0;
-        private double _a = 0;
+        private double _localX = 0;
+        private double _localY = 0;
+        private double _localA = 0;
 
         public override double x
         {
-            get => _x;
+            get => BoundedBone != null ? BoundedBone.x + _localX : _localX;
             set
             {
-                if (Math.Abs(_x - value) > double.Epsilon)
-                {
-                    _x = value;
-                    Move(_x, _y);
-                    OnPropertyChanged(nameof(x));
-                }
+                if (BoundedBone != null)
+                    _localX = value - BoundedBone.x;
+                else
+                    _localX = value;
+                OnPropertyChanged(nameof(x));
             }
         }
 
         public override double y
         {
-            get => _y;
+            get => BoundedBone != null ? BoundedBone.y + _localY : _localY;
             set
             {
-                if (Math.Abs(_y - value) > double.Epsilon)
-                {
-                    _y = value;
-                    Move(_x, _y);
-                    OnPropertyChanged(nameof(y));
-                }
+                if (BoundedBone != null)
+                    _localY = value - BoundedBone.y;
+                else
+                    _localY = value;
+                OnPropertyChanged(nameof(y));
             }
         }
 
         public override double a
         {
-            get => _a;
+            get => BoundedBone != null ? _localA + BoundedBone.a : _localA;
             set
             {
-                if (Math.Abs(_a - value) > double.Epsilon)
-                {
-                    _a = value;
-                    Rotate(_a);
-                    OnPropertyChanged(nameof(a));
-                }
+                if (BoundedBone != null)
+                    _localA = value - BoundedBone.a;
+                else
+                    _localA = value;
+                OnPropertyChanged(nameof(a));
             }
         }
 
@@ -87,19 +84,17 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// </summary>
         public void UpdateAttachment()
         {
-            CurrentAttachment = this._globalState.CurrentProject!.CurrentSkin.GetAttachment(this);
-
-            if (CurrentAttachment != null && this.BoundedBone != null)
+            CurrentAttachment = _globalState.CurrentProject!.CurrentSkin.GetAttachment(this);
+            if (CurrentAttachment != null && BoundedBone != null)
             {
-                this._x = this.BoundedBone.x + CurrentAttachment.x;
-                this._y = this.BoundedBone.y + CurrentAttachment.y;
-                this._a = CurrentAttachment.a + this.BoundedBone.a;
+                _localX = CurrentAttachment.x;
+                _localY = CurrentAttachment.y;
+                _localA = CurrentAttachment.a;
+                parentA = BoundedBone.a;
 
-                this.parentA = this.BoundedBone.a;
-
-                Dictionary<string, int?> size = CurrentAttachment.GetSize();
-                this.LengthX = size["width"] ?? this.LengthX;
-                this.LengthY = size["height"] ?? this.LengthY;
+                var size = CurrentAttachment.GetSize();
+                LengthX = size["width"] ?? LengthX;
+                LengthY = size["height"] ?? LengthY;
             }
         }
 
@@ -253,14 +248,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="y">Target y coordinate</param>
         public override void Move(double x, double y)
         {
-            this.x = x;
-            this.y = y;
-
-            CurrentAttachment?.SetPos(
-                this.x - this.BoundedBone!.x,
-                this.y - this.BoundedBone.y,
-                this.a - this.BoundedBone.a
-            );
+            _localX = x - (BoundedBone?.x ?? 0);
+            _localY = y - (BoundedBone?.y ?? 0);
+            CurrentAttachment?.SetPos(_localX, _localY, _localA);
         }
 
         /// <summary>
@@ -285,13 +275,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="a">Target angle</param>
         public override void Rotate(double a)
         {
-            this.a = a;
-
-            CurrentAttachment?.SetPos(
-                this.x - this.BoundedBone!.x,
-                this.y - this.BoundedBone.y,
-                this.a - this.BoundedBone.a
-            );
+            _localA = a - (BoundedBone?.a ?? 0);
+            CurrentAttachment?.SetPos(_localX, _localY, _localA);
         }
 
         private Bitmap _cachedBitmap;
@@ -299,60 +284,51 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public void DrawSlot(Canvas canvas)
         {
-            if (!this._globalState.CurrentProject!.CurrentSkin.IsSlotDrawable(this))
-            {
+            if (!_globalState.CurrentProject!.CurrentSkin.IsSlotDrawable(this))
                 return;
-            }
 
             try
             {
-                string currentPath = this._globalState.CurrentProject.CurrentSkin.GetImagePath(
-                    this
-                );
+                double globalX = BoundedBone?.x + _localX ?? _localX;
+                double globalY = BoundedBone?.y + _localY ?? _localY;
+                double globalA = _localA + (BoundedBone?.a ?? 0);
 
+                string currentPath = _globalState.CurrentProject.CurrentSkin.GetImagePath(this);
                 if (_cachedBitmap == null || _cachedPath != currentPath)
                 {
                     _cachedPath = currentPath;
                     byte[] imageBytes = File.ReadAllBytes(currentPath);
-                    using (var ms = new MemoryStream(imageBytes))
-                    {
-                        _cachedBitmap?.Dispose();
-                        _cachedBitmap = new Avalonia.Media.Imaging.Bitmap(ms);
-                    }
+                    using var ms = new MemoryStream(imageBytes);
+                    _cachedBitmap?.Dispose();
+                    _cachedBitmap = new Bitmap(ms);
                 }
 
                 var image = new Image
                 {
                     Source = _cachedBitmap,
-                    Width = _lengthX,
-                    Height = _lengthY,
-                    RenderTransform = new RotateTransform(this.a + this.parentA),
+                    Width = LengthX,
+                    Height = LengthY,
+                    RenderTransform = new RotateTransform(globalA + parentA),
                 };
 
-                double left = canvas.Width / 2 + this.x - image.Width / 2;
-                double top = canvas.Height / 2 + this.y - image.Height / 2;
+                double left = canvas.Width / 2 + globalX - image.Width / 2;
+                double top = canvas.Height / 2 + globalY - image.Height / 2;
 
                 Canvas.SetLeft(image, left);
                 Canvas.SetTop(image, top);
-
                 canvas.Children.Add(image);
 
-                if (this._globalState.IsSlotSelected(this))
+                if (_globalState.IsSlotSelected(this))
                 {
-                    int SELECTION = 10;
-
                     var border = new Border
                     {
-                        Width = SELECTION,
-                        Height = SELECTION,
+                        Width = 10,
+                        Height = 10,
                         BorderBrush = AppColors.Red,
                         BorderThickness = new Thickness(2),
-                        Background = null,
                     };
-
-                    Canvas.SetLeft(border, canvas.Width / 2 + this.x - SELECTION / 2);
-                    Canvas.SetTop(border, canvas.Height / 2 + this.y - SELECTION / 2);
-
+                    Canvas.SetLeft(border, canvas.Width / 2 + globalX - 5);
+                    Canvas.SetTop(border, canvas.Height / 2 + globalY - 5);
                     canvas.Children.Add(border);
                 }
             }

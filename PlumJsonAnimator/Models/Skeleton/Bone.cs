@@ -248,17 +248,6 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 c.Move(c.x - deltaX, c.y - deltaY);
             }
 
-            List<Slot> slots = this._globalState.CurrentProject!.CurrentSkin.GetSlots(this);
-            var options = this._globalState.GetParallelOptions();
-            Parallel.ForEach(
-                slots,
-                options,
-                slot =>
-                {
-                    slot.Move(slot.x - deltaX, slot.y - deltaY);
-                }
-            );
-
             _isMoving = false;
         }
 
@@ -316,8 +305,6 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                         slotdx * Math.Sin(slotangleDiff) + slotdy * Math.Cos(slotangleDiff);
 
                     slot.Move(this.x + slotnewDx, this.y + slotnewDy);
-
-                    slot.parentA = slot.parentA + (a - oldA);
                 }
             );
 
