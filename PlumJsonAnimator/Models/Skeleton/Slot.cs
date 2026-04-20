@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
 
-// TODO: UI bug with animation and skin name length
+// TODO: UI bug with animation and skin name length -- fixed but need improve
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
     /// <summary>

@@ -118,13 +118,16 @@
                             Name="skinName"
                             Grid.Row="1"
                             Grid.ColumnSpan="3"
+                            MaxWidth="150"
                             Margin="0,5"
+                            HorizontalAlignment="Left"
                             Text="{Binding CurrentProject.CurrentSkin.Name, Mode=TwoWay}" />
                         <ComboBox
                             Grid.Row="2"
                             Grid.Column="0"
+                            MaxWidth="150"
                             Margin="0,5,5,0"
-                            HorizontalAlignment="Stretch"
+                            HorizontalAlignment="Left"
                             ItemsSource="{Binding CurrentProject.Skins}"
                             MaxDropDownHeight="100"
                             SelectedItem="{Binding CurrentProject.CurrentSkin, Mode=TwoWay}">
@@ -180,13 +183,16 @@
                             Name="animationName"
                             Grid.Row="1"
                             Grid.ColumnSpan="3"
+                            MaxWidth="150"
                             Margin="0,5"
+                            HorizontalAlignment="Left"
                             Text="{Binding CurrentProject.CurrentAnimation.Name, Mode=TwoWay}" />
                         <ComboBox
                             Grid.Row="2"
                             Grid.Column="0"
+                            MaxWidth="150"
                             Margin="0,5,5,0"
-                            HorizontalAlignment="Stretch"
+                            HorizontalAlignment="Left"
                             ItemsSource="{Binding CurrentProject.Animations}"
                             MaxDropDownHeight="100"
                             SelectedItem="{Binding CurrentProject.CurrentAnimation, Mode=TwoWay}">
