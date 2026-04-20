@@ -247,6 +247,28 @@ namespace PlumJsonAnimator.Models
             return null;
         }
 
+        public void DeleteSlotFromProject(Slot slot)
+        {
+            this.Slots.Remove(slot);
+            foreach (Skin s in this.Skins)
+            {
+                if (s.ContainsSlot(slot) == true)
+                {
+                    s.DeleteSlot(slot);
+                }
+            }
+        }
+
+        public void DeleteBoneFromProject(Bone bone)
+        {
+            this.MainSkeleton?.Bones.Remove(bone);
+            bone?.Parent?.Children.Remove(bone);
+            foreach (Animation a in this.Animations)
+            {
+                a.DeleteBoneFromAnimation(bone);
+            }
+        }
+
         /// <summary>
         /// Regenerates project from JSON objects
         /// </summary>
@@ -376,7 +398,12 @@ namespace PlumJsonAnimator.Models
                             }
                             foreach (IKeyframeTypeData keyframe in boneAnimation.translate)
                             {
-                                animation.TranslateBone(bone, keyframe.X, keyframe.Y, keyframe.Time);
+                                animation.TranslateBone(
+                                    bone,
+                                    keyframe.X,
+                                    keyframe.Y,
+                                    keyframe.Time
+                                );
                             }
                         }
                         if (animationData.DrawOrder != null && animationData != null)

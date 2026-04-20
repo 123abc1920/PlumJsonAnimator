@@ -81,6 +81,30 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         }
 
         /// <summary>
+        /// Checks whether a bone is involved in an animation
+        /// </summary>
+        public bool ContainsBone(Bone bone)
+        {
+            return BoneAnimationBinding.ContainsKey(bone);
+        }
+
+        /// <summary>
+        /// Checks if the bone has any movement
+        /// </summary>
+        public bool ContainsAnimationBone(BoneAnimation boneAnimation)
+        {
+            return BoneAnimationBinding.ContainsValue(boneAnimation);
+        }
+
+        public void DeleteBoneFromAnimation(Bone bone)
+        {
+            if (this.ContainsBone(bone) == true)
+            {
+                this.BoneAnimationBinding.Remove(bone);
+            }
+        }
+
+        /// <summary>
         /// Turn animation data into JSON object
         /// </summary>
         public AnimationData GenerateJSONData()
@@ -192,7 +216,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="y">Target y coordinate</param>
         public void TranslateBone(Bone b, double? x, double? y)
         {
-            if (x != null && y != null)
+            if (b != null && x != null && y != null)
             {
                 AnimateBone(b);
                 BoneAnimationBinding[b].AddTranslateFrame(currentTime, (double)x, (double)y);
@@ -208,7 +232,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="currTime">Target time</param>
         public void TranslateBone(Bone b, double? x, double? y, double? currTime)
         {
-            if (x != null && y != null && currTime != null)
+            if (b != null && x != null && y != null && currTime != null)
             {
                 AnimateBone(b);
                 BoneAnimationBinding[b].AddTranslateFrame((double)currTime, (double)x, (double)y);
@@ -222,7 +246,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="value">Target angle</param>
         public void RotateBone(Bone b, double? value)
         {
-            if (value != null)
+            if (b != null && value != null)
             {
                 AnimateBone(b);
                 BoneAnimationBinding[b].AddRotateFrame(currentTime, (double)value);
@@ -237,7 +261,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="currTime">Target time</param>
         public void RotateBone(Bone b, double? value, double? currTime)
         {
-            if (value != null && currTime != null)
+            if (b != null && value != null && currTime != null)
             {
                 AnimateBone(b);
                 BoneAnimationBinding[b].AddRotateFrame((double)currTime, (double)value);
