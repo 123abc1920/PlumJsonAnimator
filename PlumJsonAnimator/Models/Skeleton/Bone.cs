@@ -147,10 +147,10 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             this.Name = "root";
 
-            this._a = -100;
+            this._a = 0;
             this.id = 0;
-            this._x = 100;
-            this._y = 100;
+            this._x = 0;
+            this._y = 0;
 
             double angleRad = this.a * Math.PI / 180;
             this.endX = this._x + lengthX * Math.Cos(angleRad);
@@ -163,9 +163,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public Bone(GlobalState globalState, int _id, LocalizationService localizationService)
         {
             this.id = _id;
-            this._a = -100;
-            this._x = 100;
-            this._y = 100;
+            this._a = 0;
+            this._x = 0;
+            this._y = 0;
             string name = "bone";
             this.Name = $"{name}{Counter.GenerateNamePostfix()}";
 
@@ -175,10 +175,10 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public Bone(GlobalState globalState, Bone parent, LocalizationService localizationService)
         {
-            this._a = -100;
+            this._a = 0;
             this.id = 0;
-            this._x = 100;
-            this._y = 100;
+            this._x = 0;
+            this._y = 0;
 
             string name = "bone";
             this.Name = $"{name}{Counter.GenerateNamePostfix()}";
@@ -201,10 +201,10 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             LocalizationService localizationService
         )
         {
-            this._a = -100;
+            this._a = 0;
             this.id = 0;
-            this._x = 100;
-            this._y = 100;
+            this._x = 0;
+            this._y = 0;
 
             this._name = name;
 
