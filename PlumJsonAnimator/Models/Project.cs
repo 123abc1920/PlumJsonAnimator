@@ -299,8 +299,8 @@ namespace PlumJsonAnimator.Models
                 {
                     if (b.GenerateJSONData() != boneData)
                     {
-                        b.x = boneData.X;
-                        b.y = boneData.Y;
+                        b.X = boneData.X;
+                        b.Y = boneData.Y;
                         b.Parent = this.MainSkeleton.GetBoneByName(boneData.Parent);
                     }
                     bones.Remove(b.Name);

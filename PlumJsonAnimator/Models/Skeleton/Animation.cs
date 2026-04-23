@@ -295,11 +295,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 if (type == TransformModesTypes.TRANSLATE)
                 {
-                    TranslateBone(b, b.x, b.y);
+                    TranslateBone(b, b.X, b.Y);
                 }
                 if (type == TransformModesTypes.ROTATE)
                 {
-                    RotateBone(b, b.a);
+                    RotateBone(b, b.A);
                 }
                 if (type == TransformModesTypes.SCALE) { }
                 if (type == TransformModesTypes.SHEAR) { }

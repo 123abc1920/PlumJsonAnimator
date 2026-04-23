@@ -40,15 +40,23 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="parentId">Parent bone id</param>
         public void AddBoneToParent(int parentId)
         {
-            Bone new_bone = new Bone(this._globalState, _last_bone_id, this._localizationService);
-            this.Bones.Add(new_bone);
+            Bone parentBone = this.RootBones[0];
             foreach (Bone b in this.Bones)
             {
                 if (b.id == parentId)
                 {
-                    b.AddChildren(new_bone);
+                    parentBone = b;
+                    break;
                 }
             }
+            Bone new_bone = new Bone(
+                this._globalState,
+                parentBone,
+                _last_bone_id,
+                this._localizationService
+            );
+            this.Bones.Add(new_bone);
+            parentBone.AddChildren(new_bone);
             _last_bone_id++;
         }
 

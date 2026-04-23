@@ -70,7 +70,7 @@ namespace PlumJsonAnimator.Models.Common
             var animation = this.globalState.CurrentProject?.GetCurrentAnimation();
             if (animation != null && !animation.IsRun && bone.IsBone == true)
             {
-                animation.TranslateBone(bone, bone.x, bone.y);
+                animation.TranslateBone(bone, bone.X, bone.Y);
             }
         }
     }
@@ -134,8 +134,8 @@ namespace PlumJsonAnimator.Models.Common
 
         public override void Transform(Bone bone, double x, double y)
         {
-            double xx = x - bone.x;
-            Point av = new Point(xx, y - bone.y);
+            double xx = x - bone.X;
+            Point av = new Point(xx, y - bone.Y);
             Point bv = new Point(10, 0);
 
             double dot = av.x * bv.x + av.y * bv.y;
@@ -148,7 +148,7 @@ namespace PlumJsonAnimator.Models.Common
             var animation = this.globalState.CurrentProject?.GetCurrentAnimation();
             if (animation != null && !animation.IsRun && bone.IsBone == true)
             {
-                animation.RotateBone(bone, bone.a);
+                animation.RotateBone(bone, bone.A);
             }
         }
     }

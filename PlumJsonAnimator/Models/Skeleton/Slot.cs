@@ -26,42 +26,42 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         private double _localY = 0;
         private double _localA = 0;
 
-        public override double x
+        public override double X
         {
-            get => BoundedBone != null ? BoundedBone.x + _localX : _localX;
+            get => BoundedBone != null ? BoundedBone.X + _localX : _localX;
             set
             {
                 if (BoundedBone != null)
-                    _localX = value - BoundedBone.x;
+                    _localX = value - BoundedBone.X;
                 else
                     _localX = value;
-                OnPropertyChanged(nameof(x));
+                OnPropertyChanged(nameof(X));
             }
         }
 
-        public override double y
+        public override double Y
         {
-            get => BoundedBone != null ? BoundedBone.y + _localY : _localY;
+            get => BoundedBone != null ? BoundedBone.Y + _localY : _localY;
             set
             {
                 if (BoundedBone != null)
-                    _localY = value - BoundedBone.y;
+                    _localY = value - BoundedBone.Y;
                 else
                     _localY = value;
-                OnPropertyChanged(nameof(y));
+                OnPropertyChanged(nameof(Y));
             }
         }
 
-        public override double a
+        public override double A
         {
-            get => BoundedBone != null ? _localA + BoundedBone.a : _localA;
+            get => BoundedBone != null ? _localA + BoundedBone.A : _localA;
             set
             {
                 if (BoundedBone != null)
-                    _localA = value - BoundedBone.a;
+                    _localA = value - BoundedBone.A;
                 else
                     _localA = value;
-                OnPropertyChanged(nameof(a));
+                OnPropertyChanged(nameof(A));
             }
         }
 
@@ -91,7 +91,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 _localX = CurrentAttachment.x;
                 _localY = CurrentAttachment.y;
                 _localA = CurrentAttachment.a;
-                parentA = BoundedBone.a;
+                parentA = BoundedBone.A;
 
                 var size = CurrentAttachment.GetSize();
                 LengthX = size["width"] ?? LengthX;
@@ -206,7 +206,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                     _boundedBone = value;
                     if (value != null)
                     {
-                        Move(value.x, value.y);
+                        Move(value.X, value.Y);
                     }
                     OnPropertyChanged();
                 }
@@ -216,9 +216,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public Slot(GlobalState globalState, int id, string path)
         {
             this.id = id;
-            this.a = 0;
-            this.x = 0;
-            this.y = 0;
+            this.A = 0;
+            this.X = 0;
+            this.Y = 0;
 
             this.Name = $"{Path.GetFileNameWithoutExtension(path)}{Counter.GenerateNamePostfix()}";
 
@@ -249,8 +249,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="y">Target y coordinate</param>
         public override void Move(double x, double y)
         {
-            _localX = x - (BoundedBone?.x ?? 0);
-            _localY = y - (BoundedBone?.y ?? 0);
+            _localX = x - (BoundedBone?.X ?? 0);
+            _localY = y - (BoundedBone?.Y ?? 0);
             CurrentAttachment?.SetPos(_localX, _localY, _localA);
         }
 
@@ -263,8 +263,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             if (this.CurrentAttachment != null)
             {
-                this.LengthX = Math.Abs(x - this.x) * 5;
-                this.LengthY = Math.Abs(y - this.y) * 5;
+                this.LengthX = Math.Abs(x - this.X) * 5;
+                this.LengthY = Math.Abs(y - this.Y) * 5;
 
                 this.CurrentAttachment.SetSize(this.LengthX, this.LengthY);
             }
@@ -276,7 +276,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="a">Target angle</param>
         public override void Rotate(double a)
         {
-            _localA = a - (BoundedBone?.a ?? 0);
+            _localA = a - (BoundedBone?.A ?? 0);
             CurrentAttachment?.SetPos(_localX, _localY, _localA);
         }
 
@@ -292,9 +292,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
             try
             {
-                double globalX = BoundedBone?.x + _localX ?? _localX;
-                double globalY = BoundedBone?.y + _localY ?? _localY;
-                double globalA = _localA + (BoundedBone?.a ?? 0);
+                double globalX = BoundedBone?.X + _localX ?? _localX;
+                double globalY = BoundedBone?.Y + _localY ?? _localY;
+                double globalA = _localA + (BoundedBone?.A ?? 0);
 
                 string currentPath = _globalState.CurrentProject.CurrentSkin.GetImagePath(this);
                 if (_cachedBitmap == null || _cachedPath != currentPath)

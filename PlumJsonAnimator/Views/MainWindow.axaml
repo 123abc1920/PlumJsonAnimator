@@ -401,11 +401,11 @@
 
                                         <TextBox
                                             x:Name="transformX"
-                                            Text="{Binding CurrentBone.x, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
+                                            Text="{Binding CurrentBone.X, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
                                             Watermark="X" />
                                         <TextBox
                                             x:Name="transformY"
-                                            Text="{Binding CurrentBone.y, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
+                                            Text="{Binding CurrentBone.Y, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
                                             Watermark="Y" />
 
                                         <ToggleButton
@@ -422,7 +422,7 @@
 
                                         <TextBox
                                             x:Name="rotate"
-                                            Text="{Binding CurrentBone.a, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
+                                            Text="{Binding CurrentBone.A, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
                                             Watermark="A" />
 
                                         <ToggleButton

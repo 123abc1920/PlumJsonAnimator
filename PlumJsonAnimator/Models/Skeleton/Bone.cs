@@ -40,7 +40,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         private double _y = 0;
         private double _a = 0;
 
-        public virtual double x
+        public virtual double X
         {
             get => _x;
             set
@@ -49,12 +49,12 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 {
                     Move(value, _y);
                     _x = value;
-                    OnPropertyChanged(nameof(x));
+                    OnPropertyChanged(nameof(X));
                 }
             }
         }
 
-        public virtual double y
+        public virtual double Y
         {
             get => _y;
             set
@@ -63,12 +63,12 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 {
                     Move(_x, value);
                     _y = value;
-                    OnPropertyChanged(nameof(y));
+                    OnPropertyChanged(nameof(Y));
                 }
             }
         }
 
-        public virtual double a
+        public virtual double A
         {
             get => _a;
             set
@@ -77,7 +77,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 {
                     Rotate(value);
                     _a = value;
-                    OnPropertyChanged(nameof(a));
+                    OnPropertyChanged(nameof(A));
                 }
             }
         }
@@ -128,9 +128,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 if (lengthX != value && value > 0)
                 {
                     lengthX = value;
-                    double angleRad = this.a * Math.PI / 180;
-                    this.endX = this.x + lengthX * Math.Cos(angleRad);
-                    this.endY = this.y + lengthX * Math.Sin(angleRad);
+                    double angleRad = this.A * Math.PI / 180;
+                    this.endX = this.X + lengthX * Math.Cos(angleRad);
+                    this.endY = this.Y + lengthX * Math.Sin(angleRad);
                     OnPropertyChanged(nameof(LengthX));
                 }
             }
@@ -153,11 +153,19 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this._localizationService = localizationService;
         }
 
-        public Bone(GlobalState globalState, int _id, LocalizationService localizationService)
+        public Bone(
+            GlobalState globalState,
+            Bone parent,
+            int _id,
+            LocalizationService localizationService
+        )
         {
             this.id = _id;
             string name = "bone";
             this.Name = $"{name}{Counter.GenerateNamePostfix()}";
+
+            this._x = parent.X;
+            this._y = parent.Y;
 
             SetupEndXEndY();
 
@@ -169,6 +177,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             string name = "bone";
             this.Name = $"{name}{Counter.GenerateNamePostfix()}";
+
+            this._x = parent.X;
+            this._y = parent.Y;
 
             SetupEndXEndY();
 
@@ -187,6 +198,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             this._name = name;
 
+            this._x = parent.X;
+            this._y = parent.Y;
+
             SetupEndXEndY();
 
             this.Parent = parent;
@@ -198,7 +212,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         private void SetupEndXEndY()
         {
-            double angleRad = this.a * Math.PI / 180;
+            double angleRad = this.A * Math.PI / 180;
             this.endX = this._x + lengthX * Math.Cos(angleRad);
             this.endY = this._y + lengthX * Math.Sin(angleRad);
         }
@@ -225,22 +239,22 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
             _isMoving = true;
 
-            double oldX = this.x;
-            double oldY = this.y;
+            double oldX = this.X;
+            double oldY = this.Y;
 
             double deltaX = oldX - x;
             double deltaY = oldY - y;
 
-            this.x = x;
-            this.y = y;
+            this.X = x;
+            this.Y = y;
 
-            double angleRad = this.a * Math.PI / 180;
-            this.endX = this.x + lengthX * Math.Cos(angleRad);
-            this.endY = this.y + lengthX * Math.Sin(angleRad);
+            double angleRad = this.A * Math.PI / 180;
+            this.endX = this.X + lengthX * Math.Cos(angleRad);
+            this.endY = this.Y + lengthX * Math.Sin(angleRad);
 
             foreach (Bone c in this.Children)
             {
-                c.Move(c.x - deltaX, c.y - deltaY);
+                c.Move(c.X - deltaX, c.Y - deltaY);
             }
 
             _isMoving = false;
@@ -261,26 +275,26 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
             _isRotating = true;
 
-            double oldA = this.a;
-            this.a = a;
-            double angleRad = this.a * Math.PI / 180;
+            double oldA = this.A;
+            this.A = a;
+            double angleRad = this.A * Math.PI / 180;
 
-            this.endX = this.x + lengthX * Math.Cos(angleRad);
-            this.endY = this.y + lengthX * Math.Sin(angleRad);
+            this.endX = this.X + lengthX * Math.Cos(angleRad);
+            this.endY = this.Y + lengthX * Math.Sin(angleRad);
 
             foreach (Bone child in this.Children)
             {
-                double dx = child.x - this.x;
-                double dy = child.y - this.y;
+                double dx = child.X - this.X;
+                double dy = child.Y - this.Y;
 
                 double angleDiff = (a - oldA) * Math.PI / 180;
                 double newDx = dx * Math.Cos(angleDiff) - dy * Math.Sin(angleDiff);
                 double newDy = dx * Math.Sin(angleDiff) + dy * Math.Cos(angleDiff);
 
-                child.x = this.x + newDx;
-                child.y = this.y + newDy;
+                child.X = this.X + newDx;
+                child.Y = this.Y + newDy;
 
-                child.Rotate(child.a + (a - oldA));
+                child.Rotate(child.A + (a - oldA));
             }
 
             List<Slot> slots = this._globalState.CurrentProject!.CurrentSkin.GetSlots(this);
@@ -290,8 +304,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 options,
                 slot =>
                 {
-                    double slotdx = slot.x - this.x;
-                    double slotdy = slot.y - this.y;
+                    double slotdx = slot.X - this.X;
+                    double slotdy = slot.Y - this.Y;
 
                     double slotangleDiff = (a - oldA) * Math.PI / 180;
                     double slotnewDx =
@@ -299,7 +313,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                     double slotnewDy =
                         slotdx * Math.Sin(slotangleDiff) + slotdy * Math.Cos(slotangleDiff);
 
-                    slot.Move(this.x + slotnewDx, this.y + slotnewDy);
+                    slot.Move(this.X + slotnewDx, this.Y + slotnewDy);
                 }
             );
 
@@ -313,7 +327,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="y">Click y coordinate</param>
         public virtual void Scale(double x, double y)
         {
-            this.LengthX = Math.Sqrt((x - this.x) * (x - this.x) + (y - this.y) * (y - this.y));
+            this.LengthX = Math.Sqrt((x - this.X) * (x - this.X) + (y - this.Y) * (y - this.Y));
         }
 
         /// <summary>
@@ -322,7 +336,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="canvas">Target canvas</param>
         public void DrawBone(Canvas canvas)
         {
-            Point start = new Point(canvas.Width / 2 + this.x, canvas.Height / 2 + this.y);
+            Point start = new Point(canvas.Width / 2 + this.X, canvas.Height / 2 + this.Y);
             Point end = new Point(canvas.Width / 2 + this.endX, canvas.Height / 2 + this.endY);
 
             var line = new Line
@@ -356,8 +370,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 Name = this.Name,
                 Parent = this.Parent?.Name,
-                X = this.x,
-                Y = this.y,
+                X = this.X,
+                Y = this.Y,
             };
         }
 
