@@ -17,7 +17,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
     /// </summary>
     public class Bone : INotifyable, IRenamable
     {
-        public int id;
+        public int id = 0;
         private string _name = "";
         public string Name
         {
@@ -117,8 +117,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
-        private double endX = 110;
-        private double endY = 110;
+        private double endX = 10;
+        private double endY = 10;
         private double lengthX = 10;
         public virtual double LengthX
         {
@@ -147,14 +147,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             this.Name = "root";
 
-            this._a = 0;
-            this.id = 0;
-            this._x = 0;
-            this._y = 0;
-
-            double angleRad = this.a * Math.PI / 180;
-            this.endX = this._x + lengthX * Math.Cos(angleRad);
-            this.endY = this._y + lengthX * Math.Sin(angleRad);
+            SetupEndXEndY();
 
             this._globalState = globalState;
             this._localizationService = localizationService;
@@ -163,11 +156,10 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public Bone(GlobalState globalState, int _id, LocalizationService localizationService)
         {
             this.id = _id;
-            this._a = 0;
-            this._x = 0;
-            this._y = 0;
             string name = "bone";
             this.Name = $"{name}{Counter.GenerateNamePostfix()}";
+
+            SetupEndXEndY();
 
             this._globalState = globalState;
             this._localizationService = localizationService;
@@ -175,20 +167,12 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public Bone(GlobalState globalState, Bone parent, LocalizationService localizationService)
         {
-            this._a = 0;
-            this.id = 0;
-            this._x = 0;
-            this._y = 0;
-
             string name = "bone";
             this.Name = $"{name}{Counter.GenerateNamePostfix()}";
 
-            double angleRad = this.a * Math.PI / 180;
-            this.endX = this.x + lengthX * Math.Cos(angleRad);
-            this.endY = this.y + lengthX * Math.Sin(angleRad);
+            SetupEndXEndY();
 
             this.Parent = parent;
-            this.id = 100;
 
             this._globalState = globalState;
             this._localizationService = localizationService;
@@ -201,22 +185,22 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             LocalizationService localizationService
         )
         {
-            this._a = 0;
-            this.id = 0;
-            this._x = 0;
-            this._y = 0;
-
             this._name = name;
 
-            double angleRad = this.a * Math.PI / 180;
-            this.endX = this.x + lengthX * Math.Cos(angleRad);
-            this.endY = this.y + lengthX * Math.Sin(angleRad);
+            SetupEndXEndY();
 
             this.Parent = parent;
             this.id = 100;
 
             this._globalState = globalState;
             this._localizationService = localizationService;
+        }
+
+        private void SetupEndXEndY()
+        {
+            double angleRad = this.a * Math.PI / 180;
+            this.endX = this._x + lengthX * Math.Cos(angleRad);
+            this.endY = this._y + lengthX * Math.Sin(angleRad);
         }
 
         public void AddChildren(Bone bone)
