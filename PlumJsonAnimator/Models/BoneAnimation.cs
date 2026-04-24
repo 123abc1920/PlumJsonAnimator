@@ -227,13 +227,6 @@ namespace PlumJsonAnimator.Models
                 return;
             }
 
-            /*if (_translateKeyframes.Count == 1)
-            {
-                var onlyKeyframe = _translateKeyframes.First().Value;
-                b.Move(((Translate)onlyKeyframe).x, ((Translate)onlyKeyframe).y);
-                return;
-            }*/
-
             FindSegment(time, KeyFrameTypes.TRANSLATE);
 
             double t = this._interpolation.findInterpolateParam(
@@ -252,7 +245,24 @@ namespace PlumJsonAnimator.Models
                 t
             );
 
-            b.Move(interpolatedX, interpolatedY);
+            double globalX = interpolatedX;
+            double globalY = interpolatedY;
+
+            Bone current = b;
+            double totalAngle = 0;
+
+            while (current.Parent != null)
+            {
+                totalAngle += current.Parent.A;
+                double angleRad = totalAngle * Math.PI / 180;
+                double rotatedX = globalX * Math.Cos(angleRad) - globalY * Math.Sin(angleRad);
+                double rotatedY = globalX * Math.Sin(angleRad) + globalY * Math.Cos(angleRad);
+                globalX = current.Parent.GlobalX + rotatedX;
+                globalY = current.Parent.GlobalY + rotatedY;
+                current = current.Parent;
+            }
+
+            b.Move(globalX, globalY);
         }
 
         /// <summary>

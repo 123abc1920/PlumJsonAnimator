@@ -228,8 +228,6 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                     double parentAngleRad = this.Parent.A * Math.PI / 180;
                     double rotatedX =
                         localX * Math.Cos(parentAngleRad) - localY * Math.Sin(parentAngleRad);
-                    double rotatedY =
-                        localX * Math.Sin(parentAngleRad) + localY * Math.Cos(parentAngleRad);
 
                     return this.Parent.GlobalX + rotatedX;
                 }
@@ -248,8 +246,6 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 if (this.Parent != null)
                 {
                     double parentAngleRad = this.Parent.A * Math.PI / 180;
-                    double rotatedX =
-                        localX * Math.Cos(parentAngleRad) - localY * Math.Sin(parentAngleRad);
                     double rotatedY =
                         localX * Math.Sin(parentAngleRad) + localY * Math.Cos(parentAngleRad);
 

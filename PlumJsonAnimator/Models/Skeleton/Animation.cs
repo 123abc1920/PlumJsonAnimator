@@ -219,7 +219,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             if (b != null && x != null && y != null)
             {
                 AnimateBone(b);
-                BoneAnimationBinding[b].AddTranslateFrame(currentTime, (double)x, (double)y);
+                BoneAnimationBinding[b].AddTranslateFrame(currentTime, b.X, b.Y);
             }
         }
 
@@ -235,7 +235,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             if (b != null && x != null && y != null && currTime != null)
             {
                 AnimateBone(b);
-                BoneAnimationBinding[b].AddTranslateFrame((double)currTime, (double)x, (double)y);
+                BoneAnimationBinding[b].AddTranslateFrame((double)currTime, b.X, b.Y);
             }
         }
 
@@ -249,7 +249,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             if (b != null && value != null)
             {
                 AnimateBone(b);
-                BoneAnimationBinding[b].AddRotateFrame(currentTime, (double)value);
+                BoneAnimationBinding[b].AddRotateFrame(currentTime, b.A);
             }
         }
 
@@ -264,7 +264,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             if (b != null && value != null && currTime != null)
             {
                 AnimateBone(b);
-                BoneAnimationBinding[b].AddRotateFrame((double)currTime, (double)value);
+                BoneAnimationBinding[b].AddRotateFrame((double)currTime, b.A);
             }
         }
 
