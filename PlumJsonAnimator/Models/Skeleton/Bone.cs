@@ -48,6 +48,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 if (Math.Abs(_baseX - value) > double.Epsilon)
                 {
                     _baseX = value;
+                    OnPropertyChanged(nameof(BaseX));
                     OnPropertyChanged(nameof(X));
                 }
             }
@@ -61,6 +62,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 if (Math.Abs(_baseY - value) > double.Epsilon)
                 {
                     _baseY = value;
+                    OnPropertyChanged(nameof(BaseY));
                     OnPropertyChanged(nameof(Y));
                 }
             }
@@ -74,6 +76,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 if (Math.Abs(_baseA - value) > double.Epsilon)
                 {
                     _baseA = value;
+                    OnPropertyChanged(nameof(BaseA));
                     OnPropertyChanged(nameof(A));
                 }
             }
@@ -515,8 +518,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 Name = this.Name,
                 Parent = this.Parent?.Name,
-                X = this.X,
-                Y = this.Y,
+                X = this.BaseX,
+                Y = this.BaseY,
+                Rotation = this.BaseA,
             };
         }
 
@@ -557,5 +561,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         [JsonProperty("y", DefaultValueHandling = DefaultValueHandling.Ignore)]
         public double Y { get; set; }
+
+        [JsonProperty("rotation", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public double Rotation { get; set; }
     }
 }
