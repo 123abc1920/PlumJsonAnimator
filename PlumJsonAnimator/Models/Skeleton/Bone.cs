@@ -445,22 +445,6 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 child.Rotate(child.A + deltaAngle);
             }
 
-            List<Slot> slots = this._globalState.CurrentProject!.CurrentSkin.GetSlots(this);
-            var options = this._globalState.GetParallelOptions();
-            Parallel.ForEach(
-                slots,
-                options,
-                slot =>
-                {
-                    double slotdx = slot.X - this.X;
-                    double slotdy = slot.Y - this.Y;
-                    double angleRad = deltaAngle * Math.PI / 180;
-                    double newDx = slotdx * Math.Cos(angleRad) - slotdy * Math.Sin(angleRad);
-                    double newDy = slotdx * Math.Sin(angleRad) + slotdy * Math.Cos(angleRad);
-                    slot.Move(this.GlobalX + newDx, this.GlobalY + newDy);
-                }
-            );
-
             _isRotating = false;
         }
 
