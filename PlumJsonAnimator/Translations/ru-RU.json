@@ -73,5 +73,6 @@
     "select_folder": "Выберите папку",
     "select_ffmpeg": "Выберите файл ffmpeg.exe",
     "slot_null_name": "У одного из скинов не установлено имя!",
-    "empty_json": "Json код пуст"
+    "empty_json": "Json код пуст",
+    "base_pos": "Базовая поза"
 }

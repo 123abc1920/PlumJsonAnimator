@@ -301,7 +301,10 @@
                 Background="{DynamicResource SukiPrimaryColor}"
                 ResizeDirection="Columns" />
             <Grid Grid.Column="2">
-                <TabControl x:Name="MainTabControl" Padding="0" SelectionChanged="TabControl_SelectionChanged">
+                <TabControl
+                    x:Name="MainTabControl"
+                    Padding="0"
+                    SelectionChanged="TabControl_SelectionChanged">
                     <TabItem Header="{DynamicResource animation}">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -362,7 +365,7 @@
                                                 IsChecked="{Binding CaptureMode}" />
                                             <CheckBox
                                                 HorizontalAlignment="Right"
-                                                Content="Base pose"
+                                                Content="{DynamicResource base_pos}"
                                                 IsChecked="{Binding SetBasePos}" />
                                             <Button
                                                 Width="32"

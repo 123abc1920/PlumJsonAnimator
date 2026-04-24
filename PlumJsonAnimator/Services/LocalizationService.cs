@@ -7,6 +7,7 @@ using Avalonia.Controls;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Models.Interfaces;
 
+// TODO: setup animation key frame when 1 keyframe
 namespace PlumJsonAnimator.Services
 {
     /// <summary>
@@ -174,6 +175,7 @@ namespace PlumJsonAnimator.Services
                 LocalizationConsts.SELECT_FFMPEG => "select_ffmpeg",
                 LocalizationConsts.SLOT_NULL_NAME => "slot_null_name",
                 LocalizationConsts.EMPTY_JSON => "empty_json",
+                LocalizationConsts.BASE_POS => "base_pos",
 
                 _ => null,
             };
@@ -226,5 +228,6 @@ namespace PlumJsonAnimator.Services
         SELECT_FFMPEG,
         SLOT_NULL_NAME,
         EMPTY_JSON,
+        BASE_POS,
     }
 }
