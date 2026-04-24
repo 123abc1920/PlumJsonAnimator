@@ -118,6 +118,19 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
+    public bool SetBasePos
+    {
+        get { return this.globalState.setBasePos; }
+        set
+        {
+            if (this.globalState.setBasePos != value)
+            {
+                this.globalState.setBasePos = value;
+                OnPropertyChanged(nameof(SetBasePos));
+            }
+        }
+    }
+
     public bool CaptureMode
     {
         get { return this.globalState.captureMode; }

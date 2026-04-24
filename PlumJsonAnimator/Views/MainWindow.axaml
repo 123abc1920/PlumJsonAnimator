@@ -360,6 +360,10 @@
                                                 Click="EditCaptureMode"
                                                 Content="{DynamicResource capture_mode}"
                                                 IsChecked="{Binding CaptureMode}" />
+                                            <CheckBox
+                                                HorizontalAlignment="Right"
+                                                Content="Base pose"
+                                                IsChecked="{Binding SetBasePos}" />
                                             <Button
                                                 Width="32"
                                                 Height="32"

@@ -222,17 +222,17 @@ namespace PlumJsonAnimator.Models
         /// <param name="time">Current time</param>
         private void TranslateStep(Bone b, double time)
         {
-            if (_translateKeyframes.Count == 0)
+            if (_translateKeyframes.Count < 2)
             {
                 return;
             }
 
-            if (_translateKeyframes.Count == 1)
+            /*if (_translateKeyframes.Count == 1)
             {
                 var onlyKeyframe = _translateKeyframes.First().Value;
                 b.Move(((Translate)onlyKeyframe).x, ((Translate)onlyKeyframe).y);
                 return;
-            }
+            }*/
 
             FindSegment(time, KeyFrameTypes.TRANSLATE);
 
@@ -262,17 +262,17 @@ namespace PlumJsonAnimator.Models
         /// <param name="time">Current time</param>
         private void RotateStep(Bone b, double time)
         {
-            if (_rotateKeyframes.Count == 0)
+            if (_rotateKeyframes.Count < 2)
             {
                 return;
             }
 
-            if (_rotateKeyframes.Count == 1)
+            /*if (_rotateKeyframes.Count == 1)
             {
                 var onlyKeyframe = _rotateKeyframes.First().Value;
                 b.Rotate(((Rotate)onlyKeyframe).value);
                 return;
-            }
+            }*/
 
             FindSegment(time, KeyFrameTypes.ROTATE);
 

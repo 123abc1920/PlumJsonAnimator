@@ -11,6 +11,8 @@ using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
 
+// TODO: бесконечный add slot во вкладке json
+// TODO: сохранять в x y value позиции 1 кадра
 namespace PlumJsonAnimator.Models
 {
     public partial class Project : INotifyable
@@ -313,7 +315,7 @@ namespace PlumJsonAnimator.Models
 
             foreach (var bone in bones)
             {
-                Bone b = new Bone(this._globalState, bone.Key, null, this._localizationService);
+                Bone b = new Bone(this._globalState, bone.Key, this._localizationService);
                 this.MainSkeleton.AddBone(b);
             }
 
@@ -511,7 +513,6 @@ namespace PlumJsonAnimator.Models
                 Animations.Add(new Animation(this._globalState, this._interpolation));
             }
             this.CurrentAnimation = Animations[0];
-            this.CurrentAnimation.SetupBones();
 
             // recreate skins and slot-bone bounding
             List<Skin> skinsToRemove = new List<Skin>();

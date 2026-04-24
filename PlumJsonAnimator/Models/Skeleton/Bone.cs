@@ -189,21 +189,12 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this._localizationService = localizationService;
         }
 
-        public Bone(
-            GlobalState globalState,
-            string name,
-            Bone parent,
-            LocalizationService localizationService
-        )
+        public Bone(GlobalState globalState, string name, LocalizationService localizationService)
         {
             this._name = name;
 
-            this._x = parent.X;
-            this._y = parent.Y;
-
             SetupEndXEndY();
 
-            this.Parent = parent;
             this.id = 100;
 
             this._globalState = globalState;
