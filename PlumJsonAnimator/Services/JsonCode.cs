@@ -388,6 +388,7 @@ namespace PlumJsonAnimator.Services
         /// Regenerates project from its json code
         /// </summary>
         /// <param name="project">Project</param>
+        /// <param name="needRegenearation">If true, recreates all project objects, else just validate</param>
         /// <example>
         /// ValidResult result=regenerate(project);
         /// if (!result.IsOk)
@@ -396,7 +397,7 @@ namespace PlumJsonAnimator.Services
         /// }
         /// </example>
         /// <returns>ValoidResult, where UpdatedArray is empty</returns>
-        public ValidResult regenerate(Project project)
+        public ValidResult Regenerate(Project project, bool needRegenearation)
         {
             if (project.Code == null || project.Code == "")
             {
@@ -439,12 +440,15 @@ namespace PlumJsonAnimator.Services
                 return new ValidResult { Message = animationResult.Message, IsOk = false };
             }
 
-            this._globalState.CurrentProject?.RegenerateProject(
-                (Dictionary<string, BoneData>)boneResult.UpdatedArray,
-                (Dictionary<string, SlotData>)slotResult.UpdatedArray,
-                (Dictionary<string, SkinData>)skinResult.UpdatedArray,
-                (Dictionary<string, AnimationData>)animationResult.UpdatedArray
-            );
+            if (needRegenearation == true)
+            {
+                this._globalState.CurrentProject?.RegenerateProject(
+                    (Dictionary<string, BoneData>)boneResult.UpdatedArray,
+                    (Dictionary<string, SlotData>)slotResult.UpdatedArray,
+                    (Dictionary<string, SkinData>)skinResult.UpdatedArray,
+                    (Dictionary<string, AnimationData>)animationResult.UpdatedArray
+                );
+            }
 
             return new ValidResult { Message = "", IsOk = true };
         }

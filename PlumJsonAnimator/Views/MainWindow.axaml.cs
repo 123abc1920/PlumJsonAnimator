@@ -31,8 +31,6 @@ public partial class MainWindow : SukiWindow
     };
     private bool _isDragging = false;
 
-    private int currentTab = 0;
-
     public MainWindow()
     {
         InitializeComponent();
@@ -69,7 +67,7 @@ public partial class MainWindow : SukiWindow
 
     private void UpdateCanvas(object? sender, EventArgs e)
     {
-        if (currentTab == 0)
+        if (MainTabControl.SelectedIndex == 0)
         {
             mainCanvas.Children.Clear();
             if (DataContext is MainWindowViewModel viewModel)
@@ -90,14 +88,11 @@ public partial class MainWindow : SukiWindow
                 }
             }
         }
-        else if (currentTab == 1)
+        else if (MainTabControl.SelectedIndex == 1)
         {
             if (DataContext is MainWindowViewModel viewModel)
             {
-                if (viewModel.CanGenerateProject() == true)
-                {
-                    currentTab = 1;
-                }
+                viewModel.CanGenerateProject();
             }
         }
     }
@@ -304,7 +299,17 @@ public partial class MainWindow : SukiWindow
 
                 if (tabControl.SelectedItem is TabItem selectedTab)
                 {
-                    currentTab = tabControl.SelectedIndex;
+                    if (tabControl.SelectedIndex == 0)
+                    {
+                        if (viewModel.CanGenerateProject() == false)
+                        {
+                            tabControl.SelectedIndex = 1;
+                        }
+                        else
+                        {
+                            viewModel.RegenerateProject();
+                        }
+                    }
                 }
             }
         }

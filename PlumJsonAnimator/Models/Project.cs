@@ -11,7 +11,6 @@ using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
 
-// TODO: бесконечный add slot во вкладке json
 namespace PlumJsonAnimator.Models
 {
     public partial class Project : INotifyable

@@ -255,7 +255,7 @@ public partial class MainWindowViewModel : ViewModelBase
         JsonErrorObj.ErrorText = Validate(CurrentProject.Code);
         if (JsonErrorObj.isOk)
         {
-            ValidResult validateResult = this.jsonCode.regenerate(CurrentProject);
+            ValidResult validateResult = this.jsonCode.Regenerate(CurrentProject, false);
             if (!validateResult.IsOk)
             {
                 JsonErrorObj.ErrorText = validateResult.Message;
@@ -263,6 +263,11 @@ public partial class MainWindowViewModel : ViewModelBase
             }
         }
         return true;
+    }
+
+    public void RegenerateProject()
+    {
+        this.jsonCode.Regenerate(CurrentProject, true);
     }
 
     public string Validate(string text)
@@ -347,7 +352,7 @@ public partial class MainWindowViewModel : ViewModelBase
             CanvasHeight
         );
 
-        ValidResult validateResult = this.jsonCode.regenerate(CurrentProject);
+        ValidResult validateResult = this.jsonCode.Regenerate(CurrentProject, true);
         this.JsonErrorObj.isOk = validateResult.IsOk;
     }
 
