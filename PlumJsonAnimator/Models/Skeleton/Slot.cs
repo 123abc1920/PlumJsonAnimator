@@ -22,12 +22,10 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             get { return false; }
         }
 
-        // Локальные координаты относительно привязанной кости
         private double _localX = 0;
         private double _localY = 0;
         private double _localA = 0;
 
-        // Глобальные координаты (вычисляются на основе кости и локального смещения)
         public override double X
         {
             get => BoundedBone != null ? BoundedBone.X + _localX : _localX;
@@ -250,8 +248,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             if (BoundedBone != null)
             {
-                _localX = x - BoundedBone.GlobalX;
-                _localY = y - BoundedBone.GlobalY;
+                double dx = x - BoundedBone.GlobalX;
+                double dy = y - BoundedBone.GlobalY;
+                double rad = -BoundedBone.GlobalA * Math.PI / 180;
+                _localX = dx * Math.Cos(rad) - dy * Math.Sin(rad);
+                _localY = dx * Math.Sin(rad) + dy * Math.Cos(rad);
             }
             else
             {
