@@ -216,7 +216,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
-        public virtual double GlobalX
+        public double GlobalX
         {
             get
             {
@@ -236,7 +236,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
-        public virtual double GlobalY
+        public double GlobalY
         {
             get
             {
@@ -253,6 +253,21 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 }
 
                 return localY;
+            }
+        }
+
+        public virtual double GlobalA
+        {
+            get
+            {
+                double angle = this.A;
+                Bone? current = this.Parent;
+                while (current != null)
+                {
+                    angle += current.A;
+                    current = current.Parent;
+                }
+                return angle;
             }
         }
 
@@ -439,7 +454,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                     double angleRad = deltaAngle * Math.PI / 180;
                     double newDx = slotdx * Math.Cos(angleRad) - slotdy * Math.Sin(angleRad);
                     double newDy = slotdx * Math.Sin(angleRad) + slotdy * Math.Cos(angleRad);
-                    slot.Move(this.X + newDx, this.Y + newDy);
+                    slot.Move(this.GlobalX + newDx, this.GlobalY + newDy);
                 }
             );
 
