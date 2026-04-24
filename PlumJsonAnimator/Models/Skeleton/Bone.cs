@@ -220,12 +220,21 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             get
             {
-                double globalX = this.BaseX + (this._globalState.setBasePos ? 0 : this.AnimX);
+                double localX = this.BaseX + (this._globalState.setBasePos ? 0 : this.AnimX);
+                double localY = this.BaseY + (this._globalState.setBasePos ? 0 : this.AnimY);
+
                 if (this.Parent != null)
                 {
-                    globalX += this.Parent.GlobalX;
+                    double parentAngleRad = this.Parent.A * Math.PI / 180;
+                    double rotatedX =
+                        localX * Math.Cos(parentAngleRad) - localY * Math.Sin(parentAngleRad);
+                    double rotatedY =
+                        localX * Math.Sin(parentAngleRad) + localY * Math.Cos(parentAngleRad);
+
+                    return this.Parent.GlobalX + rotatedX;
                 }
-                return globalX;
+
+                return localX;
             }
         }
 
@@ -233,12 +242,21 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             get
             {
-                double globalY = this.BaseY + (this._globalState.setBasePos ? 0 : this.AnimY);
+                double localX = this.BaseX + (this._globalState.setBasePos ? 0 : this.AnimX);
+                double localY = this.BaseY + (this._globalState.setBasePos ? 0 : this.AnimY);
+
                 if (this.Parent != null)
                 {
-                    globalY += this.Parent.GlobalY;
+                    double parentAngleRad = this.Parent.A * Math.PI / 180;
+                    double rotatedX =
+                        localX * Math.Cos(parentAngleRad) - localY * Math.Sin(parentAngleRad);
+                    double rotatedY =
+                        localX * Math.Sin(parentAngleRad) + localY * Math.Cos(parentAngleRad);
+
+                    return this.Parent.GlobalY + rotatedY;
                 }
-                return globalY;
+
+                return localY;
             }
         }
 
@@ -362,25 +380,31 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <summary>
         /// Moves bone and all its children and slots to new position
         /// </summary>
-        /// <param name="x">Target x coordinate</param>
-        /// <param name="y">Target y coordinate</param>
+        /// <param name="x">Target x coordinate (global)</param>
+        /// <param name="y">Target y coordinate (global)</param>
         public virtual void Move(double x, double y)
         {
             if (_isMoving)
                 return;
             _isMoving = true;
 
-            double localX = x;
-            double localY = y;
-
             if (this.Parent != null)
             {
-                localX = x - this.Parent.GlobalX;
-                localY = y - this.Parent.GlobalY;
-            }
+                double dx = x - this.Parent.GlobalX;
+                double dy = y - this.Parent.GlobalY;
 
-            this.X = localX;
-            this.Y = localY;
+                double parentAngleRad = -this.Parent.A * Math.PI / 180;
+                double localX = dx * Math.Cos(parentAngleRad) - dy * Math.Sin(parentAngleRad);
+                double localY = dx * Math.Sin(parentAngleRad) + dy * Math.Cos(parentAngleRad);
+
+                this.X = localX;
+                this.Y = localY;
+            }
+            else
+            {
+                this.X = x;
+                this.Y = y;
+            }
 
             _isMoving = false;
         }
@@ -394,29 +418,18 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public virtual void Rotate(double a)
         {
             if (_isRotating)
-            {
                 return;
-            }
 
             _isRotating = true;
 
             double oldA = this.A;
+            double deltaAngle = a - oldA;
             this.A = a;
 
-            /*foreach (Bone child in this.Children)
+            foreach (Bone child in this.Children)
             {
-                double dx = child.X - this.X;
-                double dy = child.Y - this.Y;
-
-                double angleDiff = (a - oldA) * Math.PI / 180;
-                double newDx = dx * Math.Cos(angleDiff) - dy * Math.Sin(angleDiff);
-                double newDy = dx * Math.Sin(angleDiff) + dy * Math.Cos(angleDiff);
-
-                child.X = this.X + newDx;
-                child.Y = this.Y + newDy;
-
-                child.Rotate(child.A + (a - oldA));
-            }*/
+                child.Rotate(child.A + deltaAngle);
+            }
 
             List<Slot> slots = this._globalState.CurrentProject!.CurrentSkin.GetSlots(this);
             var options = this._globalState.GetParallelOptions();
@@ -427,14 +440,10 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 {
                     double slotdx = slot.X - this.X;
                     double slotdy = slot.Y - this.Y;
-
-                    double slotangleDiff = (a - oldA) * Math.PI / 180;
-                    double slotnewDx =
-                        slotdx * Math.Cos(slotangleDiff) - slotdy * Math.Sin(slotangleDiff);
-                    double slotnewDy =
-                        slotdx * Math.Sin(slotangleDiff) + slotdy * Math.Cos(slotangleDiff);
-
-                    slot.Move(this.X + slotnewDx, this.Y + slotnewDy);
+                    double angleRad = deltaAngle * Math.PI / 180;
+                    double newDx = slotdx * Math.Cos(angleRad) - slotdy * Math.Sin(angleRad);
+                    double newDy = slotdx * Math.Sin(angleRad) + slotdy * Math.Cos(angleRad);
+                    slot.Move(this.X + newDx, this.Y + newDy);
                 }
             );
 
