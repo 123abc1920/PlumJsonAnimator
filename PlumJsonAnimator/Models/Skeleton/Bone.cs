@@ -36,49 +36,210 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             get { return true; }
         }
 
-        private double _x = 0;
-        private double _y = 0;
-        private double _a = 0;
+        private double _baseX = 0;
+        private double _baseY = 0;
+        private double _baseA = 0;
+
+        public virtual double BaseX
+        {
+            get => _baseX;
+            set
+            {
+                if (Math.Abs(_baseX - value) > double.Epsilon)
+                {
+                    _baseX = value;
+                    OnPropertyChanged(nameof(X));
+                }
+            }
+        }
+
+        public virtual double BaseY
+        {
+            get => _baseY;
+            set
+            {
+                if (Math.Abs(_baseY - value) > double.Epsilon)
+                {
+                    _baseY = value;
+                    OnPropertyChanged(nameof(Y));
+                }
+            }
+        }
+
+        public virtual double BaseA
+        {
+            get => _baseA;
+            set
+            {
+                if (Math.Abs(_baseA - value) > double.Epsilon)
+                {
+                    Rotate(value);
+                    _baseA = value;
+                    OnPropertyChanged(nameof(A));
+                }
+            }
+        }
+
+        private double _animX = 0;
+        private double _animY = 0;
+        private double _animA = 0;
+
+        public virtual double AnimX
+        {
+            get => _animX;
+            set
+            {
+                if (Math.Abs(_animX - value) > double.Epsilon)
+                {
+                    _animX = value;
+                    OnPropertyChanged(nameof(X));
+                }
+            }
+        }
+
+        public virtual double AnimY
+        {
+            get => _animY;
+            set
+            {
+                if (Math.Abs(_animY - value) > double.Epsilon)
+                {
+                    _animY = value;
+                    OnPropertyChanged(nameof(Y));
+                }
+            }
+        }
+
+        public virtual double AnimA
+        {
+            get => _animA;
+            set
+            {
+                if (Math.Abs(_animA - value) > double.Epsilon)
+                {
+                    Rotate(value);
+                    _animA = value;
+                    OnPropertyChanged(nameof(AnimA));
+                }
+            }
+        }
 
         public virtual double X
         {
-            get => _x;
+            get
+            {
+                if (this._globalState == null)
+                {
+                    return 0;
+                }
+
+                if (this._globalState.setBasePos == true)
+                {
+                    return this.BaseX;
+                }
+                else
+                {
+                    return this.BaseX + this.AnimX;
+                }
+            }
             set
             {
-                if (Math.Abs(_x - value) > double.Epsilon)
+                if (this._globalState.setBasePos == true)
                 {
-                    Move(value, _y);
-                    _x = value;
-                    OnPropertyChanged(nameof(X));
+                    this.BaseX = value;
+                }
+                else
+                {
+                    this.AnimX = value - this.BaseX;
                 }
             }
         }
 
         public virtual double Y
         {
-            get => _y;
+            get
+            {
+                if (this._globalState == null)
+                {
+                    return 0;
+                }
+
+                if (this._globalState.setBasePos == true)
+                {
+                    return this.BaseY;
+                }
+                else
+                {
+                    return this.BaseY + this.AnimY;
+                }
+            }
             set
             {
-                if (Math.Abs(_y - value) > double.Epsilon)
+                if (this._globalState.setBasePos == true)
                 {
-                    Move(_x, value);
-                    _y = value;
-                    OnPropertyChanged(nameof(Y));
+                    this.BaseY = value;
+                }
+                else
+                {
+                    this.AnimY = value - this.BaseY;
                 }
             }
         }
 
         public virtual double A
         {
-            get => _a;
+            get
+            {
+                if (this._globalState == null)
+                {
+                    return 0;
+                }
+
+                if (this._globalState.setBasePos == true)
+                {
+                    return this.BaseA;
+                }
+                else
+                {
+                    return this.AnimA;
+                }
+            }
             set
             {
-                if (Math.Abs(_a - value) > double.Epsilon)
+                if (this._globalState.setBasePos == true)
                 {
-                    Rotate(value);
-                    _a = value;
-                    OnPropertyChanged(nameof(A));
+                    this.BaseA = value;
                 }
+                else
+                {
+                    this.AnimA = value;
+                }
+            }
+        }
+
+        public virtual double GlobalX
+        {
+            get
+            {
+                double globalX = this.BaseX + (this._globalState.setBasePos ? 0 : this.AnimX);
+                if (this.Parent != null)
+                {
+                    globalX += this.Parent.GlobalX;
+                }
+                return globalX;
+            }
+        }
+
+        public virtual double GlobalY
+        {
+            get
+            {
+                double globalY = this.BaseY + (this._globalState.setBasePos ? 0 : this.AnimY);
+                if (this.Parent != null)
+                {
+                    globalY += this.Parent.GlobalY;
+                }
+                return globalY;
             }
         }
 
@@ -151,6 +312,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
             this._globalState = globalState;
             this._localizationService = localizationService;
+
+            Console.WriteLine("setted");
         }
 
         public Bone(
@@ -164,9 +327,6 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             string name = "bone";
             this.Name = $"{name}{Counter.GenerateNamePostfix()}";
 
-            this._x = parent.X;
-            this._y = parent.Y;
-
             SetupEndXEndY();
 
             this._globalState = globalState;
@@ -177,9 +337,6 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             string name = "bone";
             this.Name = $"{name}{Counter.GenerateNamePostfix()}";
-
-            this._x = parent.X;
-            this._y = parent.Y;
 
             SetupEndXEndY();
 
@@ -204,8 +361,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         private void SetupEndXEndY()
         {
             double angleRad = this.A * Math.PI / 180;
-            this.endX = this._x + lengthX * Math.Cos(angleRad);
-            this.endY = this._y + lengthX * Math.Sin(angleRad);
+            this.endX = this._baseX + lengthX * Math.Cos(angleRad);
+            this.endY = this._baseY + lengthX * Math.Sin(angleRad);
         }
 
         public void AddChildren(Bone bone)
@@ -224,29 +381,20 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public virtual void Move(double x, double y)
         {
             if (_isMoving)
-            {
                 return;
-            }
-
             _isMoving = true;
 
-            double oldX = this.X;
-            double oldY = this.Y;
+            double localX = x;
+            double localY = y;
 
-            double deltaX = oldX - x;
-            double deltaY = oldY - y;
-
-            this.X = x;
-            this.Y = y;
-
-            double angleRad = this.A * Math.PI / 180;
-            this.endX = this.X + lengthX * Math.Cos(angleRad);
-            this.endY = this.Y + lengthX * Math.Sin(angleRad);
-
-            foreach (Bone c in this.Children)
+            if (this.Parent != null)
             {
-                c.Move(c.X - deltaX, c.Y - deltaY);
+                localX = x - this.Parent.GlobalX;
+                localY = y - this.Parent.GlobalY;
             }
+
+            this.X = localX;
+            this.Y = localY;
 
             _isMoving = false;
         }
@@ -273,7 +421,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             this.endX = this.X + lengthX * Math.Cos(angleRad);
             this.endY = this.Y + lengthX * Math.Sin(angleRad);
 
-            foreach (Bone child in this.Children)
+            /*foreach (Bone child in this.Children)
             {
                 double dx = child.X - this.X;
                 double dy = child.Y - this.Y;
@@ -286,7 +434,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 child.Y = this.Y + newDy;
 
                 child.Rotate(child.A + (a - oldA));
-            }
+            }*/
 
             List<Slot> slots = this._globalState.CurrentProject!.CurrentSkin.GetSlots(this);
             var options = this._globalState.GetParallelOptions();
@@ -327,7 +475,10 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="canvas">Target canvas</param>
         public void DrawBone(Canvas canvas)
         {
-            Point start = new Point(canvas.Width / 2 + this.X, canvas.Height / 2 + this.Y);
+            Point start = new Point(
+                canvas.Width / 2 + this.GlobalX,
+                canvas.Height / 2 + this.GlobalY
+            );
             Point end = new Point(canvas.Width / 2 + this.endX, canvas.Height / 2 + this.endY);
 
             var line = new Line

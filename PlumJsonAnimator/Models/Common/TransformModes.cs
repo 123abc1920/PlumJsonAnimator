@@ -67,10 +67,13 @@ namespace PlumJsonAnimator.Models.Common
         public override void Transform(Bone bone, double x, double y)
         {
             bone.Move(x, y);
-            var animation = this.globalState.CurrentProject?.GetCurrentAnimation();
-            if (animation != null && !animation.IsRun && bone.IsBone == true)
+            if (this.globalState.setBasePos == false)
             {
-                animation.TranslateBone(bone, bone.X, bone.Y);
+                var animation = this.globalState.CurrentProject?.GetCurrentAnimation();
+                if (animation != null && !animation.IsRun && bone.IsBone == true)
+                {
+                    animation.TranslateBone(bone, bone.X, bone.Y);
+                }
             }
         }
     }
@@ -101,8 +104,6 @@ namespace PlumJsonAnimator.Models.Common
                 startY = y;
                 return;
             }
-            double deltaX = (double)startX - x;
-            double deltaY = (double)startY - y;
             startX = x;
             startY = y;
             bone.Scale(x, y);
@@ -144,11 +145,13 @@ namespace PlumJsonAnimator.Models.Common
             double angleDeg = angleRad * 180 / Math.PI;
 
             bone.Rotate(-angleDeg);
-
-            var animation = this.globalState.CurrentProject?.GetCurrentAnimation();
-            if (animation != null && !animation.IsRun && bone.IsBone == true)
+            if (this.globalState.setBasePos == false)
             {
-                animation.RotateBone(bone, bone.A);
+                var animation = this.globalState.CurrentProject?.GetCurrentAnimation();
+                if (animation != null && !animation.IsRun && bone.IsBone == true)
+                {
+                    animation.RotateBone(bone, bone.A);
+                }
             }
         }
     }
