@@ -313,9 +313,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
                 if (BoundedBone != null)
                 {
-                    globalAngle = BoundedBone.GlobalA + _localA;
+                    globalAngle = BoundedBone.A;
 
-                    double rad = BoundedBone.GlobalA * Math.PI / 180;
+                    double rad = BoundedBone.A * Math.PI / 180;
                     double rotatedX = _localX * Math.Cos(rad) - _localY * Math.Sin(rad);
                     double rotatedY = _localX * Math.Sin(rad) + _localY * Math.Cos(rad);
 
