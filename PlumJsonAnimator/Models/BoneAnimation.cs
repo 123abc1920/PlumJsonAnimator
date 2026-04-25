@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Avalonia.Media;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Common;
@@ -222,47 +223,82 @@ namespace PlumJsonAnimator.Models
         /// <param name="time">Current time</param>
         private void TranslateStep(Bone b, double time)
         {
-            if (_translateKeyframes.Count < 2)
+            if (_translateKeyframes.Count == 0)
             {
                 return;
             }
 
-            FindSegment(time, KeyFrameTypes.TRANSLATE);
-
-            double t = this._interpolation.findInterpolateParam(
-                _translateEnd - _translateStart,
-                time - _translateStart
-            );
-
-            double interpolatedX = this._interpolation.linearInterpolation(
-                ((Translate)_translateKeyframes[_translateStart]).x,
-                ((Translate)_translateKeyframes[_translateEnd]).x,
-                t
-            );
-            double interpolatedY = this._interpolation.linearInterpolation(
-                ((Translate)_translateKeyframes[_translateStart]).y,
-                ((Translate)_translateKeyframes[_translateEnd]).y,
-                t
-            );
-
-            double globalX = interpolatedX;
-            double globalY = interpolatedY;
-
-            Bone current = b;
-            double totalAngle = 0;
-
-            while (current.Parent != null)
+            if (_rotateKeyframes.Count == 1)
             {
-                totalAngle += current.Parent.A;
-                double angleRad = totalAngle * Math.PI / 180;
-                double rotatedX = globalX * Math.Cos(angleRad) - globalY * Math.Sin(angleRad);
-                double rotatedY = globalX * Math.Sin(angleRad) + globalY * Math.Cos(angleRad);
-                globalX = current.Parent.GlobalX + rotatedX;
-                globalY = current.Parent.GlobalY + rotatedY;
-                current = current.Parent;
-            }
+                var onlyKeyframe = (Translate)_translateKeyframes.First().Value;
+                double globalX = (double)onlyKeyframe.x;
+                double globalY = (double)onlyKeyframe.y;
 
-            b.Move(globalX, globalY);
+                Bone current = b;
+                double totalAngle = 0;
+
+                while (current.Parent != null)
+                {
+                    totalAngle += current.Parent.A;
+                    double angleRad = totalAngle * Math.PI / 180;
+                    double rotatedX = globalX * Math.Cos(angleRad) - globalY * Math.Sin(angleRad);
+                    double rotatedY = globalX * Math.Sin(angleRad) + globalY * Math.Cos(angleRad);
+                    globalX = current.Parent.GlobalX + rotatedX;
+                    globalY = current.Parent.GlobalY + rotatedY;
+                    current = current.Parent;
+                }
+
+                b.Move(globalX, globalY);
+                return;
+            }
+            else
+            {
+                FindSegment(time, KeyFrameTypes.TRANSLATE);
+
+                double t = this._interpolation.findInterpolateParam(
+                    _translateEnd - _translateStart,
+                    time - _translateStart
+                );
+
+                double interpolatedX = b.BaseX;
+                double interpolatedY = b.BaseY;
+
+                if (
+                    this._translateKeyframes.ContainsKey(_translateEnd) == true
+                    && this._translateKeyframes.ContainsKey(_translateStart) == true
+                )
+                {
+                    interpolatedX = this._interpolation.linearInterpolation(
+                        ((Translate)_translateKeyframes[_translateStart]).x,
+                        ((Translate)_translateKeyframes[_translateEnd]).x,
+                        t
+                    );
+                    interpolatedY = this._interpolation.linearInterpolation(
+                        ((Translate)_translateKeyframes[_translateStart]).y,
+                        ((Translate)_translateKeyframes[_translateEnd]).y,
+                        t
+                    );
+                }
+
+                double globalX = interpolatedX;
+                double globalY = interpolatedY;
+
+                Bone current = b;
+                double totalAngle = 0;
+
+                while (current.Parent != null)
+                {
+                    totalAngle += current.Parent.A;
+                    double angleRad = totalAngle * Math.PI / 180;
+                    double rotatedX = globalX * Math.Cos(angleRad) - globalY * Math.Sin(angleRad);
+                    double rotatedY = globalX * Math.Sin(angleRad) + globalY * Math.Cos(angleRad);
+                    globalX = current.Parent.GlobalX + rotatedX;
+                    globalY = current.Parent.GlobalY + rotatedY;
+                    current = current.Parent;
+                }
+
+                b.Move(globalX, globalY);
+            }
         }
 
         /// <summary>
@@ -272,17 +308,17 @@ namespace PlumJsonAnimator.Models
         /// <param name="time">Current time</param>
         private void RotateStep(Bone b, double time)
         {
-            if (_rotateKeyframes.Count < 2)
+            if (_rotateKeyframes.Count == 0)
             {
                 return;
             }
 
-            /*if (_rotateKeyframes.Count == 1)
+            if (_rotateKeyframes.Count == 1)
             {
                 var onlyKeyframe = _rotateKeyframes.First().Value;
                 b.Rotate(((Rotate)onlyKeyframe).value);
                 return;
-            }*/
+            }
 
             FindSegment(time, KeyFrameTypes.ROTATE);
 
@@ -291,11 +327,18 @@ namespace PlumJsonAnimator.Models
                 time - _rotateStart
             );
 
-            double interpolatedA = this._interpolation.angleInterpolation(
-                ((Rotate)_rotateKeyframes[_rotateStart]).value,
-                ((Rotate)_rotateKeyframes[_rotateEnd]).value,
-                t
-            );
+            double interpolatedA = b.BaseA;
+            if (
+                this._rotateKeyframes.ContainsKey(_rotateEnd) == true
+                && this._rotateKeyframes.ContainsKey(_rotateStart) == true
+            )
+            {
+                interpolatedA = this._interpolation.angleInterpolation(
+                    ((Rotate)_rotateKeyframes[_rotateStart]).value,
+                    ((Rotate)_rotateKeyframes[_rotateEnd]).value,
+                    t
+                );
+            }
 
             b.Rotate(interpolatedA);
         }

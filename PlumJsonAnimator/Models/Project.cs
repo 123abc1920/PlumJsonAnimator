@@ -142,7 +142,7 @@ namespace PlumJsonAnimator.Models
                 new Animation(
                     this._globalState,
                     this._interpolation,
-                    "anim" + Animations.Count.ToString()
+                    $"anim{Counter.GenerateNamePostfix()}"
                 )
             );
         }
@@ -158,7 +158,7 @@ namespace PlumJsonAnimator.Models
 
         public void AddSkin()
         {
-            this.Skins.Add(new Skin("skin" + Skins.Count.ToString(), this._globalState));
+            this.Skins.Add(new Skin($"skin{Counter.GenerateNamePostfix()}", this._globalState));
         }
 
         public void DeleteSkin()

@@ -197,19 +197,6 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
-    public Animation? CurrentAnimation
-    {
-        get => CurrentProject!.CurrentAnimation;
-        set
-        {
-            if (CurrentProject!.CurrentAnimation != value)
-            {
-                CurrentProject!.CurrentAnimation = value;
-                OnPropertyChanged(nameof(CurrentBone));
-            }
-        }
-    }
-
     private const double ZOOM_STEP = 0.1;
     private const double MIN_ZOOM_CANVAS = 0.1;
     private const double MAX_ZOOM_CANVAS = 5.0;
