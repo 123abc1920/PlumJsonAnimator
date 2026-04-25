@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -92,6 +93,7 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
             if (globalState.CurrentProject != value)
             {
                 globalState.CurrentProject = value;
+                Console.WriteLine(CurrentProject.Name);
                 OnPropertyChanged(nameof(CurrentProject));
             }
         }

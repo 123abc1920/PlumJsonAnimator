@@ -400,9 +400,12 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="name">New name</param>
         public new void SetName(string? name)
         {
-            if (name != null)
+            if (this._globalState.CurrentProject.IsUniqSlot(name))
             {
-                this.Name = name;
+                if (name != null)
+                {
+                    this.Name = name;
+                }
             }
         }
 

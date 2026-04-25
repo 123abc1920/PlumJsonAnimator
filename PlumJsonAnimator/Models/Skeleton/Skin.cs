@@ -216,6 +216,18 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             return JsonConvert.SerializeObject(GenerateJSONData(), this._globalState.jsonSettings);
         }
+
+        public bool IsAttachUniq(string name)
+        {
+            foreach (Attachment attachment in SlotAttachmentBinding.Values)
+            {
+                if (attachment?.Name == name)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
     /// <summary>

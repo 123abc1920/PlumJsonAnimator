@@ -82,19 +82,23 @@ namespace PlumJsonAnimator.Models.Resources
 
         public string ext = ".png";
 
+        // TODO: show toast about names
         public void SetName(string? name)
         {
             if (name != null)
             {
-                this.Name = name;
-                this._projectManager.RenameFile(
-                    Path,
-                    System.IO.Path.Combine(
-                        this._globalState.CurrentProject!.GetProjectPath(),
-                        "res",
-                        $"{this.Name}{ext}"
-                    )
-                );
+                if (this._globalState.CurrentProject.IsUniqRes(name) == true)
+                {
+                    this.Name = name;
+                    this._projectManager.RenameFile(
+                        Path,
+                        System.IO.Path.Combine(
+                            this._globalState.CurrentProject!.GetProjectPath(),
+                            "res",
+                            $"{this.Name}{ext}"
+                        )
+                    );
+                }
             }
         }
 

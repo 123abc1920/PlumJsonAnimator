@@ -582,6 +582,54 @@ namespace PlumJsonAnimator.Models
             }
             this.CurrentSkin = Skins[0];
         }
+
+        public bool IsUniqRes(string name)
+        {
+            foreach (Res r in this.Resources)
+            {
+                if (r.Name == name)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public bool IsUniqBone(string name)
+        {
+            foreach (Bone bone in this.MainSkeleton.Bones)
+            {
+                if (bone.Name == name)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public bool IsUniqSlot(string name)
+        {
+            foreach (Slot slot in this.Slots)
+            {
+                if (slot.Name == name)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public bool IsUniqAttach(string name)
+        {
+            foreach (Skin skin in this.Skins)
+            {
+                if (skin.IsAttachUniq(name) == false)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
     /// <summary>

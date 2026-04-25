@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using PlumJsonAnimator.ViewModels;
 
+// TODO: unique names in redactobjs
 namespace PlumJsonAnimator.Views
 {
     public partial class RenameDialog : UserControl
