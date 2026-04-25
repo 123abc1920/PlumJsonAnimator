@@ -120,7 +120,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
             var drawOrders = new List<DrawOrderItem>();
 
-            foreach (Bone b in BoneAnimationBinding.Keys)
+            foreach (Bone b in this._globalState.CurrentProject.MainSkeleton.Bones)
             {
                 var slots = b.Slots;
                 Dictionary<double, DrawOrderItem> drawOrderItems =
