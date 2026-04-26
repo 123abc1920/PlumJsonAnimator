@@ -203,7 +203,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 }
                 else
                 {
-                    return this.AnimA;
+                    return (this.AnimA == 0) ? this.BaseA : this.AnimA;
                 }
             }
             set
