@@ -224,81 +224,47 @@ namespace PlumJsonAnimator.Models
         private void TranslateStep(Bone b, double time)
         {
             if (_translateKeyframes.Count == 0)
-            {
                 return;
-            }
 
-            if (_rotateKeyframes.Count == 1)
+            double localX,
+                localY;
+
+            if (_translateKeyframes.Count == 1)
             {
                 var onlyKeyframe = (Translate)_translateKeyframes.First().Value;
-                double globalX = (double)onlyKeyframe.x;
-                double globalY = (double)onlyKeyframe.y;
-
-                Bone current = b;
-                double totalAngle = 0;
-
-                while (current.Parent != null)
-                {
-                    totalAngle += current.Parent.A;
-                    double angleRad = totalAngle * Math.PI / 180;
-                    double rotatedX = globalX * Math.Cos(angleRad) - globalY * Math.Sin(angleRad);
-                    double rotatedY = globalX * Math.Sin(angleRad) + globalY * Math.Cos(angleRad);
-                    globalX = current.Parent.GlobalX + rotatedX;
-                    globalY = current.Parent.GlobalY + rotatedY;
-                    current = current.Parent;
-                }
-
-                b.Move(globalX, globalY);
-                return;
+                localX = (double)onlyKeyframe.x;
+                localY = (double)onlyKeyframe.y;
             }
             else
             {
                 FindSegment(time, KeyFrameTypes.TRANSLATE);
-
                 double t = this._interpolation.findInterpolateParam(
                     _translateEnd - _translateStart,
                     time - _translateStart
                 );
 
-                double interpolatedX = b.BaseX;
-                double interpolatedY = b.BaseY;
-
                 if (
-                    this._translateKeyframes.ContainsKey(_translateEnd) == true
-                    && this._translateKeyframes.ContainsKey(_translateStart) == true
+                    this._translateKeyframes.ContainsKey(_translateEnd)
+                    && this._translateKeyframes.ContainsKey(_translateStart)
                 )
                 {
-                    interpolatedX = this._interpolation.linearInterpolation(
+                    localX = this._interpolation.linearInterpolation(
                         ((Translate)_translateKeyframes[_translateStart]).x,
                         ((Translate)_translateKeyframes[_translateEnd]).x,
                         t
                     );
-                    interpolatedY = this._interpolation.linearInterpolation(
+                    localY = this._interpolation.linearInterpolation(
                         ((Translate)_translateKeyframes[_translateStart]).y,
                         ((Translate)_translateKeyframes[_translateEnd]).y,
                         t
                     );
                 }
-
-                double globalX = interpolatedX;
-                double globalY = interpolatedY;
-
-                Bone current = b;
-                double totalAngle = 0;
-
-                while (current.Parent != null)
-                {
-                    totalAngle += current.Parent.A;
-                    double angleRad = totalAngle * Math.PI / 180;
-                    double rotatedX = globalX * Math.Cos(angleRad) - globalY * Math.Sin(angleRad);
-                    double rotatedY = globalX * Math.Sin(angleRad) + globalY * Math.Cos(angleRad);
-                    globalX = current.Parent.GlobalX + rotatedX;
-                    globalY = current.Parent.GlobalY + rotatedY;
-                    current = current.Parent;
-                }
-
-                b.Move(globalX, globalY);
+                else
+                    return;
             }
+
+            b.X = localX;
+            b.Y = localY;
         }
 
         /// <summary>

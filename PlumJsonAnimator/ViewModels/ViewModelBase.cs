@@ -93,7 +93,6 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
             if (globalState.CurrentProject != value)
             {
                 globalState.CurrentProject = value;
-                Console.WriteLine(CurrentProject.Name);
                 OnPropertyChanged(nameof(CurrentProject));
             }
         }
