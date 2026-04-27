@@ -69,6 +69,10 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 BoneAnimationBinding[b].BoneStep(b, currentTime);
             }
+            foreach (Slot s in this._globalState.CurrentProject.Slots)
+            {
+                s.UpdateDrawOrderOffset();
+            }
         }
 
         /// <summary>
