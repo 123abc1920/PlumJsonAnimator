@@ -536,7 +536,7 @@
   },
   "index.html": {
     "href": "index.html",
-    "title": "This is the HOMEPAGE. | PlumJsonAnimator",
-    "summary": "This is the HOMEPAGE. Refer to Markdown for how to write markdown files. Quick Start Notes: Add images to the images folder if the file is referencing an image."
+    "title": "PlumJsonAnimator | PlumJsonAnimator",
+    "summary": "PlumJsonAnimator A program for creating skeletal animations. Free and open-source. The app allows you to create animations in a graphical interface, then export or re-import them. It offers the ability to edit JSON files and export animations as images and videos. It also features the ability to switch themes and languages. Full support for English and Russian languages. Documentation: Introduction Getting Started"
   }
 }
