@@ -5,7 +5,7 @@ items:
   id: Skeleton
   parent: PlumJsonAnimator.Models.SkeletonNameSpace
   children:
-  - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.LocalizationService)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBone(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBoneToParent(System.Int32)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.Bones
@@ -29,7 +29,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Skeleton
     path: Models/Skeleton/Skeleton.cs
-    startLine: 13
+    startLine: 14
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -71,7 +71,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Bones
     path: Models/Skeleton/Skeleton.cs
-    startLine: 15
+    startLine: 16
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -100,7 +100,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: RootBones
     path: Models/Skeleton/Skeleton.cs
-    startLine: 16
+    startLine: 17
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -111,16 +111,16 @@ items:
       type: System.Collections.ObjectModel.ObservableCollection{PlumJsonAnimator.Models.SkeletonNameSpace.Bone}
     content.vb: Public Property RootBones As ObservableCollection(Of Bone)
   overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.RootBones*
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
-  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
-  id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState)'
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.LocalizationService)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.LocalizationService)
+  id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.LocalizationService)'
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton
   langs:
   - csharp
   - vb
-  name: Skeleton(GlobalState)
-  nameWithType: Skeleton.Skeleton(GlobalState)
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.Skeleton(PlumJsonAnimator.Common.Constants.GlobalState)
+  name: Skeleton(GlobalState, LocalizationService)
+  nameWithType: Skeleton.Skeleton(GlobalState, LocalizationService)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.Skeleton(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.LocalizationService)
   type: Constructor
   source:
     remote:
@@ -129,20 +129,22 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Models/Skeleton/Skeleton.cs
-    startLine: 22
+    startLine: 24
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
   syntax:
-    content: public Skeleton(GlobalState globalState)
+    content: public Skeleton(GlobalState globalState, LocalizationService localizationService)
     parameters:
     - id: globalState
       type: PlumJsonAnimator.Common.Constants.GlobalState
-    content.vb: Public Sub New(globalState As GlobalState)
+    - id: localizationService
+      type: PlumJsonAnimator.Services.LocalizationService
+    content.vb: Public Sub New(globalState As GlobalState, localizationService As LocalizationService)
   overload: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.#ctor*
-  nameWithType.vb: Skeleton.New(GlobalState)
-  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.New(PlumJsonAnimator.Common.Constants.GlobalState)
-  name.vb: New(GlobalState)
+  nameWithType.vb: Skeleton.New(GlobalState, LocalizationService)
+  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.LocalizationService)
+  name.vb: New(GlobalState, LocalizationService)
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBoneToParent(System.Int32)
   commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBoneToParent(System.Int32)
   id: AddBoneToParent(System.Int32)
@@ -161,7 +163,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AddBoneToParent
     path: Models/Skeleton/Skeleton.cs
-    startLine: 37
+    startLine: 40
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -196,7 +198,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AddBone
     path: Models/Skeleton/Skeleton.cs
-    startLine: 55
+    startLine: 66
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -228,7 +230,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetBoneById
     path: Models/Skeleton/Skeleton.cs
-    startLine: 62
+    startLine: 73
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -262,7 +264,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetBoneByName
     path: Models/Skeleton/Skeleton.cs
-    startLine: 74
+    startLine: 85
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -296,7 +298,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: DrawSkeleton
     path: Models/Skeleton/Skeleton.cs
-    startLine: 86
+    startLine: 97
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -325,7 +327,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GenerateJSONData
     path: Models/Skeleton/Skeleton.cs
-    startLine: 94
+    startLine: 105
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -353,7 +355,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GenerateCode
     path: Models/Skeleton/Skeleton.cs
-    startLine: 106
+    startLine: 117
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -853,7 +855,7 @@ references:
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.RootBones
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.#ctor*
   commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.#ctor
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skeleton__ctor_PlumJsonAnimator_Common_Constants_GlobalState_
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skeleton__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_LocalizationService_
   name: Skeleton
   nameWithType: Skeleton.Skeleton
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.Skeleton
@@ -867,6 +869,13 @@ references:
   name: GlobalState
   nameWithType: GlobalState
   fullName: PlumJsonAnimator.Common.Constants.GlobalState
+- uid: PlumJsonAnimator.Services.LocalizationService
+  commentId: T:PlumJsonAnimator.Services.LocalizationService
+  parent: PlumJsonAnimator.Services
+  href: PlumJsonAnimator.Services.LocalizationService.html
+  name: LocalizationService
+  nameWithType: LocalizationService
+  fullName: PlumJsonAnimator.Services.LocalizationService
 - uid: PlumJsonAnimator.Common.Constants
   commentId: N:PlumJsonAnimator.Common.Constants
   href: PlumJsonAnimator.html
@@ -897,6 +906,28 @@ references:
   - uid: PlumJsonAnimator.Common.Constants
     name: Constants
     href: PlumJsonAnimator.Common.Constants.html
+- uid: PlumJsonAnimator.Services
+  commentId: N:PlumJsonAnimator.Services
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Services
+  nameWithType: PlumJsonAnimator.Services
+  fullName: PlumJsonAnimator.Services
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Services
+    name: Services
+    href: PlumJsonAnimator.Services.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Services
+    name: Services
+    href: PlumJsonAnimator.Services.html
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBoneToParent*
   commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.AddBoneToParent
   href: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skeleton_AddBoneToParent_System_Int32_

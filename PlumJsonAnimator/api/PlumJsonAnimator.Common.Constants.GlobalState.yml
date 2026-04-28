@@ -24,6 +24,7 @@ items:
   - PlumJsonAnimator.Common.Constants.GlobalState.jsonError
   - PlumJsonAnimator.Common.Constants.GlobalState.jsonSettings
   - PlumJsonAnimator.Common.Constants.GlobalState.programExt
+  - PlumJsonAnimator.Common.Constants.GlobalState.setBasePos
   - PlumJsonAnimator.Common.Constants.GlobalState.theme
   - PlumJsonAnimator.Common.Constants.GlobalState.workspace
   - PlumJsonAnimator.Common.Constants.GlobalState.zoomCanvas
@@ -309,6 +310,33 @@ items:
     return:
       type: System.Boolean
     content.vb: Public drawBones As Boolean
+- uid: PlumJsonAnimator.Common.Constants.GlobalState.setBasePos
+  commentId: F:PlumJsonAnimator.Common.Constants.GlobalState.setBasePos
+  id: setBasePos
+  parent: PlumJsonAnimator.Common.Constants.GlobalState
+  langs:
+  - csharp
+  - vb
+  name: setBasePos
+  nameWithType: GlobalState.setBasePos
+  fullName: PlumJsonAnimator.Common.Constants.GlobalState.setBasePos
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Common/Constants/GlobalState.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: setBasePos
+    path: Common/Constants/GlobalState.cs
+    startLine: 50
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Common.Constants
+  syntax:
+    content: public bool setBasePos
+    return:
+      type: System.Boolean
+    content.vb: Public setBasePos As Boolean
 - uid: PlumJsonAnimator.Common.Constants.GlobalState.captureMode
   commentId: F:PlumJsonAnimator.Common.Constants.GlobalState.captureMode
   id: captureMode
@@ -327,7 +355,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: captureMode
     path: Common/Constants/GlobalState.cs
-    startLine: 50
+    startLine: 51
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -354,7 +382,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: workspace
     path: Common/Constants/GlobalState.cs
-    startLine: 51
+    startLine: 52
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -381,7 +409,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: programExt
     path: Common/Constants/GlobalState.cs
-    startLine: 52
+    startLine: 53
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -408,7 +436,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: BASE_CANVAS_SIZE
     path: Common/Constants/GlobalState.cs
-    startLine: 54
+    startLine: 55
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -435,7 +463,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: canvasHeight
     path: Common/Constants/GlobalState.cs
-    startLine: 55
+    startLine: 56
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -462,7 +490,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: canvasWidth
     path: Common/Constants/GlobalState.cs
-    startLine: 56
+    startLine: 57
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -489,7 +517,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: zoomCanvas
     path: Common/Constants/GlobalState.cs
-    startLine: 58
+    startLine: 59
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -516,7 +544,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: captureArea
     path: Common/Constants/GlobalState.cs
-    startLine: 60
+    startLine: 61
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -543,7 +571,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetParallelOptions
     path: Common/Constants/GlobalState.cs
-    startLine: 62
+    startLine: 63
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -571,7 +599,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetDotBoneColor
     path: Common/Constants/GlobalState.cs
-    startLine: 69
+    startLine: 70
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -602,7 +630,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetLineBoneColor
     path: Common/Constants/GlobalState.cs
-    startLine: 81
+    startLine: 82
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -633,7 +661,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: IsSlotSelected
     path: Common/Constants/GlobalState.cs
-    startLine: 93
+    startLine: 94
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -664,7 +692,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Common/Constants/GlobalState.cs
-    startLine: 105
+    startLine: 106
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants

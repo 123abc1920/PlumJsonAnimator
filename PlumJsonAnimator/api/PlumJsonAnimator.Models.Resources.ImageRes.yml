@@ -23,7 +23,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ImageRes
     path: Models/Resources/Resources.cs
-    startLine: 109
+    startLine: 113
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Resources
@@ -77,7 +77,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: width
     path: Models/Resources/Resources.cs
-    startLine: 111
+    startLine: 115
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Resources
@@ -104,7 +104,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: height
     path: Models/Resources/Resources.cs
-    startLine: 112
+    startLine: 116
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Resources
@@ -131,7 +131,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Models/Resources/Resources.cs
-    startLine: 114
+    startLine: 118
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Resources
@@ -165,7 +165,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Models/Resources/Resources.cs
-    startLine: 117
+    startLine: 121
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Resources

@@ -5,10 +5,10 @@ items:
   id: JsonCode
   parent: PlumJsonAnimator.Services
   children:
-  - PlumJsonAnimator.Services.JsonCode.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Prettify)
+  - PlumJsonAnimator.Services.JsonCode.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Prettify,PlumJsonAnimator.Services.LocalizationService)
+  - PlumJsonAnimator.Services.JsonCode.Regenerate(PlumJsonAnimator.Models.Project,System.Boolean)
   - PlumJsonAnimator.Services.JsonCode.generateCode(PlumJsonAnimator.Models.Project)
   - PlumJsonAnimator.Services.JsonCode.generateJSONData(PlumJsonAnimator.Models.Project)
-  - PlumJsonAnimator.Services.JsonCode.regenerate(PlumJsonAnimator.Models.Project)
   langs:
   - csharp
   - vb
@@ -23,7 +23,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: JsonCode
     path: Services/JsonCode.cs
-    startLine: 16
+    startLine: 15
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -42,16 +42,16 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-- uid: PlumJsonAnimator.Services.JsonCode.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Prettify)
-  commentId: M:PlumJsonAnimator.Services.JsonCode.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Prettify)
-  id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Prettify)'
+- uid: PlumJsonAnimator.Services.JsonCode.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Prettify,PlumJsonAnimator.Services.LocalizationService)
+  commentId: M:PlumJsonAnimator.Services.JsonCode.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Prettify,PlumJsonAnimator.Services.LocalizationService)
+  id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Prettify,PlumJsonAnimator.Services.LocalizationService)'
   parent: PlumJsonAnimator.Services.JsonCode
   langs:
   - csharp
   - vb
-  name: JsonCode(GlobalState, Prettify)
-  nameWithType: JsonCode.JsonCode(GlobalState, Prettify)
-  fullName: PlumJsonAnimator.Services.JsonCode.JsonCode(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Prettify)
+  name: JsonCode(GlobalState, Prettify, LocalizationService)
+  nameWithType: JsonCode.JsonCode(GlobalState, Prettify, LocalizationService)
+  fullName: PlumJsonAnimator.Services.JsonCode.JsonCode(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Prettify, PlumJsonAnimator.Services.LocalizationService)
   type: Constructor
   source:
     remote:
@@ -60,22 +60,24 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Services/JsonCode.cs
-    startLine: 32
+    startLine: 31
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
   syntax:
-    content: public JsonCode(GlobalState globalState, Prettify prettify)
+    content: public JsonCode(GlobalState globalState, Prettify prettify, LocalizationService localizationService)
     parameters:
     - id: globalState
       type: PlumJsonAnimator.Common.Constants.GlobalState
     - id: prettify
       type: PlumJsonAnimator.Services.Prettify
-    content.vb: Public Sub New(globalState As GlobalState, prettify As Prettify)
+    - id: localizationService
+      type: PlumJsonAnimator.Services.LocalizationService
+    content.vb: Public Sub New(globalState As GlobalState, prettify As Prettify, localizationService As LocalizationService)
   overload: PlumJsonAnimator.Services.JsonCode.#ctor*
-  nameWithType.vb: JsonCode.New(GlobalState, Prettify)
-  fullName.vb: PlumJsonAnimator.Services.JsonCode.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Prettify)
-  name.vb: New(GlobalState, Prettify)
+  nameWithType.vb: JsonCode.New(GlobalState, Prettify, LocalizationService)
+  fullName.vb: PlumJsonAnimator.Services.JsonCode.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Prettify, PlumJsonAnimator.Services.LocalizationService)
+  name.vb: New(GlobalState, Prettify, LocalizationService)
 - uid: PlumJsonAnimator.Services.JsonCode.generateJSONData(PlumJsonAnimator.Models.Project)
   commentId: M:PlumJsonAnimator.Services.JsonCode.generateJSONData(PlumJsonAnimator.Models.Project)
   id: generateJSONData(PlumJsonAnimator.Models.Project)
@@ -94,7 +96,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: generateJSONData
     path: Services/JsonCode.cs
-    startLine: 140
+    startLine: 144
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -129,7 +131,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: generateCode
     path: Services/JsonCode.cs
-    startLine: 171
+    startLine: 175
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -143,25 +145,25 @@ items:
       description: Project that has to get data
     content.vb: Public Sub generateCode(project As Project)
   overload: PlumJsonAnimator.Services.JsonCode.generateCode*
-- uid: PlumJsonAnimator.Services.JsonCode.regenerate(PlumJsonAnimator.Models.Project)
-  commentId: M:PlumJsonAnimator.Services.JsonCode.regenerate(PlumJsonAnimator.Models.Project)
-  id: regenerate(PlumJsonAnimator.Models.Project)
+- uid: PlumJsonAnimator.Services.JsonCode.Regenerate(PlumJsonAnimator.Models.Project,System.Boolean)
+  commentId: M:PlumJsonAnimator.Services.JsonCode.Regenerate(PlumJsonAnimator.Models.Project,System.Boolean)
+  id: Regenerate(PlumJsonAnimator.Models.Project,System.Boolean)
   parent: PlumJsonAnimator.Services.JsonCode
   langs:
   - csharp
   - vb
-  name: regenerate(Project)
-  nameWithType: JsonCode.regenerate(Project)
-  fullName: PlumJsonAnimator.Services.JsonCode.regenerate(PlumJsonAnimator.Models.Project)
+  name: Regenerate(Project, bool)
+  nameWithType: JsonCode.Regenerate(Project, bool)
+  fullName: PlumJsonAnimator.Services.JsonCode.Regenerate(PlumJsonAnimator.Models.Project, bool)
   type: Method
   source:
     remote:
       path: PlumJsonAnimator/Services/JsonCode.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: regenerate
+    id: Regenerate
     path: Services/JsonCode.cs
-    startLine: 385
+    startLine: 399
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -176,16 +178,22 @@ items:
         //DO SOMETHING
     }
   syntax:
-    content: public JsonCode.ValidResult regenerate(Project project)
+    content: public JsonCode.ValidResult Regenerate(Project project, bool needRegenearation)
     parameters:
     - id: project
       type: PlumJsonAnimator.Models.Project
       description: Project
+    - id: needRegenearation
+      type: System.Boolean
+      description: If true, recreates all project objects, else just validate
     return:
       type: PlumJsonAnimator.Services.JsonCode.ValidResult
       description: ValoidResult, where UpdatedArray is empty
-    content.vb: Public Function regenerate(project As Project) As JsonCode.ValidResult
-  overload: PlumJsonAnimator.Services.JsonCode.regenerate*
+    content.vb: Public Function Regenerate(project As Project, needRegenearation As Boolean) As JsonCode.ValidResult
+  overload: PlumJsonAnimator.Services.JsonCode.Regenerate*
+  nameWithType.vb: JsonCode.Regenerate(Project, Boolean)
+  fullName.vb: PlumJsonAnimator.Services.JsonCode.Regenerate(PlumJsonAnimator.Models.Project, Boolean)
+  name.vb: Regenerate(Project, Boolean)
 references:
 - uid: PlumJsonAnimator.Services
   commentId: N:PlumJsonAnimator.Services
@@ -448,7 +456,7 @@ references:
   fullName: System
 - uid: PlumJsonAnimator.Services.JsonCode.#ctor*
   commentId: Overload:PlumJsonAnimator.Services.JsonCode.#ctor
-  href: PlumJsonAnimator.Services.JsonCode.html#PlumJsonAnimator_Services_JsonCode__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_Prettify_
+  href: PlumJsonAnimator.Services.JsonCode.html#PlumJsonAnimator_Services_JsonCode__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_Prettify_PlumJsonAnimator_Services_LocalizationService_
   name: JsonCode
   nameWithType: JsonCode.JsonCode
   fullName: PlumJsonAnimator.Services.JsonCode.JsonCode
@@ -469,6 +477,13 @@ references:
   name: Prettify
   nameWithType: Prettify
   fullName: PlumJsonAnimator.Services.Prettify
+- uid: PlumJsonAnimator.Services.LocalizationService
+  commentId: T:PlumJsonAnimator.Services.LocalizationService
+  parent: PlumJsonAnimator.Services
+  href: PlumJsonAnimator.Services.LocalizationService.html
+  name: LocalizationService
+  nameWithType: LocalizationService
+  fullName: PlumJsonAnimator.Services.LocalizationService
 - uid: PlumJsonAnimator.Common.Constants
   commentId: N:PlumJsonAnimator.Common.Constants
   href: PlumJsonAnimator.html
@@ -547,12 +562,23 @@ references:
   name: generateCode
   nameWithType: JsonCode.generateCode
   fullName: PlumJsonAnimator.Services.JsonCode.generateCode
-- uid: PlumJsonAnimator.Services.JsonCode.regenerate*
-  commentId: Overload:PlumJsonAnimator.Services.JsonCode.regenerate
-  href: PlumJsonAnimator.Services.JsonCode.html#PlumJsonAnimator_Services_JsonCode_regenerate_PlumJsonAnimator_Models_Project_
-  name: regenerate
-  nameWithType: JsonCode.regenerate
-  fullName: PlumJsonAnimator.Services.JsonCode.regenerate
+- uid: PlumJsonAnimator.Services.JsonCode.Regenerate*
+  commentId: Overload:PlumJsonAnimator.Services.JsonCode.Regenerate
+  href: PlumJsonAnimator.Services.JsonCode.html#PlumJsonAnimator_Services_JsonCode_Regenerate_PlumJsonAnimator_Models_Project_System_Boolean_
+  name: Regenerate
+  nameWithType: JsonCode.Regenerate
+  fullName: PlumJsonAnimator.Services.JsonCode.Regenerate
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
 - uid: PlumJsonAnimator.Services.JsonCode.ValidResult
   commentId: T:PlumJsonAnimator.Services.JsonCode.ValidResult
   parent: PlumJsonAnimator.Services

@@ -8,6 +8,7 @@ items:
   - PlumJsonAnimator.Models.SkeletonNameSpace.Slot.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Slot.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,System.Int32,System.String)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Slot.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,System.String,PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Slot.A
   - PlumJsonAnimator.Models.SkeletonNameSpace.Slot.BoundedBone
   - PlumJsonAnimator.Models.SkeletonNameSpace.Slot.CurrentAttachment
   - PlumJsonAnimator.Models.SkeletonNameSpace.Slot.CurrentDrawOrderOffset
@@ -24,12 +25,10 @@ items:
   - PlumJsonAnimator.Models.SkeletonNameSpace.Slot.SetName(System.String)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Slot.UpdateAttachment
   - PlumJsonAnimator.Models.SkeletonNameSpace.Slot.UpdateDrawOrderOffset
-  - PlumJsonAnimator.Models.SkeletonNameSpace.Slot.a
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Slot.X
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Slot.Y
   - PlumJsonAnimator.Models.SkeletonNameSpace.Slot.drawOrders
   - PlumJsonAnimator.Models.SkeletonNameSpace.Slot.isUpdatingFromCode
-  - PlumJsonAnimator.Models.SkeletonNameSpace.Slot.parentA
-  - PlumJsonAnimator.Models.SkeletonNameSpace.Slot.x
-  - PlumJsonAnimator.Models.SkeletonNameSpace.Slot.y
   langs:
   - csharp
   - vb
@@ -44,7 +43,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Slot
     path: Models/Skeleton/Slot.cs
-    startLine: 16
+    startLine: 17
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -63,11 +62,21 @@ items:
   inheritedMembers:
   - PlumJsonAnimator.Models.SkeletonNameSpace.Bone.id
   - PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Name
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseX
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseY
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseA
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimX
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimY
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimA
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalX
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalY
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalA
   - PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Slots
   - PlumJsonAnimator.Models.SkeletonNameSpace.Bone.UpdateSlots
   - PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Children
   - PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Parent
   - PlumJsonAnimator.Models.SkeletonNameSpace.Bone._globalState
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Bone._localizationService
   - PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AddChildren(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Bone.DrawBone(Avalonia.Controls.Canvas)
   - PlumJsonAnimator.Models.Interfaces.INotifyable.PropertyChanged
@@ -97,7 +106,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: IsBone
     path: Models/Skeleton/Slot.cs
-    startLine: 18
+    startLine: 19
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -110,85 +119,85 @@ items:
     content.vb: Public Overrides ReadOnly Property IsBone As Boolean
   overridden: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.IsBone
   overload: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.IsBone*
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.x
-  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.x
-  id: x
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.X
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.X
+  id: X
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
   langs:
   - csharp
   - vb
-  name: x
-  nameWithType: Slot.x
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.x
+  name: X
+  nameWithType: Slot.X
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.X
   type: Property
   source:
     remote:
       path: PlumJsonAnimator/Models/Skeleton/Slot.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: x
+    id: X
     path: Models/Skeleton/Slot.cs
-    startLine: 26
+    startLine: 28
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
   example: []
   syntax:
-    content: public override double x { get; set; }
+    content: public override double X { get; set; }
     parameters: []
     return:
       type: System.Double
-    content.vb: Public Overrides Property x As Double
-  overridden: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.x
-  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.x*
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.y
-  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.y
-  id: y
+    content.vb: Public Overrides Property X As Double
+  overridden: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.X
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.X*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.Y
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.Y
+  id: Y
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
   langs:
   - csharp
   - vb
-  name: y
-  nameWithType: Slot.y
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.y
+  name: Y
+  nameWithType: Slot.Y
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.Y
   type: Property
   source:
     remote:
       path: PlumJsonAnimator/Models/Skeleton/Slot.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: y
+    id: Y
     path: Models/Skeleton/Slot.cs
-    startLine: 40
+    startLine: 41
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
   example: []
   syntax:
-    content: public override double y { get; set; }
+    content: public override double Y { get; set; }
     parameters: []
     return:
       type: System.Double
-    content.vb: Public Overrides Property y As Double
-  overridden: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.y
-  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.y*
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.a
-  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.a
-  id: a
+    content.vb: Public Overrides Property Y As Double
+  overridden: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Y
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.Y*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.A
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.A
+  id: A
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
   langs:
   - csharp
   - vb
-  name: a
-  nameWithType: Slot.a
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.a
+  name: A
+  nameWithType: Slot.A
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.A
   type: Property
   source:
     remote:
       path: PlumJsonAnimator/Models/Skeleton/Slot.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
-    id: a
+    id: A
     path: Models/Skeleton/Slot.cs
     startLine: 54
   assemblies:
@@ -196,13 +205,13 @@ items:
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
   example: []
   syntax:
-    content: public override double a { get; set; }
+    content: public override double A { get; set; }
     parameters: []
     return:
       type: System.Double
-    content.vb: Public Overrides Property a As Double
-  overridden: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.a
-  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.a*
+    content.vb: Public Overrides Property A As Double
+  overridden: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.A
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.A*
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.CurrentAttachment
   commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.CurrentAttachment
   id: CurrentAttachment
@@ -221,7 +230,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: CurrentAttachment
     path: Models/Skeleton/Slot.cs
-    startLine: 70
+    startLine: 69
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -250,7 +259,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: UpdateAttachment
     path: Models/Skeleton/Slot.cs
-    startLine: 86
+    startLine: 85
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -278,7 +287,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: drawOrders
     path: Models/Skeleton/Slot.cs
-    startLine: 102
+    startLine: 100
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -305,7 +314,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: isUpdatingFromCode
     path: Models/Skeleton/Slot.cs
-    startLine: 105
+    startLine: 103
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -332,7 +341,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: CurrentDrawOrderOffset
     path: Models/Skeleton/Slot.cs
-    startLine: 107
+    startLine: 105
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -361,7 +370,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: UpdateDrawOrderOffset
     path: Models/Skeleton/Slot.cs
-    startLine: 142
+    startLine: 140
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -371,33 +380,6 @@ items:
     content: public void UpdateDrawOrderOffset()
     content.vb: Public Sub UpdateDrawOrderOffset()
   overload: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.UpdateDrawOrderOffset*
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.parentA
-  commentId: F:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.parentA
-  id: parentA
-  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
-  langs:
-  - csharp
-  - vb
-  name: parentA
-  nameWithType: Slot.parentA
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.parentA
-  type: Field
-  source:
-    remote:
-      path: PlumJsonAnimator/Models/Skeleton/Slot.cs
-      branch: main
-      repo: https://github.com/123abc1920/PlumAnimation.git
-    id: parentA
-    path: Models/Skeleton/Slot.cs
-    startLine: 170
-  assemblies:
-  - PlumJsonAnimator
-  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
-  syntax:
-    content: public double parentA
-    return:
-      type: System.Double
-    content.vb: Public parentA As Double
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.LengthX
   commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.LengthX
   id: LengthX
@@ -416,7 +398,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: LengthX
     path: Models/Skeleton/Slot.cs
-    startLine: 173
+    startLine: 169
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -447,7 +429,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: LengthY
     path: Models/Skeleton/Slot.cs
-    startLine: 186
+    startLine: 182
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -478,7 +460,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: BoundedBone
     path: Models/Skeleton/Slot.cs
-    startLine: 199
+    startLine: 195
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -507,7 +489,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Models/Skeleton/Slot.cs
-    startLine: 216
+    startLine: 212
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -543,7 +525,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Models/Skeleton/Slot.cs
-    startLine: 229
+    startLine: 225
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -579,7 +561,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Models/Skeleton/Slot.cs
-    startLine: 237
+    startLine: 233
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -613,7 +595,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Move
     path: Models/Skeleton/Slot.cs
-    startLine: 250
+    startLine: 246
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -652,7 +634,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Scale
     path: Models/Skeleton/Slot.cs
-    startLine: 263
+    startLine: 269
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -691,7 +673,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Rotate
     path: Models/Skeleton/Slot.cs
-    startLine: 278
+    startLine: 284
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -727,7 +709,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: DrawSlot
     path: Models/Skeleton/Slot.cs
-    startLine: 288
+    startLine: 300
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -756,7 +738,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GenerateJSONData
     path: Models/Skeleton/Slot.cs
-    startLine: 361
+    startLine: 381
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -784,7 +766,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GenerateCode
     path: Models/Skeleton/Slot.cs
-    startLine: 371
+    startLine: 391
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -812,7 +794,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SetName
     path: Models/Skeleton/Slot.cs
-    startLine: 380
+    startLine: 400
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -849,7 +831,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetName
     path: Models/Skeleton/Slot.cs
-    startLine: 388
+    startLine: 411
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -948,6 +930,69 @@ references:
   name: Name
   nameWithType: Bone.Name
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Name
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseX
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseX
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_BaseX
+  name: BaseX
+  nameWithType: Bone.BaseX
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseX
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseY
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseY
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_BaseY
+  name: BaseY
+  nameWithType: Bone.BaseY
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseY
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseA
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseA
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_BaseA
+  name: BaseA
+  nameWithType: Bone.BaseA
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseA
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimX
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimX
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_AnimX
+  name: AnimX
+  nameWithType: Bone.AnimX
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimX
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimY
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimY
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_AnimY
+  name: AnimY
+  nameWithType: Bone.AnimY
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimY
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimA
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimA
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_AnimA
+  name: AnimA
+  nameWithType: Bone.AnimA
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimA
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalX
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalX
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_GlobalX
+  name: GlobalX
+  nameWithType: Bone.GlobalX
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalX
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalY
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalY
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_GlobalY
+  name: GlobalY
+  nameWithType: Bone.GlobalY
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalY
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalA
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalA
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_GlobalA
+  name: GlobalA
+  nameWithType: Bone.GlobalA
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalA
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Slots
   commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Slots
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
@@ -995,6 +1040,13 @@ references:
   name: _globalState
   nameWithType: Bone._globalState
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone._globalState
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone._localizationService
+  commentId: F:PlumJsonAnimator.Models.SkeletonNameSpace.Bone._localizationService
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone__localizationService
+  name: _localizationService
+  nameWithType: Bone._localizationService
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone._localizationService
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AddChildren(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
   commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AddChildren(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
@@ -1391,19 +1443,19 @@ references:
   nameWithType.vb: Boolean
   fullName.vb: Boolean
   name.vb: Boolean
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.x
-  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.x
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.X
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.X
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_x
-  name: x
-  nameWithType: Bone.x
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.x
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.x*
-  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.x
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html#PlumJsonAnimator_Models_SkeletonNameSpace_Slot_x
-  name: x
-  nameWithType: Slot.x
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.x
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_X
+  name: X
+  nameWithType: Bone.X
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.X
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.X*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.X
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html#PlumJsonAnimator_Models_SkeletonNameSpace_Slot_X
+  name: X
+  nameWithType: Slot.X
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.X
 - uid: System.Double
   commentId: T:System.Double
   parent: System
@@ -1415,32 +1467,32 @@ references:
   nameWithType.vb: Double
   fullName.vb: Double
   name.vb: Double
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.y
-  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.y
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Y
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Y
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_y
-  name: y
-  nameWithType: Bone.y
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.y
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.y*
-  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.y
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html#PlumJsonAnimator_Models_SkeletonNameSpace_Slot_y
-  name: y
-  nameWithType: Slot.y
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.y
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.a
-  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.a
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_Y
+  name: Y
+  nameWithType: Bone.Y
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Y
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.Y*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.Y
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html#PlumJsonAnimator_Models_SkeletonNameSpace_Slot_Y
+  name: Y
+  nameWithType: Slot.Y
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.Y
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.A
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.A
   parent: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_a
-  name: a
-  nameWithType: Bone.a
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.a
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.a*
-  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.a
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html#PlumJsonAnimator_Models_SkeletonNameSpace_Slot_a
-  name: a
-  nameWithType: Slot.a
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.a
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_A
+  name: A
+  nameWithType: Bone.A
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.A
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.A*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.A
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html#PlumJsonAnimator_Models_SkeletonNameSpace_Slot_A
+  name: A
+  nameWithType: Slot.A
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.A
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.CurrentAttachment*
   commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.CurrentAttachment
   href: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html#PlumJsonAnimator_Models_SkeletonNameSpace_Slot_CurrentAttachment

@@ -5,7 +5,7 @@ items:
   id: ImageExporter
   parent: PlumJsonAnimator.Services
   children:
-  - PlumJsonAnimator.Services.ImageExporter.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
+  - PlumJsonAnimator.Services.ImageExporter.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.LocalizationService)
   - PlumJsonAnimator.Services.ImageExporter.Canvas
   - PlumJsonAnimator.Services.ImageExporter.ExportAsGif(System.Double,System.Double,System.String,PlumJsonAnimator.Models.Project)
   - PlumJsonAnimator.Services.ImageExporter.ExportAsJpg(System.Double,System.Double,System.String,PlumJsonAnimator.Models.Project)
@@ -102,16 +102,16 @@ items:
       type: Avalonia.Controls.Canvas
     content.vb: Public Property Canvas As Canvas
   overload: PlumJsonAnimator.Services.ImageExporter.Canvas*
-- uid: PlumJsonAnimator.Services.ImageExporter.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
-  commentId: M:PlumJsonAnimator.Services.ImageExporter.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
-  id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState)'
+- uid: PlumJsonAnimator.Services.ImageExporter.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.LocalizationService)
+  commentId: M:PlumJsonAnimator.Services.ImageExporter.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.LocalizationService)
+  id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.LocalizationService)'
   parent: PlumJsonAnimator.Services.ImageExporter
   langs:
   - csharp
   - vb
-  name: ImageExporter(GlobalState)
-  nameWithType: ImageExporter.ImageExporter(GlobalState)
-  fullName: PlumJsonAnimator.Services.ImageExporter.ImageExporter(PlumJsonAnimator.Common.Constants.GlobalState)
+  name: ImageExporter(GlobalState, LocalizationService)
+  nameWithType: ImageExporter.ImageExporter(GlobalState, LocalizationService)
+  fullName: PlumJsonAnimator.Services.ImageExporter.ImageExporter(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.LocalizationService)
   type: Constructor
   source:
     remote:
@@ -120,20 +120,22 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Services/ImageExporter.cs
-    startLine: 40
+    startLine: 41
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
   syntax:
-    content: public ImageExporter(GlobalState globalState)
+    content: public ImageExporter(GlobalState globalState, LocalizationService localizationService)
     parameters:
     - id: globalState
       type: PlumJsonAnimator.Common.Constants.GlobalState
-    content.vb: Public Sub New(globalState As GlobalState)
+    - id: localizationService
+      type: PlumJsonAnimator.Services.LocalizationService
+    content.vb: Public Sub New(globalState As GlobalState, localizationService As LocalizationService)
   overload: PlumJsonAnimator.Services.ImageExporter.#ctor*
-  nameWithType.vb: ImageExporter.New(GlobalState)
-  fullName.vb: PlumJsonAnimator.Services.ImageExporter.New(PlumJsonAnimator.Common.Constants.GlobalState)
-  name.vb: New(GlobalState)
+  nameWithType.vb: ImageExporter.New(GlobalState, LocalizationService)
+  fullName.vb: PlumJsonAnimator.Services.ImageExporter.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.LocalizationService)
+  name.vb: New(GlobalState, LocalizationService)
 - uid: PlumJsonAnimator.Services.ImageExporter.ProgressChanged
   commentId: E:PlumJsonAnimator.Services.ImageExporter.ProgressChanged
   id: ProgressChanged
@@ -152,7 +154,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ProgressChanged
     path: Services/ImageExporter.cs
-    startLine: 79
+    startLine: 81
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -179,7 +181,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ExportAsPng
     path: Services/ImageExporter.cs
-    startLine: 88
+    startLine: 90
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -225,7 +227,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ExportAsJpg
     path: Services/ImageExporter.cs
-    startLine: 147
+    startLine: 149
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -271,7 +273,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ExportAsGif
     path: Services/ImageExporter.cs
-    startLine: 206
+    startLine: 208
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -317,7 +319,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ExportAsMp4
     path: Services/ImageExporter.cs
-    startLine: 305
+    startLine: 307
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -656,7 +658,7 @@ references:
     isExternal: true
 - uid: PlumJsonAnimator.Services.ImageExporter.#ctor*
   commentId: Overload:PlumJsonAnimator.Services.ImageExporter.#ctor
-  href: PlumJsonAnimator.Services.ImageExporter.html#PlumJsonAnimator_Services_ImageExporter__ctor_PlumJsonAnimator_Common_Constants_GlobalState_
+  href: PlumJsonAnimator.Services.ImageExporter.html#PlumJsonAnimator_Services_ImageExporter__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_LocalizationService_
   name: ImageExporter
   nameWithType: ImageExporter.ImageExporter
   fullName: PlumJsonAnimator.Services.ImageExporter.ImageExporter
@@ -670,6 +672,13 @@ references:
   name: GlobalState
   nameWithType: GlobalState
   fullName: PlumJsonAnimator.Common.Constants.GlobalState
+- uid: PlumJsonAnimator.Services.LocalizationService
+  commentId: T:PlumJsonAnimator.Services.LocalizationService
+  parent: PlumJsonAnimator.Services
+  href: PlumJsonAnimator.Services.LocalizationService.html
+  name: LocalizationService
+  nameWithType: LocalizationService
+  fullName: PlumJsonAnimator.Services.LocalizationService
 - uid: PlumJsonAnimator.Common.Constants
   commentId: N:PlumJsonAnimator.Common.Constants
   href: PlumJsonAnimator.html

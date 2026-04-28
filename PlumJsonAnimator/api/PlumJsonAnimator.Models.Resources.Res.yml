@@ -336,7 +336,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SetName
     path: Models/Resources/Resources.cs
-    startLine: 84
+    startLine: 85
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Resources
@@ -371,7 +371,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SetPath
     path: Models/Resources/Resources.cs
-    startLine: 100
+    startLine: 104
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.Resources

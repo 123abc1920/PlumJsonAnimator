@@ -19,7 +19,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: BonesListData
     path: Models/Skeleton/Animation.cs
-    startLine: 333
+    startLine: 361
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace

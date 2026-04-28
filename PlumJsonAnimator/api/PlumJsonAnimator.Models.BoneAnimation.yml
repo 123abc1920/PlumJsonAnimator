@@ -29,7 +29,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: BoneAnimation
     path: Models/BoneAnimation.cs
-    startLine: 15
+    startLine: 16
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -66,7 +66,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Models/BoneAnimation.cs
-    startLine: 38
+    startLine: 39
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -100,7 +100,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AddTranslateFrame
     path: Models/BoneAnimation.cs
-    startLine: 50
+    startLine: 51
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -141,7 +141,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AddRotateFrame
     path: Models/BoneAnimation.cs
-    startLine: 67
+    startLine: 68
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -179,7 +179,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: DeleteKeyFrame
     path: Models/BoneAnimation.cs
-    startLine: 84
+    startLine: 85
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -217,7 +217,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetKeyFeamesMarks
     path: Models/BoneAnimation.cs
-    startLine: 116
+    startLine: 117
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -245,7 +245,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: BoneStep
     path: Models/BoneAnimation.cs
-    startLine: 281
+    startLine: 316
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -283,7 +283,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GenerateJSONData
     path: Models/BoneAnimation.cs
-    startLine: 287
+    startLine: 322
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -311,7 +311,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GenerateCode
     path: Models/BoneAnimation.cs
-    startLine: 320
+    startLine: 355
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -339,7 +339,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: FindTime
     path: Models/BoneAnimation.cs
-    startLine: 332
+    startLine: 367
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -383,7 +383,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: MaxTime
     path: Models/BoneAnimation.cs
-    startLine: 396
+    startLine: 431
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models

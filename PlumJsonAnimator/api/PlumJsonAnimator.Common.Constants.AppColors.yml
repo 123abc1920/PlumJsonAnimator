@@ -24,7 +24,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AppColors
     path: Common/Constants/AppColors.cs
-    startLine: 7
+    startLine: 9
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -61,7 +61,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AppColor
     path: Common/Constants/AppColors.cs
-    startLine: 10
+    startLine: 12
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -90,7 +90,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Red
     path: Common/Constants/AppColors.cs
-    startLine: 15
+    startLine: 17
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -117,7 +117,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Green
     path: Common/Constants/AppColors.cs
-    startLine: 16
+    startLine: 18
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -144,7 +144,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Blue
     path: Common/Constants/AppColors.cs
-    startLine: 17
+    startLine: 19
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants
@@ -171,7 +171,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Aqua
     path: Common/Constants/AppColors.cs
-    startLine: 18
+    startLine: 20
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Common.Constants

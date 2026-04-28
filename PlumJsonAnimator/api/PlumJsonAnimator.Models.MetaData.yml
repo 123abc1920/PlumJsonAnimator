@@ -20,7 +20,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: MetaData
     path: Models/Project.cs
-    startLine: 544
+    startLine: 637
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -57,7 +57,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Spine
     path: Models/Project.cs
-    startLine: 546
+    startLine: 639
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models

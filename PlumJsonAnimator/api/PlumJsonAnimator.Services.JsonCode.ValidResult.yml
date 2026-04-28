@@ -22,7 +22,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ValidResult
     path: Services/JsonCode.cs
-    startLine: 21
+    startLine: 20
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -59,7 +59,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Message
     path: Services/JsonCode.cs
-    startLine: 23
+    startLine: 22
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -88,7 +88,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: IsOk
     path: Services/JsonCode.cs
-    startLine: 24
+    startLine: 23
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -117,7 +117,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: UpdatedArray
     path: Services/JsonCode.cs
-    startLine: 25
+    startLine: 24
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services

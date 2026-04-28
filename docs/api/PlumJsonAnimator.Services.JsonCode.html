@@ -89,7 +89,7 @@
 
 
   <h1 id="PlumJsonAnimator_Services_JsonCode" data-uid="PlumJsonAnimator.Services.JsonCode" class="text-break">
-Class JsonCode  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/JsonCode.cs/#L17"><i class="bi bi-code-slash"></i></a>
+Class JsonCode  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/JsonCode.cs/#L16"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -155,16 +155,16 @@ Class JsonCode  <a class="header-action link-secondary" title="View source" href
 
   <a id="PlumJsonAnimator_Services_JsonCode__ctor_" data-uid="PlumJsonAnimator.Services.JsonCode.#ctor*"></a>
 
-  <h3 id="PlumJsonAnimator_Services_JsonCode__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_Prettify_" data-uid="PlumJsonAnimator.Services.JsonCode.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Prettify)">
-  JsonCode(GlobalState, Prettify)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/JsonCode.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  <h3 id="PlumJsonAnimator_Services_JsonCode__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_Prettify_PlumJsonAnimator_Services_LocalizationService_" data-uid="PlumJsonAnimator.Services.JsonCode.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Prettify,PlumJsonAnimator.Services.LocalizationService)">
+  JsonCode(GlobalState, Prettify, LocalizationService)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/JsonCode.cs/#L32"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public JsonCode(GlobalState globalState, Prettify prettify)</code></pre>
+    <pre><code class="lang-csharp hljs">public JsonCode(GlobalState globalState, Prettify prettify, LocalizationService localizationService)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -172,6 +172,8 @@ Class JsonCode  <a class="header-action link-secondary" title="View source" href
     <dt><code>globalState</code> <a class="xref" href="PlumJsonAnimator.Common.Constants.GlobalState.html">GlobalState</a></dt>
     <dd></dd>
     <dt><code>prettify</code> <a class="xref" href="PlumJsonAnimator.Services.Prettify.html">Prettify</a></dt>
+    <dd></dd>
+    <dt><code>localizationService</code> <a class="xref" href="PlumJsonAnimator.Services.LocalizationService.html">LocalizationService</a></dt>
     <dd></dd>
   </dl>
 
@@ -190,11 +192,60 @@ Class JsonCode  <a class="header-action link-secondary" title="View source" href
 </h2>
 
 
+  <a id="PlumJsonAnimator_Services_JsonCode_Regenerate_" data-uid="PlumJsonAnimator.Services.JsonCode.Regenerate*"></a>
+
+  <h3 id="PlumJsonAnimator_Services_JsonCode_Regenerate_PlumJsonAnimator_Models_Project_System_Boolean_" data-uid="PlumJsonAnimator.Services.JsonCode.Regenerate(PlumJsonAnimator.Models.Project,System.Boolean)">
+  Regenerate(Project, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/JsonCode.cs/#L400"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Regenerates project from its json code</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonCode.ValidResult Regenerate(Project project, bool needRegenearation)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>project</code> <a class="xref" href="PlumJsonAnimator.Models.Project.html">Project</a></dt>
+    <dd><p>Project</p>
+</dd>
+    <dt><code>needRegenearation</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>If true, recreates all project objects, else just validate</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PlumJsonAnimator.Services.JsonCode.html">JsonCode</a>.<a class="xref" href="PlumJsonAnimator.Services.JsonCode.ValidResult.html">ValidResult</a></dt>
+    <dd><p>ValoidResult, where UpdatedArray is empty</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="PlumJsonAnimator_Services_JsonCode_Regenerate_PlumJsonAnimator_Models_Project_System_Boolean__examples">Examples</h4>
+  <p>ValidResult result=regenerate(project);
+if (!result.IsOk)
+{
+//DO SOMETHING
+}</p>
+
+
+
+
+
+
   <a id="PlumJsonAnimator_Services_JsonCode_generateCode_" data-uid="PlumJsonAnimator.Services.JsonCode.generateCode*"></a>
 
   <h3 id="PlumJsonAnimator_Services_JsonCode_generateCode_PlumJsonAnimator_Models_Project_" data-uid="PlumJsonAnimator.Services.JsonCode.generateCode(PlumJsonAnimator.Models.Project)">
   generateCode(Project)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/JsonCode.cs/#L172"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/JsonCode.cs/#L176"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Sets the project json data to project</p>
@@ -227,7 +278,7 @@ Class JsonCode  <a class="header-action link-secondary" title="View source" href
 
   <h3 id="PlumJsonAnimator_Services_JsonCode_generateJSONData_PlumJsonAnimator_Models_Project_" data-uid="PlumJsonAnimator.Services.JsonCode.generateJSONData(PlumJsonAnimator.Models.Project)">
   generateJSONData(Project)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/JsonCode.cs/#L141"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/JsonCode.cs/#L145"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Generates project json data</p>
@@ -262,57 +313,11 @@ Class JsonCode  <a class="header-action link-secondary" title="View source" href
 
 
 
-  <a id="PlumJsonAnimator_Services_JsonCode_regenerate_" data-uid="PlumJsonAnimator.Services.JsonCode.regenerate*"></a>
-
-  <h3 id="PlumJsonAnimator_Services_JsonCode_regenerate_PlumJsonAnimator_Models_Project_" data-uid="PlumJsonAnimator.Services.JsonCode.regenerate(PlumJsonAnimator.Models.Project)">
-  regenerate(Project)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/JsonCode.cs/#L386"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"><p>Regenerates project from its json code</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public JsonCode.ValidResult regenerate(Project project)</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>project</code> <a class="xref" href="PlumJsonAnimator.Models.Project.html">Project</a></dt>
-    <dd><p>Project</p>
-</dd>
-  </dl>
-
-  <h4 class="section">Returns</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="PlumJsonAnimator.Services.JsonCode.html">JsonCode</a>.<a class="xref" href="PlumJsonAnimator.Services.JsonCode.ValidResult.html">ValidResult</a></dt>
-    <dd><p>ValoidResult, where UpdatedArray is empty</p>
-</dd>
-  </dl>
-
-
-
-
-
-
-  <h4 class="section" id="PlumJsonAnimator_Services_JsonCode_regenerate_PlumJsonAnimator_Models_Project__examples">Examples</h4>
-  <p>ValidResult result=regenerate(project);
-if (!result.IsOk)
-{
-//DO SOMETHING
-}</p>
-
-
-
-
-
-
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/JsonCode.cs/#L17" class="edit-link">Edit this page</a>
+          <a href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/JsonCode.cs/#L16" class="edit-link">Edit this page</a>
         </div>
 
 

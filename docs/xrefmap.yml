@@ -452,6 +452,12 @@ references:
   commentId: F:PlumJsonAnimator.Common.Constants.GlobalState.programExt
   fullName: PlumJsonAnimator.Common.Constants.GlobalState.programExt
   nameWithType: GlobalState.programExt
+- uid: PlumJsonAnimator.Common.Constants.GlobalState.setBasePos
+  name: setBasePos
+  href: api/PlumJsonAnimator.Common.Constants.GlobalState.html#PlumJsonAnimator_Common_Constants_GlobalState_setBasePos
+  commentId: F:PlumJsonAnimator.Common.Constants.GlobalState.setBasePos
+  fullName: PlumJsonAnimator.Common.Constants.GlobalState.setBasePos
+  nameWithType: GlobalState.setBasePos
 - uid: PlumJsonAnimator.Common.Constants.GlobalState.theme
   name: theme
   href: api/PlumJsonAnimator.Common.Constants.GlobalState.html#PlumJsonAnimator_Common_Constants_GlobalState_theme
@@ -2021,24 +2027,24 @@ references:
   commentId: T:PlumJsonAnimator.Models.Project
   fullName: PlumJsonAnimator.Models.Project
   nameWithType: Project
-- uid: PlumJsonAnimator.Models.Project.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)
-  name: Project(GlobalState, Interpolation)
-  href: api/PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_Interpolation_
-  commentId: M:PlumJsonAnimator.Models.Project.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)
-  name.vb: New(GlobalState, Interpolation)
-  fullName: PlumJsonAnimator.Models.Project.Project(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation)
-  fullName.vb: PlumJsonAnimator.Models.Project.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation)
-  nameWithType: Project.Project(GlobalState, Interpolation)
-  nameWithType.vb: Project.New(GlobalState, Interpolation)
-- uid: PlumJsonAnimator.Models.Project.#ctor(System.String,System.String,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)
-  name: Project(string, string, GlobalState, Interpolation)
-  href: api/PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project__ctor_System_String_System_String_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_Interpolation_
-  commentId: M:PlumJsonAnimator.Models.Project.#ctor(System.String,System.String,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)
-  name.vb: New(String, String, GlobalState, Interpolation)
-  fullName: PlumJsonAnimator.Models.Project.Project(string, string, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation)
-  fullName.vb: PlumJsonAnimator.Models.Project.New(String, String, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation)
-  nameWithType: Project.Project(string, string, GlobalState, Interpolation)
-  nameWithType.vb: Project.New(String, String, GlobalState, Interpolation)
+- uid: PlumJsonAnimator.Models.Project.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.LocalizationService)
+  name: Project(GlobalState, Interpolation, LocalizationService)
+  href: api/PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_Interpolation_PlumJsonAnimator_Services_LocalizationService_
+  commentId: M:PlumJsonAnimator.Models.Project.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.LocalizationService)
+  name.vb: New(GlobalState, Interpolation, LocalizationService)
+  fullName: PlumJsonAnimator.Models.Project.Project(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation, PlumJsonAnimator.Services.LocalizationService)
+  fullName.vb: PlumJsonAnimator.Models.Project.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation, PlumJsonAnimator.Services.LocalizationService)
+  nameWithType: Project.Project(GlobalState, Interpolation, LocalizationService)
+  nameWithType.vb: Project.New(GlobalState, Interpolation, LocalizationService)
+- uid: PlumJsonAnimator.Models.Project.#ctor(System.String,System.String,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.LocalizationService)
+  name: Project(string, string, GlobalState, Interpolation, LocalizationService)
+  href: api/PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project__ctor_System_String_System_String_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_Interpolation_PlumJsonAnimator_Services_LocalizationService_
+  commentId: M:PlumJsonAnimator.Models.Project.#ctor(System.String,System.String,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.LocalizationService)
+  name.vb: New(String, String, GlobalState, Interpolation, LocalizationService)
+  fullName: PlumJsonAnimator.Models.Project.Project(string, string, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation, PlumJsonAnimator.Services.LocalizationService)
+  fullName.vb: PlumJsonAnimator.Models.Project.New(String, String, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation, PlumJsonAnimator.Services.LocalizationService)
+  nameWithType: Project.Project(string, string, GlobalState, Interpolation, LocalizationService)
+  nameWithType.vb: Project.New(String, String, GlobalState, Interpolation, LocalizationService)
 - uid: PlumJsonAnimator.Models.Project.#ctor*
   name: Project
   href: api/PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project__ctor_
@@ -2140,6 +2146,19 @@ references:
   isSpec: "True"
   fullName: PlumJsonAnimator.Models.Project.DeleteAnimation
   nameWithType: Project.DeleteAnimation
+- uid: PlumJsonAnimator.Models.Project.DeleteBoneFromProject(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  name: DeleteBoneFromProject(Bone)
+  href: api/PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_DeleteBoneFromProject_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_
+  commentId: M:PlumJsonAnimator.Models.Project.DeleteBoneFromProject(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  fullName: PlumJsonAnimator.Models.Project.DeleteBoneFromProject(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  nameWithType: Project.DeleteBoneFromProject(Bone)
+- uid: PlumJsonAnimator.Models.Project.DeleteBoneFromProject*
+  name: DeleteBoneFromProject
+  href: api/PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_DeleteBoneFromProject_
+  commentId: Overload:PlumJsonAnimator.Models.Project.DeleteBoneFromProject
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.Project.DeleteBoneFromProject
+  nameWithType: Project.DeleteBoneFromProject
 - uid: PlumJsonAnimator.Models.Project.DeleteSkin
   name: DeleteSkin()
   href: api/PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_DeleteSkin
@@ -2153,6 +2172,19 @@ references:
   isSpec: "True"
   fullName: PlumJsonAnimator.Models.Project.DeleteSkin
   nameWithType: Project.DeleteSkin
+- uid: PlumJsonAnimator.Models.Project.DeleteSlotFromProject(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  name: DeleteSlotFromProject(Slot)
+  href: api/PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_DeleteSlotFromProject_PlumJsonAnimator_Models_SkeletonNameSpace_Slot_
+  commentId: M:PlumJsonAnimator.Models.Project.DeleteSlotFromProject(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  fullName: PlumJsonAnimator.Models.Project.DeleteSlotFromProject(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  nameWithType: Project.DeleteSlotFromProject(Slot)
+- uid: PlumJsonAnimator.Models.Project.DeleteSlotFromProject*
+  name: DeleteSlotFromProject
+  href: api/PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_DeleteSlotFromProject_
+  commentId: Overload:PlumJsonAnimator.Models.Project.DeleteSlotFromProject
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.Project.DeleteSlotFromProject
+  nameWithType: Project.DeleteSlotFromProject
 - uid: PlumJsonAnimator.Models.Project.DrawSlots(Avalonia.Controls.Canvas)
   name: DrawSlots(Canvas)
   href: api/PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_DrawSlots_Avalonia_Controls_Canvas_
@@ -2276,6 +2308,70 @@ references:
   isSpec: "True"
   fullName: PlumJsonAnimator.Models.Project.GetSlotByName
   nameWithType: Project.GetSlotByName
+- uid: PlumJsonAnimator.Models.Project.IsUniqAttach(System.String)
+  name: IsUniqAttach(string)
+  href: api/PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_IsUniqAttach_System_String_
+  commentId: M:PlumJsonAnimator.Models.Project.IsUniqAttach(System.String)
+  name.vb: IsUniqAttach(String)
+  fullName: PlumJsonAnimator.Models.Project.IsUniqAttach(string)
+  fullName.vb: PlumJsonAnimator.Models.Project.IsUniqAttach(String)
+  nameWithType: Project.IsUniqAttach(string)
+  nameWithType.vb: Project.IsUniqAttach(String)
+- uid: PlumJsonAnimator.Models.Project.IsUniqAttach*
+  name: IsUniqAttach
+  href: api/PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_IsUniqAttach_
+  commentId: Overload:PlumJsonAnimator.Models.Project.IsUniqAttach
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.Project.IsUniqAttach
+  nameWithType: Project.IsUniqAttach
+- uid: PlumJsonAnimator.Models.Project.IsUniqBone(System.String)
+  name: IsUniqBone(string)
+  href: api/PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_IsUniqBone_System_String_
+  commentId: M:PlumJsonAnimator.Models.Project.IsUniqBone(System.String)
+  name.vb: IsUniqBone(String)
+  fullName: PlumJsonAnimator.Models.Project.IsUniqBone(string)
+  fullName.vb: PlumJsonAnimator.Models.Project.IsUniqBone(String)
+  nameWithType: Project.IsUniqBone(string)
+  nameWithType.vb: Project.IsUniqBone(String)
+- uid: PlumJsonAnimator.Models.Project.IsUniqBone*
+  name: IsUniqBone
+  href: api/PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_IsUniqBone_
+  commentId: Overload:PlumJsonAnimator.Models.Project.IsUniqBone
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.Project.IsUniqBone
+  nameWithType: Project.IsUniqBone
+- uid: PlumJsonAnimator.Models.Project.IsUniqRes(System.String)
+  name: IsUniqRes(string)
+  href: api/PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_IsUniqRes_System_String_
+  commentId: M:PlumJsonAnimator.Models.Project.IsUniqRes(System.String)
+  name.vb: IsUniqRes(String)
+  fullName: PlumJsonAnimator.Models.Project.IsUniqRes(string)
+  fullName.vb: PlumJsonAnimator.Models.Project.IsUniqRes(String)
+  nameWithType: Project.IsUniqRes(string)
+  nameWithType.vb: Project.IsUniqRes(String)
+- uid: PlumJsonAnimator.Models.Project.IsUniqRes*
+  name: IsUniqRes
+  href: api/PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_IsUniqRes_
+  commentId: Overload:PlumJsonAnimator.Models.Project.IsUniqRes
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.Project.IsUniqRes
+  nameWithType: Project.IsUniqRes
+- uid: PlumJsonAnimator.Models.Project.IsUniqSlot(System.String)
+  name: IsUniqSlot(string)
+  href: api/PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_IsUniqSlot_System_String_
+  commentId: M:PlumJsonAnimator.Models.Project.IsUniqSlot(System.String)
+  name.vb: IsUniqSlot(String)
+  fullName: PlumJsonAnimator.Models.Project.IsUniqSlot(string)
+  fullName.vb: PlumJsonAnimator.Models.Project.IsUniqSlot(String)
+  nameWithType: Project.IsUniqSlot(string)
+  nameWithType.vb: Project.IsUniqSlot(String)
+- uid: PlumJsonAnimator.Models.Project.IsUniqSlot*
+  name: IsUniqSlot
+  href: api/PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_IsUniqSlot_
+  commentId: Overload:PlumJsonAnimator.Models.Project.IsUniqSlot
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.Project.IsUniqSlot
+  nameWithType: Project.IsUniqSlot
 - uid: PlumJsonAnimator.Models.Project.MainSkeleton
   name: MainSkeleton
   href: api/PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_MainSkeleton
@@ -2646,6 +2742,45 @@ references:
   commentId: F:PlumJsonAnimator.Models.SkeletonNameSpace.Animation.BoneAnimationBinding
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.BoneAnimationBinding
   nameWithType: Animation.BoneAnimationBinding
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsAnimationBone(PlumJsonAnimator.Models.BoneAnimation)
+  name: ContainsAnimationBone(BoneAnimation)
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Animation.html#PlumJsonAnimator_Models_SkeletonNameSpace_Animation_ContainsAnimationBone_PlumJsonAnimator_Models_BoneAnimation_
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsAnimationBone(PlumJsonAnimator.Models.BoneAnimation)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsAnimationBone(PlumJsonAnimator.Models.BoneAnimation)
+  nameWithType: Animation.ContainsAnimationBone(BoneAnimation)
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsAnimationBone*
+  name: ContainsAnimationBone
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Animation.html#PlumJsonAnimator_Models_SkeletonNameSpace_Animation_ContainsAnimationBone_
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsAnimationBone
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsAnimationBone
+  nameWithType: Animation.ContainsAnimationBone
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsBone(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  name: ContainsBone(Bone)
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Animation.html#PlumJsonAnimator_Models_SkeletonNameSpace_Animation_ContainsBone_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsBone(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsBone(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  nameWithType: Animation.ContainsBone(Bone)
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsBone*
+  name: ContainsBone
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Animation.html#PlumJsonAnimator_Models_SkeletonNameSpace_Animation_ContainsBone_
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsBone
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsBone
+  nameWithType: Animation.ContainsBone
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.DeleteBoneFromAnimation(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  name: DeleteBoneFromAnimation(Bone)
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Animation.html#PlumJsonAnimator_Models_SkeletonNameSpace_Animation_DeleteBoneFromAnimation_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Animation.DeleteBoneFromAnimation(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.DeleteBoneFromAnimation(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  nameWithType: Animation.DeleteBoneFromAnimation(Bone)
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.DeleteBoneFromAnimation*
+  name: DeleteBoneFromAnimation
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Animation.html#PlumJsonAnimator_Models_SkeletonNameSpace_Animation_DeleteBoneFromAnimation_
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Animation.DeleteBoneFromAnimation
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.DeleteBoneFromAnimation
+  nameWithType: Animation.DeleteBoneFromAnimation
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.DeleteKeyFrame(PlumJsonAnimator.Models.SkeletonNameSpace.Bone,PlumJsonAnimator.Models.Common.TransformModesTypes)
   name: DeleteKeyFrame(Bone, TransformModesTypes)
   href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Animation.html#PlumJsonAnimator_Models_SkeletonNameSpace_Animation_DeleteKeyFrame_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_PlumJsonAnimator_Models_Common_TransformModesTypes_
@@ -3086,42 +3221,42 @@ references:
   fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.New()
   nameWithType: Bone.Bone()
   nameWithType.vb: Bone.New()
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
-  name: Bone(GlobalState)
-  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor_PlumJsonAnimator_Common_Constants_GlobalState_
-  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
-  name.vb: New(GlobalState)
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Bone(PlumJsonAnimator.Common.Constants.GlobalState)
-  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.New(PlumJsonAnimator.Common.Constants.GlobalState)
-  nameWithType: Bone.Bone(GlobalState)
-  nameWithType.vb: Bone.New(GlobalState)
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
-  name: Bone(GlobalState, Bone)
-  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_
-  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
-  name.vb: New(GlobalState, Bone)
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Bone(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
-  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
-  nameWithType: Bone.Bone(GlobalState, Bone)
-  nameWithType.vb: Bone.New(GlobalState, Bone)
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,System.Int32)
-  name: Bone(GlobalState, int)
-  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor_PlumJsonAnimator_Common_Constants_GlobalState_System_Int32_
-  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,System.Int32)
-  name.vb: New(GlobalState, Integer)
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Bone(PlumJsonAnimator.Common.Constants.GlobalState, int)
-  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.New(PlumJsonAnimator.Common.Constants.GlobalState, Integer)
-  nameWithType: Bone.Bone(GlobalState, int)
-  nameWithType.vb: Bone.New(GlobalState, Integer)
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,System.String,PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
-  name: Bone(GlobalState, string, Bone)
-  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor_PlumJsonAnimator_Common_Constants_GlobalState_System_String_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_
-  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,System.String,PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
-  name.vb: New(GlobalState, String, Bone)
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Bone(PlumJsonAnimator.Common.Constants.GlobalState, string, PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
-  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.New(PlumJsonAnimator.Common.Constants.GlobalState, String, PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
-  nameWithType: Bone.Bone(GlobalState, string, Bone)
-  nameWithType.vb: Bone.New(GlobalState, String, Bone)
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Models.SkeletonNameSpace.Bone,PlumJsonAnimator.Services.LocalizationService)
+  name: Bone(GlobalState, Bone, LocalizationService)
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_PlumJsonAnimator_Services_LocalizationService_
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Models.SkeletonNameSpace.Bone,PlumJsonAnimator.Services.LocalizationService)
+  name.vb: New(GlobalState, Bone, LocalizationService)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Bone(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Models.SkeletonNameSpace.Bone, PlumJsonAnimator.Services.LocalizationService)
+  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Models.SkeletonNameSpace.Bone, PlumJsonAnimator.Services.LocalizationService)
+  nameWithType: Bone.Bone(GlobalState, Bone, LocalizationService)
+  nameWithType.vb: Bone.New(GlobalState, Bone, LocalizationService)
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Models.SkeletonNameSpace.Bone,System.Int32,PlumJsonAnimator.Services.LocalizationService)
+  name: Bone(GlobalState, Bone, int, LocalizationService)
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_System_Int32_PlumJsonAnimator_Services_LocalizationService_
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Models.SkeletonNameSpace.Bone,System.Int32,PlumJsonAnimator.Services.LocalizationService)
+  name.vb: New(GlobalState, Bone, Integer, LocalizationService)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Bone(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Models.SkeletonNameSpace.Bone, int, PlumJsonAnimator.Services.LocalizationService)
+  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Models.SkeletonNameSpace.Bone, Integer, PlumJsonAnimator.Services.LocalizationService)
+  nameWithType: Bone.Bone(GlobalState, Bone, int, LocalizationService)
+  nameWithType.vb: Bone.New(GlobalState, Bone, Integer, LocalizationService)
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.LocalizationService)
+  name: Bone(GlobalState, LocalizationService)
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_LocalizationService_
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.LocalizationService)
+  name.vb: New(GlobalState, LocalizationService)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Bone(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.LocalizationService)
+  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.LocalizationService)
+  nameWithType: Bone.Bone(GlobalState, LocalizationService)
+  nameWithType.vb: Bone.New(GlobalState, LocalizationService)
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,System.String,PlumJsonAnimator.Services.LocalizationService)
+  name: Bone(GlobalState, string, LocalizationService)
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor_PlumJsonAnimator_Common_Constants_GlobalState_System_String_PlumJsonAnimator_Services_LocalizationService_
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,System.String,PlumJsonAnimator.Services.LocalizationService)
+  name.vb: New(GlobalState, String, LocalizationService)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Bone(PlumJsonAnimator.Common.Constants.GlobalState, string, PlumJsonAnimator.Services.LocalizationService)
+  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.New(PlumJsonAnimator.Common.Constants.GlobalState, String, PlumJsonAnimator.Services.LocalizationService)
+  nameWithType: Bone.Bone(GlobalState, string, LocalizationService)
+  nameWithType.vb: Bone.New(GlobalState, String, LocalizationService)
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor*
   name: Bone
   href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor_
@@ -3132,6 +3267,19 @@ references:
   fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.New
   nameWithType: Bone.Bone
   nameWithType.vb: Bone.New
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.A
+  name: A
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_A
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.A
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.A
+  nameWithType: Bone.A
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.A*
+  name: A
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_A_
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.A
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.A
+  nameWithType: Bone.A
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AddChildren(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
   name: AddChildren(Bone)
   href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_AddChildren_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_
@@ -3145,6 +3293,84 @@ references:
   isSpec: "True"
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AddChildren
   nameWithType: Bone.AddChildren
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimA
+  name: AnimA
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_AnimA
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimA
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimA
+  nameWithType: Bone.AnimA
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimA*
+  name: AnimA
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_AnimA_
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimA
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimA
+  nameWithType: Bone.AnimA
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimX
+  name: AnimX
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_AnimX
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimX
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimX
+  nameWithType: Bone.AnimX
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimX*
+  name: AnimX
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_AnimX_
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimX
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimX
+  nameWithType: Bone.AnimX
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimY
+  name: AnimY
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_AnimY
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimY
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimY
+  nameWithType: Bone.AnimY
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimY*
+  name: AnimY
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_AnimY_
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimY
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimY
+  nameWithType: Bone.AnimY
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseA
+  name: BaseA
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_BaseA
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseA
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseA
+  nameWithType: Bone.BaseA
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseA*
+  name: BaseA
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_BaseA_
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseA
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseA
+  nameWithType: Bone.BaseA
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseX
+  name: BaseX
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_BaseX
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseX
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseX
+  nameWithType: Bone.BaseX
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseX*
+  name: BaseX
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_BaseX_
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseX
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseX
+  nameWithType: Bone.BaseX
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseY
+  name: BaseY
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_BaseY
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseY
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseY
+  nameWithType: Bone.BaseY
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseY*
+  name: BaseY
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_BaseY_
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseY
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseY
+  nameWithType: Bone.BaseY
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Children
   name: Children
   href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_Children
@@ -3210,6 +3436,45 @@ references:
   isSpec: "True"
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GetName
   nameWithType: Bone.GetName
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalA
+  name: GlobalA
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_GlobalA
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalA
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalA
+  nameWithType: Bone.GlobalA
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalA*
+  name: GlobalA
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_GlobalA_
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalA
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalA
+  nameWithType: Bone.GlobalA
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalX
+  name: GlobalX
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_GlobalX
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalX
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalX
+  nameWithType: Bone.GlobalX
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalX*
+  name: GlobalX
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_GlobalX_
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalX
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalX
+  nameWithType: Bone.GlobalX
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalY
+  name: GlobalY
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_GlobalY
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalY
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalY
+  nameWithType: Bone.GlobalY
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalY*
+  name: GlobalY
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_GlobalY_
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalY
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalY
+  nameWithType: Bone.GlobalY
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.IsBone
   name: IsBone
   href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_IsBone
@@ -3365,57 +3630,50 @@ references:
   isSpec: "True"
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.UpdateSlots
   nameWithType: Bone.UpdateSlots
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.X
+  name: X
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_X
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.X
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.X
+  nameWithType: Bone.X
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.X*
+  name: X
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_X_
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.X
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.X
+  nameWithType: Bone.X
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Y
+  name: Y
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_Y
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Y
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Y
+  nameWithType: Bone.Y
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Y*
+  name: Y
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_Y_
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Y
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Y
+  nameWithType: Bone.Y
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone._globalState
   name: _globalState
   href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone__globalState
   commentId: F:PlumJsonAnimator.Models.SkeletonNameSpace.Bone._globalState
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone._globalState
   nameWithType: Bone._globalState
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.a
-  name: a
-  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_a
-  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.a
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.a
-  nameWithType: Bone.a
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.a*
-  name: a
-  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_a_
-  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.a
-  isSpec: "True"
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.a
-  nameWithType: Bone.a
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone._localizationService
+  name: _localizationService
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone__localizationService
+  commentId: F:PlumJsonAnimator.Models.SkeletonNameSpace.Bone._localizationService
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone._localizationService
+  nameWithType: Bone._localizationService
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.id
   name: id
   href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_id
   commentId: F:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.id
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.id
   nameWithType: Bone.id
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.x
-  name: x
-  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_x
-  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.x
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.x
-  nameWithType: Bone.x
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.x*
-  name: x
-  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_x_
-  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.x
-  isSpec: "True"
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.x
-  nameWithType: Bone.x
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.y
-  name: y
-  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_y
-  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.y
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.y
-  nameWithType: Bone.y
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.y*
-  name: y
-  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html#PlumJsonAnimator_Models_SkeletonNameSpace_Bone_y_
-  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Bone.y
-  isSpec: "True"
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.y
-  nameWithType: Bone.y
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData
   name: BoneData
   href: api/PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.html
@@ -3448,6 +3706,19 @@ references:
   isSpec: "True"
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.Parent
   nameWithType: BoneData.Parent
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.Rotation
+  name: Rotation
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.html#PlumJsonAnimator_Models_SkeletonNameSpace_BoneData_Rotation
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.Rotation
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.Rotation
+  nameWithType: BoneData.Rotation
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.Rotation*
+  name: Rotation
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.html#PlumJsonAnimator_Models_SkeletonNameSpace_BoneData_Rotation_
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.Rotation
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.Rotation
+  nameWithType: BoneData.Rotation
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.X
   name: X
   href: api/PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.html#PlumJsonAnimator_Models_SkeletonNameSpace_BoneData_X
@@ -3623,15 +3894,15 @@ references:
   commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton
   nameWithType: Skeleton
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
-  name: Skeleton(GlobalState)
-  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skeleton__ctor_PlumJsonAnimator_Common_Constants_GlobalState_
-  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
-  name.vb: New(GlobalState)
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.Skeleton(PlumJsonAnimator.Common.Constants.GlobalState)
-  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.New(PlumJsonAnimator.Common.Constants.GlobalState)
-  nameWithType: Skeleton.Skeleton(GlobalState)
-  nameWithType.vb: Skeleton.New(GlobalState)
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.LocalizationService)
+  name: Skeleton(GlobalState, LocalizationService)
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skeleton__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_LocalizationService_
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.LocalizationService)
+  name.vb: New(GlobalState, LocalizationService)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.Skeleton(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.LocalizationService)
+  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.LocalizationService)
+  nameWithType: Skeleton.Skeleton(GlobalState, LocalizationService)
+  nameWithType.vb: Skeleton.New(GlobalState, LocalizationService)
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.#ctor*
   name: Skeleton
   href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skeleton__ctor_
@@ -3964,6 +4235,22 @@ references:
   isSpec: "True"
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.GetSlots
   nameWithType: Skin.GetSlots
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.IsAttachUniq(System.String)
+  name: IsAttachUniq(string)
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_IsAttachUniq_System_String_
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.IsAttachUniq(System.String)
+  name.vb: IsAttachUniq(String)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.IsAttachUniq(string)
+  fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.IsAttachUniq(String)
+  nameWithType: Skin.IsAttachUniq(string)
+  nameWithType.vb: Skin.IsAttachUniq(String)
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.IsAttachUniq*
+  name: IsAttachUniq
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_IsAttachUniq_
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Skin.IsAttachUniq
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.IsAttachUniq
+  nameWithType: Skin.IsAttachUniq
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Skin.IsSlotDrawable(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
   name: IsSlotDrawable(Slot)
   href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html#PlumJsonAnimator_Models_SkeletonNameSpace_Skin_IsSlotDrawable_PlumJsonAnimator_Models_SkeletonNameSpace_Slot_
@@ -4084,6 +4371,19 @@ references:
   fullName.vb: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.New
   nameWithType: Slot.Slot
   nameWithType.vb: Slot.New
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.A
+  name: A
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html#PlumJsonAnimator_Models_SkeletonNameSpace_Slot_A
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.A
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.A
+  nameWithType: Slot.A
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.A*
+  name: A
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html#PlumJsonAnimator_Models_SkeletonNameSpace_Slot_A_
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.A
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.A
+  nameWithType: Slot.A
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.BoundedBone
   name: BoundedBone
   href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html#PlumJsonAnimator_Models_SkeletonNameSpace_Slot_BoundedBone
@@ -4304,19 +4604,32 @@ references:
   isSpec: "True"
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.UpdateDrawOrderOffset
   nameWithType: Slot.UpdateDrawOrderOffset
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.a
-  name: a
-  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html#PlumJsonAnimator_Models_SkeletonNameSpace_Slot_a
-  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.a
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.a
-  nameWithType: Slot.a
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.a*
-  name: a
-  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html#PlumJsonAnimator_Models_SkeletonNameSpace_Slot_a_
-  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.a
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.X
+  name: X
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html#PlumJsonAnimator_Models_SkeletonNameSpace_Slot_X
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.X
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.X
+  nameWithType: Slot.X
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.X*
+  name: X
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html#PlumJsonAnimator_Models_SkeletonNameSpace_Slot_X_
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.X
   isSpec: "True"
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.a
-  nameWithType: Slot.a
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.X
+  nameWithType: Slot.X
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.Y
+  name: Y
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html#PlumJsonAnimator_Models_SkeletonNameSpace_Slot_Y
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.Y
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.Y
+  nameWithType: Slot.Y
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.Y*
+  name: Y
+  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html#PlumJsonAnimator_Models_SkeletonNameSpace_Slot_Y_
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.Y
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.Y
+  nameWithType: Slot.Y
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.drawOrders
   name: drawOrders
   href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html#PlumJsonAnimator_Models_SkeletonNameSpace_Slot_drawOrders
@@ -4329,38 +4642,6 @@ references:
   commentId: F:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.isUpdatingFromCode
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.isUpdatingFromCode
   nameWithType: Slot.isUpdatingFromCode
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.parentA
-  name: parentA
-  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html#PlumJsonAnimator_Models_SkeletonNameSpace_Slot_parentA
-  commentId: F:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.parentA
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.parentA
-  nameWithType: Slot.parentA
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.x
-  name: x
-  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html#PlumJsonAnimator_Models_SkeletonNameSpace_Slot_x
-  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.x
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.x
-  nameWithType: Slot.x
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.x*
-  name: x
-  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html#PlumJsonAnimator_Models_SkeletonNameSpace_Slot_x_
-  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.x
-  isSpec: "True"
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.x
-  nameWithType: Slot.x
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.y
-  name: y
-  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html#PlumJsonAnimator_Models_SkeletonNameSpace_Slot_y
-  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.y
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.y
-  nameWithType: Slot.y
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.y*
-  name: y
-  href: api/PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html#PlumJsonAnimator_Models_SkeletonNameSpace_Slot_y_
-  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Slot.y
-  isSpec: "True"
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Slot.y
-  nameWithType: Slot.y
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.SlotData
   name: SlotData
   href: api/PlumJsonAnimator.Models.SkeletonNameSpace.SlotData.html
@@ -4800,15 +5081,15 @@ references:
   commentId: T:PlumJsonAnimator.Services.ImageExporter
   fullName: PlumJsonAnimator.Services.ImageExporter
   nameWithType: ImageExporter
-- uid: PlumJsonAnimator.Services.ImageExporter.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
-  name: ImageExporter(GlobalState)
-  href: api/PlumJsonAnimator.Services.ImageExporter.html#PlumJsonAnimator_Services_ImageExporter__ctor_PlumJsonAnimator_Common_Constants_GlobalState_
-  commentId: M:PlumJsonAnimator.Services.ImageExporter.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
-  name.vb: New(GlobalState)
-  fullName: PlumJsonAnimator.Services.ImageExporter.ImageExporter(PlumJsonAnimator.Common.Constants.GlobalState)
-  fullName.vb: PlumJsonAnimator.Services.ImageExporter.New(PlumJsonAnimator.Common.Constants.GlobalState)
-  nameWithType: ImageExporter.ImageExporter(GlobalState)
-  nameWithType.vb: ImageExporter.New(GlobalState)
+- uid: PlumJsonAnimator.Services.ImageExporter.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.LocalizationService)
+  name: ImageExporter(GlobalState, LocalizationService)
+  href: api/PlumJsonAnimator.Services.ImageExporter.html#PlumJsonAnimator_Services_ImageExporter__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_LocalizationService_
+  commentId: M:PlumJsonAnimator.Services.ImageExporter.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.LocalizationService)
+  name.vb: New(GlobalState, LocalizationService)
+  fullName: PlumJsonAnimator.Services.ImageExporter.ImageExporter(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.LocalizationService)
+  fullName.vb: PlumJsonAnimator.Services.ImageExporter.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.LocalizationService)
+  nameWithType: ImageExporter.ImageExporter(GlobalState, LocalizationService)
+  nameWithType.vb: ImageExporter.New(GlobalState, LocalizationService)
 - uid: PlumJsonAnimator.Services.ImageExporter.#ctor*
   name: ImageExporter
   href: api/PlumJsonAnimator.Services.ImageExporter.html#PlumJsonAnimator_Services_ImageExporter__ctor_
@@ -4968,15 +5249,15 @@ references:
   commentId: T:PlumJsonAnimator.Services.JsonCode
   fullName: PlumJsonAnimator.Services.JsonCode
   nameWithType: JsonCode
-- uid: PlumJsonAnimator.Services.JsonCode.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Prettify)
-  name: JsonCode(GlobalState, Prettify)
-  href: api/PlumJsonAnimator.Services.JsonCode.html#PlumJsonAnimator_Services_JsonCode__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_Prettify_
-  commentId: M:PlumJsonAnimator.Services.JsonCode.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Prettify)
-  name.vb: New(GlobalState, Prettify)
-  fullName: PlumJsonAnimator.Services.JsonCode.JsonCode(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Prettify)
-  fullName.vb: PlumJsonAnimator.Services.JsonCode.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Prettify)
-  nameWithType: JsonCode.JsonCode(GlobalState, Prettify)
-  nameWithType.vb: JsonCode.New(GlobalState, Prettify)
+- uid: PlumJsonAnimator.Services.JsonCode.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Prettify,PlumJsonAnimator.Services.LocalizationService)
+  name: JsonCode(GlobalState, Prettify, LocalizationService)
+  href: api/PlumJsonAnimator.Services.JsonCode.html#PlumJsonAnimator_Services_JsonCode__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_Prettify_PlumJsonAnimator_Services_LocalizationService_
+  commentId: M:PlumJsonAnimator.Services.JsonCode.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Prettify,PlumJsonAnimator.Services.LocalizationService)
+  name.vb: New(GlobalState, Prettify, LocalizationService)
+  fullName: PlumJsonAnimator.Services.JsonCode.JsonCode(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Prettify, PlumJsonAnimator.Services.LocalizationService)
+  fullName.vb: PlumJsonAnimator.Services.JsonCode.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Prettify, PlumJsonAnimator.Services.LocalizationService)
+  nameWithType: JsonCode.JsonCode(GlobalState, Prettify, LocalizationService)
+  nameWithType.vb: JsonCode.New(GlobalState, Prettify, LocalizationService)
 - uid: PlumJsonAnimator.Services.JsonCode.#ctor*
   name: JsonCode
   href: api/PlumJsonAnimator.Services.JsonCode.html#PlumJsonAnimator_Services_JsonCode__ctor_
@@ -4987,6 +5268,22 @@ references:
   fullName.vb: PlumJsonAnimator.Services.JsonCode.New
   nameWithType: JsonCode.JsonCode
   nameWithType.vb: JsonCode.New
+- uid: PlumJsonAnimator.Services.JsonCode.Regenerate(PlumJsonAnimator.Models.Project,System.Boolean)
+  name: Regenerate(Project, bool)
+  href: api/PlumJsonAnimator.Services.JsonCode.html#PlumJsonAnimator_Services_JsonCode_Regenerate_PlumJsonAnimator_Models_Project_System_Boolean_
+  commentId: M:PlumJsonAnimator.Services.JsonCode.Regenerate(PlumJsonAnimator.Models.Project,System.Boolean)
+  name.vb: Regenerate(Project, Boolean)
+  fullName: PlumJsonAnimator.Services.JsonCode.Regenerate(PlumJsonAnimator.Models.Project, bool)
+  fullName.vb: PlumJsonAnimator.Services.JsonCode.Regenerate(PlumJsonAnimator.Models.Project, Boolean)
+  nameWithType: JsonCode.Regenerate(Project, bool)
+  nameWithType.vb: JsonCode.Regenerate(Project, Boolean)
+- uid: PlumJsonAnimator.Services.JsonCode.Regenerate*
+  name: Regenerate
+  href: api/PlumJsonAnimator.Services.JsonCode.html#PlumJsonAnimator_Services_JsonCode_Regenerate_
+  commentId: Overload:PlumJsonAnimator.Services.JsonCode.Regenerate
+  isSpec: "True"
+  fullName: PlumJsonAnimator.Services.JsonCode.Regenerate
+  nameWithType: JsonCode.Regenerate
 - uid: PlumJsonAnimator.Services.JsonCode.ValidResult
   name: JsonCode.ValidResult
   href: api/PlumJsonAnimator.Services.JsonCode.ValidResult.html
@@ -5058,19 +5355,6 @@ references:
   isSpec: "True"
   fullName: PlumJsonAnimator.Services.JsonCode.generateJSONData
   nameWithType: JsonCode.generateJSONData
-- uid: PlumJsonAnimator.Services.JsonCode.regenerate(PlumJsonAnimator.Models.Project)
-  name: regenerate(Project)
-  href: api/PlumJsonAnimator.Services.JsonCode.html#PlumJsonAnimator_Services_JsonCode_regenerate_PlumJsonAnimator_Models_Project_
-  commentId: M:PlumJsonAnimator.Services.JsonCode.regenerate(PlumJsonAnimator.Models.Project)
-  fullName: PlumJsonAnimator.Services.JsonCode.regenerate(PlumJsonAnimator.Models.Project)
-  nameWithType: JsonCode.regenerate(Project)
-- uid: PlumJsonAnimator.Services.JsonCode.regenerate*
-  name: regenerate
-  href: api/PlumJsonAnimator.Services.JsonCode.html#PlumJsonAnimator_Services_JsonCode_regenerate_
-  commentId: Overload:PlumJsonAnimator.Services.JsonCode.regenerate
-  isSpec: "True"
-  fullName: PlumJsonAnimator.Services.JsonCode.regenerate
-  nameWithType: JsonCode.regenerate
 - uid: PlumJsonAnimator.Services.JsonExport
   name: JsonExport
   href: api/PlumJsonAnimator.Services.JsonExport.html
@@ -5181,6 +5465,36 @@ references:
   commentId: F:PlumJsonAnimator.Services.LocalizationConsts.ANIM_SUCCESS
   fullName: PlumJsonAnimator.Services.LocalizationConsts.ANIM_SUCCESS
   nameWithType: LocalizationConsts.ANIM_SUCCESS
+- uid: PlumJsonAnimator.Services.LocalizationConsts.BASE_POS
+  name: BASE_POS
+  href: api/PlumJsonAnimator.Services.LocalizationConsts.html#PlumJsonAnimator_Services_LocalizationConsts_BASE_POS
+  commentId: F:PlumJsonAnimator.Services.LocalizationConsts.BASE_POS
+  fullName: PlumJsonAnimator.Services.LocalizationConsts.BASE_POS
+  nameWithType: LocalizationConsts.BASE_POS
+- uid: PlumJsonAnimator.Services.LocalizationConsts.BONE_NULL_NAME_ERROR
+  name: BONE_NULL_NAME_ERROR
+  href: api/PlumJsonAnimator.Services.LocalizationConsts.html#PlumJsonAnimator_Services_LocalizationConsts_BONE_NULL_NAME_ERROR
+  commentId: F:PlumJsonAnimator.Services.LocalizationConsts.BONE_NULL_NAME_ERROR
+  fullName: PlumJsonAnimator.Services.LocalizationConsts.BONE_NULL_NAME_ERROR
+  nameWithType: LocalizationConsts.BONE_NULL_NAME_ERROR
+- uid: PlumJsonAnimator.Services.LocalizationConsts.BONE_PARENT_NULL_ERROR
+  name: BONE_PARENT_NULL_ERROR
+  href: api/PlumJsonAnimator.Services.LocalizationConsts.html#PlumJsonAnimator_Services_LocalizationConsts_BONE_PARENT_NULL_ERROR
+  commentId: F:PlumJsonAnimator.Services.LocalizationConsts.BONE_PARENT_NULL_ERROR
+  fullName: PlumJsonAnimator.Services.LocalizationConsts.BONE_PARENT_NULL_ERROR
+  nameWithType: LocalizationConsts.BONE_PARENT_NULL_ERROR
+- uid: PlumJsonAnimator.Services.LocalizationConsts.DELETE_ERROR
+  name: DELETE_ERROR
+  href: api/PlumJsonAnimator.Services.LocalizationConsts.html#PlumJsonAnimator_Services_LocalizationConsts_DELETE_ERROR
+  commentId: F:PlumJsonAnimator.Services.LocalizationConsts.DELETE_ERROR
+  fullName: PlumJsonAnimator.Services.LocalizationConsts.DELETE_ERROR
+  nameWithType: LocalizationConsts.DELETE_ERROR
+- uid: PlumJsonAnimator.Services.LocalizationConsts.EMPTY_JSON
+  name: EMPTY_JSON
+  href: api/PlumJsonAnimator.Services.LocalizationConsts.html#PlumJsonAnimator_Services_LocalizationConsts_EMPTY_JSON
+  commentId: F:PlumJsonAnimator.Services.LocalizationConsts.EMPTY_JSON
+  fullName: PlumJsonAnimator.Services.LocalizationConsts.EMPTY_JSON
+  nameWithType: LocalizationConsts.EMPTY_JSON
 - uid: PlumJsonAnimator.Services.LocalizationConsts.ERROR
   name: ERROR
   href: api/PlumJsonAnimator.Services.LocalizationConsts.html#PlumJsonAnimator_Services_LocalizationConsts_ERROR
@@ -5313,6 +5627,12 @@ references:
   commentId: F:PlumJsonAnimator.Services.LocalizationConsts.NEW_PROJECT
   fullName: PlumJsonAnimator.Services.LocalizationConsts.NEW_PROJECT
   nameWithType: LocalizationConsts.NEW_PROJECT
+- uid: PlumJsonAnimator.Services.LocalizationConsts.NO_ROOT_BONE
+  name: NO_ROOT_BONE
+  href: api/PlumJsonAnimator.Services.LocalizationConsts.html#PlumJsonAnimator_Services_LocalizationConsts_NO_ROOT_BONE
+  commentId: F:PlumJsonAnimator.Services.LocalizationConsts.NO_ROOT_BONE
+  fullName: PlumJsonAnimator.Services.LocalizationConsts.NO_ROOT_BONE
+  nameWithType: LocalizationConsts.NO_ROOT_BONE
 - uid: PlumJsonAnimator.Services.LocalizationConsts.REGENERATE_ERROR
   name: REGENERATE_ERROR
   href: api/PlumJsonAnimator.Services.LocalizationConsts.html#PlumJsonAnimator_Services_LocalizationConsts_REGENERATE_ERROR
@@ -5331,12 +5651,42 @@ references:
   commentId: F:PlumJsonAnimator.Services.LocalizationConsts.SAVED
   fullName: PlumJsonAnimator.Services.LocalizationConsts.SAVED
   nameWithType: LocalizationConsts.SAVED
+- uid: PlumJsonAnimator.Services.LocalizationConsts.SELECT_FFMPEG
+  name: SELECT_FFMPEG
+  href: api/PlumJsonAnimator.Services.LocalizationConsts.html#PlumJsonAnimator_Services_LocalizationConsts_SELECT_FFMPEG
+  commentId: F:PlumJsonAnimator.Services.LocalizationConsts.SELECT_FFMPEG
+  fullName: PlumJsonAnimator.Services.LocalizationConsts.SELECT_FFMPEG
+  nameWithType: LocalizationConsts.SELECT_FFMPEG
+- uid: PlumJsonAnimator.Services.LocalizationConsts.SELECT_FOLDER
+  name: SELECT_FOLDER
+  href: api/PlumJsonAnimator.Services.LocalizationConsts.html#PlumJsonAnimator_Services_LocalizationConsts_SELECT_FOLDER
+  commentId: F:PlumJsonAnimator.Services.LocalizationConsts.SELECT_FOLDER
+  fullName: PlumJsonAnimator.Services.LocalizationConsts.SELECT_FOLDER
+  nameWithType: LocalizationConsts.SELECT_FOLDER
+- uid: PlumJsonAnimator.Services.LocalizationConsts.SELECT_SETTINGS_FILE
+  name: SELECT_SETTINGS_FILE
+  href: api/PlumJsonAnimator.Services.LocalizationConsts.html#PlumJsonAnimator_Services_LocalizationConsts_SELECT_SETTINGS_FILE
+  commentId: F:PlumJsonAnimator.Services.LocalizationConsts.SELECT_SETTINGS_FILE
+  fullName: PlumJsonAnimator.Services.LocalizationConsts.SELECT_SETTINGS_FILE
+  nameWithType: LocalizationConsts.SELECT_SETTINGS_FILE
 - uid: PlumJsonAnimator.Services.LocalizationConsts.SETTINGS
   name: SETTINGS
   href: api/PlumJsonAnimator.Services.LocalizationConsts.html#PlumJsonAnimator_Services_LocalizationConsts_SETTINGS
   commentId: F:PlumJsonAnimator.Services.LocalizationConsts.SETTINGS
   fullName: PlumJsonAnimator.Services.LocalizationConsts.SETTINGS
   nameWithType: LocalizationConsts.SETTINGS
+- uid: PlumJsonAnimator.Services.LocalizationConsts.SEVERAL_ROOT_BONES
+  name: SEVERAL_ROOT_BONES
+  href: api/PlumJsonAnimator.Services.LocalizationConsts.html#PlumJsonAnimator_Services_LocalizationConsts_SEVERAL_ROOT_BONES
+  commentId: F:PlumJsonAnimator.Services.LocalizationConsts.SEVERAL_ROOT_BONES
+  fullName: PlumJsonAnimator.Services.LocalizationConsts.SEVERAL_ROOT_BONES
+  nameWithType: LocalizationConsts.SEVERAL_ROOT_BONES
+- uid: PlumJsonAnimator.Services.LocalizationConsts.SLOT_NULL_NAME
+  name: SLOT_NULL_NAME
+  href: api/PlumJsonAnimator.Services.LocalizationConsts.html#PlumJsonAnimator_Services_LocalizationConsts_SLOT_NULL_NAME
+  commentId: F:PlumJsonAnimator.Services.LocalizationConsts.SLOT_NULL_NAME
+  fullName: PlumJsonAnimator.Services.LocalizationConsts.SLOT_NULL_NAME
+  nameWithType: LocalizationConsts.SLOT_NULL_NAME
 - uid: PlumJsonAnimator.Services.LocalizationService
   name: LocalizationService
   href: api/PlumJsonAnimator.Services.LocalizationService.html
@@ -5440,15 +5790,15 @@ references:
   commentId: T:PlumJsonAnimator.Services.Prettify
   fullName: PlumJsonAnimator.Services.Prettify
   nameWithType: Prettify
-- uid: PlumJsonAnimator.Services.Prettify.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
-  name: Prettify(GlobalState)
-  href: api/PlumJsonAnimator.Services.Prettify.html#PlumJsonAnimator_Services_Prettify__ctor_PlumJsonAnimator_Common_Constants_GlobalState_
-  commentId: M:PlumJsonAnimator.Services.Prettify.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
-  name.vb: New(GlobalState)
-  fullName: PlumJsonAnimator.Services.Prettify.Prettify(PlumJsonAnimator.Common.Constants.GlobalState)
-  fullName.vb: PlumJsonAnimator.Services.Prettify.New(PlumJsonAnimator.Common.Constants.GlobalState)
-  nameWithType: Prettify.Prettify(GlobalState)
-  nameWithType.vb: Prettify.New(GlobalState)
+- uid: PlumJsonAnimator.Services.Prettify.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.LocalizationService)
+  name: Prettify(GlobalState, LocalizationService)
+  href: api/PlumJsonAnimator.Services.Prettify.html#PlumJsonAnimator_Services_Prettify__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_LocalizationService_
+  commentId: M:PlumJsonAnimator.Services.Prettify.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.LocalizationService)
+  name.vb: New(GlobalState, LocalizationService)
+  fullName: PlumJsonAnimator.Services.Prettify.Prettify(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.LocalizationService)
+  fullName.vb: PlumJsonAnimator.Services.Prettify.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.LocalizationService)
+  nameWithType: Prettify.Prettify(GlobalState, LocalizationService)
+  nameWithType.vb: Prettify.New(GlobalState, LocalizationService)
 - uid: PlumJsonAnimator.Services.Prettify.#ctor*
   name: Prettify
   href: api/PlumJsonAnimator.Services.Prettify.html#PlumJsonAnimator_Services_Prettify__ctor_
@@ -5481,15 +5831,15 @@ references:
   commentId: T:PlumJsonAnimator.Services.ProjectFilesManager
   fullName: PlumJsonAnimator.Services.ProjectFilesManager
   nameWithType: ProjectFilesManager
-- uid: PlumJsonAnimator.Services.ProjectFilesManager.#ctor(PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)
-  name: ProjectFilesManager(ProjectSettings, AppSettings, GlobalState, Interpolation)
-  href: api/PlumJsonAnimator.Services.ProjectFilesManager.html#PlumJsonAnimator_Services_ProjectFilesManager__ctor_PlumJsonAnimator_Services_ProjectSettings_PlumJsonAnimator_Services_AppSettings_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_Interpolation_
-  commentId: M:PlumJsonAnimator.Services.ProjectFilesManager.#ctor(PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)
-  name.vb: New(ProjectSettings, AppSettings, GlobalState, Interpolation)
-  fullName: PlumJsonAnimator.Services.ProjectFilesManager.ProjectFilesManager(PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation)
-  fullName.vb: PlumJsonAnimator.Services.ProjectFilesManager.New(PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation)
-  nameWithType: ProjectFilesManager.ProjectFilesManager(ProjectSettings, AppSettings, GlobalState, Interpolation)
-  nameWithType.vb: ProjectFilesManager.New(ProjectSettings, AppSettings, GlobalState, Interpolation)
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.#ctor(PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.LocalizationService)
+  name: ProjectFilesManager(ProjectSettings, AppSettings, GlobalState, Interpolation, LocalizationService)
+  href: api/PlumJsonAnimator.Services.ProjectFilesManager.html#PlumJsonAnimator_Services_ProjectFilesManager__ctor_PlumJsonAnimator_Services_ProjectSettings_PlumJsonAnimator_Services_AppSettings_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_Interpolation_PlumJsonAnimator_Services_LocalizationService_
+  commentId: M:PlumJsonAnimator.Services.ProjectFilesManager.#ctor(PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.LocalizationService)
+  name.vb: New(ProjectSettings, AppSettings, GlobalState, Interpolation, LocalizationService)
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.ProjectFilesManager(PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation, PlumJsonAnimator.Services.LocalizationService)
+  fullName.vb: PlumJsonAnimator.Services.ProjectFilesManager.New(PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation, PlumJsonAnimator.Services.LocalizationService)
+  nameWithType: ProjectFilesManager.ProjectFilesManager(ProjectSettings, AppSettings, GlobalState, Interpolation, LocalizationService)
+  nameWithType.vb: ProjectFilesManager.New(ProjectSettings, AppSettings, GlobalState, Interpolation, LocalizationService)
 - uid: PlumJsonAnimator.Services.ProjectFilesManager.#ctor*
   name: ProjectFilesManager
   href: api/PlumJsonAnimator.Services.ProjectFilesManager.html#PlumJsonAnimator_Services_ProjectFilesManager__ctor_

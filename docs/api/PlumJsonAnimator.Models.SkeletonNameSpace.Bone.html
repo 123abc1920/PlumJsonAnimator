@@ -89,7 +89,7 @@
 
 
   <h1 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone" class="text-break">
-Class Bone  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L17"><i class="bi bi-code-slash"></i></a>
+Class Bone  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L18"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -177,7 +177,7 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
   <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor">
   Bone()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L142"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L331"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -201,47 +201,16 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
   <a id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor*"></a>
 
-  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor_PlumJsonAnimator_Common_Constants_GlobalState_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)">
-  Bone(GlobalState)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L144"><i class="bi bi-code-slash"></i></a>
+  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_PlumJsonAnimator_Services_LocalizationService_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Models.SkeletonNameSpace.Bone,PlumJsonAnimator.Services.LocalizationService)">
+  Bone(GlobalState, Bone, LocalizationService)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L356"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Bone(GlobalState globalState)</code></pre>
-  </div>
-
-  <h4 class="section">Parameters</h4>
-  <dl class="parameters">
-    <dt><code>globalState</code> <a class="xref" href="PlumJsonAnimator.Common.Constants.GlobalState.html">GlobalState</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-
-
-
-
-  <a id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor*"></a>
-
-  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Models.SkeletonNameSpace.Bone)">
-  Bone(GlobalState, Bone)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L172"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Bone(GlobalState globalState, Bone parent)</code></pre>
+    <pre><code class="lang-csharp hljs">public Bone(GlobalState globalState, Bone parent, LocalizationService localizationService)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -250,6 +219,8 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
     <dd></dd>
     <dt><code>parent</code> <a class="xref" href="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html">Bone</a></dt>
     <dd></dd>
+    <dt><code>localizationService</code> <a class="xref" href="PlumJsonAnimator.Services.LocalizationService.html">LocalizationService</a></dt>
+    <dd></dd>
   </dl>
 
 
@@ -265,23 +236,27 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
   <a id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor*"></a>
 
-  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor_PlumJsonAnimator_Common_Constants_GlobalState_System_Int32_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,System.Int32)">
-  Bone(GlobalState, int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L160"><i class="bi bi-code-slash"></i></a>
+  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_System_Int32_PlumJsonAnimator_Services_LocalizationService_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Models.SkeletonNameSpace.Bone,System.Int32,PlumJsonAnimator.Services.LocalizationService)">
+  Bone(GlobalState, Bone, int, LocalizationService)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L341"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Bone(GlobalState globalState, int _id)</code></pre>
+    <pre><code class="lang-csharp hljs">public Bone(GlobalState globalState, Bone parent, int _id, LocalizationService localizationService)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>globalState</code> <a class="xref" href="PlumJsonAnimator.Common.Constants.GlobalState.html">GlobalState</a></dt>
     <dd></dd>
+    <dt><code>parent</code> <a class="xref" href="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html">Bone</a></dt>
+    <dd></dd>
     <dt><code>_id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>localizationService</code> <a class="xref" href="PlumJsonAnimator.Services.LocalizationService.html">LocalizationService</a></dt>
     <dd></dd>
   </dl>
 
@@ -298,16 +273,49 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
   <a id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor*"></a>
 
-  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor_PlumJsonAnimator_Common_Constants_GlobalState_System_String_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,System.String,PlumJsonAnimator.Models.SkeletonNameSpace.Bone)">
-  Bone(GlobalState, string, Bone)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L192"><i class="bi bi-code-slash"></i></a>
+  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_LocalizationService_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.LocalizationService)">
+  Bone(GlobalState, LocalizationService)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L333"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Bone(GlobalState globalState, string name, Bone parent)</code></pre>
+    <pre><code class="lang-csharp hljs">public Bone(GlobalState globalState, LocalizationService localizationService)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>globalState</code> <a class="xref" href="PlumJsonAnimator.Common.Constants.GlobalState.html">GlobalState</a></dt>
+    <dd></dd>
+    <dt><code>localizationService</code> <a class="xref" href="PlumJsonAnimator.Services.LocalizationService.html">LocalizationService</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor*"></a>
+
+  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone__ctor_PlumJsonAnimator_Common_Constants_GlobalState_System_String_PlumJsonAnimator_Services_LocalizationService_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,System.String,PlumJsonAnimator.Services.LocalizationService)">
+  Bone(GlobalState, string, LocalizationService)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L367"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Bone(GlobalState globalState, string name, LocalizationService localizationService)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -316,7 +324,7 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
     <dd></dd>
     <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
     <dd></dd>
-    <dt><code>parent</code> <a class="xref" href="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html">Bone</a></dt>
+    <dt><code>localizationService</code> <a class="xref" href="PlumJsonAnimator.Services.LocalizationService.html">LocalizationService</a></dt>
     <dd></dd>
   </dl>
 
@@ -338,7 +346,7 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
   <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone__globalState" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone._globalState">
   _globalState
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L140"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L328"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -366,9 +374,39 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
 
 
+  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone__localizationService" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone._localizationService">
+  _localizationService
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L329"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected LocalizationService _localizationService</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PlumJsonAnimator.Services.LocalizationService.html">LocalizationService</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
   <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_id" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.id">
   id
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L20"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -399,11 +437,228 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 </h2>
 
 
+  <a id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_A_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.A*"></a>
+
+  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_A" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.A">
+  A
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L191"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual double A { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_AnimA_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimA*"></a>
+
+  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_AnimA" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimA">
+  AnimA
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L115"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual double AnimA { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_AnimX_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimX*"></a>
+
+  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_AnimX" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimX">
+  AnimX
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L89"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual double AnimX { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_AnimY_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimY*"></a>
+
+  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_AnimY" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AnimY">
+  AnimY
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L102"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual double AnimY { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_BaseA_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseA*"></a>
+
+  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_BaseA" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseA">
+  BaseA
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L71"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual double BaseA { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_BaseX_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseX*"></a>
+
+  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_BaseX" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseX">
+  BaseX
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L43"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual double BaseX { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_BaseY_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseY*"></a>
+
+  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_BaseY" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.BaseY">
+  BaseY
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L57"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual double BaseY { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_Children_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Children*"></a>
 
   <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_Children" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Children">
   Children
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L101"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L294"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -434,7 +689,7 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
   <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_GetName" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GetName">
   GetName
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L107"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L300"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns name of the IRenamable object</p>
@@ -462,11 +717,104 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
 
 
+  <a id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_GlobalA_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalA*"></a>
+
+  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_GlobalA" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalA">
+  GlobalA
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L262"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual double GlobalA { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_GlobalX_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalX*"></a>
+
+  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_GlobalX" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalX">
+  GlobalX
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L222"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double GlobalX { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_GlobalY_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalY*"></a>
+
+  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_GlobalY" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GlobalY">
+  GlobalY
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L242"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double GlobalY { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_IsBone_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.IsBone*"></a>
 
   <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_IsBone" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.IsBone">
   IsBone
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L33"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L34"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -497,7 +845,7 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
   <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_LengthX" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.LengthX">
   LengthX
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L122"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L313"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -528,7 +876,7 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
   <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_LengthY" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.LengthY">
   LengthY
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L138"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L326"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -559,7 +907,7 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
   <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_Name" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Name">
   Name
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L21"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L22"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -590,7 +938,7 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
   <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_Parent" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Parent">
   Parent
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L102"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L295"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -621,7 +969,7 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
   <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_Slots" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Slots">
   Slots
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L85"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L278"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -648,18 +996,18 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
 
 
-  <a id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_a_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.a*"></a>
+  <a id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_X_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.X*"></a>
 
-  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_a" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.a">
-  a
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L70"><i class="bi bi-code-slash"></i></a>
+  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_X" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.X">
+  X
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L129"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual double a { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual double X { get; set; }</code></pre>
   </div>
 
 
@@ -679,49 +1027,18 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
 
 
-  <a id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_x_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.x*"></a>
+  <a id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_Y_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Y*"></a>
 
-  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_x" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.x">
-  x
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L42"><i class="bi bi-code-slash"></i></a>
+  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_Y" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Y">
+  Y
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L160"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual double x { get; set; }</code></pre>
-  </div>
-
-
-
-
-
-  <h4 class="section">Property Value</h4>
-  <dl class="parameters">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
-    <dd></dd>
-  </dl>
-
-
-
-
-
-
-
-
-  <a id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_y_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.y*"></a>
-
-  <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_y" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.y">
-  y
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L56"><i class="bi bi-code-slash"></i></a>
-  </h3>
-
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual double y { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual double Y { get; set; }</code></pre>
   </div>
 
 
@@ -749,7 +1066,7 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
   <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_AddChildren_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.AddChildren(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)">
   AddChildren(Bone)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L211"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L386"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -780,7 +1097,7 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
   <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_DrawBone_Avalonia_Controls_Canvas_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.DrawBone(Avalonia.Controls.Canvas)">
   DrawBone(Canvas)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L342"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L465"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Draws bone</p>
@@ -813,7 +1130,7 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
   <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_GenerateCode" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GenerateCode">
   GenerateCode()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L386"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L514"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns JSON string</p>
@@ -845,7 +1162,7 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
   <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_GenerateJSONData" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.GenerateJSONData">
   GenerateJSONData()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L372"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L499"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Returns JSON data</p>
@@ -877,7 +1194,7 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
   <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_Move_System_Double_System_Double_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Move(System.Double,System.Double)">
   Move(double, double)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L224"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L399"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Moves bone and all its children and slots to new position</p>
@@ -891,10 +1208,10 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>x</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
-    <dd><p>Target x coordinate</p>
+    <dd><p>Target x coordinate (global)</p>
 </dd>
     <dt><code>y</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
-    <dd><p>Target y coordinate</p>
+    <dd><p>Target y coordinate (global)</p>
 </dd>
   </dl>
 
@@ -913,7 +1230,7 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
   <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_Rotate_System_Double_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Rotate(System.Double)">
   Rotate(double)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L271"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L432"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Rotates bone to new angle</p>
@@ -946,7 +1263,7 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
   <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_Scale_System_Double_System_Double_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.Scale(System.Double,System.Double)">
   Scale(double, double)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L333"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L456"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Changes bone`s length</p>
@@ -982,7 +1299,7 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
   <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_SetName_System_String_" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.SetName(System.String)">
   SetName(string?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L395"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L523"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Sets new name to IRenamable object</p>
@@ -1015,7 +1332,7 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 
   <h3 id="PlumJsonAnimator_Models_SkeletonNameSpace_Bone_UpdateSlots" data-uid="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.UpdateSlots">
   UpdateSlots()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L280"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -1041,7 +1358,7 @@ Class Bone  <a class="header-action link-secondary" title="View source" href="ht
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L17" class="edit-link">Edit this page</a>
+          <a href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Models/Skeleton/Bone.cs/#L18" class="edit-link">Edit this page</a>
         </div>
 
 

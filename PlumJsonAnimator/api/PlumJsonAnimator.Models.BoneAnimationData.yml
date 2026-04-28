@@ -23,7 +23,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: BoneAnimationData
     path: Models/BoneAnimation.cs
-    startLine: 410
+    startLine: 445
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -60,7 +60,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: translate
     path: Models/BoneAnimation.cs
-    startLine: 412
+    startLine: 447
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -101,7 +101,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: rotate
     path: Models/BoneAnimation.cs
-    startLine: 415
+    startLine: 450
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -146,7 +146,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: scale
     path: Models/BoneAnimation.cs
-    startLine: 418
+    startLine: 453
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -191,7 +191,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: shear
     path: Models/BoneAnimation.cs
-    startLine: 421
+    startLine: 456
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models

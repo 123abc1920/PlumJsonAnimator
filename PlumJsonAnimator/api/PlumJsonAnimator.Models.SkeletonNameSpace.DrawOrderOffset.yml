@@ -21,7 +21,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: DrawOrderOffset
     path: Models/Skeleton/Animation.cs
-    startLine: 350
+    startLine: 378
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -58,7 +58,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Slot
     path: Models/Skeleton/Animation.cs
-    startLine: 352
+    startLine: 380
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -99,7 +99,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Offset
     path: Models/Skeleton/Animation.cs
-    startLine: 355
+    startLine: 383
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace

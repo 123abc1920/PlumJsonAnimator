@@ -9,6 +9,9 @@ items:
   - PlumJsonAnimator.Models.SkeletonNameSpace.Animation.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation,System.String)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Animation.AddKeyFrame(PlumJsonAnimator.Models.SkeletonNameSpace.Bone,PlumJsonAnimator.Models.Common.TransformModesTypes)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Animation.BoneAnimationBinding
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsAnimationBone(PlumJsonAnimator.Models.BoneAnimation)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsBone(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  - PlumJsonAnimator.Models.SkeletonNameSpace.Animation.DeleteBoneFromAnimation(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Animation.DeleteKeyFrame(PlumJsonAnimator.Models.SkeletonNameSpace.Bone,PlumJsonAnimator.Models.Common.TransformModesTypes)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Animation.FindKeyFrame(PlumJsonAnimator.Models.SkeletonNameSpace.Bone,System.Double,PlumJsonAnimator.Models.Common.TransformModesTypes,System.Boolean)
   - PlumJsonAnimator.Models.SkeletonNameSpace.Animation.GenerateCode
@@ -290,7 +293,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Step
     path: Models/Skeleton/Animation.cs
-    startLine: 76
+    startLine: 80
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -300,6 +303,101 @@ items:
     content: public void Step()
     content.vb: Public Sub [Step]()
   overload: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.Step*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsBone(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsBone(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  id: ContainsBone(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Animation
+  langs:
+  - csharp
+  - vb
+  name: ContainsBone(Bone)
+  nameWithType: Animation.ContainsBone(Bone)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsBone(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Skeleton/Animation.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: ContainsBone
+    path: Models/Skeleton/Animation.cs
+    startLine: 89
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  summary: Checks whether a bone is involved in an animation
+  example: []
+  syntax:
+    content: public bool ContainsBone(Bone bone)
+    parameters:
+    - id: bone
+      type: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+    return:
+      type: System.Boolean
+    content.vb: Public Function ContainsBone(bone As Bone) As Boolean
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsBone*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsAnimationBone(PlumJsonAnimator.Models.BoneAnimation)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsAnimationBone(PlumJsonAnimator.Models.BoneAnimation)
+  id: ContainsAnimationBone(PlumJsonAnimator.Models.BoneAnimation)
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Animation
+  langs:
+  - csharp
+  - vb
+  name: ContainsAnimationBone(BoneAnimation)
+  nameWithType: Animation.ContainsAnimationBone(BoneAnimation)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsAnimationBone(PlumJsonAnimator.Models.BoneAnimation)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Skeleton/Animation.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: ContainsAnimationBone
+    path: Models/Skeleton/Animation.cs
+    startLine: 97
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  summary: Checks if the bone has any movement
+  example: []
+  syntax:
+    content: public bool ContainsAnimationBone(BoneAnimation boneAnimation)
+    parameters:
+    - id: boneAnimation
+      type: PlumJsonAnimator.Models.BoneAnimation
+    return:
+      type: System.Boolean
+    content.vb: Public Function ContainsAnimationBone(boneAnimation As BoneAnimation) As Boolean
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsAnimationBone*
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.DeleteBoneFromAnimation(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Animation.DeleteBoneFromAnimation(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  id: DeleteBoneFromAnimation(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.Animation
+  langs:
+  - csharp
+  - vb
+  name: DeleteBoneFromAnimation(Bone)
+  nameWithType: Animation.DeleteBoneFromAnimation(Bone)
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.DeleteBoneFromAnimation(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Skeleton/Animation.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: DeleteBoneFromAnimation
+    path: Models/Skeleton/Animation.cs
+    startLine: 102
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  syntax:
+    content: public void DeleteBoneFromAnimation(Bone bone)
+    parameters:
+    - id: bone
+      type: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+    content.vb: Public Sub DeleteBoneFromAnimation(bone As Bone)
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.DeleteBoneFromAnimation*
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.GenerateJSONData
   commentId: M:PlumJsonAnimator.Models.SkeletonNameSpace.Animation.GenerateJSONData
   id: GenerateJSONData
@@ -318,7 +416,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GenerateJSONData
     path: Models/Skeleton/Animation.cs
-    startLine: 85
+    startLine: 113
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -348,7 +446,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GenerateCode
     path: Models/Skeleton/Animation.cs
-    startLine: 143
+    startLine: 171
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -378,7 +476,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetKeyFramesMarks
     path: Models/Skeleton/Animation.cs
-    startLine: 152
+    startLine: 180
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -412,7 +510,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: TranslateBone
     path: Models/Skeleton/Animation.cs
-    startLine: 192
+    startLine: 220
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -453,7 +551,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: TranslateBone
     path: Models/Skeleton/Animation.cs
-    startLine: 208
+    startLine: 236
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -497,7 +595,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: RotateBone
     path: Models/Skeleton/Animation.cs
-    startLine: 222
+    startLine: 250
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -535,7 +633,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: RotateBone
     path: Models/Skeleton/Animation.cs
-    startLine: 237
+    startLine: 265
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -576,7 +674,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: FindKeyFrame
     path: Models/Skeleton/Animation.cs
-    startLine: 253
+    startLine: 281
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -622,7 +720,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AddKeyFrame
     path: Models/Skeleton/Animation.cs
-    startLine: 267
+    startLine: 295
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -657,7 +755,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: DeleteKeyFrame
     path: Models/Skeleton/Animation.cs
-    startLine: 289
+    startLine: 317
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -692,7 +790,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: MaxTime
     path: Models/Skeleton/Animation.cs
-    startLine: 304
+    startLine: 332
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -1328,6 +1426,60 @@ references:
   name: Step
   nameWithType: Animation.Step
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.Step
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsBone*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsBone
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.html#PlumJsonAnimator_Models_SkeletonNameSpace_Animation_ContainsBone_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_
+  name: ContainsBone
+  nameWithType: Animation.ContainsBone
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsBone
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html
+  name: Bone
+  nameWithType: Bone
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsAnimationBone*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsAnimationBone
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.html#PlumJsonAnimator_Models_SkeletonNameSpace_Animation_ContainsAnimationBone_PlumJsonAnimator_Models_BoneAnimation_
+  name: ContainsAnimationBone
+  nameWithType: Animation.ContainsAnimationBone
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.ContainsAnimationBone
+- uid: PlumJsonAnimator.Models.BoneAnimation
+  commentId: T:PlumJsonAnimator.Models.BoneAnimation
+  parent: PlumJsonAnimator.Models
+  href: PlumJsonAnimator.Models.BoneAnimation.html
+  name: BoneAnimation
+  nameWithType: BoneAnimation
+  fullName: PlumJsonAnimator.Models.BoneAnimation
+- uid: PlumJsonAnimator.Models
+  commentId: N:PlumJsonAnimator.Models
+  href: PlumJsonAnimator.html
+  name: PlumJsonAnimator.Models
+  nameWithType: PlumJsonAnimator.Models
+  fullName: PlumJsonAnimator.Models
+  spec.csharp:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+  spec.vb:
+  - uid: PlumJsonAnimator
+    name: PlumJsonAnimator
+    href: PlumJsonAnimator.html
+  - name: .
+  - uid: PlumJsonAnimator.Models
+    name: Models
+    href: PlumJsonAnimator.Models.html
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.DeleteBoneFromAnimation*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Animation.DeleteBoneFromAnimation
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.html#PlumJsonAnimator_Models_SkeletonNameSpace_Animation_DeleteBoneFromAnimation_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_
+  name: DeleteBoneFromAnimation
+  nameWithType: Animation.DeleteBoneFromAnimation
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.DeleteBoneFromAnimation
 - uid: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.GenerateJSONData*
   commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.Animation.GenerateJSONData
   href: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.html#PlumJsonAnimator_Models_SkeletonNameSpace_Animation_GenerateJSONData
@@ -1353,13 +1505,6 @@ references:
   name: GetKeyFramesMarks
   nameWithType: Animation.GetKeyFramesMarks
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Animation.GetKeyFramesMarks
-- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
-  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.Bone
-  parent: PlumJsonAnimator.Models.SkeletonNameSpace
-  href: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html
-  name: Bone
-  nameWithType: Bone
-  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
 - uid: System.Collections.Generic.Dictionary{System.Double,System.Collections.Generic.Dictionary{PlumJsonAnimator.Models.Common.KeyFrameTypes,System.Boolean}}
   commentId: T:System.Collections.Generic.Dictionary{System.Double,System.Collections.Generic.Dictionary{PlumJsonAnimator.Models.Common.KeyFrameTypes,System.Boolean}}
   parent: System.Collections.Generic

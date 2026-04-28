@@ -6,6 +6,11 @@ items:
   parent: PlumJsonAnimator.Services
   children:
   - PlumJsonAnimator.Services.LocalizationConsts.ANIM_SUCCESS
+  - PlumJsonAnimator.Services.LocalizationConsts.BASE_POS
+  - PlumJsonAnimator.Services.LocalizationConsts.BONE_NULL_NAME_ERROR
+  - PlumJsonAnimator.Services.LocalizationConsts.BONE_PARENT_NULL_ERROR
+  - PlumJsonAnimator.Services.LocalizationConsts.DELETE_ERROR
+  - PlumJsonAnimator.Services.LocalizationConsts.EMPTY_JSON
   - PlumJsonAnimator.Services.LocalizationConsts.ERROR
   - PlumJsonAnimator.Services.LocalizationConsts.EXPORT_AS_GIF
   - PlumJsonAnimator.Services.LocalizationConsts.EXPORT_AS_JPG
@@ -28,10 +33,16 @@ items:
   - PlumJsonAnimator.Services.LocalizationConsts.JSON_ERROR_STR
   - PlumJsonAnimator.Services.LocalizationConsts.JSON_VALID
   - PlumJsonAnimator.Services.LocalizationConsts.NEW_PROJECT
+  - PlumJsonAnimator.Services.LocalizationConsts.NO_ROOT_BONE
   - PlumJsonAnimator.Services.LocalizationConsts.REGENERATE_ERROR
   - PlumJsonAnimator.Services.LocalizationConsts.RENAME
   - PlumJsonAnimator.Services.LocalizationConsts.SAVED
+  - PlumJsonAnimator.Services.LocalizationConsts.SELECT_FFMPEG
+  - PlumJsonAnimator.Services.LocalizationConsts.SELECT_FOLDER
+  - PlumJsonAnimator.Services.LocalizationConsts.SELECT_SETTINGS_FILE
   - PlumJsonAnimator.Services.LocalizationConsts.SETTINGS
+  - PlumJsonAnimator.Services.LocalizationConsts.SEVERAL_ROOT_BONES
+  - PlumJsonAnimator.Services.LocalizationConsts.SLOT_NULL_NAME
   langs:
   - csharp
   - vb
@@ -46,7 +57,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: LocalizationConsts
     path: Services/LocalizationService.cs
-    startLine: 179
+    startLine: 191
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -73,7 +84,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: EXPORT_AS_GIF
     path: Services/LocalizationService.cs
-    startLine: 181
+    startLine: 193
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -99,7 +110,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: EXPORT_AS_MP4
     path: Services/LocalizationService.cs
-    startLine: 182
+    startLine: 194
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -125,7 +136,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: EXPORT_AS_PNG
     path: Services/LocalizationService.cs
-    startLine: 183
+    startLine: 195
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -151,7 +162,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: EXPORT_AS_JPG
     path: Services/LocalizationService.cs
-    startLine: 184
+    startLine: 196
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -177,7 +188,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SETTINGS
     path: Services/LocalizationService.cs
-    startLine: 185
+    startLine: 197
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -203,7 +214,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: NEW_PROJECT
     path: Services/LocalizationService.cs
-    startLine: 186
+    startLine: 198
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -229,7 +240,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ANIM_SUCCESS
     path: Services/LocalizationService.cs
-    startLine: 187
+    startLine: 199
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -255,7 +266,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: FOLDER_ERROR
     path: Services/LocalizationService.cs
-    startLine: 188
+    startLine: 200
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -281,7 +292,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: FILE_NOT_EXIST
     path: Services/LocalizationService.cs
-    startLine: 189
+    startLine: 201
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -307,7 +318,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: FILE_DAMAGED
     path: Services/LocalizationService.cs
-    startLine: 190
+    startLine: 202
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -333,7 +344,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: IMPORT_SUCCESS
     path: Services/LocalizationService.cs
-    startLine: 191
+    startLine: 203
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -359,7 +370,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: EXPORT_SUCCESS
     path: Services/LocalizationService.cs
-    startLine: 192
+    startLine: 204
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -385,7 +396,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: INCORRECT_TIME
     path: Services/LocalizationService.cs
-    startLine: 193
+    startLine: 205
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -411,7 +422,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: INPUT_NAME
     path: Services/LocalizationService.cs
-    startLine: 194
+    startLine: 206
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -437,7 +448,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: INPUT_FOLDER
     path: Services/LocalizationService.cs
-    startLine: 195
+    startLine: 207
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -463,7 +474,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: FOLDER_NOT_EXIST
     path: Services/LocalizationService.cs
-    startLine: 196
+    startLine: 208
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -489,7 +500,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: FFMPEG_NOT_EXIST
     path: Services/LocalizationService.cs
-    startLine: 197
+    startLine: 209
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -515,7 +526,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: INPUT_FFMPEG
     path: Services/LocalizationService.cs
-    startLine: 198
+    startLine: 210
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -541,7 +552,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ERROR
     path: Services/LocalizationService.cs
-    startLine: 199
+    startLine: 211
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -567,7 +578,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: JSON_VALID
     path: Services/LocalizationService.cs
-    startLine: 200
+    startLine: 212
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -593,7 +604,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: JSON_ERROR_STR
     path: Services/LocalizationService.cs
-    startLine: 201
+    startLine: 213
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -619,7 +630,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: JSON_ERROR_POS
     path: Services/LocalizationService.cs
-    startLine: 202
+    startLine: 214
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -645,7 +656,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: JSON_CONTEXT
     path: Services/LocalizationService.cs
-    startLine: 203
+    startLine: 215
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -671,7 +682,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: RENAME
     path: Services/LocalizationService.cs
-    startLine: 204
+    startLine: 216
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -697,7 +708,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: INFO_MESSAGE
     path: Services/LocalizationService.cs
-    startLine: 205
+    startLine: 217
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -723,7 +734,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SAVED
     path: Services/LocalizationService.cs
-    startLine: 206
+    startLine: 218
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -749,12 +760,298 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: REGENERATE_ERROR
     path: Services/LocalizationService.cs
-    startLine: 207
+    startLine: 219
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
   syntax:
     content: REGENERATE_ERROR = 26
+    return:
+      type: PlumJsonAnimator.Services.LocalizationConsts
+- uid: PlumJsonAnimator.Services.LocalizationConsts.BONE_NULL_NAME_ERROR
+  commentId: F:PlumJsonAnimator.Services.LocalizationConsts.BONE_NULL_NAME_ERROR
+  id: BONE_NULL_NAME_ERROR
+  parent: PlumJsonAnimator.Services.LocalizationConsts
+  langs:
+  - csharp
+  - vb
+  name: BONE_NULL_NAME_ERROR
+  nameWithType: LocalizationConsts.BONE_NULL_NAME_ERROR
+  fullName: PlumJsonAnimator.Services.LocalizationConsts.BONE_NULL_NAME_ERROR
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/LocalizationService.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: BONE_NULL_NAME_ERROR
+    path: Services/LocalizationService.cs
+    startLine: 220
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: BONE_NULL_NAME_ERROR = 27
+    return:
+      type: PlumJsonAnimator.Services.LocalizationConsts
+- uid: PlumJsonAnimator.Services.LocalizationConsts.BONE_PARENT_NULL_ERROR
+  commentId: F:PlumJsonAnimator.Services.LocalizationConsts.BONE_PARENT_NULL_ERROR
+  id: BONE_PARENT_NULL_ERROR
+  parent: PlumJsonAnimator.Services.LocalizationConsts
+  langs:
+  - csharp
+  - vb
+  name: BONE_PARENT_NULL_ERROR
+  nameWithType: LocalizationConsts.BONE_PARENT_NULL_ERROR
+  fullName: PlumJsonAnimator.Services.LocalizationConsts.BONE_PARENT_NULL_ERROR
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/LocalizationService.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: BONE_PARENT_NULL_ERROR
+    path: Services/LocalizationService.cs
+    startLine: 221
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: BONE_PARENT_NULL_ERROR = 28
+    return:
+      type: PlumJsonAnimator.Services.LocalizationConsts
+- uid: PlumJsonAnimator.Services.LocalizationConsts.SEVERAL_ROOT_BONES
+  commentId: F:PlumJsonAnimator.Services.LocalizationConsts.SEVERAL_ROOT_BONES
+  id: SEVERAL_ROOT_BONES
+  parent: PlumJsonAnimator.Services.LocalizationConsts
+  langs:
+  - csharp
+  - vb
+  name: SEVERAL_ROOT_BONES
+  nameWithType: LocalizationConsts.SEVERAL_ROOT_BONES
+  fullName: PlumJsonAnimator.Services.LocalizationConsts.SEVERAL_ROOT_BONES
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/LocalizationService.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: SEVERAL_ROOT_BONES
+    path: Services/LocalizationService.cs
+    startLine: 222
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: SEVERAL_ROOT_BONES = 29
+    return:
+      type: PlumJsonAnimator.Services.LocalizationConsts
+- uid: PlumJsonAnimator.Services.LocalizationConsts.NO_ROOT_BONE
+  commentId: F:PlumJsonAnimator.Services.LocalizationConsts.NO_ROOT_BONE
+  id: NO_ROOT_BONE
+  parent: PlumJsonAnimator.Services.LocalizationConsts
+  langs:
+  - csharp
+  - vb
+  name: NO_ROOT_BONE
+  nameWithType: LocalizationConsts.NO_ROOT_BONE
+  fullName: PlumJsonAnimator.Services.LocalizationConsts.NO_ROOT_BONE
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/LocalizationService.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: NO_ROOT_BONE
+    path: Services/LocalizationService.cs
+    startLine: 223
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: NO_ROOT_BONE = 30
+    return:
+      type: PlumJsonAnimator.Services.LocalizationConsts
+- uid: PlumJsonAnimator.Services.LocalizationConsts.DELETE_ERROR
+  commentId: F:PlumJsonAnimator.Services.LocalizationConsts.DELETE_ERROR
+  id: DELETE_ERROR
+  parent: PlumJsonAnimator.Services.LocalizationConsts
+  langs:
+  - csharp
+  - vb
+  name: DELETE_ERROR
+  nameWithType: LocalizationConsts.DELETE_ERROR
+  fullName: PlumJsonAnimator.Services.LocalizationConsts.DELETE_ERROR
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/LocalizationService.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: DELETE_ERROR
+    path: Services/LocalizationService.cs
+    startLine: 224
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: DELETE_ERROR = 31
+    return:
+      type: PlumJsonAnimator.Services.LocalizationConsts
+- uid: PlumJsonAnimator.Services.LocalizationConsts.SELECT_SETTINGS_FILE
+  commentId: F:PlumJsonAnimator.Services.LocalizationConsts.SELECT_SETTINGS_FILE
+  id: SELECT_SETTINGS_FILE
+  parent: PlumJsonAnimator.Services.LocalizationConsts
+  langs:
+  - csharp
+  - vb
+  name: SELECT_SETTINGS_FILE
+  nameWithType: LocalizationConsts.SELECT_SETTINGS_FILE
+  fullName: PlumJsonAnimator.Services.LocalizationConsts.SELECT_SETTINGS_FILE
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/LocalizationService.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: SELECT_SETTINGS_FILE
+    path: Services/LocalizationService.cs
+    startLine: 225
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: SELECT_SETTINGS_FILE = 32
+    return:
+      type: PlumJsonAnimator.Services.LocalizationConsts
+- uid: PlumJsonAnimator.Services.LocalizationConsts.SELECT_FOLDER
+  commentId: F:PlumJsonAnimator.Services.LocalizationConsts.SELECT_FOLDER
+  id: SELECT_FOLDER
+  parent: PlumJsonAnimator.Services.LocalizationConsts
+  langs:
+  - csharp
+  - vb
+  name: SELECT_FOLDER
+  nameWithType: LocalizationConsts.SELECT_FOLDER
+  fullName: PlumJsonAnimator.Services.LocalizationConsts.SELECT_FOLDER
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/LocalizationService.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: SELECT_FOLDER
+    path: Services/LocalizationService.cs
+    startLine: 226
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: SELECT_FOLDER = 33
+    return:
+      type: PlumJsonAnimator.Services.LocalizationConsts
+- uid: PlumJsonAnimator.Services.LocalizationConsts.SELECT_FFMPEG
+  commentId: F:PlumJsonAnimator.Services.LocalizationConsts.SELECT_FFMPEG
+  id: SELECT_FFMPEG
+  parent: PlumJsonAnimator.Services.LocalizationConsts
+  langs:
+  - csharp
+  - vb
+  name: SELECT_FFMPEG
+  nameWithType: LocalizationConsts.SELECT_FFMPEG
+  fullName: PlumJsonAnimator.Services.LocalizationConsts.SELECT_FFMPEG
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/LocalizationService.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: SELECT_FFMPEG
+    path: Services/LocalizationService.cs
+    startLine: 227
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: SELECT_FFMPEG = 34
+    return:
+      type: PlumJsonAnimator.Services.LocalizationConsts
+- uid: PlumJsonAnimator.Services.LocalizationConsts.SLOT_NULL_NAME
+  commentId: F:PlumJsonAnimator.Services.LocalizationConsts.SLOT_NULL_NAME
+  id: SLOT_NULL_NAME
+  parent: PlumJsonAnimator.Services.LocalizationConsts
+  langs:
+  - csharp
+  - vb
+  name: SLOT_NULL_NAME
+  nameWithType: LocalizationConsts.SLOT_NULL_NAME
+  fullName: PlumJsonAnimator.Services.LocalizationConsts.SLOT_NULL_NAME
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/LocalizationService.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: SLOT_NULL_NAME
+    path: Services/LocalizationService.cs
+    startLine: 228
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: SLOT_NULL_NAME = 35
+    return:
+      type: PlumJsonAnimator.Services.LocalizationConsts
+- uid: PlumJsonAnimator.Services.LocalizationConsts.EMPTY_JSON
+  commentId: F:PlumJsonAnimator.Services.LocalizationConsts.EMPTY_JSON
+  id: EMPTY_JSON
+  parent: PlumJsonAnimator.Services.LocalizationConsts
+  langs:
+  - csharp
+  - vb
+  name: EMPTY_JSON
+  nameWithType: LocalizationConsts.EMPTY_JSON
+  fullName: PlumJsonAnimator.Services.LocalizationConsts.EMPTY_JSON
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/LocalizationService.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: EMPTY_JSON
+    path: Services/LocalizationService.cs
+    startLine: 229
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: EMPTY_JSON = 36
+    return:
+      type: PlumJsonAnimator.Services.LocalizationConsts
+- uid: PlumJsonAnimator.Services.LocalizationConsts.BASE_POS
+  commentId: F:PlumJsonAnimator.Services.LocalizationConsts.BASE_POS
+  id: BASE_POS
+  parent: PlumJsonAnimator.Services.LocalizationConsts
+  langs:
+  - csharp
+  - vb
+  name: BASE_POS
+  nameWithType: LocalizationConsts.BASE_POS
+  fullName: PlumJsonAnimator.Services.LocalizationConsts.BASE_POS
+  type: Field
+  source:
+    remote:
+      path: PlumJsonAnimator/Services/LocalizationService.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: BASE_POS
+    path: Services/LocalizationService.cs
+    startLine: 230
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Services
+  syntax:
+    content: BASE_POS = 37
     return:
       type: PlumJsonAnimator.Services.LocalizationConsts
 references:

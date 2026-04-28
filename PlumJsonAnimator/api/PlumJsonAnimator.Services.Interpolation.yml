@@ -17,11 +17,11 @@ items:
   type: Class
   source:
     remote:
-      path: PlumJsonAnimator/Services/Interpolations.cs
+      path: PlumJsonAnimator/Services/Interpolation.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Interpolation
-    path: Services/Interpolations.cs
+    path: Services/Interpolation.cs
     startLine: 7
   assemblies:
   - PlumJsonAnimator
@@ -54,11 +54,11 @@ items:
   type: Method
   source:
     remote:
-      path: PlumJsonAnimator/Services/Interpolations.cs
+      path: PlumJsonAnimator/Services/Interpolation.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: linearInterpolation
-    path: Services/Interpolations.cs
+    path: Services/Interpolation.cs
     startLine: 18
   assemblies:
   - PlumJsonAnimator
@@ -98,11 +98,11 @@ items:
   type: Method
   source:
     remote:
-      path: PlumJsonAnimator/Services/Interpolations.cs
+      path: PlumJsonAnimator/Services/Interpolation.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: angleInterpolation
-    path: Services/Interpolations.cs
+    path: Services/Interpolation.cs
     startLine: 32
   assemblies:
   - PlumJsonAnimator
@@ -142,11 +142,11 @@ items:
   type: Method
   source:
     remote:
-      path: PlumJsonAnimator/Services/Interpolations.cs
+      path: PlumJsonAnimator/Services/Interpolation.cs
       branch: main
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: findInterpolateParam
-    path: Services/Interpolations.cs
+    path: Services/Interpolation.cs
     startLine: 46
   assemblies:
   - PlumJsonAnimator

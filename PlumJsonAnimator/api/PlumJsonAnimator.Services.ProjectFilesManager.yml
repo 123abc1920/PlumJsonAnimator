@@ -5,7 +5,7 @@ items:
   id: ProjectFilesManager
   parent: PlumJsonAnimator.Services
   children:
-  - PlumJsonAnimator.Services.ProjectFilesManager.#ctor(PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)
+  - PlumJsonAnimator.Services.ProjectFilesManager.#ctor(PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.LocalizationService)
   - PlumJsonAnimator.Services.ProjectFilesManager.CopyDir(System.String,System.String)
   - PlumJsonAnimator.Services.ProjectFilesManager.CopyRes(System.String,System.String,PlumJsonAnimator.Models.Project)
   - PlumJsonAnimator.Services.ProjectFilesManager.DeleteResource(System.String,System.String,PlumJsonAnimator.Models.Project)
@@ -31,7 +31,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: ProjectFilesManager
     path: Services/ProjectFilesManager.cs
-    startLine: 16
+    startLine: 15
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -50,16 +50,16 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-- uid: PlumJsonAnimator.Services.ProjectFilesManager.#ctor(PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)
-  commentId: M:PlumJsonAnimator.Services.ProjectFilesManager.#ctor(PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)
-  id: '#ctor(PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)'
+- uid: PlumJsonAnimator.Services.ProjectFilesManager.#ctor(PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.LocalizationService)
+  commentId: M:PlumJsonAnimator.Services.ProjectFilesManager.#ctor(PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.LocalizationService)
+  id: '#ctor(PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.LocalizationService)'
   parent: PlumJsonAnimator.Services.ProjectFilesManager
   langs:
   - csharp
   - vb
-  name: ProjectFilesManager(ProjectSettings, AppSettings, GlobalState, Interpolation)
-  nameWithType: ProjectFilesManager.ProjectFilesManager(ProjectSettings, AppSettings, GlobalState, Interpolation)
-  fullName: PlumJsonAnimator.Services.ProjectFilesManager.ProjectFilesManager(PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation)
+  name: ProjectFilesManager(ProjectSettings, AppSettings, GlobalState, Interpolation, LocalizationService)
+  nameWithType: ProjectFilesManager.ProjectFilesManager(ProjectSettings, AppSettings, GlobalState, Interpolation, LocalizationService)
+  fullName: PlumJsonAnimator.Services.ProjectFilesManager.ProjectFilesManager(PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation, PlumJsonAnimator.Services.LocalizationService)
   type: Constructor
   source:
     remote:
@@ -73,7 +73,7 @@ items:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
   syntax:
-    content: public ProjectFilesManager(ProjectSettings projectSettings, AppSettings appSettings, GlobalState globalState, Interpolation interpolation)
+    content: public ProjectFilesManager(ProjectSettings projectSettings, AppSettings appSettings, GlobalState globalState, Interpolation interpolation, LocalizationService localizationService)
     parameters:
     - id: projectSettings
       type: PlumJsonAnimator.Services.ProjectSettings
@@ -83,11 +83,13 @@ items:
       type: PlumJsonAnimator.Common.Constants.GlobalState
     - id: interpolation
       type: PlumJsonAnimator.Services.Interpolation
-    content.vb: Public Sub New(projectSettings As ProjectSettings, appSettings As AppSettings, globalState As GlobalState, interpolation As Interpolation)
+    - id: localizationService
+      type: PlumJsonAnimator.Services.LocalizationService
+    content.vb: Public Sub New(projectSettings As ProjectSettings, appSettings As AppSettings, globalState As GlobalState, interpolation As Interpolation, localizationService As LocalizationService)
   overload: PlumJsonAnimator.Services.ProjectFilesManager.#ctor*
-  nameWithType.vb: ProjectFilesManager.New(ProjectSettings, AppSettings, GlobalState, Interpolation)
-  fullName.vb: PlumJsonAnimator.Services.ProjectFilesManager.New(PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation)
-  name.vb: New(ProjectSettings, AppSettings, GlobalState, Interpolation)
+  nameWithType.vb: ProjectFilesManager.New(ProjectSettings, AppSettings, GlobalState, Interpolation, LocalizationService)
+  fullName.vb: PlumJsonAnimator.Services.ProjectFilesManager.New(PlumJsonAnimator.Services.ProjectSettings, PlumJsonAnimator.Services.AppSettings, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation, PlumJsonAnimator.Services.LocalizationService)
+  name.vb: New(ProjectSettings, AppSettings, GlobalState, Interpolation, LocalizationService)
 - uid: PlumJsonAnimator.Services.ProjectFilesManager.OpenProjectDialog(Avalonia.Controls.Window)
   commentId: M:PlumJsonAnimator.Services.ProjectFilesManager.OpenProjectDialog(Avalonia.Controls.Window)
   id: OpenProjectDialog(Avalonia.Controls.Window)
@@ -106,7 +108,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: OpenProjectDialog
     path: Services/ProjectFilesManager.cs
-    startLine: 40
+    startLine: 42
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -140,7 +142,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: OpenProject
     path: Services/ProjectFilesManager.cs
-    startLine: 64
+    startLine: 67
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -174,7 +176,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: NewProject
     path: Services/ProjectFilesManager.cs
-    startLine: 88
+    startLine: 92
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -210,7 +212,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetProjectDir
     path: Services/ProjectFilesManager.cs
-    startLine: 116
+    startLine: 121
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -247,7 +249,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: CopyRes
     path: Services/ProjectFilesManager.cs
-    startLine: 137
+    startLine: 142
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -285,7 +287,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: DeleteResource
     path: Services/ProjectFilesManager.cs
-    startLine: 162
+    startLine: 167
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -323,7 +325,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: RenameProject
     path: Services/ProjectFilesManager.cs
-    startLine: 189
+    startLine: 196
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -357,7 +359,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: MoveRes
     path: Services/ProjectFilesManager.cs
-    startLine: 201
+    startLine: 208
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -389,7 +391,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: RenameFile
     path: Services/ProjectFilesManager.cs
-    startLine: 209
+    startLine: 216
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -423,7 +425,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: CopyDir
     path: Services/ProjectFilesManager.cs
-    startLine: 222
+    startLine: 229
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -461,7 +463,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: LoadRes
     path: Services/ProjectFilesManager.cs
-    startLine: 263
+    startLine: 270
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -737,7 +739,7 @@ references:
   fullName: System
 - uid: PlumJsonAnimator.Services.ProjectFilesManager.#ctor*
   commentId: Overload:PlumJsonAnimator.Services.ProjectFilesManager.#ctor
-  href: PlumJsonAnimator.Services.ProjectFilesManager.html#PlumJsonAnimator_Services_ProjectFilesManager__ctor_PlumJsonAnimator_Services_ProjectSettings_PlumJsonAnimator_Services_AppSettings_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_Interpolation_
+  href: PlumJsonAnimator.Services.ProjectFilesManager.html#PlumJsonAnimator_Services_ProjectFilesManager__ctor_PlumJsonAnimator_Services_ProjectSettings_PlumJsonAnimator_Services_AppSettings_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_Interpolation_PlumJsonAnimator_Services_LocalizationService_
   name: ProjectFilesManager
   nameWithType: ProjectFilesManager.ProjectFilesManager
   fullName: PlumJsonAnimator.Services.ProjectFilesManager.ProjectFilesManager
@@ -772,6 +774,13 @@ references:
   name: Interpolation
   nameWithType: Interpolation
   fullName: PlumJsonAnimator.Services.Interpolation
+- uid: PlumJsonAnimator.Services.LocalizationService
+  commentId: T:PlumJsonAnimator.Services.LocalizationService
+  parent: PlumJsonAnimator.Services
+  href: PlumJsonAnimator.Services.LocalizationService.html
+  name: LocalizationService
+  nameWithType: LocalizationService
+  fullName: PlumJsonAnimator.Services.LocalizationService
 - uid: PlumJsonAnimator.Common.Constants
   commentId: N:PlumJsonAnimator.Common.Constants
   href: PlumJsonAnimator.html

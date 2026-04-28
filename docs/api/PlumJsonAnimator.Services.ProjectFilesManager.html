@@ -89,7 +89,7 @@
 
 
   <h1 id="PlumJsonAnimator_Services_ProjectFilesManager" data-uid="PlumJsonAnimator.Services.ProjectFilesManager" class="text-break">
-Class ProjectFilesManager  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L17"><i class="bi bi-code-slash"></i></a>
+Class ProjectFilesManager  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L16"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -155,8 +155,8 @@ Class ProjectFilesManager  <a class="header-action link-secondary" title="View s
 
   <a id="PlumJsonAnimator_Services_ProjectFilesManager__ctor_" data-uid="PlumJsonAnimator.Services.ProjectFilesManager.#ctor*"></a>
 
-  <h3 id="PlumJsonAnimator_Services_ProjectFilesManager__ctor_PlumJsonAnimator_Services_ProjectSettings_PlumJsonAnimator_Services_AppSettings_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_Interpolation_" data-uid="PlumJsonAnimator.Services.ProjectFilesManager.#ctor(PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)">
-  ProjectFilesManager(ProjectSettings, AppSettings, GlobalState, Interpolation)
+  <h3 id="PlumJsonAnimator_Services_ProjectFilesManager__ctor_PlumJsonAnimator_Services_ProjectSettings_PlumJsonAnimator_Services_AppSettings_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_Interpolation_PlumJsonAnimator_Services_LocalizationService_" data-uid="PlumJsonAnimator.Services.ProjectFilesManager.#ctor(PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.LocalizationService)">
+  ProjectFilesManager(ProjectSettings, AppSettings, GlobalState, Interpolation, LocalizationService)
   <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L24"><i class="bi bi-code-slash"></i></a>
   </h3>
 
@@ -164,7 +164,7 @@ Class ProjectFilesManager  <a class="header-action link-secondary" title="View s
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ProjectFilesManager(ProjectSettings projectSettings, AppSettings appSettings, GlobalState globalState, Interpolation interpolation)</code></pre>
+    <pre><code class="lang-csharp hljs">public ProjectFilesManager(ProjectSettings projectSettings, AppSettings appSettings, GlobalState globalState, Interpolation interpolation, LocalizationService localizationService)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -176,6 +176,8 @@ Class ProjectFilesManager  <a class="header-action link-secondary" title="View s
     <dt><code>globalState</code> <a class="xref" href="PlumJsonAnimator.Common.Constants.GlobalState.html">GlobalState</a></dt>
     <dd></dd>
     <dt><code>interpolation</code> <a class="xref" href="PlumJsonAnimator.Services.Interpolation.html">Interpolation</a></dt>
+    <dd></dd>
+    <dt><code>localizationService</code> <a class="xref" href="PlumJsonAnimator.Services.LocalizationService.html">LocalizationService</a></dt>
     <dd></dd>
   </dl>
 
@@ -198,7 +200,7 @@ Class ProjectFilesManager  <a class="header-action link-secondary" title="View s
 
   <h3 id="PlumJsonAnimator_Services_ProjectFilesManager_CopyDir_System_String_System_String_" data-uid="PlumJsonAnimator.Services.ProjectFilesManager.CopyDir(System.String,System.String)">
   CopyDir(string, string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L223"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L230"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Cipies all project files into new directory</p>
@@ -232,7 +234,7 @@ Class ProjectFilesManager  <a class="header-action link-secondary" title="View s
 
   <h3 id="PlumJsonAnimator_Services_ProjectFilesManager_CopyRes_System_String_System_String_PlumJsonAnimator_Models_Project_" data-uid="PlumJsonAnimator.Services.ProjectFilesManager.CopyRes(System.String,System.String,PlumJsonAnimator.Models.Project)">
   CopyRes(string, string, Project?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L138"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L143"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -272,7 +274,7 @@ Class ProjectFilesManager  <a class="header-action link-secondary" title="View s
 
   <h3 id="PlumJsonAnimator_Services_ProjectFilesManager_DeleteResource_System_String_System_String_PlumJsonAnimator_Models_Project_" data-uid="PlumJsonAnimator.Services.ProjectFilesManager.DeleteResource(System.String,System.String,PlumJsonAnimator.Models.Project)">
   DeleteResource(string, string, Project?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L163"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L168"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -312,7 +314,7 @@ Class ProjectFilesManager  <a class="header-action link-secondary" title="View s
 
   <h3 id="PlumJsonAnimator_Services_ProjectFilesManager_GetProjectDir_PlumJsonAnimator_Models_Project_" data-uid="PlumJsonAnimator.Services.ProjectFilesManager.GetProjectDir(PlumJsonAnimator.Models.Project)">
   GetProjectDir(Project?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L117"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L122"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Return real project directory in file system</p>
@@ -350,7 +352,7 @@ Class ProjectFilesManager  <a class="header-action link-secondary" title="View s
 
   <h3 id="PlumJsonAnimator_Services_ProjectFilesManager_LoadRes_PlumJsonAnimator_Models_Project_" data-uid="PlumJsonAnimator.Services.ProjectFilesManager.LoadRes(PlumJsonAnimator.Models.Project)">
   LoadRes(Project)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L264"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L271"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Load all resources into project</p>
@@ -382,7 +384,7 @@ Class ProjectFilesManager  <a class="header-action link-secondary" title="View s
 
   <h3 id="PlumJsonAnimator_Services_ProjectFilesManager_MoveRes_PlumJsonAnimator_Models_Project_" data-uid="PlumJsonAnimator.Services.ProjectFilesManager.MoveRes(PlumJsonAnimator.Models.Project)">
   MoveRes(Project)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L202"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L209"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Sets new pathes to project resource objects after moving project into another directory</p>
@@ -414,7 +416,7 @@ Class ProjectFilesManager  <a class="header-action link-secondary" title="View s
 
   <h3 id="PlumJsonAnimator_Services_ProjectFilesManager_NewProject_System_String_System_String_" data-uid="PlumJsonAnimator.Services.ProjectFilesManager.NewProject(System.String,System.String)">
   NewProject(string?, string?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L89"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L93"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -452,7 +454,7 @@ Class ProjectFilesManager  <a class="header-action link-secondary" title="View s
 
   <h3 id="PlumJsonAnimator_Services_ProjectFilesManager_OpenProject_System_String_" data-uid="PlumJsonAnimator.Services.ProjectFilesManager.OpenProject(System.String)">
   OpenProject(string?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L65"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L68"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -488,7 +490,7 @@ Class ProjectFilesManager  <a class="header-action link-secondary" title="View s
 
   <h3 id="PlumJsonAnimator_Services_ProjectFilesManager_OpenProjectDialog_Avalonia_Controls_Window_" data-uid="PlumJsonAnimator.Services.ProjectFilesManager.OpenProjectDialog(Avalonia.Controls.Window)">
   OpenProjectDialog(Window)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L43"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Open dialog for open existing projects</p>
@@ -526,7 +528,7 @@ Class ProjectFilesManager  <a class="header-action link-secondary" title="View s
 
   <h3 id="PlumJsonAnimator_Services_ProjectFilesManager_RenameFile_System_String_System_String_" data-uid="PlumJsonAnimator.Services.ProjectFilesManager.RenameFile(System.String,System.String)">
   RenameFile(string, string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L210"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L217"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -559,7 +561,7 @@ Class ProjectFilesManager  <a class="header-action link-secondary" title="View s
 
   <h3 id="PlumJsonAnimator_Services_ProjectFilesManager_RenameProject_System_String_System_String_" data-uid="PlumJsonAnimator.Services.ProjectFilesManager.RenameProject(System.String,System.String)">
   RenameProject(string, string)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L190"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L197"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
@@ -592,7 +594,7 @@ Class ProjectFilesManager  <a class="header-action link-secondary" title="View s
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L17" class="edit-link">Edit this page</a>
+          <a href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/Services/ProjectFilesManager.cs/#L16" class="edit-link">Edit this page</a>
         </div>
 
 

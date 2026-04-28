@@ -28,7 +28,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: LocalizationService
     path: Services/LocalizationService.cs
-    startLine: 14
+    startLine: 15
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -70,7 +70,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: START_LANG
     path: Services/LocalizationService.cs
-    startLine: 16
+    startLine: 17
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -97,7 +97,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: langs
     path: Services/LocalizationService.cs
-    startLine: 20
+    startLine: 21
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -124,7 +124,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: currentLang
     path: Services/LocalizationService.cs
-    startLine: 21
+    startLine: 22
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -151,7 +151,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: LangResources
     path: Services/LocalizationService.cs
-    startLine: 23
+    startLine: 24
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -178,7 +178,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Services/LocalizationService.cs
-    startLine: 25
+    startLine: 26
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -207,7 +207,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: LoadLangs
     path: Services/LocalizationService.cs
-    startLine: 72
+    startLine: 73
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -235,7 +235,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: LoadLangResorce
     path: Services/LocalizationService.cs
-    startLine: 121
+    startLine: 122
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -267,7 +267,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: LoadLangResorce
     path: Services/LocalizationService.cs
-    startLine: 126
+    startLine: 127
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -293,7 +293,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetMessage
     path: Services/LocalizationService.cs
-    startLine: 135
+    startLine: 136
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services

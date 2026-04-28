@@ -7,6 +7,7 @@ items:
   children:
   - PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.Name
   - PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.Parent
+  - PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.Rotation
   - PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.X
   - PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.Y
   langs:
@@ -23,7 +24,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: BoneData
     path: Models/Skeleton/Bone.cs
-    startLine: 406
+    startLine: 537
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -60,7 +61,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Name
     path: Models/Skeleton/Bone.cs
-    startLine: 408
+    startLine: 539
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -101,7 +102,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Parent
     path: Models/Skeleton/Bone.cs
-    startLine: 411
+    startLine: 542
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -146,7 +147,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: X
     path: Models/Skeleton/Bone.cs
-    startLine: 414
+    startLine: 545
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -191,7 +192,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Y
     path: Models/Skeleton/Bone.cs
-    startLine: 417
+    startLine: 548
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -214,6 +215,51 @@ items:
     arguments:
     - type: System.String
       value: y
+    namedArguments:
+    - name: DefaultValueHandling
+      type: Newtonsoft.Json.DefaultValueHandling
+      value: 1
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.Rotation
+  commentId: P:PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.Rotation
+  id: Rotation
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData
+  langs:
+  - csharp
+  - vb
+  name: Rotation
+  nameWithType: BoneData.Rotation
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.Rotation
+  type: Property
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Skeleton/Bone.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: Rotation
+    path: Models/Skeleton/Bone.cs
+    startLine: 551
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models.SkeletonNameSpace
+  syntax:
+    content: >-
+      [JsonProperty("rotation", DefaultValueHandling = DefaultValueHandling.Ignore)]
+
+      public double Rotation { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: >-
+      <JsonProperty("rotation", DefaultValueHandling:=DefaultValueHandling.Ignore)>
+
+      Public Property Rotation As Double
+  overload: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.Rotation*
+  attributes:
+  - type: Newtonsoft.Json.JsonPropertyAttribute
+    ctor: Newtonsoft.Json.JsonPropertyAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: rotation
     namedArguments:
     - name: DefaultValueHandling
       type: Newtonsoft.Json.DefaultValueHandling
@@ -532,3 +578,9 @@ references:
   name: Y
   nameWithType: BoneData.Y
   fullName: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.Y
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.Rotation*
+  commentId: Overload:PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.Rotation
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.html#PlumJsonAnimator_Models_SkeletonNameSpace_BoneData_Rotation
+  name: Rotation
+  nameWithType: BoneData.Rotation
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.Rotation

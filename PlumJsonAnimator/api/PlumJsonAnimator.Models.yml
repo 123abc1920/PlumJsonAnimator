@@ -23,6 +23,7 @@ items:
 references:
 - uid: PlumJsonAnimator.Models.BoneAnimation
   commentId: T:PlumJsonAnimator.Models.BoneAnimation
+  parent: PlumJsonAnimator.Models
   href: PlumJsonAnimator.Models.BoneAnimation.html
   name: BoneAnimation
   nameWithType: BoneAnimation

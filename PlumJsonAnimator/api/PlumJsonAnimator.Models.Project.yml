@@ -5,8 +5,8 @@ items:
   id: Project
   parent: PlumJsonAnimator.Models
   children:
-  - PlumJsonAnimator.Models.Project.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)
-  - PlumJsonAnimator.Models.Project.#ctor(System.String,System.String,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)
+  - PlumJsonAnimator.Models.Project.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.LocalizationService)
+  - PlumJsonAnimator.Models.Project.#ctor(System.String,System.String,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.LocalizationService)
   - PlumJsonAnimator.Models.Project.AddAnimation
   - PlumJsonAnimator.Models.Project.AddSkin
   - PlumJsonAnimator.Models.Project.Animations
@@ -14,7 +14,9 @@ items:
   - PlumJsonAnimator.Models.Project.CurrentAnimation
   - PlumJsonAnimator.Models.Project.CurrentSkin
   - PlumJsonAnimator.Models.Project.DeleteAnimation
+  - PlumJsonAnimator.Models.Project.DeleteBoneFromProject(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
   - PlumJsonAnimator.Models.Project.DeleteSkin
+  - PlumJsonAnimator.Models.Project.DeleteSlotFromProject(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
   - PlumJsonAnimator.Models.Project.DrawSlots(Avalonia.Controls.Canvas)
   - PlumJsonAnimator.Models.Project.GenerateAnimationsJSONData
   - PlumJsonAnimator.Models.Project.GenerateMetaData
@@ -24,6 +26,10 @@ items:
   - PlumJsonAnimator.Models.Project.GetProjectPath
   - PlumJsonAnimator.Models.Project.GetResByName(System.String)
   - PlumJsonAnimator.Models.Project.GetSlotByName(System.String)
+  - PlumJsonAnimator.Models.Project.IsUniqAttach(System.String)
+  - PlumJsonAnimator.Models.Project.IsUniqBone(System.String)
+  - PlumJsonAnimator.Models.Project.IsUniqRes(System.String)
+  - PlumJsonAnimator.Models.Project.IsUniqSlot(System.String)
   - PlumJsonAnimator.Models.Project.MainSkeleton
   - PlumJsonAnimator.Models.Project.MetaData
   - PlumJsonAnimator.Models.Project.Name
@@ -347,7 +353,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: CurrentSkin
     path: Models/Project.cs
-    startLine: 48
+    startLine: 49
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -376,7 +382,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: CurrentAnimation
     path: Models/Project.cs
-    startLine: 65
+    startLine: 66
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -405,7 +411,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Code
     path: Models/Project.cs
-    startLine: 79
+    startLine: 80
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -416,16 +422,16 @@ items:
       type: System.String
     content.vb: Public Property Code As String
   overload: PlumJsonAnimator.Models.Project.Code*
-- uid: PlumJsonAnimator.Models.Project.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)
-  commentId: M:PlumJsonAnimator.Models.Project.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)
-  id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)'
+- uid: PlumJsonAnimator.Models.Project.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.LocalizationService)
+  commentId: M:PlumJsonAnimator.Models.Project.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.LocalizationService)
+  id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.LocalizationService)'
   parent: PlumJsonAnimator.Models.Project
   langs:
   - csharp
   - vb
-  name: Project(GlobalState, Interpolation)
-  nameWithType: Project.Project(GlobalState, Interpolation)
-  fullName: PlumJsonAnimator.Models.Project.Project(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation)
+  name: Project(GlobalState, Interpolation, LocalizationService)
+  nameWithType: Project.Project(GlobalState, Interpolation, LocalizationService)
+  fullName: PlumJsonAnimator.Models.Project.Project(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation, PlumJsonAnimator.Services.LocalizationService)
   type: Constructor
   source:
     remote:
@@ -434,32 +440,34 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Models/Project.cs
-    startLine: 92
+    startLine: 93
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
   syntax:
-    content: public Project(GlobalState globalState, Interpolation interpolation)
+    content: public Project(GlobalState globalState, Interpolation interpolation, LocalizationService localizationService)
     parameters:
     - id: globalState
       type: PlumJsonAnimator.Common.Constants.GlobalState
     - id: interpolation
       type: PlumJsonAnimator.Services.Interpolation
-    content.vb: Public Sub New(globalState As GlobalState, interpolation As Interpolation)
+    - id: localizationService
+      type: PlumJsonAnimator.Services.LocalizationService
+    content.vb: Public Sub New(globalState As GlobalState, interpolation As Interpolation, localizationService As LocalizationService)
   overload: PlumJsonAnimator.Models.Project.#ctor*
-  nameWithType.vb: Project.New(GlobalState, Interpolation)
-  fullName.vb: PlumJsonAnimator.Models.Project.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation)
-  name.vb: New(GlobalState, Interpolation)
-- uid: PlumJsonAnimator.Models.Project.#ctor(System.String,System.String,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)
-  commentId: M:PlumJsonAnimator.Models.Project.#ctor(System.String,System.String,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)
-  id: '#ctor(System.String,System.String,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation)'
+  nameWithType.vb: Project.New(GlobalState, Interpolation, LocalizationService)
+  fullName.vb: PlumJsonAnimator.Models.Project.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation, PlumJsonAnimator.Services.LocalizationService)
+  name.vb: New(GlobalState, Interpolation, LocalizationService)
+- uid: PlumJsonAnimator.Models.Project.#ctor(System.String,System.String,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.LocalizationService)
+  commentId: M:PlumJsonAnimator.Models.Project.#ctor(System.String,System.String,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.LocalizationService)
+  id: '#ctor(System.String,System.String,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.LocalizationService)'
   parent: PlumJsonAnimator.Models.Project
   langs:
   - csharp
   - vb
-  name: Project(string, string, GlobalState, Interpolation)
-  nameWithType: Project.Project(string, string, GlobalState, Interpolation)
-  fullName: PlumJsonAnimator.Models.Project.Project(string, string, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation)
+  name: Project(string, string, GlobalState, Interpolation, LocalizationService)
+  nameWithType: Project.Project(string, string, GlobalState, Interpolation, LocalizationService)
+  fullName: PlumJsonAnimator.Models.Project.Project(string, string, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation, PlumJsonAnimator.Services.LocalizationService)
   type: Constructor
   source:
     remote:
@@ -468,12 +476,12 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Models/Project.cs
-    startLine: 106
+    startLine: 112
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
   syntax:
-    content: public Project(string name, string path, GlobalState globalState, Interpolation interpolation)
+    content: public Project(string name, string path, GlobalState globalState, Interpolation interpolation, LocalizationService localizationService)
     parameters:
     - id: name
       type: System.String
@@ -483,11 +491,13 @@ items:
       type: PlumJsonAnimator.Common.Constants.GlobalState
     - id: interpolation
       type: PlumJsonAnimator.Services.Interpolation
-    content.vb: Public Sub New(name As String, path As String, globalState As GlobalState, interpolation As Interpolation)
+    - id: localizationService
+      type: PlumJsonAnimator.Services.LocalizationService
+    content.vb: Public Sub New(name As String, path As String, globalState As GlobalState, interpolation As Interpolation, localizationService As LocalizationService)
   overload: PlumJsonAnimator.Models.Project.#ctor*
-  nameWithType.vb: Project.New(String, String, GlobalState, Interpolation)
-  fullName.vb: PlumJsonAnimator.Models.Project.New(String, String, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation)
-  name.vb: New(String, String, GlobalState, Interpolation)
+  nameWithType.vb: Project.New(String, String, GlobalState, Interpolation, LocalizationService)
+  fullName.vb: PlumJsonAnimator.Models.Project.New(String, String, PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.Interpolation, PlumJsonAnimator.Services.LocalizationService)
+  name.vb: New(String, String, GlobalState, Interpolation, LocalizationService)
 - uid: PlumJsonAnimator.Models.Project.SetupProjectSettings(PlumJsonAnimator.Services.SettingsData)
   commentId: M:PlumJsonAnimator.Models.Project.SetupProjectSettings(PlumJsonAnimator.Services.SettingsData)
   id: SetupProjectSettings(PlumJsonAnimator.Services.SettingsData)
@@ -506,7 +516,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SetupProjectSettings
     path: Models/Project.cs
-    startLine: 118
+    startLine: 125
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -535,7 +545,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetCurrentAnimation
     path: Models/Project.cs
-    startLine: 126
+    startLine: 133
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -563,7 +573,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AddAnimation
     path: Models/Project.cs
-    startLine: 131
+    startLine: 138
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -589,7 +599,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: DeleteAnimation
     path: Models/Project.cs
-    startLine: 142
+    startLine: 149
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -615,7 +625,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: AddSkin
     path: Models/Project.cs
-    startLine: 151
+    startLine: 158
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -641,7 +651,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: DeleteSkin
     path: Models/Project.cs
-    startLine: 156
+    startLine: 163
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -667,7 +677,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetSlotByName
     path: Models/Project.cs
-    startLine: 165
+    startLine: 172
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -701,7 +711,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: DrawSlots
     path: Models/Project.cs
-    startLine: 178
+    startLine: 185
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -730,7 +740,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetProjectPath
     path: Models/Project.cs
-    startLine: 183
+    startLine: 194
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -758,7 +768,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GenerateMetaData
     path: Models/Project.cs
-    startLine: 191
+    startLine: 202
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -788,7 +798,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GenerateSkinsJSONData
     path: Models/Project.cs
-    startLine: 199
+    startLine: 210
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -818,7 +828,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GenerateSlotsJSONData
     path: Models/Project.cs
-    startLine: 212
+    startLine: 223
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -848,7 +858,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GenerateAnimationsJSONData
     path: Models/Project.cs
-    startLine: 225
+    startLine: 236
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -878,7 +888,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: GetResByName
     path: Models/Project.cs
-    startLine: 237
+    startLine: 248
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -894,6 +904,64 @@ items:
   nameWithType.vb: Project.GetResByName(String)
   fullName.vb: PlumJsonAnimator.Models.Project.GetResByName(String)
   name.vb: GetResByName(String)
+- uid: PlumJsonAnimator.Models.Project.DeleteSlotFromProject(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  commentId: M:PlumJsonAnimator.Models.Project.DeleteSlotFromProject(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  id: DeleteSlotFromProject(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  parent: PlumJsonAnimator.Models.Project
+  langs:
+  - csharp
+  - vb
+  name: DeleteSlotFromProject(Slot)
+  nameWithType: Project.DeleteSlotFromProject(Slot)
+  fullName: PlumJsonAnimator.Models.Project.DeleteSlotFromProject(PlumJsonAnimator.Models.SkeletonNameSpace.Slot)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Project.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: DeleteSlotFromProject
+    path: Models/Project.cs
+    startLine: 260
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models
+  syntax:
+    content: public void DeleteSlotFromProject(Slot slot)
+    parameters:
+    - id: slot
+      type: PlumJsonAnimator.Models.SkeletonNameSpace.Slot
+    content.vb: Public Sub DeleteSlotFromProject(slot As Slot)
+  overload: PlumJsonAnimator.Models.Project.DeleteSlotFromProject*
+- uid: PlumJsonAnimator.Models.Project.DeleteBoneFromProject(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  commentId: M:PlumJsonAnimator.Models.Project.DeleteBoneFromProject(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  id: DeleteBoneFromProject(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  parent: PlumJsonAnimator.Models.Project
+  langs:
+  - csharp
+  - vb
+  name: DeleteBoneFromProject(Bone)
+  nameWithType: Project.DeleteBoneFromProject(Bone)
+  fullName: PlumJsonAnimator.Models.Project.DeleteBoneFromProject(PlumJsonAnimator.Models.SkeletonNameSpace.Bone)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Project.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: DeleteBoneFromProject
+    path: Models/Project.cs
+    startLine: 272
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models
+  syntax:
+    content: public void DeleteBoneFromProject(Bone bone)
+    parameters:
+    - id: bone
+      type: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+    content.vb: Public Sub DeleteBoneFromProject(bone As Bone)
+  overload: PlumJsonAnimator.Models.Project.DeleteBoneFromProject*
 - uid: PlumJsonAnimator.Models.Project.RegenerateProject(System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.BoneData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SlotData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SkinData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData})
   commentId: M:PlumJsonAnimator.Models.Project.RegenerateProject(System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.BoneData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SlotData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SkinData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData})
   id: RegenerateProject(System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.BoneData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SlotData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.SkinData},System.Collections.Generic.Dictionary{System.String,PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData})
@@ -912,7 +980,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: RegenerateProject
     path: Models/Project.cs
-    startLine: 252
+    startLine: 285
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models
@@ -934,6 +1002,142 @@ items:
   nameWithType.vb: Project.RegenerateProject(Dictionary(Of String, BoneData), Dictionary(Of String, SlotData), Dictionary(Of String, SkinData), Dictionary(Of String, AnimationData))
   fullName.vb: PlumJsonAnimator.Models.Project.RegenerateProject(System.Collections.Generic.Dictionary(Of String, PlumJsonAnimator.Models.SkeletonNameSpace.BoneData), System.Collections.Generic.Dictionary(Of String, PlumJsonAnimator.Models.SkeletonNameSpace.SlotData), System.Collections.Generic.Dictionary(Of String, PlumJsonAnimator.Models.SkeletonNameSpace.SkinData), System.Collections.Generic.Dictionary(Of String, PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData))
   name.vb: RegenerateProject(Dictionary(Of String, BoneData), Dictionary(Of String, SlotData), Dictionary(Of String, SkinData), Dictionary(Of String, AnimationData))
+- uid: PlumJsonAnimator.Models.Project.IsUniqRes(System.String)
+  commentId: M:PlumJsonAnimator.Models.Project.IsUniqRes(System.String)
+  id: IsUniqRes(System.String)
+  parent: PlumJsonAnimator.Models.Project
+  langs:
+  - csharp
+  - vb
+  name: IsUniqRes(string)
+  nameWithType: Project.IsUniqRes(string)
+  fullName: PlumJsonAnimator.Models.Project.IsUniqRes(string)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Project.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: IsUniqRes
+    path: Models/Project.cs
+    startLine: 585
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models
+  syntax:
+    content: public bool IsUniqRes(string name)
+    parameters:
+    - id: name
+      type: System.String
+    return:
+      type: System.Boolean
+    content.vb: Public Function IsUniqRes(name As String) As Boolean
+  overload: PlumJsonAnimator.Models.Project.IsUniqRes*
+  nameWithType.vb: Project.IsUniqRes(String)
+  fullName.vb: PlumJsonAnimator.Models.Project.IsUniqRes(String)
+  name.vb: IsUniqRes(String)
+- uid: PlumJsonAnimator.Models.Project.IsUniqBone(System.String)
+  commentId: M:PlumJsonAnimator.Models.Project.IsUniqBone(System.String)
+  id: IsUniqBone(System.String)
+  parent: PlumJsonAnimator.Models.Project
+  langs:
+  - csharp
+  - vb
+  name: IsUniqBone(string)
+  nameWithType: Project.IsUniqBone(string)
+  fullName: PlumJsonAnimator.Models.Project.IsUniqBone(string)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Project.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: IsUniqBone
+    path: Models/Project.cs
+    startLine: 597
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models
+  syntax:
+    content: public bool IsUniqBone(string name)
+    parameters:
+    - id: name
+      type: System.String
+    return:
+      type: System.Boolean
+    content.vb: Public Function IsUniqBone(name As String) As Boolean
+  overload: PlumJsonAnimator.Models.Project.IsUniqBone*
+  nameWithType.vb: Project.IsUniqBone(String)
+  fullName.vb: PlumJsonAnimator.Models.Project.IsUniqBone(String)
+  name.vb: IsUniqBone(String)
+- uid: PlumJsonAnimator.Models.Project.IsUniqSlot(System.String)
+  commentId: M:PlumJsonAnimator.Models.Project.IsUniqSlot(System.String)
+  id: IsUniqSlot(System.String)
+  parent: PlumJsonAnimator.Models.Project
+  langs:
+  - csharp
+  - vb
+  name: IsUniqSlot(string)
+  nameWithType: Project.IsUniqSlot(string)
+  fullName: PlumJsonAnimator.Models.Project.IsUniqSlot(string)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Project.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: IsUniqSlot
+    path: Models/Project.cs
+    startLine: 609
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models
+  syntax:
+    content: public bool IsUniqSlot(string name)
+    parameters:
+    - id: name
+      type: System.String
+    return:
+      type: System.Boolean
+    content.vb: Public Function IsUniqSlot(name As String) As Boolean
+  overload: PlumJsonAnimator.Models.Project.IsUniqSlot*
+  nameWithType.vb: Project.IsUniqSlot(String)
+  fullName.vb: PlumJsonAnimator.Models.Project.IsUniqSlot(String)
+  name.vb: IsUniqSlot(String)
+- uid: PlumJsonAnimator.Models.Project.IsUniqAttach(System.String)
+  commentId: M:PlumJsonAnimator.Models.Project.IsUniqAttach(System.String)
+  id: IsUniqAttach(System.String)
+  parent: PlumJsonAnimator.Models.Project
+  langs:
+  - csharp
+  - vb
+  name: IsUniqAttach(string)
+  nameWithType: Project.IsUniqAttach(string)
+  fullName: PlumJsonAnimator.Models.Project.IsUniqAttach(string)
+  type: Method
+  source:
+    remote:
+      path: PlumJsonAnimator/Models/Project.cs
+      branch: main
+      repo: https://github.com/123abc1920/PlumAnimation.git
+    id: IsUniqAttach
+    path: Models/Project.cs
+    startLine: 621
+  assemblies:
+  - PlumJsonAnimator
+  namespace: PlumJsonAnimator.Models
+  syntax:
+    content: public bool IsUniqAttach(string name)
+    parameters:
+    - id: name
+      type: System.String
+    return:
+      type: System.Boolean
+    content.vb: Public Function IsUniqAttach(name As String) As Boolean
+  overload: PlumJsonAnimator.Models.Project.IsUniqAttach*
+  nameWithType.vb: Project.IsUniqAttach(String)
+  fullName.vb: PlumJsonAnimator.Models.Project.IsUniqAttach(String)
+  name.vb: IsUniqAttach(String)
 references:
 - uid: PlumJsonAnimator.Models
   commentId: N:PlumJsonAnimator.Models
@@ -1675,7 +1879,7 @@ references:
   fullName: PlumJsonAnimator.Models.Project.Code
 - uid: PlumJsonAnimator.Models.Project.#ctor*
   commentId: Overload:PlumJsonAnimator.Models.Project.#ctor
-  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_Interpolation_
+  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_Interpolation_PlumJsonAnimator_Services_LocalizationService_
   name: Project
   nameWithType: Project.Project
   fullName: PlumJsonAnimator.Models.Project.Project
@@ -1696,6 +1900,13 @@ references:
   name: Interpolation
   nameWithType: Interpolation
   fullName: PlumJsonAnimator.Services.Interpolation
+- uid: PlumJsonAnimator.Services.LocalizationService
+  commentId: T:PlumJsonAnimator.Services.LocalizationService
+  parent: PlumJsonAnimator.Services
+  href: PlumJsonAnimator.Services.LocalizationService.html
+  name: LocalizationService
+  nameWithType: LocalizationService
+  fullName: PlumJsonAnimator.Services.LocalizationService
 - uid: PlumJsonAnimator.Common.Constants
   commentId: N:PlumJsonAnimator.Common.Constants
   href: PlumJsonAnimator.html
@@ -2122,6 +2333,25 @@ references:
   - uid: PlumJsonAnimator.Models.Resources
     name: Resources
     href: PlumJsonAnimator.Models.Resources.html
+- uid: PlumJsonAnimator.Models.Project.DeleteSlotFromProject*
+  commentId: Overload:PlumJsonAnimator.Models.Project.DeleteSlotFromProject
+  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_DeleteSlotFromProject_PlumJsonAnimator_Models_SkeletonNameSpace_Slot_
+  name: DeleteSlotFromProject
+  nameWithType: Project.DeleteSlotFromProject
+  fullName: PlumJsonAnimator.Models.Project.DeleteSlotFromProject
+- uid: PlumJsonAnimator.Models.Project.DeleteBoneFromProject*
+  commentId: Overload:PlumJsonAnimator.Models.Project.DeleteBoneFromProject
+  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_DeleteBoneFromProject_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_
+  name: DeleteBoneFromProject
+  nameWithType: Project.DeleteBoneFromProject
+  fullName: PlumJsonAnimator.Models.Project.DeleteBoneFromProject
+- uid: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+  commentId: T:PlumJsonAnimator.Models.SkeletonNameSpace.Bone
+  parent: PlumJsonAnimator.Models.SkeletonNameSpace
+  href: PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html
+  name: Bone
+  nameWithType: Bone
+  fullName: PlumJsonAnimator.Models.SkeletonNameSpace.Bone
 - uid: PlumJsonAnimator.Models.Project.RegenerateProject*
   commentId: Overload:PlumJsonAnimator.Models.Project.RegenerateProject
   href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_RegenerateProject_System_Collections_Generic_Dictionary_System_String_PlumJsonAnimator_Models_SkeletonNameSpace_BoneData__System_Collections_Generic_Dictionary_System_String_PlumJsonAnimator_Models_SkeletonNameSpace_SlotData__System_Collections_Generic_Dictionary_System_String_PlumJsonAnimator_Models_SkeletonNameSpace_SkinData__System_Collections_Generic_Dictionary_System_String_PlumJsonAnimator_Models_SkeletonNameSpace_AnimationData__
@@ -2263,3 +2493,38 @@ references:
     name: SkinData
     href: PlumJsonAnimator.Models.SkeletonNameSpace.SkinData.html
   - name: )
+- uid: PlumJsonAnimator.Models.Project.IsUniqRes*
+  commentId: Overload:PlumJsonAnimator.Models.Project.IsUniqRes
+  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_IsUniqRes_System_String_
+  name: IsUniqRes
+  nameWithType: Project.IsUniqRes
+  fullName: PlumJsonAnimator.Models.Project.IsUniqRes
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: PlumJsonAnimator.Models.Project.IsUniqBone*
+  commentId: Overload:PlumJsonAnimator.Models.Project.IsUniqBone
+  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_IsUniqBone_System_String_
+  name: IsUniqBone
+  nameWithType: Project.IsUniqBone
+  fullName: PlumJsonAnimator.Models.Project.IsUniqBone
+- uid: PlumJsonAnimator.Models.Project.IsUniqSlot*
+  commentId: Overload:PlumJsonAnimator.Models.Project.IsUniqSlot
+  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_IsUniqSlot_System_String_
+  name: IsUniqSlot
+  nameWithType: Project.IsUniqSlot
+  fullName: PlumJsonAnimator.Models.Project.IsUniqSlot
+- uid: PlumJsonAnimator.Models.Project.IsUniqAttach*
+  commentId: Overload:PlumJsonAnimator.Models.Project.IsUniqAttach
+  href: PlumJsonAnimator.Models.Project.html#PlumJsonAnimator_Models_Project_IsUniqAttach_System_String_
+  name: IsUniqAttach
+  nameWithType: Project.IsUniqAttach
+  fullName: PlumJsonAnimator.Models.Project.IsUniqAttach

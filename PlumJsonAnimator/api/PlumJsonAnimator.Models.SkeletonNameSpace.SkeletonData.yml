@@ -20,7 +20,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: SkeletonData
     path: Models/Skeleton/Skeleton.cs
-    startLine: 115
+    startLine: 126
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace
@@ -57,7 +57,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: Bones
     path: Models/Skeleton/Skeleton.cs
-    startLine: 117
+    startLine: 128
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Models.SkeletonNameSpace

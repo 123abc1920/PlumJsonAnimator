@@ -5,7 +5,7 @@ items:
   id: Prettify
   parent: PlumJsonAnimator.Services
   children:
-  - PlumJsonAnimator.Services.Prettify.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
+  - PlumJsonAnimator.Services.Prettify.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.LocalizationService)
   - PlumJsonAnimator.Services.Prettify.prettify(System.String)
   langs:
   - csharp
@@ -40,16 +40,16 @@ items:
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
   - System.Object.ToString
-- uid: PlumJsonAnimator.Services.Prettify.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
-  commentId: M:PlumJsonAnimator.Services.Prettify.#ctor(PlumJsonAnimator.Common.Constants.GlobalState)
-  id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState)'
+- uid: PlumJsonAnimator.Services.Prettify.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.LocalizationService)
+  commentId: M:PlumJsonAnimator.Services.Prettify.#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.LocalizationService)
+  id: '#ctor(PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.LocalizationService)'
   parent: PlumJsonAnimator.Services.Prettify
   langs:
   - csharp
   - vb
-  name: Prettify(GlobalState)
-  nameWithType: Prettify.Prettify(GlobalState)
-  fullName: PlumJsonAnimator.Services.Prettify.Prettify(PlumJsonAnimator.Common.Constants.GlobalState)
+  name: Prettify(GlobalState, LocalizationService)
+  nameWithType: Prettify.Prettify(GlobalState, LocalizationService)
+  fullName: PlumJsonAnimator.Services.Prettify.Prettify(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.LocalizationService)
   type: Constructor
   source:
     remote:
@@ -58,20 +58,22 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: .ctor
     path: Services/Prettify.cs
-    startLine: 15
+    startLine: 16
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
   syntax:
-    content: public Prettify(GlobalState globalState)
+    content: public Prettify(GlobalState globalState, LocalizationService localizationService)
     parameters:
     - id: globalState
       type: PlumJsonAnimator.Common.Constants.GlobalState
-    content.vb: Public Sub New(globalState As GlobalState)
+    - id: localizationService
+      type: PlumJsonAnimator.Services.LocalizationService
+    content.vb: Public Sub New(globalState As GlobalState, localizationService As LocalizationService)
   overload: PlumJsonAnimator.Services.Prettify.#ctor*
-  nameWithType.vb: Prettify.New(GlobalState)
-  fullName.vb: PlumJsonAnimator.Services.Prettify.New(PlumJsonAnimator.Common.Constants.GlobalState)
-  name.vb: New(GlobalState)
+  nameWithType.vb: Prettify.New(GlobalState, LocalizationService)
+  fullName.vb: PlumJsonAnimator.Services.Prettify.New(PlumJsonAnimator.Common.Constants.GlobalState, PlumJsonAnimator.Services.LocalizationService)
+  name.vb: New(GlobalState, LocalizationService)
 - uid: PlumJsonAnimator.Services.Prettify.prettify(System.String)
   commentId: M:PlumJsonAnimator.Services.Prettify.prettify(System.String)
   id: prettify(System.String)
@@ -90,7 +92,7 @@ items:
       repo: https://github.com/123abc1920/PlumAnimation.git
     id: prettify
     path: Services/Prettify.cs
-    startLine: 25
+    startLine: 27
   assemblies:
   - PlumJsonAnimator
   namespace: PlumJsonAnimator.Services
@@ -372,7 +374,7 @@ references:
   fullName: System
 - uid: PlumJsonAnimator.Services.Prettify.#ctor*
   commentId: Overload:PlumJsonAnimator.Services.Prettify.#ctor
-  href: PlumJsonAnimator.Services.Prettify.html#PlumJsonAnimator_Services_Prettify__ctor_PlumJsonAnimator_Common_Constants_GlobalState_
+  href: PlumJsonAnimator.Services.Prettify.html#PlumJsonAnimator_Services_Prettify__ctor_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_LocalizationService_
   name: Prettify
   nameWithType: Prettify.Prettify
   fullName: PlumJsonAnimator.Services.Prettify.Prettify
@@ -386,6 +388,13 @@ references:
   name: GlobalState
   nameWithType: GlobalState
   fullName: PlumJsonAnimator.Common.Constants.GlobalState
+- uid: PlumJsonAnimator.Services.LocalizationService
+  commentId: T:PlumJsonAnimator.Services.LocalizationService
+  parent: PlumJsonAnimator.Services
+  href: PlumJsonAnimator.Services.LocalizationService.html
+  name: LocalizationService
+  nameWithType: LocalizationService
+  fullName: PlumJsonAnimator.Services.LocalizationService
 - uid: PlumJsonAnimator.Common.Constants
   commentId: N:PlumJsonAnimator.Common.Constants
   href: PlumJsonAnimator.html
