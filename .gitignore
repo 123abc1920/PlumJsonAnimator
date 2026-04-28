@@ -82,5 +82,6 @@ publish/
 # Файлы единицы измерения
 *.VisualState.xml
 
+# Документация
 hint.txt
 _site/
