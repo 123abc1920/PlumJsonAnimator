@@ -11,6 +11,26 @@
       }
     },
     {
+      "type": "Resource",
+      "source_relative_path": "Assets/logo.ico",
+      "output": {
+        "resource": {
+          "relative_path": "Assets/logo.ico"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "Assets/logo_mini.svg",
+      "output": {
+        "resource": {
+          "relative_path": "Assets/logo_mini.svg"
+        }
+      },
+      "version": ""
+    },
+    {
       "type": "ManagedReference",
       "source_relative_path": "api/Command.Command.yml",
       "output": {

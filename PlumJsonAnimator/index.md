@@ -2,10 +2,15 @@
 _layout: landing
 ---
 
-# This is the **HOMEPAGE**.
+# **PlumJsonAnimator**
 
-Refer to [Markdown](http://daringfireball.net/projects/markdown/) for how to write markdown files.
+A program for creating skeletal animations. Free and open-source.
 
-## Quick Start Notes:
+The app allows you to create animations in a graphical interface, then export or re-import them. It offers the ability to edit JSON files and export animations as images and videos. It also features the ability to switch themes and languages.
 
-1. Add images to the *images* folder if the file is referencing an image.
+**Full support for English and Russian languages.**
+
+## Documentation:
+
+- [Introduction](/docs/docs/introduction.html)
+- [Getting Started](/docs/docs/getting-started.html)

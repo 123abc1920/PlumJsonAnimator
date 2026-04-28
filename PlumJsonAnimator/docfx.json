@@ -28,7 +28,9 @@
     "resource": [
       {
         "files": [
-          "images/**"
+          "images/**",
+          "Assets/logo.ico",
+          "Assets/logo_mini.svg"
         ]
       }
     ],
@@ -40,6 +42,8 @@
     "globalMetadata": {
       "_appName": "PlumJsonAnimator",
       "_appTitle": "PlumJsonAnimator",
+      "_appFaviconPath": "Assets/logo.ico",
+      "_appLogoPath": "Assets/logo_mini.svg",
       "_enableSearch": true,
       "pdf": false
     }
