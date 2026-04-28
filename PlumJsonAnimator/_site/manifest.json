@@ -1,0 +1,1558 @@
+{
+  "source_base_path": "C:/Users/annam/vscode-workspace/animation/PlumJsonAnimator",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Command.Command.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Command.Command.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Command.Command",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Command.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Command.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Command",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.App.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.App.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.App",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Common.Constants.AppColors.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Common.Constants.AppColors.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Common.Constants.AppColors",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Common.Constants.AppColors.yml\" sourcestartlinenumber=\"1\">App color palette</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Common.Constants.Command.Command.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Common.Constants.Command.Command.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Common.Constants.Command.Command",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Common.Constants.Command.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Common.Constants.Command.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Common.Constants.Command",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Common.Constants.Counter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Common.Constants.Counter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Common.Constants.Counter",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Common.Constants.Counter.yml\" sourcestartlinenumber=\"1\">Generates unique names</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Common.Constants.GlobalState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Common.Constants.GlobalState.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Common.Constants.GlobalState",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Common.Constants.GlobalState.yml\" sourcestartlinenumber=\"1\">Data exchange service</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Common.Constants.TransformModeFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Common.Constants.TransformModeFactory.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Common.Constants.TransformModeFactory",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Common.Constants.TransformModeFactory.yml\" sourcestartlinenumber=\"1\">Creates transform modes</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Common.Constants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Common.Constants.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Common.Constants",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Common.Converters.AnimationConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Common.Converters.AnimationConverter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Common.Converters.AnimationConverter",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Common.Converters.AnimationConverter.yml\" sourcestartlinenumber=\"1\">Converter fo play button image</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Common.Converters.DoubleConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Common.Converters.DoubleConverter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Common.Converters.DoubleConverter",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Common.Converters.DoubleConverter.yml\" sourcestartlinenumber=\"1\">Converter for double values in UI</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Common.Converters.StringToBoolConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Common.Converters.StringToBoolConverter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Common.Converters.StringToBoolConverter",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Common.Converters.StringToBoolConverter.yml\" sourcestartlinenumber=\"1\">Converter for toggle transform modes buttons</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Common.Converters.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Common.Converters.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Common.Converters",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Common.Dialogs.DialogType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Common.Dialogs.DialogType.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Common.Dialogs.DialogType",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Common.Dialogs.DialogType.yml\" sourcestartlinenumber=\"1\">Dialogs types</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Common.Dialogs.Dialogs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Common.Dialogs.Dialogs.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Common.Dialogs.Dialogs",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Common.Dialogs.Dialogs.yml\" sourcestartlinenumber=\"1\">Provides methods for opening dialogs</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Common.Dialogs.Popups.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Common.Dialogs.Popups.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Common.Dialogs.Popups",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Common.Dialogs.Popups.yml\" sourcestartlinenumber=\"1\">Procides popups</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Common.Dialogs.ViewType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Common.Dialogs.ViewType.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Common.Dialogs.ViewType",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Common.Dialogs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Common.Dialogs.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Common.Dialogs",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Common.Timeline.Keyframe.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Common.Timeline.Keyframe.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Common.Timeline.Keyframe",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Common.Timeline.TimelineControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Common.Timeline.TimelineControl.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Common.Timeline.TimelineControl",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Common.Timeline.TimelineTrack.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Common.Timeline.TimelineTrack.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Common.Timeline.TimelineTrack",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Common.Timeline.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Common.Timeline.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Common.Timeline",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.BoneAnimation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.BoneAnimation.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.BoneAnimation",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.BoneAnimation.yml\" sourcestartlinenumber=\"1\">Class BoneAnimation contains the bone's transformations during animation</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.BoneAnimationData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.BoneAnimationData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.BoneAnimationData",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.BoneAnimationData.yml\" sourcestartlinenumber=\"1\">BoneAnimation JSON data</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.CaptureArea.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.CaptureArea.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.CaptureArea",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.CaptureArea.yml\" sourcestartlinenumber=\"1\">Provides methods for work with capture area. This area renders into exported images, gifs, videos and other images.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.Common.IKeyframeType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.Common.IKeyframeType.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.Common.IKeyframeType",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.Common.IKeyframeTypeData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.Common.IKeyframeTypeData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.Common.IKeyframeTypeData",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.Common.KeyFrameTypes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.Common.KeyFrameTypes.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.Common.KeyFrameTypes",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.Common.KeyFrameTypes.yml\" sourcestartlinenumber=\"1\">Key frames types. Not transform modes, transform modes provides transformation.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.Common.Mode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.Common.Mode.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.Common.Mode",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.Common.Mode.yml\" sourcestartlinenumber=\"1\">Mode for no transformations</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.Common.Rotate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.Common.Rotate.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.Common.Rotate",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.Common.TransformModesTypes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.Common.TransformModesTypes.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.Common.TransformModesTypes",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.Common.TransformModesTypes.yml\" sourcestartlinenumber=\"1\">Transform modes types. Not IKeyFrameTypes, IKeyFrameTypes are only for storage information about transformations</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.Common.Translate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.Common.Translate.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.Common.Translate",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.Common.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.Common.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.Common",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.ExportResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.ExportResult.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.ExportResult",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.ExportResult.yml\" sourcestartlinenumber=\"1\">All possible results of export</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.Interfaces.INotifyable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.Interfaces.INotifyable.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.Interfaces.INotifyable",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.Interfaces.INotifyable.yml\" sourcestartlinenumber=\"1\">Interface for all observable objects</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.Interfaces.IRenamable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.Interfaces.IRenamable.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.Interfaces.IRenamable",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.Interfaces.IRenamable.yml\" sourcestartlinenumber=\"1\">Interface for al objects which can be renamed from UI</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.Interfaces.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.Interfaces.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.Interfaces",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.JsonError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.JsonError.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.JsonError",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.JsonError.yml\" sourcestartlinenumber=\"1\">Json error objects</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.MetaData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.MetaData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.MetaData",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.MetaData.yml\" sourcestartlinenumber=\"1\">Jsonifyed project metadata</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.Project.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.Project.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.Project",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.Resources.ImageRes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.Resources.ImageRes.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.Resources.ImageRes",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.Resources.ImageRes.yml\" sourcestartlinenumber=\"1\">Image resources, which are uploaded by user</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.Resources.Res.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.Resources.Res.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.Resources.Res",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.Resources.Res.yml\" sourcestartlinenumber=\"1\">Resources -- images, textures etc</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.Resources.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.Resources.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.Resources",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.Animation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.Animation.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.SkeletonNameSpace.Animation",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.SkeletonNameSpace.Animation.yml\" sourcestartlinenumber=\"1\">Provides methods for work with animations</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.SkeletonNameSpace.AnimationData.yml\" sourcestartlinenumber=\"1\">Animation data</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.SkeletonNameSpace.Attachment",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.SkeletonNameSpace.Attachment.yml\" sourcestartlinenumber=\"1\">Attachment class. Helps to bind slot and res or another functions</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.AttachmentData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.AttachmentData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.SkeletonNameSpace.AttachmentData",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.SkeletonNameSpace.AttachmentData.yml\" sourcestartlinenumber=\"1\">Jsonifyed attachment data</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.SkeletonNameSpace.Bone",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.SkeletonNameSpace.Bone.yml\" sourcestartlinenumber=\"1\">Bone data</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.SkeletonNameSpace.BoneData",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.SkeletonNameSpace.BoneData.yml\" sourcestartlinenumber=\"1\">Jsonifyed bone data</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.BonesListData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.BonesListData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.SkeletonNameSpace.BonesListData",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.SkeletonNameSpace.BonesListData.yml\" sourcestartlinenumber=\"1\">List of bones</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderItem.yml\" sourcestartlinenumber=\"1\">Draw order list</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderOffset.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderOffset.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderOffset",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.SkeletonNameSpace.DrawOrderOffset.yml\" sourcestartlinenumber=\"1\">Draw order list item</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.SkeletonNameSpace.ImageAttachment.yml\" sourcestartlinenumber=\"1\">Binds slot and res</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.SkeletonNameSpace.Skeleton.yml\" sourcestartlinenumber=\"1\">Provides methods for work with skeleton</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.SkeletonData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.SkeletonData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.SkeletonNameSpace.SkeletonData",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.SkeletonNameSpace.SkeletonData.yml\" sourcestartlinenumber=\"1\">Skeleton JSON data</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.Skin.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.Skin.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.SkeletonNameSpace.Skin",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.SkeletonNameSpace.Skin.yml\" sourcestartlinenumber=\"1\">Provides methods for work with skin</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.SkinData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.SkinData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.SkeletonNameSpace.SkinData",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.SkeletonNameSpace.SkinData.yml\" sourcestartlinenumber=\"1\">Skin JSON data</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.Slot.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.Slot.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.SkeletonNameSpace.Slot",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.SkeletonNameSpace.Slot.yml\" sourcestartlinenumber=\"1\">Provides methods for work with slots</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.SlotData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.SlotData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.SkeletonNameSpace.SlotData",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Models.SkeletonNameSpace.SlotData.yml\" sourcestartlinenumber=\"1\">Slot JSON data</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.SkeletonNameSpace.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models.SkeletonNameSpace",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Models.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Models.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Models",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Services.AppSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Services.AppSettings.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Services.AppSettings",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Services.AppSettings.yml\" sourcestartlinenumber=\"1\">Provides app settings. It is in &quot;C:\\Users\\username\\AppData\\Roaming\\PlumJsonAnimator\\settings.plmjsn&quot; usually</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Services.AppSettingsData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Services.AppSettingsData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Services.AppSettingsData",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Services.AppSettingsData.yml\" sourcestartlinenumber=\"1\">Contains jsonifyed app settings</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Services.CodeData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Services.CodeData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Services.CodeData",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Services.CodeData.yml\" sourcestartlinenumber=\"1\">Jsonifyed project</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Services.Engine.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Services.Engine.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Services.Engine",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Services.Engine.yml\" sourcestartlinenumber=\"1\">Plays animation and update time</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Services.ImageExporter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Services.ImageExporter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Services.ImageExporter",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Services.ImageExporter.yml\" sourcestartlinenumber=\"1\">Provides methods for exporting animations</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Services.Interpolation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Services.Interpolation.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Services.Interpolation",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Services.Interpolation.yml\" sourcestartlinenumber=\"1\">Provides interpolation methods for animations and method for finding interpolation parameter t.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Services.JsonCode.ValidResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Services.JsonCode.ValidResult.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Services.JsonCode.ValidResult",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Services.JsonCode.ValidResult.yml\" sourcestartlinenumber=\"1\">Contains information about json validation and provides updated validated data</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Services.JsonCode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Services.JsonCode.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Services.JsonCode",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Services.JsonCode.yml\" sourcestartlinenumber=\"1\">Provides methods for converting project into json code</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Services.JsonExport.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Services.JsonExport.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Services.JsonExport",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Services.JsonExport.yml\" sourcestartlinenumber=\"1\">Provides methods for exporting and importing json code from file</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Services.JsonValidator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Services.JsonValidator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Services.JsonValidator",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Services.JsonValidator.yml\" sourcestartlinenumber=\"1\">Validates json code</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Services.LocalizationConsts.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Services.LocalizationConsts.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Services.LocalizationConsts",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Services.LocalizationConsts.yml\" sourcestartlinenumber=\"1\">All word codes</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Services.LocalizationService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Services.LocalizationService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Services.LocalizationService",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Services.LocalizationService.yml\" sourcestartlinenumber=\"1\">Provides methods for localize application</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Services.Prettify.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Services.Prettify.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Services.Prettify",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Services.Prettify.yml\" sourcestartlinenumber=\"1\">Provides mwthods for prettifying json</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Services.ProjectFilesManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Services.ProjectFilesManager.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Services.ProjectFilesManager",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Services.ProjectFilesManager.yml\" sourcestartlinenumber=\"1\">Provides methods for work with project files</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Services.ProjectManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Services.ProjectManager.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Services.ProjectManager",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Services.ProjectSettings.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Services.ProjectSettings.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Services.ProjectSettings",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Services.ProjectSettings.yml\" sourcestartlinenumber=\"1\">Provides methods for work with project settings. It is in &quot;{projectDir}/{projectName}/settings.plmjsn: ususally.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Services.ProjectValidResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Services.ProjectValidResult.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Services.ProjectValidResult",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Services.SettingsData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Services.SettingsData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Services.SettingsData",
+      "Summary": "<p sourcefile=\"api/PlumJsonAnimator.Services.SettingsData.yml\" sourcestartlinenumber=\"1\">Contains jsonifyed settings data</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Services.ValidResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Services.ValidResult.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Services.ValidResult",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Services.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Services.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Services",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.ViewLocator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.ViewLocator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.ViewLocator",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.ViewModels.AppSettingsViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.ViewModels.AppSettingsViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.ViewModels.AppSettingsViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.ViewModels.ExportPanelGIFViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.ViewModels.ExportPanelGIFViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.ViewModels.ExportPanelGIFViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.ViewModels.ExportPanelJPGViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.ViewModels.ExportPanelJPGViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.ViewModels.ExportPanelJPGViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.ViewModels.ExportPanelMP4ViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.ViewModels.ExportPanelPNGViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.ViewModels.ExportPanelPNGViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.ViewModels.ExportPanelPNGViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.ViewModels.MainWindowViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.ViewModels.MainWindowViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.ViewModels.MainWindowViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.ViewModels.NewProjectViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.ViewModels.NewProjectViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.ViewModels.NewProjectViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.ViewModels.RenameViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.ViewModels.RenameViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.ViewModels.RenameViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.ViewModels.ViewModelBase.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.ViewModels.ViewModelBase.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.ViewModels.ViewModelBase",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.ViewModels.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.ViewModels.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.ViewModels",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Views.AppSettingsPanel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Views.AppSettingsPanel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Views.AppSettingsPanel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Views.ExportPanelGIF.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Views.ExportPanelGIF.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Views.ExportPanelGIF",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Views.ExportPanelJPG.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Views.ExportPanelJPG.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Views.ExportPanelJPG",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Views.ExportPanelMP4.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Views.ExportPanelMP4.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Views.ExportPanelMP4",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Views.ExportPanelPNG.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Views.ExportPanelPNG.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Views.ExportPanelPNG",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Views.MainWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Views.MainWindow.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Views.MainWindow",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Views.NewProjectDialog.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Views.NewProjectDialog.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Views.NewProjectDialog",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Views.ProjectSettingsPanel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Views.ProjectSettingsPanel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Views.ProjectSettingsPanel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Views.RenameDialog.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Views.RenameDialog.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Views.RenameDialog",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Views.SettingsView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Views.SettingsView.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Views.SettingsView",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.Views.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.Views.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator.Views",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/PlumJsonAnimator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PlumJsonAnimator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "PlumJsonAnimator",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/getting-started.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/getting-started.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/introduction.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/introduction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "docs/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docs/toc.html"
+        },
+        ".json": {
+          "relative_path": "docs/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

@@ -1,0 +1,2033 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class MainWindowViewModel | PlumJsonAnimator </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class MainWindowViewModel | PlumJsonAnimator ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/123abc1920/PlumAnimation/new/main/apiSpec/new?filename=PlumJsonAnimator_ViewModels_MainWindowViewModel.md&amp;value=---%0Auid%3A%20PlumJsonAnimator.ViewModels.MainWindowViewModel%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="PlumJsonAnimator">
+            PlumJsonAnimator
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel">
+
+
+
+  <h1 id="PlumJsonAnimator_ViewModels_MainWindowViewModel" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel" class="text-break">
+Class MainWindowViewModel  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="PlumJsonAnimator.html">PlumJsonAnimator</a>.<a class="xref" href="PlumJsonAnimator.ViewModels.html">ViewModels</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>PlumJsonAnimator.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class MainWindowViewModel : ViewModelBase, INotifyPropertyChanging, INotifyPropertyChanged</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/communitytoolkit.mvvm.componentmodel.observableobject">ObservableObject</a></div>
+      <div><a class="xref" href="PlumJsonAnimator.ViewModels.ViewModelBase.html">ViewModelBase</a></div>
+      <div><span class="xref">MainWindowViewModel</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanging">INotifyPropertyChanging</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="PlumJsonAnimator.ViewModels.ViewModelBase.html#PlumJsonAnimator_ViewModels_ViewModelBase_globalState">ViewModelBase.globalState</a>
+    </div>
+    <div>
+      <a class="xref" href="PlumJsonAnimator.ViewModels.ViewModelBase.html#PlumJsonAnimator_ViewModels_ViewModelBase_dialogs">ViewModelBase.dialogs</a>
+    </div>
+    <div>
+      <a class="xref" href="PlumJsonAnimator.ViewModels.ViewModelBase.html#PlumJsonAnimator_ViewModels_ViewModelBase_projectSettings">ViewModelBase.projectSettings</a>
+    </div>
+    <div>
+      <a class="xref" href="PlumJsonAnimator.ViewModels.ViewModelBase.html#PlumJsonAnimator_ViewModels_ViewModelBase_projectManager">ViewModelBase.projectManager</a>
+    </div>
+    <div>
+      <a class="xref" href="PlumJsonAnimator.ViewModels.ViewModelBase.html#PlumJsonAnimator_ViewModels_ViewModelBase_appSettings">ViewModelBase.appSettings</a>
+    </div>
+    <div>
+      <a class="xref" href="PlumJsonAnimator.ViewModels.ViewModelBase.html#PlumJsonAnimator_ViewModels_ViewModelBase_localizationService">ViewModelBase.localizationService</a>
+    </div>
+    <div>
+      <a class="xref" href="PlumJsonAnimator.ViewModels.ViewModelBase.html#PlumJsonAnimator_ViewModels_ViewModelBase_imageExporter">ViewModelBase.imageExporter</a>
+    </div>
+    <div>
+      <a class="xref" href="PlumJsonAnimator.ViewModels.ViewModelBase.html#PlumJsonAnimator_ViewModels_ViewModelBase_Langs">ViewModelBase.Langs</a>
+    </div>
+    <div>
+      <a class="xref" href="PlumJsonAnimator.ViewModels.ViewModelBase.html#PlumJsonAnimator_ViewModels_ViewModelBase_CurrentLang">ViewModelBase.CurrentLang</a>
+    </div>
+    <div>
+      <a class="xref" href="PlumJsonAnimator.ViewModels.ViewModelBase.html#PlumJsonAnimator_ViewModels_ViewModelBase_GetCaptureArea">ViewModelBase.GetCaptureArea()</a>
+    </div>
+    <div>
+      <a class="xref" href="PlumJsonAnimator.ViewModels.ViewModelBase.html#PlumJsonAnimator_ViewModels_ViewModelBase_CurrentProject">ViewModelBase.CurrentProject</a>
+    </div>
+    <div>
+      <a class="xref" href="PlumJsonAnimator.ViewModels.ViewModelBase.html#PlumJsonAnimator_ViewModels_ViewModelBase_RenameProject_PlumJsonAnimator_Services_SettingsData_">ViewModelBase.RenameProject(SettingsData)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlumJsonAnimator.ViewModels.ViewModelBase.html#PlumJsonAnimator_ViewModels_ViewModelBase_GetMessage_PlumJsonAnimator_Services_LocalizationConsts_">ViewModelBase.GetMessage(LocalizationConsts)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlumJsonAnimator.ViewModels.ViewModelBase.html#PlumJsonAnimator_ViewModels_ViewModelBase_PropertyChanged">ViewModelBase.PropertyChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="PlumJsonAnimator.ViewModels.ViewModelBase.html#PlumJsonAnimator_ViewModels_ViewModelBase_OnPropertyChanged_System_String_">ViewModelBase.OnPropertyChanged(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="PlumJsonAnimator.ViewModels.ViewModelBase.html#PlumJsonAnimator_ViewModels_ViewModelBase_SetProperty__1___0____0_System_String_">ViewModelBase.SetProperty&lt;T&gt;(ref T, T, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/communitytoolkit.mvvm.componentmodel.observableobject.onpropertychanged#communitytoolkit-mvvm-componentmodel-observableobject-onpropertychanged(system-componentmodel-propertychangedeventargs)">ObservableObject.OnPropertyChanged(PropertyChangedEventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/communitytoolkit.mvvm.componentmodel.observableobject.onpropertychanging#communitytoolkit-mvvm-componentmodel-observableobject-onpropertychanging(system-componentmodel-propertychangingeventargs)">ObservableObject.OnPropertyChanging(PropertyChangingEventArgs)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/communitytoolkit.mvvm.componentmodel.observableobject.onpropertychanging#communitytoolkit-mvvm-componentmodel-observableobject-onpropertychanging(system-string)">ObservableObject.OnPropertyChanging(string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/communitytoolkit.mvvm.componentmodel.observableobject.setproperty#communitytoolkit-mvvm-componentmodel-observableobject-setproperty-1(-0@-0-system-collections-generic-iequalitycomparer((-0))-system-string)">ObservableObject.SetProperty&lt;T&gt;(ref T, T, IEqualityComparer&lt;T&gt;, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/communitytoolkit.mvvm.componentmodel.observableobject.setproperty#communitytoolkit-mvvm-componentmodel-observableobject-setproperty-1(-0-0-system-action((-0))-system-string)">ObservableObject.SetProperty&lt;T&gt;(T, T, Action&lt;T&gt;, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/communitytoolkit.mvvm.componentmodel.observableobject.setproperty#communitytoolkit-mvvm-componentmodel-observableobject-setproperty-1(-0-0-system-collections-generic-iequalitycomparer((-0))-system-action((-0))-system-string)">ObservableObject.SetProperty&lt;T&gt;(T, T, IEqualityComparer&lt;T&gt;, Action&lt;T&gt;, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/communitytoolkit.mvvm.componentmodel.observableobject.setproperty#communitytoolkit-mvvm-componentmodel-observableobject-setproperty-2(-1-1-0-system-action((-0-1))-system-string)">ObservableObject.SetProperty&lt;TModel, T&gt;(T, T, TModel, Action&lt;TModel, T&gt;, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/communitytoolkit.mvvm.componentmodel.observableobject.setproperty#communitytoolkit-mvvm-componentmodel-observableobject-setproperty-2(-1-1-system-collections-generic-iequalitycomparer((-1))-0-system-action((-0-1))-system-string)">ObservableObject.SetProperty&lt;TModel, T&gt;(T, T, IEqualityComparer&lt;T&gt;, TModel, Action&lt;TModel, T&gt;, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/communitytoolkit.mvvm.componentmodel.observableobject.setpropertyandnotifyoncompletion#communitytoolkit-mvvm-componentmodel-observableobject-setpropertyandnotifyoncompletion(communitytoolkit-mvvm-componentmodel-observableobject-tasknotifier@-system-threading-tasks-task-system-string)">ObservableObject.SetPropertyAndNotifyOnCompletion(ref ObservableObject.TaskNotifier, Task, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/communitytoolkit.mvvm.componentmodel.observableobject.setpropertyandnotifyoncompletion#communitytoolkit-mvvm-componentmodel-observableobject-setpropertyandnotifyoncompletion(communitytoolkit-mvvm-componentmodel-observableobject-tasknotifier@-system-threading-tasks-task-system-action((system-threading-tasks-task))-system-string)">ObservableObject.SetPropertyAndNotifyOnCompletion(ref ObservableObject.TaskNotifier, Task, Action&lt;Task&gt;, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/communitytoolkit.mvvm.componentmodel.observableobject.setpropertyandnotifyoncompletion#communitytoolkit-mvvm-componentmodel-observableobject-setpropertyandnotifyoncompletion-1(communitytoolkit-mvvm-componentmodel-observableobject-tasknotifier((-0))@-system-threading-tasks-task((-0))-system-string)">ObservableObject.SetPropertyAndNotifyOnCompletion&lt;T&gt;(ref ObservableObject.TaskNotifier&lt;T&gt;, Task&lt;T&gt;, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/communitytoolkit.mvvm.componentmodel.observableobject.setpropertyandnotifyoncompletion#communitytoolkit-mvvm-componentmodel-observableobject-setpropertyandnotifyoncompletion-1(communitytoolkit-mvvm-componentmodel-observableobject-tasknotifier((-0))@-system-threading-tasks-task((-0))-system-action((system-threading-tasks-task((-0))))-system-string)">ObservableObject.SetPropertyAndNotifyOnCompletion&lt;T&gt;(ref ObservableObject.TaskNotifier&lt;T&gt;, Task&lt;T&gt;, Action&lt;Task&lt;T&gt;&gt;, string)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/communitytoolkit.mvvm.componentmodel.observableobject.propertychanging">ObservableObject.PropertyChanging</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel__ctor_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.#ctor*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel__ctor_System_IServiceProvider_PlumJsonAnimator_Services_AppSettings_PlumJsonAnimator_Services_ProjectSettings_PlumJsonAnimator_Services_ProjectFilesManager_PlumJsonAnimator_Common_Constants_GlobalState_PlumJsonAnimator_Services_JsonCode_PlumJsonAnimator_Services_Interpolation_PlumJsonAnimator_Services_ImageExporter_PlumJsonAnimator_Common_Constants_TransformModeFactory_PlumJsonAnimator_Services_Prettify_PlumJsonAnimator_Services_JsonExport_PlumJsonAnimator_Services_JsonValidator_PlumJsonAnimator_Services_Engine_PlumJsonAnimator_Services_LocalizationService_PlumJsonAnimator_Common_Dialogs_Dialogs_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.#ctor(System.IServiceProvider,PlumJsonAnimator.Services.AppSettings,PlumJsonAnimator.Services.ProjectSettings,PlumJsonAnimator.Services.ProjectFilesManager,PlumJsonAnimator.Common.Constants.GlobalState,PlumJsonAnimator.Services.JsonCode,PlumJsonAnimator.Services.Interpolation,PlumJsonAnimator.Services.ImageExporter,PlumJsonAnimator.Common.Constants.TransformModeFactory,PlumJsonAnimator.Services.Prettify,PlumJsonAnimator.Services.JsonExport,PlumJsonAnimator.Services.JsonValidator,PlumJsonAnimator.Services.Engine,PlumJsonAnimator.Services.LocalizationService,PlumJsonAnimator.Common.Dialogs.Dialogs)">
+  MainWindowViewModel(IServiceProvider, AppSettings, ProjectSettings, ProjectFilesManager, GlobalState, JsonCode, Interpolation, ImageExporter, TransformModeFactory, Prettify, JsonExport, JsonValidator, Engine, LocalizationService, Dialogs)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L452"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MainWindowViewModel(IServiceProvider serviceProvider, AppSettings appSettings, ProjectSettings projectSettings, ProjectFilesManager projectManager, GlobalState globalState, JsonCode jsonCode, Interpolation interpolation, ImageExporter imageExporter, TransformModeFactory transformModeFactory, Prettify prettify, JsonExport jsonExport, JsonValidator jsonValidator, Engine engine, LocalizationService localizationService, Dialogs dialogs)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>serviceProvider</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iserviceprovider">IServiceProvider</a></dt>
+    <dd></dd>
+    <dt><code>appSettings</code> <a class="xref" href="PlumJsonAnimator.Services.AppSettings.html">AppSettings</a></dt>
+    <dd></dd>
+    <dt><code>projectSettings</code> <a class="xref" href="PlumJsonAnimator.Services.ProjectSettings.html">ProjectSettings</a></dt>
+    <dd></dd>
+    <dt><code>projectManager</code> <a class="xref" href="PlumJsonAnimator.Services.ProjectFilesManager.html">ProjectFilesManager</a></dt>
+    <dd></dd>
+    <dt><code>globalState</code> <a class="xref" href="PlumJsonAnimator.Common.Constants.GlobalState.html">GlobalState</a></dt>
+    <dd></dd>
+    <dt><code>jsonCode</code> <a class="xref" href="PlumJsonAnimator.Services.JsonCode.html">JsonCode</a></dt>
+    <dd></dd>
+    <dt><code>interpolation</code> <a class="xref" href="PlumJsonAnimator.Services.Interpolation.html">Interpolation</a></dt>
+    <dd></dd>
+    <dt><code>imageExporter</code> <a class="xref" href="PlumJsonAnimator.Services.ImageExporter.html">ImageExporter</a></dt>
+    <dd></dd>
+    <dt><code>transformModeFactory</code> <a class="xref" href="PlumJsonAnimator.Common.Constants.TransformModeFactory.html">TransformModeFactory</a></dt>
+    <dd></dd>
+    <dt><code>prettify</code> <a class="xref" href="PlumJsonAnimator.Services.Prettify.html">Prettify</a></dt>
+    <dd></dd>
+    <dt><code>jsonExport</code> <a class="xref" href="PlumJsonAnimator.Services.JsonExport.html">JsonExport</a></dt>
+    <dd></dd>
+    <dt><code>jsonValidator</code> <a class="xref" href="PlumJsonAnimator.Services.JsonValidator.html">JsonValidator</a></dt>
+    <dd></dd>
+    <dt><code>engine</code> <a class="xref" href="PlumJsonAnimator.Services.Engine.html">Engine</a></dt>
+    <dd></dd>
+    <dt><code>localizationService</code> <a class="xref" href="PlumJsonAnimator.Services.LocalizationService.html">LocalizationService</a></dt>
+    <dd></dd>
+    <dt><code>dialogs</code> <a class="xref" href="PlumJsonAnimator.Common.Dialogs.Dialogs.html">Dialogs</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="fields">Fields
+</h2>
+
+
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_Timeline" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.Timeline">
+  Timeline
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L68"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TimelineControl? Timeline</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PlumJsonAnimator.Common.Timeline.TimelineControl.html">TimelineControl</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_engine" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.engine">
+  engine
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L448"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Engine engine</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PlumJsonAnimator.Services.Engine.html">Engine</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_jsonExport" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.jsonExport">
+  jsonExport
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L446"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonExport jsonExport</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PlumJsonAnimator.Services.JsonExport.html">JsonExport</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_jsonValidator" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.jsonValidator">
+  jsonValidator
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L447"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonValidator jsonValidator</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PlumJsonAnimator.Services.JsonValidator.html">JsonValidator</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_prettify" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.prettify">
+  prettify
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L445"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Prettify prettify</code></pre>
+  </div>
+
+
+
+
+  <h4 class="section">Field Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PlumJsonAnimator.Services.Prettify.html">Prettify</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_AddAnimation_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.AddAnimation*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_AddAnimation" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.AddAnimation">
+  AddAnimation
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L427"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand AddAnimation { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_AddBoneView_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.AddBoneView*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_AddBoneView" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.AddBoneView">
+  AddBoneView
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L420"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand AddBoneView { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_AddKeyFrame_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.AddKeyFrame*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_AddKeyFrame" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.AddKeyFrame">
+  AddKeyFrame
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L436"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand AddKeyFrame { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_AddSkin_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.AddSkin*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_AddSkin" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.AddSkin">
+  AddSkin
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L428"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand AddSkin { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_AddSlot_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.AddSlot*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_AddSlot" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.AddSlot">
+  AddSlot
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L431"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand AddSlot { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_Canvas_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.Canvas*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_Canvas" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.Canvas">
+  Canvas
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Canvas? Canvas { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">Canvas</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_CanvasHeight_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.CanvasHeight*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_CanvasHeight" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.CanvasHeight">
+  CanvasHeight
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L55"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CanvasHeight { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_CanvasWidth_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.CanvasWidth*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_CanvasWidth" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.CanvasWidth">
+  CanvasWidth
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L42"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CanvasWidth { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_CaptureMode_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.CaptureMode*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_CaptureMode" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.CaptureMode">
+  CaptureMode
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L125"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool CaptureMode { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_CurrentAnimation_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.CurrentAnimation*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_CurrentAnimation" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.CurrentAnimation">
+  CurrentAnimation
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L191"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Animation? CurrentAnimation { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PlumJsonAnimator.Models.SkeletonNameSpace.Animation.html">Animation</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_CurrentBone_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.CurrentBone*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_CurrentBone" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.CurrentBone">
+  CurrentBone
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L173"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Bone? CurrentBone { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html">Bone</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_CurrentTime_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.CurrentTime*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_CurrentTime" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.CurrentTime">
+  CurrentTime
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L69"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double CurrentTime { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_DeleteAnimation_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.DeleteAnimation*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_DeleteAnimation" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.DeleteAnimation">
+  DeleteAnimation
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L429"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand DeleteAnimation { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_DeleteBone_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.DeleteBone*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_DeleteBone" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.DeleteBone">
+  DeleteBone
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L425"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand DeleteBone { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_DeleteKeyFrame_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.DeleteKeyFrame*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_DeleteKeyFrame" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.DeleteKeyFrame">
+  DeleteKeyFrame
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L437"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand DeleteKeyFrame { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_DeleteRes_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.DeleteRes*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_DeleteRes" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.DeleteRes">
+  DeleteRes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L422"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand DeleteRes { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_DeleteSkin_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.DeleteSkin*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_DeleteSkin" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.DeleteSkin">
+  DeleteSkin
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L430"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand DeleteSkin { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_DeleteSlot_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.DeleteSlot*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_DeleteSlot" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.DeleteSlot">
+  DeleteSlot
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L432"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand DeleteSlot { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_DrawBones_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.DrawBones*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_DrawBones" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.DrawBones">
+  DrawBones
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L112"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool DrawBones { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_FPS_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.FPS*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_FPS" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.FPS">
+  FPS
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L99"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int FPS { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_IsTransformModeActive_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.IsTransformModeActive*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_IsTransformModeActive" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.IsTransformModeActive">
+  IsTransformModeActive
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L171"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string IsTransformModeActive { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_JsonErrorObj_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.JsonErrorObj*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_JsonErrorObj" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.JsonErrorObj">
+  JsonErrorObj
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonError JsonErrorObj { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PlumJsonAnimator.Models.JsonError.html">JsonError</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_NextKeyFrame_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.NextKeyFrame*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_NextKeyFrame" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.NextKeyFrame">
+  NextKeyFrame
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L435"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand NextKeyFrame { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_PlayAnim_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.PlayAnim*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_PlayAnim" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.PlayAnim">
+  PlayAnim
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L438"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand PlayAnim { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_PrevKeyFrame_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.PrevKeyFrame*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_PrevKeyFrame" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.PrevKeyFrame">
+  PrevKeyFrame
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L434"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand PrevKeyFrame { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_RenameBone_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.RenameBone*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_RenameBone" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.RenameBone">
+  RenameBone
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L424"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand RenameBone { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_RenameRes_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.RenameRes*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_RenameRes" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.RenameRes">
+  RenameRes
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L421"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand RenameRes { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_RenameSlot_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.RenameSlot*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_RenameSlot" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.RenameSlot">
+  RenameSlot
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L423"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand RenameSlot { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_SaveProject_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.SaveProject*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_SaveProject" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.SaveProject">
+  SaveProject
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L433"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand SaveProject { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_SetTransformMode_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.SetTransformMode*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_SetTransformMode" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.SetTransformMode">
+  SetTransformMode
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L426"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand SetTransformMode { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_ToggleTransformModeCommand_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.ToggleTransformModeCommand*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_ToggleTransformModeCommand" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.ToggleTransformModeCommand">
+  ToggleTransformModeCommand
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L440"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand ToggleTransformModeCommand { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_TransformMode_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.TransformMode*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_TransformMode" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.TransformMode">
+  TransformMode
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L139"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string TransformMode { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_ZoomCanvas_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.ZoomCanvas*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_ZoomCanvas" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.ZoomCanvas">
+  ZoomCanvas
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L207"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double ZoomCanvas { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_ZoomCanvasComm_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.ZoomCanvasComm*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_ZoomCanvasComm" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.ZoomCanvasComm">
+  ZoomCanvasComm
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L439"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICommand ZoomCanvasComm { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.windows.input.icommand">ICommand</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_AddBone_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.AddBone*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_AddBone_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_PlumJsonAnimator_Models_SkeletonNameSpace_Bone_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.AddBone(PlumJsonAnimator.Models.SkeletonNameSpace.Bone,PlumJsonAnimator.Models.SkeletonNameSpace.Bone)">
+  AddBone(Bone, Bone?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L234"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddBone(Bone newBone, Bone? parent)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>newBone</code> <a class="xref" href="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html">Bone</a></dt>
+    <dd></dd>
+    <dt><code>parent</code> <a class="xref" href="PlumJsonAnimator.Models.SkeletonNameSpace.Bone.html">Bone</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_AddBone_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.AddBone*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_AddBone_System_String_System_Int32_System_Object_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.AddBone(System.String,System.Int32,System.Object)">
+  AddBone(string, int, object?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L226"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddBone(string title, int id, object? selectedBone)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>title</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>selectedBone</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_AddRes_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.AddRes*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_AddRes_System_String___" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.AddRes(System.String[])">
+  AddRes(string[])
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L354"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddRes(string[] paths)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>paths</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_CanGenerateProject_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.CanGenerateProject*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_CanGenerateProject" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.CanGenerateProject">
+  CanGenerateProject()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L242"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool CanGenerateProject()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_DropSlotToBone_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.DropSlotToBone*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_DropSlotToBone_System_Int32_PlumJsonAnimator_Models_Resources_Res_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.DropSlotToBone(System.Int32,PlumJsonAnimator.Models.Resources.Res)">
+  DropSlotToBone(int, Res)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L376"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DropSlotToBone(int id, Res res)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>id</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>res</code> <a class="xref" href="PlumJsonAnimator.Models.Resources.Res.html">Res</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_GenerateCode_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.GenerateCode*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_GenerateCode" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.GenerateCode">
+  GenerateCode()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L309"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GenerateCode()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_OpenProject_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.OpenProject*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_OpenProject_Avalonia_Controls_Window_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.OpenProject(Avalonia.Controls.Window)">
+  OpenProject(Window)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L388"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OpenProject(Window win)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>win</code> <span class="xref">Window</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_Prettify_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.Prettify*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_Prettify_System_String_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.Prettify(System.String)">
+  Prettify(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L398"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Prettify(string text)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>text</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_SetMainWin_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.SetMainWin*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_SetMainWin_Avalonia_Controls_Window_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.SetMainWin(Avalonia.Controls.Window)">
+  SetMainWin(Window)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L262"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetMainWin(Window window)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>window</code> <span class="xref">Window</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_ShowDialog_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.ShowDialog*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_ShowDialog_System_String_Avalonia_Controls_Window_PlumJsonAnimator_Common_Dialogs_DialogType_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.ShowDialog(System.String,Avalonia.Controls.Window,PlumJsonAnimator.Common.Dialogs.DialogType)">
+  ShowDialog(string, Window, DialogType)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L303"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ShowDialog(string title, Window owner, DialogType viewType)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>title</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>owner</code> <span class="xref">Window</span></dt>
+    <dd></dd>
+    <dt><code>viewType</code> <a class="xref" href="PlumJsonAnimator.Common.Dialogs.DialogType.html">DialogType</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_Validate_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.Validate*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_Validate_System_String_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.Validate(System.String)">
+  Validate(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L257"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Validate(string text)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>text</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_WriteSettings_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.WriteSettings*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_WriteSettings" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.WriteSettings">
+  WriteSettings()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L349"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void WriteSettings()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_exportSpineJson_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.exportSpineJson*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_exportSpineJson_System_String_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.exportSpineJson(System.String)">
+  exportSpineJson(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L339"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ExportResult exportSpineJson(string outFolder)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>outFolder</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PlumJsonAnimator.Models.ExportResult.html">ExportResult</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_importSpineJson_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.importSpineJson*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_importSpineJson_System_String_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.importSpineJson(System.String)">
+  importSpineJson(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L344"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ExportResult importSpineJson(string inputFile)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>inputFile</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="PlumJsonAnimator.Models.ExportResult.html">ExportResult</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="PlumJsonAnimator_ViewModels_MainWindowViewModel_initProgram_" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.initProgram*"></a>
+
+  <h3 id="PlumJsonAnimator_ViewModels_MainWindowViewModel_initProgram" data-uid="PlumJsonAnimator.ViewModels.MainWindowViewModel.initProgram">
+  initProgram()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L314"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void initProgram()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/123abc1920/PlumAnimation/blob/main/PlumJsonAnimator/ViewModels/MainWindowViewModel.cs/#L27" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
