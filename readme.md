@@ -71,17 +71,17 @@
 
 ## Скриншоты интерфейса:
 
-![Темная тема, английский язык](ReadmeImgs\darkimg.png)
-![Светлая тема, русский язык](ReadmeImgs\whiteimg.png)
-![Иерархия костей](ReadmeImgs\bones.png)
-![Вывод json](ReadmeImgs\.png)
-![Слоты](ReadmeImgs\slots.png)
-![Настройки](ReadmeImgs\settings.png)
-![Настройки](ReadmeImgs\settings2.png)
-![Скины и анимации](ReadmeImgs\skinsanims.png)
-![Временная шкала](ReadmeImgs\timeline.png)
-![Уведомление](ReadmeImgs\toast.png)
-![Ресурсы](ReadmeImgs\res.png)
+![Темная тема, английский язык](https://github.com/123abc1920/PlumAnimation/blob/main/ReadmeImgs/darkimg.png)
+![Светлая тема, русский язык](https://github.com/123abc1920/PlumAnimation/blob/main/ReadmeImgs/whiteimg.png)
+![Иерархия костей](https://github.com/123abc1920/PlumAnimation/blob/main/ReadmeImgs/bones.png)
+![Вывод json](https://github.com/123abc1920/PlumAnimation/blob/main/ReadmeImgs/.png)
+![Слоты](https://github.com/123abc1920/PlumAnimation/blob/main/ReadmeImgs/slots.png)
+![Настройки](https://github.com/123abc1920/PlumAnimation/blob/main/ReadmeImgs/settings.png)
+![Настройки](https://github.com/123abc1920/PlumAnimation/blob/main/ReadmeImgs/settings2.png)
+![Скины и анимации](https://github.com/123abc1920/PlumAnimation/blob/main/ReadmeImgs/skinsanims.png)
+![Временная шкала](https://github.com/123abc1920/PlumAnimation/blob/main/ReadmeImgs/timeline.png)
+![Уведомление](https://github.com/123abc1920/PlumAnimation/blob/main/ReadmeImgs/toast.png)
+![Ресурсы](https://github.com/123abc1920/PlumAnimation/blob/main/ReadmeImgs/res.png)
 
 ---
 
