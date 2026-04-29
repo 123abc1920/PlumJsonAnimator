@@ -14,6 +14,6 @@ For now, only for Windows.
 
 ## Documentation
 
-- [Introduction](https://123abc1920.github.io/PlumAnimation/docs/introduction.html)
-- [Getting Started](https://123abc1920.github.io/PlumAnimation/docs/getting-started.html)
-- [API](https://123abc1920.github.io/PlumAnimation/api/PlumJsonAnimator.Common.Constants.html)
+- [Introduction](https://123abc1920.github.io/PlumJsonAnimator/docs/introduction.html)
+- [Getting Started](https://123abc1920.github.io/PlumJsonAnimator/docs/getting-started.html)
+- [API](https://123abc1920.github.io/PlumJsonAnimator/api/PlumJsonAnimator.Common.Constants.html)
