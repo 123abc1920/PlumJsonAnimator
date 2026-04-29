@@ -1,90 +1,15 @@
-# PlumJsonAnimator
+# **PlumJsonAnimator**
 
-> Программа для создания и редактирования скелетных анимаций.
+A program for creating skeletal animations. Free and open-source.
 
-## Оглавление
+The app allows you to create animations in a graphical interface, then export or re-import them. It offers the ability to edit JSON files and export animations as images and videos. It also features the ability to switch themes and languages.
 
-- [О проекте](#о-проекте)
-- [Цель и задачи](#цель-и-задачи)
-- [Технологии](#технологии)
-- [Функциональные возможности](#функциональные-возможности)
-- [Структура проекта](#структура-проекта)
-- [Результаты](#результаты)
+**Full support for English and Russian languages.**
 
----
+For now, only for Windows.
 
-## О проекте
+## Documentation
 
-**PlumJsonAnimator** — это приложение для создания скелетных анимаций на основе формата SpineJson.
-
----
-
-## Цель и задачи
-
-**Цель:** разработать инструмент для наглядной анимации объектов.
-
-**Задачи, решённые в ходе работы:**
-
-1. Проанализировать существующие программы для скелетных анимаций
-2. Спроектировать архитектуру приложения
-3. Создать пользовательский интерфейс с выводом анимации на экран и ее редактирование в окне
-4. Проигрывать анимации внутри программы
-5. Реализовать экспорт и импорт анимаций в файлы
-
----
-
-## Основные технологии
-
-| Технология                               | Назначение                               |
-| ---------------------------------------- | ---------------------------------------- |
-| AvaloniaUI                               | UI                                       |
-| C#                                       | Логика приложения                        |
-| SukiUI                                   | Библиотека интерфейса                    |
-| SixLabors.ImageSharp                     | Для конвертации в виде изображений/видео |
-| Newtonsoft.Json                          | Для работы с Json                        |
-| Microsoft.Extensions.DependencyInjection | Инъекция зависимостей                    |
-
----
-
-## Функциональные возможности
-
-- Редактирование анимации в окне приложения
-- Сохранение анимации
-- Проигрывание анимации
-- Экспорт и импорт анимаций в JSON файл или в виде картинок
-- Смена языков
-- Смена тем приложения
-
----
-
-## Структура проекта
-
-Используется MVVM паттерн, DI. Models содержит все модели проекта, Service -- все сервисы, ViewModels -- view models. Common содержит общие модели и модули.
-
----
-
-## Результаты
-
-Было получено приложение, которое позволяет создавать анимацию в графическом интерфейсе, затем экспортировать ее или импортировать снова. Предоставляет возможность редактировать JSON файл, экспортировать анимацию в виде изображений и видео. Также имеет возможность переключать темы и языки.
-
----
-
-## Скриншоты интерфейса:
-
-![Темная тема, английский язык](https://github.com/123abc1920/PlumAnimation/blob/main/ReadmeImgs/darkimg.png)
-![Светлая тема, русский язык](https://github.com/123abc1920/PlumAnimation/blob/main/ReadmeImgs/whiteimg.png)
-![Иерархия костей](https://github.com/123abc1920/PlumAnimation/blob/main/ReadmeImgs/bones.png)
-![Вывод json](https://github.com/123abc1920/PlumAnimation/blob/main/ReadmeImgs/.png)
-![Слоты](https://github.com/123abc1920/PlumAnimation/blob/main/ReadmeImgs/slots.png)
-![Настройки](https://github.com/123abc1920/PlumAnimation/blob/main/ReadmeImgs/settings.png)
-![Настройки](https://github.com/123abc1920/PlumAnimation/blob/main/ReadmeImgs/settings2.png)
-![Скины и анимации](https://github.com/123abc1920/PlumAnimation/blob/main/ReadmeImgs/skinsanims.png)
-![Временная шкала](https://github.com/123abc1920/PlumAnimation/blob/main/ReadmeImgs/timeline.png)
-![Уведомление](https://github.com/123abc1920/PlumAnimation/blob/main/ReadmeImgs/toast.png)
-![Ресурсы](https://github.com/123abc1920/PlumAnimation/blob/main/ReadmeImgs/res.png)
-
----
-
-## Запись работы:
-
-[Видео](http://170.168.15.70:7000/itograbbit.mp4)
+- [Introduction](https://123abc1920.github.io/PlumAnimation/docs/introduction.html)
+- [Getting Started](https://123abc1920.github.io/PlumAnimation/docs/getting-started.html)
+- [API](https://123abc1920.github.io/PlumAnimation/api/PlumJsonAnimator.Common.Constants.html)
