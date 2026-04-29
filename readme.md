@@ -83,3 +83,8 @@
 ![Уведомление](ReadmeImgs\toast.png)
 ![Ресурсы](ReadmeImgs\res.png)
 
+---
+
+## Запись работы:
+
+[Видео](http://170.168.15.70:7000/itograbbit.mp4)

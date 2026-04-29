@@ -10,7 +10,10 @@ The app allows you to create animations in a graphical interface, then export or
 
 **Full support for English and Russian languages.**
 
-## Documentation:
+For now, only for Windows.
 
-- [Introduction](/docs/docs/introduction.html)
-- [Getting Started](/docs/docs/getting-started.html)
+## Documentation
+
+- [Introduction](https://123abc1920.github.io/PlumAnimation/docs/introduction.html)
+- [Getting Started](https://123abc1920.github.io/PlumAnimation/docs/getting-started.html)
+- [API](https://123abc1920.github.io/PlumAnimation/api/PlumJsonAnimator.Common.Constants.html)

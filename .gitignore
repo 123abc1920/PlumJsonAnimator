@@ -85,3 +85,4 @@ publish/
 # Документация
 hint.txt
 _site/
+*.mp4
