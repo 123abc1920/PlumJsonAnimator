@@ -41,5 +41,9 @@
     <PackageReference Include="Avalonia.Svg.Skia" Version="11.0.0" />
 
     <PackageReference Include="SukiUI" Version="6.0.3" />
+
+    <None Update="NOTICE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
