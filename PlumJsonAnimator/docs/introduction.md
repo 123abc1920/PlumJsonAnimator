@@ -42,7 +42,7 @@ All animations are saved in a readable JSON format, allowing you to:
 
 ## Quick Start
 
-1. [Download the latest version](https://github.com/yourusername/PlumJsonAnimator/releases)
+1. [Download the latest version](https://github.com/123abc1920/PlumJsonAnimator/releases)
 2. Run `PlumJsonAnimator.exe`
 3. Create a new project
 4. Add a sprite and create bones
@@ -61,5 +61,5 @@ All animations are saved in a readable JSON format, allowing you to:
 
 ## Links
 
-- [GitHub repository](https://github.com/123abc1920/PlumAnimation)
-- [Report a bug](https://github.com/123abc1920/PlumAnimation/issues)
+- [GitHub repository](https://github.com/123abc1920/PlumJsonAnimator)
+- [Report a bug](https://github.com/123abc1920/PlumJsonAnimator/issues)
