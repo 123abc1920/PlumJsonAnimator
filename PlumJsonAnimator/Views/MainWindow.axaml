@@ -158,7 +158,7 @@
                             Padding="0"
                             HorizontalContentAlignment="Center"
                             VerticalContentAlignment="Center"
-                            Command="{Binding AddSkin}">
+                            Command="{Binding DeleteSkin}">
                             <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
                         </Button>
                     </Grid>
