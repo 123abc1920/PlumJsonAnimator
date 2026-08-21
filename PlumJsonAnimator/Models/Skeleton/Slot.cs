@@ -307,9 +307,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
                 if (BoundedBone != null)
                 {
-                    globalAngle = BoundedBone.A;
+                    // 1. ИСПРАВЛЕНИЕ: Берем ПОЛНЫЙ накопленный угол кости (GlobalA) вместо локального (A)
+                    globalAngle = BoundedBone.GlobalA + _localA;
 
-                    double rad = BoundedBone.A * Math.PI / 180;
+                    // 2. ИСПРАВЛЕНИЕ: Для расчета орбиты смещения слота тоже используем GlobalA кости
+                    double rad = BoundedBone.GlobalA * Math.PI / 180;
                     double rotatedX = _localX * Math.Cos(rad) - _localY * Math.Sin(rad);
                     double rotatedY = _localX * Math.Sin(rad) + _localY * Math.Cos(rad);
 
@@ -332,10 +334,12 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                     Source = _cachedBitmap,
                     Width = LengthX,
                     Height = LengthY,
-                    RenderTransform = new RotateTransform(this.A),
+                    // 3. ИСПРАВЛЕНИЕ: Поворачиваем картинку на полный посчитанный globalAngle
+                    RenderTransform = new RotateTransform(globalAngle),
                     RenderTransformOrigin = new RelativePoint(0.5, 0.5, RelativeUnit.Relative),
                 };
 
+                // Твой оригинальный рабочий расчет позиционирования (оставляем как было)
                 double left = canvas.Width / 2 + globalX - image.Width / 2;
                 double top = canvas.Height / 2 + globalY - image.Height / 2;
 
