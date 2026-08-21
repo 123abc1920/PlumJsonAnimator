@@ -692,40 +692,33 @@
                         Tapped="OnBonePointerPressed"
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <TreeView.ItemTemplate>
-<TreeDataTemplate ItemsSource="{Binding Children}">
-    <!-- Grid принудительно растягивается по ширине и не дает элементам выходить за край -->
-    <Grid HorizontalAlignment="Stretch" Margin="0,0,10,0">
-        <Grid.ColumnDefinitions>
-            <!-- Текст забирает все доступное пространство -->
-            <ColumnDefinition Width="*" />
-            <!-- Квадрат фиксирован справа -->
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
+                            <TreeDataTemplate ItemsSource="{Binding Children}">
+                                <Grid HorizontalAlignment="Stretch" Margin="0,0,10,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
 
-        <!-- Текст: строго в одну строку, лишнее просто прячется без троеточия -->
-        <TextBlock Text="{Binding Name}" 
-                   Grid.Column="0"
-                   VerticalAlignment="Center" 
-                   TextWrapping="NoWrap"
-                   TextTrimming="None"
-                   HorizontalAlignment="Left"/>
+                                    <TextBlock Text="{Binding Name}" 
+                                            Grid.Column="0"
+                                            VerticalAlignment="Center" 
+                                            TextWrapping="NoWrap"
+                                            TextTrimming="None"
+                                            HorizontalAlignment="Left"/>
 
-        <!-- Квадрат: всегда закреплен в конце строки -->
-        <Rectangle Fill="{Binding BoneColor}" 
-                   Grid.Column="1"
-                   Height="10" 
-                   Width="10"
-                   VerticalAlignment="Center"
-                   Margin="10,0,0,0"/>
+                                    <Rectangle Fill="{Binding BoneColor}" 
+                                            Grid.Column="1"
+                                            Height="10" 
+                                            Width="10"
+                                            VerticalAlignment="Center"
+                                            Margin="10,0,0,0"/>
 
-        <!-- Тултип для отображения полного имени при наведении -->
-        <ToolTip.Tip>
-            <TextBox Padding="0" 
-                     Text="{Binding Name}" />
-        </ToolTip.Tip>
-    </Grid>
-</TreeDataTemplate>
-
+                                    <ToolTip.Tip>
+                                        <TextBox Padding="0" 
+                                                Text="{Binding Name}" />
+                                    </ToolTip.Tip>
+                                </Grid>
+                            </TreeDataTemplate>
                         </TreeView.ItemTemplate>
                     </TreeView>
                 </Grid>
