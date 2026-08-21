@@ -40,18 +40,24 @@ public partial class App : Application
         services.AddTransient<AppSettingsViewModel>();
 
         services.AddSingleton<AppSettings>();
-        services.AddSingleton<ProjectSettings>();
-        services.AddSingleton<ProjectFilesManager>();
+        services.AddSingleton<GlobalState>();
+
         services.AddSingleton<Interpolation>();
+        services.AddSingleton<Engine>();
+
+        services.AddSingleton<LocalizationService>();
+
+        services.AddSingleton<TransformModeFactory>();
+
         services.AddSingleton<Prettify>();
         services.AddSingleton<JsonCode>();
         services.AddSingleton<JsonValidator>();
+
         services.AddSingleton<ImageExporter>();
         services.AddSingleton<JsonExport>();
-        services.AddSingleton<GlobalState>();
-        services.AddSingleton<TransformModeFactory>();
-        services.AddSingleton<Engine>();
-        services.AddSingleton<LocalizationService>();
+
+        services.AddSingleton<ProjectSettings>();
+        services.AddSingleton<ProjectFilesManager>();
 
         services.AddSingleton<Dialogs>();
 

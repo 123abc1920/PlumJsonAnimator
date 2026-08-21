@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reactive.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
@@ -9,6 +10,8 @@ using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Services;
+using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
@@ -22,20 +25,21 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             get { return false; }
         }
 
+        // Приватные поля для локальных значений
         private double _localX = 0;
         private double _localY = 0;
         private double _localA = 0;
+
+        [Reactive]
+        public Attachment? CurrentAttachment { get; set; }
 
         public override double X
         {
             get => BoundedBone != null ? BoundedBone.X + _localX : _localX;
             set
             {
-                if (BoundedBone != null)
-                    _localX = value - BoundedBone.X;
-                else
-                    _localX = value;
-                OnPropertyChanged(nameof(X));
+                _localX = BoundedBone != null ? value - BoundedBone.X : value;
+                this.RaisePropertyChanged(nameof(X));
             }
         }
 
@@ -44,11 +48,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             get => BoundedBone != null ? BoundedBone.Y + _localY : _localY;
             set
             {
-                if (BoundedBone != null)
-                    _localY = value - BoundedBone.Y;
-                else
-                    _localY = value;
-                OnPropertyChanged(nameof(Y));
+                _localY = BoundedBone != null ? value - BoundedBone.Y : value;
+                this.RaisePropertyChanged(nameof(Y));
             }
         }
 
@@ -57,26 +58,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             get => BoundedBone != null ? BoundedBone.A + _localA : _localA;
             set
             {
-                if (BoundedBone != null)
-                    _localA = value - BoundedBone.A;
-                else
-                    _localA = value;
-                OnPropertyChanged(nameof(A));
-            }
-        }
-
-        private Attachment? _currentAttachment;
-
-        public Attachment? CurrentAttachment
-        {
-            get => _currentAttachment;
-            set
-            {
-                if (_currentAttachment != value)
-                {
-                    _currentAttachment = value;
-                    OnPropertyChanged();
-                }
+                _localA = BoundedBone != null ? value - BoundedBone.A : value;
+                this.RaisePropertyChanged(nameof(A));
             }
         }
 
@@ -95,6 +78,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 var size = CurrentAttachment.GetSize();
                 LengthX = size["width"] ?? LengthX;
                 LengthY = size["height"] ?? LengthY;
+
+                // Уведомляем об изменениях
+                this.RaisePropertyChanged(nameof(X));
+                this.RaisePropertyChanged(nameof(Y));
+                this.RaisePropertyChanged(nameof(A));
             }
         }
 
@@ -102,38 +90,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             new SortedDictionary<double, DrawOrderOffset>();
 
         public bool isUpdatingFromCode;
-        private int _currentDrawOrderOffset;
-        public int CurrentDrawOrderOffset
-        {
-            get => _currentDrawOrderOffset;
-            set
-            {
-                if (value == null)
-                {
-                    _currentDrawOrderOffset = 0;
-                    OnPropertyChanged();
-                    return;
-                }
 
-                _currentDrawOrderOffset = value;
-                if (!isUpdatingFromCode)
-                {
-                    double currTime = this._globalState.CurrentProject.CurrentAnimation.currentTime;
-                    if (drawOrders.Keys.Contains(currTime))
-                    {
-                        drawOrders[currTime].Offset = value;
-                    }
-                    else
-                    {
-                        drawOrders.Add(
-                            currTime,
-                            new DrawOrderOffset() { Slot = this.Name, Offset = value }
-                        );
-                    }
-                }
-                OnPropertyChanged();
-            }
-        }
+        [Reactive]
+        public int CurrentDrawOrderOffset { get; set; }
 
         /// <summary>
         /// Updates draw order offset according current animation time
@@ -174,11 +133,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 if (_lengthX != value && value > 0)
                 {
-                    _lengthX = value;
-                    OnPropertyChanged(nameof(LengthX));
+                    this.RaiseAndSetIfChanged(ref _lengthX, value);
                 }
             }
         }
+
         private double _lengthY = 100;
         public override double LengthY
         {
@@ -187,11 +146,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 if (_lengthY != value && value > 0)
                 {
-                    _lengthY = value;
-                    OnPropertyChanged(nameof(LengthY));
+                    this.RaiseAndSetIfChanged(ref _lengthY, value);
                 }
             }
         }
+
         private Bone? _boundedBone;
         public Bone? BoundedBone
         {
@@ -205,12 +164,45 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                     {
                         Move(value.GlobalX + this.X, value.GlobalY + this.Y);
                     }
-                    OnPropertyChanged();
+                    this.RaisePropertyChanged();
                 }
             }
         }
 
+        private Slot(GlobalState _globalState)
+        {
+            this.WhenAnyValue(x => x.CurrentDrawOrderOffset)
+                .Where(_ => !isUpdatingFromCode)
+                .Subscribe(value =>
+                {
+                    if (_globalState?.CurrentProject?.CurrentAnimation == null)
+                        return;
+
+                    double currTime = _globalState.CurrentProject.CurrentAnimation.currentTime;
+                    if (drawOrders.ContainsKey(currTime))
+                    {
+                        drawOrders[currTime].Offset = value;
+                    }
+                    else
+                    {
+                        drawOrders.Add(
+                            currTime,
+                            new DrawOrderOffset() { Slot = Name, Offset = value }
+                        );
+                    }
+                });
+
+            this.WhenAnyValue(x => x.BoundedBone)
+                .Subscribe(_ =>
+                {
+                    this.RaisePropertyChanged(nameof(X));
+                    this.RaisePropertyChanged(nameof(Y));
+                    this.RaisePropertyChanged(nameof(A));
+                });
+        }
+
         public Slot(GlobalState globalState, int id, string path)
+            : this(globalState)
         {
             this.id = id;
             this.A = 0;
@@ -224,6 +216,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         }
 
         public Slot(GlobalState globalState, string name, Bone b)
+            : this(globalState)
         {
             this.Name = name;
             this.BoundedBone = b;
@@ -232,6 +225,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         }
 
         public Slot(GlobalState globalState, Bone b)
+            : this(globalState)
         {
             this.Name = $"tesr{Counter.GenerateNamePostfix()}";
             this.BoundedBone = b;

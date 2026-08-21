@@ -1,117 +1,47 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
-using Avalonia.Media;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Services;
+using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
     /// <summary>
     /// Bone data
     /// </summary>
-    public class Bone : INotifyable, IRenamable
+    public class Bone : ReactiveObject, IRenamable
     {
         public int id = 0;
-        private string _name = "";
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                if (_name != value)
-                {
-                    _name = value;
-                    OnPropertyChanged(nameof(Name));
-                }
-            }
-        }
+
+        [Reactive]
+        public string Name { get; set; } = "";
         public virtual bool IsBone
         {
             get { return true; }
         }
 
-        private double _baseX = 0;
-        private double _baseY = 0;
-        private double _baseA = 0;
+        [Reactive]
+        public virtual double BaseX { get; set; }
 
-        public virtual double BaseX
-        {
-            get => _baseX;
-            set
-            {
-                if (Math.Abs(_baseX - value) > double.Epsilon)
-                {
-                    _baseX = value;
-                    OnPropertyChanged(nameof(BaseX));
-                    OnPropertyChanged(nameof(X));
-                }
-            }
-        }
+        [Reactive]
+        public virtual double BaseY { get; set; }
 
-        public virtual double BaseY
-        {
-            get => _baseY;
-            set
-            {
-                if (Math.Abs(_baseY - value) > double.Epsilon)
-                {
-                    _baseY = value;
-                    OnPropertyChanged(nameof(BaseY));
-                    OnPropertyChanged(nameof(Y));
-                }
-            }
-        }
+        [Reactive]
+        public virtual double BaseA { get; set; }
 
-        public virtual double BaseA
-        {
-            get => _baseA;
-            set
-            {
-                if (Math.Abs(_baseA - value) > double.Epsilon)
-                {
-                    _baseA = value;
-                    OnPropertyChanged(nameof(BaseA));
-                    OnPropertyChanged(nameof(A));
-                }
-            }
-        }
+        [Reactive]
+        public virtual double AnimX { get; set; }
 
-        private double _animX = 0;
-        private double _animY = 0;
-        private double _animA = 0;
+        [Reactive]
+        public virtual double AnimY { get; set; }
 
-        public virtual double AnimX
-        {
-            get => _animX;
-            set
-            {
-                if (Math.Abs(_animX - value) > double.Epsilon)
-                {
-                    _animX = value;
-                    OnPropertyChanged(nameof(X));
-                }
-            }
-        }
-
-        public virtual double AnimY
-        {
-            get => _animY;
-            set
-            {
-                if (Math.Abs(_animY - value) > double.Epsilon)
-                {
-                    _animY = value;
-                    OnPropertyChanged(nameof(Y));
-                }
-            }
-        }
-
+        private double _animA;
         public virtual double AnimA
         {
             get => _animA;
@@ -120,8 +50,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 if (Math.Abs(_animA - value) > double.Epsilon)
                 {
                     Rotate(value);
-                    _animA = value;
-                    OnPropertyChanged(nameof(AnimA));
+                    this.RaiseAndSetIfChanged(ref _animA, value);
                 }
             }
         }
@@ -131,22 +60,12 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             get
             {
                 if (this._globalState == null)
-                {
                     return 0;
-                }
-
-                if (this._globalState.setBasePos == true)
-                {
-                    return this.BaseX;
-                }
-                else
-                {
-                    return this.BaseX + this.AnimX;
-                }
+                return this._globalState.setBasePos ? this.BaseX : this.BaseX + this.AnimX;
             }
             set
             {
-                if (this._globalState.setBasePos == true)
+                if (this._globalState.setBasePos)
                 {
                     this.BaseX = value;
                 }
@@ -162,22 +81,12 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             get
             {
                 if (this._globalState == null)
-                {
                     return 0;
-                }
-
-                if (this._globalState.setBasePos == true)
-                {
-                    return this.BaseY;
-                }
-                else
-                {
-                    return this.BaseY + this.AnimY;
-                }
+                return this._globalState.setBasePos ? this.BaseY : this.BaseY + this.AnimY;
             }
             set
             {
-                if (this._globalState.setBasePos == true)
+                if (this._globalState.setBasePos)
                 {
                     this.BaseY = value;
                 }
@@ -193,22 +102,14 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             get
             {
                 if (this._globalState == null)
-                {
                     return 0;
-                }
-
-                if (this._globalState.setBasePos == true)
-                {
-                    return this.BaseA;
-                }
-                else
-                {
-                    return (this.AnimA == 0) ? this.BaseA : this.AnimA;
-                }
+                return this._globalState.setBasePos
+                    ? this.BaseA
+                    : (this.AnimA == 0 ? this.BaseA : this.AnimA);
             }
             set
             {
-                if (this._globalState.setBasePos == true)
+                if (this._globalState.setBasePos)
                 {
                     this.BaseA = value;
                 }
@@ -312,28 +213,37 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
-        private double lengthX = 10;
+        private double _lengthX = 10;
         public virtual double LengthX
         {
-            get => lengthX;
+            get => _lengthX;
             set
             {
-                if (lengthX != value && value > 0)
+                if (_lengthX != value && value > 0)
                 {
-                    lengthX = value;
-                    OnPropertyChanged(nameof(LengthX));
+                    this.RaiseAndSetIfChanged(ref _lengthX, value);
                 }
             }
         }
-
         public virtual double LengthY { get; set; } = 0;
 
         protected GlobalState _globalState;
         protected LocalizationService _localizationService;
 
-        protected Bone() { }
+        protected Bone()
+        {
+            this.WhenAnyValue(x => x.BaseX, x => x.AnimX)
+                .Subscribe(_ => this.RaisePropertyChanged(nameof(X)));
+
+            this.WhenAnyValue(x => x.BaseY, x => x.AnimY)
+                .Subscribe(_ => this.RaisePropertyChanged(nameof(Y)));
+
+            this.WhenAnyValue(x => x.BaseA, x => x.AnimA)
+                .Subscribe(_ => this.RaisePropertyChanged(nameof(A)));
+        }
 
         public Bone(GlobalState globalState, LocalizationService localizationService)
+            : this()
         {
             this.Name = "root";
 
@@ -347,6 +257,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             int _id,
             LocalizationService localizationService
         )
+            : this()
         {
             this.id = _id;
             string name = "bone";
@@ -357,6 +268,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         }
 
         public Bone(GlobalState globalState, Bone parent, LocalizationService localizationService)
+            : this()
         {
             string name = "bone";
             this.Name = $"{name}{Counter.GenerateNamePostfix()}";
@@ -368,8 +280,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         }
 
         public Bone(GlobalState globalState, string name, LocalizationService localizationService)
+            : this()
         {
-            this._name = name;
+            this.Name = name;
 
             this.id = 100;
 
@@ -493,8 +406,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             double globalX = parentX + (this.X * m11 + this.Y * m21);
             double globalY = parentY + (this.X * m12 + this.Y * m22);
 
-            double endX = globalX + (this.lengthX * g11);
-            double endY = globalY + (this.lengthX * g12);
+            double endX = globalX + (this.LengthX * g11);
+            double endY = globalY + (this.LengthX * g12);
 
             Point start = new Point(canvas.Width / 2 + globalX, canvas.Height / 2 + globalY);
             Point end = new Point(canvas.Width / 2 + endX, canvas.Height / 2 + endY);
