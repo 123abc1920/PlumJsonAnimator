@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
+using Avalonia.Media;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
@@ -227,6 +228,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         }
         public virtual double LengthY { get; set; } = 0;
 
+        [Reactive]
+        public SolidColorBrush BoneColor { get; set; } = new SolidColorBrush(Colors.Black);
+
         protected GlobalState _globalState;
         protected LocalizationService _localizationService;
 
@@ -240,6 +244,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
             this.WhenAnyValue(x => x.BaseA, x => x.AnimA)
                 .Subscribe(_ => this.RaisePropertyChanged(nameof(A)));
+
+            this.BoneColor = this.GenerateRandomColor();
         }
 
         public Bone(GlobalState globalState, LocalizationService localizationService)
@@ -437,6 +443,15 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 childBone.DrawBone(canvas, g11, g12, g21, g22, globalX, globalY);
             }
+        }
+
+        private SolidColorBrush GenerateRandomColor()
+        {
+            var random = new Random();
+            byte r = (byte)random.Next(256);
+            byte g = (byte)random.Next(256);
+            byte b = (byte)random.Next(256);
+            return new SolidColorBrush(new Color(255, r, g, b));
         }
 
         /// <summary>
