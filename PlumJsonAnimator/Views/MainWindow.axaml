@@ -762,7 +762,7 @@
                                     <iconPacks:PackIconBootstrapIcons Kind="PencilFill" />
                                 </Button>
                             </StackPanel>
-                            <TextBlock Margin="0,5" Text="{Binding CurrentBone.Name}" />
+                            <TextBlock Margin="0,5" FontWeight="Bold" Text="{Binding CurrentBone.Name}" />
                             <ListBox
                                 x:Name="SlotsList"
                                 DragDrop.Drop="OnListBoxDrop"
@@ -806,29 +806,49 @@
 
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <Grid HorizontalAlignment="Stretch" DoubleTapped="OnSlotSelectionChanged">
+                                        <Grid HorizontalAlignment="Stretch" 
+                                            VerticalAlignment="Center"
+                                            DoubleTapped="OnSlotSelectionChanged">
                                             <DragDrop.AllowDrop>True</DragDrop.AllowDrop>
+                                            
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*" />
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
 
-                                            <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
-                                                <TextBlock
-                                                    Text="{Binding Name}"
-                                                    TextTrimming="CharacterEllipsis"
-                                                    TextWrapping="NoWrap" />
-                                                <TextBlock
-                                                    Text="{Binding CurrentAttachment.Name}"
-                                                    TextTrimming="CharacterEllipsis"
-                                                    TextWrapping="NoWrap" />
+                                            <StackPanel Grid.Column="0" 
+                                                        VerticalAlignment="Center" 
+                                                        Spacing="2">
+                                                <TextBlock Text="{Binding Name}"
+                                                        FontSize="13"
+                                                        FontWeight="SemiBold"
+                                                        TextTrimming="CharacterEllipsis"
+                                                        TextWrapping="NoWrap" >
+                                                        <ToolTip.Tip>
+                                                            <TextBlock Text="{Binding Name}"/>
+                                                        </ToolTip.Tip>
+                                                </TextBlock>
+                                                
+                                                <TextBlock Text="{Binding CurrentAttachment.Name}"
+                                                        FontSize="11"
+                                                        Opacity="0.6"
+                                                        TextTrimming="CharacterEllipsis"
+                                                        TextWrapping="NoWrap">
+
+                                                        <ToolTip.Tip>
+                                                            <TextBlock Text="{Binding CurrentAttachment.Name}"/>
+                                                        </ToolTip.Tip>
+                                                </TextBlock>
                                             </StackPanel>
 
-                                            <NumericUpDown
-                                                Grid.Column="1"
-                                                Margin="4,0,0,0"
-                                                Increment="1"
-                                                Value="{Binding CurrentDrawOrderOffset}" />
+                                            <NumericUpDown Grid.Column="1"
+                                                        VerticalAlignment="Center"
+                                                        Margin="12,0,0,0"
+                                                        Width="80"
+                                                        MinWidth="60"
+                                                        Padding="4"
+                                                        Increment="1"
+                                                        Value="{Binding CurrentDrawOrderOffset}" />
                                         </Grid>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
