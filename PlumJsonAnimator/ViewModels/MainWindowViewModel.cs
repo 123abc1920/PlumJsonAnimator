@@ -328,35 +328,6 @@ public partial class MainWindowViewModel : ViewModelBase
         this.jsonCode.generateCode(CurrentProject);
     }
 
-    public void initProgram()
-    {
-        this.CurrentProject = new Project(
-            this.globalState,
-            this.interpolation,
-            this.localizationService
-        );
-
-        this.appSettings.ReadSettings();
-        this.projectSettings.ReadSettings();
-
-        CurrentProject?.SetupProjectSettings(this.projectSettings.GetSettingsData());
-
-        this.projectManager.LoadRes(CurrentProject);
-
-        var appSettingsVM = (AppSettingsViewModel)GetViewModel(DialogType.SETTINGS);
-        appSettingsVM.CurrentTheme = appSettingsVM.Themes[
-            appSettingsVM.GetCurrThemeInd(this.appSettings.GetTheme())
-        ];
-
-        this.globalState.captureArea = this.appSettings.CreateCaptureArea(
-            CanvasWidth,
-            CanvasHeight
-        );
-
-        ValidResult validateResult = this.jsonCode.Regenerate(CurrentProject, true);
-        this.JsonErrorObj.isOk = validateResult.IsOk;
-    }
-
     public ExportResult exportSpineJson(string outFolder)
     {
         return this.jsonExport.exportSpineJson(outFolder, CurrentProject);

@@ -8,6 +8,7 @@ using Avalonia.Svg.Skia;
 using Microsoft.Extensions.DependencyInjection;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
 using PlumJsonAnimator.Views;
@@ -61,6 +62,8 @@ public partial class App : Application
 
         services.AddSingleton<Dialogs>();
 
+        services.AddSingleton<PlumApp>();
+
         _serviceProvider = services.BuildServiceProvider();
     }
 
@@ -80,13 +83,12 @@ public partial class App : Application
                 );
             }
 
-            var localization = _serviceProvider.GetRequiredService<LocalizationService>();
-            localization.LoadLangs();
-            localization.LoadLangResorce();
-            Application.Current?.Resources.MergedDictionaries.Add(localization.LangResources);
+            var app = _serviceProvider.GetRequiredService<PlumApp>();
+            app.Start();
+
+            Application.Current?.Resources.MergedDictionaries.Add(app.Localization.LangResources);
 
             var mainViewModelInstance = _serviceProvider.GetService<MainWindowViewModel>();
-
             if (mainViewModelInstance == null)
             {
                 throw new InvalidOperationException(
@@ -94,10 +96,7 @@ public partial class App : Application
                 );
             }
 
-            mainViewModelInstance.initProgram();
-
             var mainWindow = new MainWindow { DataContext = mainViewModelInstance };
-
             mainWindow.initViews();
             desktop.MainWindow = mainWindow;
         }
