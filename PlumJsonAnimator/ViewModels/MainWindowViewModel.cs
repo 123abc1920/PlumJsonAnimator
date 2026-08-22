@@ -502,7 +502,15 @@ public partial class MainWindowViewModel : ViewModelBase
 
         SaveProject = new Command(_ =>
         {
-            this.PlumApp.SaveProject();
+            bool isSuccess = this.PlumApp.SaveProject();
+
+            if (isSuccess)
+            {
+                Popups.ShowPopup(
+                    GetMessage(LocalizationConsts.SAVED),
+                    GetMessage(LocalizationConsts.INFO_MESSAGE)
+                );
+            }
         });
 
         PrevKeyFrame = new Command(_ =>

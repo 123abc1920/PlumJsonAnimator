@@ -82,13 +82,6 @@ public partial class ExportPanelMP4ViewModel : ViewModelBase
         string ffmpegPath
     )
     {
-        ExportResult result = await this.imageExporter.ExportAsMp4(
-            start,
-            end,
-            outputFile,
-            ffmpegPath,
-            this.globalState.CurrentProject
-        );
-        return result;
+        return await this.PlumApp.ExportAsMp4(start, end, outputFile, ffmpegPath);
     }
 }

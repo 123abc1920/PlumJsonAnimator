@@ -1,9 +1,9 @@
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
-using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
@@ -13,7 +13,6 @@ namespace PlumJsonAnimator.Models.Common;
 
 public class PlumApp
 {
-    public Project CurrentProject { get; private set; }
     public AppSettings AppSettings { get; }
     public ProjectSettings ProjectSettings { get; }
     public GlobalState GlobalState { get; }
@@ -26,6 +25,7 @@ public class PlumApp
     private readonly JsonExport _jsonExport;
     private readonly Prettify _prettify;
     private readonly Engine _engine;
+    private readonly ImageExporter _imageExporter;
 
     public PlumApp(
         AppSettings appSettings,
@@ -38,7 +38,8 @@ public class PlumApp
         JsonValidator jsonValidator,
         JsonExport jsonExport,
         Prettify prettify,
-        Engine engine
+        Engine engine,
+        ImageExporter imageExporter
     )
     {
         AppSettings = appSettings;
@@ -53,6 +54,7 @@ public class PlumApp
         _jsonExport = jsonExport;
         _prettify = prettify;
         _engine = engine;
+        _imageExporter = imageExporter;
     }
 
     public void Start()
@@ -60,30 +62,35 @@ public class PlumApp
         Localization.LoadLangs();
         Localization.LoadLangResorce();
 
-        CurrentProject = new Project(GlobalState, _interpolation, Localization);
+        GlobalState.CurrentProject = new Project(GlobalState, _interpolation, Localization);
 
         AppSettings.ReadSettings();
         ProjectSettings.ReadSettings();
 
-        CurrentProject.SetupProjectSettings(ProjectSettings.GetSettingsData());
-        _projectManager.LoadRes(CurrentProject);
+        GlobalState.CurrentProject.SetupProjectSettings(ProjectSettings.GetSettingsData());
+        _projectManager.LoadRes(GlobalState.CurrentProject);
 
-        GlobalState.CurrentProject = CurrentProject;
+        GlobalState.CurrentProject = GlobalState.CurrentProject;
         GlobalState.captureArea = AppSettings.CreateCaptureArea(
             this.GlobalState.canvasWidth,
             this.GlobalState.canvasHeight
         );
 
-        ValidResult validateResult = _jsonCode.Regenerate(CurrentProject, true);
+        ValidResult validateResult = _jsonCode.Regenerate(GlobalState.CurrentProject, true);
         this.GlobalState.jsonError.IsOk = validateResult.IsOk;
     }
 
     public bool CanGenerateProject()
     {
-        this.GlobalState.jsonError.ErrorText = this._jsonValidator.Validate(CurrentProject.Code);
+        this.GlobalState.jsonError.ErrorText = this._jsonValidator.Validate(
+            GlobalState.CurrentProject.Code
+        );
         if (this.GlobalState.jsonError.IsOk)
         {
-            ValidResult validateResult = this._jsonCode.Regenerate(CurrentProject, false);
+            ValidResult validateResult = this._jsonCode.Regenerate(
+                GlobalState.CurrentProject,
+                false
+            );
             if (!validateResult.IsOk)
             {
                 this.GlobalState.jsonError.ErrorText = validateResult.Message;
@@ -95,22 +102,22 @@ public class PlumApp
 
     public void RegenerateProject()
     {
-        this._jsonCode.Regenerate(CurrentProject, true);
+        this._jsonCode.Regenerate(GlobalState.CurrentProject, true);
     }
 
     public void GenerateCode()
     {
-        this._jsonCode.generateCode(CurrentProject);
+        this._jsonCode.generateCode(GlobalState.CurrentProject);
     }
 
     public ExportResult ExportSpineJson(string outFolder)
     {
-        return this._jsonExport.exportSpineJson(outFolder, CurrentProject);
+        return this._jsonExport.exportSpineJson(outFolder, GlobalState.CurrentProject);
     }
 
     public ExportResult ImportSpineJson(string inputFile)
     {
-        return this._jsonExport.importSpineJson(inputFile, CurrentProject);
+        return this._jsonExport.importSpineJson(inputFile, GlobalState.CurrentProject);
     }
 
     public string Prettify(string text)
@@ -128,19 +135,19 @@ public class PlumApp
         {
             foreach (Slot s in bone.Slots)
             {
-                CurrentProject?.DeleteSlotFromProject(s);
+                GlobalState.CurrentProject?.DeleteSlotFromProject(s);
             }
             foreach (Bone b in bone.Children.ToList())
             {
                 DeleteBoneReqursion(b);
             }
-            CurrentProject?.DeleteBoneFromProject(bone);
+            GlobalState.CurrentProject?.DeleteBoneFromProject(bone);
         }
     }
 
     public void RunAnimation()
     {
-        this._engine.runAnimation(CurrentProject?.CurrentAnimation);
+        this._engine.runAnimation(GlobalState.CurrentProject?.CurrentAnimation);
     }
 
     public string GetMessage(LocalizationConsts constStr)
@@ -148,49 +155,50 @@ public class PlumApp
         return Localization.GetMessage(constStr);
     }
 
-    public void SaveProject()
+    public bool SaveProject()
     {
         string anim = JsonConvert.SerializeObject(
-            this._jsonCode.generateJSONData(CurrentProject),
+            this._jsonCode.generateJSONData(GlobalState.CurrentProject),
             GlobalState.jsonSettings
         );
         ProjectSettings.WriteAnimation(anim);
-        Popups.ShowPopup(
-            GetMessage(LocalizationConsts.SAVED),
-            GetMessage(LocalizationConsts.INFO_MESSAGE)
-        );
+
+        return true;
     }
 
     public void AddRes(string[] paths)
     {
-        this._projectManager.GetProjectDir(CurrentProject);
+        this._projectManager.GetProjectDir(GlobalState.CurrentProject);
 
         foreach (string p in paths)
         {
-            string resName = "img" + CurrentProject?.Resources.Count.ToString();
-            string ext = this._projectManager.CopyRes(resName, p, CurrentProject);
+            string resName = "img" + GlobalState.CurrentProject?.Resources.Count.ToString();
+            string ext = this._projectManager.CopyRes(resName, p, GlobalState.CurrentProject);
             if (ext != "")
             {
-                ImageRes image = new ImageRes(
+                Res image = new ImageRes(
                     this._projectManager,
                     this.GlobalState,
-                    Path.Combine(CurrentProject?.GetProjectPath(), "res", $"{resName}{ext}"),
+                    this._projectManager.GetResDir(GlobalState.CurrentProject, $"{resName}{ext}"),
                     resName,
                     ext
                 );
-                CurrentProject.Resources.Add(image);
+                GlobalState.CurrentProject?.AddRes(image);
             }
         }
     }
 
     public void DropSlotToBone(int id, Res res)
     {
-        Bone bone = CurrentProject.MainSkeleton.GetBoneById(id);
+        Bone bone = GlobalState.CurrentProject.MainSkeleton.GetBoneById(id);
         if (bone != null)
         {
             Slot s = new Slot(this.GlobalState, bone);
-            CurrentProject.Slots.Add(s);
-            CurrentProject.CurrentSkin.BindSlotAttachment(s, new ImageAttachment((ImageRes)res));
+            GlobalState.CurrentProject.Slots.Add(s);
+            GlobalState.CurrentProject.CurrentSkin.BindSlotAttachment(
+                s,
+                new ImageAttachment((ImageRes)res)
+            );
             bone.UpdateSlots();
         }
     }
@@ -201,34 +209,31 @@ public class PlumApp
         Project? result = this._projectManager.OpenProject(path);
         if (result != null)
         {
-            CurrentProject = result;
+            GlobalState.CurrentProject = result;
         }
     }
 
-    public void RenameProject(SettingsData settingsData)
+    public bool RenameProject(SettingsData settingsData)
     {
-        settingsData.Anim = CurrentProject!.Code;
+        settingsData.Anim = GlobalState.CurrentProject!.Code;
 
-        var oldName = CurrentProject!.Name;
-        var oldPath = CurrentProject.ProjectPath;
+        var oldName = GlobalState.CurrentProject!.Name;
+        var oldPath = GlobalState.CurrentProject.ProjectPath;
 
         var oldDir = Path.Combine(oldPath, oldName);
-        var newDir = Path.Combine(CurrentProject.ProjectPath, settingsData.Name);
+        var newDir = Path.Combine(GlobalState.CurrentProject.ProjectPath, settingsData.Name);
 
         this._projectManager.CopyDir(oldDir, newDir);
 
-        CurrentProject.SetupProjectSettings(settingsData);
-        ProjectSettings.UpdateSettings(CurrentProject);
+        GlobalState.CurrentProject.SetupProjectSettings(settingsData);
+        ProjectSettings.UpdateSettings(GlobalState.CurrentProject);
         AppSettings.ChangeProject(newDir);
 
-        this._projectManager.MoveRes(CurrentProject);
+        this._projectManager.MoveRes(GlobalState.CurrentProject);
 
         ProjectSettings.WriteSettings();
 
-        Popups.ShowPopup(
-            GetMessage(LocalizationConsts.SAVED),
-            GetMessage(LocalizationConsts.INFO_MESSAGE)
-        );
+        return true;
     }
 
     public bool NewProject(string? projectName, string? projectPath)
@@ -236,9 +241,68 @@ public class PlumApp
         Project? result = this._projectManager.NewProject(projectName, projectPath);
         if (result != null)
         {
-            this.CurrentProject = result;
+            this.GlobalState.CurrentProject = result;
             return true;
         }
         return false;
+    }
+
+    public bool SaveSettings(AppSettingsData data)
+    {
+        AppSettings.SetSettings(data);
+        Localization.LoadLangResorce(data.Lang);
+
+        return true;
+    }
+
+    // TODO: паттерн стратегия
+    public async Task<ExportResult> ExportAsJpg(double start, double end, string outputFolder)
+    {
+        ExportResult result = await this._imageExporter.ExportAsJpg(
+            start,
+            end,
+            outputFolder,
+            GlobalState.CurrentProject
+        );
+        return result;
+    }
+
+    public async Task<ExportResult> ExportAsGif(double start, double end, string outputFile)
+    {
+        ExportResult result = await this._imageExporter.ExportAsGif(
+            start,
+            end,
+            outputFile,
+            GlobalState.CurrentProject
+        );
+        return result;
+    }
+
+    public async Task<ExportResult> ExportAsMp4(
+        double start,
+        double end,
+        string outputFile,
+        string ffmpegPath
+    )
+    {
+        ExportResult result = await this._imageExporter.ExportAsMp4(
+            start,
+            end,
+            outputFile,
+            ffmpegPath,
+            GlobalState.CurrentProject
+        );
+        return result;
+    }
+
+    public async Task<ExportResult> ExportAsPng(double start, double end, string outputFolder)
+    {
+        ExportResult result = await this._imageExporter.ExportAsPng(
+            start,
+            end,
+            outputFolder,
+            GlobalState.CurrentProject
+        );
+        return result;
     }
 }

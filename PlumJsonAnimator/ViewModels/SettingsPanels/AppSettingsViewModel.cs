@@ -35,29 +35,17 @@ public partial class AppSettingsViewModel : ViewModelBase
         }
     }
 
-    public int GetCurrThemeInd(string theme)
-    {
-        for (int i = 0; i < Themes.Count; i++)
-        {
-            if (Themes[i] == theme)
-            {
-                return i;
-            }
-        }
-
-        return 0;
-    }
-
     public void SaveSettings(AppSettingsData data)
     {
-        this.appSettings.SetSettings(data);
+        bool isSuccess = this.PlumApp.SaveSettings(data);
 
-        this.localizationService.LoadLangResorce(data.Lang);
-
-        Popups.ShowPopup(
-            GetMessage(LocalizationConsts.SAVED),
-            GetMessage(LocalizationConsts.INFO_MESSAGE)
-        );
+        if (isSuccess)
+        {
+            Popups.ShowPopup(
+                GetMessage(LocalizationConsts.SAVED),
+                GetMessage(LocalizationConsts.INFO_MESSAGE)
+            );
+        }
     }
 
     public AppSettingsViewModel(

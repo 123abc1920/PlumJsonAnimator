@@ -63,14 +63,8 @@ public partial class ExportPanelGIFViewModel : ViewModelBase
         };
     }
 
-    public async Task<ExportResult> ExportAsGif(double start, double end, string outputFile)
+    public async Task<ExportResult> ExportAsGif(double start, double end, string outputFolder)
     {
-        ExportResult result = await this.imageExporter.ExportAsGif(
-            start,
-            end,
-            outputFile,
-            this.globalState.CurrentProject
-        );
-        return result;
+        return await this.PlumApp.ExportAsGif(start, end, outputFolder);
     }
 }

@@ -301,5 +301,18 @@ namespace PlumJsonAnimator.Services
                 );
             }
         }
+
+        /// <summary>
+        /// Get path to resources folder
+        /// </summary>
+        /// <param name="project"></param>
+        /// <param name="resName">Resource name with extension</param>
+        public String GetResDir(Project? project, String resName)
+        {
+            if (project == null)
+                return "";
+
+            return Path.Combine(GetProjectDir(project), "res", resName);
+        }
     }
 }

@@ -78,7 +78,15 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
 
     public void RenameProject(SettingsData settingsData)
     {
-        this.PlumApp.RenameProject(settingsData);
+        bool isSuccess = this.PlumApp.RenameProject(settingsData);
+
+        if (isSuccess)
+        {
+            Popups.ShowPopup(
+                GetMessage(LocalizationConsts.SAVED),
+                GetMessage(LocalizationConsts.INFO_MESSAGE)
+            );
+        }
     }
 
     public string GetMessage(LocalizationConsts constStr)

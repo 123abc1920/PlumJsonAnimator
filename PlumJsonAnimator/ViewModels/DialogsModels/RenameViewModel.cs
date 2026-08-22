@@ -13,7 +13,6 @@ public partial class RenameViewModel : ViewModelBase
     public RenameViewModel(
         GlobalState globalState,
         Dialogs dialogs,
-        ProjectSettings projectSettings,
         ProjectFilesManager projectManager,
         AppSettings appSettings,
         LocalizationService localizationService,

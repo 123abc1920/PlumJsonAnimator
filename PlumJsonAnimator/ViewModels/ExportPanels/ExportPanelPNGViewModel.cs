@@ -64,12 +64,6 @@ public partial class ExportPanelPNGViewModel : ViewModelBase
 
     public async Task<ExportResult> ExportAsPng(double start, double end, string outputFolder)
     {
-        ExportResult result = await this.imageExporter.ExportAsPng(
-            start,
-            end,
-            outputFolder,
-            this.globalState.CurrentProject
-        );
-        return result;
+        return await this.PlumApp.ExportAsPng(start, end, outputFolder);
     }
 }
