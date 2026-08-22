@@ -55,7 +55,7 @@ public partial class MainWindow : SukiWindow
             viewModel.Canvas = mainCanvas;
             viewModel.Timeline = Timeline;
             viewModel.SetMainWin(this);
-            if (!viewModel.JsonErrorObj.isOk)
+            if (!viewModel.JsonErrorObj.IsOk)
             {
                 Popups.ShowPopup(
                     viewModel.GetMessage(LocalizationConsts.REGENERATE_ERROR),
@@ -285,7 +285,7 @@ public partial class MainWindow : SukiWindow
 
             if (DataContext is MainWindowViewModel viewModel)
             {
-                if (newIndex == 0 && viewModel.JsonErrorObj.isOk != true)
+                if (newIndex == 0 && viewModel.JsonErrorObj.IsOk != true)
                 {
                     tabControl.SelectionChanged -= TabControl_SelectionChanged;
                     tabControl.SelectedIndex = 1;
