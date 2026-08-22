@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models;
+using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.ViewModels;
@@ -55,16 +56,17 @@ public partial class ExportPanelMP4ViewModel : ViewModelBase
         AppSettings appSettings,
         ProjectSettings projectSettings,
         ProjectFilesManager projectManager,
-        LocalizationService localizationService
+        LocalizationService localizationService,
+        PlumApp plumApp
     )
         : base(
             globalState,
             dialogs,
-            projectSettings,
             projectManager,
             appSettings,
             localizationService,
-            imageExporter
+            imageExporter,
+            plumApp
         )
     {
         this.imageExporter.ProgressChanged += (sender, percent) =>

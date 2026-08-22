@@ -121,8 +121,6 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
-    public PlumApp PlumApp { get; set; }
-
     private string _transformMode;
     public string TransformMode
     {
@@ -284,53 +282,19 @@ public partial class MainWindowViewModel : ViewModelBase
         return this.PlumApp.ImportSpineJson(inputFile);
     }
 
-    public void WriteSettings()
-    {
-        this.PlumApp.WriteSettings();
-    }
-
     public void AddRes(string[] paths)
     {
-        this.projectManager.GetProjectDir(CurrentProject);
-
-        foreach (string p in paths)
-        {
-            string resName = "img" + CurrentProject?.Resources.Count.ToString();
-            string ext = this.projectManager.CopyRes(resName, p, CurrentProject);
-            if (ext != "")
-            {
-                ImageRes image = new ImageRes(
-                    this.projectManager,
-                    this.globalState,
-                    Path.Combine(CurrentProject?.GetProjectPath(), "res", $"{resName}{ext}"),
-                    resName,
-                    ext
-                );
-                CurrentProject.Resources.Add(image);
-            }
-        }
+        this.PlumApp.AddRes(paths);
     }
 
     public void DropSlotToBone(int id, Res res)
     {
-        Bone bone = CurrentProject.MainSkeleton.GetBoneById(id);
-        if (bone != null)
-        {
-            Slot s = new Slot(this.globalState, bone);
-            CurrentProject.Slots.Add(s);
-            CurrentProject.CurrentSkin.BindSlotAttachment(s, new ImageAttachment((ImageRes)res));
-            bone.UpdateSlots();
-        }
+        this.PlumApp.DropSlotToBone(id, res);
     }
 
     public async void OpenProject(Window win)
     {
-        var path = await this.projectManager.OpenProjectDialog(win);
-        Project? result = this.projectManager.OpenProject(path);
-        if (result != null)
-        {
-            CurrentProject = result;
-        }
+        this.PlumApp.OpenProject(win);
     }
 
     public string Prettify(string text)
@@ -360,9 +324,6 @@ public partial class MainWindowViewModel : ViewModelBase
     public ICommand ZoomCanvasComm { get; }
     public ICommand ToggleTransformModeCommand { get; }
 
-    private JsonCode jsonCode;
-    public Engine engine;
-
     private readonly IServiceProvider _serviceProvider;
 
     public MainWindowViewModel(
@@ -371,9 +332,7 @@ public partial class MainWindowViewModel : ViewModelBase
         ProjectSettings projectSettings,
         ProjectFilesManager projectManager,
         GlobalState globalState,
-        JsonCode jsonCode,
         ImageExporter imageExporter,
-        Engine engine,
         LocalizationService localizationService,
         Dialogs dialogs,
         PlumApp plumApp
@@ -381,18 +340,14 @@ public partial class MainWindowViewModel : ViewModelBase
         : base(
             globalState,
             dialogs,
-            projectSettings,
             projectManager,
             appSettings,
             localizationService,
-            imageExporter
+            imageExporter,
+            plumApp
         )
     {
         _serviceProvider = serviceProvider;
-
-        this.jsonCode = jsonCode;
-        this.engine = engine;
-        this.PlumApp = plumApp;
 
         var appSettingsVM = (AppSettingsViewModel)GetViewModel(DialogType.SETTINGS);
         appSettingsVM.CurrentTheme = appSettingsVM.Themes[0];
@@ -547,15 +502,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
         SaveProject = new Command(_ =>
         {
-            string anim = JsonConvert.SerializeObject(
-                this.jsonCode.generateJSONData(CurrentProject),
-                this.globalState.jsonSettings
-            );
-            this.projectSettings.WriteAnimation(anim);
-            Popups.ShowPopup(
-                GetMessage(LocalizationConsts.SAVED),
-                GetMessage(LocalizationConsts.INFO_MESSAGE)
-            );
+            this.PlumApp.SaveProject();
         });
 
         PrevKeyFrame = new Command(_ =>
@@ -605,7 +552,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
         PlayAnim = new Command(_ =>
         {
-            this.engine.runAnimation(this?.CurrentProject?.CurrentAnimation);
+            this.PlumApp.RunAnimation();
         });
 
         ZoomCanvasComm = new Command(parameter =>

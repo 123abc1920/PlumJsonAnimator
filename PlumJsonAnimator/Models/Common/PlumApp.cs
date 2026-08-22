@@ -1,5 +1,10 @@
+using System.IO;
 using System.Linq;
+using Avalonia.Controls;
+using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
 using static PlumJsonAnimator.Services.JsonCode;
@@ -20,6 +25,7 @@ public class PlumApp
     private readonly JsonValidator _jsonValidator;
     private readonly JsonExport _jsonExport;
     private readonly Prettify _prettify;
+    private readonly Engine _engine;
 
     public PlumApp(
         AppSettings appSettings,
@@ -31,7 +37,8 @@ public class PlumApp
         JsonCode jsonCode,
         JsonValidator jsonValidator,
         JsonExport jsonExport,
-        Prettify prettify
+        Prettify prettify,
+        Engine engine
     )
     {
         AppSettings = appSettings;
@@ -45,6 +52,7 @@ public class PlumApp
         _jsonValidator = jsonValidator;
         _jsonExport = jsonExport;
         _prettify = prettify;
+        _engine = engine;
     }
 
     public void Start()
@@ -105,11 +113,6 @@ public class PlumApp
         return this._jsonExport.importSpineJson(inputFile, CurrentProject);
     }
 
-    public void WriteSettings()
-    {
-        ProjectSettings.WriteSettings();
-    }
-
     public string Prettify(string text)
     {
         if (text == null)
@@ -133,5 +136,109 @@ public class PlumApp
             }
             CurrentProject?.DeleteBoneFromProject(bone);
         }
+    }
+
+    public void RunAnimation()
+    {
+        this._engine.runAnimation(CurrentProject?.CurrentAnimation);
+    }
+
+    public string GetMessage(LocalizationConsts constStr)
+    {
+        return Localization.GetMessage(constStr);
+    }
+
+    public void SaveProject()
+    {
+        string anim = JsonConvert.SerializeObject(
+            this._jsonCode.generateJSONData(CurrentProject),
+            GlobalState.jsonSettings
+        );
+        ProjectSettings.WriteAnimation(anim);
+        Popups.ShowPopup(
+            GetMessage(LocalizationConsts.SAVED),
+            GetMessage(LocalizationConsts.INFO_MESSAGE)
+        );
+    }
+
+    public void AddRes(string[] paths)
+    {
+        this._projectManager.GetProjectDir(CurrentProject);
+
+        foreach (string p in paths)
+        {
+            string resName = "img" + CurrentProject?.Resources.Count.ToString();
+            string ext = this._projectManager.CopyRes(resName, p, CurrentProject);
+            if (ext != "")
+            {
+                ImageRes image = new ImageRes(
+                    this._projectManager,
+                    this.GlobalState,
+                    Path.Combine(CurrentProject?.GetProjectPath(), "res", $"{resName}{ext}"),
+                    resName,
+                    ext
+                );
+                CurrentProject.Resources.Add(image);
+            }
+        }
+    }
+
+    public void DropSlotToBone(int id, Res res)
+    {
+        Bone bone = CurrentProject.MainSkeleton.GetBoneById(id);
+        if (bone != null)
+        {
+            Slot s = new Slot(this.GlobalState, bone);
+            CurrentProject.Slots.Add(s);
+            CurrentProject.CurrentSkin.BindSlotAttachment(s, new ImageAttachment((ImageRes)res));
+            bone.UpdateSlots();
+        }
+    }
+
+    public async void OpenProject(Window win)
+    {
+        var path = await this._projectManager.OpenProjectDialog(win);
+        Project? result = this._projectManager.OpenProject(path);
+        if (result != null)
+        {
+            CurrentProject = result;
+        }
+    }
+
+    public void RenameProject(SettingsData settingsData)
+    {
+        settingsData.Anim = CurrentProject!.Code;
+
+        var oldName = CurrentProject!.Name;
+        var oldPath = CurrentProject.ProjectPath;
+
+        var oldDir = Path.Combine(oldPath, oldName);
+        var newDir = Path.Combine(CurrentProject.ProjectPath, settingsData.Name);
+
+        this._projectManager.CopyDir(oldDir, newDir);
+
+        CurrentProject.SetupProjectSettings(settingsData);
+        ProjectSettings.UpdateSettings(CurrentProject);
+        AppSettings.ChangeProject(newDir);
+
+        this._projectManager.MoveRes(CurrentProject);
+
+        ProjectSettings.WriteSettings();
+
+        Popups.ShowPopup(
+            GetMessage(LocalizationConsts.SAVED),
+            GetMessage(LocalizationConsts.INFO_MESSAGE)
+        );
+    }
+
+    public bool NewProject(string? projectName, string? projectPath)
+    {
+        Project? result = this._projectManager.NewProject(projectName, projectPath);
+        if (result != null)
+        {
+            this.CurrentProject = result;
+            return true;
+        }
+        return false;
     }
 }

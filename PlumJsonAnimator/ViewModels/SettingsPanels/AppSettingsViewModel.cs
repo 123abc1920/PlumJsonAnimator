@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.ViewModels;
@@ -66,15 +67,16 @@ public partial class AppSettingsViewModel : ViewModelBase
         ProjectFilesManager projectManager,
         AppSettings appSettings,
         LocalizationService localizationService,
-        ImageExporter imageExporter
+        ImageExporter imageExporter,
+        PlumApp plumApp
     )
         : base(
             globalState,
             dialogs,
-            projectSettings,
             projectManager,
             appSettings,
             localizationService,
-            imageExporter
+            imageExporter,
+            plumApp
         ) { }
 }
