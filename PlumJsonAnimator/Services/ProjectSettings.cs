@@ -13,8 +13,7 @@ namespace PlumJsonAnimator.Services
     {
         private AppSettings appSettings;
         private GlobalState globalState;
-        private JsonCode jsonCode;
-        private string settingsName;
+        private string settingsFileName;
 
         private const string BASE_ANIM =
             "{'skeleton':{'spine':'4.3.2'},'bones':[{'name':'root','x':100.0,'y':100.0}],'slots':[],'skins':[{'name':'default','attachments':{}}],'animations':{'anim0':{'bones':{},'drawOrder':[]}}}";
@@ -38,13 +37,12 @@ namespace PlumJsonAnimator.Services
             this.settingsData.Anim = project.Code;
         }
 
-        public ProjectSettings(AppSettings appSettings, GlobalState globalState, JsonCode jsonCode)
+        public ProjectSettings(AppSettings appSettings, GlobalState globalState)
         {
             this.appSettings = appSettings;
             this.globalState = globalState;
-            this.jsonCode = jsonCode;
 
-            this.settingsName = $"settings{this.globalState.programExt}";
+            this.settingsFileName = $"settings{this.globalState.programExt}";
             this.settingsData = new SettingsData()
             {
                 Path = Path.Combine(
@@ -71,18 +69,18 @@ namespace PlumJsonAnimator.Services
                 );
             }
 
-            if (!File.Exists(Path.Combine(this.appSettings.appSettings!.Workspace, settingsName)))
+            if (!File.Exists(Path.Combine(this.appSettings.appSettings!.Workspace, settingsFileName)))
             {
-                File.Create(Path.Combine(this.appSettings.appSettings!.Workspace, settingsName))
+                File.Create(Path.Combine(this.appSettings.appSettings!.Workspace, settingsFileName))
                     .Close();
             }
         }
 
-        public void WriteSettings()
+        public void SaveSettings()
         {
             string settingsPath = Path.Combine(
                 this.appSettings.appSettings!.Workspace,
-                settingsName
+                settingsFileName
             );
 
             ExistOrCreateProjectDirs();
@@ -97,7 +95,7 @@ namespace PlumJsonAnimator.Services
         {
             string settingsPath = Path.Combine(
                 this.appSettings.appSettings!.Workspace,
-                settingsName
+                settingsFileName
             );
 
             ExistOrCreateProjectDirs();
@@ -116,7 +114,7 @@ namespace PlumJsonAnimator.Services
         {
             if (!File.Exists(settingsPath))
             {
-                WriteSettings();
+                SaveSettings();
                 return;
             }
 
@@ -135,7 +133,7 @@ namespace PlumJsonAnimator.Services
             }
             else
             {
-                WriteSettings();
+                SaveSettings();
             }
         }
 
@@ -143,7 +141,7 @@ namespace PlumJsonAnimator.Services
         {
             string settingsPath = Path.Combine(
                 this.appSettings.appSettings!.Workspace,
-                settingsName
+                settingsFileName
             );
 
             readFile(settingsPath);

@@ -388,7 +388,7 @@ namespace PlumJsonAnimator.Services
         /// Regenerates project from its json code
         /// </summary>
         /// <param name="project">Project</param>
-        /// <param name="needRegenearation">If true, recreates all project objects, else just validate</param>
+        /// <param name="needRegeneration">If true, recreates all project objects, else just validate</param>
         /// <example>
         /// ValidResult result=regenerate(project);
         /// if (!result.IsOk)
@@ -397,7 +397,8 @@ namespace PlumJsonAnimator.Services
         /// }
         /// </example>
         /// <returns>ValoidResult, where UpdatedArray is empty</returns>
-        public ValidResult Regenerate(Project project, bool needRegenearation)
+        // TODO: разделить валиацию и регенерацию
+        public ValidResult Regenerate(Project project, bool needRegeneration)
         {
             if (project.Code == null || project.Code == "")
             {
@@ -440,7 +441,7 @@ namespace PlumJsonAnimator.Services
                 return new ValidResult { Message = animationResult.Message, IsOk = false };
             }
 
-            if (needRegenearation == true)
+            if (needRegeneration == true)
             {
                 this._globalState.CurrentProject?.RegenerateProject(
                     (Dictionary<string, BoneData>)boneResult.UpdatedArray,

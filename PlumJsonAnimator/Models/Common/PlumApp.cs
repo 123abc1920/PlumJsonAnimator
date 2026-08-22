@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -62,19 +63,22 @@ public class PlumApp
         Localization.LoadLangs();
         Localization.LoadLangResorce();
 
-        GlobalState.CurrentProject = new Project(GlobalState, _interpolation, Localization);
-
         AppSettings.ReadSettings();
-        ProjectSettings.ReadSettings();
-
-        GlobalState.CurrentProject.SetupProjectSettings(ProjectSettings.GetSettingsData());
-        _projectManager.LoadRes(GlobalState.CurrentProject);
-
-        GlobalState.CurrentProject = GlobalState.CurrentProject;
         GlobalState.captureArea = AppSettings.CreateCaptureArea(
             this.GlobalState.canvasWidth,
             this.GlobalState.canvasHeight
         );
+
+        ProjectSettings.ReadSettings();
+        InitProject(new Project(GlobalState, _interpolation, Localization));
+    }
+
+    private void InitProject(Project project)
+    {
+        GlobalState.CurrentProject = project;
+
+        GlobalState.CurrentProject.SetupProjectSettings(ProjectSettings.GetSettingsData());
+        _projectManager.LoadRes(GlobalState.CurrentProject);
 
         ValidResult validateResult = _jsonCode.Regenerate(GlobalState.CurrentProject, true);
         this.GlobalState.jsonError.IsOk = validateResult.IsOk;
@@ -206,11 +210,26 @@ public class PlumApp
     public async void OpenProject(Window win)
     {
         var path = await this._projectManager.OpenProjectDialog(win);
-        Project? result = this._projectManager.OpenProject(path);
-        if (result != null)
-        {
-            GlobalState.CurrentProject = result;
-        }
+
+        if (path == "" || path == null)
+            return;
+
+        ProjectSettings.ReadSettings(path);
+        SettingsData settingsData = ProjectSettings.GetSettingsData();
+        AppSettings.ChangeProject(Path.Combine(settingsData.Path, settingsData.Name));
+
+        Project newProject = new Project(
+            settingsData.Name,
+            settingsData.Path,
+            GlobalState,
+            this._interpolation,
+            Localization
+        );
+
+        ProjectSettings.SaveSettings();
+        AppSettings.SaveSettings();
+
+        InitProject(newProject);
     }
 
     public bool RenameProject(SettingsData settingsData)
@@ -231,7 +250,7 @@ public class PlumApp
 
         this._projectManager.MoveRes(GlobalState.CurrentProject);
 
-        ProjectSettings.WriteSettings();
+        ProjectSettings.SaveSettings();
 
         return true;
     }
