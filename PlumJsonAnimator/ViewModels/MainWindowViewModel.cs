@@ -14,6 +14,7 @@ using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
+using PlumJsonAnimator.Views;
 
 namespace PlumJsonAnimator.ViewModels;
 
@@ -168,6 +169,8 @@ public partial class MainWindowViewModel : ViewModelBase
         get => _isAnimMode;
     }
 
+    public object CurrentInfoPanel { get; set; }
+
     public string IsTransformModeActive => TransformMode;
 
     public Bone? CurrentBone
@@ -179,7 +182,10 @@ public partial class MainWindowViewModel : ViewModelBase
             {
                 this.globalState.currentBone = value;
                 this.globalState.currentBone?.UpdateSlots();
+                // TODO: фабрика
+                CurrentInfoPanel = new BoneInfo();
                 OnPropertyChanged(nameof(CurrentBone));
+                OnPropertyChanged(nameof(CurrentInfoPanel));
             }
             else
             {

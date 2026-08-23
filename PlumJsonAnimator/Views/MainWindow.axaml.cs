@@ -238,45 +238,6 @@ public partial class MainWindow : SukiWindow
         }
     }
 
-    private void OnListBoxDrop(object sender, DragEventArgs e)
-    {
-        var listBox = (ListBox)sender;
-        var point = e.GetPosition(listBox);
-        var item = listBox.InputHitTest(point) as Visual;
-
-        while (item != null && !(item is ListBoxItem))
-        {
-            item = item.Parent as Visual;
-        }
-
-        if (item is ListBoxItem listBoxItem)
-        {
-            if (e.Data.Get("Resource") is ImageRes imageRes && listBoxItem.DataContext is Slot slot)
-            {
-                if (DataContext is MainWindowViewModel viewModel)
-                {
-                    viewModel.CurrentProject.CurrentSkin.BindSlotAttachment(
-                        slot,
-                        new ImageAttachment(imageRes)
-                    );
-                }
-                e.Handled = true;
-            }
-        }
-    }
-
-    private void OnSlotSelectionChanged(object sender, TappedEventArgs e)
-    {
-        Slot selectedSlot = SlotsList.SelectedItem as Slot;
-        if (selectedSlot != null)
-        {
-            if (DataContext is MainWindowViewModel viewModel)
-            {
-                viewModel.CurrentBone = (Bone)selectedSlot;
-            }
-        }
-    }
-
     private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (e.Source is TabControl tabControl)
@@ -329,12 +290,10 @@ public partial class MainWindow : SukiWindow
                 if (bone == viewModel.CurrentBone)
                 {
                     viewModel.CurrentBone = null;
-                    Console.WriteLine("Not bone");
                 }
                 else
                 {
                     viewModel.CurrentBone = bone;
-                    Console.WriteLine("Bone");
                 }
             }
             e.Handled = true;
