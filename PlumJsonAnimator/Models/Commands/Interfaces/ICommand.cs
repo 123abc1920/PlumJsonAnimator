@@ -1,6 +1,6 @@
 namespace PlumJsonAnimator.Models.Commands;
 
-interface ICommand
+public interface ICommand
 {
     void Execute();
     void Undo();

@@ -1,15 +1,13 @@
-using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
-using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Models.Commands;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
-using PlumJsonAnimator.ViewModels;
 using static PlumJsonAnimator.Services.JsonCode;
 
 namespace PlumJsonAnimator.Models.Common;
@@ -29,6 +27,7 @@ public class PlumApp
     private readonly Prettify _prettify;
     private readonly Engine _engine;
     private readonly ImageExporter _imageExporter;
+    private readonly HistoryManager _historyManager;
 
     public PlumApp(
         AppSettings appSettings,
@@ -42,7 +41,8 @@ public class PlumApp
         JsonExport jsonExport,
         Prettify prettify,
         Engine engine,
-        ImageExporter imageExporter
+        ImageExporter imageExporter,
+        HistoryManager historyManager
     )
     {
         AppSettings = appSettings;
@@ -58,6 +58,7 @@ public class PlumApp
         _prettify = prettify;
         _engine = engine;
         _imageExporter = imageExporter;
+        _historyManager = historyManager;
     }
 
     public void Start()
@@ -329,10 +330,8 @@ public class PlumApp
 
     public void AddBone(Bone? selectedBone)
     {
-        if (selectedBone != null && selectedBone.IsBone)
-        {
-            GlobalState.CurrentProject?.MainSkeleton?.AddBoneToParent(selectedBone.id);
-        }
+        AddBoneCommand command = new AddBoneCommand(selectedBone, GlobalState.CurrentProject);
+        this._historyManager.DoCommand(command);
     }
 
     public void DeleteRes(Res? res)

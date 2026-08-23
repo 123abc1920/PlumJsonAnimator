@@ -3,7 +3,7 @@ using PlumJsonAnimator.Models.Commands;
 
 namespace PlumJsonAnimator.Services;
 
-class HistoryManager
+public class HistoryManager
 {
     private readonly DoneHistory done = new DoneHistory();
     private readonly UndoneHistory undone = new UndoneHistory();
