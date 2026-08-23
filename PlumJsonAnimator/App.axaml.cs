@@ -8,6 +8,7 @@ using Avalonia.Svg.Skia;
 using Microsoft.Extensions.DependencyInjection;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Models.Commands;
 using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
@@ -61,6 +62,8 @@ public partial class App : Application
         services.AddSingleton<ProjectFilesManager>();
 
         services.AddSingleton<Dialogs>();
+
+        services.AddSingleton<HistoryManager>();
 
         services.AddSingleton<PlumApp>();
 
