@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
+using PlumJsonAnimator.ViewModels;
 using static PlumJsonAnimator.Services.JsonCode;
 
 namespace PlumJsonAnimator.Models.Common;
@@ -323,5 +325,90 @@ public class PlumApp
             GlobalState.CurrentProject
         );
         return result;
+    }
+
+    public void AddBone(Bone? selectedBone)
+    {
+        if (selectedBone != null && selectedBone.IsBone)
+        {
+            GlobalState.CurrentProject?.MainSkeleton?.AddBoneToParent(selectedBone.id);
+        }
+    }
+
+    public void DeleteRes(Res? res)
+    {
+        if (res != null)
+        {
+            foreach (Skin s in GlobalState.CurrentProject.Skins)
+            {
+                s.RemoveResIfContains(res);
+            }
+            GlobalState.CurrentProject.Resources.Remove(res);
+            this._projectManager.DeleteResource(res.Name, res.ext, GlobalState.CurrentProject);
+        }
+    }
+
+    public void AddAnimation()
+    {
+        GlobalState.CurrentProject?.AddAnimation();
+    }
+
+    public void AddSkin()
+    {
+        GlobalState.CurrentProject?.AddSkin();
+    }
+
+    public void DeleteAnimation()
+    {
+        GlobalState.CurrentProject?.DeleteAnimation();
+    }
+
+    public void DeleteSkin()
+    {
+        GlobalState.CurrentProject?.DeleteSkin();
+    }
+
+    public void AddSlot()
+    {
+        Bone? bone = GlobalState.currentBone;
+        if (bone != null)
+        {
+            Slot s = new Slot(GlobalState, bone);
+            GlobalState.CurrentProject?.Slots.Add(s);
+            GlobalState.CurrentProject?.CurrentSkin.AddSlot(s);
+            bone.UpdateSlots();
+        }
+    }
+
+    public void DeleteSlot(Slot? selectedSlot)
+    {
+        if (selectedSlot != null)
+        {
+            GlobalState.CurrentProject?.Slots.Remove(selectedSlot);
+            GlobalState.CurrentProject?.CurrentSkin.DeleteSlot(selectedSlot);
+            GlobalState.currentBone?.UpdateSlots();
+        }
+    }
+
+    public void AddKeyFrame()
+    {
+        if (GlobalState.currentBone != null)
+        {
+            GlobalState.CurrentProject?.CurrentAnimation?.AddKeyFrame(
+                GlobalState.currentBone,
+                GlobalState.CurrentProject.currentMode.type
+            );
+        }
+    }
+
+    public void DeleteKeyFrame()
+    {
+        if (GlobalState.currentBone != null)
+        {
+            GlobalState.CurrentProject?.CurrentAnimation?.DeleteKeyFrame(
+                GlobalState.currentBone,
+                GlobalState.CurrentProject.currentMode.type
+            );
+        }
     }
 }

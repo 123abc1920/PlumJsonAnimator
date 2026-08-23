@@ -9,7 +9,7 @@
         <TextBox
             Name="name"
             Margin="0,5"
-            Text="{Binding RedactObj.GetName, Mode=OneWay}" />
+            Text="{Binding RenamableObject.GetName, Mode=OneWay}" />
         <Button
             Margin="0,10"
             HorizontalAlignment="Center"

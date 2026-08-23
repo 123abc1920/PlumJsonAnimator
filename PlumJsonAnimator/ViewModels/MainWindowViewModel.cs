@@ -11,6 +11,7 @@ using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Common.Timeline;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
@@ -308,6 +309,20 @@ public partial class MainWindowViewModel : ViewModelBase
         return this.PlumApp.Prettify(text);
     }
 
+    private void OpenRenameDialog(IRenamable? _renamableObject)
+    {
+        if (_renamableObject != null)
+        {
+            var viewModel = (RenameViewModel)GetViewModel(DialogType.RENAME);
+            viewModel.RenamableObject = _renamableObject;
+            this.dialogs.ShowDialog(
+                GetMessage(LocalizationConsts.RENAME),
+                viewModel,
+                DialogType.RENAME
+            );
+        }
+    }
+
     public ICommand AddBoneView { get; }
     public ICommand RenameRes { get; }
     public ICommand DeleteRes { get; }
@@ -387,129 +402,77 @@ public partial class MainWindowViewModel : ViewModelBase
             if (parameter is TreeView treeView)
             {
                 Bone? selectedItem = treeView.SelectedItem as Bone;
-                if (selectedItem != null && selectedItem.IsBone)
-                {
-                    CurrentProject?.MainSkeleton?.AddBoneToParent(selectedItem.id);
-                }
+                PlumApp.AddBone(selectedItem);
             }
         });
         RenameRes = new Command(parameter =>
         {
             if (parameter is ListBox resList)
             {
-                Res selectedRes = resList.SelectedItem as Res;
-                if (selectedRes != null)
-                {
-                    var viewModel = (RenameViewModel)GetViewModel(DialogType.RENAME);
-                    viewModel.RedactObj = selectedRes;
-                    this.dialogs.ShowDialog(
-                        GetMessage(LocalizationConsts.RENAME),
-                        viewModel,
-                        DialogType.RENAME
-                    );
-                }
+                Res? selectedRes = resList.SelectedItem as Res;
+                OpenRenameDialog(selectedRes);
             }
         });
         DeleteRes = new Command(parameter =>
         {
             if (parameter is ListBox resList)
             {
-                Res res = resList.SelectedItem as Res;
-                if (res != null)
-                {
-                    foreach (Skin s in CurrentProject.Skins)
-                    {
-                        s.RemoveResIfContains(res);
-                    }
-                    CurrentProject.Resources.Remove(res);
-                    this.projectManager.DeleteResource(res.Name, res.ext, CurrentProject);
-                }
+                Res? res = resList.SelectedItem as Res;
+                PlumApp.DeleteRes(res);
             }
         });
         RenameSlot = new Command(parameter =>
         {
             if (parameter is ListBox SlotsList)
             {
-                Slot selectedSlot = SlotsList.SelectedItem as Slot;
-                if (selectedSlot != null)
-                {
-                    var viewModel = (RenameViewModel)GetViewModel(DialogType.RENAME);
-                    viewModel.RedactObj = selectedSlot;
-                    this.dialogs.ShowDialog(
-                        GetMessage(LocalizationConsts.RENAME),
-                        viewModel,
-                        DialogType.RENAME
-                    );
-                }
+                Slot? selectedSlot = SlotsList.SelectedItem as Slot;
+                OpenRenameDialog(selectedSlot);
             }
         });
         RenameBone = new Command(parameter =>
         {
             if (parameter is TreeView boneTreeView)
             {
-                Bone bone = boneTreeView.SelectedItem as Bone;
-                if (bone != null)
-                {
-                    var viewModel = (RenameViewModel)GetViewModel(DialogType.RENAME);
-                    viewModel.RedactObj = bone;
-                    this.dialogs.ShowDialog(
-                        GetMessage(LocalizationConsts.RENAME),
-                        viewModel,
-                        DialogType.RENAME
-                    );
-                }
+                Bone? bone = boneTreeView.SelectedItem as Bone;
+                OpenRenameDialog(bone);
             }
         });
         DeleteBone = new Command(_ =>
         {
-            Bone bone = CurrentBone;
-            this.PlumApp.DeleteBoneReqursion(bone);
+            this.PlumApp.DeleteBoneReqursion(CurrentBone);
         });
         AddAnimation = new Command(_ =>
         {
-            CurrentProject?.AddAnimation();
+            PlumApp.AddAnimation();
         });
         AddSkin = new Command(_ =>
         {
-            CurrentProject?.AddSkin();
+            PlumApp.AddSkin();
         });
         DeleteAnimation = new Command(_ =>
         {
-            CurrentProject?.DeleteAnimation();
+            PlumApp.DeleteAnimation();
         });
         DeleteSkin = new Command(_ =>
         {
-            CurrentProject?.DeleteSkin();
+            PlumApp.DeleteSkin();
         });
         AddSlot = new Command(_ =>
         {
-            Bone bone = CurrentBone;
-            if (bone != null)
-            {
-                Slot s = new Slot(this.globalState, bone);
-                CurrentProject.Slots.Add(s);
-                CurrentProject.CurrentSkin.AddSlot(s);
-                bone.UpdateSlots();
-            }
+            PlumApp.AddSlot();
         });
         DeleteSlot = new Command(parameter =>
         {
             if (parameter is ListBox SlotsList)
             {
-                Slot selectedSlot = SlotsList.SelectedItem as Slot;
-                if (selectedSlot != null)
-                {
-                    CurrentProject.Slots.Remove(selectedSlot);
-                    CurrentProject.CurrentSkin.DeleteSlot(selectedSlot);
-                    CurrentBone.UpdateSlots();
-                }
+                Slot? selectedSlot = SlotsList.SelectedItem as Slot;
+                PlumApp.DeleteSlot(selectedSlot);
             }
         });
 
         SaveProject = new Command(_ =>
         {
             bool isSuccess = this.PlumApp.SaveProject();
-
             if (isSuccess)
             {
                 Popups.ShowPopup(
@@ -545,23 +508,11 @@ public partial class MainWindowViewModel : ViewModelBase
         });
         AddKeyFrame = new Command(_ =>
         {
-            if (CurrentBone != null)
-            {
-                CurrentProject.CurrentAnimation.AddKeyFrame(
-                    CurrentBone,
-                    CurrentProject.currentMode.type
-                );
-            }
+            PlumApp.AddKeyFrame();
         });
         DeleteKeyFrame = new Command(_ =>
         {
-            if (CurrentBone != null)
-            {
-                CurrentProject?.CurrentAnimation?.DeleteKeyFrame(
-                    CurrentBone,
-                    CurrentProject.currentMode.type
-                );
-            }
+            PlumApp.DeleteKeyFrame();
         });
 
         PlayAnim = new Command(_ =>

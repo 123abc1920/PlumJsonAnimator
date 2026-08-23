@@ -24,7 +24,7 @@ namespace PlumJsonAnimator.Views
             if (DataContext is RenameViewModel viewModel)
             {
                 string? newName = this.FindControl<TextBox>("name")?.Text;
-                viewModel.RedactObj.SetName(newName);
+                viewModel.RenamableObject.SetName(newName);
 
                 var parentWindow = this.VisualRoot as Window;
                 parentWindow?.Close();

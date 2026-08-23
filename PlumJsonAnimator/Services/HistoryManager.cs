@@ -1,6 +1,7 @@
 using PlumJsonAnimator.Common.Constants.Command;
+using PlumJsonAnimator.Models.Commands;
 
-namespace PlumJsonAnimator.Models.Commands;
+namespace PlumJsonAnimator.Services;
 
 class HistoryManager
 {
