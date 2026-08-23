@@ -18,6 +18,11 @@
     Icon="/Assets/logo.ico"
     mc:Ignorable="d">
 
+    <suki:SukiWindow.KeyBindings>
+        <KeyBinding Gesture="Ctrl+Z" Command="{Binding Undo}" />
+        <KeyBinding Gesture="Ctrl+Y" Command="{Binding Redo}" />
+    </suki:SukiWindow.KeyBindings>
+
     <suki:SukiWindow.Hosts>
         <suki:SukiToastHost Name="ToastHost" />
     </suki:SukiWindow.Hosts>

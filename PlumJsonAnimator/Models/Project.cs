@@ -278,8 +278,11 @@ namespace PlumJsonAnimator.Models
             }
         }
 
-        public void DeleteBoneFromProject(Bone bone)
+        public void DeleteBoneFromProject(Bone? bone)
         {
+            if (bone == null)
+                return;
+
             this.MainSkeleton?.Bones.Remove(bone);
             bone?.Parent?.Children.Remove(bone);
             foreach (Animation a in this.Animations)

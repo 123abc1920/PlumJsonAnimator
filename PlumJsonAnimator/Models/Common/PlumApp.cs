@@ -410,4 +410,14 @@ public class PlumApp
             );
         }
     }
+
+    public void Undo()
+    {
+        this._historyManager.Undo();
+    }
+
+    public void Redo()
+    {
+        this._historyManager.Redo();
+    }
 }

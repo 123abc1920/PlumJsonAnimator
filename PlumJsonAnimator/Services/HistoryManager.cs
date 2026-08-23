@@ -16,15 +16,17 @@ public class HistoryManager
         undone.Clear();
     }
 
-    public void CtrlZ()
+    public void Undo()
     {
         ICommand? command = done.GetLast();
+        command?.Undo();
         undone.Add(command);
     }
 
-    public void CtrlY()
+    public void Redo()
     {
         ICommand? command = undone.GetLast();
+        command?.Execute();
         done.Add(command);
     }
 }

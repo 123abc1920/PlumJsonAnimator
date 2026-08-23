@@ -7,6 +7,8 @@ class AddBoneCommand : ICommand
     private readonly Bone _selectedBone;
     private readonly Project _project;
 
+    private Bone? _newBone;
+
     public AddBoneCommand(Bone selectedBone, Project project)
     {
         this._selectedBone = selectedBone;
@@ -17,12 +19,12 @@ class AddBoneCommand : ICommand
     {
         if (_selectedBone != null && _selectedBone.IsBone)
         {
-            _project?.MainSkeleton?.AddBoneToParent(_selectedBone.id);
+            this._newBone = _project?.MainSkeleton?.AddBoneToParent(_selectedBone.id);
         }
     }
 
     public void Undo()
     {
-        _project.DeleteBoneFromProject(this._selectedBone);
+        _project.DeleteBoneFromProject(this._newBone);
     }
 }

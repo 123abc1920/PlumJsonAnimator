@@ -344,6 +344,8 @@ public partial class MainWindowViewModel : ViewModelBase
     public ICommand PlayAnim { get; }
     public ICommand ZoomCanvasComm { get; }
     public ICommand ToggleTransformModeCommand { get; }
+    public ICommand Undo { get; }
+    public ICommand Redo { get; }
 
     private readonly IServiceProvider _serviceProvider;
 
@@ -533,6 +535,15 @@ public partial class MainWindowViewModel : ViewModelBase
                     this.ZoomCanvas -= ZOOM_STEP;
                 }
             }
+        });
+
+        Undo = new Command(_ =>
+        {
+            this.PlumApp.Undo();
+        });
+        Redo = new Command(_ =>
+        {
+            this.PlumApp.Redo();
         });
     }
 }
