@@ -136,20 +136,10 @@ public class PlumApp
         return this._prettify.prettify(text);
     }
 
-    public void DeleteBoneReqursion(Bone? bone)
+    public void DeleteBone(Bone? bone)
     {
-        if (bone != null && bone.Parent != null)
-        {
-            foreach (Slot s in bone.Slots)
-            {
-                GlobalState.CurrentProject?.DeleteSlotFromProject(s);
-            }
-            foreach (Bone b in bone.Children.ToList())
-            {
-                DeleteBoneReqursion(b);
-            }
-            GlobalState.CurrentProject?.DeleteBoneFromProject(bone);
-        }
+        DeleteBoneCommand command = new DeleteBoneCommand(bone, GlobalState.CurrentProject);
+        this._historyManager.DoCommand(command);
     }
 
     public void RunAnimation()

@@ -36,10 +36,10 @@ namespace PlumJsonAnimator.Models
         public Skeleton? MainSkeleton { get; set; } = null;
         public ObservableCollection<Slot> Slots { get; set; } = new ObservableCollection<Slot>();
         public ObservableCollection<Res> Resources { get; } = new ObservableCollection<Res>();
-        public ObservableCollection<Animation> Animations { get; } =
+        public ObservableCollection<Animation> Animations { get; set; } =
             new ObservableCollection<Animation>();
 
-        public ObservableCollection<Skin> Skins { get; } = new ObservableCollection<Skin>();
+        public ObservableCollection<Skin> Skins { get; set; } = new ObservableCollection<Skin>();
         private Skin _currentSkin;
         private Animation? _currentAnimation;
 
@@ -266,16 +266,23 @@ namespace PlumJsonAnimator.Models
             return null;
         }
 
-        public void DeleteSlotFromProject(Slot slot)
+        public Dictionary<Skin, Attachment> DeleteSlotFromProject(Slot slot)
         {
+            // TODO: перейти на DTO
+            Dictionary<Skin, Attachment> result = new Dictionary<Skin, Attachment>();
+
             this.Slots.Remove(slot);
             foreach (Skin s in this.Skins)
             {
                 if (s.ContainsSlot(slot) == true)
                 {
                     s.DeleteSlot(slot);
+                    Attachment a = s.GetAttachment(slot);
+                    result.Add(s, a);
                 }
             }
+
+            return result;
         }
 
         public void DeleteBoneFromProject(Bone? bone)
@@ -289,6 +296,42 @@ namespace PlumJsonAnimator.Models
             {
                 a.DeleteBoneFromAnimation(bone);
             }
+        }
+
+        public void AddBoneToProject(Bone? bone, Bone? parent = null)
+        {
+            if (bone == null)
+                return;
+
+            this.MainSkeleton?.Bones.Add(bone);
+
+            if (parent != null)
+            {
+                bone.Parent = parent;
+                parent.Children.Add(bone);
+            }
+            else
+            {
+                bone.Parent = null;
+            }
+        }
+
+        public void RestoreBone(Bone? bone)
+        {
+            if (bone == null)
+                return;
+
+            this.MainSkeleton.Bones.Add(bone);
+
+            foreach (Slot s in bone.Slots)
+            {
+                this.Slots.Add(s);
+            }
+        }
+
+        public void AddSlotToProject(Slot s, Bone b)
+        {
+            this.Slots.Add(s);
         }
 
         /// <summary>

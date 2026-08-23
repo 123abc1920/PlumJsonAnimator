@@ -110,6 +110,21 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
+        public void RestoreBoneAnimation(Bone bone, BoneAnimation? boneAnimation)
+        {
+            if (bone == null || boneAnimation == null)
+            {
+                return;
+            }
+
+            BoneAnimationBinding[bone] = boneAnimation;
+        }
+
+        public BoneAnimation GetBoneAnimation(Bone bone)
+        {
+            return BoneAnimationBinding[bone];
+        }
+
         /// <summary>
         /// Turn animation data into JSON object
         /// </summary>

@@ -441,7 +441,7 @@ public partial class MainWindowViewModel : ViewModelBase
         });
         DeleteBone = new Command(_ =>
         {
-            this.PlumApp.DeleteBoneReqursion(CurrentBone);
+            this.PlumApp.DeleteBone(CurrentBone);
         });
         AddAnimation = new Command(_ =>
         {
