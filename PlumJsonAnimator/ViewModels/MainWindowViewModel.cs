@@ -1,10 +1,8 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
+using System.Drawing;
 using System.Windows.Input;
 using Avalonia.Controls;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Constants.Command;
 using PlumJsonAnimator.Common.Dialogs;
@@ -307,6 +305,14 @@ public partial class MainWindowViewModel : ViewModelBase
     public string Prettify(string text)
     {
         return this.PlumApp.Prettify(text);
+    }
+
+    public void Transform(double a, double b)
+    {
+        if (this.globalState.currentBone != null)
+        {
+            this.PlumApp.Transform(a, b);
+        }
     }
 
     private void OpenRenameDialog(IRenamable? _renamableObject)

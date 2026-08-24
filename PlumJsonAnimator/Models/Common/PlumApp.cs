@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -427,6 +428,21 @@ public class PlumApp
         var oldName = renamableObject.GetName;
         RenameCommand renameCommand = new RenameCommand(renamableObject, oldName, newName);
         this._historyManager.DoCommand(renameCommand);
+    }
+
+    public void Transform(double a, double b)
+    {
+        GlobalState.CurrentProject?.currentMode.Transform(GlobalState.currentBone, a, b);
+    }
+
+    public void ChangeBoneStatus(BoneStatus oldBoneStatus, BoneStatus newBoneStatus)
+    {
+        ChangeBoneStatusCommand changeBoneStatusCommand = new ChangeBoneStatusCommand(
+            GlobalState.currentBone,
+            oldBoneStatus,
+            newBoneStatus
+        );
+        this._historyManager.DoCommand(changeBoneStatusCommand);
     }
 
     public void Undo()

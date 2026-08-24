@@ -9,6 +9,7 @@ using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models;
+using PlumJsonAnimator.Models.Commands;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
@@ -30,6 +31,7 @@ public partial class MainWindow : SukiWindow
         { '<', '>' },
     };
     private bool _isDragging = false;
+    private BoneStatus _oldBoneStatus;
 
     public MainWindow()
     {
@@ -148,6 +150,7 @@ public partial class MainWindow : SukiWindow
                 if (viewModel.CaptureMode == false)
                 {
                     _isDragging = true;
+                    _oldBoneStatus = new BoneStatus(viewModel.CurrentBone);
                 }
                 else
                 {
@@ -172,14 +175,7 @@ public partial class MainWindow : SukiWindow
 
             if (_isDragging)
             {
-                if (viewModel.CurrentBone != null)
-                {
-                    viewModel.CurrentProject?.currentMode.Transform(
-                        viewModel.CurrentBone,
-                        point.X - canvas.Width / 2,
-                        point.Y - canvas.Height / 2
-                    );
-                }
+                viewModel.Transform(point.X - canvas.Width / 2, point.Y - canvas.Height / 2);
             }
         }
     }
@@ -188,18 +184,18 @@ public partial class MainWindow : SukiWindow
     {
         _isDragging = false;
 
-        if (DataContext is MainWindowViewModel viewModely)
-        {
-            if (viewModely.CaptureMode)
-            {
-                viewModely.GetCaptureArea()?.UnSelectPoint();
-            }
-            return;
-        }
-
         if (DataContext is MainWindowViewModel viewModel)
         {
             viewModel.CurrentProject?.currentMode.ClearMode();
+            BoneStatus newBoneStatus = new BoneStatus(viewModel.CurrentBone);
+            viewModel.PlumApp.ChangeBoneStatus(_oldBoneStatus.Copy(), newBoneStatus);
+            _oldBoneStatus = null;
+
+            if (viewModel.CaptureMode)
+            {
+                viewModel.GetCaptureArea()?.UnSelectPoint();
+            }
+            return;
         }
     }
 
