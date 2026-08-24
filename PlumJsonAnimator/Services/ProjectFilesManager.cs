@@ -65,36 +65,11 @@ namespace PlumJsonAnimator.Services
             return result?.FirstOrDefault()?.Path.LocalPath;
         }
 
-        public Project? OpenProject(string? path)
-        {
-            if (path != null && path != "")
-            {
-                this._projectSettings.ReadSettings(path);
-                SettingsData settingsData = this._projectSettings.GetSettingsData();
-                this._appSettings.ChangeProject(Path.Combine(settingsData.Path, settingsData.Name));
-
-                Project newProject = new Project(
-                    settingsData.Name,
-                    settingsData.Path,
-                    this._globalState,
-                    this._interpolation,
-                    this._localizationService
-                );
-
-                this._projectSettings.WriteSettings();
-                this._appSettings.SaveSettings();
-                LoadRes(newProject);
-
-                return newProject;
-            }
-            return null;
-        }
-
         public Project? NewProject(string? projectName, string? projectPath)
         {
             if (projectName != null && projectPath != null)
             {
-                this._projectSettings.WriteSettings();
+                this._projectSettings.SaveSettings();
                 this._appSettings.ChangeProject(Path.Combine(projectPath, projectName));
 
                 Project newProject = new Project(
@@ -106,7 +81,7 @@ namespace PlumJsonAnimator.Services
                 );
 
                 this._projectSettings.UpdateSettings(newProject);
-                this._projectSettings.WriteSettings();
+                this._projectSettings.SaveSettings();
                 this._appSettings.SaveSettings();
                 LoadRes(newProject);
 
@@ -300,6 +275,19 @@ namespace PlumJsonAnimator.Services
                     $"{this._localizationService.GetMessage(LocalizationConsts.ERROR)}: {ex.Message}"
                 );
             }
+        }
+
+        /// <summary>
+        /// Get path to resources folder
+        /// </summary>
+        /// <param name="project"></param>
+        /// <param name="resName">Resource name with extension</param>
+        public String GetResDir(Project? project, String resName)
+        {
+            if (project == null)
+                return "";
+
+            return Path.Combine(GetProjectDir(project), "res", resName);
         }
     }
 }

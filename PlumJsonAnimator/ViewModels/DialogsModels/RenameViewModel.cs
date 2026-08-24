@@ -1,5 +1,6 @@
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Services;
 
@@ -12,19 +13,19 @@ public partial class RenameViewModel : ViewModelBase
     public RenameViewModel(
         GlobalState globalState,
         Dialogs dialogs,
-        ProjectSettings projectSettings,
         ProjectFilesManager projectManager,
         AppSettings appSettings,
         LocalizationService localizationService,
-        ImageExporter imageExporter
+        ImageExporter imageExporter,
+        PlumApp plumApp
     )
         : base(
             globalState,
             dialogs,
-            projectSettings,
             projectManager,
             appSettings,
             localizationService,
-            imageExporter
+            imageExporter,
+            plumApp
         ) { }
 }

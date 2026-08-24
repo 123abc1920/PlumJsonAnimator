@@ -97,10 +97,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public void DrawSkeleton(Canvas canvas)
         {
-            foreach (Bone b in this.Bones)
-            {
-                b.DrawBone(canvas);
-            }
+            RootBones[0].DrawBone(canvas);
         }
 
         public List<BoneData> GenerateJSONData()

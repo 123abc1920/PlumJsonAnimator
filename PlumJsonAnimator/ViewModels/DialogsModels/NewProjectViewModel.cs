@@ -1,6 +1,7 @@
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models;
+using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.ViewModels;
@@ -8,38 +9,27 @@ namespace PlumJsonAnimator.ViewModels;
 // TODO: rename dialogs localization
 public partial class NewProjectViewModel : ViewModelBase
 {
-    private ProjectFilesManager projectManager;
-
     public NewProjectViewModel(
         ProjectFilesManager projectManager,
         GlobalState globalState,
         Dialogs dialogs,
-        ProjectSettings projectSettings,
         AppSettings appSettings,
         LocalizationService localizationService,
-        ImageExporter imageExporter
+        ImageExporter imageExporter,
+        PlumApp plumApp
     )
         : base(
             globalState,
             dialogs,
-            projectSettings,
             projectManager,
             appSettings,
             localizationService,
-            imageExporter
-        )
-    {
-        this.projectManager = projectManager;
-    }
+            imageExporter,
+            plumApp
+        ) { }
 
     public bool NewProject(string? projectName, string? projectPath)
     {
-        Project? result = this.projectManager.NewProject(projectName, projectPath);
-        if (result != null)
-        {
-            this.CurrentProject = result;
-            return true;
-        }
-        return false;
+        return this.PlumApp.NewProject(projectName, projectPath);
     }
 }

@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Interfaces;
+using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
@@ -187,6 +189,26 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 BoneAnimation ba = BoneAnimationBinding[b];
                 result = ba.GetKeyFeamesMarks();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Collects all bones animation keyframes
+        /// </summary>
+        /// <returns>Dictionary of bone and its keyframes</returns>
+        public Dictionary<
+            Bone,
+            Dictionary<double, Dictionary<KeyFrameTypes, bool>>
+        > GetAllKeyFrameMarks()
+        {
+            Dictionary<Bone, Dictionary<double, Dictionary<KeyFrameTypes, bool>>> result =
+                new Dictionary<Bone, Dictionary<double, Dictionary<KeyFrameTypes, bool>>>();
+
+            foreach (var element in BoneAnimationBinding)
+            {
+                result.Add(element.Key, element.Value.GetKeyFeamesMarks());
             }
 
             return result;

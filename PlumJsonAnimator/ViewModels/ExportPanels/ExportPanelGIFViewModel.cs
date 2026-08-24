@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models;
+using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Services;
 
@@ -43,16 +44,17 @@ public partial class ExportPanelGIFViewModel : ViewModelBase
         ProjectSettings projectSettings,
         ProjectFilesManager projectManager,
         AppSettings appSettings,
-        LocalizationService localizationService
+        LocalizationService localizationService,
+        PlumApp plumApp
     )
         : base(
             globalState,
             dialogs,
-            projectSettings,
             projectManager,
             appSettings,
             localizationService,
-            imageExporter
+            imageExporter,
+            plumApp
         )
     {
         this.imageExporter.ProgressChanged += (sender, percent) =>
@@ -61,14 +63,8 @@ public partial class ExportPanelGIFViewModel : ViewModelBase
         };
     }
 
-    public async Task<ExportResult> ExportAsGif(double start, double end, string outputFile)
+    public async Task<ExportResult> ExportAsGif(double start, double end, string outputFolder)
     {
-        ExportResult result = await this.imageExporter.ExportAsGif(
-            start,
-            end,
-            outputFile,
-            this.globalState.CurrentProject
-        );
-        return result;
+        return await this.PlumApp.ExportAsGif(start, end, outputFolder);
     }
 }

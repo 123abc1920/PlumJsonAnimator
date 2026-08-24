@@ -4,16 +4,14 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
-using Avalonia.Media;
 using Avalonia.Svg.Skia;
 using Microsoft.Extensions.DependencyInjection;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
 using PlumJsonAnimator.Views;
-using SukiUI;
-using SukiUI.Models;
 
 namespace PlumJsonAnimator;
 
@@ -43,20 +41,28 @@ public partial class App : Application
         services.AddTransient<AppSettingsViewModel>();
 
         services.AddSingleton<AppSettings>();
-        services.AddSingleton<ProjectSettings>();
-        services.AddSingleton<ProjectFilesManager>();
+        services.AddSingleton<GlobalState>();
+
         services.AddSingleton<Interpolation>();
+        services.AddSingleton<Engine>();
+
+        services.AddSingleton<LocalizationService>();
+
+        services.AddSingleton<TransformModeFactory>();
+
         services.AddSingleton<Prettify>();
         services.AddSingleton<JsonCode>();
         services.AddSingleton<JsonValidator>();
+
         services.AddSingleton<ImageExporter>();
         services.AddSingleton<JsonExport>();
-        services.AddSingleton<GlobalState>();
-        services.AddSingleton<TransformModeFactory>();
-        services.AddSingleton<Engine>();
-        services.AddSingleton<LocalizationService>();
+
+        services.AddSingleton<ProjectSettings>();
+        services.AddSingleton<ProjectFilesManager>();
 
         services.AddSingleton<Dialogs>();
+
+        services.AddSingleton<PlumApp>();
 
         _serviceProvider = services.BuildServiceProvider();
     }
@@ -77,13 +83,12 @@ public partial class App : Application
                 );
             }
 
-            var localization = _serviceProvider.GetRequiredService<LocalizationService>();
-            localization.LoadLangs();
-            localization.LoadLangResorce();
-            Application.Current?.Resources.MergedDictionaries.Add(localization.LangResources);
+            var app = _serviceProvider.GetRequiredService<PlumApp>();
+            app.Start();
+
+            Application.Current?.Resources.MergedDictionaries.Add(app.Localization.LangResources);
 
             var mainViewModelInstance = _serviceProvider.GetService<MainWindowViewModel>();
-
             if (mainViewModelInstance == null)
             {
                 throw new InvalidOperationException(
@@ -91,10 +96,7 @@ public partial class App : Application
                 );
             }
 
-            mainViewModelInstance.initProgram();
-
             var mainWindow = new MainWindow { DataContext = mainViewModelInstance };
-
             mainWindow.initViews();
             desktop.MainWindow = mainWindow;
         }

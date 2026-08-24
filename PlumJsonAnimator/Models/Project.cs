@@ -246,6 +246,14 @@ namespace PlumJsonAnimator.Models
             return animData;
         }
 
+        /// <summary>
+        /// Adds resource in resources list
+        /// </summary>
+        public void AddRes(Res res)
+        {
+            this.Resources.Add(res);
+        }
+
         public Res? GetResByName(string name)
         {
             foreach (Res res in this.Resources)

@@ -14,7 +14,7 @@ using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
-using static PlumJsonAnimator.Services.JsonCode;
+using PlumJsonAnimator.Views;
 
 namespace PlumJsonAnimator.ViewModels;
 
@@ -25,14 +25,7 @@ public partial class MainWindowViewModel : ViewModelBase
     public Canvas? Canvas
     {
         get { return this.imageExporter.Canvas; }
-        set
-        {
-            if (this.imageExporter.Canvas != value)
-            {
-                this.imageExporter.Canvas = value;
-                OnPropertyChanged(nameof(CurrentProject));
-            }
-        }
+        set { this.imageExporter.Canvas = value; }
     }
 
     public int CanvasWidth
@@ -83,26 +76,11 @@ public partial class MainWindowViewModel : ViewModelBase
     public JsonError JsonErrorObj
     {
         get { return this.globalState.jsonError; }
-        set
-        {
-            if (this.globalState.jsonError != value)
-            {
-                this.globalState.jsonError = value;
-                OnPropertyChanged(nameof(JsonErrorObj));
-            }
-        }
     }
+
     public int FPS
     {
         get { return this.globalState.FPS; }
-        set
-        {
-            if (this.globalState.FPS != value)
-            {
-                this.globalState.FPS = value;
-                OnPropertyChanged(nameof(FPS));
-            }
-        }
     }
 
     public bool DrawBones
@@ -177,6 +155,22 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
+    private bool _isAnimMode = true;
+    public bool IsAnimMode
+    {
+        set
+        {
+            if (_isAnimMode != value)
+            {
+                _isAnimMode = value;
+                OnPropertyChanged(nameof(IsAnimMode));
+            }
+        }
+        get => _isAnimMode;
+    }
+
+    public object CurrentInfoPanel { get; set; }
+
     public string IsTransformModeActive => TransformMode;
 
     public Bone? CurrentBone
@@ -188,7 +182,10 @@ public partial class MainWindowViewModel : ViewModelBase
             {
                 this.globalState.currentBone = value;
                 this.globalState.currentBone?.UpdateSlots();
+                // TODO: фабрика
+                CurrentInfoPanel = new BoneInfo();
                 OnPropertyChanged(nameof(CurrentBone));
+                OnPropertyChanged(nameof(CurrentInfoPanel));
             }
             else
             {
@@ -219,47 +216,14 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
-    public void AddBone(string title, int id, object? selectedBone)
-    {
-        if (selectedBone is Bone selectedNode)
-        {
-            selectedNode.AddChildren(
-                new Bone(this.globalState, selectedNode, this.localizationService)
-            );
-        }
-    }
-
-    public void AddBone(Bone newBone, Bone? parent)
-    {
-        if (parent != null)
-        {
-            parent.Children.Add(newBone);
-        }
-    }
-
     public bool CanGenerateProject()
     {
-        JsonErrorObj.ErrorText = Validate(CurrentProject.Code);
-        if (JsonErrorObj.isOk)
-        {
-            ValidResult validateResult = this.jsonCode.Regenerate(CurrentProject, false);
-            if (!validateResult.IsOk)
-            {
-                JsonErrorObj.ErrorText = validateResult.Message;
-                return false;
-            }
-        }
-        return true;
+        return this.PlumApp.CanGenerateProject();
     }
 
     public void RegenerateProject()
     {
-        this.jsonCode.Regenerate(CurrentProject, true);
-    }
-
-    public string Validate(string text)
-    {
-        return this.jsonValidator.Validate(text);
+        this.PlumApp.RegenerateProject();
     }
 
     public void SetMainWin(Window window)
@@ -311,120 +275,37 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public void GenerateCode()
     {
-        this.jsonCode.generateCode(CurrentProject);
-    }
-
-    public void initProgram()
-    {
-        this.CurrentProject = new Project(
-            this.globalState,
-            this.interpolation,
-            this.localizationService
-        );
-
-        this.appSettings.ReadSettings();
-        this.projectSettings.ReadSettings();
-
-        CurrentProject?.SetupProjectSettings(this.projectSettings.GetSettingsData());
-
-        this.projectManager.LoadRes(CurrentProject);
-
-        var appSettingsVM = (AppSettingsViewModel)GetViewModel(DialogType.SETTINGS);
-        appSettingsVM.CurrentTheme = appSettingsVM.Themes[
-            appSettingsVM.GetCurrThemeInd(this.appSettings.GetTheme())
-        ];
-
-        this.globalState.captureArea = this.appSettings.CreateCaptureArea(
-            CanvasWidth,
-            CanvasHeight
-        );
-
-        ValidResult validateResult = this.jsonCode.Regenerate(CurrentProject, true);
-        this.JsonErrorObj.isOk = validateResult.IsOk;
+        this.PlumApp.GenerateCode();
     }
 
     public ExportResult exportSpineJson(string outFolder)
     {
-        return this.jsonExport.exportSpineJson(outFolder, CurrentProject);
+        return this.PlumApp.ExportSpineJson(outFolder);
     }
 
     public ExportResult importSpineJson(string inputFile)
     {
-        return this.jsonExport.importSpineJson(inputFile, CurrentProject);
-    }
-
-    public void WriteSettings()
-    {
-        this.projectSettings.WriteSettings();
+        return this.PlumApp.ImportSpineJson(inputFile);
     }
 
     public void AddRes(string[] paths)
     {
-        this.projectManager.GetProjectDir(CurrentProject);
-
-        foreach (string p in paths)
-        {
-            string resName = "img" + CurrentProject?.Resources.Count.ToString();
-            string ext = this.projectManager.CopyRes(resName, p, CurrentProject);
-            if (ext != "")
-            {
-                ImageRes image = new ImageRes(
-                    this.projectManager,
-                    this.globalState,
-                    Path.Combine(CurrentProject?.GetProjectPath(), "res", $"{resName}{ext}"),
-                    resName,
-                    ext
-                );
-                CurrentProject.Resources.Add(image);
-            }
-        }
+        this.PlumApp.AddRes(paths);
     }
 
     public void DropSlotToBone(int id, Res res)
     {
-        Bone bone = CurrentProject.MainSkeleton.GetBoneById(id);
-        if (bone != null)
-        {
-            Slot s = new Slot(this.globalState, bone);
-            CurrentProject.Slots.Add(s);
-            CurrentProject.CurrentSkin.BindSlotAttachment(s, new ImageAttachment((ImageRes)res));
-            bone.UpdateSlots();
-        }
+        this.PlumApp.DropSlotToBone(id, res);
     }
 
     public async void OpenProject(Window win)
     {
-        var path = await this.projectManager.OpenProjectDialog(win);
-        Project? result = this.projectManager.OpenProject(path);
-        if (result != null)
-        {
-            CurrentProject = result;
-        }
+        this.PlumApp.OpenProject(win);
     }
 
     public string Prettify(string text)
     {
-        if (text == null)
-        {
-            return "";
-        }
-        return this.prettify.prettify(text);
-    }
-
-    private void DeleteBoneReqursion(Bone? bone)
-    {
-        if (bone != null && bone.Parent != null)
-        {
-            foreach (Slot s in bone.Slots)
-            {
-                CurrentProject?.DeleteSlotFromProject(s);
-            }
-            foreach (Bone b in bone.Children.ToList())
-            {
-                DeleteBoneReqursion(b);
-            }
-            CurrentProject?.DeleteBoneFromProject(bone);
-        }
+        return this.PlumApp.Prettify(text);
     }
 
     public ICommand AddBoneView { get; }
@@ -449,14 +330,6 @@ public partial class MainWindowViewModel : ViewModelBase
     public ICommand ZoomCanvasComm { get; }
     public ICommand ToggleTransformModeCommand { get; }
 
-    private JsonCode jsonCode;
-    private Interpolation interpolation;
-    private TransformModeFactory transformModeFactory;
-    public Prettify prettify;
-    public JsonExport jsonExport;
-    public JsonValidator jsonValidator;
-    public Engine engine;
-
     private readonly IServiceProvider _serviceProvider;
 
     public MainWindowViewModel(
@@ -465,36 +338,22 @@ public partial class MainWindowViewModel : ViewModelBase
         ProjectSettings projectSettings,
         ProjectFilesManager projectManager,
         GlobalState globalState,
-        JsonCode jsonCode,
-        Interpolation interpolation,
         ImageExporter imageExporter,
-        TransformModeFactory transformModeFactory,
-        Prettify prettify,
-        JsonExport jsonExport,
-        JsonValidator jsonValidator,
-        Engine engine,
         LocalizationService localizationService,
-        Dialogs dialogs
+        Dialogs dialogs,
+        PlumApp plumApp
     )
         : base(
             globalState,
             dialogs,
-            projectSettings,
             projectManager,
             appSettings,
             localizationService,
-            imageExporter
+            imageExporter,
+            plumApp
         )
     {
         _serviceProvider = serviceProvider;
-
-        this.jsonCode = jsonCode;
-        this.interpolation = interpolation;
-        this.transformModeFactory = transformModeFactory;
-        this.prettify = prettify;
-        this.jsonExport = jsonExport;
-        this.jsonValidator = jsonValidator;
-        this.engine = engine;
 
         var appSettingsVM = (AppSettingsViewModel)GetViewModel(DialogType.SETTINGS);
         appSettingsVM.CurrentTheme = appSettingsVM.Themes[0];
@@ -604,7 +463,7 @@ public partial class MainWindowViewModel : ViewModelBase
         DeleteBone = new Command(_ =>
         {
             Bone bone = CurrentBone;
-            DeleteBoneReqursion(bone);
+            this.PlumApp.DeleteBoneReqursion(bone);
         });
         AddAnimation = new Command(_ =>
         {
@@ -649,15 +508,15 @@ public partial class MainWindowViewModel : ViewModelBase
 
         SaveProject = new Command(_ =>
         {
-            string anim = JsonConvert.SerializeObject(
-                this.jsonCode.generateJSONData(CurrentProject),
-                this.globalState.jsonSettings
-            );
-            this.projectSettings.WriteAnimation(anim);
-            Popups.ShowPopup(
-                GetMessage(LocalizationConsts.SAVED),
-                GetMessage(LocalizationConsts.INFO_MESSAGE)
-            );
+            bool isSuccess = this.PlumApp.SaveProject();
+
+            if (isSuccess)
+            {
+                Popups.ShowPopup(
+                    GetMessage(LocalizationConsts.SAVED),
+                    GetMessage(LocalizationConsts.INFO_MESSAGE)
+                );
+            }
         });
 
         PrevKeyFrame = new Command(_ =>
@@ -707,7 +566,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
         PlayAnim = new Command(_ =>
         {
-            this.engine.runAnimation(this?.CurrentProject?.CurrentAnimation);
+            this.PlumApp.RunAnimation();
         });
 
         ZoomCanvasComm = new Command(parameter =>

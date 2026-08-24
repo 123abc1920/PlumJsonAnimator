@@ -55,7 +55,7 @@ public partial class MainWindow : SukiWindow
             viewModel.Canvas = mainCanvas;
             viewModel.Timeline = Timeline;
             viewModel.SetMainWin(this);
-            if (!viewModel.JsonErrorObj.isOk)
+            if (!viewModel.JsonErrorObj.IsOk)
             {
                 Popups.ShowPopup(
                     viewModel.GetMessage(LocalizationConsts.REGENERATE_ERROR),
@@ -76,10 +76,6 @@ public partial class MainWindow : SukiWindow
                 if (viewModel.DrawBones)
                 {
                     viewModel.CurrentProject?.MainSkeleton?.DrawSkeleton(mainCanvas);
-                    if (viewModel.CurrentBone?.IsBone == true)
-                    {
-                        viewModel.CurrentBone?.DrawBone(mainCanvas);
-                    }
                     viewModel.GenerateCode();
                 }
                 if (viewModel.CaptureMode)
@@ -242,45 +238,6 @@ public partial class MainWindow : SukiWindow
         }
     }
 
-    private void OnListBoxDrop(object sender, DragEventArgs e)
-    {
-        var listBox = (ListBox)sender;
-        var point = e.GetPosition(listBox);
-        var item = listBox.InputHitTest(point) as Visual;
-
-        while (item != null && !(item is ListBoxItem))
-        {
-            item = item.Parent as Visual;
-        }
-
-        if (item is ListBoxItem listBoxItem)
-        {
-            if (e.Data.Get("Resource") is ImageRes imageRes && listBoxItem.DataContext is Slot slot)
-            {
-                if (DataContext is MainWindowViewModel viewModel)
-                {
-                    viewModel.CurrentProject.CurrentSkin.BindSlotAttachment(
-                        slot,
-                        new ImageAttachment(imageRes)
-                    );
-                }
-                e.Handled = true;
-            }
-        }
-    }
-
-    private void OnSlotSelectionChanged(object sender, TappedEventArgs e)
-    {
-        Slot selectedSlot = SlotsList.SelectedItem as Slot;
-        if (selectedSlot != null)
-        {
-            if (DataContext is MainWindowViewModel viewModel)
-            {
-                viewModel.CurrentBone = (Bone)selectedSlot;
-            }
-        }
-    }
-
     private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (e.Source is TabControl tabControl)
@@ -289,7 +246,7 @@ public partial class MainWindow : SukiWindow
 
             if (DataContext is MainWindowViewModel viewModel)
             {
-                if (newIndex == 0 && viewModel.JsonErrorObj.isOk != true)
+                if (newIndex == 0 && viewModel.JsonErrorObj.IsOk != true)
                 {
                     tabControl.SelectionChanged -= TabControl_SelectionChanged;
                     tabControl.SelectedIndex = 1;
@@ -310,6 +267,15 @@ public partial class MainWindow : SukiWindow
                             viewModel.RegenerateProject();
                         }
                     }
+
+                    if (tabControl.SelectedIndex == 0)
+                    {
+                        viewModel.IsAnimMode = true;
+                    }
+                    else
+                    {
+                        viewModel.IsAnimMode = false;
+                    }
                 }
             }
         }
@@ -317,20 +283,17 @@ public partial class MainWindow : SukiWindow
 
     private void OnBonePointerPressed(object sender, TappedEventArgs e)
     {
-        if (sender is StackPanel panel && panel.DataContext is Bone bone)
+        if (sender is TreeView treeView && treeView.SelectedItem is Bone bone)
         {
             if (DataContext is MainWindowViewModel viewModel)
             {
                 if (bone == viewModel.CurrentBone)
                 {
                     viewModel.CurrentBone = null;
-                    Console.WriteLine("Not bone");
                 }
                 else
                 {
                     viewModel.CurrentBone = bone;
-
-                    Console.WriteLine("Bone");
                 }
             }
             e.Handled = true;

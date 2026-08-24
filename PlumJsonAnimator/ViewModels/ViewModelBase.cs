@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models;
+using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.ViewModels;
@@ -15,11 +16,11 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
 {
     protected GlobalState globalState;
     protected Dialogs dialogs;
-    protected ProjectSettings projectSettings;
     protected ProjectFilesManager projectManager;
     protected AppSettings appSettings;
     protected LocalizationService localizationService;
     protected ImageExporter imageExporter;
+    public PlumApp PlumApp { get; set; }
 
     public List<string> Langs
     {
@@ -46,20 +47,20 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
     protected ViewModelBase(
         GlobalState globalState,
         Dialogs dialogs,
-        ProjectSettings projectSettings,
         ProjectFilesManager projectManager,
         AppSettings appSettings,
         LocalizationService localizationService,
-        ImageExporter imageExporter
+        ImageExporter imageExporter,
+        PlumApp plumApp
     )
     {
         this.globalState = globalState;
         this.dialogs = dialogs;
         this.projectManager = projectManager;
-        this.projectSettings = projectSettings;
         this.appSettings = appSettings;
         this.localizationService = localizationService;
         this.imageExporter = imageExporter;
+        this.PlumApp = plumApp;
 
         this.globalState.PropertyChanged += (s, e) =>
         {
@@ -70,63 +71,27 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
         };
     }
 
-    public ViewModelBase(
-        GlobalState globalState,
-        Dialogs dialogs,
-        ProjectSettings projectSettings,
-        ProjectFilesManager projectManager,
-        AppSettings appSettings
-    )
-    {
-        this.globalState = globalState;
-        this.dialogs = dialogs;
-        this.projectSettings = projectSettings;
-        this.projectManager = projectManager;
-        this.appSettings = appSettings;
-    }
-
     public Project? CurrentProject
     {
         get => globalState.CurrentProject;
-        set
-        {
-            if (globalState.CurrentProject != value)
-            {
-                globalState.CurrentProject = value;
-                OnPropertyChanged(nameof(CurrentProject));
-            }
-        }
     }
 
     public void RenameProject(SettingsData settingsData)
     {
-        settingsData.Anim = CurrentProject!.Code;
+        bool isSuccess = this.PlumApp.RenameProject(settingsData);
 
-        var oldName = CurrentProject!.Name;
-        var oldPath = CurrentProject.ProjectPath;
-
-        var oldDir = Path.Combine(oldPath, oldName);
-        var newDir = Path.Combine(CurrentProject.ProjectPath, settingsData.Name);
-
-        this.projectManager.CopyDir(oldDir, newDir);
-
-        CurrentProject.SetupProjectSettings(settingsData);
-        this.projectSettings.UpdateSettings(CurrentProject);
-        this.appSettings.ChangeProject(newDir);
-
-        this.projectManager.MoveRes(CurrentProject);
-
-        this.projectSettings.WriteSettings();
-
-        Popups.ShowPopup(
-            GetMessage(LocalizationConsts.SAVED),
-            GetMessage(LocalizationConsts.INFO_MESSAGE)
-        );
+        if (isSuccess)
+        {
+            Popups.ShowPopup(
+                GetMessage(LocalizationConsts.SAVED),
+                GetMessage(LocalizationConsts.INFO_MESSAGE)
+            );
+        }
     }
 
     public string GetMessage(LocalizationConsts constStr)
     {
-        return this.localizationService.GetMessage(constStr);
+        return this.PlumApp.GetMessage(constStr);
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

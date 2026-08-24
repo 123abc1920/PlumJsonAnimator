@@ -6,6 +6,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.Threading;
+using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 
@@ -229,8 +230,6 @@ namespace PlumJsonAnimator.Common.Timeline
             // 6. Расчет и отрисовка Меток Времени
             // ----------------------------------------------------------------------------------
 
-            int numIntervals = (int)Math.Ceiling(duration); // Используем Ceil, чтобы не обрезать последнюю метку
-
             double step = 1.0 / FPS;
             this.timeStep = step;
 
@@ -253,66 +252,77 @@ namespace PlumJsonAnimator.Common.Timeline
             // ----------------------------------------------------------------------------------
             // 7. Отрисовка ключкадров
             // ----------------------------------------------------------------------------------
-            Dictionary<double, Dictionary<KeyFrameTypes, bool>> keyframesMarks =
-                CurrentAnimation.GetKeyFramesMarks(CurrentBone);
+            KeyValuePair<
+                Bone,
+                Dictionary<double, Dictionary<KeyFrameTypes, bool>>
+            >? currentBoneKeyFrames = null;
 
-            if (keyframesMarks == null)
+            foreach (var boneKeyFrames in CurrentAnimation.GetAllKeyFrameMarks())
             {
-                keyframesMarks = new Dictionary<double, Dictionary<KeyFrameTypes, bool>>();
+                if (CurrentBone == boneKeyFrames.Key)
+                {
+                    currentBoneKeyFrames = boneKeyFrames;
+                    continue;
+                }
+
+                DrawBoneKeyframes(context, boneKeyFrames, 0.2, timelineHeight, trackRowHeight);
             }
+
+            if (currentBoneKeyFrames != null)
+            {
+                DrawBoneKeyframes(
+                    context,
+                    currentBoneKeyFrames.Value,
+                    1.0,
+                    timelineHeight,
+                    trackRowHeight
+                );
+            }
+        }
+
+        private void DrawBoneKeyframes(
+            DrawingContext context,
+            KeyValuePair<Bone, Dictionary<double, Dictionary<KeyFrameTypes, bool>>> boneKeyFrames,
+            double opacity,
+            double timelineHeight,
+            double trackRowHeight
+        )
+        {
+            var color = boneKeyFrames.Key.BoneColor;
+            var keyframesMarks =
+                boneKeyFrames.Value ?? new Dictionary<double, Dictionary<KeyFrameTypes, bool>>();
 
             const double KeyframeWidth = 6;
             const double KeyframeHeight = 18;
-            SolidColorBrush fillBrush = new SolidColorBrush(Colors.Red);
+
+            SolidColorBrush fillBrush = new SolidColorBrush(color.Color) { Opacity = opacity };
 
             foreach (double time in keyframesMarks.Keys)
             {
                 double xPosition = PixelsPerSecond * time * Zoom;
 
-                if (keyframesMarks[time].ContainsKey(KeyFrameTypes.TRANSLATE))
+                var trackTypes = new[]
                 {
-                    double yPosition = timelineHeight + (0 * trackRowHeight);
+                    (KeyFrameTypes.TRANSLATE, 0),
+                    (KeyFrameTypes.ROTATE, 1),
+                    (KeyFrameTypes.SCALE, 2),
+                };
 
-                    // Создаем прямоугольник
-                    var rect = new Rect(
-                        xPosition - KeyframeWidth / 2, // Центрируем по X
-                        yPosition - KeyframeHeight / 2, // Центрируем по Y
-                        KeyframeWidth,
-                        KeyframeHeight
-                    );
-
-                    context.FillRectangle(fillBrush, rect);
-                    context.DrawRectangle(redPen, rect);
-                }
-
-                if (keyframesMarks[time].ContainsKey(KeyFrameTypes.ROTATE))
+                foreach (var (type, rowIndex) in trackTypes)
                 {
-                    double yPosition = timelineHeight + (1 * trackRowHeight);
+                    if (keyframesMarks[time].ContainsKey(type))
+                    {
+                        double yPosition = timelineHeight + (rowIndex * trackRowHeight);
 
-                    var rect = new Rect(
-                        xPosition - KeyframeWidth / 2,
-                        yPosition - KeyframeHeight / 2,
-                        KeyframeWidth,
-                        KeyframeHeight
-                    );
+                        var rect = new Rect(
+                            xPosition - KeyframeWidth / 2,
+                            yPosition - KeyframeHeight / 2,
+                            KeyframeWidth,
+                            KeyframeHeight
+                        );
 
-                    context.FillRectangle(fillBrush, rect);
-                    context.DrawRectangle(redPen, rect);
-                }
-
-                if (keyframesMarks[time].ContainsKey(KeyFrameTypes.SCALE))
-                {
-                    double yPosition = timelineHeight + (2 * trackRowHeight);
-
-                    var rect = new Rect(
-                        xPosition - KeyframeWidth / 2,
-                        yPosition - KeyframeHeight / 2,
-                        KeyframeWidth,
-                        KeyframeHeight
-                    );
-
-                    context.FillRectangle(fillBrush, rect);
-                    context.DrawRectangle(redPen, rect);
+                        context.FillRectangle(fillBrush, rect);
+                    }
                 }
             }
         }

@@ -109,7 +109,10 @@
                     Margin="5"
                     HorizontalScrollBarVisibility="Auto"
                     VerticalScrollBarVisibility="Auto">
-                    <Grid ColumnDefinitions="*,Auto,Auto" RowDefinitions="Auto,Auto,Auto">
+                    <Grid
+                        ColumnDefinitions="*,Auto,Auto"
+                        IsEnabled="{Binding IsAnimMode}"
+                        RowDefinitions="Auto,Auto,Auto">
                         <TextBlock
                             Grid.Row="0"
                             Grid.ColumnSpan="3"
@@ -158,7 +161,7 @@
                             Padding="0"
                             HorizontalContentAlignment="Center"
                             VerticalContentAlignment="Center"
-                            Command="{Binding AddSkin}">
+                            Command="{Binding DeleteSkin}">
                             <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
                         </Button>
                     </Grid>
@@ -174,7 +177,10 @@
                     HorizontalAlignment="Stretch"
                     HorizontalScrollBarVisibility="Auto"
                     VerticalScrollBarVisibility="Auto">
-                    <Grid ColumnDefinitions="*,Auto,Auto" RowDefinitions="Auto,Auto,Auto">
+                    <Grid
+                        ColumnDefinitions="*,Auto,Auto"
+                        IsEnabled="{Binding IsAnimMode}"
+                        RowDefinitions="Auto,Auto,Auto">
                         <TextBlock
                             Grid.Row="0"
                             Grid.ColumnSpan="3"
@@ -242,7 +248,10 @@
 
                     <TextBlock Grid.Row="0" Text="{DynamicResource resources}" />
 
-                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <StackPanel
+                        Grid.Row="1"
+                        IsEnabled="{Binding IsAnimMode}"
+                        Orientation="Horizontal">
                         <Button
                             Width="32"
                             Height="32"
@@ -281,7 +290,7 @@
                         ScrollViewer.VerticalScrollBarVisibility="Auto">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock PointerPressed="OnResPointerPressed" Text="{Binding Name}">
+                                <Grid HorizontalAlignment="Stretch" Background="Transparent">
                                     <ToolTip.Tip>
                                         <Image
                                             MaxWidth="200"
@@ -289,7 +298,11 @@
                                             Source="{Binding Preview}"
                                             Stretch="Uniform" />
                                     </ToolTip.Tip>
-                                </TextBlock>
+                                    <TextBlock
+                                        HorizontalAlignment="Stretch"
+                                        PointerPressed="OnResPointerPressed"
+                                        Text="{Binding Name}" />
+                                </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
@@ -637,7 +650,10 @@
 
                     <TextBlock Grid.Row="0" Text="{DynamicResource skeleton}" />
 
-                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <StackPanel
+                        Grid.Row="1"
+                        IsEnabled="{Binding IsAnimMode}"
+                        Orientation="Horizontal">
                         <Button
                             Width="32"
                             Height="32"
@@ -672,12 +688,36 @@
                         Name="boneTreeView"
                         Grid.Row="2"
                         Margin="0,5"
-                        ItemsSource="{Binding CurrentProject.MainSkeleton.RootBones}">
+                        ItemsSource="{Binding CurrentProject.MainSkeleton.RootBones}"
+                        Tapped="OnBonePointerPressed"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                         <TreeView.ItemTemplate>
                             <TreeDataTemplate ItemsSource="{Binding Children}">
-                                <StackPanel DoubleTapped="OnBonePointerPressed">
-                                    <TextBlock Text="{Binding Name, Mode=TwoWay}" />
-                                </StackPanel>
+                                <Grid HorizontalAlignment="Stretch" Margin="0,0,10,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Text="{Binding Name}" 
+                                            Grid.Column="0"
+                                            VerticalAlignment="Center" 
+                                            TextWrapping="NoWrap"
+                                            TextTrimming="None"
+                                            HorizontalAlignment="Left"/>
+
+                                    <Rectangle Fill="{Binding BoneColor}" 
+                                            Grid.Column="1"
+                                            Height="10" 
+                                            Width="10"
+                                            VerticalAlignment="Center"
+                                            Margin="10,0,0,0"/>
+
+                                    <ToolTip.Tip>
+                                        <TextBox Padding="0" 
+                                                Text="{Binding Name}" />
+                                    </ToolTip.Tip>
+                                </Grid>
                             </TreeDataTemplate>
                         </TreeView.ItemTemplate>
                     </TreeView>
@@ -688,113 +728,7 @@
                     Background="{DynamicResource SukiPrimaryColor}"
                     ResizeDirection="Rows" />
                 <DockPanel Grid.Row="2">
-                    <ScrollViewer Margin="5" VerticalScrollBarVisibility="Auto">
-                        <StackPanel>
-                            <TextBlock Text="{DynamicResource info}" />
-                            <StackPanel Orientation="Horizontal">
-                                <Button
-                                    Width="32"
-                                    Height="32"
-                                    Padding="0"
-                                    HorizontalContentAlignment="Center"
-                                    VerticalContentAlignment="Center"
-                                    Command="{Binding AddSlot}">
-                                    <iconPacks:PackIconBootstrapIcons Kind="Plus" />
-                                </Button>
-                                <Button
-                                    Width="32"
-                                    Height="32"
-                                    Padding="0"
-                                    HorizontalContentAlignment="Center"
-                                    VerticalContentAlignment="Center"
-                                    Command="{Binding DeleteSlot}"
-                                    CommandParameter="{Binding ElementName=SlotsList}">
-                                    <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
-                                </Button>
-                                <Button
-                                    Width="32"
-                                    Height="32"
-                                    Padding="0"
-                                    HorizontalContentAlignment="Center"
-                                    VerticalContentAlignment="Center"
-                                    Command="{Binding RenameSlot}"
-                                    CommandParameter="{Binding ElementName=SlotsList}">
-                                    <iconPacks:PackIconBootstrapIcons Kind="PencilFill" />
-                                </Button>
-                            </StackPanel>
-                            <TextBlock Margin="0,5" Text="{Binding CurrentBone.Name}" />
-                            <ListBox
-                                x:Name="SlotsList"
-                                DragDrop.Drop="OnListBoxDrop"
-                                IsVisible="{Binding CurrentBone}"
-                                ItemsSource="{Binding CurrentBone.Slots}">
-                                <DragDrop.AllowDrop>True</DragDrop.AllowDrop>
-
-                                <ListBox.Styles>
-                                    <Style Selector="ListBoxItem">
-                                        <Setter Property="Template">
-                                            <ControlTemplate>
-                                                <Border
-                                                    Name="PART_Border"
-                                                    Background="{TemplateBinding Background}"
-                                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                                    BorderThickness="{TemplateBinding BorderThickness}">
-                                                    <ContentPresenter
-                                                        Name="PART_ContentPresenter"
-                                                        HorizontalAlignment="Stretch"
-                                                        Content="{TemplateBinding Content}"
-                                                        ContentTemplate="{TemplateBinding ContentTemplate}" />
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter>
-                                    </Style>
-
-                                    <Style Selector="ListBoxItem:selected">
-                                        <Setter Property="Background" Value="{DynamicResource SukiAccentColor}" />
-                                        <Setter Property="Foreground" Value="{DynamicResource SukiTextColor}" />
-                                    </Style>
-
-                                    <Style Selector="ListBoxItem:pointerover">
-                                        <Setter Property="Background" Value="{DynamicResource SukiCardBackground}" />
-                                    </Style>
-
-                                    <Style Selector="ListBoxItem:selected:pointerover">
-                                        <Setter Property="Background" Value="{DynamicResource SukiAccentColor}" />
-                                        <Setter Property="Opacity" Value="0.9" />
-                                    </Style>
-                                </ListBox.Styles>
-
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid HorizontalAlignment="Stretch" DoubleTapped="OnSlotSelectionChanged">
-                                            <DragDrop.AllowDrop>True</DragDrop.AllowDrop>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="Auto" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <StackPanel Grid.Column="0" HorizontalAlignment="Stretch">
-                                                <TextBlock
-                                                    Text="{Binding Name}"
-                                                    TextTrimming="CharacterEllipsis"
-                                                    TextWrapping="NoWrap" />
-                                                <TextBlock
-                                                    Text="{Binding CurrentAttachment.Name}"
-                                                    TextTrimming="CharacterEllipsis"
-                                                    TextWrapping="NoWrap" />
-                                            </StackPanel>
-
-                                            <NumericUpDown
-                                                Grid.Column="1"
-                                                Margin="4,0,0,0"
-                                                Increment="1"
-                                                Value="{Binding CurrentDrawOrderOffset}" />
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </StackPanel>
-                    </ScrollViewer>
+                    <ContentControl Content="{Binding CurrentInfoPanel}" />
                 </DockPanel>
             </Grid>
         </Grid>
