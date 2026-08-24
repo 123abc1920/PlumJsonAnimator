@@ -139,12 +139,6 @@ public class PlumApp
         return this._prettify.prettify(text);
     }
 
-    public void DeleteBone(Bone? bone)
-    {
-        DeleteBoneCommand command = new DeleteBoneCommand(bone, GlobalState.CurrentProject);
-        this._historyManager.DoCommand(command);
-    }
-
     public void RunAnimation()
     {
         this._engine.runAnimation(GlobalState.CurrentProject?.CurrentAnimation);
@@ -321,12 +315,6 @@ public class PlumApp
         return result;
     }
 
-    public void AddBone(Bone? selectedBone)
-    {
-        AddBoneCommand command = new AddBoneCommand(selectedBone, GlobalState.CurrentProject);
-        this._historyManager.DoCommand(command);
-    }
-
     public void DeleteRes(Res? res)
     {
         if (res != null)
@@ -340,24 +328,48 @@ public class PlumApp
         }
     }
 
+    public void DeleteBone(Bone? bone)
+    {
+        DeleteBoneCommand command = new DeleteBoneCommand(bone, GlobalState.CurrentProject);
+        this._historyManager.DoCommand(command);
+    }
+
+    public void AddBone(Bone? selectedBone)
+    {
+        AddBoneCommand command = new AddBoneCommand(selectedBone, GlobalState.CurrentProject);
+        this._historyManager.DoCommand(command);
+    }
+
     public void AddAnimation()
     {
-        GlobalState.CurrentProject?.AddAnimation();
+        AddAnimationCommand addAnimationCommand = new AddAnimationCommand(
+            GlobalState.CurrentProject
+        );
+        this._historyManager.DoCommand(addAnimationCommand);
     }
 
     public void AddSkin()
     {
-        GlobalState.CurrentProject?.AddSkin();
+        AddSkinCommand addSkinCommand = new AddSkinCommand(GlobalState.CurrentProject);
+        this._historyManager.DoCommand(addSkinCommand);
     }
 
     public void DeleteAnimation()
     {
-        GlobalState.CurrentProject?.DeleteAnimation();
+        DeleteAnimationCommand deleteAnimationCommand = new DeleteAnimationCommand(
+            GlobalState.CurrentProject,
+            GlobalState.CurrentProject.CurrentAnimation
+        );
+        this._historyManager.DoCommand(deleteAnimationCommand);
     }
 
     public void DeleteSkin()
     {
-        GlobalState.CurrentProject?.DeleteSkin();
+        DeleteSkinCommand deleteSkinCommand = new DeleteSkinCommand(
+            GlobalState.CurrentProject,
+            GlobalState.CurrentProject.CurrentSkin
+        );
+        this._historyManager.DoCommand(deleteSkinCommand);
     }
 
     public void AddSlot()

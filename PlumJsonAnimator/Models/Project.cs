@@ -137,36 +137,48 @@ namespace PlumJsonAnimator.Models
             return CurrentAnimation;
         }
 
-        public void AddAnimation()
+        public Animation AddAnimation()
         {
-            this.Animations.Add(
-                new Animation(
-                    this._globalState,
-                    this._interpolation,
-                    $"anim{Counter.GenerateNamePostfix()}"
-                )
+            Animation newAnimation = new Animation(
+                this._globalState,
+                this._interpolation,
+                $"anim{Counter.GenerateNamePostfix()}"
             );
+            this.Animations.Add(newAnimation);
+            return newAnimation;
         }
 
-        public void DeleteAnimation()
+        public void RestoreAnimation(Animation animation)
+        {
+            this.Animations.Add(animation);
+        }
+
+        public void DeleteAnimation(Animation animation)
         {
             if (this.Animations.Count > 1)
             {
-                this.Animations.Remove(CurrentAnimation);
+                this.Animations.Remove(animation);
                 CurrentAnimation = this.Animations[0];
             }
         }
 
-        public void AddSkin()
+        public Skin AddSkin()
         {
-            this.Skins.Add(new Skin($"skin{Counter.GenerateNamePostfix()}", this._globalState));
+            Skin newSkin = new Skin($"skin{Counter.GenerateNamePostfix()}", this._globalState);
+            this.Skins.Add(newSkin);
+            return newSkin;
         }
 
-        public void DeleteSkin()
+        public void RestoreSkin(Skin skin)
+        {
+            this.Skins.Add(skin);
+        }
+
+        public void DeleteSkin(Skin skin)
         {
             if (this.Skins.Count > 1)
             {
-                this.Skins.Remove(CurrentSkin);
+                this.Skins.Remove(skin);
                 CurrentSkin = this.Skins[0];
             }
         }
