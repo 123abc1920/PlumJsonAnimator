@@ -85,6 +85,8 @@ public class PlumApp
 
         ValidResult validateResult = _jsonCode.Regenerate(GlobalState.CurrentProject, true);
         this.GlobalState.jsonError.IsOk = validateResult.IsOk;
+
+        this._historyManager.Clear();
     }
 
     public bool CanGenerateProject()
@@ -154,11 +156,11 @@ public class PlumApp
 
     public bool SaveProject()
     {
-        string anim = JsonConvert.SerializeObject(
+        string project = JsonConvert.SerializeObject(
             this._jsonCode.generateJSONData(GlobalState.CurrentProject),
             GlobalState.jsonSettings
         );
-        ProjectSettings.WriteAnimation(anim);
+        ProjectSettings.WriteProjectJSON(project);
 
         return true;
     }
@@ -185,18 +187,19 @@ public class PlumApp
         }
     }
 
-    public void DropSlotToBone(int id, Res res)
+    public void DropImageToBone(int id, Res res)
     {
         Bone bone = GlobalState.CurrentProject.MainSkeleton.GetBoneById(id);
         if (bone != null)
         {
             Slot s = new Slot(this.GlobalState, bone);
-            GlobalState.CurrentProject.Slots.Add(s);
-            GlobalState.CurrentProject.CurrentSkin.BindSlotAttachment(
-                s,
-                new ImageAttachment((ImageRes)res)
+            DropImageToBoneCommand dropImageToBoneCommand = new DropImageToBoneCommand(
+                bone,
+                GlobalState.CurrentProject,
+                res,
+                s
             );
-            bone.UpdateSlots();
+            this._historyManager.DoCommand(dropImageToBoneCommand);
         }
     }
 

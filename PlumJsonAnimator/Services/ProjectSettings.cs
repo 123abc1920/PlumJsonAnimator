@@ -91,7 +91,7 @@ namespace PlumJsonAnimator.Services
             );
         }
 
-        public void WriteAnimation(string anim)
+        public void WriteProjectJSON(string project)
         {
             string settingsPath = Path.Combine(
                 this.appSettings.appSettings!.Workspace,
@@ -100,7 +100,7 @@ namespace PlumJsonAnimator.Services
 
             ExistOrCreateProjectDirs();
 
-            this.settingsData.Anim = anim;
+            this.settingsData.Anim = project;
 
             ExistOrCreateProjectDirs();
 

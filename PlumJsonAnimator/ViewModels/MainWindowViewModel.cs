@@ -296,7 +296,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public void DropSlotToBone(int id, Res res)
     {
-        this.PlumApp.DropSlotToBone(id, res);
+        this.PlumApp.DropImageToBone(id, res);
     }
 
     public async void OpenProject(Window win)

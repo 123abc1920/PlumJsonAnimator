@@ -29,4 +29,10 @@ public class HistoryManager
         command?.Execute();
         done.Add(command);
     }
+
+    public void Clear()
+    {
+        this.undone.Clear();
+        this.done.Clear();
+    }
 }
