@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Avalonia.Input;
 using Avalonia.Media;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
@@ -157,6 +158,36 @@ namespace PlumJsonAnimator.Models
             }
 
             return result;
+        }
+
+        public IKeyframeType? GetKeyFrame(TransformModesTypes type, double time)
+        {
+            if (type == TransformModesTypes.TRANSLATE)
+            {
+                return _translateKeyframes[time];
+            }
+            else if (type == TransformModesTypes.ROTATE)
+            {
+                return _rotateKeyframes[time];
+            }
+
+            return null;
+        }
+
+        public void RestoreKeyFrame(
+            IKeyframeType keyframeType,
+            double time,
+            TransformModesTypes type
+        )
+        {
+            if (type == TransformModesTypes.TRANSLATE)
+            {
+                _translateKeyframes[time] = keyframeType;
+            }
+            else if (type == TransformModesTypes.ROTATE)
+            {
+                _rotateKeyframes[time] = keyframeType;
+            }
         }
 
         /// <summary>

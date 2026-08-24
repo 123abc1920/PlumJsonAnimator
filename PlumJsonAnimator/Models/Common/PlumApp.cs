@@ -386,10 +386,12 @@ public class PlumApp
     {
         if (GlobalState.currentBone != null)
         {
-            GlobalState.CurrentProject?.CurrentAnimation?.AddKeyFrame(
+            AddKeyFrameCommand addKeyFrameCommand = new AddKeyFrameCommand(
+                GlobalState.CurrentProject.CurrentAnimation,
                 GlobalState.currentBone,
                 GlobalState.CurrentProject.currentMode.type
             );
+            this._historyManager.DoCommand(addKeyFrameCommand);
         }
     }
 
@@ -397,10 +399,12 @@ public class PlumApp
     {
         if (GlobalState.currentBone != null)
         {
-            GlobalState.CurrentProject?.CurrentAnimation?.DeleteKeyFrame(
+            DeleteKeyFrameCommand deleteKeyFrameCommand = new DeleteKeyFrameCommand(
+                GlobalState.CurrentProject.CurrentAnimation,
                 GlobalState.currentBone,
                 GlobalState.CurrentProject.currentMode.type
             );
+            this._historyManager.DoCommand(deleteKeyFrameCommand);
         }
     }
 

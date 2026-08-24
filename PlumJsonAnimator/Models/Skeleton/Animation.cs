@@ -330,21 +330,33 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// </summary>
         /// <param name="b">Bone</param>
         /// <param name="type">Current transform type</param>
-        public void AddKeyFrame(Bone b, TransformModesTypes type)
+        /// <param name="time">Current time</param>
+        public void AddKeyFrame(Bone b, TransformModesTypes type, double time)
         {
             if (b != null && b.IsBone && type != TransformModesTypes.NO)
             {
                 if (type == TransformModesTypes.TRANSLATE)
                 {
-                    TranslateBone(b, b.X, b.Y);
+                    TranslateBone(b, b.X, b.Y, time);
                 }
                 if (type == TransformModesTypes.ROTATE)
                 {
-                    RotateBone(b, b.A);
+                    RotateBone(b, b.A, time);
                 }
                 if (type == TransformModesTypes.SCALE) { }
                 if (type == TransformModesTypes.SHEAR) { }
             }
+        }
+
+        public void RestoreKeyFrame(
+            IKeyframeType keyframe,
+            Bone bone,
+            double time,
+            TransformModesTypes type
+        )
+        {
+            BoneAnimation boneAnimation = BoneAnimationBinding[bone];
+            boneAnimation.RestoreKeyFrame(keyframe, time, type);
         }
 
         /// <summary>
@@ -352,16 +364,22 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// </summary>
         /// <param name="b">Bone</param>
         /// <param name="type">Current transform type</param>
-        public void DeleteKeyFrame(Bone b, TransformModesTypes type)
+        /// <param name="time">Current time</param>
+        public void DeleteKeyFrame(Bone b, TransformModesTypes type, double time)
         {
             if (b != null && b.IsBone && type != TransformModesTypes.NO)
             {
                 if (BoneAnimationBinding.ContainsKey(b))
                 {
                     BoneAnimation ba = BoneAnimationBinding[b];
-                    ba.DeleteKeyFrame(currentTime, type);
+                    ba.DeleteKeyFrame(time, type);
                 }
             }
+        }
+
+        public IKeyframeType GetKeyframe(TransformModesTypes type, double time, Bone bone)
+        {
+            return BoneAnimationBinding[bone].GetKeyFrame(type, time);
         }
 
         /// <summary>
