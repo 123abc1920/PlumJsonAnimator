@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Commands;
+using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
@@ -192,12 +193,11 @@ public class PlumApp
         Bone bone = GlobalState.CurrentProject.MainSkeleton.GetBoneById(id);
         if (bone != null)
         {
-            Slot s = new Slot(this.GlobalState, bone);
             DropImageToBoneCommand dropImageToBoneCommand = new DropImageToBoneCommand(
                 bone,
                 GlobalState.CurrentProject,
                 res,
-                s
+                new Slot(this.GlobalState, bone)
             );
             this._historyManager.DoCommand(dropImageToBoneCommand);
         }
@@ -402,6 +402,13 @@ public class PlumApp
                 GlobalState.CurrentProject.currentMode.type
             );
         }
+    }
+
+    public void Rename(string newName, IRenamable renamableObject)
+    {
+        var oldName = renamableObject.GetName;
+        RenameCommand renameCommand = new RenameCommand(renamableObject, oldName, newName);
+        this._historyManager.DoCommand(renameCommand);
     }
 
     public void Undo()

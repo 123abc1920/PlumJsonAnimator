@@ -1,6 +1,7 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.ViewModels;
 
 // TODO: unique names in redactobjs
@@ -24,7 +25,8 @@ namespace PlumJsonAnimator.Views
             if (DataContext is RenameViewModel viewModel)
             {
                 string? newName = this.FindControl<TextBox>("name")?.Text;
-                viewModel.RenamableObject.SetName(newName);
+
+                viewModel.PlumApp.Rename(newName, viewModel.RenamableObject);
 
                 var parentWindow = this.VisualRoot as Window;
                 parentWindow?.Close();

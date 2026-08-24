@@ -17,6 +17,12 @@ class AddBoneCommand : ICommand
 
     public void Execute()
     {
+        if (this._newBone != null)
+        {
+            _project?.AddBoneToProject(this._newBone, this._selectedBone);
+            return;
+        }
+
         if (_selectedBone != null && _selectedBone.IsBone)
         {
             this._newBone = _project?.MainSkeleton?.AddBoneToParent(_selectedBone.id);
