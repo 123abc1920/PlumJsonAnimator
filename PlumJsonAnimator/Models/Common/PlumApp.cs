@@ -366,9 +366,8 @@ public class PlumApp
         if (bone != null)
         {
             Slot s = new Slot(GlobalState, bone);
-            GlobalState.CurrentProject?.Slots.Add(s);
-            GlobalState.CurrentProject?.CurrentSkin.AddSlot(s);
-            bone.UpdateSlots();
+            AddSlotCommand addSlotCommand = new AddSlotCommand(GlobalState.CurrentProject, s, bone);
+            this._historyManager.DoCommand(addSlotCommand);
         }
     }
 
@@ -376,9 +375,12 @@ public class PlumApp
     {
         if (selectedSlot != null)
         {
-            GlobalState.CurrentProject?.Slots.Remove(selectedSlot);
-            GlobalState.CurrentProject?.CurrentSkin.DeleteSlot(selectedSlot);
-            GlobalState.currentBone?.UpdateSlots();
+            DeleteSlotCommand deleteSlotCommand = new DeleteSlotCommand(
+                GlobalState.CurrentProject,
+                selectedSlot,
+                GlobalState.currentBone
+            );
+            this._historyManager.DoCommand(deleteSlotCommand);
         }
     }
 
