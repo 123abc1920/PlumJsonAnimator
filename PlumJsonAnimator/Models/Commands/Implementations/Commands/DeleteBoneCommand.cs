@@ -1,28 +1,40 @@
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
+using Avalonia.Metadata;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
-using Tmds.DBus.Protocol;
 
 namespace PlumJsonAnimator.Models.Commands;
 
+public class BoneAnim
+{
+    public Bone bone;
+    public Animation animation;
+    public BoneAnimation boneAnimation;
+
+    public BoneAnim(Bone bone, Animation animation, BoneAnimation boneAnimation)
+    {
+        this.bone = bone;
+        this.animation = animation;
+        this.boneAnimation = boneAnimation;
+    }
+}
+
+public class SlotAttach
+{
+    public Slot slot;
+    public Skin skin;
+    public Attachment attachment;
+
+    public SlotAttach(Slot slot, Skin skin, Attachment attachment)
+    {
+        this.slot = slot;
+        this.skin = skin;
+        this.attachment = attachment;
+    }
+}
+
 class DeleteBoneCommand : ICommand
 {
-    private class BoneAnim
-    {
-        public Bone bone;
-        public Animation animation;
-        public BoneAnimation boneAnimation;
-    }
-
-    private class SlotAttach
-    {
-        public Slot slot;
-        public Skin skin;
-        public Attachment attachment;
-    }
-
     private readonly Bone _selectedBone;
     private readonly Project? _project;
     private readonly Bone? _parent;
@@ -61,6 +73,16 @@ class DeleteBoneCommand : ICommand
     {
         RestoreBoneRecursive(this._selectedBone);
         this._parent?.Children.Add(this._selectedBone);
+
+        foreach (var skinDTO in skins)
+        {
+            skinDTO.skin.RestoreSlot(skinDTO.slot, skinDTO.attachment);
+        }
+
+        foreach (var animDTO in anims)
+        {
+            animDTO.animation.RestoreBoneAnimation(animDTO.bone, animDTO.boneAnimation);
+        }
     }
 
     private void DeleteBoneReqursion(Bone? bone)
@@ -69,13 +91,21 @@ class DeleteBoneCommand : ICommand
         {
             foreach (Slot s in bone.Slots)
             {
-                _project?.DeleteSlotFromProject(s);
+                var newSkins = _project?.DeleteSlotFromProject(s);
+                foreach (var e in newSkins)
+                {
+                    skins.Add(e);
+                }
             }
             foreach (Bone b in bone.Children.ToList())
             {
                 DeleteBoneReqursion(b);
             }
-            _project?.DeleteBoneFromProject(bone);
+            var newAnims = _project?.DeleteBoneFromProject(bone);
+            foreach (var e in newAnims)
+            {
+                anims.Add(e);
+            }
         }
     }
 

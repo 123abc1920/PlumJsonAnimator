@@ -5,6 +5,7 @@ using System.IO;
 using Avalonia.Controls;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Models.Commands;
 using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
@@ -266,36 +267,43 @@ namespace PlumJsonAnimator.Models
             return null;
         }
 
-        public Dictionary<Skin, Attachment> DeleteSlotFromProject(Slot slot)
+        public List<SlotAttach> DeleteSlotFromProject(Slot slot)
         {
-            // TODO: перейти на DTO
-            Dictionary<Skin, Attachment> result = new Dictionary<Skin, Attachment>();
+            List<SlotAttach> result = new List<SlotAttach>();
 
             this.Slots.Remove(slot);
             foreach (Skin s in this.Skins)
             {
                 if (s.ContainsSlot(slot) == true)
                 {
-                    s.DeleteSlot(slot);
                     Attachment a = s.GetAttachment(slot);
-                    result.Add(s, a);
+                    result.Add(new SlotAttach(slot, s, a));
+                    s.DeleteSlot(slot);
                 }
             }
 
             return result;
         }
 
-        public void DeleteBoneFromProject(Bone? bone)
+        public List<BoneAnim> DeleteBoneFromProject(Bone? bone)
         {
             if (bone == null)
-                return;
+                return null;
+
+            List<BoneAnim> result = new List<BoneAnim>();
 
             this.MainSkeleton?.Bones.Remove(bone);
             bone?.Parent?.Children.Remove(bone);
             foreach (Animation a in this.Animations)
             {
+                if (a.ContainsBone(bone))
+                {
+                    result.Add(new BoneAnim(bone, a, a.GetBoneAnimation(bone)));
+                }
                 a.DeleteBoneFromAnimation(bone);
             }
+
+            return result;
         }
 
         public void AddBoneToProject(Bone? bone, Bone? parent = null)

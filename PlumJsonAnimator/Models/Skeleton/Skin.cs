@@ -81,6 +81,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
+        public void RestoreSlot(Slot s, Attachment a)
+        {
+            SlotAttachmentBinding[s] = a;
+        }
+
         public void DeleteSlot(Slot s)
         {
             if (SlotAttachmentBinding.ContainsKey(s))
