@@ -59,6 +59,22 @@ namespace PlumJsonAnimator.Common.Constants
 
         public double zoomCanvas = 1;
 
+        public bool isAutoSave = true;
+        public long autoSaveSec = 300;
+        public DateTime lastSaveTime;
+        public DateTime LastSaveTime
+        {
+            set
+            {
+                if (this.lastSaveTime != value)
+                {
+                    this.lastSaveTime = value;
+                    OnPropertyChanged(nameof(LastSaveTime));
+                }
+            }
+            get => this.lastSaveTime;
+        }
+
         public CaptureArea? captureArea;
 
         public ParallelOptions GetParallelOptions()

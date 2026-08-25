@@ -65,6 +65,8 @@ public partial class App : Application
 
         services.AddSingleton<HistoryManager>();
 
+        services.AddSingleton<AutoSaver>();
+
         services.AddSingleton<PlumApp>();
 
         _serviceProvider = services.BuildServiceProvider();

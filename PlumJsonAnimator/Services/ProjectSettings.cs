@@ -17,6 +17,7 @@ namespace PlumJsonAnimator.Services
 
         private const string BASE_ANIM =
             "{'skeleton':{'spine':'4.3.2'},'bones':[{'name':'root','x':100.0,'y':100.0}],'slots':[],'skins':[{'name':'default','attachments':{}}],'animations':{'anim0':{'bones':{},'drawOrder':[]}}}";
+        private readonly string AUTO_SAVE_FILE;
 
         private SettingsData settingsData;
 
@@ -43,6 +44,7 @@ namespace PlumJsonAnimator.Services
             this.globalState = globalState;
 
             this.settingsFileName = $"settings{this.globalState.programExt}";
+            this.AUTO_SAVE_FILE = $"autosave{this.globalState.programExt}";
             this.settingsData = new SettingsData()
             {
                 Path = Path.Combine(
@@ -69,7 +71,11 @@ namespace PlumJsonAnimator.Services
                 );
             }
 
-            if (!File.Exists(Path.Combine(this.appSettings.appSettings!.Workspace, settingsFileName)))
+            if (
+                !File.Exists(
+                    Path.Combine(this.appSettings.appSettings!.Workspace, settingsFileName)
+                )
+            )
             {
                 File.Create(Path.Combine(this.appSettings.appSettings!.Workspace, settingsFileName))
                     .Close();
@@ -91,23 +97,36 @@ namespace PlumJsonAnimator.Services
             );
         }
 
-        public void WriteProjectJSON(string project)
+        private void WriteProjectInFile(string filePath, string jsonifyedProject)
+        {
+            ExistOrCreateProjectDirs();
+
+            this.settingsData.Anim = jsonifyedProject;
+
+            ExistOrCreateProjectDirs();
+
+            File.WriteAllText(
+                filePath,
+                JsonConvert.SerializeObject(this.settingsData, this.globalState.jsonSettings)
+            );
+        }
+
+        public void WriteProjectJSON(string jsonifyedProject)
         {
             string settingsPath = Path.Combine(
                 this.appSettings.appSettings!.Workspace,
                 settingsFileName
             );
+            WriteProjectInFile(settingsPath, jsonifyedProject);
+        }
 
-            ExistOrCreateProjectDirs();
-
-            this.settingsData.Anim = project;
-
-            ExistOrCreateProjectDirs();
-
-            File.WriteAllText(
-                settingsPath,
-                JsonConvert.SerializeObject(this.settingsData, this.globalState.jsonSettings)
+        public void WriteAutoSave(string jsonifyedProject)
+        {
+            string settingsPath = Path.Combine(
+                this.appSettings.appSettings!.Workspace,
+                AUTO_SAVE_FILE
             );
+            WriteProjectInFile(settingsPath, jsonifyedProject);
         }
 
         private void readFile(string settingsPath)

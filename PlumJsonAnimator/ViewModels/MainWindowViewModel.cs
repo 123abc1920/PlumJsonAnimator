@@ -168,6 +168,12 @@ public partial class MainWindowViewModel : ViewModelBase
         get => _isAnimMode;
     }
 
+    public DateTime LastSaveTime
+    {
+        get => globalState.LastSaveTime;
+        set => globalState.LastSaveTime = value;
+    }
+
     public object CurrentInfoPanel { get; set; }
 
     public string IsTransformModeActive => TransformMode;
@@ -377,6 +383,12 @@ public partial class MainWindowViewModel : ViewModelBase
         )
     {
         _serviceProvider = serviceProvider;
+
+        globalState.PropertyChanged += (s, e) =>
+        {
+            if (e.PropertyName == nameof(GlobalState.LastSaveTime))
+                OnPropertyChanged(nameof(LastSaveTime));
+        };
 
         var appSettingsVM = (AppSettingsViewModel)GetViewModel(DialogType.SETTINGS);
         appSettingsVM.CurrentTheme = appSettingsVM.Themes[0];

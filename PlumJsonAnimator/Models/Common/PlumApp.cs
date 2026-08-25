@@ -30,6 +30,7 @@ public class PlumApp
     private readonly Engine _engine;
     private readonly ImageExporter _imageExporter;
     private readonly HistoryManager _historyManager;
+    private readonly AutoSaver _autoSaver;
 
     public PlumApp(
         AppSettings appSettings,
@@ -44,7 +45,8 @@ public class PlumApp
         Prettify prettify,
         Engine engine,
         ImageExporter imageExporter,
-        HistoryManager historyManager
+        HistoryManager historyManager,
+        AutoSaver autoSaver
     )
     {
         AppSettings = appSettings;
@@ -61,6 +63,7 @@ public class PlumApp
         _engine = engine;
         _imageExporter = imageExporter;
         _historyManager = historyManager;
+        _autoSaver = autoSaver;
     }
 
     public void Start()
@@ -73,9 +76,12 @@ public class PlumApp
             this.GlobalState.canvasWidth,
             this.GlobalState.canvasHeight
         );
+        GlobalState.lastSaveTime = DateTime.Now;
 
         ProjectSettings.ReadSettings();
         InitProject(new Project(GlobalState, _interpolation, Localization));
+
+        _autoSaver.StartAutoSaveAsync(GlobalState.autoSaveSec);
     }
 
     private void InitProject(Project project)

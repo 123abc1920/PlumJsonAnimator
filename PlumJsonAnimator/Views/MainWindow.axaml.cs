@@ -151,22 +151,25 @@ public partial class MainWindow : SukiWindow
                 if (viewModel.CaptureMode == false)
                 {
                     _isDragging = true;
-                    _oldBoneStatus = new BoneStatus(viewModel.CurrentBone);
-                    if (viewModel.IsAnimMode)
+                    if (viewModel.CurrentBone != null)
                     {
-                        this._oldBoneStatus.T =
-                            viewModel.CurrentProject.CurrentAnimation.GetKeyframe(
-                                TransformModesTypes.TRANSLATE,
-                                viewModel.CurrentTime,
-                                viewModel.CurrentBone
-                            );
+                        _oldBoneStatus = new BoneStatus(viewModel.CurrentBone);
+                        if (viewModel.IsAnimMode)
+                        {
+                            this._oldBoneStatus.T =
+                                viewModel.CurrentProject.CurrentAnimation.GetKeyframe(
+                                    TransformModesTypes.TRANSLATE,
+                                    viewModel.CurrentTime,
+                                    viewModel.CurrentBone
+                                );
 
-                        this._oldBoneStatus.R =
-                            viewModel.CurrentProject.CurrentAnimation.GetKeyframe(
-                                TransformModesTypes.ROTATE,
-                                viewModel.CurrentTime,
-                                viewModel.CurrentBone
-                            );
+                            this._oldBoneStatus.R =
+                                viewModel.CurrentProject.CurrentAnimation.GetKeyframe(
+                                    TransformModesTypes.ROTATE,
+                                    viewModel.CurrentTime,
+                                    viewModel.CurrentBone
+                                );
+                        }
                     }
                 }
                 else
@@ -204,27 +207,30 @@ public partial class MainWindow : SukiWindow
         if (DataContext is MainWindowViewModel viewModel)
         {
             viewModel.CurrentProject?.currentMode.ClearMode();
-            BoneStatus newBoneStatus = new BoneStatus(viewModel.CurrentBone);
-            if (viewModel.IsAnimMode)
+            if (this._oldBoneStatus != null)
             {
-                newBoneStatus.T = viewModel.CurrentProject.CurrentAnimation.GetKeyframe(
-                    TransformModesTypes.TRANSLATE,
-                    viewModel.CurrentTime,
-                    viewModel.CurrentBone
-                );
+                BoneStatus newBoneStatus = new BoneStatus(viewModel.CurrentBone);
+                if (viewModel.IsAnimMode)
+                {
+                    newBoneStatus.T = viewModel.CurrentProject.CurrentAnimation.GetKeyframe(
+                        TransformModesTypes.TRANSLATE,
+                        viewModel.CurrentTime,
+                        viewModel.CurrentBone
+                    );
 
-                newBoneStatus.R = viewModel.CurrentProject.CurrentAnimation.GetKeyframe(
-                    TransformModesTypes.ROTATE,
-                    viewModel.CurrentTime,
-                    viewModel.CurrentBone
+                    newBoneStatus.R = viewModel.CurrentProject.CurrentAnimation.GetKeyframe(
+                        TransformModesTypes.ROTATE,
+                        viewModel.CurrentTime,
+                        viewModel.CurrentBone
+                    );
+                }
+                viewModel.PlumApp.ChangeBoneStatus(
+                    _oldBoneStatus.Copy(),
+                    newBoneStatus,
+                    viewModel.IsAnimMode
                 );
+                _oldBoneStatus = null;
             }
-            viewModel.PlumApp.ChangeBoneStatus(
-                _oldBoneStatus.Copy(),
-                newBoneStatus,
-                viewModel.IsAnimMode
-            );
-            _oldBoneStatus = null;
 
             if (viewModel.CaptureMode)
             {
