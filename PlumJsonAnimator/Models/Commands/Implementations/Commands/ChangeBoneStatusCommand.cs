@@ -9,6 +9,9 @@ public class BoneStatus
         Y,
         A;
 
+    public IKeyframeType T;
+    public IKeyframeType R;
+
     private BoneStatus(double X, double Y, double A)
     {
         this.X = X;
@@ -25,7 +28,10 @@ public class BoneStatus
 
     public BoneStatus Copy()
     {
-        return new BoneStatus(this.X, this.Y, this.A);
+        BoneStatus newBone = new BoneStatus(this.X, this.Y, this.A);
+        newBone.T = this.T;
+        newBone.R = this.R;
+        return newBone;
     }
 }
 
@@ -34,34 +40,26 @@ public class ChangeBoneStatusCommand : ICommand
     private readonly Bone _bone;
     private readonly BoneStatus oldStatus;
     private readonly BoneStatus newStatus;
-
-    private readonly IKeyframeType oldT;
-    private readonly IKeyframeType newT;
-    private readonly IKeyframeType oldR;
-    private readonly IKeyframeType newR;
+    private readonly Animation animation;
+    private readonly bool isAnim;
+    private readonly double time;
 
     public ChangeBoneStatusCommand(
         Bone bone,
         BoneStatus oldStatus,
         BoneStatus newStatus,
         Animation animation,
-        bool isAnim
+        bool isAnim,
+        double time
     )
     {
         _bone = bone;
 
         this.oldStatus = oldStatus;
         this.newStatus = newStatus;
-
-        if (isAnim)
-        {
-            oldT = animation.GetKeyframe(
-                TransformModesTypes.TRANSLATE,
-                animation.currentTime,
-                _bone
-            );
-            oldR = animation.GetKeyframe(TransformModesTypes.ROTATE, animation.currentTime, _bone);
-        }
+        this.animation = animation;
+        this.isAnim = isAnim;
+        this.time = time;
     }
 
     public void Execute()
@@ -69,6 +67,12 @@ public class ChangeBoneStatusCommand : ICommand
         _bone.X = newStatus.X;
         _bone.Y = newStatus.Y;
         _bone.A = newStatus.A;
+
+        if (isAnim)
+        {
+            animation.SetKeyFrame(TransformModesTypes.TRANSLATE, time, newStatus.T, _bone);
+            animation.SetKeyFrame(TransformModesTypes.ROTATE, time, newStatus.R, _bone);
+        }
     }
 
     public void Undo()
@@ -76,5 +80,14 @@ public class ChangeBoneStatusCommand : ICommand
         _bone.X = oldStatus.X;
         _bone.Y = oldStatus.Y;
         _bone.A = oldStatus.A;
+
+        if (isAnim)
+        {
+            if (isAnim)
+            {
+                animation.SetKeyFrame(TransformModesTypes.TRANSLATE, time, oldStatus.T, _bone);
+                animation.SetKeyFrame(TransformModesTypes.ROTATE, time, oldStatus.R, _bone);
+            }
+        }
     }
 }

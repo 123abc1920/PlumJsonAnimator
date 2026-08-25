@@ -435,12 +435,15 @@ public class PlumApp
         GlobalState.CurrentProject?.currentMode.Transform(GlobalState.currentBone, a, b);
     }
 
-    public void ChangeBoneStatus(BoneStatus oldBoneStatus, BoneStatus newBoneStatus)
+    public void ChangeBoneStatus(BoneStatus oldBoneStatus, BoneStatus newBoneStatus, bool isAnim)
     {
         ChangeBoneStatusCommand changeBoneStatusCommand = new ChangeBoneStatusCommand(
             GlobalState.currentBone,
             oldBoneStatus,
-            newBoneStatus
+            newBoneStatus,
+            GlobalState.CurrentProject.CurrentAnimation,
+            isAnim,
+            GlobalState.CurrentProject.CurrentAnimation.currentTime
         );
         this._historyManager.DoCommand(changeBoneStatusCommand);
     }

@@ -10,6 +10,7 @@ using Avalonia.Threading;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Commands;
+using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
@@ -151,6 +152,22 @@ public partial class MainWindow : SukiWindow
                 {
                     _isDragging = true;
                     _oldBoneStatus = new BoneStatus(viewModel.CurrentBone);
+                    if (viewModel.IsAnimMode)
+                    {
+                        this._oldBoneStatus.T =
+                            viewModel.CurrentProject.CurrentAnimation.GetKeyframe(
+                                TransformModesTypes.TRANSLATE,
+                                viewModel.CurrentTime,
+                                viewModel.CurrentBone
+                            );
+
+                        this._oldBoneStatus.R =
+                            viewModel.CurrentProject.CurrentAnimation.GetKeyframe(
+                                TransformModesTypes.ROTATE,
+                                viewModel.CurrentTime,
+                                viewModel.CurrentBone
+                            );
+                    }
                 }
                 else
                 {
@@ -188,7 +205,25 @@ public partial class MainWindow : SukiWindow
         {
             viewModel.CurrentProject?.currentMode.ClearMode();
             BoneStatus newBoneStatus = new BoneStatus(viewModel.CurrentBone);
-            viewModel.PlumApp.ChangeBoneStatus(_oldBoneStatus.Copy(), newBoneStatus);
+            if (viewModel.IsAnimMode)
+            {
+                newBoneStatus.T = viewModel.CurrentProject.CurrentAnimation.GetKeyframe(
+                    TransformModesTypes.TRANSLATE,
+                    viewModel.CurrentTime,
+                    viewModel.CurrentBone
+                );
+
+                newBoneStatus.R = viewModel.CurrentProject.CurrentAnimation.GetKeyframe(
+                    TransformModesTypes.ROTATE,
+                    viewModel.CurrentTime,
+                    viewModel.CurrentBone
+                );
+            }
+            viewModel.PlumApp.ChangeBoneStatus(
+                _oldBoneStatus.Copy(),
+                newBoneStatus,
+                viewModel.IsAnimMode
+            );
             _oldBoneStatus = null;
 
             if (viewModel.CaptureMode)

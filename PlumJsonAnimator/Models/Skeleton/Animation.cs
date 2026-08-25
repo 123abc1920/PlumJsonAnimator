@@ -382,6 +382,16 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             return BoneAnimationBinding[bone].GetKeyFrame(type, time);
         }
 
+        public void SetKeyFrame(
+            TransformModesTypes type,
+            double time,
+            IKeyframeType keyframe,
+            Bone bone
+        )
+        {
+            BoneAnimationBinding[bone].SetKeyFrame(type, time, keyframe);
+        }
+
         /// <summary>
         /// Animation end time
         /// </summary>
