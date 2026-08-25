@@ -38,7 +38,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// Adds new bone into skeleton. Binds it with existing parent bone
         /// </summary>
         /// <param name="parentId">Parent bone id</param>
-        public void AddBoneToParent(int parentId)
+        public Bone AddBoneToParent(int parentId)
         {
             Bone parentBone = this.RootBones[0];
             foreach (Bone b in this.Bones)
@@ -49,15 +49,17 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                     break;
                 }
             }
-            Bone new_bone = new Bone(
+            Bone newBone = new Bone(
                 this._globalState,
                 parentBone,
                 _last_bone_id,
                 this._localizationService
             );
-            this.Bones.Add(new_bone);
-            parentBone.AddChildren(new_bone);
+            this.Bones.Add(newBone);
+            parentBone.AddChildren(newBone);
             _last_bone_id++;
+
+            return newBone;
         }
 
         /// <summary>

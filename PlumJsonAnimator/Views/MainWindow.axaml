@@ -18,6 +18,11 @@
     Icon="/Assets/logo.ico"
     mc:Ignorable="d">
 
+    <suki:SukiWindow.KeyBindings>
+        <KeyBinding Command="{Binding Undo}" Gesture="Ctrl+Z" />
+        <KeyBinding Command="{Binding Redo}" Gesture="Ctrl+Y" />
+    </suki:SukiWindow.KeyBindings>
+
     <suki:SukiWindow.Hosts>
         <suki:SukiToastHost Name="ToastHost" />
     </suki:SukiWindow.Hosts>
@@ -80,13 +85,23 @@
         </Menu>
         <Grid
             Margin="5"
-            ColumnDefinitions="Auto,Auto,Auto"
+            ColumnDefinitions="Auto,Auto,Auto,Auto"
             DockPanel.Dock="Bottom">
+
             <TextBlock
                 Grid.Column="0"
                 Margin="0,0,5,0"
                 Text="{DynamicResource project}" />
-            <TextBlock Grid.Column="1" Text="{Binding CurrentProject.Name}" />
+            <TextBlock
+                Grid.Column="1"
+                Margin="0,0,15,0"
+                Text="{Binding CurrentProject.Name}" />
+
+            <TextBlock
+                Grid.Column="2"
+                Margin="0,0,5,0"
+                Text="{DynamicResource last_saved}" />
+            <TextBlock Grid.Column="3" Text="{Binding LastSaveTime, StringFormat={}{0:HH:mm}}" />
         </Grid>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -689,33 +704,34 @@
                         Grid.Row="2"
                         Margin="0,5"
                         ItemsSource="{Binding CurrentProject.MainSkeleton.RootBones}"
-                        Tapped="OnBonePointerPressed"
-                        ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                        Tapped="OnBonePointerPressed">
                         <TreeView.ItemTemplate>
                             <TreeDataTemplate ItemsSource="{Binding Children}">
-                                <Grid HorizontalAlignment="Stretch" Margin="0,0,10,0">
+                                <Grid Margin="0,0,10,0" HorizontalAlignment="Stretch">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Text="{Binding Name}" 
-                                            Grid.Column="0"
-                                            VerticalAlignment="Center" 
-                                            TextWrapping="NoWrap"
-                                            TextTrimming="None"
-                                            HorizontalAlignment="Left"/>
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        Text="{Binding Name}"
+                                        TextTrimming="None"
+                                        TextWrapping="NoWrap" />
 
-                                    <Rectangle Fill="{Binding BoneColor}" 
-                                            Grid.Column="1"
-                                            Height="10" 
-                                            Width="10"
-                                            VerticalAlignment="Center"
-                                            Margin="10,0,0,0"/>
+                                    <Rectangle
+                                        Grid.Column="1"
+                                        Width="10"
+                                        Height="10"
+                                        Margin="10,0,0,0"
+                                        VerticalAlignment="Center"
+                                        Fill="{Binding BoneColor}" />
 
                                     <ToolTip.Tip>
-                                        <TextBox Padding="0" 
-                                                Text="{Binding Name}" />
+                                        <TextBox Padding="0" Text="{Binding Name}" />
                                     </ToolTip.Tip>
                                 </Grid>
                             </TreeDataTemplate>

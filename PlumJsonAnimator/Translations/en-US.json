@@ -74,5 +74,6 @@
     "select_ffmpeg": "Select ffmpeg.exe file",
     "slot_null_name": "One of the skins does not have a name set!",
     "empty_json": "Empty json code",
-    "base_pos": "Set base pos"
+    "base_pos": "Set base pos",
+    "last_saved": "Last saved:"
 }

@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Models.Commands;
+using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
@@ -27,6 +29,8 @@ public class PlumApp
     private readonly Prettify _prettify;
     private readonly Engine _engine;
     private readonly ImageExporter _imageExporter;
+    private readonly HistoryManager _historyManager;
+    private readonly AutoSaver _autoSaver;
 
     public PlumApp(
         AppSettings appSettings,
@@ -40,7 +44,9 @@ public class PlumApp
         JsonExport jsonExport,
         Prettify prettify,
         Engine engine,
-        ImageExporter imageExporter
+        ImageExporter imageExporter,
+        HistoryManager historyManager,
+        AutoSaver autoSaver
     )
     {
         AppSettings = appSettings;
@@ -56,6 +62,8 @@ public class PlumApp
         _prettify = prettify;
         _engine = engine;
         _imageExporter = imageExporter;
+        _historyManager = historyManager;
+        _autoSaver = autoSaver;
     }
 
     public void Start()
@@ -68,9 +76,12 @@ public class PlumApp
             this.GlobalState.canvasWidth,
             this.GlobalState.canvasHeight
         );
+        GlobalState.lastSaveTime = DateTime.Now;
 
         ProjectSettings.ReadSettings();
         InitProject(new Project(GlobalState, _interpolation, Localization));
+
+        _autoSaver.StartAutoSaveAsync(GlobalState.autoSaveSec);
     }
 
     private void InitProject(Project project)
@@ -82,6 +93,8 @@ public class PlumApp
 
         ValidResult validateResult = _jsonCode.Regenerate(GlobalState.CurrentProject, true);
         this.GlobalState.jsonError.IsOk = validateResult.IsOk;
+
+        this._historyManager.Clear();
     }
 
     public bool CanGenerateProject()
@@ -133,22 +146,6 @@ public class PlumApp
         return this._prettify.prettify(text);
     }
 
-    public void DeleteBoneReqursion(Bone? bone)
-    {
-        if (bone != null && bone.Parent != null)
-        {
-            foreach (Slot s in bone.Slots)
-            {
-                GlobalState.CurrentProject?.DeleteSlotFromProject(s);
-            }
-            foreach (Bone b in bone.Children.ToList())
-            {
-                DeleteBoneReqursion(b);
-            }
-            GlobalState.CurrentProject?.DeleteBoneFromProject(bone);
-        }
-    }
-
     public void RunAnimation()
     {
         this._engine.runAnimation(GlobalState.CurrentProject?.CurrentAnimation);
@@ -161,11 +158,11 @@ public class PlumApp
 
     public bool SaveProject()
     {
-        string anim = JsonConvert.SerializeObject(
+        string project = JsonConvert.SerializeObject(
             this._jsonCode.generateJSONData(GlobalState.CurrentProject),
             GlobalState.jsonSettings
         );
-        ProjectSettings.WriteAnimation(anim);
+        ProjectSettings.WriteProjectJSON(project);
 
         return true;
     }
@@ -192,18 +189,18 @@ public class PlumApp
         }
     }
 
-    public void DropSlotToBone(int id, Res res)
+    public void DropImageToBone(int id, Res res)
     {
         Bone bone = GlobalState.CurrentProject.MainSkeleton.GetBoneById(id);
         if (bone != null)
         {
-            Slot s = new Slot(this.GlobalState, bone);
-            GlobalState.CurrentProject.Slots.Add(s);
-            GlobalState.CurrentProject.CurrentSkin.BindSlotAttachment(
-                s,
-                new ImageAttachment((ImageRes)res)
+            DropImageToBoneCommand dropImageToBoneCommand = new DropImageToBoneCommand(
+                bone,
+                GlobalState.CurrentProject,
+                res,
+                new Slot(this.GlobalState, bone)
             );
-            bone.UpdateSlots();
+            this._historyManager.DoCommand(dropImageToBoneCommand);
         }
     }
 
@@ -323,5 +320,147 @@ public class PlumApp
             GlobalState.CurrentProject
         );
         return result;
+    }
+
+    public void DeleteRes(Res? res)
+    {
+        if (res != null)
+        {
+            foreach (Skin s in GlobalState.CurrentProject.Skins)
+            {
+                s.RemoveResIfContains(res);
+            }
+            GlobalState.CurrentProject.Resources.Remove(res);
+            this._projectManager.DeleteResource(res.Name, res.ext, GlobalState.CurrentProject);
+        }
+    }
+
+    public void DeleteBone(Bone? bone)
+    {
+        DeleteBoneCommand command = new DeleteBoneCommand(bone, GlobalState.CurrentProject);
+        this._historyManager.DoCommand(command);
+    }
+
+    public void AddBone(Bone? selectedBone)
+    {
+        AddBoneCommand command = new AddBoneCommand(selectedBone, GlobalState.CurrentProject);
+        this._historyManager.DoCommand(command);
+    }
+
+    public void AddAnimation()
+    {
+        AddAnimationCommand addAnimationCommand = new AddAnimationCommand(
+            GlobalState.CurrentProject
+        );
+        this._historyManager.DoCommand(addAnimationCommand);
+    }
+
+    public void AddSkin()
+    {
+        AddSkinCommand addSkinCommand = new AddSkinCommand(GlobalState.CurrentProject);
+        this._historyManager.DoCommand(addSkinCommand);
+    }
+
+    public void DeleteAnimation()
+    {
+        DeleteAnimationCommand deleteAnimationCommand = new DeleteAnimationCommand(
+            GlobalState.CurrentProject,
+            GlobalState.CurrentProject.CurrentAnimation
+        );
+        this._historyManager.DoCommand(deleteAnimationCommand);
+    }
+
+    public void DeleteSkin()
+    {
+        DeleteSkinCommand deleteSkinCommand = new DeleteSkinCommand(
+            GlobalState.CurrentProject,
+            GlobalState.CurrentProject.CurrentSkin
+        );
+        this._historyManager.DoCommand(deleteSkinCommand);
+    }
+
+    public void AddSlot()
+    {
+        Bone? bone = GlobalState.currentBone;
+        if (bone != null)
+        {
+            Slot s = new Slot(GlobalState, bone);
+            AddSlotCommand addSlotCommand = new AddSlotCommand(GlobalState.CurrentProject, s, bone);
+            this._historyManager.DoCommand(addSlotCommand);
+        }
+    }
+
+    public void DeleteSlot(Slot? selectedSlot)
+    {
+        if (selectedSlot != null)
+        {
+            DeleteSlotCommand deleteSlotCommand = new DeleteSlotCommand(
+                GlobalState.CurrentProject,
+                selectedSlot,
+                GlobalState.currentBone
+            );
+            this._historyManager.DoCommand(deleteSlotCommand);
+        }
+    }
+
+    public void AddKeyFrame()
+    {
+        if (GlobalState.currentBone != null)
+        {
+            AddKeyFrameCommand addKeyFrameCommand = new AddKeyFrameCommand(
+                GlobalState.CurrentProject.CurrentAnimation,
+                GlobalState.currentBone,
+                GlobalState.CurrentProject.currentMode.type
+            );
+            this._historyManager.DoCommand(addKeyFrameCommand);
+        }
+    }
+
+    public void DeleteKeyFrame()
+    {
+        if (GlobalState.currentBone != null)
+        {
+            DeleteKeyFrameCommand deleteKeyFrameCommand = new DeleteKeyFrameCommand(
+                GlobalState.CurrentProject.CurrentAnimation,
+                GlobalState.currentBone,
+                GlobalState.CurrentProject.currentMode.type
+            );
+            this._historyManager.DoCommand(deleteKeyFrameCommand);
+        }
+    }
+
+    public void Rename(string newName, IRenamable renamableObject)
+    {
+        var oldName = renamableObject.GetName;
+        RenameCommand renameCommand = new RenameCommand(renamableObject, oldName, newName);
+        this._historyManager.DoCommand(renameCommand);
+    }
+
+    public void Transform(double a, double b)
+    {
+        GlobalState.CurrentProject?.currentMode.Transform(GlobalState.currentBone, a, b);
+    }
+
+    public void ChangeBoneStatus(BoneStatus oldBoneStatus, BoneStatus newBoneStatus, bool isAnim)
+    {
+        ChangeBoneStatusCommand changeBoneStatusCommand = new ChangeBoneStatusCommand(
+            GlobalState.currentBone,
+            oldBoneStatus,
+            newBoneStatus,
+            GlobalState.CurrentProject.CurrentAnimation,
+            isAnim,
+            GlobalState.CurrentProject.CurrentAnimation.currentTime
+        );
+        this._historyManager.DoCommand(changeBoneStatusCommand);
+    }
+
+    public void Undo()
+    {
+        this._historyManager.Undo();
+    }
+
+    public void Redo()
+    {
+        this._historyManager.Redo();
     }
 }

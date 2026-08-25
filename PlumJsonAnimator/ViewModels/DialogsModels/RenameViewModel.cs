@@ -8,7 +8,7 @@ namespace PlumJsonAnimator.ViewModels;
 
 public partial class RenameViewModel : ViewModelBase
 {
-    public IRenamable? RedactObj { get; set; } = null;
+    public IRenamable? RenamableObject { get; set; } = null;
 
     public RenameViewModel(
         GlobalState globalState,

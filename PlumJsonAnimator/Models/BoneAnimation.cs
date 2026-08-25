@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Avalonia.Input;
 using Avalonia.Media;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
@@ -16,14 +17,14 @@ namespace PlumJsonAnimator.Models
     /// </summary>
     public class BoneAnimation
     {
-        private SortedDictionary<double, IKeyframeType> _rotateKeyframes =
-            new SortedDictionary<double, IKeyframeType>();
-        private SortedDictionary<double, IKeyframeType> _translateKeyframes =
-            new SortedDictionary<double, IKeyframeType>();
-        private SortedDictionary<double, IKeyframeType> _shearKeyframes =
-            new SortedDictionary<double, IKeyframeType>();
-        private SortedDictionary<double, IKeyframeType> _scaleKeyframes =
-            new SortedDictionary<double, IKeyframeType>();
+        private NoNullSortedDictionary<double, IKeyframeType> _rotateKeyframes =
+            new NoNullSortedDictionary<double, IKeyframeType>();
+        private NoNullSortedDictionary<double, IKeyframeType> _translateKeyframes =
+            new NoNullSortedDictionary<double, IKeyframeType>();
+        private NoNullSortedDictionary<double, IKeyframeType> _shearKeyframes =
+            new NoNullSortedDictionary<double, IKeyframeType>();
+        private NoNullSortedDictionary<double, IKeyframeType> _scaleKeyframes =
+            new NoNullSortedDictionary<double, IKeyframeType>();
 
         private double _rotateStart,
             _rotateEnd;
@@ -157,6 +158,56 @@ namespace PlumJsonAnimator.Models
             }
 
             return result;
+        }
+
+        public IKeyframeType? GetKeyFrame(TransformModesTypes type, double time)
+        {
+            if (type == TransformModesTypes.TRANSLATE)
+            {
+                if (!_translateKeyframes.ContainsKey(time))
+                {
+                    return null;
+                }
+                return _translateKeyframes[time];
+            }
+            else if (type == TransformModesTypes.ROTATE)
+            {
+                if (!_rotateKeyframes.ContainsKey(time))
+                {
+                    return null;
+                }
+                return _rotateKeyframes[time];
+            }
+
+            return null;
+        }
+
+        public void SetKeyFrame(TransformModesTypes type, double time, IKeyframeType keyframe)
+        {
+            if (type == TransformModesTypes.TRANSLATE)
+            {
+                _translateKeyframes[time] = keyframe;
+            }
+            else if (type == TransformModesTypes.ROTATE)
+            {
+                _rotateKeyframes[time] = keyframe;
+            }
+        }
+
+        public void RestoreKeyFrame(
+            IKeyframeType keyframeType,
+            double time,
+            TransformModesTypes type
+        )
+        {
+            if (type == TransformModesTypes.TRANSLATE)
+            {
+                _translateKeyframes[time] = keyframeType;
+            }
+            else if (type == TransformModesTypes.ROTATE)
+            {
+                _rotateKeyframes[time] = keyframeType;
+            }
         }
 
         /// <summary>
@@ -327,22 +378,29 @@ namespace PlumJsonAnimator.Models
             List<IKeyframeTypeData> scalesJSON = new List<IKeyframeTypeData>();
             List<IKeyframeTypeData> shearsJSON = new List<IKeyframeTypeData>();
 
-            foreach (IKeyframeType frame in _translateKeyframes.Values)
-            {
-                translatesJSON.Add(frame.GenerateJSONData());
-            }
-            foreach (IKeyframeType frame in _rotateKeyframes.Values)
-            {
-                rotatesJSON.Add(frame.GenerateJSONData());
-            }
-            foreach (IKeyframeType frame in _scaleKeyframes.Values)
-            {
-                scalesJSON.Add(frame.GenerateJSONData());
-            }
-            foreach (IKeyframeType frame in _shearKeyframes.Values)
-            {
-                shearsJSON.Add(frame.GenerateJSONData());
-            }
+            translatesJSON.AddRange(
+                _translateKeyframes
+                    .Values.Where(frame => frame != null)
+                    .Select(frame => frame.GenerateJSONData())
+            );
+
+            rotatesJSON.AddRange(
+                _rotateKeyframes
+                    .Values.Where(frame => frame != null)
+                    .Select(frame => frame.GenerateJSONData())
+            );
+
+            scalesJSON.AddRange(
+                _scaleKeyframes
+                    .Values.Where(frame => frame != null)
+                    .Select(frame => frame.GenerateJSONData())
+            );
+
+            shearsJSON.AddRange(
+                _shearKeyframes
+                    .Values.Where(frame => frame != null)
+                    .Select(frame => frame.GenerateJSONData())
+            );
 
             return new BoneAnimationData
             {

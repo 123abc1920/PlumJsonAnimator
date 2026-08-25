@@ -5,6 +5,7 @@ using System.IO;
 using Avalonia.Controls;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Models.Commands;
 using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
@@ -36,10 +37,10 @@ namespace PlumJsonAnimator.Models
         public Skeleton? MainSkeleton { get; set; } = null;
         public ObservableCollection<Slot> Slots { get; set; } = new ObservableCollection<Slot>();
         public ObservableCollection<Res> Resources { get; } = new ObservableCollection<Res>();
-        public ObservableCollection<Animation> Animations { get; } =
+        public ObservableCollection<Animation> Animations { get; set; } =
             new ObservableCollection<Animation>();
 
-        public ObservableCollection<Skin> Skins { get; } = new ObservableCollection<Skin>();
+        public ObservableCollection<Skin> Skins { get; set; } = new ObservableCollection<Skin>();
         private Skin _currentSkin;
         private Animation? _currentAnimation;
 
@@ -136,36 +137,48 @@ namespace PlumJsonAnimator.Models
             return CurrentAnimation;
         }
 
-        public void AddAnimation()
+        public Animation AddAnimation()
         {
-            this.Animations.Add(
-                new Animation(
-                    this._globalState,
-                    this._interpolation,
-                    $"anim{Counter.GenerateNamePostfix()}"
-                )
+            Animation newAnimation = new Animation(
+                this._globalState,
+                this._interpolation,
+                $"anim{Counter.GenerateNamePostfix()}"
             );
+            this.Animations.Add(newAnimation);
+            return newAnimation;
         }
 
-        public void DeleteAnimation()
+        public void RestoreAnimation(Animation animation)
+        {
+            this.Animations.Add(animation);
+        }
+
+        public void DeleteAnimation(Animation animation)
         {
             if (this.Animations.Count > 1)
             {
-                this.Animations.Remove(CurrentAnimation);
+                this.Animations.Remove(animation);
                 CurrentAnimation = this.Animations[0];
             }
         }
 
-        public void AddSkin()
+        public Skin AddSkin()
         {
-            this.Skins.Add(new Skin($"skin{Counter.GenerateNamePostfix()}", this._globalState));
+            Skin newSkin = new Skin($"skin{Counter.GenerateNamePostfix()}", this._globalState);
+            this.Skins.Add(newSkin);
+            return newSkin;
         }
 
-        public void DeleteSkin()
+        public void RestoreSkin(Skin skin)
+        {
+            this.Skins.Add(skin);
+        }
+
+        public void DeleteSkin(Skin skin)
         {
             if (this.Skins.Count > 1)
             {
-                this.Skins.Remove(CurrentSkin);
+                this.Skins.Remove(skin);
                 CurrentSkin = this.Skins[0];
             }
         }
@@ -266,26 +279,79 @@ namespace PlumJsonAnimator.Models
             return null;
         }
 
-        public void DeleteSlotFromProject(Slot slot)
+        public List<SlotAttach> DeleteSlotFromProject(Slot slot)
         {
+            List<SlotAttach> result = new List<SlotAttach>();
+
             this.Slots.Remove(slot);
             foreach (Skin s in this.Skins)
             {
                 if (s.ContainsSlot(slot) == true)
                 {
+                    Attachment a = s.GetAttachment(slot);
+                    result.Add(new SlotAttach(slot, s, a));
                     s.DeleteSlot(slot);
                 }
             }
+
+            return result;
         }
 
-        public void DeleteBoneFromProject(Bone bone)
+        public List<BoneAnim> DeleteBoneFromProject(Bone? bone)
         {
+            if (bone == null)
+                return null;
+
+            List<BoneAnim> result = new List<BoneAnim>();
+
             this.MainSkeleton?.Bones.Remove(bone);
             bone?.Parent?.Children.Remove(bone);
             foreach (Animation a in this.Animations)
             {
+                if (a.ContainsBone(bone))
+                {
+                    result.Add(new BoneAnim(bone, a, a.GetBoneAnimation(bone)));
+                }
                 a.DeleteBoneFromAnimation(bone);
             }
+
+            return result;
+        }
+
+        public void AddBoneToProject(Bone? bone, Bone? parent = null)
+        {
+            if (bone == null)
+                return;
+
+            this.MainSkeleton?.Bones.Add(bone);
+
+            if (parent != null)
+            {
+                bone.Parent = parent;
+                parent.Children.Add(bone);
+            }
+            else
+            {
+                bone.Parent = null;
+            }
+        }
+
+        public void RestoreBone(Bone? bone)
+        {
+            if (bone == null)
+                return;
+
+            this.MainSkeleton.Bones.Add(bone);
+
+            foreach (Slot s in bone.Slots)
+            {
+                this.Slots.Add(s);
+            }
+        }
+
+        public void AddSlotToProject(Slot s, Bone b)
+        {
+            this.Slots.Add(s);
         }
 
         /// <summary>
