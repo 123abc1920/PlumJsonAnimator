@@ -7,6 +7,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
+using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Commands;
@@ -43,55 +44,23 @@ public partial class MainWindow : SukiWindow
         Popups.ToastManager = ToastManager;
     }
 
-    public void initViews()
+    public void InitViews(GlobalState globalState)
     {
-        DispatcherTimer _canvasLoop = new DispatcherTimer();
-        _canvasLoop.Interval = TimeSpan.FromMilliseconds(1000 / 60.0);
-        _canvasLoop.Tick += UpdateCanvas;
-        _canvasLoop.Start();
-
         DragDrop.SetAllowDrop(boneTreeView, true);
         boneTreeView.AddHandler(DragDrop.DropEvent, OnTreeViewDrop);
 
         if (DataContext is MainWindowViewModel viewModel)
         {
-            viewModel.Canvas = mainCanvas;
             viewModel.Timeline = Timeline;
             viewModel.SetMainWin(this);
+            globalState.canvas = mainCanvas;
+
             if (!viewModel.JsonErrorObj.IsOk)
             {
                 Popups.ShowPopup(
                     viewModel.GetMessage(LocalizationConsts.REGENERATE_ERROR),
                     viewModel.GetMessage(LocalizationConsts.INFO_MESSAGE)
                 );
-            }
-        }
-    }
-
-    private void UpdateCanvas(object? sender, EventArgs e)
-    {
-        if (MainTabControl.SelectedIndex == 0)
-        {
-            mainCanvas.Children.Clear();
-            if (DataContext is MainWindowViewModel viewModel)
-            {
-                viewModel.CurrentProject?.DrawSlots(mainCanvas);
-                if (viewModel.DrawBones)
-                {
-                    viewModel.CurrentProject?.MainSkeleton?.DrawSkeleton(mainCanvas);
-                    viewModel.GenerateCode();
-                }
-                if (viewModel.CaptureMode)
-                {
-                    viewModel.GetCaptureArea()?.DrawCaptureArea(mainCanvas);
-                }
-            }
-        }
-        else if (MainTabControl.SelectedIndex == 1)
-        {
-            if (DataContext is MainWindowViewModel viewModel)
-            {
-                viewModel.CanGenerateProject();
             }
         }
     }

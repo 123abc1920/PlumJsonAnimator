@@ -1,6 +1,8 @@
 using System;
 using System.Threading.Tasks;
+using Avalonia.Controls;
 using Avalonia.Media;
+using Avalonia.Threading;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Interfaces;
@@ -45,6 +47,8 @@ namespace PlumJsonAnimator.Common.Constants
             TimeUpdated?.Invoke();
         }
 
+        public int currentTab;
+
         public Bone? currentBone = null;
         public string theme = "light";
         public bool drawBones = true;
@@ -53,6 +57,7 @@ namespace PlumJsonAnimator.Common.Constants
         public string workspace = "PlumJsonAnimatorWorkspace";
         public string programExt = ".plmjsn";
 
+        public Canvas? canvas;
         public const int BASE_CANVAS_SIZE = 1000;
         public int canvasHeight = 1000;
         public int canvasWidth = 1000;
