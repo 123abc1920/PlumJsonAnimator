@@ -11,6 +11,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models;
+using PlumJsonAnimator.Models.Common;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Gif;
 using SixLabors.ImageSharp.PixelFormats;
@@ -23,26 +24,31 @@ namespace PlumJsonAnimator.Services
     public class ImageExporter
     {
         public string ExportPath = "";
-        private Canvas? _canvas = null;
         public Canvas? Canvas
         {
-            get => _canvas;
+            get => this._globalState.canvas;
             set
             {
-                if (_canvas != value)
+                if (this._globalState.canvas != value)
                 {
-                    _canvas = value;
+                    this._globalState.canvas = value;
                 }
             }
         }
 
         private GlobalState _globalState;
         private LocalizationService _localizationService;
+        private CanvasRenderer _canvasRenderer;
 
-        public ImageExporter(GlobalState globalState, LocalizationService localizationService)
+        public ImageExporter(
+            GlobalState globalState,
+            LocalizationService localizationService,
+            CanvasRenderer canvasRenderer
+        )
         {
             this._globalState = globalState;
             this._localizationService = localizationService;
+            this._canvasRenderer = canvasRenderer;
         }
 
         /// <summary>
@@ -95,49 +101,62 @@ namespace PlumJsonAnimator.Services
             Project project
         )
         {
-            if (Directory.Exists(outputFolder))
+            if (!Directory.Exists(outputFolder))
             {
-                project!.CurrentAnimation!.currentTime = start;
-                double endTime = Math.Min(project.CurrentAnimation.MaxTime(), end);
-
-                var totalFrames = (int)((endTime - start) * this._globalState.FPS) + 1;
-                int frameCount = 0;
-
-                var i = 0;
-                var drawBones = this._globalState.drawBones;
-                var captureMode = this._globalState.captureMode;
-                this._globalState.drawBones = false;
-                this._globalState.captureMode = false;
-                while (project.CurrentAnimation.currentTime <= endTime)
-                {
-                    using (RenderTargetBitmap bitmap = CatchCanvas(_canvas))
-                    {
-                        var fileName = Path.Combine(outputFolder, $"{i:D8}.png");
-                        using (var fileStream = File.Create(fileName))
-                        {
-                            bitmap.Save(fileStream);
-                        }
-                    }
-
-                    frameCount++;
-
-                    var percent = (int)((double)frameCount / totalFrames * 100);
-                    ProgressChanged?.Invoke(this, percent);
-
-                    project.CurrentAnimation.Step();
-                    _canvas!.InvalidateVisual();
-                    await Task.Delay(30);
-                    i++;
-                }
-                this._globalState.drawBones = drawBones;
-                this._globalState.captureMode = captureMode;
-
                 ProgressChanged?.Invoke(this, 0);
-                return ExportResult.SUCCESS;
+                return ExportResult.NO_FOLDER;
             }
 
+            this._canvasRenderer.LoopStop();
+
+            project!.CurrentAnimation!.currentTime = start;
+            double endTime = Math.Min(project.CurrentAnimation.MaxTime(), end);
+
+            var totalFrames = (int)((endTime - start) * this._globalState.FPS) + 1;
+            int frameCount = 0;
+
+            var i = 0;
+
+            this._globalState.CurrentProject.CurrentAnimation.SetupBones();
+            this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
+
+            while (project.CurrentAnimation.currentTime <= endTime)
+            {
+                Canvas!.Measure(
+                    new Avalonia.Size(double.PositiveInfinity, double.PositiveInfinity)
+                );
+                Canvas!.Arrange(new Rect(Canvas.Bounds.Size));
+
+                using (RenderTargetBitmap bitmap = CatchCanvas(Canvas))
+                {
+                    var fileName = Path.Combine(outputFolder, $"{i:D8}.png");
+                    using (var fileStream = File.Create(fileName))
+                    {
+                        bitmap.Save(fileStream);
+                    }
+                }
+
+                frameCount++;
+                var percent = (int)((double)frameCount / totalFrames * 100);
+                ProgressChanged?.Invoke(this, percent);
+
+                project.CurrentAnimation.Step();
+
+                this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
+
+                await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(
+                    () => { },
+                    Avalonia.Threading.DispatcherPriority.Background
+                );
+
+                i++;
+            }
+
+            this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
+            this._canvasRenderer.LoopStart();
+
             ProgressChanged?.Invoke(this, 0);
-            return ExportResult.NO_FOLDER;
+            return ExportResult.SUCCESS;
         }
 
         /// <summary>
@@ -154,49 +173,62 @@ namespace PlumJsonAnimator.Services
             Project project
         )
         {
-            if (Directory.Exists(outputFolder))
+            if (!Directory.Exists(outputFolder))
             {
-                project!.CurrentAnimation!.currentTime = start;
-                double endTime = Math.Min(project.CurrentAnimation.MaxTime(), end);
-
-                var totalFrames = (int)((endTime - start) * this._globalState.FPS) + 1;
-                int frameCount = 0;
-
-                var i = 0;
-                var drawBones = this._globalState.drawBones;
-                var captureMode = this._globalState.captureMode;
-                this._globalState.drawBones = false;
-                this._globalState.captureMode = false;
-                while (project.CurrentAnimation.currentTime <= endTime)
-                {
-                    using (RenderTargetBitmap bitmap = CatchCanvas(_canvas))
-                    {
-                        var fileName = Path.Combine(outputFolder, $"{i:D8}.jpg");
-                        using (var fileStream = File.Create(fileName))
-                        {
-                            bitmap.Save(fileStream);
-                        }
-                    }
-
-                    frameCount++;
-
-                    var percent = (int)((double)frameCount / totalFrames * 100);
-                    ProgressChanged?.Invoke(this, percent);
-
-                    project.CurrentAnimation.Step();
-                    _canvas!.InvalidateVisual();
-                    await Task.Delay(30);
-                    i++;
-                }
-                this._globalState.drawBones = drawBones;
-                this._globalState.captureMode = captureMode;
-
                 ProgressChanged?.Invoke(this, 0);
-                return ExportResult.SUCCESS;
+                return ExportResult.NO_FOLDER;
             }
 
+            this._canvasRenderer.LoopStop();
+
+            project!.CurrentAnimation!.currentTime = start;
+            double endTime = Math.Min(project.CurrentAnimation.MaxTime(), end);
+
+            var totalFrames = (int)((endTime - start) * this._globalState.FPS) + 1;
+            int frameCount = 0;
+
+            var i = 0;
+
+            this._globalState.CurrentProject.CurrentAnimation.SetupBones();
+            this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
+
+            while (project.CurrentAnimation.currentTime <= endTime)
+            {
+                Canvas!.Measure(
+                    new Avalonia.Size(double.PositiveInfinity, double.PositiveInfinity)
+                );
+                Canvas!.Arrange(new Rect(Canvas.Bounds.Size));
+
+                using (RenderTargetBitmap bitmap = CatchCanvas(Canvas))
+                {
+                    var fileName = Path.Combine(outputFolder, $"{i:D8}.jpg");
+                    using (var fileStream = File.Create(fileName))
+                    {
+                        bitmap.Save(fileStream);
+                    }
+                }
+
+                frameCount++;
+                var percent = (int)((double)frameCount / totalFrames * 100);
+                ProgressChanged?.Invoke(this, percent);
+
+                project.CurrentAnimation.Step();
+
+                this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
+
+                await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(
+                    () => { },
+                    Avalonia.Threading.DispatcherPriority.Background
+                );
+
+                i++;
+            }
+
+            this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
+            this._canvasRenderer.LoopStart();
+
             ProgressChanged?.Invoke(this, 0);
-            return ExportResult.NO_FOLDER;
+            return ExportResult.SUCCESS;
         }
 
         /// <summary>
@@ -215,79 +247,99 @@ namespace PlumJsonAnimator.Services
         {
             if (!File.Exists(outputFile))
             {
-                File.Create(outputFile).Close();
+                try
+                {
+                    File.Create(outputFile).Close();
+                }
+                catch
+                {
+                    ProgressChanged?.Invoke(this, 0);
+                    return ExportResult.NO_FOLDER;
+                }
             }
 
             if (File.Exists(outputFile))
             {
+                this._canvasRenderer.LoopStop();
+
                 project!.CurrentAnimation!.currentTime = start;
                 double endTime = Math.Min(project.CurrentAnimation.MaxTime(), end);
 
                 var totalFrames = (int)((endTime - start) * this._globalState.FPS) + 1;
                 int frameCount = 0;
 
-                var drawBones = this._globalState.drawBones;
-                var captureMode = this._globalState.captureMode;
-                this._globalState.drawBones = false;
-                this._globalState.captureMode = false;
-                List<Image<Rgba32>> frames = new List<Image<Rgba32>>();
+                List<SixLabors.ImageSharp.Image<Rgba32>> frames =
+                    new List<SixLabors.ImageSharp.Image<Rgba32>>();
+
+                this._globalState.CurrentProject.CurrentAnimation.SetupBones();
+                this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
+
                 while (project.CurrentAnimation.currentTime <= endTime)
                 {
-                    _canvas!.InvalidateVisual();
-                    _canvas.UpdateLayout();
+                    Canvas!.Measure(
+                        new Avalonia.Size(double.PositiveInfinity, double.PositiveInfinity)
+                    );
+                    Canvas!.Arrange(new Avalonia.Rect(Canvas.Bounds.Size));
 
-                    using (RenderTargetBitmap bitmap = CatchCanvas(_canvas))
+                    using (RenderTargetBitmap bitmap = CatchCanvas(Canvas))
                     {
-                        var pixelSize = bitmap.PixelSize;
-                        var image = new Image<Rgba32>(pixelSize.Width, pixelSize.Height);
-
                         using (var stream = new MemoryStream())
                         {
                             bitmap.Save(stream);
                             stream.Position = 0;
+
                             var frameImage = SixLabors.ImageSharp.Image.Load<Rgba32>(stream);
                             frames.Add(frameImage);
-
-                            frameCount++;
-
-                            var percent = (int)((double)frameCount / totalFrames * 100);
-                            ProgressChanged?.Invoke(this, percent);
                         }
                     }
 
+                    frameCount++;
+                    var percent = (int)((double)frameCount / totalFrames * 100);
+                    ProgressChanged?.Invoke(this, percent);
+
                     project.CurrentAnimation.Step();
-                    _canvas!.InvalidateVisual();
-                    await Task.Delay(30);
+
+                    this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
+
+                    await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(
+                        () => { },
+                        Avalonia.Threading.DispatcherPriority.Background
+                    );
                 }
 
-                using (var gif = frames[0].CloneAs<Rgba32>())
+                if (frames.Count > 0)
                 {
-                    gif.Metadata.GetGifMetadata().RepeatCount = 0;
+                    int gifFrameDelay = (int)Math.Round(100.0 / this._globalState.FPS);
 
-                    gif.Frames.RootFrame.Metadata.GetGifMetadata().DisposalMethod =
-                        GifDisposalMethod.RestoreToBackground;
-                    gif.Frames.RootFrame.Metadata.GetGifMetadata().FrameDelay = 5;
-
-                    for (int i = 1; i < frames.Count; i++)
+                    using (var gif = frames[0].CloneAs<Rgba32>())
                     {
-                        var frame = frames[i].Frames.RootFrame;
-                        frame.Metadata.GetGifMetadata().DisposalMethod =
+                        gif.Metadata.GetGifMetadata().RepeatCount = 0;
+
+                        gif.Frames.RootFrame.Metadata.GetGifMetadata().DisposalMethod =
                             GifDisposalMethod.RestoreToBackground;
-                        frame.Metadata.GetGifMetadata().FrameDelay = 5;
-                        gif.Frames.AddFrame(frame);
+                        gif.Frames.RootFrame.Metadata.GetGifMetadata().FrameDelay = gifFrameDelay;
+
+                        for (int i = 1; i < frames.Count; i++)
+                        {
+                            var frame = frames[i].Frames.RootFrame;
+                            frame.Metadata.GetGifMetadata().DisposalMethod =
+                                GifDisposalMethod.RestoreToBackground;
+                            frame.Metadata.GetGifMetadata().FrameDelay = gifFrameDelay;
+                            gif.Frames.AddFrame(frame);
+                        }
+
+                        var encoder = new GifEncoder();
+                        gif.Save(outputFile, encoder);
                     }
 
-                    var encoder = new GifEncoder();
-                    gif.Save(outputFile, encoder);
+                    foreach (var frame in frames)
+                    {
+                        frame.Dispose();
+                    }
                 }
 
-                foreach (var frame in frames)
-                {
-                    frame.Dispose();
-                }
-
-                this._globalState.drawBones = drawBones;
-                this._globalState.captureMode = captureMode;
+                this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
+                this._canvasRenderer.LoopStart();
 
                 ProgressChanged?.Invoke(this, 0);
                 return ExportResult.SUCCESS;
@@ -319,21 +371,31 @@ namespace PlumJsonAnimator.Services
                 return ExportResult.NO_FFMPEG;
             }
 
-            using (var testBitmap = CatchCanvas(_canvas))
+            this._canvasRenderer.LoopStop();
+
+            project!.CurrentAnimation!.currentTime = start;
+            this._globalState.CurrentProject.CurrentAnimation.SetupBones();
+            this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
+
+            Canvas!.Measure(new Avalonia.Size(double.PositiveInfinity, double.PositiveInfinity));
+            Canvas!.Arrange(new Avalonia.Rect(Canvas.Bounds.Size));
+
+            using (var testBitmap = CatchCanvas(Canvas))
             {
                 if (testBitmap == null)
                 {
+                    this._canvasRenderer.LoopStart();
                     ProgressChanged?.Invoke(this, 0);
                     return ExportResult.FFMPEG_ERROR;
                 }
 
                 var size = testBitmap.PixelSize;
-
                 int width = size.Width;
                 int height = size.Height;
 
                 if (width <= 0 || height <= 0)
                 {
+                    this._canvasRenderer.LoopStart();
                     ProgressChanged?.Invoke(this, 0);
                     return ExportResult.FFMPEG_ERROR;
                 }
@@ -344,8 +406,9 @@ namespace PlumJsonAnimator.Services
                     + $"-r {this._globalState.FPS} "
                     + $"-i - "
                     + $"-c:v libx264 "
-                    + $"-preset fast "
-                    + $"-crf 23 "
+                    + $"-preset medium "
+                    + $"-tune animation "
+                    + $"-crf 15 "
                     + $"-pix_fmt yuv420p "
                     + $"-movflags +faststart "
                     + $"-y "
@@ -377,23 +440,21 @@ namespace PlumJsonAnimator.Services
                 process.Start();
                 process.BeginErrorReadLine();
 
-                var drawBones = this._globalState.drawBones;
-                var captureMode = this._globalState.captureMode;
-                this._globalState.drawBones = false;
-                this._globalState.captureMode = false;
+                double endTime = Math.Min(project.CurrentAnimation.MaxTime(), end);
+                int frameCount = 0;
+                bool error = false;
+                var totalFrames = (int)((endTime - start) * this._globalState.FPS) + 1;
+
                 using (var stdin = process.StandardInput.BaseStream)
                 {
-                    project!.CurrentAnimation!.currentTime = start;
-                    double endTime = Math.Min(project.CurrentAnimation.MaxTime(), end);
-
-                    int frameCount = 0;
-                    bool error = false;
-
-                    var totalFrames = (int)((endTime - start) * this._globalState.FPS) + 1;
-
                     while (project.CurrentAnimation.currentTime <= endTime)
                     {
-                        using (RenderTargetBitmap bitmap = CatchCanvas(_canvas))
+                        Canvas!.Measure(
+                            new Avalonia.Size(double.PositiveInfinity, double.PositiveInfinity)
+                        );
+                        Canvas!.Arrange(new Avalonia.Rect(Canvas.Bounds.Size));
+
+                        using (RenderTargetBitmap bitmap = CatchCanvas(Canvas))
                         {
                             var currentSize = bitmap.PixelSize;
 
@@ -408,14 +469,13 @@ namespace PlumJsonAnimator.Services
 
                             int stride = width * 4;
                             int bufferSize = height * stride;
-
                             var buffer = new byte[bufferSize];
 
                             var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
                             try
                             {
                                 bitmap.CopyPixels(
-                                    new PixelRect(0, 0, width, height),
+                                    new Avalonia.PixelRect(0, 0, width, height), // Явно указываем Avalonia.PixelRect
                                     handle.AddrOfPinnedObject(),
                                     bufferSize,
                                     stride
@@ -444,8 +504,13 @@ namespace PlumJsonAnimator.Services
                         }
 
                         project.CurrentAnimation.Step();
-                        _canvas!.InvalidateVisual();
-                        await Task.Delay(30);
+
+                        this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
+
+                        await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(
+                            () => { },
+                            Avalonia.Threading.DispatcherPriority.Background
+                        );
                     }
 
                     if (!error)
@@ -453,8 +518,9 @@ namespace PlumJsonAnimator.Services
                         stdin.Flush();
                     }
                 }
-                this._globalState.drawBones = drawBones;
-                this._globalState.captureMode = captureMode;
+
+                this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
+                this._canvasRenderer.LoopStart();
 
                 if (!process.WaitForExit(10000))
                 {

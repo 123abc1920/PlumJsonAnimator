@@ -1,4 +1,5 @@
 using System;
+using Avalonia.Controls;
 using Avalonia.Threading;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
@@ -55,6 +56,32 @@ namespace PlumJsonAnimator.Services
             }
 
             this.currentAnimation = animation;
+        }
+
+        private void UpdateCanvas(object? sender, EventArgs e)
+        {
+            if (this.globalState.currentTab == 0)
+            {
+                UpdateCanvas(
+                    this.globalState.canvas,
+                    this.globalState.drawBones,
+                    this.globalState.captureMode
+                );
+            }
+        }
+
+        public void UpdateCanvas(Canvas canvas, bool isDrawBone, bool isDrawCapture)
+        {
+            canvas?.Children.Clear();
+            this.globalState.CurrentProject?.DrawSlots(canvas);
+            if (isDrawBone)
+            {
+                this.globalState.CurrentProject?.MainSkeleton?.DrawSkeleton(canvas);
+            }
+            if (isDrawCapture)
+            {
+                this.globalState.captureArea?.DrawCaptureArea(canvas);
+            }
         }
     }
 }

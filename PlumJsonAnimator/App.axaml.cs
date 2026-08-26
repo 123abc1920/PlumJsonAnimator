@@ -46,6 +46,7 @@ public partial class App : Application
 
         services.AddSingleton<Interpolation>();
         services.AddSingleton<Engine>();
+        services.AddSingleton<CanvasRenderer>();
 
         services.AddSingleton<LocalizationService>();
 
@@ -88,6 +89,8 @@ public partial class App : Application
                 );
             }
 
+            var globalState = _serviceProvider.GetRequiredService<GlobalState>();
+
             var app = _serviceProvider.GetRequiredService<PlumApp>();
             app.Start();
 
@@ -102,7 +105,7 @@ public partial class App : Application
             }
 
             var mainWindow = new MainWindow { DataContext = mainViewModelInstance };
-            mainWindow.initViews();
+            mainWindow.InitViews(globalState);
             desktop.MainWindow = mainWindow;
         }
 

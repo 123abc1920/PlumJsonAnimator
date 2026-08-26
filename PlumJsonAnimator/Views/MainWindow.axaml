@@ -332,6 +332,7 @@
                 <TabControl
                     x:Name="MainTabControl"
                     Padding="0"
+                    SelectedIndex="{Binding CurrentTab, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     SelectionChanged="TabControl_SelectionChanged">
                     <TabItem Header="{DynamicResource animation}">
                         <Grid>
@@ -369,11 +370,13 @@
                                                     Background="Transparent"
                                                     PointerMoved="Move_Canvas"
                                                     PointerPressed="Press_Canvas"
-                                                    PointerReleased="Release_Canvas">
+                                                    PointerReleased="Release_Canvas"
+                                                    UseLayoutRounding="False">
                                                     <Canvas.RenderTransform>
                                                         <ScaleTransform ScaleX="{Binding ZoomCanvas}" ScaleY="{Binding ZoomCanvas}" />
                                                     </Canvas.RenderTransform>
                                                 </Canvas>
+
                                             </Grid>
                                         </ScrollViewer>
 

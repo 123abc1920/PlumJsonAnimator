@@ -31,6 +31,7 @@ public class PlumApp
     private readonly ImageExporter _imageExporter;
     private readonly HistoryManager _historyManager;
     private readonly AutoSaver _autoSaver;
+    private readonly CanvasRenderer _canvasUpdater;
 
     public PlumApp(
         AppSettings appSettings,
@@ -46,7 +47,8 @@ public class PlumApp
         Engine engine,
         ImageExporter imageExporter,
         HistoryManager historyManager,
-        AutoSaver autoSaver
+        AutoSaver autoSaver,
+        CanvasRenderer canvasUpdater
     )
     {
         AppSettings = appSettings;
@@ -64,6 +66,7 @@ public class PlumApp
         _imageExporter = imageExporter;
         _historyManager = historyManager;
         _autoSaver = autoSaver;
+        _canvasUpdater = canvasUpdater;
     }
 
     public void Start()
@@ -99,32 +102,12 @@ public class PlumApp
 
     public bool CanGenerateProject()
     {
-        this.GlobalState.jsonError.ErrorText = this._jsonValidator.Validate(
-            GlobalState.CurrentProject.Code
-        );
-        if (this.GlobalState.jsonError.IsOk)
-        {
-            ValidResult validateResult = this._jsonCode.Regenerate(
-                GlobalState.CurrentProject,
-                false
-            );
-            if (!validateResult.IsOk)
-            {
-                this.GlobalState.jsonError.ErrorText = validateResult.Message;
-                return false;
-            }
-        }
-        return true;
+        return this._canvasUpdater.CanGenerateProject();
     }
 
     public void RegenerateProject()
     {
         this._jsonCode.Regenerate(GlobalState.CurrentProject, true);
-    }
-
-    public void GenerateCode()
-    {
-        this._jsonCode.generateCode(GlobalState.CurrentProject);
     }
 
     public ExportResult ExportSpineJson(string outFolder)

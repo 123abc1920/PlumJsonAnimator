@@ -68,7 +68,7 @@ public class ChangeBoneStatusCommand : ICommand
         _bone.Y = newStatus.Y;
         _bone.A = newStatus.A;
 
-        if (isAnim)
+        if (isAnim == true)
         {
             animation.SetKeyFrame(TransformModesTypes.TRANSLATE, time, newStatus.T, _bone);
             animation.SetKeyFrame(TransformModesTypes.ROTATE, time, newStatus.R, _bone);
@@ -81,13 +81,10 @@ public class ChangeBoneStatusCommand : ICommand
         _bone.Y = oldStatus.Y;
         _bone.A = oldStatus.A;
 
-        if (isAnim)
+        if (isAnim == true)
         {
-            if (isAnim)
-            {
-                animation.SetKeyFrame(TransformModesTypes.TRANSLATE, time, oldStatus.T, _bone);
-                animation.SetKeyFrame(TransformModesTypes.ROTATE, time, oldStatus.R, _bone);
-            }
+            animation.SetKeyFrame(TransformModesTypes.TRANSLATE, time, oldStatus.T, _bone);
+            animation.SetKeyFrame(TransformModesTypes.ROTATE, time, oldStatus.R, _bone);
         }
     }
 }

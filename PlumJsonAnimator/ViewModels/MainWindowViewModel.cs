@@ -53,6 +53,19 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
+    public int CurrentTab
+    {
+        get => this.globalState.currentTab;
+        set
+        {
+            if (this.globalState.currentTab != value)
+            {
+                this.globalState.currentTab = value;
+                OnPropertyChanged(nameof(CurrentTab));
+            }
+        }
+    }
+
     public TimelineControl? Timeline;
     public double CurrentTime
     {
@@ -276,11 +289,6 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         ViewModelBase viewModel = GetViewModel(viewType);
         this.dialogs.ShowDialog(title, viewModel, owner, viewType);
-    }
-
-    public void GenerateCode()
-    {
-        this.PlumApp.GenerateCode();
     }
 
     public ExportResult exportSpineJson(string outFolder)

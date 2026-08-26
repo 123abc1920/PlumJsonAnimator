@@ -14,7 +14,7 @@ namespace PlumJsonAnimator.ViewModels;
 
 public class ViewModelBase : ObservableObject, INotifyPropertyChanged
 {
-    protected GlobalState globalState;
+    public GlobalState globalState;
     protected Dialogs dialogs;
     protected ProjectFilesManager projectManager;
     protected AppSettings appSettings;
