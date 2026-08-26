@@ -377,9 +377,13 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
-        public IKeyframeType GetKeyframe(TransformModesTypes type, double time, Bone bone)
+        public IKeyframeType? GetKeyframe(TransformModesTypes type, double time, Bone bone)
         {
-            return BoneAnimationBinding[bone].GetKeyFrame(type, time);
+            if (BoneAnimationBinding.TryGetValue(bone, out var animation))
+            {
+                return animation.GetKeyFrame(type, time);
+            }
+            return null;
         }
 
         public void SetKeyFrame(
@@ -389,7 +393,10 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             Bone bone
         )
         {
-            BoneAnimationBinding[bone].SetKeyFrame(type, time, keyframe);
+            if (BoneAnimationBinding.TryGetValue(bone, out var boneAnimation))
+            {
+                boneAnimation.SetKeyFrame(type, time, keyframe);
+            }
         }
 
         /// <summary>

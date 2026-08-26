@@ -369,11 +369,17 @@
                                                     Background="Transparent"
                                                     PointerMoved="Move_Canvas"
                                                     PointerPressed="Press_Canvas"
-                                                    PointerReleased="Release_Canvas">
+                                                    PointerReleased="Release_Canvas"
+                                                    RenderTransformOrigin="0,0"
+                                                    UseLayoutRounding="False"> 
+                                                    <!--  Добавлено это  -->
                                                     <Canvas.RenderTransform>
-                                                        <ScaleTransform ScaleX="{Binding ZoomCanvas}" ScaleY="{Binding ZoomCanvas}" />
+                                                        <TransformGroup>
+                                                            <ScaleTransform ScaleX="{Binding ZoomCanvas}" ScaleY="{Binding ZoomCanvas}" />
+                                                        </TransformGroup>
                                                     </Canvas.RenderTransform>
                                                 </Canvas>
+
                                             </Grid>
                                         </ScrollViewer>
 
