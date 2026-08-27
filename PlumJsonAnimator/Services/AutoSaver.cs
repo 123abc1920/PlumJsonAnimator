@@ -14,13 +14,11 @@ public class AutoSaver
 
     private readonly GlobalState GlobalState;
     private readonly JsonCode jsonCode;
-    private readonly ProjectSettings projectSettings;
 
-    public AutoSaver(GlobalState globalState, JsonCode jsonCode, ProjectSettings projectSettings)
+    public AutoSaver(GlobalState globalState, JsonCode jsonCode)
     {
         this.GlobalState = globalState;
         this.jsonCode = jsonCode;
-        this.projectSettings = projectSettings;
     }
 
     public async Task StartAutoSaveAsync(long seconds)
@@ -32,11 +30,7 @@ public class AutoSaver
         {
             if (GlobalState.isAutoSave)
             {
-                string project = JsonConvert.SerializeObject(
-                    this.jsonCode.generateJSONData(GlobalState.CurrentProject),
-                    GlobalState.jsonSettings
-                );
-                projectSettings.WriteAutoSave(project);
+                GlobalState.CurrentProject?.AutoSaveProjectSettings(this.jsonCode);
                 GlobalState.LastSaveTime = DateTime.Now;
             }
         }

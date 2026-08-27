@@ -17,12 +17,11 @@ namespace PlumJsonAnimator.Models.Common;
 public class PlumApp
 {
     public AppSettings AppSettings { get; }
-    public ProjectSettings ProjectSettings { get; }
     public GlobalState GlobalState { get; }
     public LocalizationService Localization { get; }
 
     private readonly Interpolation _interpolation;
-    private readonly ProjectFilesManager _projectManager;
+    private readonly ProjectFilesManager _fileManager;
     private readonly JsonCode _jsonCode;
     private readonly JsonValidator _jsonValidator;
     private readonly JsonExport _jsonExport;
@@ -35,7 +34,6 @@ public class PlumApp
 
     public PlumApp(
         AppSettings appSettings,
-        ProjectSettings projectSettings,
         GlobalState globalState,
         Interpolation interpolation,
         LocalizationService localization,
@@ -52,12 +50,11 @@ public class PlumApp
     )
     {
         AppSettings = appSettings;
-        ProjectSettings = projectSettings;
         GlobalState = globalState;
         Localization = localization;
 
         _interpolation = interpolation;
-        _projectManager = projectManager;
+        _fileManager = projectManager;
         _jsonCode = jsonCode;
         _jsonValidator = jsonValidator;
         _jsonExport = jsonExport;
@@ -81,8 +78,14 @@ public class PlumApp
         );
         GlobalState.lastSaveTime = DateTime.Now;
 
-        ProjectSettings.ReadSettings();
-        InitProject(new Project(GlobalState, _interpolation, Localization));
+        var projectWorkspace = AppSettings.appSettings.Workspace;
+        ProjectSettings projectSettings = new ProjectSettings(
+            Path.Combine(projectWorkspace, GlobalState.SETTINGS_FILE_NAME),
+            AppSettings,
+            GlobalState
+        );
+
+        InitProject(new Project(projectSettings, GlobalState, _interpolation, Localization));
 
         _autoSaver.StartAutoSaveAsync(GlobalState.autoSaveSec);
     }
@@ -91,13 +94,36 @@ public class PlumApp
     {
         GlobalState.CurrentProject = project;
 
-        GlobalState.CurrentProject.SetupProjectSettings(ProjectSettings.GetSettingsData());
-        _projectManager.LoadRes(GlobalState.CurrentProject);
+        _fileManager.LoadRes(GlobalState.CurrentProject);
 
         ValidResult validateResult = _jsonCode.Regenerate(GlobalState.CurrentProject, true);
         this.GlobalState.jsonError.IsOk = validateResult.IsOk;
 
         this._historyManager.Clear();
+
+        project.SaveProjectSettings();
+    }
+
+    public async void OpenProject(Window win)
+    {
+        var path = await this._fileManager.OpenProjectDialog(win);
+
+        if (path == "" || path == null)
+            return;
+
+        ProjectSettings projectSettings = new ProjectSettings(path, AppSettings, GlobalState);
+        AppSettings.ChangeProject(projectSettings.GetSettingsData());
+
+        Project newProject = new Project(
+            projectSettings,
+            GlobalState,
+            this._interpolation,
+            Localization
+        );
+
+        AppSettings.SaveSettings();
+
+        InitProject(newProject);
     }
 
     public bool CanGenerateProject()
@@ -141,29 +167,24 @@ public class PlumApp
 
     public bool SaveProject()
     {
-        string project = JsonConvert.SerializeObject(
-            this._jsonCode.generateJSONData(GlobalState.CurrentProject),
-            GlobalState.jsonSettings
-        );
-        ProjectSettings.WriteProjectJSON(project);
-
+        GlobalState.CurrentProject?.SaveProject(this._jsonCode);
         return true;
     }
 
     public void AddRes(string[] paths)
     {
-        this._projectManager.GetProjectDir(GlobalState.CurrentProject);
+        this._fileManager.GetProjectDir(GlobalState.CurrentProject);
 
         foreach (string p in paths)
         {
             string resName = "img" + GlobalState.CurrentProject?.Resources.Count.ToString();
-            string ext = this._projectManager.CopyRes(resName, p, GlobalState.CurrentProject);
+            string ext = this._fileManager.CopyRes(resName, p, GlobalState.CurrentProject);
             if (ext != "")
             {
                 Res image = new ImageRes(
-                    this._projectManager,
+                    this._fileManager,
                     this.GlobalState,
-                    this._projectManager.GetResDir(GlobalState.CurrentProject, $"{resName}{ext}"),
+                    this._fileManager.GetResDir(GlobalState.CurrentProject, $"{resName}{ext}"),
                     resName,
                     ext
                 );
@@ -187,31 +208,6 @@ public class PlumApp
         }
     }
 
-    public async void OpenProject(Window win)
-    {
-        var path = await this._projectManager.OpenProjectDialog(win);
-
-        if (path == "" || path == null)
-            return;
-
-        ProjectSettings.ReadSettings(path);
-        SettingsData settingsData = ProjectSettings.GetSettingsData();
-        AppSettings.ChangeProject(Path.Combine(settingsData.Path, settingsData.Name));
-
-        Project newProject = new Project(
-            settingsData.Name,
-            settingsData.Path,
-            GlobalState,
-            this._interpolation,
-            Localization
-        );
-
-        ProjectSettings.SaveSettings();
-        AppSettings.SaveSettings();
-
-        InitProject(newProject);
-    }
-
     public bool RenameProject(SettingsData settingsData)
     {
         settingsData.Anim = GlobalState.CurrentProject!.Code;
@@ -222,22 +218,21 @@ public class PlumApp
         var oldDir = Path.Combine(oldPath, oldName);
         var newDir = Path.Combine(GlobalState.CurrentProject.ProjectPath, settingsData.Name);
 
-        this._projectManager.CopyDir(oldDir, newDir);
+        this._fileManager.CopyDir(oldDir, newDir);
 
         GlobalState.CurrentProject.SetupProjectSettings(settingsData);
-        ProjectSettings.UpdateSettings(GlobalState.CurrentProject);
-        AppSettings.ChangeProject(newDir);
+        AppSettings.ChangeProject(settingsData);
 
-        this._projectManager.MoveRes(GlobalState.CurrentProject);
+        this._fileManager.MoveRes(GlobalState.CurrentProject);
 
-        ProjectSettings.SaveSettings();
+        GlobalState.CurrentProject.SaveProjectSettings();
 
         return true;
     }
 
     public bool NewProject(string? projectName, string? projectPath)
     {
-        Project? result = this._projectManager.NewProject(projectName, projectPath);
+        Project? result = this._fileManager.NewProject(projectName, projectPath);
         if (result != null)
         {
             this.GlobalState.CurrentProject = result;
@@ -314,7 +309,7 @@ public class PlumApp
                 s.RemoveResIfContains(res);
             }
             GlobalState.CurrentProject.Resources.Remove(res);
-            this._projectManager.DeleteResource(res.Name, res.ext, GlobalState.CurrentProject);
+            this._fileManager.DeleteResource(res.Name, res.ext, GlobalState.CurrentProject);
         }
     }
 

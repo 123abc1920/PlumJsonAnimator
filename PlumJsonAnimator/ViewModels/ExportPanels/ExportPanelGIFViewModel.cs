@@ -41,7 +41,6 @@ public partial class ExportPanelGIFViewModel : ViewModelBase
         GlobalState globalState,
         Dialogs dialogs,
         ImageExporter imageExporter,
-        ProjectSettings projectSettings,
         ProjectFilesManager projectManager,
         AppSettings appSettings,
         LocalizationService localizationService,

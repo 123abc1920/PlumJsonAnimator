@@ -59,7 +59,6 @@ public partial class App : Application
         services.AddSingleton<ImageExporter>();
         services.AddSingleton<JsonExport>();
 
-        services.AddSingleton<ProjectSettings>();
         services.AddSingleton<ProjectFilesManager>();
 
         services.AddSingleton<Dialogs>();

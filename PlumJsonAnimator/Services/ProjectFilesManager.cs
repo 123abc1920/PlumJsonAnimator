@@ -15,21 +15,18 @@ namespace PlumJsonAnimator.Services
     /// </summary>
     public class ProjectFilesManager
     {
-        private ProjectSettings _projectSettings;
         private AppSettings _appSettings;
         private GlobalState _globalState;
         private Interpolation _interpolation;
         private LocalizationService _localizationService;
 
         public ProjectFilesManager(
-            ProjectSettings projectSettings,
             AppSettings appSettings,
             GlobalState globalState,
             Interpolation interpolation,
             LocalizationService localizationService
         )
         {
-            this._projectSettings = projectSettings;
             this._appSettings = appSettings;
             this._globalState = globalState;
             this._interpolation = interpolation;
@@ -69,19 +66,23 @@ namespace PlumJsonAnimator.Services
         {
             if (projectName != null && projectPath != null)
             {
-                this._projectSettings.SaveSettings();
-                this._appSettings.ChangeProject(Path.Combine(projectPath, projectName));
+                this._globalState.CurrentProject?.SaveProjectSettings();
+
+                ProjectSettings projectSettings = new ProjectSettings(
+                    this._appSettings,
+                    this._globalState
+                );
+
+                this._appSettings.ChangeProject(projectSettings.GetSettingsData());
 
                 Project newProject = new Project(
-                    projectName,
-                    projectPath,
+                    projectSettings,
                     this._globalState,
                     this._interpolation,
                     this._localizationService
                 );
 
-                this._projectSettings.UpdateSettings(newProject);
-                this._projectSettings.SaveSettings();
+                newProject.SaveProjectSettings();
                 this._appSettings.SaveSettings();
                 LoadRes(newProject);
 

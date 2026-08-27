@@ -372,7 +372,6 @@ public partial class MainWindowViewModel : ViewModelBase
     public MainWindowViewModel(
         IServiceProvider serviceProvider,
         AppSettings appSettings,
-        ProjectSettings projectSettings,
         ProjectFilesManager projectManager,
         GlobalState globalState,
         ImageExporter imageExporter,

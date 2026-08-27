@@ -51,7 +51,6 @@ public partial class AppSettingsViewModel : ViewModelBase
     public AppSettingsViewModel(
         GlobalState globalState,
         Dialogs dialogs,
-        ProjectSettings projectSettings,
         ProjectFilesManager projectManager,
         AppSettings appSettings,
         LocalizationService localizationService,
