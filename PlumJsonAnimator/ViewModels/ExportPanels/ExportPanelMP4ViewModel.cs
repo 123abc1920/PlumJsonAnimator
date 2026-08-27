@@ -54,7 +54,6 @@ public partial class ExportPanelMP4ViewModel : ViewModelBase
         Dialogs dialogs,
         ImageExporter imageExporter,
         AppSettings appSettings,
-        ProjectSettings projectSettings,
         ProjectFilesManager projectManager,
         LocalizationService localizationService,
         PlumApp plumApp

@@ -2,7 +2,6 @@ using System;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Media;
-using Avalonia.Threading;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Interfaces;
@@ -31,6 +30,9 @@ namespace PlumJsonAnimator.Common.Constants
             }
         }
 
+        public readonly string SETTINGS_FILE_NAME;
+        public readonly string AUTO_SAVE_FILE;
+
         public JsonError jsonError;
         public JsonSerializerSettings jsonSettings = new JsonSerializerSettings
         {
@@ -54,7 +56,7 @@ namespace PlumJsonAnimator.Common.Constants
         public bool drawBones = true;
         public bool setBasePos = true;
         public bool captureMode = false;
-        public string workspace = "PlumJsonAnimatorWorkspace";
+        public string globalWorkspace = "PlumJsonAnimatorWorkspace";
         public string programExt = ".plmjsn";
 
         public Canvas? canvas;
@@ -65,7 +67,7 @@ namespace PlumJsonAnimator.Common.Constants
         public double zoomCanvas = 1;
 
         public bool isAutoSave = true;
-        public long autoSaveSec = 300;
+        public long autoSaveSec = 5;
         public DateTime lastSaveTime;
         public DateTime LastSaveTime
         {
@@ -81,6 +83,14 @@ namespace PlumJsonAnimator.Common.Constants
         }
 
         public CaptureArea? captureArea;
+
+        public GlobalState(LocalizationService localizationService)
+        {
+            this.jsonError = new JsonError(localizationService);
+
+            this.SETTINGS_FILE_NAME = $"settings{this.programExt}";
+            this.AUTO_SAVE_FILE = $"autosave{this.programExt}";
+        }
 
         public ParallelOptions GetParallelOptions()
         {
@@ -123,11 +133,6 @@ namespace PlumJsonAnimator.Common.Constants
                 }
             }
             return false;
-        }
-
-        public GlobalState(LocalizationService localizationService)
-        {
-            this.jsonError = new JsonError(localizationService);
         }
     }
 }

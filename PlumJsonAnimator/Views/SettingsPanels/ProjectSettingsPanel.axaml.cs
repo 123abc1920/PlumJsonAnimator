@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
+using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
 

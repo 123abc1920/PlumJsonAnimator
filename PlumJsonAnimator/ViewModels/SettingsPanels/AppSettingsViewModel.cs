@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
@@ -51,7 +52,6 @@ public partial class AppSettingsViewModel : ViewModelBase
     public AppSettingsViewModel(
         GlobalState globalState,
         Dialogs dialogs,
-        ProjectSettings projectSettings,
         ProjectFilesManager projectManager,
         AppSettings appSettings,
         LocalizationService localizationService,
@@ -66,5 +66,8 @@ public partial class AppSettingsViewModel : ViewModelBase
             localizationService,
             imageExporter,
             plumApp
-        ) { }
+        )
+    {
+        this.CurrentTheme = appSettings.appSettings.Theme;
+    }
 }

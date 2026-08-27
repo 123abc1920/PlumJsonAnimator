@@ -43,7 +43,7 @@ namespace PlumJsonAnimator.Services
                 Theme = "light",
                 Workspace = Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
-                    this.globalState.workspace,
+                    this.globalState.globalWorkspace,
                     "NewProject"
                 ),
                 Ffmpeg = "",
@@ -74,9 +74,13 @@ namespace PlumJsonAnimator.Services
             SaveSettings();
         }
 
-        public void ChangeProject(string newWorkspace)
+        public void ChangeProject(SettingsData newProjectData)
         {
-            this.appSettings!.Workspace = newWorkspace;
+            string newProjectWorkspace = Path.Combine(newProjectData.Path, newProjectData.Name);
+
+            this.appSettings!.Workspace = newProjectWorkspace;
+            this.appSettings!.LastDir = newProjectWorkspace;
+
             SaveSettings();
         }
 

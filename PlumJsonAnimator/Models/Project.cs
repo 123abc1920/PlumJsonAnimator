@@ -44,6 +44,8 @@ namespace PlumJsonAnimator.Models
         private Skin _currentSkin;
         private Animation? _currentAnimation;
 
+        private ProjectSettings projectSettings;
+
         private GlobalState _globalState;
         private Interpolation _interpolation;
         private LocalizationService _localizationService;
@@ -122,6 +124,18 @@ namespace PlumJsonAnimator.Models
         {
             this.Name = name;
             this.ProjectPath = path;
+        }
+
+        public Project(
+            ProjectSettings projectSettings,
+            GlobalState globalState,
+            Interpolation interpolation,
+            LocalizationService localizationService
+        )
+            : this(globalState, interpolation, localizationService)
+        {
+            this.projectSettings = projectSettings;
+            this.SetupProjectSettings(projectSettings.GetSettingsData());
         }
 
         public void SetupProjectSettings(SettingsData settingsData)
@@ -703,6 +717,30 @@ namespace PlumJsonAnimator.Models
                 }
             }
             return true;
+        }
+
+        public void SaveProjectSettings()
+        {
+            this.projectSettings.SaveSettings();
+        }
+
+        public void SaveProject(JsonCode jsonCode)
+        {
+            string project = JsonConvert.SerializeObject(
+                jsonCode.generateJSONData(this),
+                _globalState.jsonSettings
+            );
+            projectSettings.WriteProjectJSON(project);
+        }
+
+        public void AutoSaveProjectSettings(JsonCode jsonCode)
+        {
+            string project = JsonConvert.SerializeObject(
+                jsonCode.generateJSONData(this),
+                this._globalState.jsonSettings
+            );
+
+            this.projectSettings.WriteAutoSave(project);
         }
     }
 
