@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
@@ -65,5 +66,8 @@ public partial class AppSettingsViewModel : ViewModelBase
             localizationService,
             imageExporter,
             plumApp
-        ) { }
+        )
+    {
+        this.CurrentTheme = appSettings.appSettings.Theme;
+    }
 }
