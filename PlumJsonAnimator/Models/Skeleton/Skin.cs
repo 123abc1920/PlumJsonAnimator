@@ -100,11 +100,13 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="canvas"></param>
         public void DrawSkin(Canvas canvas)
         {
-            foreach (
-                Slot s in SlotAttachmentBinding.Keys.OrderBy(slot => slot.CurrentDrawOrderOffset)
-            )
+            foreach (var item in SlotAttachmentBinding.OrderBy(it => it.Key.CurrentDrawOrderOffset))
             {
-                s.DrawSlot(canvas);
+                if (_globalState.CurrentProject!.CurrentSkin.IsSlotDrawable(item.Key))
+                {
+                    item.Value?.DrawAttachment(item.Key, canvas);
+                    item.Key.DrawSlotSelection(canvas);
+                }
             }
         }
 

@@ -169,6 +169,55 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
+        public double GlobalX
+        {
+            get
+            {
+                double globalX = _localX;
+
+                if (BoundedBone != null)
+                {
+                    double rad = BoundedBone.GlobalA * Math.PI / 180;
+                    double rotatedX = _localX * Math.Cos(rad) - _localY * Math.Sin(rad);
+                    globalX = BoundedBone.GlobalX + rotatedX;
+                }
+
+                return globalX;
+            }
+        }
+
+        public double GlobalY
+        {
+            get
+            {
+                double globalY = _localY;
+
+                if (BoundedBone != null)
+                {
+                    double rad = BoundedBone.GlobalA * Math.PI / 180;
+                    double rotatedY = _localX * Math.Sin(rad) + _localY * Math.Cos(rad);
+                    globalY = BoundedBone.GlobalY + rotatedY;
+                }
+
+                return globalY;
+            }
+        }
+
+        public double GlobalA
+        {
+            get
+            {
+                double globalAngle = _localA;
+
+                if (BoundedBone != null)
+                {
+                    globalAngle = BoundedBone.GlobalA + _localA;
+                }
+
+                return globalAngle;
+            }
+        }
+
         private Slot(GlobalState _globalState)
         {
             this.WhenAnyValue(x => x.CurrentDrawOrderOffset)
@@ -289,92 +338,21 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             CurrentAttachment?.SetPos(_localX, _localY, _localA);
         }
 
-        private Bitmap _cachedBitmap;
-        private string _cachedPath;
-
-        public void DrawSlot(Canvas canvas)
+        public void DrawSlotSelection(Canvas canvas)
         {
-            if (!_globalState.CurrentProject!.CurrentSkin.IsSlotDrawable(this))
+            if (_globalState.IsSlotSelected(this))
             {
-                return;
-            }
-
-            try
-            {
-                double globalX = _localX;
-                double globalY = _localY;
-                double globalAngle = _localA;
-
-                if (BoundedBone != null)
+                var border = new Border
                 {
-                    // 1. ИСПРАВЛЕНИЕ: Берем ПОЛНЫЙ накопленный угол кости (GlobalA) вместо локального (A)
-                    globalAngle = BoundedBone.GlobalA + _localA;
-
-                    // 2. ИСПРАВЛЕНИЕ: Для расчета орбиты смещения слота тоже используем GlobalA кости
-                    double rad = BoundedBone.GlobalA * Math.PI / 180;
-                    double rotatedX = _localX * Math.Cos(rad) - _localY * Math.Sin(rad);
-                    double rotatedY = _localX * Math.Sin(rad) + _localY * Math.Cos(rad);
-
-                    globalX = BoundedBone.GlobalX + rotatedX;
-                    globalY = BoundedBone.GlobalY + rotatedY;
-                }
-
-                string currentPath = _globalState.CurrentProject.CurrentSkin.GetImagePath(this);
-                if (_cachedBitmap == null || _cachedPath != currentPath)
-                {
-                    _cachedPath = currentPath;
-                    byte[] imageBytes = File.ReadAllBytes(currentPath);
-                    using var ms = new MemoryStream(imageBytes);
-                    _cachedBitmap?.Dispose();
-                    _cachedBitmap = new Bitmap(ms);
-                }
-
-                var image = new Image
-                {
-                    Source = _cachedBitmap,
-                    Width = LengthX,
-                    Height = LengthY,
-                    // 3. ИСПРАВЛЕНИЕ: Поворачиваем картинку на полный посчитанный globalAngle
-                    RenderTransform = new RotateTransform(globalAngle),
-                    RenderTransformOrigin = new RelativePoint(0.5, 0.5, RelativeUnit.Relative),
+                    Width = 10,
+                    Height = 10,
+                    BorderBrush = AppColors.Red,
+                    BorderThickness = new Thickness(2),
                 };
-
-                // Твой оригинальный рабочий расчет позиционирования (оставляем как было)
-                double left = canvas.Width / 2 + globalX - image.Width / 2;
-                double top = canvas.Height / 2 + globalY - image.Height / 2;
-
-                Canvas.SetLeft(image, left);
-                Canvas.SetTop(image, top);
-                canvas.Children.Add(image);
-
-                if (_globalState.IsSlotSelected(this))
-                {
-                    var border = new Border
-                    {
-                        Width = 10,
-                        Height = 10,
-                        BorderBrush = AppColors.Red,
-                        BorderThickness = new Thickness(2),
-                    };
-                    Canvas.SetLeft(border, canvas.Width / 2 + globalX - 5);
-                    Canvas.SetTop(border, canvas.Height / 2 + globalY - 5);
-                    canvas.Children.Add(border);
-                }
+                Canvas.SetLeft(border, canvas.Width / 2 + this.GlobalX - 5);
+                Canvas.SetTop(border, canvas.Height / 2 + this.GlobalY - 5);
+                canvas.Children.Add(border);
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(
-                    $"{this._localizationService.GetMessage(LocalizationConsts.ERROR)}: {ex.Message}"
-                );
-            }
-        }
-
-        /// <summary>
-        /// Disposes cached bitmap
-        /// </summary>
-        private void Dispose()
-        {
-            _cachedBitmap?.Dispose();
         }
 
         public new SlotData GenerateJSONData()

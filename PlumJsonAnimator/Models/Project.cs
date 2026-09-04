@@ -215,7 +215,7 @@ namespace PlumJsonAnimator.Models
             CurrentSkin.DrawSkin(c);
             if (this._globalState.currentBone?.IsBone == false)
             {
-                ((Slot)this._globalState.currentBone).DrawSlot(c);
+                ((Slot)this._globalState.currentBone).DrawSlotSelection(c);
             }
         }
 
