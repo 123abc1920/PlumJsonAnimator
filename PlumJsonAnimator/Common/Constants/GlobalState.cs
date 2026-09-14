@@ -30,8 +30,8 @@ namespace PlumJsonAnimator.Common.Constants
             }
         }
 
-        public readonly string SETTINGS_FILE_NAME;
-        public readonly string AUTO_SAVE_FILE;
+        public readonly string SettingsFileName;
+        public readonly string AutoSaveFile;
 
         public JsonError jsonError;
         public JsonSerializerSettings jsonSettings = new JsonSerializerSettings
@@ -67,7 +67,7 @@ namespace PlumJsonAnimator.Common.Constants
         public double zoomCanvas = 1;
 
         public bool isAutoSave = true;
-        public long autoSaveSec = 5;
+        public long autoSaveSec = 300;
         public DateTime lastSaveTime;
         public DateTime LastSaveTime
         {
@@ -88,8 +88,8 @@ namespace PlumJsonAnimator.Common.Constants
         {
             this.jsonError = new JsonError(localizationService);
 
-            this.SETTINGS_FILE_NAME = $"settings{this.programExt}";
-            this.AUTO_SAVE_FILE = $"autosave{this.programExt}";
+            this.SettingsFileName = $"settings{this.programExt}";
+            this.AutoSaveFile = $"autosave{this.programExt}";
         }
 
         public ParallelOptions GetParallelOptions()

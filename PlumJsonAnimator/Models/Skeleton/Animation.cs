@@ -51,15 +51,15 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public Animation(GlobalState globalState, Interpolation interpolation)
         {
-            this._globalState = globalState;
-            this._interpolation = interpolation;
+            _globalState = globalState;
+            _interpolation = interpolation;
         }
 
         public Animation(GlobalState globalState, Interpolation interpolation, string name)
         {
-            this._globalState = globalState;
-            this._interpolation = interpolation;
-            this.Name = name;
+            _globalState = globalState;
+            _interpolation = interpolation;
+            Name = name;
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 BoneAnimationBinding[b].BoneStep(b, currentTime);
             }
-            foreach (Slot s in this._globalState.CurrentProject.Slots)
+            foreach (Slot s in _globalState.CurrentProject.Slots)
             {
                 s.UpdateDrawOrderOffset();
             }
@@ -82,7 +82,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// </summary>
         public void Step()
         {
-            this.currentTime += 1.0 / (double)this._globalState.FPS;
+            currentTime += 1.0 / (double)_globalState.FPS;
             SetupBones();
         }
 
@@ -104,9 +104,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public void DeleteBoneFromAnimation(Bone bone)
         {
-            if (this.ContainsBone(bone) == true)
+            if (ContainsBone(bone) == true)
             {
-                this.BoneAnimationBinding.Remove(bone);
+                BoneAnimationBinding.Remove(bone);
             }
         }
 
@@ -141,7 +141,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
             var drawOrders = new List<DrawOrderItem>();
 
-            foreach (Bone b in this._globalState.CurrentProject.MainSkeleton.Bones)
+            foreach (Bone b in _globalState.CurrentProject.MainSkeleton.Bones)
             {
                 var slots = b.Slots;
                 Dictionary<double, DrawOrderItem> drawOrderItems =
@@ -188,7 +188,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// </summary>
         public String GenerateCode()
         {
-            return JsonConvert.SerializeObject(GenerateJSONData(), this._globalState.jsonSettings);
+            return JsonConvert.SerializeObject(GenerateJSONData(), _globalState.jsonSettings);
         }
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 BoneAnimationBinding.Add(
                     b,
-                    new BoneAnimation(this._globalState, this._interpolation)
+                    new BoneAnimation(_globalState, _interpolation)
                 );
             }
         }
@@ -291,6 +291,42 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 AnimateBone(b);
                 BoneAnimationBinding[b].AddRotateFrame(currentTime, (double)value);
+            }
+        }
+
+        public void ShearBone(Bone b, double? shearX, double? shearY)
+        {
+            if (b != null && shearX != null && shearY != null)
+            {
+                AnimateBone(b);
+                BoneAnimationBinding[b].AddShearFrame(currentTime, (double)shearX, (double)shearY);
+            }
+        }
+
+        public void ShearBone(Bone b, double? shearX, double? shearY, double? time)
+        {
+            if (b != null && shearX != null && shearY != null && time != null)
+            {
+                AnimateBone(b);
+                BoneAnimationBinding[b].AddShearFrame((double)time, (double)shearX, (double)shearY);
+            }
+        }
+
+        public void ScaleBone(Bone b, double? scaleX, double? scaleY)
+        {
+            if (b != null && scaleX != null && scaleY != null)
+            {
+                AnimateBone(b);
+                BoneAnimationBinding[b].AddScaleFrame(currentTime, (double)scaleX, (double)scaleY);
+            }
+        }
+
+        public void ScaleBone(Bone b, double? scaleX, double? scaleY, double? time)
+        {
+            if (b != null && scaleX != null && scaleY != null && time != null)
+            {
+                AnimateBone(b);
+                BoneAnimationBinding[b].AddScaleFrame((double)time, (double)scaleX, (double)scaleY);
             }
         }
 

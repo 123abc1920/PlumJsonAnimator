@@ -477,13 +477,34 @@
 
                                         <TextBox
                                             x:Name="scaleX"
-                                            Text="{Binding CurrentBone.LengthX, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
+                                            Text="{Binding CurrentBone.ScaleX, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
                                             Watermark="X" />
                                         <TextBox
                                             x:Name="scaleY"
-                                            IsVisible="{Binding !CurrentBone.IsBone}"
-                                            Text="{Binding CurrentBone.LengthY, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
+                                            Text="{Binding CurrentBone.ScaleY, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
                                             Watermark="Y" />
+
+                                        <ToggleButton
+                                            Width="32"
+                                            Height="32"
+                                            Padding="0"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            Command="{Binding ToggleTransformModeCommand}"
+                                            CommandParameter="shear"
+                                            IsChecked="{Binding IsTransformModeActive, Converter={StaticResource StringToBoolConverter}, ConverterParameter='shear', Mode=OneWay}">
+                                            <iconPacks:PackIconBootstrapIcons Kind="ArrowLeftRight" />
+                                        </ToggleButton>
+
+                                        <TextBox
+                                            x:Name="shearX"
+                                            Text="{Binding CurrentBone.ShearX, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
+                                            Watermark="X" />
+                                        <TextBox
+                                            x:Name="shearY"
+                                            Text="{Binding CurrentBone.ShearY, Mode=TwoWay, Converter={StaticResource DoubleConverter}}"
+                                            Watermark="Y" />
+
                                     </StackPanel>
                                 </Grid>
                             </Grid>

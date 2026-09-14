@@ -6,7 +6,6 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.Threading;
-using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 
@@ -210,7 +209,7 @@ namespace PlumJsonAnimator.Common.Timeline
             double availableTrackHeight = height - timelineHeight;
 
             // Высота одной дорожки (делим на количество дорожек)
-            double trackRowHeight = availableTrackHeight / Math.Max(1, trackCount);
+            double trackRowHeight = availableTrackHeight / Math.Max(1, trackCount) - 5;
 
             for (int i = 0; i < trackCount; i++)
             {
@@ -306,6 +305,7 @@ namespace PlumJsonAnimator.Common.Timeline
                     (KeyFrameTypes.TRANSLATE, 0),
                     (KeyFrameTypes.ROTATE, 1),
                     (KeyFrameTypes.SCALE, 2),
+                    (KeyFrameTypes.SHEAR, 3),
                 };
 
                 foreach (var (type, rowIndex) in trackTypes)

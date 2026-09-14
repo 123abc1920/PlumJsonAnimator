@@ -102,6 +102,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             RootBones[0].DrawBone(canvas);
         }
 
+        public void RecalculateBones()
+        {
+            RootBones[0].UpdateTransform();
+        }
+
         public List<BoneData> GenerateJSONData()
         {
             List<BoneData> result = new List<BoneData>();

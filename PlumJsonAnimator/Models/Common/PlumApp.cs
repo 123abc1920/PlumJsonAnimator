@@ -80,7 +80,7 @@ public class PlumApp
 
         var projectWorkspace = AppSettings.appSettings.Workspace;
         ProjectSettings projectSettings = new ProjectSettings(
-            Path.Combine(projectWorkspace, GlobalState.SETTINGS_FILE_NAME),
+            Path.Combine(projectWorkspace, GlobalState.SettingsFileName),
             AppSettings,
             GlobalState
         );
@@ -388,7 +388,7 @@ public class PlumApp
             AddKeyFrameCommand addKeyFrameCommand = new AddKeyFrameCommand(
                 GlobalState.CurrentProject.CurrentAnimation,
                 GlobalState.currentBone,
-                GlobalState.CurrentProject.currentMode.type
+                GlobalState.CurrentProject.currentMode.Type
             );
             this._historyManager.DoCommand(addKeyFrameCommand);
         }
@@ -401,7 +401,7 @@ public class PlumApp
             DeleteKeyFrameCommand deleteKeyFrameCommand = new DeleteKeyFrameCommand(
                 GlobalState.CurrentProject.CurrentAnimation,
                 GlobalState.currentBone,
-                GlobalState.CurrentProject.currentMode.type
+                GlobalState.CurrentProject.currentMode.Type
             );
             this._historyManager.DoCommand(deleteKeyFrameCommand);
         }

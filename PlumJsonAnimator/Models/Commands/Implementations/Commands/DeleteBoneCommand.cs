@@ -46,6 +46,11 @@ class DeleteBoneCommand : ICommand
 
     public DeleteBoneCommand(Bone selectedBone, Project? project)
     {
+        if (selectedBone == null)
+        {
+            return;
+        }
+
         this._selectedBone = selectedBone;
         this._project = project;
         this._parent = selectedBone.Parent;

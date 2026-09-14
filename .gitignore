@@ -47,6 +47,8 @@ packages/
 *.pidb
 *.log
 *.scc
+*.csproj
+*.csproj.lscache
 
 # Файлы покрытия кода
 coverage.xml

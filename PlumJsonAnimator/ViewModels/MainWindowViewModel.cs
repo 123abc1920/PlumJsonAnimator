@@ -156,6 +156,10 @@ public partial class MainWindowViewModel : ViewModelBase
                 {
                     CurrentProject!.currentMode = new ScaleMode(this.globalState);
                 }
+                else if (value == "shear")
+                {
+                    CurrentProject!.currentMode = new ShearMode(this.globalState);
+                }
                 else
                 {
                     CurrentProject!.currentMode = new NoMode(this.globalState);
@@ -516,7 +520,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 CurrentTime = CurrentProject.CurrentAnimation.FindKeyFrame(
                     CurrentBone,
                     CurrentProject.CurrentAnimation.currentTime,
-                    CurrentProject.currentMode.type,
+                    CurrentProject.currentMode.Type,
                     false
                 );
             }
@@ -528,7 +532,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 CurrentTime = CurrentProject.CurrentAnimation.FindKeyFrame(
                     CurrentBone,
                     CurrentProject.CurrentAnimation.currentTime,
-                    CurrentProject.currentMode.type,
+                    CurrentProject.currentMode.Type,
                     true
                 );
             }

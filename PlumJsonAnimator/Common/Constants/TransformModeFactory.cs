@@ -21,12 +21,13 @@ namespace PlumJsonAnimator.Common.Constants
                 [TransformModesTypes.TRANSLATE] = new TransformMode(globalState),
                 [TransformModesTypes.ROTATE] = new RotateMode(globalState),
                 [TransformModesTypes.SCALE] = new ScaleMode(globalState),
+                [TransformModesTypes.SHEAR] = new ShearMode(globalState),
             };
         }
 
         public Mode CreateMode(Mode old, TransformModesTypes type)
         {
-            if (old.type == type)
+            if (old.Type == type)
             {
                 return _modes[TransformModesTypes.NO];
             }

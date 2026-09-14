@@ -130,9 +130,9 @@ namespace PlumJsonAnimator.Models.Common
         public Scale(GlobalState globalState, double _time, double _x, double _y)
             : base(globalState)
         {
-            this.time = _time;
-            this.x = _x;
-            this.y = _y;
+            time = _time;
+            x = _x;
+            y = _y;
         }
 
         public override IKeyframeTypeData GenerateJSONData()

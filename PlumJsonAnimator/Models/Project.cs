@@ -215,7 +215,7 @@ namespace PlumJsonAnimator.Models
             CurrentSkin.DrawSkin(c);
             if (this._globalState.currentBone?.IsBone == false)
             {
-                ((Slot)this._globalState.currentBone).DrawSlot(c);
+                ((Slot)this._globalState.currentBone).DrawSlotSelection(c);
             }
         }
 
@@ -390,6 +390,8 @@ namespace PlumJsonAnimator.Models
                         b.BaseX = boneData.X;
                         b.BaseY = boneData.Y;
                         b.BaseA = boneData.Rotation;
+                        b.ShearX = boneData.ShearX;
+                        b.ShearY = boneData.ShearY;
                         b.Parent = this.MainSkeleton.GetBoneByName(boneData.Parent);
                     }
                     bones.Remove(b.Name);
@@ -406,6 +408,8 @@ namespace PlumJsonAnimator.Models
                 b.BaseX = bone.Value.X;
                 b.BaseY = bone.Value.Y;
                 b.BaseA = bone.Value.Rotation;
+                b.ShearX = bone.Value.ShearX;
+                b.ShearY = bone.Value.ShearY;
                 this.MainSkeleton.AddBone(b);
             }
 
@@ -507,6 +511,14 @@ namespace PlumJsonAnimator.Models
                                     keyframe.Y,
                                     keyframe.Time
                                 );
+                            }
+                            foreach (IKeyframeTypeData keyframe in boneAnimation.shear)
+                            {
+                                animation.ShearBone(bone, keyframe.X, keyframe.Y, keyframe.Time);
+                            }
+                            foreach (IKeyframeTypeData keyframe in boneAnimation.scale)
+                            {
+                                animation.ScaleBone(bone, keyframe.X, keyframe.Y, keyframe.Time);
                             }
                         }
                         if (animationData.DrawOrder != null && animationData != null)

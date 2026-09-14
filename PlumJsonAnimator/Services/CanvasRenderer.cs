@@ -56,6 +56,7 @@ public class CanvasRenderer
     {
         canvas?.Children.Clear();
         this.globalState.CurrentProject?.DrawSlots(canvas);
+        this.globalState.CurrentProject?.MainSkeleton?.RecalculateBones();
         if (isDrawBone)
         {
             this.globalState.CurrentProject?.MainSkeleton?.DrawSkeleton(canvas);

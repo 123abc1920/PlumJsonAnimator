@@ -67,7 +67,7 @@ public class ProjectSettings
             !File.Exists(
                 Path.Combine(
                     this.appSettings.appSettings!.Workspace,
-                    this.globalState.SETTINGS_FILE_NAME
+                    this.globalState.SettingsFileName
                 )
             )
         )
@@ -75,7 +75,7 @@ public class ProjectSettings
             File.Create(
                     Path.Combine(
                         this.appSettings.appSettings!.Workspace,
-                        this.globalState.SETTINGS_FILE_NAME
+                        this.globalState.SettingsFileName
                     )
                 )
                 .Close();
@@ -86,7 +86,7 @@ public class ProjectSettings
     {
         string settingsPath = Path.Combine(
             this.appSettings.appSettings!.Workspace,
-            this.globalState.SETTINGS_FILE_NAME
+            this.globalState.SettingsFileName
         );
 
         ExistOrCreateProjectDirs();
@@ -115,7 +115,7 @@ public class ProjectSettings
     {
         string settingsPath = Path.Combine(
             this.appSettings.appSettings!.Workspace,
-            this.globalState.SETTINGS_FILE_NAME
+            this.globalState.SettingsFileName
         );
         WriteProjectInFile(settingsPath, jsonifyedProject);
     }
@@ -124,7 +124,7 @@ public class ProjectSettings
     {
         string settingsPath = Path.Combine(
             this.appSettings.appSettings!.Workspace,
-            this.globalState.AUTO_SAVE_FILE
+            this.globalState.AutoSaveFile
         );
         Console.WriteLine(settingsPath);
         WriteProjectInFile(settingsPath, jsonifyedProject);
@@ -160,7 +160,7 @@ public class ProjectSettings
     {
         string settingsPath = Path.Combine(
             this.appSettings.appSettings!.Workspace,
-            this.globalState.SETTINGS_FILE_NAME
+            this.globalState.SettingsFileName
         );
 
         return readFile(settingsPath);
