@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
@@ -70,10 +71,23 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             foreach (Bone b in BoneAnimationBinding.Keys)
             {
                 BoneAnimationBinding[b].BoneStep(b, currentTime);
+                UpdateDrawOrder(b.Slots);
             }
-            foreach (Slot s in _globalState.CurrentProject.Slots)
+        }
+
+        public void UpdateDrawOrder(ObservableCollection<Slot> slots)
+        {
+            foreach (Slot s in slots)
             {
                 s.UpdateDrawOrderOffset();
+            }
+        }
+
+        public void UpdateAllDrawOrder()
+        {
+            foreach (Bone b in BoneAnimationBinding.Keys)
+            {
+                UpdateDrawOrder(b.Slots);
             }
         }
 
@@ -242,10 +256,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
             if (!BoneAnimationBinding.ContainsKey(b))
             {
-                BoneAnimationBinding.Add(
-                    b,
-                    new BoneAnimation(_globalState, _interpolation)
-                );
+                BoneAnimationBinding.Add(b, new BoneAnimation(_globalState, _interpolation));
             }
         }
 

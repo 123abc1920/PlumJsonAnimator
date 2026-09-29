@@ -258,6 +258,7 @@ namespace PlumJsonAnimator.Common.Timeline
 
             foreach (var boneKeyFrames in CurrentAnimation.GetAllKeyFrameMarks())
             {
+                Console.WriteLine(boneKeyFrames.Value.Count);
                 if (CurrentBone == boneKeyFrames.Key)
                 {
                     currentBoneKeyFrames = boneKeyFrames;

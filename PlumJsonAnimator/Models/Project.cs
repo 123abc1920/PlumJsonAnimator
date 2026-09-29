@@ -59,11 +59,8 @@ namespace PlumJsonAnimator.Models
                 if (_currentSkin != value)
                 {
                     _currentSkin = value;
+                    _currentAnimation?.UpdateAllDrawOrder();
                     OnPropertyChanged(nameof(CurrentSkin));
-                    /*foreach (Bone b in MainSkeleton!.Bones)
-                    {
-                        b.UpdateSlots();
-                    }*/
                 }
             }
         }
@@ -76,6 +73,7 @@ namespace PlumJsonAnimator.Models
                 if (_currentAnimation != value)
                 {
                     _currentAnimation = value;
+                    _currentAnimation?.UpdateAllDrawOrder();
                     OnPropertyChanged(nameof(CurrentAnimation));
                 }
             }
@@ -575,6 +573,14 @@ namespace PlumJsonAnimator.Models
                     foreach (IKeyframeTypeData keyframe in boneAnimation.translate)
                     {
                         a.TranslateBone(bone, keyframe.X, keyframe.Y, keyframe.Time);
+                    }
+                    foreach (IKeyframeTypeData keyframe in boneAnimation.shear)
+                    {
+                        a.ShearBone(bone, keyframe.X, keyframe.Y, keyframe.Time);
+                    }
+                    foreach (IKeyframeTypeData keyframe in boneAnimation.scale)
+                    {
+                        a.ScaleBone(bone, keyframe.X, keyframe.Y, keyframe.Time);
                     }
                 }
                 foreach (DrawOrderItem item in animationData.DrawOrder)
