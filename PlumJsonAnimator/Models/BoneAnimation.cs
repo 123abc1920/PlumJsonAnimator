@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Avalonia.Input;
-using Avalonia.Media;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Easing;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
 
@@ -269,8 +268,6 @@ namespace PlumJsonAnimator.Models
         /// <param name="keyFrameType"></param>
         private void FindSegment(double currTime, KeyFrameTypes keyFrameType)
         {
-            // Выносим общую логику поиска в маленькую локальную функцию,
-            // чтобы не дублировать код для каждого типа анимации
             void FindInKeys(
                 System.Collections.Generic.ICollection<double> keys,
                 ref double startRes,
@@ -347,9 +344,12 @@ namespace PlumJsonAnimator.Models
             else
             {
                 FindSegment(time, KeyFrameTypes.TRANSLATE);
-                double t = this._interpolation.findInterpolateParam(
+                double t = this._interpolation.FindInterpolateParam(
                     _translateEnd - _translateStart,
-                    time - _translateStart
+                    time - _translateStart,
+                    true,
+                    true,
+                    new QuadroEasing()
                 );
 
                 if (
@@ -357,12 +357,12 @@ namespace PlumJsonAnimator.Models
                     && this._translateKeyframes.ContainsKey(_translateStart)
                 )
                 {
-                    localX = this._interpolation.linearInterpolation(
+                    localX = this._interpolation.BaseInterpolation(
                         ((Translate)_translateKeyframes[_translateStart]).x,
                         ((Translate)_translateKeyframes[_translateEnd]).x,
                         t
                     );
-                    localY = this._interpolation.linearInterpolation(
+                    localY = this._interpolation.BaseInterpolation(
                         ((Translate)_translateKeyframes[_translateStart]).y,
                         ((Translate)_translateKeyframes[_translateEnd]).y,
                         t
@@ -397,9 +397,12 @@ namespace PlumJsonAnimator.Models
 
             FindSegment(time, KeyFrameTypes.ROTATE);
 
-            double t = this._interpolation.findInterpolateParam(
+            double t = this._interpolation.FindInterpolateParam(
                 _rotateEnd - _rotateStart,
-                time - _rotateStart
+                time - _rotateStart,
+                true,
+                true,
+                new QuadroEasing()
             );
 
             double interpolatedA = b.BaseA;
@@ -408,7 +411,7 @@ namespace PlumJsonAnimator.Models
                 && this._rotateKeyframes.ContainsKey(_rotateStart) == true
             )
             {
-                interpolatedA = this._interpolation.angleInterpolation(
+                interpolatedA = this._interpolation.AngleInterpolation(
                     ((Rotate)_rotateKeyframes[_rotateStart]).value,
                     ((Rotate)_rotateKeyframes[_rotateEnd]).value,
                     t
@@ -440,9 +443,12 @@ namespace PlumJsonAnimator.Models
             else
             {
                 FindSegment(time, KeyFrameTypes.SHEAR);
-                double t = this._interpolation.findInterpolateParam(
+                double t = this._interpolation.FindInterpolateParam(
                     _shearEnd - _shearStart,
-                    time - _shearStart
+                    time - _shearStart,
+                    true,
+                    true,
+                    new QuadroEasing()
                 );
 
                 if (
@@ -450,12 +456,12 @@ namespace PlumJsonAnimator.Models
                     && this._shearKeyframes.ContainsKey(_shearStart)
                 )
                 {
-                    localX = this._interpolation.linearInterpolation(
+                    localX = this._interpolation.BaseInterpolation(
                         ((Shear)_shearKeyframes[_shearStart]).x,
                         ((Shear)_shearKeyframes[_shearEnd]).x,
                         t
                     );
-                    localY = this._interpolation.linearInterpolation(
+                    localY = this._interpolation.BaseInterpolation(
                         ((Shear)_shearKeyframes[_shearStart]).y,
                         ((Shear)_shearKeyframes[_shearEnd]).y,
                         t
@@ -490,9 +496,12 @@ namespace PlumJsonAnimator.Models
             else
             {
                 FindSegment(time, KeyFrameTypes.SCALE);
-                double t = _interpolation.findInterpolateParam(
+                double t = _interpolation.FindInterpolateParam(
                     _scaleEnd - _scaleStart,
-                    time - _scaleStart
+                    time - _scaleStart,
+                    true,
+                    true,
+                    new QuadroEasing()
                 );
 
                 if (
@@ -500,12 +509,12 @@ namespace PlumJsonAnimator.Models
                     && _scaleKeyframes.ContainsKey(_scaleStart)
                 )
                 {
-                    localX = _interpolation.linearInterpolation(
+                    localX = _interpolation.BaseInterpolation(
                         ((Scale)_scaleKeyframes[_scaleStart]).x,
                         ((Scale)_scaleKeyframes[_scaleEnd]).x,
                         t
                     );
-                    localY = _interpolation.linearInterpolation(
+                    localY = _interpolation.BaseInterpolation(
                         ((Scale)_scaleKeyframes[_scaleStart]).y,
                         ((Scale)_scaleKeyframes[_scaleEnd]).y,
                         t
