@@ -9,6 +9,7 @@ using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
 
 // TODO: Remove repetitions
+// TODO: new project not working
 namespace PlumJsonAnimator.Models
 {
     /// <summary>
@@ -347,9 +348,7 @@ namespace PlumJsonAnimator.Models
                 double t = this._interpolation.FindInterpolateParam(
                     _translateEnd - _translateStart,
                     time - _translateStart,
-                    true,
-                    true,
-                    new QuadroEasing()
+                    new LinearEasing()
                 );
 
                 if (
@@ -400,9 +399,7 @@ namespace PlumJsonAnimator.Models
             double t = this._interpolation.FindInterpolateParam(
                 _rotateEnd - _rotateStart,
                 time - _rotateStart,
-                true,
-                true,
-                new QuadroEasing()
+                new LinearEasing()
             );
 
             double interpolatedA = b.BaseA;
@@ -446,9 +443,7 @@ namespace PlumJsonAnimator.Models
                 double t = this._interpolation.FindInterpolateParam(
                     _shearEnd - _shearStart,
                     time - _shearStart,
-                    true,
-                    true,
-                    new QuadroEasing()
+                    new LinearEasing()
                 );
 
                 if (
@@ -499,9 +494,7 @@ namespace PlumJsonAnimator.Models
                 double t = _interpolation.FindInterpolateParam(
                     _scaleEnd - _scaleStart,
                     time - _scaleStart,
-                    true,
-                    true,
-                    new QuadroEasing()
+                    new LinearEasing()
                 );
 
                 if (

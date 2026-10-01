@@ -40,8 +40,6 @@ public class Interpolation
     /// </summary>
     /// <param name="segmentDuration">Total duration in ms</param>
     /// <param name="timeElapsed">Time passed in ms</param>
-    /// <param name="isIn">If interpolation is in</param>
-    /// <param name="isOut">If interpolation is out</param>
     /// <param name="easing">Easing type</param>
     /// <example>
     /// new Interpolation().findInterpolateParam(10, 6); //Returns 0.6
@@ -50,8 +48,6 @@ public class Interpolation
     public double FindInterpolateParam(
         double segmentDuration,
         double timeElapsed,
-        bool isIn = false,
-        bool isOut = false,
         IEasing? easing = null
     )
     {
@@ -59,18 +55,7 @@ public class Interpolation
 
         if (!(easing is null))
         {
-            if (isIn && isOut)
-            {
-                t = easing.InOutInterpolation(t);
-            }
-            else if (isIn)
-            {
-                t = easing.InInterpolation(t);
-            }
-            else if (isOut)
-            {
-                t = easing.OutInterpolation(t);
-            }
+            t = easing.Ease(t);
         }
 
         return t;

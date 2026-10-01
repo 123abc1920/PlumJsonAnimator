@@ -3,16 +3,13 @@ using PlumJsonAnimator.Models.Interfaces;
 
 namespace PlumJsonAnimator.Models.Easing;
 
-class LinearEasing : IEasing
+class SteppedEasing : IEasing
 {
-    private List<double> _keyMap = new List<double>();
-    public List<double> KeysMap
-    {
-        get => _keyMap;
-    }
+    private List<double> _keysMap = new List<double>();
+    public List<double> KeysMap => _keysMap;
 
     public double Ease(double t)
     {
-        return t;
+        return t < 1.0 ? 0.0 : 1.0;
     }
 }
