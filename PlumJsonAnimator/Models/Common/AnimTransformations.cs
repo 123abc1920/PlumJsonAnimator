@@ -1,6 +1,7 @@
 using System;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Models.Interfaces;
 
 namespace PlumJsonAnimator.Models.Common
 {
@@ -15,18 +16,14 @@ namespace PlumJsonAnimator.Models.Common
         SHEAR,
     }
 
-    public abstract class IKeyframeType
+    public abstract class IKeyframeType(GlobalState globalState, IEasing curve, double time)
     {
-        public double time;
+        protected double _time = time;
+        public IEasing Curve { get; set; } = curve;
 
         public abstract IKeyframeTypeData GenerateJSONData();
 
-        protected GlobalState _globalState;
-
-        public IKeyframeType(GlobalState globalState)
-        {
-            this._globalState = globalState;
-        }
+        protected GlobalState _globalState = globalState;
 
         public String GenerateCode()
         {
@@ -38,6 +35,10 @@ namespace PlumJsonAnimator.Models.Common
     {
         [JsonProperty("time")]
         public Double? Time { get; set; }
+
+        [JsonProperty("curve", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(EasingConverter))]
+        public IEasing? Curve { get; set; }
 
         [JsonProperty("x", NullValueHandling = NullValueHandling.Ignore)]
         public Double? X { get; set; }
@@ -51,24 +52,24 @@ namespace PlumJsonAnimator.Models.Common
 
     public class Translate : IKeyframeType
     {
-        public double x;
-        public double y;
+        public double X { get; private set; }
+        public double Y { get; private set; }
 
-        public Translate(GlobalState globalState, double _time, double _x, double _y)
-            : base(globalState)
+        public Translate(GlobalState globalState, double time, double x, double y, IEasing easing)
+            : base(globalState, easing, time)
         {
-            this.time = _time;
-            this.x = _x;
-            this.y = _y;
+            X = x;
+            Y = y;
         }
 
         public override IKeyframeTypeData GenerateJSONData()
         {
             return new IKeyframeTypeData
             {
-                Time = this.time,
-                X = this.x,
-                Y = this.y,
+                Time = _time,
+                Curve = Curve,
+                X = X,
+                Y = Y,
                 Value = null,
             };
         }
@@ -76,47 +77,47 @@ namespace PlumJsonAnimator.Models.Common
 
     public class Rotate : IKeyframeType
     {
-        public double value;
+        public double Value { get; private set; }
 
-        public Rotate(GlobalState globalState, double _time, double _value)
-            : base(globalState)
+        public Rotate(GlobalState globalState, double time, double value, IEasing easing)
+            : base(globalState, easing, time)
         {
-            this.time = _time;
-            this.value = _value;
+            Value = value;
         }
 
         public override IKeyframeTypeData GenerateJSONData()
         {
             return new IKeyframeTypeData
             {
-                Time = this.time,
+                Time = _time,
+                Curve = Curve,
                 X = null,
                 Y = null,
-                Value = this.value,
+                Value = Value,
             };
         }
     }
 
     class Shear : IKeyframeType
     {
-        public double x;
-        public double y;
+        public double X { get; private set; }
+        public double Y { get; private set; }
 
-        public Shear(GlobalState globalState, double _time, double _x, double _y)
-            : base(globalState)
+        public Shear(GlobalState globalState, double time, double x, double y, IEasing easing)
+            : base(globalState, easing, time)
         {
-            this.time = _time;
-            this.x = _x;
-            this.y = _y;
+            X = x;
+            Y = y;
         }
 
         public override IKeyframeTypeData GenerateJSONData()
         {
             return new IKeyframeTypeData
             {
-                Time = this.time,
-                X = this.x,
-                Y = this.y,
+                Time = _time,
+                Curve = Curve,
+                X = X,
+                Y = Y,
                 Value = null,
             };
         }
@@ -124,24 +125,24 @@ namespace PlumJsonAnimator.Models.Common
 
     class Scale : IKeyframeType
     {
-        public double x;
-        public double y;
+        public double X { get; private set; }
+        public double Y { get; private set; }
 
-        public Scale(GlobalState globalState, double _time, double _x, double _y)
-            : base(globalState)
+        public Scale(GlobalState globalState, double time, double x, double y, IEasing easing)
+            : base(globalState, easing, time)
         {
-            time = _time;
-            x = _x;
-            y = _y;
+            X = x;
+            Y = y;
         }
 
         public override IKeyframeTypeData GenerateJSONData()
         {
             return new IKeyframeTypeData
             {
-                Time = this.time,
-                X = this.x,
-                Y = this.y,
+                Time = _time,
+                Curve = Curve,
+                X = X,
+                Y = Y,
                 Value = null,
             };
         }

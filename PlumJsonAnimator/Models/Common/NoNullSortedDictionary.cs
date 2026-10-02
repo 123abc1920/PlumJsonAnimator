@@ -22,4 +22,9 @@ public class NoNullSortedDictionary<TKey, TValue> : SortedDictionary<TKey, TValu
         if (value != null)
             base.Add(key, value);
     }
+
+    public TValue Get(TKey key)
+    {
+        return base[key];
+    }
 }

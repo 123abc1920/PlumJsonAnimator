@@ -38,6 +38,8 @@ namespace PlumJsonAnimator.Models
         private GlobalState _globalState;
         private Interpolation _interpolation;
 
+        private BezierEasing _testBezier = new BezierEasing(0.95, 0.05, 0.75, 0.05);
+
         public BoneAnimation(GlobalState globalState, Interpolation interpolation)
         {
             this._globalState = globalState;
@@ -54,11 +56,20 @@ namespace PlumJsonAnimator.Models
         {
             if (_translateKeyframes.ContainsKey(time))
             {
-                _translateKeyframes[time] = new Translate(this._globalState, time, x, y);
+                _translateKeyframes[time] = new Translate(
+                    this._globalState,
+                    time,
+                    x,
+                    y,
+                    _testBezier
+                );
             }
             else
             {
-                _translateKeyframes.Add(time, new Translate(this._globalState, time, x, y));
+                _translateKeyframes.Add(
+                    time,
+                    new Translate(this._globalState, time, x, y, _testBezier)
+                );
             }
         }
 
@@ -71,11 +82,11 @@ namespace PlumJsonAnimator.Models
         {
             if (_rotateKeyframes.ContainsKey(time))
             {
-                _rotateKeyframes[time] = new Rotate(this._globalState, time, value);
+                _rotateKeyframes[time] = new Rotate(this._globalState, time, value, _testBezier);
             }
             else
             {
-                _rotateKeyframes.Add(time, new Rotate(this._globalState, time, value));
+                _rotateKeyframes.Add(time, new Rotate(this._globalState, time, value, _testBezier));
             }
         }
 
@@ -83,11 +94,14 @@ namespace PlumJsonAnimator.Models
         {
             if (_shearKeyframes.ContainsKey(time))
             {
-                _shearKeyframes[time] = new Shear(_globalState, time, shearX, shearY);
+                _shearKeyframes[time] = new Shear(_globalState, time, shearX, shearY, _testBezier);
             }
             else
             {
-                _shearKeyframes.Add(time, new Shear(_globalState, time, shearX, shearY));
+                _shearKeyframes.Add(
+                    time,
+                    new Shear(_globalState, time, shearX, shearY, _testBezier)
+                );
             }
         }
 
@@ -95,11 +109,14 @@ namespace PlumJsonAnimator.Models
         {
             if (_scaleKeyframes.ContainsKey(time))
             {
-                _scaleKeyframes[time] = new Scale(_globalState, time, scaleX, scaleY);
+                _scaleKeyframes[time] = new Scale(_globalState, time, scaleX, scaleY, _testBezier);
             }
             else
             {
-                _scaleKeyframes.Add(time, new Scale(_globalState, time, scaleX, scaleY));
+                _scaleKeyframes.Add(
+                    time,
+                    new Scale(_globalState, time, scaleX, scaleY, _testBezier)
+                );
             }
         }
 
@@ -339,40 +356,43 @@ namespace PlumJsonAnimator.Models
             if (_translateKeyframes.Count == 1)
             {
                 var onlyKeyframe = (Translate)_translateKeyframes.First().Value;
-                localX = (double)onlyKeyframe.x;
-                localY = (double)onlyKeyframe.y;
+                localX = (double)onlyKeyframe.X;
+                localY = (double)onlyKeyframe.Y;
             }
             else
             {
-                FindSegment(time, KeyFrameTypes.TRANSLATE);
-                double t = this._interpolation.FindInterpolateParam(
-                    _translateEnd - _translateStart,
-                    time - _translateStart,
-                    new LinearEasing()
-                );
-
-                if (
-                    this._translateKeyframes.ContainsKey(_translateEnd)
-                    && this._translateKeyframes.ContainsKey(_translateStart)
-                )
+                if (_translateKeyframes.ContainsKey(_translateStart))
                 {
-                    localX = this._interpolation.BaseInterpolation(
-                        ((Translate)_translateKeyframes[_translateStart]).x,
-                        ((Translate)_translateKeyframes[_translateEnd]).x,
-                        t
+                    var currentSegment = _translateKeyframes.Get(_translateStart);
+                    FindSegment(time, KeyFrameTypes.TRANSLATE);
+                    double t = _interpolation.FindInterpolateParam(
+                        _translateEnd - _translateStart,
+                        time - _translateStart,
+                        currentSegment.Curve
                     );
-                    localY = this._interpolation.BaseInterpolation(
-                        ((Translate)_translateKeyframes[_translateStart]).y,
-                        ((Translate)_translateKeyframes[_translateEnd]).y,
-                        t
-                    );
-                }
-                else
-                    return;
-            }
+                    if (
+                        _translateKeyframes.ContainsKey(_translateEnd)
+                        && _translateKeyframes.ContainsKey(_translateStart)
+                    )
+                    {
+                        localX = _interpolation.BaseInterpolation(
+                            ((Translate)_translateKeyframes[_translateStart]).X,
+                            ((Translate)_translateKeyframes[_translateEnd]).X,
+                            t
+                        );
+                        localY = _interpolation.BaseInterpolation(
+                            ((Translate)_translateKeyframes[_translateStart]).Y,
+                            ((Translate)_translateKeyframes[_translateEnd]).Y,
+                            t
+                        );
+                    }
+                    else
+                        return;
 
-            b.X = localX;
-            b.Y = localY;
+                    b.X = localX;
+                    b.Y = localY;
+                }
+            }
         }
 
         /// <summary>
@@ -390,32 +410,37 @@ namespace PlumJsonAnimator.Models
             if (_rotateKeyframes.Count == 1)
             {
                 var onlyKeyframe = _rotateKeyframes.First().Value;
-                b.Rotate(((Rotate)onlyKeyframe).value);
+                b.Rotate(((Rotate)onlyKeyframe).Value);
                 return;
             }
 
-            FindSegment(time, KeyFrameTypes.ROTATE);
-
-            double t = this._interpolation.FindInterpolateParam(
-                _rotateEnd - _rotateStart,
-                time - _rotateStart,
-                new LinearEasing()
-            );
-
-            double interpolatedA = b.BaseA;
-            if (
-                this._rotateKeyframes.ContainsKey(_rotateEnd) == true
-                && this._rotateKeyframes.ContainsKey(_rotateStart) == true
-            )
+            if (_rotateKeyframes.ContainsKey(_rotateStart))
             {
-                interpolatedA = this._interpolation.AngleInterpolation(
-                    ((Rotate)_rotateKeyframes[_rotateStart]).value,
-                    ((Rotate)_rotateKeyframes[_rotateEnd]).value,
-                    t
-                );
-            }
+                var currentSegment = _rotateKeyframes.Get(_rotateStart);
 
-            b.Rotate(interpolatedA);
+                FindSegment(time, KeyFrameTypes.ROTATE);
+
+                double t = _interpolation.FindInterpolateParam(
+                    _rotateEnd - _rotateStart,
+                    time - _rotateStart,
+                    currentSegment.Curve
+                );
+
+                double interpolatedA = b.BaseA;
+                if (
+                    _rotateKeyframes.ContainsKey(_rotateEnd) == true
+                    && _rotateKeyframes.ContainsKey(_rotateStart) == true
+                )
+                {
+                    interpolatedA = _interpolation.AngleInterpolation(
+                        ((Rotate)_rotateKeyframes[_rotateStart]).Value,
+                        ((Rotate)_rotateKeyframes[_rotateEnd]).Value,
+                        t
+                    );
+                }
+
+                b.Rotate(interpolatedA);
+            }
         }
 
         /// <summary>
@@ -434,39 +459,45 @@ namespace PlumJsonAnimator.Models
             if (_shearKeyframes.Count == 1)
             {
                 var onlyKeyframe = (Shear)_shearKeyframes.First().Value;
-                localX = (double)onlyKeyframe.x;
-                localY = (double)onlyKeyframe.y;
+                localX = (double)onlyKeyframe.X;
+                localY = (double)onlyKeyframe.Y;
+                b.Shear(localX, localY);
+                return;
             }
-            else
+            
             {
-                FindSegment(time, KeyFrameTypes.SHEAR);
-                double t = this._interpolation.FindInterpolateParam(
-                    _shearEnd - _shearStart,
-                    time - _shearStart,
-                    new LinearEasing()
-                );
-
-                if (
-                    this._shearKeyframes.ContainsKey(_shearEnd)
-                    && this._shearKeyframes.ContainsKey(_shearStart)
-                )
+                if (_shearKeyframes.ContainsKey(_shearStart))
                 {
-                    localX = this._interpolation.BaseInterpolation(
-                        ((Shear)_shearKeyframes[_shearStart]).x,
-                        ((Shear)_shearKeyframes[_shearEnd]).x,
-                        t
+                    var currentSegment = _shearKeyframes.Get(_shearStart);
+                    FindSegment(time, KeyFrameTypes.SHEAR);
+                    double t = this._interpolation.FindInterpolateParam(
+                        _shearEnd - _shearStart,
+                        time - _shearStart,
+                        currentSegment.Curve
                     );
-                    localY = this._interpolation.BaseInterpolation(
-                        ((Shear)_shearKeyframes[_shearStart]).y,
-                        ((Shear)_shearKeyframes[_shearEnd]).y,
-                        t
-                    );
-                }
-                else
-                    return;
-            }
 
-            b.Shear(localX, localY);
+                    if (
+                        _shearKeyframes.ContainsKey(_shearEnd)
+                        && _shearKeyframes.ContainsKey(_shearStart)
+                    )
+                    {
+                        localX = _interpolation.BaseInterpolation(
+                            ((Shear)_shearKeyframes[_shearStart]).X,
+                            ((Shear)_shearKeyframes[_shearEnd]).X,
+                            t
+                        );
+                        localY = _interpolation.BaseInterpolation(
+                            ((Shear)_shearKeyframes[_shearStart]).Y,
+                            ((Shear)_shearKeyframes[_shearEnd]).Y,
+                            t
+                        );
+                    }
+                    else
+                        return;
+
+                    b.Shear(localX, localY);
+                }
+            }
         }
 
         /// <summary>
@@ -485,39 +516,45 @@ namespace PlumJsonAnimator.Models
             if (_scaleKeyframes.Count == 1)
             {
                 var onlyKeyframe = (Scale)_scaleKeyframes.First().Value;
-                localX = (double)onlyKeyframe.x;
-                localY = (double)onlyKeyframe.y;
+                localX = (double)onlyKeyframe.X;
+                localY = (double)onlyKeyframe.Y;
+                b.Scale(localX, localY);
+                return;
             }
-            else
+
             {
-                FindSegment(time, KeyFrameTypes.SCALE);
-                double t = _interpolation.FindInterpolateParam(
-                    _scaleEnd - _scaleStart,
-                    time - _scaleStart,
-                    new LinearEasing()
-                );
-
-                if (
-                    _scaleKeyframes.ContainsKey(_scaleEnd)
-                    && _scaleKeyframes.ContainsKey(_scaleStart)
-                )
+                if (_scaleKeyframes.ContainsKey(_scaleStart))
                 {
-                    localX = _interpolation.BaseInterpolation(
-                        ((Scale)_scaleKeyframes[_scaleStart]).x,
-                        ((Scale)_scaleKeyframes[_scaleEnd]).x,
-                        t
+                    var currentSegment = _scaleKeyframes.Get(_scaleStart);
+                    FindSegment(time, KeyFrameTypes.SCALE);
+                    double t = _interpolation.FindInterpolateParam(
+                        _scaleEnd - _scaleStart,
+                        time - _scaleStart,
+                        currentSegment.Curve
                     );
-                    localY = _interpolation.BaseInterpolation(
-                        ((Scale)_scaleKeyframes[_scaleStart]).y,
-                        ((Scale)_scaleKeyframes[_scaleEnd]).y,
-                        t
-                    );
-                }
-                else
-                    return;
-            }
 
-            b.Scale(localX, localY);
+                    if (
+                        _scaleKeyframes.ContainsKey(_scaleEnd)
+                        && _scaleKeyframes.ContainsKey(_scaleStart)
+                    )
+                    {
+                        localX = _interpolation.BaseInterpolation(
+                            ((Scale)_scaleKeyframes[_scaleStart]).X,
+                            ((Scale)_scaleKeyframes[_scaleEnd]).X,
+                            t
+                        );
+                        localY = _interpolation.BaseInterpolation(
+                            ((Scale)_scaleKeyframes[_scaleStart]).Y,
+                            ((Scale)_scaleKeyframes[_scaleEnd]).Y,
+                            t
+                        );
+                    }
+                    else
+                        return;
+
+                    b.Scale(localX, localY);
+                }
+            }
         }
 
         /// <summary>
