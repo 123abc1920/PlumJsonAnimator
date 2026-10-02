@@ -624,10 +624,12 @@
                                             FPS="{Binding FPS}"
                                             PixelsPerSecond="100"
                                             TotalDuration="60"
-                                            Zoom="1">
+                                            Zoom="1"
+                                            Background="Transparent">
                                             <ctrls:TimelineControl.Tracks>
                                                 <models:TimelineTrack Name="translate" />
                                                 <models:TimelineTrack Name="rotate" />
+                                                <models:TimelineTrack Name="shear" />
                                                 <models:TimelineTrack Name="scale" />
                                             </ctrls:TimelineControl.Tracks>
                                         </ctrls:TimelineControl>

@@ -2,18 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Avalonia;
-using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Media;
+using Avalonia.Rendering;
 using Avalonia.Threading;
 using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 
 namespace PlumJsonAnimator.Common.Timeline
 {
-    public class TimelineControl : Control
+    public class TimelineControl : TemplatedControl, ICustomHitTest
     {
-        private double timeStep;
+        private const int TickHeight = 5;
+
+        private double _timeStep;
         private bool _isDraggingPlayhead = false;
         private DispatcherTimer _refreshTimer;
 
@@ -154,6 +157,11 @@ namespace PlumJsonAnimator.Common.Timeline
             _refreshTimer?.Stop();
         }
 
+        bool ICustomHitTest.HitTest(Point point)
+        {
+            return new Rect(0, 0, Bounds.Width, Bounds.Height).Contains(point);
+        }
+
         public override void Render(DrawingContext context)
         {
             // --- 1. Основные переменные ---
@@ -230,7 +238,7 @@ namespace PlumJsonAnimator.Common.Timeline
             // ----------------------------------------------------------------------------------
 
             double step = 1.0 / FPS;
-            this.timeStep = step;
+            this._timeStep = step;
 
             for (double t = 0; t <= duration; t += step)
             {
@@ -238,7 +246,7 @@ namespace PlumJsonAnimator.Common.Timeline
                 double xPosition = PixelsPerSecond * t * Zoom;
 
                 // Высота метки: 8px для основных (каждые 5 сек), 5px для промежуточных
-                double tickHeight = 5;
+                double tickHeight = TickHeight;
 
                 // Рисуем вертикальную метку: от midlineY вверх/вниз
                 context.DrawLine(
@@ -348,6 +356,12 @@ namespace PlumJsonAnimator.Common.Timeline
                 _isDraggingPlayhead = true;
                 e.Handled = true;
             }
+            else
+            {
+                SetCurrentTime(pos.X, pos.Y);
+                e.Handled = true;
+                InvalidateVisual();
+            }
         }
 
         protected override void OnPointerMoved(PointerEventArgs e)
@@ -357,35 +371,8 @@ namespace PlumJsonAnimator.Common.Timeline
             if (_isDraggingPlayhead)
             {
                 var pos = e.GetCurrentPoint(this).Position;
-                double newX = pos.X;
-
-                // ИСПОЛЬЗУЕМ desiredWidth (Полная ширина шкалы)
-                double calculatedWidth = TotalDuration * PixelsPerSecond * Zoom;
-
-                // Ограничиваем X-координату в пределах полной шкалы
-                newX = Math.Clamp(newX, 0, calculatedWidth);
-
-                // Расчет нового времени (должен использовать calculatedWidth)
-                double newTime = (newX / calculatedWidth) * TotalDuration;
-
-                // ПРИВЯЗЫВАЕМ К КАДРАМ
-                if (FPS > 0)
-                {
-                    double frameDuration = 1.0 / FPS;
-                    int frameNumber = (int)Math.Round(newTime / frameDuration);
-                    newTime = frameNumber * frameDuration;
-                }
-
-                // Еще раз ограничиваем после привязки
-                newTime = Math.Clamp(newTime, 0, TotalDuration);
-
-                // УСТАНАВЛИВАЕМ CurrentTime - бегунок подтянется сам при отрисовке
-                newTime = Math.Round(newTime / this.timeStep) * timeStep;
-                CurrentTime = newTime;
-
+                SetCurrentTime(pos.X, pos.Y);
                 e.Handled = true;
-
-                // Обновляем отображение
                 InvalidateVisual();
             }
         }
@@ -393,6 +380,12 @@ namespace PlumJsonAnimator.Common.Timeline
         protected override void OnPointerReleased(PointerReleasedEventArgs e)
         {
             base.OnPointerReleased(e);
+
+            if (e.Pointer.Captured == this)
+            {
+                e.Pointer.Capture(null);
+            }
+
             if (_isDraggingPlayhead)
             {
                 _isDraggingPlayhead = false;
@@ -403,11 +396,36 @@ namespace PlumJsonAnimator.Common.Timeline
                     double frameDuration = 1.0 / FPS;
                     int frameNumber = (int)Math.Round(CurrentTime / frameDuration);
                     CurrentTime = frameNumber * frameDuration;
-                    CurrentTime = Math.Round(CurrentTime / this.timeStep) * this.timeStep;
+                    CurrentTime = Math.Round(CurrentTime / this._timeStep) * this._timeStep;
 
                     InvalidateVisual();
                 }
             }
+        }
+
+        private void SetCurrentTime(double x, double y)
+        {
+            double newX = x;
+            double newY = y;
+
+            if (newY > TickHeight)
+            {
+                return;
+            }
+
+            double calculatedWidth = TotalDuration * PixelsPerSecond * Zoom;
+            newX = Math.Clamp(newX, 0, calculatedWidth);
+            double newTime = (newX / calculatedWidth) * TotalDuration;
+
+            if (FPS > 0)
+            {
+                double frameDuration = 1.0 / FPS;
+                int frameNumber = (int)Math.Round(newTime / frameDuration);
+                newTime = frameNumber * frameDuration;
+            }
+            newTime = Math.Clamp(newTime, 0, TotalDuration);
+            newTime = Math.Round(newTime / _timeStep) * _timeStep;
+            CurrentTime = newTime;
         }
     }
 }
