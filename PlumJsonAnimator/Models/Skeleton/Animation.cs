@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Services;
 
@@ -47,17 +48,27 @@ public class Animation : INotifyable
 
     private GlobalState _globalState;
     private Interpolation _interpolation;
+    private EasingFactory _easingFactory;
 
-    public Animation(GlobalState globalState, Interpolation interpolation)
+    public Animation(
+        GlobalState globalState,
+        Interpolation interpolation,
+        EasingFactory easingFactory
+    )
     {
         _globalState = globalState;
         _interpolation = interpolation;
+        _easingFactory = easingFactory;
     }
 
-    public Animation(GlobalState globalState, Interpolation interpolation, string name)
+    public Animation(
+        GlobalState globalState,
+        Interpolation interpolation,
+        EasingFactory easingFactory,
+        string name
+    )
+        : this(globalState, interpolation, easingFactory)
     {
-        _globalState = globalState;
-        _interpolation = interpolation;
         Name = name;
     }
 
@@ -462,6 +473,21 @@ public class Animation : INotifyable
 
         BoneAnimation boneAnimation = BoneAnimationBinding[b];
         return boneAnimation.GetKeyFrameLine(mode.Type);
+    }
+
+    public void ChangeCurrentEasingMode(
+        EasingTypes newEasingType,
+        TransformModeTypes transformModeType
+    )
+    {
+        foreach (var kv in BoneAnimationBinding)
+        {
+            var boneAnimation = kv.Value;
+            var keyFrame = boneAnimation.FindKeyFrame(CurrentTime, transformModeType);
+            if (keyFrame is null)
+                return;
+            keyFrame.Curve = _easingFactory.CreateEasing(newEasingType);
+        }
     }
 }
 

@@ -47,8 +47,8 @@ namespace PlumJsonAnimator.Models
         {
             foreach (PointModel point in _points)
             {
-                point.X = Math.Max(0, Math.Min(GlobalState.BASE_CANVAS_SIZE, point.X));
-                point.Y = Math.Max(0, Math.Min(GlobalState.BASE_CANVAS_SIZE, point.Y));
+                point.X = Math.Max(0, Math.Min(GlobalState.BaseCanvasSize, point.X));
+                point.Y = Math.Max(0, Math.Min(GlobalState.BaseCanvasSize, point.Y));
             }
 
             int minWidth = NearRegion * 2;
@@ -82,8 +82,8 @@ namespace PlumJsonAnimator.Models
 
             foreach (PointModel point in _points)
             {
-                point.X = Math.Max(0, Math.Min(GlobalState.BASE_CANVAS_SIZE, point.X));
-                point.Y = Math.Max(0, Math.Min(GlobalState.BASE_CANVAS_SIZE, point.Y));
+                point.X = Math.Max(0, Math.Min(GlobalState.BaseCanvasSize, point.X));
+                point.Y = Math.Max(0, Math.Min(GlobalState.BaseCanvasSize, point.Y));
             }
         }
 

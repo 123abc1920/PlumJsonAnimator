@@ -62,11 +62,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 if (_globalState == null)
                     return 0;
-                return _globalState.setBasePos ? BaseX : BaseX + AnimX;
+                return _globalState.SetBasePos ? BaseX : BaseX + AnimX;
             }
             set
             {
-                if (_globalState.setBasePos)
+                if (_globalState.SetBasePos)
                 {
                     BaseX = value;
                 }
@@ -83,11 +83,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 if (_globalState == null)
                     return 0;
-                return _globalState.setBasePos ? BaseY : BaseY + AnimY;
+                return _globalState.SetBasePos ? BaseY : BaseY + AnimY;
             }
             set
             {
-                if (_globalState.setBasePos)
+                if (_globalState.SetBasePos)
                 {
                     BaseY = value;
                 }
@@ -104,11 +104,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 if (_globalState == null)
                     return 0;
-                return _globalState.setBasePos ? BaseA : (AnimA == 0 ? BaseA : AnimA);
+                return _globalState.SetBasePos ? BaseA : (AnimA == 0 ? BaseA : AnimA);
             }
             set
             {
-                if (_globalState.setBasePos)
+                if (_globalState.SetBasePos)
                 {
                     BaseA = value;
                 }
@@ -137,8 +137,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             get
             {
-                double localX = BaseX + (_globalState.setBasePos ? 0 : AnimX);
-                double localY = BaseY + (_globalState.setBasePos ? 0 : AnimY);
+                double localX = BaseX + (_globalState.SetBasePos ? 0 : AnimX);
+                double localY = BaseY + (_globalState.SetBasePos ? 0 : AnimY);
 
                 if (Parent != null)
                 {
@@ -154,8 +154,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             get
             {
-                double localY = BaseY + (_globalState.setBasePos ? 0 : AnimY);
-                double localX = BaseX + (_globalState.setBasePos ? 0 : AnimX);
+                double localY = BaseY + (_globalState.SetBasePos ? 0 : AnimY);
+                double localX = BaseX + (_globalState.SetBasePos ? 0 : AnimX);
 
                 if (Parent != null)
                 {
@@ -323,7 +323,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 double localX = dx * Math.Cos(parentAngleRad) - dy * Math.Sin(parentAngleRad);
                 double localY = dx * Math.Sin(parentAngleRad) + dy * Math.Cos(parentAngleRad);
 
-                if (_globalState.setBasePos)
+                if (_globalState.SetBasePos)
                 {
                     BaseX = localX;
                     BaseY = localY;
@@ -339,7 +339,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
             else
             {
-                if (_globalState.setBasePos)
+                if (_globalState.SetBasePos)
                 {
                     BaseX = x;
                     BaseY = y;

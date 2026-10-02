@@ -40,6 +40,7 @@
         <converters:DoubleConverter x:Key="DoubleConverter" />
         <converters:AnimationConverter x:Key="AnimationConverter" />
         <converters:StringToBoolConverter x:Key="StringToBoolConverter" />
+        <converters:EasingTypeToBoolConverter x:Key="EasingTypeToBoolConverter" />
     </Window.Resources>
 
     <Design.DataContext>
@@ -607,6 +608,36 @@
                                             Command="{Binding DeleteKeyFrame}">
                                             <iconPacks:PackIconBootstrapIcons Kind="Dash" />
                                         </Button>
+
+                                        <ToggleButton
+                                            Width="32"
+                                            Height="32"
+                                            Padding="0"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            IsChecked="{Binding EasingMode, Converter={StaticResource EasingTypeToBoolConverter}, ConverterParameter='bezier', Mode=TwoWay}">
+                                            <iconPacks:PackIconBootstrapIcons Kind="ArrowUpRight" />
+                                        </ToggleButton>
+
+                                        <ToggleButton
+                                            Width="32"
+                                            Height="32"
+                                            Padding="0"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            IsChecked="{Binding EasingMode, Converter={StaticResource EasingTypeToBoolConverter}, ConverterParameter='stepped', Mode=TwoWay}">
+                                            <iconPacks:PackIconBootstrapIcons Kind="ArrowRight" />
+                                        </ToggleButton>
+
+                                        <ToggleButton
+                                            Width="32"
+                                            Height="32"
+                                            Padding="0"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            IsChecked="{Binding EasingMode, Converter={StaticResource EasingTypeToBoolConverter}, ConverterParameter='linear', Mode=TwoWay}">
+                                            <iconPacks:PackIconBootstrapIcons Kind="Arrow90degRight" />
+                                        </ToggleButton>
                                     </StackPanel>
                                 </DockPanel>
 
@@ -618,6 +649,7 @@
                                         <ctrls:TimelineControl
                                             x:Name="Timeline"
                                             Height="150"
+                                            Background="Transparent"
                                             CurrentAnimation="{Binding CurrentProject.CurrentAnimation}"
                                             CurrentBone="{Binding CurrentBone}"
                                             CurrentMode="{Binding CurrentProject.CurrentMode}"
@@ -625,8 +657,7 @@
                                             FPS="{Binding FPS}"
                                             PixelsPerSecond="100"
                                             TotalDuration="60"
-                                            Zoom="1"
-                                            Background="Transparent">
+                                            Zoom="1">
                                             <ctrls:TimelineControl.Tracks>
                                                 <models:TimelineTrack Name="translate" />
                                                 <models:TimelineTrack Name="rotate" />

@@ -56,7 +56,7 @@ namespace PlumJsonAnimator.Models
         {
             if (_translateKeyframes.ContainsKey(time))
             {
-                _translateKeyframes[time] = new Translate(
+                _translateKeyframes[time] = new TranslateKeyFrame(
                     this._globalState,
                     time,
                     x,
@@ -68,7 +68,7 @@ namespace PlumJsonAnimator.Models
             {
                 _translateKeyframes.Add(
                     time,
-                    new Translate(this._globalState, time, x, y, _testBezier)
+                    new TranslateKeyFrame(this._globalState, time, x, y, _testBezier)
                 );
             }
         }
@@ -82,11 +82,19 @@ namespace PlumJsonAnimator.Models
         {
             if (_rotateKeyframes.ContainsKey(time))
             {
-                _rotateKeyframes[time] = new Rotate(this._globalState, time, value, _testBezier);
+                _rotateKeyframes[time] = new RotateKeyFrame(
+                    this._globalState,
+                    time,
+                    value,
+                    _testBezier
+                );
             }
             else
             {
-                _rotateKeyframes.Add(time, new Rotate(this._globalState, time, value, _testBezier));
+                _rotateKeyframes.Add(
+                    time,
+                    new RotateKeyFrame(this._globalState, time, value, _testBezier)
+                );
             }
         }
 
@@ -94,13 +102,19 @@ namespace PlumJsonAnimator.Models
         {
             if (_shearKeyframes.ContainsKey(time))
             {
-                _shearKeyframes[time] = new Shear(_globalState, time, shearX, shearY, _testBezier);
+                _shearKeyframes[time] = new ShearKeyFrame(
+                    _globalState,
+                    time,
+                    shearX,
+                    shearY,
+                    _testBezier
+                );
             }
             else
             {
                 _shearKeyframes.Add(
                     time,
-                    new Shear(_globalState, time, shearX, shearY, _testBezier)
+                    new ShearKeyFrame(_globalState, time, shearX, shearY, _testBezier)
                 );
             }
         }
@@ -109,13 +123,19 @@ namespace PlumJsonAnimator.Models
         {
             if (_scaleKeyframes.ContainsKey(time))
             {
-                _scaleKeyframes[time] = new Scale(_globalState, time, scaleX, scaleY, _testBezier);
+                _scaleKeyframes[time] = new ScaleKeyFrame(
+                    _globalState,
+                    time,
+                    scaleX,
+                    scaleY,
+                    _testBezier
+                );
             }
             else
             {
                 _scaleKeyframes.Add(
                     time,
-                    new Scale(_globalState, time, scaleX, scaleY, _testBezier)
+                    new ScaleKeyFrame(_globalState, time, scaleX, scaleY, _testBezier)
                 );
             }
         }
@@ -286,11 +306,7 @@ namespace PlumJsonAnimator.Models
         /// <param name="keyFrameType"></param>
         private void FindSegment(double currTime, TransformModeTypes keyFrameType)
         {
-            void FindInKeys(
-                System.Collections.Generic.ICollection<double> keys,
-                ref double startRes,
-                ref double endRes
-            )
+            void FindInKeys(ICollection<double> keys, ref double startRes, ref double endRes)
             {
                 if (keys.Count < 2)
                     return;
@@ -340,6 +356,49 @@ namespace PlumJsonAnimator.Models
             }
         }
 
+        public IKeyframeType? FindKeyFrame(double time, TransformModeTypes transformMode)
+        {
+            IKeyframeType? result = null;
+            double bestTime = double.NegativeInfinity;
+
+            void Scan(NoNullSortedDictionary<double, IKeyframeType> dict)
+            {
+                var keys = new SortedSet<double>(dict.Keys);
+                if (keys.Count == 0)
+                    return;
+
+                var view = keys.GetViewBetween(keys.Min, time);
+                if (view.Count == 0)
+                    return;
+
+                var max = view.Max;
+                if (max > bestTime)
+                {
+                    bestTime = max;
+                    result = dict.Get(max);
+                }
+            }
+
+            if (transformMode == TransformModeTypes.ROTATE)
+            {
+                Scan(_rotateKeyframes);
+            }
+            else if (transformMode == TransformModeTypes.TRANSLATE)
+            {
+                Scan(_translateKeyframes);
+            }
+            else if (transformMode == TransformModeTypes.SCALE)
+            {
+                Scan(_scaleKeyframes);
+            }
+            else if (transformMode == TransformModeTypes.SHEAR)
+            {
+                Scan(_shearKeyframes);
+            }
+
+            return result;
+        }
+
         public SortedDictionary<double, IKeyframeType>? GetKeyFrameLine(
             TransformModeTypes keyFrameType
         )
@@ -374,7 +433,7 @@ namespace PlumJsonAnimator.Models
 
             if (_translateKeyframes.Count == 1)
             {
-                var onlyKeyframe = (Translate)_translateKeyframes.First().Value;
+                var onlyKeyframe = (TranslateKeyFrame)_translateKeyframes.First().Value;
                 localX = (double)onlyKeyframe.X;
                 localY = (double)onlyKeyframe.Y;
             }
@@ -395,13 +454,13 @@ namespace PlumJsonAnimator.Models
                     )
                     {
                         localX = _interpolation.BaseInterpolation(
-                            ((Translate)_translateKeyframes[_translateStart]).X,
-                            ((Translate)_translateKeyframes[_translateEnd]).X,
+                            ((TranslateKeyFrame)_translateKeyframes[_translateStart]).X,
+                            ((TranslateKeyFrame)_translateKeyframes[_translateEnd]).X,
                             t
                         );
                         localY = _interpolation.BaseInterpolation(
-                            ((Translate)_translateKeyframes[_translateStart]).Y,
-                            ((Translate)_translateKeyframes[_translateEnd]).Y,
+                            ((TranslateKeyFrame)_translateKeyframes[_translateStart]).Y,
+                            ((TranslateKeyFrame)_translateKeyframes[_translateEnd]).Y,
                             t
                         );
                     }
@@ -429,7 +488,7 @@ namespace PlumJsonAnimator.Models
             if (_rotateKeyframes.Count == 1)
             {
                 var onlyKeyframe = _rotateKeyframes.First().Value;
-                b.Rotate(((Rotate)onlyKeyframe).Value);
+                b.Rotate(((RotateKeyFrame)onlyKeyframe).Value);
                 return;
             }
 
@@ -452,8 +511,8 @@ namespace PlumJsonAnimator.Models
                 )
                 {
                     interpolatedA = _interpolation.AngleInterpolation(
-                        ((Rotate)_rotateKeyframes[_rotateStart]).Value,
-                        ((Rotate)_rotateKeyframes[_rotateEnd]).Value,
+                        ((RotateKeyFrame)_rotateKeyframes[_rotateStart]).Value,
+                        ((RotateKeyFrame)_rotateKeyframes[_rotateEnd]).Value,
                         t
                     );
                 }
@@ -477,7 +536,7 @@ namespace PlumJsonAnimator.Models
 
             if (_shearKeyframes.Count == 1)
             {
-                var onlyKeyframe = (Shear)_shearKeyframes.First().Value;
+                var onlyKeyframe = (ShearKeyFrame)_shearKeyframes.First().Value;
                 localX = (double)onlyKeyframe.X;
                 localY = (double)onlyKeyframe.Y;
                 b.Shear(localX, localY);
@@ -501,13 +560,13 @@ namespace PlumJsonAnimator.Models
                     )
                     {
                         localX = _interpolation.BaseInterpolation(
-                            ((Shear)_shearKeyframes[_shearStart]).X,
-                            ((Shear)_shearKeyframes[_shearEnd]).X,
+                            ((ShearKeyFrame)_shearKeyframes[_shearStart]).X,
+                            ((ShearKeyFrame)_shearKeyframes[_shearEnd]).X,
                             t
                         );
                         localY = _interpolation.BaseInterpolation(
-                            ((Shear)_shearKeyframes[_shearStart]).Y,
-                            ((Shear)_shearKeyframes[_shearEnd]).Y,
+                            ((ShearKeyFrame)_shearKeyframes[_shearStart]).Y,
+                            ((ShearKeyFrame)_shearKeyframes[_shearEnd]).Y,
                             t
                         );
                     }
@@ -534,7 +593,7 @@ namespace PlumJsonAnimator.Models
 
             if (_scaleKeyframes.Count == 1)
             {
-                var onlyKeyframe = (Scale)_scaleKeyframes.First().Value;
+                var onlyKeyframe = (ScaleKeyFrame)_scaleKeyframes.First().Value;
                 localX = (double)onlyKeyframe.X;
                 localY = (double)onlyKeyframe.Y;
                 b.Scale(localX, localY);
@@ -558,13 +617,13 @@ namespace PlumJsonAnimator.Models
                     )
                     {
                         localX = _interpolation.BaseInterpolation(
-                            ((Scale)_scaleKeyframes[_scaleStart]).X,
-                            ((Scale)_scaleKeyframes[_scaleEnd]).X,
+                            ((ScaleKeyFrame)_scaleKeyframes[_scaleStart]).X,
+                            ((ScaleKeyFrame)_scaleKeyframes[_scaleEnd]).X,
                             t
                         );
                         localY = _interpolation.BaseInterpolation(
-                            ((Scale)_scaleKeyframes[_scaleStart]).Y,
-                            ((Scale)_scaleKeyframes[_scaleEnd]).Y,
+                            ((ScaleKeyFrame)_scaleKeyframes[_scaleStart]).Y,
+                            ((ScaleKeyFrame)_scaleKeyframes[_scaleEnd]).Y,
                             t
                         );
                     }

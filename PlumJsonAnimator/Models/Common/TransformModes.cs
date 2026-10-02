@@ -55,7 +55,7 @@ class TransformMode : Mode
     public override void Transform(Bone bone, double x, double y)
     {
         bone.Move(x, y);
-        if (_globalState.setBasePos == false)
+        if (_globalState.SetBasePos == false)
         {
             var animation = _globalState.CurrentProject?.GetCurrentAnimation();
             if (animation != null && !animation.IsRun && bone.IsBone == true)
@@ -101,7 +101,7 @@ class RotateMode : Mode
         double angleDeg = angleRad * 180 / Math.PI;
 
         bone.Rotate(-angleDeg);
-        if (_globalState.setBasePos == false)
+        if (_globalState.SetBasePos == false)
         {
             var animation = _globalState.CurrentProject?.GetCurrentAnimation();
             if (animation != null && !animation.IsRun && bone.IsBone == true)
@@ -167,7 +167,7 @@ class ScaleMode : Mode
         startX = x;
         startY = y;
 
-        if (_globalState.setBasePos == false)
+        if (_globalState.SetBasePos == false)
         {
             var animation = _globalState.CurrentProject?.GetCurrentAnimation();
             if (animation != null && !animation.IsRun && bone.IsBone == true)
@@ -248,7 +248,7 @@ class ShearMode : Mode
 
         bone.Shear(newShearX, newShearY);
 
-        if (_globalState.setBasePos == false)
+        if (_globalState.SetBasePos == false)
         {
             var animation = _globalState.CurrentProject?.GetCurrentAnimation();
             if (animation != null && !animation.IsRun && bone.IsBone == true)

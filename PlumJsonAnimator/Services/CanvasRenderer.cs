@@ -41,9 +41,9 @@ public class CanvasRenderer
         if (this.globalState.currentTab == 0)
         {
             RedrawCanvas(
-                this.globalState.canvas,
-                this.globalState.drawBones,
-                this.globalState.captureMode
+                this.globalState.Canvas,
+                this.globalState.DrawBones,
+                this.globalState.CaptureMode
             );
         }
         else if (this.globalState.currentTab == 1)
@@ -60,7 +60,7 @@ public class CanvasRenderer
         if (isDrawBone)
         {
             this.globalState.CurrentProject?.MainSkeleton?.DrawSkeleton(canvas);
-            this.jsonCode.generateCode(this.globalState.CurrentProject);
+            this.jsonCode.GenerateCode(this.globalState.CurrentProject);
         }
         if (isDrawCapture)
         {

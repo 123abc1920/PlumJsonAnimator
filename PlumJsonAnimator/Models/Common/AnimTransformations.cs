@@ -1,6 +1,7 @@
 using System;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Models.Easing;
 using PlumJsonAnimator.Models.Interfaces;
 
 namespace PlumJsonAnimator.Models.Common
@@ -37,14 +38,22 @@ namespace PlumJsonAnimator.Models.Common
 
         [JsonProperty("value", NullValueHandling = NullValueHandling.Ignore)]
         public Double? Value { get; set; }
+
+        public bool ShouldSerializeCurve() => Curve is not LinearEasing && Curve is not null;
     }
 
-    public class Translate : IKeyframeType
+    public class TranslateKeyFrame : IKeyframeType
     {
         public double X { get; private set; }
         public double Y { get; private set; }
 
-        public Translate(GlobalState globalState, double time, double x, double y, IEasing easing)
+        public TranslateKeyFrame(
+            GlobalState globalState,
+            double time,
+            double x,
+            double y,
+            IEasing easing
+        )
             : base(globalState, easing, time)
         {
             X = x;
@@ -64,11 +73,11 @@ namespace PlumJsonAnimator.Models.Common
         }
     }
 
-    public class Rotate : IKeyframeType
+    public class RotateKeyFrame : IKeyframeType
     {
         public double Value { get; private set; }
 
-        public Rotate(GlobalState globalState, double time, double value, IEasing easing)
+        public RotateKeyFrame(GlobalState globalState, double time, double value, IEasing easing)
             : base(globalState, easing, time)
         {
             Value = value;
@@ -87,12 +96,18 @@ namespace PlumJsonAnimator.Models.Common
         }
     }
 
-    class Shear : IKeyframeType
+    class ShearKeyFrame : IKeyframeType
     {
         public double X { get; private set; }
         public double Y { get; private set; }
 
-        public Shear(GlobalState globalState, double time, double x, double y, IEasing easing)
+        public ShearKeyFrame(
+            GlobalState globalState,
+            double time,
+            double x,
+            double y,
+            IEasing easing
+        )
             : base(globalState, easing, time)
         {
             X = x;
@@ -112,12 +127,18 @@ namespace PlumJsonAnimator.Models.Common
         }
     }
 
-    class Scale : IKeyframeType
+    class ScaleKeyFrame : IKeyframeType
     {
         public double X { get; private set; }
         public double Y { get; private set; }
 
-        public Scale(GlobalState globalState, double time, double x, double y, IEasing easing)
+        public ScaleKeyFrame(
+            GlobalState globalState,
+            double time,
+            double x,
+            double y,
+            IEasing easing
+        )
             : base(globalState, easing, time)
         {
             X = x;

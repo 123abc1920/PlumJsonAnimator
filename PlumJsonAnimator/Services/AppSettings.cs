@@ -33,7 +33,7 @@ namespace PlumJsonAnimator.Services
             );
             AppSettingsFile = Path.Combine(
                 AppSettingsPath,
-                $"settings{this.globalState.programExt}"
+                $"settings{this.globalState.ProgramExt}"
             );
 
             this.appSettings = new AppSettingsData()
@@ -43,7 +43,7 @@ namespace PlumJsonAnimator.Services
                 Theme = "light",
                 Workspace = Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
-                    this.globalState.globalWorkspace,
+                    this.globalState.GlobalWorkspace,
                     "NewProject"
                 ),
                 Ffmpeg = "",
@@ -152,9 +152,9 @@ namespace PlumJsonAnimator.Services
 
                     this.localizationService.LoadLangResorce(newSettings.Lang);
 
-                    this.globalState.theme = newSettings.Theme;
+                    this.globalState.Theme = newSettings.Theme;
                     var sukiTheme = SukiTheme.GetInstance();
-                    if (this.globalState.theme == "dark")
+                    if (this.globalState.Theme == "dark")
                     {
                         sukiTheme.ChangeBaseTheme(ThemeVariant.Dark);
                     }

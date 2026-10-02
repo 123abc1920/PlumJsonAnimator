@@ -53,7 +53,7 @@ public partial class MainWindow : SukiWindow
         {
             viewModel.Timeline = Timeline;
             viewModel.SetMainWin(this);
-            globalState.canvas = mainCanvas;
+            globalState.Canvas = mainCanvas;
 
             if (!viewModel.JsonErrorObj.IsOk)
             {

@@ -4,6 +4,7 @@ using Avalonia.Controls;
 using Avalonia.Media;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Models;
+using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
@@ -51,16 +52,18 @@ namespace PlumJsonAnimator.Common.Constants
 
         public int currentTab;
 
-        public Bone? CurrentBone { get; set; } = null;
-        public string theme = "light";
-        public bool drawBones = true;
-        public bool setBasePos = true;
-        public bool captureMode = false;
-        public string globalWorkspace = "PlumJsonAnimatorWorkspace";
-        public string programExt = ".plmjsn";
+        public EasingTypes CurrentEasingType { get; set; } = EasingTypes.LINEAR;
 
-        public Canvas? canvas;
-        public const int BASE_CANVAS_SIZE = 1000;
+        public Bone? CurrentBone { get; set; } = null;
+        public string Theme { get; set; } = "light";
+        public bool DrawBones { get; set; } = true;
+        public bool SetBasePos { get; set; } = true;
+        public bool CaptureMode { get; set; } = false;
+        public string GlobalWorkspace { get; set; } = "PlumJsonAnimatorWorkspace";
+        public string ProgramExt { get; set; } = ".plmjsn";
+
+        public Canvas? Canvas { get; set; }
+        public const int BaseCanvasSize = 1000;
         public int canvasHeight = 1000;
         public int canvasWidth = 1000;
 
@@ -88,8 +91,8 @@ namespace PlumJsonAnimator.Common.Constants
         {
             this.jsonError = new JsonError(localizationService);
 
-            this.SettingsFileName = $"settings{this.programExt}";
-            this.AutoSaveFile = $"autosave{this.programExt}";
+            this.SettingsFileName = $"settings{this.ProgramExt}";
+            this.AutoSaveFile = $"autosave{this.ProgramExt}";
         }
 
         public ParallelOptions GetParallelOptions()

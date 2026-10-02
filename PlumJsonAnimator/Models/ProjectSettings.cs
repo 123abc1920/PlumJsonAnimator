@@ -33,7 +33,7 @@ public class ProjectSettings
         {
             Path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
-                this.globalState.globalWorkspace
+                this.globalState.GlobalWorkspace
             ),
             Name = "NewProject",
             Spine = "4.3.2",

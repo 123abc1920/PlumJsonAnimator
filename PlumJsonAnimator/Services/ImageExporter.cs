@@ -26,12 +26,12 @@ namespace PlumJsonAnimator.Services
         public string ExportPath = "";
         public Canvas? Canvas
         {
-            get => this._globalState.canvas;
+            get => this._globalState.Canvas;
             set
             {
-                if (this._globalState.canvas != value)
+                if (this._globalState.Canvas != value)
                 {
-                    this._globalState.canvas = value;
+                    this._globalState.Canvas = value;
                 }
             }
         }

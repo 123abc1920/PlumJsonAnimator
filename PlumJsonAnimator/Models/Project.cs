@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Commands;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
@@ -62,6 +63,7 @@ namespace PlumJsonAnimator.Models
         private GlobalState _globalState;
         private Interpolation _interpolation;
         private LocalizationService _localizationService;
+        private EasingFactory _easingFactory;
 
         public Skin CurrentSkin
         {
@@ -108,11 +110,12 @@ namespace PlumJsonAnimator.Models
         public Project(
             GlobalState globalState,
             Interpolation interpolation,
-            LocalizationService localizationService
+            LocalizationService localizationService,
+            EasingFactory easingFactory
         )
         {
             MainSkeleton = new Skeleton(globalState, localizationService);
-            Animations.Add(new Animation(globalState, interpolation));
+            Animations.Add(new Animation(globalState, interpolation, easingFactory));
             CurrentAnimation = Animations[0];
             Skins.Add(new Skin(globalState));
             CurrentSkin = Skins[0];
@@ -122,15 +125,17 @@ namespace PlumJsonAnimator.Models
             _globalState = globalState;
             _interpolation = interpolation;
             _localizationService = localizationService;
+            _easingFactory = easingFactory;
         }
 
         public Project(
             ProjectSettings projectSettings,
             GlobalState globalState,
             Interpolation interpolation,
-            LocalizationService localizationService
+            LocalizationService localizationService,
+            EasingFactory easingFactory
         )
-            : this(globalState, interpolation, localizationService)
+            : this(globalState, interpolation, localizationService, easingFactory)
         {
             _projectSettings = projectSettings;
             SetupProjectSettings(projectSettings.GetSettingsData());
@@ -154,6 +159,7 @@ namespace PlumJsonAnimator.Models
             Animation newAnimation = new Animation(
                 _globalState,
                 _interpolation,
+                _easingFactory,
                 $"anim{Counter.GenerateNamePostfix()}"
             );
             Animations.Add(newAnimation);
@@ -570,7 +576,12 @@ namespace PlumJsonAnimator.Models
 
             foreach (var animation in animations)
             {
-                Animation a = new Animation(_globalState, _interpolation, animation.Key);
+                Animation a = new Animation(
+                    _globalState,
+                    _interpolation,
+                    _easingFactory,
+                    animation.Key
+                );
                 a.BoneAnimationBinding = new Dictionary<Bone, BoneAnimation>();
                 var animationData = animation.Value;
 
@@ -630,7 +641,7 @@ namespace PlumJsonAnimator.Models
 
             if (Animations.Count <= 0)
             {
-                Animations.Add(new Animation(_globalState, _interpolation));
+                Animations.Add(new Animation(_globalState, _interpolation, _easingFactory));
             }
             CurrentAnimation = Animations[0];
 
@@ -757,7 +768,7 @@ namespace PlumJsonAnimator.Models
         public void SaveProject(JsonCode jsonCode)
         {
             string project = JsonConvert.SerializeObject(
-                jsonCode.generateJSONData(this),
+                jsonCode.GenerateJSONData(this),
                 _globalState.jsonSettings
             );
             _projectSettings.WriteProjectJSON(project);
@@ -766,7 +777,7 @@ namespace PlumJsonAnimator.Models
         public void AutoSaveProjectSettings(JsonCode jsonCode)
         {
             string project = JsonConvert.SerializeObject(
-                jsonCode.generateJSONData(this),
+                jsonCode.GenerateJSONData(this),
                 _globalState.jsonSettings
             );
 

@@ -98,12 +98,12 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public bool DrawBones
     {
-        get { return this._globalState.drawBones; }
+        get { return this._globalState.DrawBones; }
         set
         {
-            if (this._globalState.drawBones != value)
+            if (this._globalState.DrawBones != value)
             {
-                this._globalState.drawBones = value;
+                this._globalState.DrawBones = value;
                 OnPropertyChanged(nameof(DrawBones));
             }
         }
@@ -111,12 +111,12 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public bool SetBasePos
     {
-        get { return this._globalState.setBasePos; }
+        get { return this._globalState.SetBasePos; }
         set
         {
-            if (this._globalState.setBasePos != value)
+            if (this._globalState.SetBasePos != value)
             {
-                this._globalState.setBasePos = value;
+                this._globalState.SetBasePos = value;
                 OnPropertyChanged(nameof(SetBasePos));
             }
         }
@@ -124,12 +124,12 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public bool CaptureMode
     {
-        get { return this._globalState.captureMode; }
+        get { return this._globalState.CaptureMode; }
         set
         {
-            if (this._globalState.captureMode != value)
+            if (this._globalState.CaptureMode != value)
             {
-                this._globalState.captureMode = value;
+                this._globalState.CaptureMode = value;
                 OnPropertyChanged(nameof(CaptureMode));
             }
         }
@@ -168,6 +168,26 @@ public partial class MainWindowViewModel : ViewModelBase
 
                 OnPropertyChanged(nameof(TransformMode));
                 OnPropertyChanged(nameof(IsTransformModeActive));
+            }
+        }
+    }
+
+    private EasingTypes _easingMode = EasingTypes.LINEAR;
+    public EasingTypes EasingMode
+    {
+        get => _easingMode;
+        set
+        {
+            if (_easingMode != value)
+            {
+                _easingMode = value;
+
+                CurrentProject?.CurrentAnimation?.ChangeCurrentEasingMode(
+                    _easingMode,
+                    CurrentProject.CurrentMode.Type
+                );
+
+                OnPropertyChanged();
             }
         }
     }
@@ -228,8 +248,8 @@ public partial class MainWindowViewModel : ViewModelBase
             )
             {
                 this._globalState.zoomCanvas = value;
-                CanvasWidth = (int)(GlobalState.BASE_CANVAS_SIZE * value);
-                CanvasHeight = (int)(GlobalState.BASE_CANVAS_SIZE * value);
+                CanvasWidth = (int)(GlobalState.BaseCanvasSize * value);
+                CanvasHeight = (int)(GlobalState.BaseCanvasSize * value);
                 OnPropertyChanged(nameof(ZoomCanvas));
             }
         }

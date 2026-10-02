@@ -1,11 +1,10 @@
 using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
-using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Commands;
+using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
@@ -31,6 +30,7 @@ public class PlumApp
     private readonly HistoryManager _historyManager;
     private readonly AutoSaver _autoSaver;
     private readonly CanvasRenderer _canvasUpdater;
+    private readonly EasingFactory _easingFactory;
 
     public PlumApp(
         AppSettings appSettings,
@@ -46,7 +46,8 @@ public class PlumApp
         ImageExporter imageExporter,
         HistoryManager historyManager,
         AutoSaver autoSaver,
-        CanvasRenderer canvasUpdater
+        CanvasRenderer canvasUpdater,
+        EasingFactory easingFactory
     )
     {
         AppSettings = appSettings;
@@ -64,6 +65,7 @@ public class PlumApp
         _historyManager = historyManager;
         _autoSaver = autoSaver;
         _canvasUpdater = canvasUpdater;
+        _easingFactory = easingFactory;
     }
 
     public void Start()
@@ -85,7 +87,7 @@ public class PlumApp
             GlobalState
         );
 
-        InitProject(new Project(projectSettings, GlobalState, _interpolation, Localization));
+        InitProject(new Project(projectSettings, GlobalState, _interpolation, Localization, _easingFactory));
 
         _autoSaver.StartAutoSaveAsync(GlobalState.autoSaveSec);
     }
@@ -118,7 +120,8 @@ public class PlumApp
             projectSettings,
             GlobalState,
             this._interpolation,
-            Localization
+            Localization,
+            _easingFactory
         );
 
         AppSettings.SaveSettings();
