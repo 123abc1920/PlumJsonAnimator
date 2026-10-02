@@ -38,7 +38,7 @@ namespace PlumJsonAnimator.Models
         private GlobalState _globalState;
         private Interpolation _interpolation;
 
-        private BezierEasing _testBezier = new BezierEasing(0.95, 0.05, 0.75, 0.05);
+        private BezierEasing _testBezier = new BezierEasing(0.1, 0.9, 0.2, 1.0);
 
         public BoneAnimation(GlobalState globalState, Interpolation interpolation)
         {

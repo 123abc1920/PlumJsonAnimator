@@ -52,6 +52,28 @@ class BezierEasing : IEasing
 
     public void DrawLine(DrawingContext context, PointModel p1, PointModel p2, Brush brush)
     {
-        context.DrawLine(new Pen(brush, 1), new Point(p1.X, p1.Y), new Point(p2.X, p2.Y));
+        if (_keysMap != null && _keysMap.Count >= 4)
+        {
+            double x1 = _keysMap[0];
+            double y1 = _keysMap[1];
+            double x2 = _keysMap[2];
+            double y2 = _keysMap[3];
+
+            double deltaX = p2.X - p1.X;
+            double deltaY = p2.Y - p1.Y;
+
+            Point controlPoint1 = new Point(p1.X + x1 * deltaX, p1.Y + y1 * deltaY);
+            Point controlPoint2 = new Point(p1.X + x2 * deltaX, p1.Y + y2 * deltaY);
+
+            StreamGeometry geometry = new StreamGeometry();
+            using (StreamGeometryContext ctx = geometry.Open())
+            {
+                ctx.BeginFigure(new Point(p1.X, p1.Y), isFilled: false);
+                ctx.CubicBezierTo(controlPoint1, controlPoint2, new Point(p2.X, p2.Y));
+                ctx.EndFigure(isClosed: false);
+            }
+
+            context.DrawGeometry(null, new Pen(brush, 1.5), geometry);
+        }
     }
 }
