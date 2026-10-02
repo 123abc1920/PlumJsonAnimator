@@ -70,12 +70,12 @@ public partial class MainWindowViewModel : ViewModelBase
     public TimelineControl? Timeline;
     public double CurrentTime
     {
-        get { return this.CurrentProject.CurrentAnimation.currentTime; }
+        get { return this.CurrentProject.CurrentAnimation.CurrentTime; }
         set
         {
-            if (this.CurrentProject.CurrentAnimation.currentTime != value)
+            if (this.CurrentProject.CurrentAnimation.CurrentTime != value)
             {
-                this.CurrentProject.CurrentAnimation.currentTime = value;
+                this.CurrentProject.CurrentAnimation.CurrentTime = value;
                 this.CurrentProject.CurrentAnimation.SetupBones();
                 foreach (Slot s in CurrentProject.Slots)
                 {
@@ -147,23 +147,23 @@ public partial class MainWindowViewModel : ViewModelBase
 
                 if (value == "transform")
                 {
-                    CurrentProject!.currentMode = new TransformMode(this._globalState);
+                    CurrentProject!.CurrentMode = new TransformMode(this._globalState);
                 }
                 else if (value == "rotate")
                 {
-                    CurrentProject!.currentMode = new RotateMode(this._globalState);
+                    CurrentProject!.CurrentMode = new RotateMode(this._globalState);
                 }
                 else if (value == "scale")
                 {
-                    CurrentProject!.currentMode = new ScaleMode(this._globalState);
+                    CurrentProject!.CurrentMode = new ScaleMode(this._globalState);
                 }
                 else if (value == "shear")
                 {
-                    CurrentProject!.currentMode = new ShearMode(this._globalState);
+                    CurrentProject!.CurrentMode = new ShearMode(this._globalState);
                 }
                 else
                 {
-                    CurrentProject!.currentMode = new NoMode(this._globalState);
+                    CurrentProject!.CurrentMode = new NoMode(this._globalState);
                 }
 
                 OnPropertyChanged(nameof(TransformMode));
@@ -516,8 +516,8 @@ public partial class MainWindowViewModel : ViewModelBase
             {
                 CurrentTime = CurrentProject.CurrentAnimation.FindKeyFrame(
                     CurrentBone,
-                    CurrentProject.CurrentAnimation.currentTime,
-                    CurrentProject.currentMode.Type,
+                    CurrentProject.CurrentAnimation.CurrentTime,
+                    CurrentProject.CurrentMode.Type,
                     false
                 );
             }
@@ -528,8 +528,8 @@ public partial class MainWindowViewModel : ViewModelBase
             {
                 CurrentTime = CurrentProject.CurrentAnimation.FindKeyFrame(
                     CurrentBone,
-                    CurrentProject.CurrentAnimation.currentTime,
-                    CurrentProject.currentMode.Type,
+                    CurrentProject.CurrentAnimation.CurrentTime,
+                    CurrentProject.CurrentMode.Type,
                     true
                 );
             }

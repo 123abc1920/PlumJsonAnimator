@@ -620,6 +620,7 @@
                                             Height="150"
                                             CurrentAnimation="{Binding CurrentProject.CurrentAnimation}"
                                             CurrentBone="{Binding CurrentBone}"
+                                            CurrentMode="{Binding CurrentProject.CurrentMode}"
                                             CurrentTime="{Binding CurrentTime, Mode=TwoWay}"
                                             FPS="{Binding FPS}"
                                             PixelsPerSecond="100"

@@ -100,7 +100,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// </summary>
         public void UpdateDrawOrderOffset()
         {
-            double currTime = _globalState.CurrentProject.CurrentAnimation.currentTime;
+            double currTime = _globalState.CurrentProject.CurrentAnimation.CurrentTime;
 
             double? foundKey = null;
             foreach (var key in drawOrders.Keys)
@@ -208,7 +208,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                     if (_globalState?.CurrentProject?.CurrentAnimation == null)
                         return;
 
-                    double currTime = _globalState.CurrentProject.CurrentAnimation.currentTime;
+                    double currTime = _globalState.CurrentProject.CurrentAnimation.CurrentTime;
                     if (drawOrders.ContainsKey(currTime))
                     {
                         drawOrders[currTime].Offset = value;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
@@ -15,6 +16,16 @@ namespace PlumJsonAnimator.Common.Timeline
     public class TimelineControl : TemplatedControl, ICustomHitTest
     {
         private const int TickHeight = 5;
+        private readonly Dictionary<TransformModeTypes, int> trackTypes = new()
+        {
+            [TransformModeTypes.TRANSLATE] = 0,
+            [TransformModeTypes.ROTATE] = 1,
+            [TransformModeTypes.SCALE] = 2,
+            [TransformModeTypes.SHEAR] = 3,
+        };
+        private const double TimelineHeight = 25;
+        private const double KeyframeWidth = 6;
+        private const double KeyframeHeight = 18;
 
         private double _timeStep;
         private bool _isDraggingPlayhead = false;
@@ -59,6 +70,9 @@ namespace PlumJsonAnimator.Common.Timeline
         public static readonly StyledProperty<Animation?> CurrentAnimationProperty =
             AvaloniaProperty.Register<TimelineControl, Animation?>(nameof(CurrentAnimation), null);
 
+        public static readonly StyledProperty<Mode?> CurrentModeProperty =
+            AvaloniaProperty.Register<TimelineControl, Mode?>(nameof(CurrentMode), null);
+
         public int Zoom
         {
             get => GetValue(ZoomProperty);
@@ -75,6 +89,12 @@ namespace PlumJsonAnimator.Common.Timeline
         {
             get => GetValue(CurrentBoneProperty);
             set => SetValue(CurrentBoneProperty, value);
+        }
+
+        public Mode? CurrentMode
+        {
+            get => GetValue(CurrentModeProperty);
+            set => SetValue(CurrentModeProperty, value);
         }
 
         public Animation? CurrentAnimation
@@ -142,10 +162,8 @@ namespace PlumJsonAnimator.Common.Timeline
 
         protected override Size MeasureOverride(Size availableSize)
         {
-            // Расчет ширины
             double desiredWidth = TotalDuration * PixelsPerSecond * Zoom;
 
-            // Высота: если Height не установлен (т.е. NaN), используем availableSize.Height.
             double desiredHeight = availableSize.Height;
 
             return new Size(desiredWidth, desiredHeight);
@@ -174,13 +192,6 @@ namespace PlumJsonAnimator.Common.Timeline
 
             var linePen = new Pen(Brushes.Gray, 1);
             var redPen = new Pen(Brushes.Red, 2);
-
-            // ... (Отрисовка фона) ...
-
-            // --- 2. Константы высоты ---
-            // Увеличим высоту для меток времени, чтобы они не накладывались на дорожки
-            double timelineHeight = 25;
-            double midlineY = timelineHeight; // Сдвинем основную линию шкалы вниз
 
             // --- 3. Отрисовка главной горизонтальной линии ---
             // Используем desiredWidth
@@ -214,7 +225,7 @@ namespace PlumJsonAnimator.Common.Timeline
             // ----------------------------------------------------------------------------------
 
             // Высота, доступная для всех дорожек
-            double availableTrackHeight = height - timelineHeight;
+            double availableTrackHeight = height - TimelineHeight;
 
             // Высота одной дорожки (делим на количество дорожек)
             double trackRowHeight = availableTrackHeight / Math.Max(1, trackCount) - 5;
@@ -223,7 +234,7 @@ namespace PlumJsonAnimator.Common.Timeline
             {
                 // Y-позиция центра дорожки:
                 // Начинаем с конца шкалы (timelineHeight) + смещение на текущий ряд + половина высоты ряда
-                double yPosition = timelineHeight + (i * trackRowHeight) + (trackRowHeight / 2.0);
+                double yPosition = TimelineHeight + (i * trackRowHeight) + (trackRowHeight / 2.0);
 
                 // Рисуем линию дорожки (используем desiredWidth)
                 context.DrawLine(
@@ -261,7 +272,7 @@ namespace PlumJsonAnimator.Common.Timeline
             // ----------------------------------------------------------------------------------
             KeyValuePair<
                 Bone,
-                Dictionary<double, Dictionary<KeyFrameTypes, bool>>
+                Dictionary<double, Dictionary<TransformModeTypes, bool>>
             >? currentBoneKeyFrames = null;
 
             if (CurrentAnimation is null)
@@ -269,30 +280,78 @@ namespace PlumJsonAnimator.Common.Timeline
 
             foreach (var boneKeyFrames in CurrentAnimation.GetAllKeyFrameMarks())
             {
-                if (CurrentBone == boneKeyFrames.Key)
+                var opacity = 0.2;
+
+                // TODO: сравнение не работает
+                if (CurrentBone == boneKeyFrames.Key && currentBoneKeyFrames != null)
                 {
-                    currentBoneKeyFrames = boneKeyFrames;
-                    continue;
+                    opacity = 1.0;
                 }
 
-                DrawBoneKeyframes(context, boneKeyFrames, 0.2, timelineHeight, trackRowHeight);
+                DrawBoneKeyframes(context, boneKeyFrames, opacity, TimelineHeight, trackRowHeight);
             }
 
-            if (currentBoneKeyFrames != null)
+            if (
+                CurrentBone != null
+                && !(CurrentMode is null)
+                && CurrentMode.Type != TransformModeTypes.NO
+            )
             {
-                DrawBoneKeyframes(
+                var keyFrameLine = CurrentAnimation.GetKeyFrameLine(CurrentMode, CurrentBone);
+                DrawKeyFrameLine(context, keyFrameLine);
+            }
+        }
+
+        private void DrawKeyFrameLine(
+            DrawingContext context,
+            SortedDictionary<double, IKeyframeType>? keyFrameLine
+        )
+        {
+            if (keyFrameLine is null)
+                return;
+
+            var keys = keyFrameLine.Keys.ToList();
+
+            var rowIndex = trackTypes[CurrentMode!.Type];
+            double availableTrackHeight = Bounds.Height - TimelineHeight;
+            double trackRowHeight = availableTrackHeight / Math.Max(1, trackTypes.Count);
+            int startY = (int)(
+                TimelineHeight
+                + (trackTypes[CurrentMode.Type] * trackRowHeight)
+                + (trackRowHeight / 2.0)
+            );
+
+            int endY = (int)(
+                TimelineHeight
+                + (trackTypes[CurrentMode.Type] * trackRowHeight)
+                - (trackRowHeight / 2.0)
+            );
+
+            for (int i = 0; i < keys.Count - 1; i++)
+            {
+                var currentKeyFrame = keyFrameLine[keys[i]];
+
+                var startX = (int)(PixelsPerSecond * keys[i] * Zoom);
+                var endX = (int)(PixelsPerSecond * keys[i + 1] * Zoom);
+
+                var color = CurrentBone!.BoneColor;
+
+                SolidColorBrush fillBrush = new SolidColorBrush(color.Color);
+                currentKeyFrame.Curve.DrawLine(
                     context,
-                    currentBoneKeyFrames.Value,
-                    1.0,
-                    timelineHeight,
-                    trackRowHeight
+                    new PointModel(startX, startY),
+                    new PointModel(endX, endY),
+                    fillBrush
                 );
             }
         }
 
         private void DrawBoneKeyframes(
             DrawingContext context,
-            KeyValuePair<Bone, Dictionary<double, Dictionary<KeyFrameTypes, bool>>> boneKeyFrames,
+            KeyValuePair<
+                Bone,
+                Dictionary<double, Dictionary<TransformModeTypes, bool>>
+            > boneKeyFrames,
             double opacity,
             double timelineHeight,
             double trackRowHeight
@@ -300,24 +359,14 @@ namespace PlumJsonAnimator.Common.Timeline
         {
             var color = boneKeyFrames.Key.BoneColor;
             var keyframesMarks =
-                boneKeyFrames.Value ?? new Dictionary<double, Dictionary<KeyFrameTypes, bool>>();
-
-            const double KeyframeWidth = 6;
-            const double KeyframeHeight = 18;
+                boneKeyFrames.Value
+                ?? new Dictionary<double, Dictionary<TransformModeTypes, bool>>();
 
             SolidColorBrush fillBrush = new SolidColorBrush(color.Color) { Opacity = opacity };
 
             foreach (double time in keyframesMarks.Keys)
             {
                 double xPosition = PixelsPerSecond * time * Zoom;
-
-                var trackTypes = new[]
-                {
-                    (KeyFrameTypes.TRANSLATE, 0),
-                    (KeyFrameTypes.ROTATE, 1),
-                    (KeyFrameTypes.SCALE, 2),
-                    (KeyFrameTypes.SHEAR, 3),
-                };
 
                 foreach (var (type, rowIndex) in trackTypes)
                 {
@@ -344,13 +393,14 @@ namespace PlumJsonAnimator.Common.Timeline
 
             var pos = e.GetCurrentPoint(this).Position;
 
-            // ИСПОЛЬЗУЕМ desiredWidth (Полная ширина шкалы)
-            double desiredWidth = TotalDuration * PixelsPerSecond * Zoom;
+            if (pos.Y > TickHeight)
+            {
+                return;
+            }
 
-            // Расчет X-позиции бегунка на полной шкале
+            double desiredWidth = TotalDuration * PixelsPerSecond * Zoom;
             double playheadX = CurrentTime * PixelsPerSecond * Zoom;
 
-            // Если указатель находится в пределах 10px от бегунка
             if (Math.Abs(pos.X - playheadX) < 10)
             {
                 _isDraggingPlayhead = true;

@@ -4,6 +4,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Avalonia.Media;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.Models
@@ -13,38 +14,26 @@ namespace PlumJsonAnimator.Models
     /// </summary>
     public class CaptureArea
     {
-        private class Point
-        {
-            public int x;
-            public int y;
+        private PointModel _a;
+        private PointModel _b;
+        private PointModel _c;
+        private PointModel _d;
 
-            public Point(int _x, int _y)
-            {
-                this.x = _x;
-                this.y = _y;
-            }
-        }
-
-        private Point _a;
-        private Point _b;
-        private Point _c;
-        private Point _d;
-
-        private Point[] _points;
-        private Point? _selectedPoint = null;
+        private PointModel[] _points;
+        private PointModel? _selectedPoint = null;
 
         private AppSettings _appSettings;
 
-        private const int NEAR_REGION = 20;
+        private const int NearRegion = 20;
 
         public CaptureArea(int x, int y, int width, int height, AppSettings appSettings)
         {
-            this._a = new Point(x, y);
-            this._b = new Point(x + width, y);
-            this._c = new Point(x + width, y + height);
-            this._d = new Point(x, y + height);
+            this._a = new PointModel(x, y);
+            this._b = new PointModel(x + width, y);
+            this._c = new PointModel(x + width, y + height);
+            this._d = new PointModel(x, y + height);
 
-            _points = new Point[4] { this._a, this._b, this._c, this._d };
+            _points = new PointModel[4] { this._a, this._b, this._c, this._d };
 
             this._appSettings = appSettings;
 
@@ -56,19 +45,19 @@ namespace PlumJsonAnimator.Models
         /// </summary>
         private void ValidatePoints()
         {
-            foreach (Point point in _points)
+            foreach (PointModel point in _points)
             {
-                point.x = Math.Max(0, Math.Min(GlobalState.BASE_CANVAS_SIZE, point.x));
-                point.y = Math.Max(0, Math.Min(GlobalState.BASE_CANVAS_SIZE, point.y));
+                point.X = Math.Max(0, Math.Min(GlobalState.BASE_CANVAS_SIZE, point.X));
+                point.Y = Math.Max(0, Math.Min(GlobalState.BASE_CANVAS_SIZE, point.Y));
             }
 
-            int minWidth = NEAR_REGION * 2;
-            int minHeight = NEAR_REGION * 2;
+            int minWidth = NearRegion * 2;
+            int minHeight = NearRegion * 2;
 
-            int left = Math.Min(_a.x, Math.Min(_b.x, Math.Min(_c.x, _d.x)));
-            int top = Math.Min(_a.y, Math.Min(_b.y, Math.Min(_c.y, _d.y)));
-            int right = Math.Max(_a.x, Math.Max(_b.x, Math.Max(_c.x, _d.x)));
-            int bottom = Math.Max(_a.y, Math.Max(_b.y, Math.Max(_c.y, _d.y)));
+            int left = Math.Min(_a.X, Math.Min(_b.X, Math.Min(_c.X, _d.X)));
+            int top = Math.Min(_a.Y, Math.Min(_b.Y, Math.Min(_c.Y, _d.Y)));
+            int right = Math.Max(_a.X, Math.Max(_b.X, Math.Max(_c.X, _d.X)));
+            int bottom = Math.Max(_a.Y, Math.Max(_b.Y, Math.Max(_c.Y, _d.Y)));
 
             if (right - left < minWidth)
             {
@@ -79,22 +68,22 @@ namespace PlumJsonAnimator.Models
                 bottom = top + minHeight;
             }
 
-            _a.x = left;
-            _a.y = top;
+            _a.X = left;
+            _a.Y = top;
 
-            _b.x = right;
-            _b.y = top;
+            _b.X = right;
+            _b.Y = top;
 
-            _c.x = right;
-            _c.y = bottom;
+            _c.X = right;
+            _c.Y = bottom;
 
-            _d.x = left;
-            _d.y = bottom;
+            _d.X = left;
+            _d.Y = bottom;
 
-            foreach (Point point in _points)
+            foreach (PointModel point in _points)
             {
-                point.x = Math.Max(0, Math.Min(GlobalState.BASE_CANVAS_SIZE, point.x));
-                point.y = Math.Max(0, Math.Min(GlobalState.BASE_CANVAS_SIZE, point.y));
+                point.X = Math.Max(0, Math.Min(GlobalState.BASE_CANVAS_SIZE, point.X));
+                point.Y = Math.Max(0, Math.Min(GlobalState.BASE_CANVAS_SIZE, point.Y));
             }
         }
 
@@ -108,12 +97,12 @@ namespace PlumJsonAnimator.Models
             double realX = x;
             double realY = y;
 
-            foreach (Point p in _points)
+            foreach (PointModel p in _points)
             {
-                double dx = Math.Abs(p.x - realX);
-                double dy = Math.Abs(p.y - realY);
+                double dx = Math.Abs(p.X - realX);
+                double dy = Math.Abs(p.Y - realY);
 
-                if (dx < NEAR_REGION && dy < NEAR_REGION)
+                if (dx < NearRegion && dy < NearRegion)
                 {
                     this._selectedPoint = p;
                     break;
@@ -130,21 +119,21 @@ namespace PlumJsonAnimator.Models
         {
             if (this._selectedPoint != null)
             {
-                var oldx = this._selectedPoint.x;
-                var oldy = this._selectedPoint.y;
+                var oldx = this._selectedPoint.X;
+                var oldy = this._selectedPoint.Y;
 
-                this._selectedPoint.x = x;
-                this._selectedPoint.y = y;
+                this._selectedPoint.X = x;
+                this._selectedPoint.Y = y;
 
-                foreach (Point p in _points)
+                foreach (PointModel p in _points)
                 {
-                    if (p.x == oldx)
+                    if (p.X == oldx)
                     {
-                        p.x = this._selectedPoint.x;
+                        p.X = this._selectedPoint.X;
                     }
-                    if (p.y == oldy)
+                    if (p.Y == oldy)
                     {
-                        p.y = this._selectedPoint.y;
+                        p.Y = this._selectedPoint.Y;
                     }
                 }
             }
@@ -170,8 +159,8 @@ namespace PlumJsonAnimator.Models
         /// <returns>Bound rect</returns>
         public Rect GetRect()
         {
-            var width = Math.Abs(this._b.x - this._a.x);
-            var height = Math.Abs(this._d.y - this._a.y);
+            var width = Math.Abs(this._b.X - this._a.X);
+            var height = Math.Abs(this._d.Y - this._a.Y);
 
             if (width % 2 != 0)
             {
@@ -183,8 +172,8 @@ namespace PlumJsonAnimator.Models
             }
 
             return new Rect(
-                Math.Floor((double)this._a.x),
-                Math.Floor((double)this._a.y),
+                Math.Floor((double)this._a.X),
+                Math.Floor((double)this._a.Y),
                 width,
                 height
             );
@@ -206,8 +195,8 @@ namespace PlumJsonAnimator.Models
             Canvas.SetTop(rectangle, rect.Y);
             canvas.Children.Add(rectangle);
 
-            var width = this._b.x - this._a.x;
-            var height = this._d.y - this._a.y;
+            var width = this._b.X - this._a.X;
+            var height = this._d.Y - this._a.Y;
             var sizeText = new TextBlock
             {
                 Text = $"{width:F0} x {height:F0}",
@@ -221,10 +210,10 @@ namespace PlumJsonAnimator.Models
             Canvas.SetTop(sizeText, rect.Y);
             canvas.Children.Add(sizeText);
 
-            DrawPoint(canvas, this._a.x, this._a.y);
-            DrawPoint(canvas, this._b.x, this._b.y);
-            DrawPoint(canvas, this._c.x, this._c.y);
-            DrawPoint(canvas, this._d.x, this._d.y);
+            DrawPoint(canvas, this._a.X, this._a.Y);
+            DrawPoint(canvas, this._b.X, this._b.Y);
+            DrawPoint(canvas, this._c.X, this._c.Y);
+            DrawPoint(canvas, this._d.X, this._d.Y);
         }
 
         /// <summary>

@@ -5,17 +5,6 @@ using PlumJsonAnimator.Models.Interfaces;
 
 namespace PlumJsonAnimator.Models.Common
 {
-    /// <summary>
-    /// Key frames types. Not transform modes, transform modes provides transformation.
-    /// </summary>
-    public enum KeyFrameTypes
-    {
-        TRANSLATE = 0,
-        ROTATE,
-        SCALE,
-        SHEAR,
-    }
-
     public abstract class IKeyframeType(GlobalState globalState, IEasing curve, double time)
     {
         protected double _time = time;

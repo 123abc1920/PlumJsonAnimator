@@ -1,506 +1,507 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Interfaces;
-using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Services;
 
-namespace PlumJsonAnimator.Models.SkeletonNameSpace
+namespace PlumJsonAnimator.Models.SkeletonNameSpace;
+
+/// <summary>
+/// Provides methods for work with animations
+/// </summary>
+public class Animation : INotifyable
 {
-    /// <summary>
-    /// Provides methods for work with animations
-    /// </summary>
-    public class Animation : INotifyable
+    private string _name = "anim0";
+    public string Name
     {
-        private string _name = "anim0";
-        public string Name
+        get => _name;
+        set
         {
-            get => _name;
-            set
+            if (_name != value)
             {
-                if (_name != value)
-                {
-                    _name = value;
-                    OnPropertyChanged(nameof(Name));
-                }
+                _name = value;
+                OnPropertyChanged(nameof(Name));
             }
         }
+    }
 
-        public double currentTime = 0;
-        private bool _isRun = false;
-        public bool IsRun
+    public double CurrentTime = 0;
+    private bool _isRun = false;
+    public bool IsRun
+    {
+        get => _isRun;
+        set
         {
-            get => _isRun;
-            set
+            if (_isRun != value)
             {
-                if (_isRun != value)
-                {
-                    _isRun = value;
-                    OnPropertyChanged(nameof(IsRun));
-                }
+                _isRun = value;
+                OnPropertyChanged(nameof(IsRun));
             }
         }
-        public Dictionary<Bone, BoneAnimation> BoneAnimationBinding =
-            new Dictionary<Bone, BoneAnimation>();
+    }
+    public Dictionary<Bone, BoneAnimation> BoneAnimationBinding =
+        new Dictionary<Bone, BoneAnimation>();
 
-        private GlobalState _globalState;
-        private Interpolation _interpolation;
+    private GlobalState _globalState;
+    private Interpolation _interpolation;
 
-        public Animation(GlobalState globalState, Interpolation interpolation)
+    public Animation(GlobalState globalState, Interpolation interpolation)
+    {
+        _globalState = globalState;
+        _interpolation = interpolation;
+    }
+
+    public Animation(GlobalState globalState, Interpolation interpolation, string name)
+    {
+        _globalState = globalState;
+        _interpolation = interpolation;
+        Name = name;
+    }
+
+    /// <summary>
+    /// Sets all bones according to the current time
+    /// </summary>
+    public void SetupBones()
+    {
+        foreach (Bone b in BoneAnimationBinding.Keys)
         {
-            _globalState = globalState;
-            _interpolation = interpolation;
+            BoneAnimationBinding[b].BoneStep(b, CurrentTime);
+            UpdateDrawOrder(b.Slots);
+        }
+    }
+
+    public void UpdateDrawOrder(ObservableCollection<Slot> slots)
+    {
+        foreach (Slot s in slots)
+        {
+            s.UpdateDrawOrderOffset();
+        }
+    }
+
+    public void UpdateAllDrawOrder()
+    {
+        foreach (Bone b in BoneAnimationBinding.Keys)
+        {
+            UpdateDrawOrder(b.Slots);
+        }
+    }
+
+    /// <summary>
+    /// Makes animation step
+    /// </summary>
+    public void Step()
+    {
+        CurrentTime += 1.0 / (double)_globalState.FPS;
+        SetupBones();
+    }
+
+    /// <summary>
+    /// Checks whether a bone is involved in an animation
+    /// </summary>
+    public bool ContainsBone(Bone bone)
+    {
+        return BoneAnimationBinding.ContainsKey(bone);
+    }
+
+    /// <summary>
+    /// Checks if the bone has any movement
+    /// </summary>
+    public bool ContainsAnimationBone(BoneAnimation boneAnimation)
+    {
+        return BoneAnimationBinding.ContainsValue(boneAnimation);
+    }
+
+    public void DeleteBoneFromAnimation(Bone bone)
+    {
+        if (ContainsBone(bone) == true)
+        {
+            BoneAnimationBinding.Remove(bone);
+        }
+    }
+
+    public void RestoreBoneAnimation(Bone bone, BoneAnimation? boneAnimation)
+    {
+        if (bone == null || boneAnimation == null)
+        {
+            return;
         }
 
-        public Animation(GlobalState globalState, Interpolation interpolation, string name)
-        {
-            _globalState = globalState;
-            _interpolation = interpolation;
-            Name = name;
-        }
+        BoneAnimationBinding[bone] = boneAnimation;
+    }
 
-        /// <summary>
-        /// Sets all bones according to the current time
-        /// </summary>
-        public void SetupBones()
-        {
-            foreach (Bone b in BoneAnimationBinding.Keys)
-            {
-                BoneAnimationBinding[b].BoneStep(b, currentTime);
-                UpdateDrawOrder(b.Slots);
-            }
-        }
+    public BoneAnimation GetBoneAnimation(Bone bone)
+    {
+        return BoneAnimationBinding[bone];
+    }
 
-        public void UpdateDrawOrder(ObservableCollection<Slot> slots)
+    /// <summary>
+    /// Turn animation data into JSON object
+    /// </summary>
+    public AnimationData GenerateJSONData()
+    {
+        var animationData = new AnimationData();
+
+        var boneListData = new BonesListData();
+        foreach (Bone b in BoneAnimationBinding.Keys)
         {
+            boneListData.Add(b.Name, BoneAnimationBinding[b].GenerateJSONData());
+        }
+        animationData.Bones = boneListData;
+
+        var drawOrders = new List<DrawOrderItem>();
+
+        foreach (Bone b in _globalState.CurrentProject.MainSkeleton.Bones)
+        {
+            var slots = b.Slots;
+            Dictionary<double, DrawOrderItem> drawOrderItems =
+                new Dictionary<double, DrawOrderItem>();
+
             foreach (Slot s in slots)
             {
-                s.UpdateDrawOrderOffset();
-            }
-        }
-
-        public void UpdateAllDrawOrder()
-        {
-            foreach (Bone b in BoneAnimationBinding.Keys)
-            {
-                UpdateDrawOrder(b.Slots);
-            }
-        }
-
-        /// <summary>
-        /// Makes animation step
-        /// </summary>
-        public void Step()
-        {
-            currentTime += 1.0 / (double)_globalState.FPS;
-            SetupBones();
-        }
-
-        /// <summary>
-        /// Checks whether a bone is involved in an animation
-        /// </summary>
-        public bool ContainsBone(Bone bone)
-        {
-            return BoneAnimationBinding.ContainsKey(bone);
-        }
-
-        /// <summary>
-        /// Checks if the bone has any movement
-        /// </summary>
-        public bool ContainsAnimationBone(BoneAnimation boneAnimation)
-        {
-            return BoneAnimationBinding.ContainsValue(boneAnimation);
-        }
-
-        public void DeleteBoneFromAnimation(Bone bone)
-        {
-            if (ContainsBone(bone) == true)
-            {
-                BoneAnimationBinding.Remove(bone);
-            }
-        }
-
-        public void RestoreBoneAnimation(Bone bone, BoneAnimation? boneAnimation)
-        {
-            if (bone == null || boneAnimation == null)
-            {
-                return;
-            }
-
-            BoneAnimationBinding[bone] = boneAnimation;
-        }
-
-        public BoneAnimation GetBoneAnimation(Bone bone)
-        {
-            return BoneAnimationBinding[bone];
-        }
-
-        /// <summary>
-        /// Turn animation data into JSON object
-        /// </summary>
-        public AnimationData GenerateJSONData()
-        {
-            var animationData = new AnimationData();
-
-            var boneListData = new BonesListData();
-            foreach (Bone b in BoneAnimationBinding.Keys)
-            {
-                boneListData.Add(b.Name, BoneAnimationBinding[b].GenerateJSONData());
-            }
-            animationData.Bones = boneListData;
-
-            var drawOrders = new List<DrawOrderItem>();
-
-            foreach (Bone b in _globalState.CurrentProject.MainSkeleton.Bones)
-            {
-                var slots = b.Slots;
-                Dictionary<double, DrawOrderItem> drawOrderItems =
-                    new Dictionary<double, DrawOrderItem>();
-
-                foreach (Slot s in slots)
+                foreach (var kv in s.drawOrders)
                 {
-                    foreach (var kv in s.drawOrders)
+                    if (drawOrderItems.Keys.Contains(kv.Key))
                     {
-                        if (drawOrderItems.Keys.Contains(kv.Key))
-                        {
-                            drawOrderItems[kv.Key].Offsets?.Add(kv.Value);
-                        }
-                        else
-                        {
-                            drawOrderItems.Add(
-                                kv.Key,
-                                new DrawOrderItem()
-                                {
-                                    Time = (float)kv.Key,
-                                    Offsets = new List<DrawOrderOffset>() { kv.Value },
-                                }
-                            );
-                        }
+                        drawOrderItems[kv.Key].Offsets?.Add(kv.Value);
                     }
-
-                    foreach (var v in drawOrderItems.Values)
+                    else
                     {
-                        if (!drawOrders.Contains(v))
-                        {
-                            drawOrders.Add(v);
-                        }
+                        drawOrderItems.Add(
+                            kv.Key,
+                            new DrawOrderItem()
+                            {
+                                Time = (float)kv.Key,
+                                Offsets = new List<DrawOrderOffset>() { kv.Value },
+                            }
+                        );
+                    }
+                }
+
+                foreach (var v in drawOrderItems.Values)
+                {
+                    if (!drawOrders.Contains(v))
+                    {
+                        drawOrders.Add(v);
                     }
                 }
             }
-
-            animationData.DrawOrder = drawOrders;
-
-            return animationData;
         }
 
-        /// <summary>
-        /// Turn animation JSON object into JSON string
-        /// </summary>
-        public String GenerateCode()
+        animationData.DrawOrder = drawOrders;
+
+        return animationData;
+    }
+
+    /// <summary>
+    /// Turn animation JSON object into JSON string
+    /// </summary>
+    public String GenerateCode()
+    {
+        return JsonConvert.SerializeObject(GenerateJSONData(), _globalState.jsonSettings);
+    }
+
+    /// <summary>
+    /// Collects data about keyframes for drawing in ui
+    /// </summary>
+    /// <returns>A dictionary, contains time-keys and another dictionary with keyframes</returns>
+    public Dictionary<double, Dictionary<TransformModeTypes, bool>> GetKeyFramesMarks(Bone b)
+    {
+        Dictionary<double, Dictionary<TransformModeTypes, bool>> result =
+            new Dictionary<double, Dictionary<TransformModeTypes, bool>>();
+
+        if (b != null && BoneAnimationBinding.ContainsKey(b))
         {
-            return JsonConvert.SerializeObject(GenerateJSONData(), _globalState.jsonSettings);
+            BoneAnimation ba = BoneAnimationBinding[b];
+            result = ba.GetKeyFeamesMarks();
         }
 
-        /// <summary>
-        /// Collects data about keyframes for drawing in ui
-        /// </summary>
-        /// <returns>A dictionary, contains time-keys and another dictionary with keyframes</returns>
-        public Dictionary<double, Dictionary<KeyFrameTypes, bool>> GetKeyFramesMarks(Bone b)
-        {
-            Dictionary<double, Dictionary<KeyFrameTypes, bool>> result =
-                new Dictionary<double, Dictionary<KeyFrameTypes, bool>>();
+        return result;
+    }
 
-            if (b != null && BoneAnimationBinding.ContainsKey(b))
+    /// <summary>
+    /// Collects all bones animation keyframes
+    /// </summary>
+    /// <returns>Dictionary of bone and its keyframes</returns>
+    public Dictionary<
+        Bone,
+        Dictionary<double, Dictionary<TransformModeTypes, bool>>
+    > GetAllKeyFrameMarks()
+    {
+        Dictionary<Bone, Dictionary<double, Dictionary<TransformModeTypes, bool>>> result =
+            new Dictionary<Bone, Dictionary<double, Dictionary<TransformModeTypes, bool>>>();
+
+        foreach (var element in BoneAnimationBinding)
+        {
+            result.Add(element.Key, element.Value.GetKeyFeamesMarks());
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// Add animation to bone if it hasn`t
+    /// </summary>
+    /// <param name="b"></param>
+    private void AnimateBone(Bone b)
+    {
+        if (b == null)
+        {
+            return;
+        }
+
+        if (!BoneAnimationBinding.ContainsKey(b))
+        {
+            BoneAnimationBinding.Add(b, new BoneAnimation(_globalState, _interpolation));
+        }
+    }
+
+    /// <summary>
+    /// Add bone translating into current animation
+    /// </summary>
+    /// <param name="b">Bone that has to be moved</param>
+    /// <param name="x">Target x coordinate</param>
+    /// <param name="y">Target y coordinate</param>
+    public void TranslateBone(Bone b, double? x, double? y)
+    {
+        if (b != null && x != null && y != null)
+        {
+            AnimateBone(b);
+            BoneAnimationBinding[b].AddTranslateFrame(CurrentTime, (double)x, (double)y);
+        }
+    }
+
+    /// <summary>
+    /// Add bone translating into current animation
+    /// </summary>
+    /// <param name="b">Bone that has to be moved</param>
+    /// <param name="x">Target x coordinate</param>
+    /// <param name="y">Target y coordinate</param>
+    /// <param name="currTime">Target time</param>
+    public void TranslateBone(Bone b, double? x, double? y, double? currTime)
+    {
+        if (b != null && x != null && y != null && currTime != null)
+        {
+            AnimateBone(b);
+            BoneAnimationBinding[b].AddTranslateFrame((double)currTime, (double)x, (double)y);
+        }
+    }
+
+    /// <summary>
+    /// Add bone rotating into current animation
+    /// </summary>
+    /// <param name="b">Bone that has to be moved</param>
+    /// <param name="value">Target angle</param>
+    public void RotateBone(Bone b, double? value)
+    {
+        if (b != null && value != null)
+        {
+            AnimateBone(b);
+            BoneAnimationBinding[b].AddRotateFrame(CurrentTime, (double)value);
+        }
+    }
+
+    public void ShearBone(Bone b, double? shearX, double? shearY)
+    {
+        if (b != null && shearX != null && shearY != null)
+        {
+            AnimateBone(b);
+            BoneAnimationBinding[b].AddShearFrame(CurrentTime, (double)shearX, (double)shearY);
+        }
+    }
+
+    public void ShearBone(Bone b, double? shearX, double? shearY, double? time)
+    {
+        if (b != null && shearX != null && shearY != null && time != null)
+        {
+            AnimateBone(b);
+            BoneAnimationBinding[b].AddShearFrame((double)time, (double)shearX, (double)shearY);
+        }
+    }
+
+    public void ScaleBone(Bone b, double? scaleX, double? scaleY)
+    {
+        if (b != null && scaleX != null && scaleY != null)
+        {
+            AnimateBone(b);
+            BoneAnimationBinding[b].AddScaleFrame(CurrentTime, (double)scaleX, (double)scaleY);
+        }
+    }
+
+    public void ScaleBone(Bone b, double? scaleX, double? scaleY, double? time)
+    {
+        if (b != null && scaleX != null && scaleY != null && time != null)
+        {
+            AnimateBone(b);
+            BoneAnimationBinding[b].AddScaleFrame((double)time, (double)scaleX, (double)scaleY);
+        }
+    }
+
+    /// <summary>
+    /// Add bone translating into current animation
+    /// </summary>
+    /// <param name="b">Bone that has to be moved</param>
+    /// <param name="value">Target angle</param>
+    /// <param name="currTime">Target time</param>
+    public void RotateBone(Bone b, double? value, double? currTime)
+    {
+        if (b != null && value != null && currTime != null)
+        {
+            AnimateBone(b);
+            BoneAnimationBinding[b].AddRotateFrame((double)currTime, (double)value);
+        }
+    }
+
+    /// <summary>
+    /// Find current keyframes
+    /// </summary>
+    /// <param name="b">Bone</param>
+    /// <param name="time">Current time</param>
+    /// <param name="type">Current transform type</param>
+    /// <param name="isNext">Next or previous keyframe</param>
+    public double FindKeyFrame(Bone b, double time, TransformModeTypes type, bool isNext)
+    {
+        if (BoneAnimationBinding.ContainsKey(b) && type != TransformModeTypes.NO)
+        {
+            return BoneAnimationBinding[b].FindTime(time, type, isNext);
+        }
+        return time;
+    }
+
+    /// <summary>
+    /// Add keyframe to animation via UI
+    /// </summary>
+    /// <param name="b">Bone</param>
+    /// <param name="type">Current transform type</param>
+    /// <param name="time">Current time</param>
+    public void AddKeyFrame(Bone b, TransformModeTypes type, double time)
+    {
+        if (b != null && b.IsBone && type != TransformModeTypes.NO)
+        {
+            if (type == TransformModeTypes.TRANSLATE)
+            {
+                TranslateBone(b, b.X, b.Y, time);
+            }
+            if (type == TransformModeTypes.ROTATE)
+            {
+                RotateBone(b, b.A, time);
+            }
+            if (type == TransformModeTypes.SCALE) { }
+            if (type == TransformModeTypes.SHEAR) { }
+        }
+    }
+
+    public void RestoreKeyFrame(
+        IKeyframeType keyframe,
+        Bone bone,
+        double time,
+        TransformModeTypes type
+    )
+    {
+        BoneAnimation boneAnimation = BoneAnimationBinding[bone];
+        boneAnimation.RestoreKeyFrame(keyframe, time, type);
+    }
+
+    /// <summary>
+    /// Delete keyframe
+    /// </summary>
+    /// <param name="b">Bone</param>
+    /// <param name="type">Current transform type</param>
+    /// <param name="time">Current time</param>
+    public void DeleteKeyFrame(Bone b, TransformModeTypes type, double time)
+    {
+        if (b != null && b.IsBone && type != TransformModeTypes.NO)
+        {
+            if (BoneAnimationBinding.ContainsKey(b))
             {
                 BoneAnimation ba = BoneAnimationBinding[b];
-                result = ba.GetKeyFeamesMarks();
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Collects all bones animation keyframes
-        /// </summary>
-        /// <returns>Dictionary of bone and its keyframes</returns>
-        public Dictionary<
-            Bone,
-            Dictionary<double, Dictionary<KeyFrameTypes, bool>>
-        > GetAllKeyFrameMarks()
-        {
-            Dictionary<Bone, Dictionary<double, Dictionary<KeyFrameTypes, bool>>> result =
-                new Dictionary<Bone, Dictionary<double, Dictionary<KeyFrameTypes, bool>>>();
-
-            foreach (var element in BoneAnimationBinding)
-            {
-                result.Add(element.Key, element.Value.GetKeyFeamesMarks());
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Add animation to bone if it hasn`t
-        /// </summary>
-        /// <param name="b"></param>
-        private void AnimateBone(Bone b)
-        {
-            if (b == null)
-            {
-                return;
-            }
-
-            if (!BoneAnimationBinding.ContainsKey(b))
-            {
-                BoneAnimationBinding.Add(b, new BoneAnimation(_globalState, _interpolation));
+                ba.DeleteKeyFrame(time, type);
             }
         }
+    }
 
-        /// <summary>
-        /// Add bone translating into current animation
-        /// </summary>
-        /// <param name="b">Bone that has to be moved</param>
-        /// <param name="x">Target x coordinate</param>
-        /// <param name="y">Target y coordinate</param>
-        public void TranslateBone(Bone b, double? x, double? y)
+    public IKeyframeType? GetKeyframe(TransformModeTypes type, double time, Bone bone)
+    {
+        if (BoneAnimationBinding.TryGetValue(bone, out var animation))
         {
-            if (b != null && x != null && y != null)
+            return animation.GetKeyFrame(type, time);
+        }
+        return null;
+    }
+
+    public void SetKeyFrame(TransformModeTypes type, double time, IKeyframeType keyframe, Bone bone)
+    {
+        if (BoneAnimationBinding.TryGetValue(bone, out var boneAnimation))
+        {
+            boneAnimation.SetKeyFrame(type, time, keyframe);
+        }
+    }
+
+    /// <summary>
+    /// Animation end time
+    /// </summary>
+    public double MaxTime()
+    {
+        double maxTime = 0.0;
+        foreach (var b in BoneAnimationBinding)
+        {
+            if (b.Value != null)
             {
-                AnimateBone(b);
-                BoneAnimationBinding[b].AddTranslateFrame(currentTime, (double)x, (double)y);
+                maxTime = Math.Max(maxTime, b.Value.MaxTime());
             }
         }
+        return maxTime;
+    }
 
-        /// <summary>
-        /// Add bone translating into current animation
-        /// </summary>
-        /// <param name="b">Bone that has to be moved</param>
-        /// <param name="x">Target x coordinate</param>
-        /// <param name="y">Target y coordinate</param>
-        /// <param name="currTime">Target time</param>
-        public void TranslateBone(Bone b, double? x, double? y, double? currTime)
-        {
-            if (b != null && x != null && y != null && currTime != null)
-            {
-                AnimateBone(b);
-                BoneAnimationBinding[b].AddTranslateFrame((double)currTime, (double)x, (double)y);
-            }
-        }
-
-        /// <summary>
-        /// Add bone rotating into current animation
-        /// </summary>
-        /// <param name="b">Bone that has to be moved</param>
-        /// <param name="value">Target angle</param>
-        public void RotateBone(Bone b, double? value)
-        {
-            if (b != null && value != null)
-            {
-                AnimateBone(b);
-                BoneAnimationBinding[b].AddRotateFrame(currentTime, (double)value);
-            }
-        }
-
-        public void ShearBone(Bone b, double? shearX, double? shearY)
-        {
-            if (b != null && shearX != null && shearY != null)
-            {
-                AnimateBone(b);
-                BoneAnimationBinding[b].AddShearFrame(currentTime, (double)shearX, (double)shearY);
-            }
-        }
-
-        public void ShearBone(Bone b, double? shearX, double? shearY, double? time)
-        {
-            if (b != null && shearX != null && shearY != null && time != null)
-            {
-                AnimateBone(b);
-                BoneAnimationBinding[b].AddShearFrame((double)time, (double)shearX, (double)shearY);
-            }
-        }
-
-        public void ScaleBone(Bone b, double? scaleX, double? scaleY)
-        {
-            if (b != null && scaleX != null && scaleY != null)
-            {
-                AnimateBone(b);
-                BoneAnimationBinding[b].AddScaleFrame(currentTime, (double)scaleX, (double)scaleY);
-            }
-        }
-
-        public void ScaleBone(Bone b, double? scaleX, double? scaleY, double? time)
-        {
-            if (b != null && scaleX != null && scaleY != null && time != null)
-            {
-                AnimateBone(b);
-                BoneAnimationBinding[b].AddScaleFrame((double)time, (double)scaleX, (double)scaleY);
-            }
-        }
-
-        /// <summary>
-        /// Add bone translating into current animation
-        /// </summary>
-        /// <param name="b">Bone that has to be moved</param>
-        /// <param name="value">Target angle</param>
-        /// <param name="currTime">Target time</param>
-        public void RotateBone(Bone b, double? value, double? currTime)
-        {
-            if (b != null && value != null && currTime != null)
-            {
-                AnimateBone(b);
-                BoneAnimationBinding[b].AddRotateFrame((double)currTime, (double)value);
-            }
-        }
-
-        /// <summary>
-        /// Find current keyframes
-        /// </summary>
-        /// <param name="b">Bone</param>
-        /// <param name="time">Current time</param>
-        /// <param name="type">Current transform type</param>
-        /// <param name="isNext">Next or previous keyframe</param>
-        public double FindKeyFrame(Bone b, double time, TransformModesTypes type, bool isNext)
-        {
-            if (BoneAnimationBinding.ContainsKey(b) && type != TransformModesTypes.NO)
-            {
-                return BoneAnimationBinding[b].FindTime(time, type, isNext);
-            }
-            return time;
-        }
-
-        /// <summary>
-        /// Add keyframe to animation via UI
-        /// </summary>
-        /// <param name="b">Bone</param>
-        /// <param name="type">Current transform type</param>
-        /// <param name="time">Current time</param>
-        public void AddKeyFrame(Bone b, TransformModesTypes type, double time)
-        {
-            if (b != null && b.IsBone && type != TransformModesTypes.NO)
-            {
-                if (type == TransformModesTypes.TRANSLATE)
-                {
-                    TranslateBone(b, b.X, b.Y, time);
-                }
-                if (type == TransformModesTypes.ROTATE)
-                {
-                    RotateBone(b, b.A, time);
-                }
-                if (type == TransformModesTypes.SCALE) { }
-                if (type == TransformModesTypes.SHEAR) { }
-            }
-        }
-
-        public void RestoreKeyFrame(
-            IKeyframeType keyframe,
-            Bone bone,
-            double time,
-            TransformModesTypes type
-        )
-        {
-            BoneAnimation boneAnimation = BoneAnimationBinding[bone];
-            boneAnimation.RestoreKeyFrame(keyframe, time, type);
-        }
-
-        /// <summary>
-        /// Delete keyframe
-        /// </summary>
-        /// <param name="b">Bone</param>
-        /// <param name="type">Current transform type</param>
-        /// <param name="time">Current time</param>
-        public void DeleteKeyFrame(Bone b, TransformModesTypes type, double time)
-        {
-            if (b != null && b.IsBone && type != TransformModesTypes.NO)
-            {
-                if (BoneAnimationBinding.ContainsKey(b))
-                {
-                    BoneAnimation ba = BoneAnimationBinding[b];
-                    ba.DeleteKeyFrame(time, type);
-                }
-            }
-        }
-
-        public IKeyframeType? GetKeyframe(TransformModesTypes type, double time, Bone bone)
-        {
-            if (BoneAnimationBinding.TryGetValue(bone, out var animation))
-            {
-                return animation.GetKeyFrame(type, time);
-            }
+    public SortedDictionary<double, IKeyframeType>? GetKeyFrameLine(Mode mode, Bone b)
+    {
+        if (!BoneAnimationBinding.ContainsKey(b))
             return null;
-        }
 
-        public void SetKeyFrame(
-            TransformModesTypes type,
-            double time,
-            IKeyframeType keyframe,
-            Bone bone
-        )
-        {
-            if (BoneAnimationBinding.TryGetValue(bone, out var boneAnimation))
-            {
-                boneAnimation.SetKeyFrame(type, time, keyframe);
-            }
-        }
-
-        /// <summary>
-        /// Animation end time
-        /// </summary>
-        public double MaxTime()
-        {
-            double maxTime = 0.0;
-            foreach (var b in BoneAnimationBinding)
-            {
-                if (b.Value != null)
-                {
-                    maxTime = Math.Max(maxTime, b.Value.MaxTime());
-                }
-            }
-            return maxTime;
-        }
+        BoneAnimation boneAnimation = BoneAnimationBinding[b];
+        return boneAnimation.GetKeyFrameLine(mode.Type);
     }
+}
 
-    /// <summary>
-    /// Animation data
-    /// </summary>
-    public class AnimationData
-    {
-        [JsonProperty("bones")]
-        public BonesListData? Bones { get; set; }
+/// <summary>
+/// Animation data
+/// </summary>
+public class AnimationData
+{
+    [JsonProperty("bones")]
+    public BonesListData? Bones { get; set; }
 
-        [JsonProperty("drawOrder")]
-        public List<DrawOrderItem>? DrawOrder { get; set; }
-    }
+    [JsonProperty("drawOrder")]
+    public List<DrawOrderItem>? DrawOrder { get; set; }
+}
 
-    /// <summary>
-    /// List of bones
-    /// </summary>
-    public class BonesListData : Dictionary<string, BoneAnimationData> { }
+/// <summary>
+/// List of bones
+/// </summary>
+public class BonesListData : Dictionary<string, BoneAnimationData> { }
 
-    /// <summary>
-    /// Draw order list
-    /// </summary>
-    public class DrawOrderItem
-    {
-        [JsonProperty("time")]
-        public float? Time { get; set; }
+/// <summary>
+/// Draw order list
+/// </summary>
+public class DrawOrderItem
+{
+    [JsonProperty("time")]
+    public float? Time { get; set; }
 
-        [JsonProperty("offsets")]
-        public List<DrawOrderOffset>? Offsets { get; set; }
-    }
+    [JsonProperty("offsets")]
+    public List<DrawOrderOffset>? Offsets { get; set; }
+}
 
-    /// <summary>
-    /// Draw order list item
-    /// </summary>
-    public class DrawOrderOffset
-    {
-        [JsonProperty("slot")]
-        public required string Slot { get; set; }
+/// <summary>
+/// Draw order list item
+/// </summary>
+public class DrawOrderOffset
+{
+    [JsonProperty("slot")]
+    public required string Slot { get; set; }
 
-        [JsonProperty("offset")]
-        public int Offset { get; set; }
-    }
+    [JsonProperty("offset")]
+    public int Offset { get; set; }
 }

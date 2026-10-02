@@ -388,7 +388,7 @@ public class PlumApp
             AddKeyFrameCommand addKeyFrameCommand = new AddKeyFrameCommand(
                 GlobalState.CurrentProject.CurrentAnimation,
                 GlobalState.CurrentBone,
-                GlobalState.CurrentProject.currentMode.Type
+                GlobalState.CurrentProject.CurrentMode.Type
             );
             this._historyManager.DoCommand(addKeyFrameCommand);
         }
@@ -401,7 +401,7 @@ public class PlumApp
             DeleteKeyFrameCommand deleteKeyFrameCommand = new DeleteKeyFrameCommand(
                 GlobalState.CurrentProject.CurrentAnimation,
                 GlobalState.CurrentBone,
-                GlobalState.CurrentProject.currentMode.Type
+                GlobalState.CurrentProject.CurrentMode.Type
             );
             this._historyManager.DoCommand(deleteKeyFrameCommand);
         }
@@ -416,7 +416,7 @@ public class PlumApp
 
     public void Transform(double a, double b)
     {
-        GlobalState.CurrentProject?.currentMode.Transform(GlobalState.CurrentBone, a, b);
+        GlobalState.CurrentProject?.CurrentMode.Transform(GlobalState.CurrentBone, a, b);
     }
 
     public void ChangeBoneStatus(BoneStatus oldBoneStatus, BoneStatus newBoneStatus, bool isAnim)
@@ -427,7 +427,7 @@ public class PlumApp
             newBoneStatus,
             GlobalState.CurrentProject.CurrentAnimation,
             isAnim,
-            GlobalState.CurrentProject.CurrentAnimation.currentTime
+            GlobalState.CurrentProject.CurrentAnimation.CurrentTime
         );
         this._historyManager.DoCommand(changeBoneStatusCommand);
     }

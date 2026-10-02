@@ -33,7 +33,19 @@ namespace PlumJsonAnimator.Models
         }
         public MetaData MetaData { get; set; } = new MetaData();
 
-        public Mode currentMode;
+        private Mode _currentMode;
+        public Mode CurrentMode
+        {
+            get => _currentMode;
+            set
+            {
+                if (_currentMode != value)
+                {
+                    _currentMode = value;
+                    OnPropertyChanged(nameof(CurrentMode));
+                }
+            }
+        }
 
         public Skeleton? MainSkeleton { get; set; } = null;
         public ObservableCollection<Slot> Slots { get; set; } = new ObservableCollection<Slot>();
@@ -105,7 +117,7 @@ namespace PlumJsonAnimator.Models
             Skins.Add(new Skin(globalState));
             CurrentSkin = Skins[0];
 
-            currentMode = new NoMode(globalState);
+            CurrentMode = new NoMode(globalState);
 
             _globalState = globalState;
             _interpolation = interpolation;

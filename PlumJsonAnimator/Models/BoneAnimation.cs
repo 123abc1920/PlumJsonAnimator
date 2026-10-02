@@ -125,30 +125,30 @@ namespace PlumJsonAnimator.Models
         /// </summary>
         /// <param name="time"></param>
         /// <param name="keyFrameType"></param>
-        public void DeleteKeyFrame(double time, TransformModesTypes keyFrameType)
+        public void DeleteKeyFrame(double time, TransformModeTypes keyFrameType)
         {
-            if (keyFrameType == TransformModesTypes.TRANSLATE)
+            if (keyFrameType == TransformModeTypes.TRANSLATE)
             {
                 if (_translateKeyframes.ContainsKey(time))
                 {
                     _translateKeyframes.Remove(time);
                 }
             }
-            else if (keyFrameType == TransformModesTypes.ROTATE)
+            else if (keyFrameType == TransformModeTypes.ROTATE)
             {
                 if (_rotateKeyframes.ContainsKey(time))
                 {
                     _rotateKeyframes.Remove(time);
                 }
             }
-            else if (keyFrameType == TransformModesTypes.SHEAR)
+            else if (keyFrameType == TransformModeTypes.SHEAR)
             {
                 if (_shearKeyframes.ContainsKey(time))
                 {
                     _shearKeyframes.Remove(time);
                 }
             }
-            else if (keyFrameType == TransformModesTypes.SCALE)
+            else if (keyFrameType == TransformModeTypes.SCALE)
             {
                 if (_scaleKeyframes.ContainsKey(time))
                 {
@@ -157,53 +157,53 @@ namespace PlumJsonAnimator.Models
             }
         }
 
-        public Dictionary<double, Dictionary<KeyFrameTypes, bool>> GetKeyFeamesMarks()
+        public Dictionary<double, Dictionary<TransformModeTypes, bool>> GetKeyFeamesMarks()
         {
-            Dictionary<double, Dictionary<KeyFrameTypes, bool>> result =
-                new Dictionary<double, Dictionary<KeyFrameTypes, bool>>();
+            Dictionary<double, Dictionary<TransformModeTypes, bool>> result =
+                new Dictionary<double, Dictionary<TransformModeTypes, bool>>();
 
             foreach (double time in _rotateKeyframes.Keys)
             {
                 if (!result.ContainsKey(time))
                 {
-                    result.Add(time, new Dictionary<KeyFrameTypes, bool>());
+                    result.Add(time, new Dictionary<TransformModeTypes, bool>());
                 }
-                result[time].Add(KeyFrameTypes.ROTATE, true);
+                result[time].Add(TransformModeTypes.ROTATE, true);
             }
 
             foreach (double time in _translateKeyframes.Keys)
             {
                 if (!result.ContainsKey(time))
                 {
-                    result.Add(time, new Dictionary<KeyFrameTypes, bool>());
+                    result.Add(time, new Dictionary<TransformModeTypes, bool>());
                 }
-                result[time].Add(KeyFrameTypes.TRANSLATE, true);
+                result[time].Add(TransformModeTypes.TRANSLATE, true);
             }
 
             foreach (double time in _scaleKeyframes.Keys)
             {
                 if (!result.ContainsKey(time))
                 {
-                    result.Add(time, new Dictionary<KeyFrameTypes, bool>());
+                    result.Add(time, new Dictionary<TransformModeTypes, bool>());
                 }
-                result[time].Add(KeyFrameTypes.SCALE, true);
+                result[time].Add(TransformModeTypes.SCALE, true);
             }
 
             foreach (double time in _shearKeyframes.Keys)
             {
                 if (!result.ContainsKey(time))
                 {
-                    result.Add(time, new Dictionary<KeyFrameTypes, bool>());
+                    result.Add(time, new Dictionary<TransformModeTypes, bool>());
                 }
-                result[time].Add(KeyFrameTypes.SHEAR, true);
+                result[time].Add(TransformModeTypes.SHEAR, true);
             }
 
             return result;
         }
 
-        public IKeyframeType? GetKeyFrame(TransformModesTypes type, double time)
+        public IKeyframeType? GetKeyFrame(TransformModeTypes type, double time)
         {
-            if (type == TransformModesTypes.TRANSLATE)
+            if (type == TransformModeTypes.TRANSLATE)
             {
                 if (!_translateKeyframes.ContainsKey(time))
                 {
@@ -211,7 +211,7 @@ namespace PlumJsonAnimator.Models
                 }
                 return _translateKeyframes[time];
             }
-            else if (type == TransformModesTypes.ROTATE)
+            else if (type == TransformModeTypes.ROTATE)
             {
                 if (!_rotateKeyframes.ContainsKey(time))
                 {
@@ -219,7 +219,7 @@ namespace PlumJsonAnimator.Models
                 }
                 return _rotateKeyframes[time];
             }
-            else if (type == TransformModesTypes.SHEAR)
+            else if (type == TransformModeTypes.SHEAR)
             {
                 if (!_shearKeyframes.ContainsKey(time))
                 {
@@ -227,7 +227,7 @@ namespace PlumJsonAnimator.Models
                 }
                 return _shearKeyframes[time];
             }
-            else if (type == TransformModesTypes.SCALE)
+            else if (type == TransformModeTypes.SCALE)
             {
                 return null;
             }
@@ -235,21 +235,21 @@ namespace PlumJsonAnimator.Models
             return null;
         }
 
-        public void SetKeyFrame(TransformModesTypes type, double time, IKeyframeType keyframe)
+        public void SetKeyFrame(TransformModeTypes type, double time, IKeyframeType keyframe)
         {
-            if (type == TransformModesTypes.TRANSLATE)
+            if (type == TransformModeTypes.TRANSLATE)
             {
                 _translateKeyframes[time] = keyframe;
             }
-            else if (type == TransformModesTypes.ROTATE)
+            else if (type == TransformModeTypes.ROTATE)
             {
                 _rotateKeyframes[time] = keyframe;
             }
-            else if (type == TransformModesTypes.SHEAR)
+            else if (type == TransformModeTypes.SHEAR)
             {
                 _shearKeyframes[time] = keyframe;
             }
-            else if (type == TransformModesTypes.SCALE)
+            else if (type == TransformModeTypes.SCALE)
             {
                 _scaleKeyframes[time] = keyframe;
             }
@@ -258,22 +258,22 @@ namespace PlumJsonAnimator.Models
         public void RestoreKeyFrame(
             IKeyframeType keyframeType,
             double time,
-            TransformModesTypes type
+            TransformModeTypes type
         )
         {
-            if (type == TransformModesTypes.TRANSLATE)
+            if (type == TransformModeTypes.TRANSLATE)
             {
                 _translateKeyframes[time] = keyframeType;
             }
-            else if (type == TransformModesTypes.ROTATE)
+            else if (type == TransformModeTypes.ROTATE)
             {
                 _rotateKeyframes[time] = keyframeType;
             }
-            else if (type == TransformModesTypes.SHEAR)
+            else if (type == TransformModeTypes.SHEAR)
             {
                 _shearKeyframes[time] = keyframeType;
             }
-            else if (type == TransformModesTypes.SCALE)
+            else if (type == TransformModeTypes.SCALE)
             {
                 _scaleKeyframes[time] = keyframeType;
             }
@@ -284,7 +284,7 @@ namespace PlumJsonAnimator.Models
         /// </summary>
         /// <param name="currTime"></param>
         /// <param name="keyFrameType"></param>
-        private void FindSegment(double currTime, KeyFrameTypes keyFrameType)
+        private void FindSegment(double currTime, TransformModeTypes keyFrameType)
         {
             void FindInKeys(
                 System.Collections.Generic.ICollection<double> keys,
@@ -325,19 +325,38 @@ namespace PlumJsonAnimator.Models
 
             switch (keyFrameType)
             {
-                case KeyFrameTypes.TRANSLATE:
+                case TransformModeTypes.TRANSLATE:
                     FindInKeys(_translateKeyframes.Keys, ref _translateStart, ref _translateEnd);
                     break;
-                case KeyFrameTypes.ROTATE:
+                case TransformModeTypes.ROTATE:
                     FindInKeys(_rotateKeyframes.Keys, ref _rotateStart, ref _rotateEnd);
                     break;
-                case KeyFrameTypes.SCALE:
+                case TransformModeTypes.SCALE:
                     FindInKeys(_scaleKeyframes.Keys, ref _scaleStart, ref _scaleEnd);
                     break;
-                case KeyFrameTypes.SHEAR:
+                case TransformModeTypes.SHEAR:
                     FindInKeys(_shearKeyframes.Keys, ref _shearStart, ref _shearEnd);
                     break;
             }
+        }
+
+        public SortedDictionary<double, IKeyframeType>? GetKeyFrameLine(
+            TransformModeTypes keyFrameType
+        )
+        {
+            var source = keyFrameType switch
+            {
+                TransformModeTypes.TRANSLATE => _translateKeyframes,
+                TransformModeTypes.ROTATE => _rotateKeyframes,
+                TransformModeTypes.SCALE => _scaleKeyframes,
+                TransformModeTypes.SHEAR => _shearKeyframes,
+                _ => null,
+            };
+
+            if (source is null)
+                return null;
+
+            return new SortedDictionary<double, IKeyframeType>(source);
         }
 
         /// <summary>
@@ -364,7 +383,7 @@ namespace PlumJsonAnimator.Models
                 if (_translateKeyframes.ContainsKey(_translateStart))
                 {
                     var currentSegment = _translateKeyframes.Get(_translateStart);
-                    FindSegment(time, KeyFrameTypes.TRANSLATE);
+                    FindSegment(time, TransformModeTypes.TRANSLATE);
                     double t = _interpolation.FindInterpolateParam(
                         _translateEnd - _translateStart,
                         time - _translateStart,
@@ -418,7 +437,7 @@ namespace PlumJsonAnimator.Models
             {
                 var currentSegment = _rotateKeyframes.Get(_rotateStart);
 
-                FindSegment(time, KeyFrameTypes.ROTATE);
+                FindSegment(time, TransformModeTypes.ROTATE);
 
                 double t = _interpolation.FindInterpolateParam(
                     _rotateEnd - _rotateStart,
@@ -464,12 +483,12 @@ namespace PlumJsonAnimator.Models
                 b.Shear(localX, localY);
                 return;
             }
-            
+
             {
                 if (_shearKeyframes.ContainsKey(_shearStart))
                 {
                     var currentSegment = _shearKeyframes.Get(_shearStart);
-                    FindSegment(time, KeyFrameTypes.SHEAR);
+                    FindSegment(time, TransformModeTypes.SHEAR);
                     double t = this._interpolation.FindInterpolateParam(
                         _shearEnd - _shearStart,
                         time - _shearStart,
@@ -526,7 +545,7 @@ namespace PlumJsonAnimator.Models
                 if (_scaleKeyframes.ContainsKey(_scaleStart))
                 {
                     var currentSegment = _scaleKeyframes.Get(_scaleStart);
-                    FindSegment(time, KeyFrameTypes.SCALE);
+                    FindSegment(time, TransformModeTypes.SCALE);
                     double t = _interpolation.FindInterpolateParam(
                         _scaleEnd - _scaleStart,
                         time - _scaleStart,
@@ -622,22 +641,22 @@ namespace PlumJsonAnimator.Models
         /// <param name="type">Type of target keyframe</param>
         /// <param name="isNext">Search for the next or the previous keyframe</param>
         /// <returns>Double, time of the target keyframe</returns>
-        public double FindTime(double time, TransformModesTypes type, bool isNext)
+        public double FindTime(double time, TransformModeTypes type, bool isNext)
         {
             SortedDictionary<double, IKeyframeType>? keyframes = null;
-            if (type == TransformModesTypes.TRANSLATE)
+            if (type == TransformModeTypes.TRANSLATE)
             {
                 keyframes = _translateKeyframes;
             }
-            if (type == TransformModesTypes.ROTATE)
+            if (type == TransformModeTypes.ROTATE)
             {
                 keyframes = _rotateKeyframes;
             }
-            if (type == TransformModesTypes.SCALE)
+            if (type == TransformModeTypes.SCALE)
             {
                 keyframes = _scaleKeyframes;
             }
-            if (type == TransformModesTypes.SHEAR)
+            if (type == TransformModeTypes.SHEAR)
             {
                 keyframes = _shearKeyframes;
             }

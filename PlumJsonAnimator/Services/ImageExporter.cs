@@ -109,7 +109,7 @@ namespace PlumJsonAnimator.Services
 
             this._canvasRenderer.LoopStop();
 
-            project!.CurrentAnimation!.currentTime = start;
+            project!.CurrentAnimation!.CurrentTime = start;
             double endTime = Math.Min(project.CurrentAnimation.MaxTime(), end);
 
             var totalFrames = (int)((endTime - start) * this._globalState.FPS) + 1;
@@ -120,7 +120,7 @@ namespace PlumJsonAnimator.Services
             this._globalState.CurrentProject.CurrentAnimation.SetupBones();
             this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
 
-            while (project.CurrentAnimation.currentTime <= endTime)
+            while (project.CurrentAnimation.CurrentTime <= endTime)
             {
                 Canvas!.Measure(
                     new Avalonia.Size(double.PositiveInfinity, double.PositiveInfinity)
@@ -181,7 +181,7 @@ namespace PlumJsonAnimator.Services
 
             this._canvasRenderer.LoopStop();
 
-            project!.CurrentAnimation!.currentTime = start;
+            project!.CurrentAnimation!.CurrentTime = start;
             double endTime = Math.Min(project.CurrentAnimation.MaxTime(), end);
 
             var totalFrames = (int)((endTime - start) * this._globalState.FPS) + 1;
@@ -192,7 +192,7 @@ namespace PlumJsonAnimator.Services
             this._globalState.CurrentProject.CurrentAnimation.SetupBones();
             this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
 
-            while (project.CurrentAnimation.currentTime <= endTime)
+            while (project.CurrentAnimation.CurrentTime <= endTime)
             {
                 Canvas!.Measure(
                     new Avalonia.Size(double.PositiveInfinity, double.PositiveInfinity)
@@ -262,7 +262,7 @@ namespace PlumJsonAnimator.Services
             {
                 this._canvasRenderer.LoopStop();
 
-                project!.CurrentAnimation!.currentTime = start;
+                project!.CurrentAnimation!.CurrentTime = start;
                 double endTime = Math.Min(project.CurrentAnimation.MaxTime(), end);
 
                 var totalFrames = (int)((endTime - start) * this._globalState.FPS) + 1;
@@ -274,7 +274,7 @@ namespace PlumJsonAnimator.Services
                 this._globalState.CurrentProject.CurrentAnimation.SetupBones();
                 this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
 
-                while (project.CurrentAnimation.currentTime <= endTime)
+                while (project.CurrentAnimation.CurrentTime <= endTime)
                 {
                     Canvas!.Measure(
                         new Avalonia.Size(double.PositiveInfinity, double.PositiveInfinity)
@@ -373,7 +373,7 @@ namespace PlumJsonAnimator.Services
 
             this._canvasRenderer.LoopStop();
 
-            project!.CurrentAnimation!.currentTime = start;
+            project!.CurrentAnimation!.CurrentTime = start;
             this._globalState.CurrentProject.CurrentAnimation.SetupBones();
             this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
 
@@ -447,7 +447,7 @@ namespace PlumJsonAnimator.Services
 
                 using (var stdin = process.StandardInput.BaseStream)
                 {
-                    while (project.CurrentAnimation.currentTime <= endTime)
+                    while (project.CurrentAnimation.CurrentTime <= endTime)
                     {
                         Canvas!.Measure(
                             new Avalonia.Size(double.PositiveInfinity, double.PositiveInfinity)

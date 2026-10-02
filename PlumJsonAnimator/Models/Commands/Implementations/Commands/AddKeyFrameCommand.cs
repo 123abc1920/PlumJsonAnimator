@@ -8,16 +8,16 @@ class AddKeyFrameCommand : ICommand
     private readonly Animation _animation;
     private readonly Bone _bone;
     private readonly double _time;
-    private readonly TransformModesTypes _type;
+    private readonly TransformModeTypes _type;
     private IKeyframeType _keyframe;
 
-    public AddKeyFrameCommand(Animation animation, Bone bone, TransformModesTypes type)
+    public AddKeyFrameCommand(Animation animation, Bone bone, TransformModeTypes type)
     {
         this._animation = animation;
         this._bone = bone;
         this._type = type;
 
-        this._time = animation.currentTime;
+        this._time = animation.CurrentTime;
     }
 
     public void Execute()
