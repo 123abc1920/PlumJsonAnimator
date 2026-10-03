@@ -616,7 +616,7 @@
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"
                                             IsChecked="{Binding EasingMode, Converter={StaticResource EasingTypeToBoolConverter}, ConverterParameter='bezier', Mode=TwoWay}">
-                                            <iconPacks:PackIconBootstrapIcons Kind="ArrowUpRight" />
+                                            <iconPacks:PackIconBootstrapIcons Kind="Arrow90degRight" />
                                         </ToggleButton>
 
                                         <ToggleButton
@@ -636,7 +636,7 @@
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"
                                             IsChecked="{Binding EasingMode, Converter={StaticResource EasingTypeToBoolConverter}, ConverterParameter='linear', Mode=TwoWay}">
-                                            <iconPacks:PackIconBootstrapIcons Kind="Arrow90degRight" />
+                                            <iconPacks:PackIconBootstrapIcons Kind="ArrowUpRight" />
                                         </ToggleButton>
                                     </StackPanel>
                                 </DockPanel>
@@ -654,6 +654,7 @@
                                             CurrentBone="{Binding CurrentBone}"
                                             CurrentMode="{Binding CurrentProject.CurrentMode}"
                                             CurrentTime="{Binding CurrentTime, Mode=TwoWay}"
+                                            CurrentEasingMode="{Binding EasingMode, Mode=TwoWay}"
                                             FPS="{Binding FPS}"
                                             PixelsPerSecond="100"
                                             TotalDuration="60"

@@ -183,6 +183,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 _easingMode = value;
 
                 CurrentProject?.CurrentAnimation?.ChangeCurrentEasingMode(
+                    CurrentBone,
                     _easingMode,
                     CurrentProject.CurrentMode.Type
                 );

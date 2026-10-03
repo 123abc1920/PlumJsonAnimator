@@ -76,4 +76,25 @@ class BezierEasing : IEasing
             context.DrawGeometry(null, new Pen(brush, 1.5), geometry);
         }
     }
+
+    public void UpdateKeys(double deltaX, double deltaY, bool isLeft)
+    {
+        int a = 2;
+        int b = 3;
+
+        if (isLeft)
+        {
+            a = 0;
+            b = 1;
+        }
+
+        double x = KeysMap[a];
+        double y = KeysMap[b];
+
+        x += deltaX;
+        y += deltaY;
+
+        KeysMap[a] = Math.Clamp(x, 0, 1);
+        KeysMap[b] = Math.Clamp(y, 0, 1);
+    }
 }

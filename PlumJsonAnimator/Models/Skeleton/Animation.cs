@@ -475,19 +475,51 @@ public class Animation : INotifyable
         return boneAnimation.GetKeyFrameLine(mode.Type);
     }
 
+    public IKeyframeType? FindKeyFrameByTime(
+        Bone? b,
+        TransformModeTypes transformModeType,
+        double time
+    )
+    {
+        if (b is null)
+            return null;
+        var boneAnimation = BoneAnimationBinding[b];
+        return boneAnimation.FindKeyFrame(time, transformModeType);
+    }
+
+    public double? FindNextTime(double time, Bone? bone, TransformModeTypes transformModeType)
+    {
+        if (bone is null || ContainsBone(bone) == false)
+            return 0;
+
+        BoneAnimation boneAnimation = BoneAnimationBinding[bone];
+        return boneAnimation.FindNextTime(time, transformModeType);
+    }
+
+    public double? FindKeyFrameTime(double time, Bone? bone, TransformModeTypes transformModeType)
+    {
+        if (bone is null || ContainsBone(bone) == false)
+            return 0;
+
+        BoneAnimation boneAnimation = BoneAnimationBinding[bone];
+        return boneAnimation.FindTime(time, transformModeType, false);
+    }
+
     public void ChangeCurrentEasingMode(
+        Bone? b,
         EasingTypes newEasingType,
         TransformModeTypes transformModeType
     )
     {
-        foreach (var kv in BoneAnimationBinding)
-        {
-            var boneAnimation = kv.Value;
-            var keyFrame = boneAnimation.FindKeyFrame(CurrentTime, transformModeType);
-            if (keyFrame is null)
-                return;
-            keyFrame.Curve = _easingFactory.CreateEasing(newEasingType);
-        }
+        if (b is null)
+            return;
+
+        var keyFrame = FindKeyFrameByTime(b, transformModeType, CurrentTime);
+
+        if (keyFrame is null)
+            return;
+
+        keyFrame.Curve = _easingFactory.CreateEasing(newEasingType);
     }
 }
 

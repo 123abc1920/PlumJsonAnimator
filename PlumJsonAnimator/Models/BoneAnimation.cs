@@ -746,6 +746,52 @@ namespace PlumJsonAnimator.Models
             return time;
         }
 
+        public double? FindNextTime(double time, TransformModeTypes type)
+        {
+            if (type == TransformModeTypes.TRANSLATE)
+            {
+                foreach (var kv in _translateKeyframes)
+                {
+                    if (kv.Key > time)
+                    {
+                        return kv.Key;
+                    }
+                }
+            }
+            if (type == TransformModeTypes.ROTATE)
+            {
+                foreach (var kv in _rotateKeyframes)
+                {
+                    if (kv.Key > time)
+                    {
+                        return kv.Key;
+                    }
+                }
+            }
+            if (type == TransformModeTypes.SCALE)
+            {
+                foreach (var kv in _scaleKeyframes)
+                {
+                    if (kv.Key > time)
+                    {
+                        return kv.Key;
+                    }
+                }
+            }
+            if (type == TransformModeTypes.SHEAR)
+            {
+                foreach (var kv in _shearKeyframes)
+                {
+                    if (kv.Key > time)
+                    {
+                        return kv.Key;
+                    }
+                }
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// Finds the last keyframe time
         /// </summary>

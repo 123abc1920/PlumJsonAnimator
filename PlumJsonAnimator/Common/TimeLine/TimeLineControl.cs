@@ -9,6 +9,7 @@ using Avalonia.Media;
 using Avalonia.Rendering;
 using Avalonia.Threading;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Easing;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 
 namespace PlumJsonAnimator.Common.Timeline
@@ -26,9 +27,17 @@ namespace PlumJsonAnimator.Common.Timeline
         private const double TimelineHeight = 25;
         private const double KeyframeWidth = 6;
         private const double KeyframeHeight = 18;
+        private const double BaseBezierDelta = 0.1;
+        private const int MouseMoveThreshold = 5;
 
         private double _timeStep;
         private bool _isDraggingPlayhead = false;
+        private bool _isSettingBezier = false;
+        private double _oldX = 0;
+        private double _oldY = 0;
+        private bool _isLeft = true;
+        private IKeyframeType? _keyframe = null;
+
         private DispatcherTimer _refreshTimer;
 
         public TimelineControl()
@@ -72,6 +81,11 @@ namespace PlumJsonAnimator.Common.Timeline
 
         public static readonly StyledProperty<Mode?> CurrentModeProperty =
             AvaloniaProperty.Register<TimelineControl, Mode?>(nameof(CurrentMode), null);
+        public static readonly StyledProperty<EasingTypes?> CurrentEasingModeProperty =
+            AvaloniaProperty.Register<TimelineControl, EasingTypes?>(
+                nameof(CurrentEasingMode),
+                null
+            );
 
         public int Zoom
         {
@@ -101,6 +115,12 @@ namespace PlumJsonAnimator.Common.Timeline
         {
             get => GetValue(CurrentAnimationProperty);
             set => SetValue(CurrentAnimationProperty, value);
+        }
+
+        public EasingTypes? CurrentEasingMode
+        {
+            get => GetValue(CurrentEasingModeProperty);
+            set => SetValue(CurrentEasingModeProperty, value);
         }
 
         protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
@@ -395,10 +415,42 @@ namespace PlumJsonAnimator.Common.Timeline
 
             if (pos.Y > TickHeight)
             {
+                if (CurrentEasingMode == EasingTypes.BEZIER)
+                {
+                    var time = pos.X / (PixelsPerSecond * Zoom);
+                    _keyframe = CurrentAnimation.FindKeyFrameByTime(
+                        CurrentBone,
+                        CurrentMode.Type,
+                        time
+                    );
+                    var nextTime = CurrentAnimation.FindNextTime(
+                        time,
+                        CurrentBone,
+                        CurrentMode.Type
+                    );
+                    double? currTime = CurrentAnimation.FindKeyFrameTime(
+                        time,
+                        CurrentBone,
+                        CurrentMode.Type
+                    );
+                    if (nextTime != null && currTime != null)
+                    {
+                        double currX = (double)currTime * PixelsPerSecond * Zoom;
+                        double nextX = (double)nextTime * PixelsPerSecond * Zoom;
+
+                        if (Math.Abs(pos.X - nextX) < Math.Abs(pos.X - currX))
+                        {
+                            _isLeft = false;
+                        }
+                    }
+                    _isSettingBezier = true;
+                    _oldX = pos.X;
+                    _oldY = pos.Y;
+                }
+                e.Handled = true;
                 return;
             }
 
-            double desiredWidth = TotalDuration * PixelsPerSecond * Zoom;
             double playheadX = CurrentTime * PixelsPerSecond * Zoom;
 
             if (Math.Abs(pos.X - playheadX) < 10)
@@ -417,13 +469,46 @@ namespace PlumJsonAnimator.Common.Timeline
         protected override void OnPointerMoved(PointerEventArgs e)
         {
             base.OnPointerMoved(e);
+            var pos = e.GetCurrentPoint(this).Position;
 
             if (_isDraggingPlayhead)
             {
-                var pos = e.GetCurrentPoint(this).Position;
                 SetCurrentTime(pos.X, pos.Y);
                 e.Handled = true;
                 InvalidateVisual();
+            }
+
+            if (_isSettingBezier)
+            {
+                var newY = pos.Y;
+                var newX = pos.X;
+
+                double deltaX = BaseBezierDelta;
+                double deltaY = BaseBezierDelta;
+
+                if (
+                    Math.Abs(newX - _oldX) > MouseMoveThreshold
+                    || Math.Abs(newY - _oldY) > MouseMoveThreshold
+                )
+                {
+                    if (newY > _oldY)
+                    {
+                        deltaY = -deltaY;
+                    }
+                    if (newX < _oldX)
+                    {
+                        deltaX = -deltaX;
+                    }
+
+                    if (_keyframe?.Curve != null)
+                    {
+                        BezierEasing bezierEasing = (BezierEasing)_keyframe.Curve;
+                        bezierEasing.UpdateKeys(deltaX, deltaY, _isLeft);
+                    }
+
+                    _oldX = newX;
+                    _oldY = newY;
+                }
             }
         }
 
@@ -450,6 +535,16 @@ namespace PlumJsonAnimator.Common.Timeline
 
                     InvalidateVisual();
                 }
+            }
+
+            if (_isSettingBezier)
+            {
+                _isSettingBezier = false;
+                _oldX = 0;
+                _oldY = 0;
+                _keyframe = null;
+                _isLeft = true;
+                e.Handled = true;
             }
         }
 
