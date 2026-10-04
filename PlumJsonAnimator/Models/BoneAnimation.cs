@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Easing;
+using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
 
@@ -38,8 +39,6 @@ namespace PlumJsonAnimator.Models
         private GlobalState _globalState;
         private Interpolation _interpolation;
 
-        private BezierEasing _testBezier = new BezierEasing(0.1, 0.9, 0.2, 1.0);
-
         public BoneAnimation(GlobalState globalState, Interpolation interpolation)
         {
             this._globalState = globalState;
@@ -52,7 +51,7 @@ namespace PlumJsonAnimator.Models
         /// <param name="time"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public void AddTranslateFrame(double time, double x, double y)
+        public void AddTranslateFrame(double time, double x, double y, IEasing easing)
         {
             if (_translateKeyframes.ContainsKey(time))
             {
@@ -61,14 +60,14 @@ namespace PlumJsonAnimator.Models
                     time,
                     x,
                     y,
-                    _testBezier
+                    easing
                 );
             }
             else
             {
                 _translateKeyframes.Add(
                     time,
-                    new TranslateKeyFrame(this._globalState, time, x, y, _testBezier)
+                    new TranslateKeyFrame(this._globalState, time, x, y, easing)
                 );
             }
         }
@@ -78,7 +77,8 @@ namespace PlumJsonAnimator.Models
         /// </summary>
         /// <param name="time"></param>
         /// <param name="value"></param>
-        public void AddRotateFrame(double time, double value)
+        /// <param name="easing"></param>
+        public void AddRotateFrame(double time, double value, IEasing easing)
         {
             if (_rotateKeyframes.ContainsKey(time))
             {
@@ -86,19 +86,19 @@ namespace PlumJsonAnimator.Models
                     this._globalState,
                     time,
                     value,
-                    _testBezier
+                    easing
                 );
             }
             else
             {
                 _rotateKeyframes.Add(
                     time,
-                    new RotateKeyFrame(this._globalState, time, value, _testBezier)
+                    new RotateKeyFrame(this._globalState, time, value, easing)
                 );
             }
         }
 
-        public void AddShearFrame(double time, double shearX, double shearY)
+        public void AddShearFrame(double time, double shearX, double shearY, IEasing easing)
         {
             if (_shearKeyframes.ContainsKey(time))
             {
@@ -107,19 +107,19 @@ namespace PlumJsonAnimator.Models
                     time,
                     shearX,
                     shearY,
-                    _testBezier
+                    easing
                 );
             }
             else
             {
                 _shearKeyframes.Add(
                     time,
-                    new ShearKeyFrame(_globalState, time, shearX, shearY, _testBezier)
+                    new ShearKeyFrame(_globalState, time, shearX, shearY, easing)
                 );
             }
         }
 
-        public void AddScaleFrame(double time, double scaleX, double scaleY)
+        public void AddScaleFrame(double time, double scaleX, double scaleY, IEasing easing)
         {
             if (_scaleKeyframes.ContainsKey(time))
             {
@@ -128,14 +128,14 @@ namespace PlumJsonAnimator.Models
                     time,
                     scaleX,
                     scaleY,
-                    _testBezier
+                    easing
                 );
             }
             else
             {
                 _scaleKeyframes.Add(
                     time,
-                    new ScaleKeyFrame(_globalState, time, scaleX, scaleY, _testBezier)
+                    new ScaleKeyFrame(_globalState, time, scaleX, scaleY, easing)
                 );
             }
         }

@@ -28,7 +28,7 @@ namespace PlumJsonAnimator.Models.Common
 
         [JsonProperty("curve", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(EasingConverter))]
-        public IEasing? Curve { get; set; }
+        public IEasing? Curve { get; set; } = new LinearEasing();
 
         [JsonProperty("x", NullValueHandling = NullValueHandling.Ignore)]
         public Double? X { get; set; }

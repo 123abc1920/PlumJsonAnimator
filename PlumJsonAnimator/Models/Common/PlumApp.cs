@@ -87,7 +87,9 @@ public class PlumApp
             GlobalState
         );
 
-        InitProject(new Project(projectSettings, GlobalState, _interpolation, Localization, _easingFactory));
+        InitProject(
+            new Project(projectSettings, GlobalState, _interpolation, Localization, _easingFactory)
+        );
 
         _autoSaver.StartAutoSaveAsync(GlobalState.autoSaveSec);
     }
@@ -391,7 +393,8 @@ public class PlumApp
             AddKeyFrameCommand addKeyFrameCommand = new AddKeyFrameCommand(
                 GlobalState.CurrentProject.CurrentAnimation,
                 GlobalState.CurrentBone,
-                GlobalState.CurrentProject.CurrentMode.Type
+                GlobalState.CurrentProject.CurrentMode.Type,
+                _easingFactory.CreateEasing(GlobalState.CurrentEasingType)
             );
             this._historyManager.DoCommand(addKeyFrameCommand);
         }
@@ -419,7 +422,12 @@ public class PlumApp
 
     public void Transform(double a, double b)
     {
-        GlobalState.CurrentProject?.CurrentMode.Transform(GlobalState.CurrentBone, a, b);
+        GlobalState.CurrentProject?.CurrentMode.Transform(
+            GlobalState.CurrentBone,
+            a,
+            b,
+            _easingFactory.CreateEasing(GlobalState.CurrentEasingType)
+        );
     }
 
     public void ChangeBoneStatus(BoneStatus oldBoneStatus, BoneStatus newBoneStatus, bool isAnim)

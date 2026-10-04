@@ -282,12 +282,12 @@ public class Animation : INotifyable
     /// <param name="b">Bone that has to be moved</param>
     /// <param name="x">Target x coordinate</param>
     /// <param name="y">Target y coordinate</param>
-    public void TranslateBone(Bone b, double? x, double? y)
+    public void TranslateBone(Bone b, double? x, double? y, IEasing easing)
     {
         if (b != null && x != null && y != null)
         {
             AnimateBone(b);
-            BoneAnimationBinding[b].AddTranslateFrame(CurrentTime, (double)x, (double)y);
+            BoneAnimationBinding[b].AddTranslateFrame(CurrentTime, (double)x, (double)y, easing);
         }
     }
 
@@ -298,12 +298,13 @@ public class Animation : INotifyable
     /// <param name="x">Target x coordinate</param>
     /// <param name="y">Target y coordinate</param>
     /// <param name="currTime">Target time</param>
-    public void TranslateBone(Bone b, double? x, double? y, double? currTime)
+    public void TranslateBone(Bone b, double? x, double? y, double? currTime, IEasing easing)
     {
         if (b != null && x != null && y != null && currTime != null)
         {
             AnimateBone(b);
-            BoneAnimationBinding[b].AddTranslateFrame((double)currTime, (double)x, (double)y);
+            BoneAnimationBinding[b]
+                .AddTranslateFrame((double)currTime, (double)x, (double)y, easing);
         }
     }
 
@@ -312,48 +313,52 @@ public class Animation : INotifyable
     /// </summary>
     /// <param name="b">Bone that has to be moved</param>
     /// <param name="value">Target angle</param>
-    public void RotateBone(Bone b, double? value)
+    public void RotateBone(Bone b, double? value, IEasing easing)
     {
         if (b != null && value != null)
         {
             AnimateBone(b);
-            BoneAnimationBinding[b].AddRotateFrame(CurrentTime, (double)value);
+            BoneAnimationBinding[b].AddRotateFrame(CurrentTime, (double)value, easing);
         }
     }
 
-    public void ShearBone(Bone b, double? shearX, double? shearY)
+    public void ShearBone(Bone b, double? shearX, double? shearY, IEasing easing)
     {
         if (b != null && shearX != null && shearY != null)
         {
             AnimateBone(b);
-            BoneAnimationBinding[b].AddShearFrame(CurrentTime, (double)shearX, (double)shearY);
+            BoneAnimationBinding[b]
+                .AddShearFrame(CurrentTime, (double)shearX, (double)shearY, easing);
         }
     }
 
-    public void ShearBone(Bone b, double? shearX, double? shearY, double? time)
+    public void ShearBone(Bone b, double? shearX, double? shearY, double? time, IEasing easing)
     {
         if (b != null && shearX != null && shearY != null && time != null)
         {
             AnimateBone(b);
-            BoneAnimationBinding[b].AddShearFrame((double)time, (double)shearX, (double)shearY);
+            BoneAnimationBinding[b]
+                .AddShearFrame((double)time, (double)shearX, (double)shearY, easing);
         }
     }
 
-    public void ScaleBone(Bone b, double? scaleX, double? scaleY)
+    public void ScaleBone(Bone b, double? scaleX, double? scaleY, IEasing easing)
     {
         if (b != null && scaleX != null && scaleY != null)
         {
             AnimateBone(b);
-            BoneAnimationBinding[b].AddScaleFrame(CurrentTime, (double)scaleX, (double)scaleY);
+            BoneAnimationBinding[b]
+                .AddScaleFrame(CurrentTime, (double)scaleX, (double)scaleY, easing);
         }
     }
 
-    public void ScaleBone(Bone b, double? scaleX, double? scaleY, double? time)
+    public void ScaleBone(Bone b, double? scaleX, double? scaleY, double? time, IEasing easing)
     {
         if (b != null && scaleX != null && scaleY != null && time != null)
         {
             AnimateBone(b);
-            BoneAnimationBinding[b].AddScaleFrame((double)time, (double)scaleX, (double)scaleY);
+            BoneAnimationBinding[b]
+                .AddScaleFrame((double)time, (double)scaleX, (double)scaleY, easing);
         }
     }
 
@@ -363,12 +368,12 @@ public class Animation : INotifyable
     /// <param name="b">Bone that has to be moved</param>
     /// <param name="value">Target angle</param>
     /// <param name="currTime">Target time</param>
-    public void RotateBone(Bone b, double? value, double? currTime)
+    public void RotateBone(Bone b, double? value, double? currTime, IEasing easing)
     {
         if (b != null && value != null && currTime != null)
         {
             AnimateBone(b);
-            BoneAnimationBinding[b].AddRotateFrame((double)currTime, (double)value);
+            BoneAnimationBinding[b].AddRotateFrame((double)currTime, (double)value, easing);
         }
     }
 
@@ -394,20 +399,26 @@ public class Animation : INotifyable
     /// <param name="b">Bone</param>
     /// <param name="type">Current transform type</param>
     /// <param name="time">Current time</param>
-    public void AddKeyFrame(Bone b, TransformModeTypes type, double time)
+    public void AddKeyFrame(Bone b, TransformModeTypes type, double time, IEasing easing)
     {
         if (b != null && b.IsBone && type != TransformModeTypes.NO)
         {
             if (type == TransformModeTypes.TRANSLATE)
             {
-                TranslateBone(b, b.X, b.Y, time);
+                TranslateBone(b, b.X, b.Y, time, easing);
             }
             if (type == TransformModeTypes.ROTATE)
             {
-                RotateBone(b, b.A, time);
+                RotateBone(b, b.A, time, easing);
             }
-            if (type == TransformModeTypes.SCALE) { }
-            if (type == TransformModeTypes.SHEAR) { }
+            if (type == TransformModeTypes.SCALE)
+            {
+                ScaleBone(b, b.ScaleX, b.ScaleY, easing);
+            }
+            if (type == TransformModeTypes.SHEAR)
+            {
+                ShearBone(b, b.ShearX, b.ShearY, easing);
+            }
         }
     }
 
@@ -524,6 +535,9 @@ public class Animation : INotifyable
         var keyFrame = FindKeyFrameByTime(b, transformModeType, CurrentTime);
 
         if (keyFrame is null)
+            return;
+
+        if (keyFrame.Curve.EasingType == newEasingType)
             return;
 
         keyFrame.Curve = _easingFactory.CreateEasing(newEasingType);

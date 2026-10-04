@@ -145,13 +145,14 @@ namespace PlumJsonAnimator.Common.Timeline
             {
                 if (CurrentMode is null || CurrentBone is null)
                     return;
-                    
+
                 var keyFrame = CurrentAnimation?.FindKeyFrameByTime(
                     CurrentBone,
                     CurrentMode.Type,
                     CurrentTime
                 );
-                CurrentEasingMode = keyFrame?.Curve.EasingType;
+
+                CurrentEasingMode = keyFrame?.Curve?.EasingType;
             }
         }
 
@@ -218,6 +219,7 @@ namespace PlumJsonAnimator.Common.Timeline
             return new Rect(0, 0, Bounds.Width, Bounds.Height).Contains(point);
         }
 
+        // TODO: fix drawing keyframe lines
         public override void Render(DrawingContext context)
         {
             // --- 1. Основные переменные ---

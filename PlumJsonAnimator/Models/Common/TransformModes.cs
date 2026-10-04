@@ -1,5 +1,6 @@
 using System;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 
 namespace PlumJsonAnimator.Models.Common;
@@ -21,7 +22,7 @@ public abstract class Mode
 
     public abstract void ClearMode();
 
-    public abstract void Transform(Bone bone, double a, double b);
+    public abstract void Transform(Bone bone, double a, double b, IEasing easing);
 }
 
 class NoMode : Mode
@@ -35,7 +36,7 @@ class NoMode : Mode
 
     public override void ClearMode() { }
 
-    public override void Transform(Bone bone, double a, double b)
+    public override void Transform(Bone bone, double a, double b, IEasing easing)
     {
         return;
     }
@@ -52,7 +53,7 @@ class TransformMode : Mode
 
     public override void ClearMode() { }
 
-    public override void Transform(Bone bone, double x, double y)
+    public override void Transform(Bone bone, double x, double y, IEasing easing)
     {
         bone.Move(x, y);
         if (_globalState.SetBasePos == false)
@@ -60,7 +61,7 @@ class TransformMode : Mode
             var animation = _globalState.CurrentProject?.GetCurrentAnimation();
             if (animation != null && !animation.IsRun && bone.IsBone == true)
             {
-                animation.TranslateBone(bone, bone.X, bone.Y);
+                animation.TranslateBone(bone, bone.X, bone.Y, easing);
             }
         }
     }
@@ -89,7 +90,7 @@ class RotateMode : Mode
 
     public override void ClearMode() { }
 
-    public override void Transform(Bone bone, double x, double y)
+    public override void Transform(Bone bone, double x, double y, IEasing easing)
     {
         double xx = x - bone.X;
         Point av = new Point(xx, y - bone.Y);
@@ -106,7 +107,7 @@ class RotateMode : Mode
             var animation = _globalState.CurrentProject?.GetCurrentAnimation();
             if (animation != null && !animation.IsRun && bone.IsBone == true)
             {
-                animation.RotateBone(bone, bone.A);
+                animation.RotateBone(bone, bone.A, easing);
             }
         }
     }
@@ -130,7 +131,7 @@ class ScaleMode : Mode
         startY = null;
     }
 
-    public override void Transform(Bone bone, double x, double y)
+    public override void Transform(Bone bone, double x, double y, IEasing easing)
     {
         if (startX == null || startY == null)
         {
@@ -172,7 +173,7 @@ class ScaleMode : Mode
             var animation = _globalState.CurrentProject?.GetCurrentAnimation();
             if (animation != null && !animation.IsRun && bone.IsBone == true)
             {
-                animation.ScaleBone(bone, bone.ScaleX, bone.ScaleY);
+                animation.ScaleBone(bone, bone.ScaleX, bone.ScaleY, easing);
             }
         }
     }
@@ -205,7 +206,7 @@ class ShearMode : Mode
         isVerticalLocked = false;
     }
 
-    public override void Transform(Bone bone, double x, double y)
+    public override void Transform(Bone bone, double x, double y, IEasing easing)
     {
         if (startX == null || startY == null)
         {
@@ -253,7 +254,7 @@ class ShearMode : Mode
             var animation = _globalState.CurrentProject?.GetCurrentAnimation();
             if (animation != null && !animation.IsRun && bone.IsBone == true)
             {
-                animation.ShearBone(bone, bone.ShearX, bone.ShearY);
+                animation.ShearBone(bone, bone.ShearX, bone.ShearY, easing);
             }
         }
     }

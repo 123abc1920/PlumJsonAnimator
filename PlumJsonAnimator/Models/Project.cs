@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Commands;
@@ -517,7 +518,12 @@ namespace PlumJsonAnimator.Models
                             Bone bone = MainSkeleton.GetBoneByName(name);
                             foreach (IKeyframeTypeData keyframe in boneAnimation.rotate)
                             {
-                                animation.RotateBone(bone, keyframe.Value, keyframe.Time);
+                                animation.RotateBone(
+                                    bone,
+                                    keyframe.Value,
+                                    keyframe.Time,
+                                    keyframe.Curve
+                                );
                             }
                             foreach (IKeyframeTypeData keyframe in boneAnimation.translate)
                             {
@@ -525,16 +531,29 @@ namespace PlumJsonAnimator.Models
                                     bone,
                                     keyframe.X,
                                     keyframe.Y,
-                                    keyframe.Time
+                                    keyframe.Time,
+                                    keyframe.Curve
                                 );
                             }
                             foreach (IKeyframeTypeData keyframe in boneAnimation.shear)
                             {
-                                animation.ShearBone(bone, keyframe.X, keyframe.Y, keyframe.Time);
+                                animation.ShearBone(
+                                    bone,
+                                    keyframe.X,
+                                    keyframe.Y,
+                                    keyframe.Time,
+                                    keyframe.Curve
+                                );
                             }
                             foreach (IKeyframeTypeData keyframe in boneAnimation.scale)
                             {
-                                animation.ScaleBone(bone, keyframe.X, keyframe.Y, keyframe.Time);
+                                animation.ScaleBone(
+                                    bone,
+                                    keyframe.X,
+                                    keyframe.Y,
+                                    keyframe.Time,
+                                    keyframe.Curve
+                                );
                             }
                         }
                         if (animationData.DrawOrder != null && animationData != null)
@@ -591,19 +610,25 @@ namespace PlumJsonAnimator.Models
                     Bone bone = MainSkeleton.GetBoneByName(name);
                     foreach (IKeyframeTypeData keyframe in boneAnimation.rotate)
                     {
-                        a.RotateBone(bone, keyframe.Value, keyframe.Time);
+                        a.RotateBone(bone, keyframe.Value, keyframe.Time, keyframe.Curve);
                     }
                     foreach (IKeyframeTypeData keyframe in boneAnimation.translate)
                     {
-                        a.TranslateBone(bone, keyframe.X, keyframe.Y, keyframe.Time);
+                        a.TranslateBone(
+                            bone,
+                            keyframe.X,
+                            keyframe.Y,
+                            keyframe.Time,
+                            keyframe.Curve
+                        );
                     }
                     foreach (IKeyframeTypeData keyframe in boneAnimation.shear)
                     {
-                        a.ShearBone(bone, keyframe.X, keyframe.Y, keyframe.Time);
+                        a.ShearBone(bone, keyframe.X, keyframe.Y, keyframe.Time, keyframe.Curve);
                     }
                     foreach (IKeyframeTypeData keyframe in boneAnimation.scale)
                     {
-                        a.ScaleBone(bone, keyframe.X, keyframe.Y, keyframe.Time);
+                        a.ScaleBone(bone, keyframe.X, keyframe.Y, keyframe.Time, keyframe.Curve);
                     }
                 }
                 foreach (DrawOrderItem item in animationData.DrawOrder)
