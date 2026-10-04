@@ -143,9 +143,16 @@ public class Animation : INotifyable
         BoneAnimationBinding[bone] = boneAnimation;
     }
 
-    public BoneAnimation GetBoneAnimation(Bone bone)
+    public BoneAnimation? GetBoneAnimation(Bone bone)
     {
-        return BoneAnimationBinding[bone];
+        if (BoneAnimationBinding.TryGetValue(bone, out var boneAnimation))
+        {
+            return boneAnimation;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     /// <summary>
@@ -209,7 +216,7 @@ public class Animation : INotifyable
     /// <summary>
     /// Turn animation JSON object into JSON string
     /// </summary>
-    public String GenerateCode()
+    public string GenerateCode()
     {
         return JsonConvert.SerializeObject(GenerateJSONData(), _globalState.jsonSettings);
     }
@@ -411,8 +418,8 @@ public class Animation : INotifyable
         TransformModeTypes type
     )
     {
-        BoneAnimation boneAnimation = BoneAnimationBinding[bone];
-        boneAnimation.RestoreKeyFrame(keyframe, time, type);
+        BoneAnimation? boneAnimation = GetBoneAnimation(bone);
+        boneAnimation?.RestoreKeyFrame(keyframe, time, type);
     }
 
     /// <summary>
@@ -483,8 +490,8 @@ public class Animation : INotifyable
     {
         if (b is null)
             return null;
-        var boneAnimation = BoneAnimationBinding[b];
-        return boneAnimation.FindKeyFrame(time, transformModeType);
+        var boneAnimation = GetBoneAnimation(b);
+        return boneAnimation?.FindKeyFrame(time, transformModeType);
     }
 
     public double? FindNextTime(double time, Bone? bone, TransformModeTypes transformModeType)
@@ -492,8 +499,8 @@ public class Animation : INotifyable
         if (bone is null || ContainsBone(bone) == false)
             return 0;
 
-        BoneAnimation boneAnimation = BoneAnimationBinding[bone];
-        return boneAnimation.FindNextTime(time, transformModeType);
+        BoneAnimation? boneAnimation = GetBoneAnimation(bone);
+        return boneAnimation?.FindNextTime(time, transformModeType);
     }
 
     public double? FindKeyFrameTime(double time, Bone? bone, TransformModeTypes transformModeType)
@@ -501,8 +508,8 @@ public class Animation : INotifyable
         if (bone is null || ContainsBone(bone) == false)
             return 0;
 
-        BoneAnimation boneAnimation = BoneAnimationBinding[bone];
-        return boneAnimation.FindTime(time, transformModeType, false);
+        BoneAnimation? boneAnimation = GetBoneAnimation(bone);
+        return boneAnimation?.FindTime(time, transformModeType, false);
     }
 
     public void ChangeCurrentEasingMode(

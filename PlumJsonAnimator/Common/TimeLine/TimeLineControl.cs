@@ -135,6 +135,24 @@ namespace PlumJsonAnimator.Common.Timeline
             {
                 InvalidateVisual();
             }
+
+            if (
+                change.Property == CurrentBoneProperty
+                || change.Property == CurrentAnimationProperty
+                || change.Property == CurrentModeProperty
+                || change.Property == CurrentTimeProperty
+            )
+            {
+                if (CurrentMode is null || CurrentBone is null)
+                    return;
+                    
+                var keyFrame = CurrentAnimation?.FindKeyFrameByTime(
+                    CurrentBone,
+                    CurrentMode.Type,
+                    CurrentTime
+                );
+                CurrentEasingMode = keyFrame?.Curve.EasingType;
+            }
         }
 
         public static readonly StyledProperty<ObservableCollection<TimelineTrack>> TracksProperty =

@@ -10,6 +10,7 @@ class SteppedEasing : IEasing
 {
     private List<double> _keysMap = new List<double>();
     public List<double> KeysMap => _keysMap;
+    public EasingTypes EasingType { get; } = EasingTypes.STEPPED;
 
     public void DrawLine(DrawingContext context, PointModel p1, PointModel p2, Brush brush)
     {

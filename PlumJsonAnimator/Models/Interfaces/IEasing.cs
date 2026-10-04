@@ -6,6 +6,8 @@ namespace PlumJsonAnimator.Models.Interfaces;
 
 public interface IEasing
 {
+    EasingTypes EasingType { get; }
+
     List<double> KeysMap { get; }
 
     double Ease(double t);

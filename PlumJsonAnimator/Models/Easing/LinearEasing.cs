@@ -15,6 +15,8 @@ class LinearEasing : IEasing
         get => _keyMap;
     }
 
+    public EasingTypes EasingType { get; } = EasingTypes.LINEAR;
+
     public void DrawLine(DrawingContext context, PointModel p1, PointModel p2, Brush brush)
     {
         context.DrawLine(new Pen(brush, 1), new Point(p1.X, p1.Y), new Point(p2.X, p2.Y));

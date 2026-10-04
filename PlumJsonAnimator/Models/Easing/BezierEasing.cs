@@ -12,6 +12,8 @@ class BezierEasing : IEasing
     private List<double> _keysMap = new List<double>();
     public List<double> KeysMap => _keysMap;
 
+    public EasingTypes EasingType { get; } = EasingTypes.BEZIER;
+
     public BezierEasing(params double[] keys)
     {
         foreach (var k in keys)
