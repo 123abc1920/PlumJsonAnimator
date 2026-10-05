@@ -6,6 +6,7 @@ using Avalonia.Controls;
 using Avalonia.Platform.Storage;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models;
+using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Resources;
 
 namespace PlumJsonAnimator.Services
@@ -19,18 +20,21 @@ namespace PlumJsonAnimator.Services
         private GlobalState _globalState;
         private Interpolation _interpolation;
         private LocalizationService _localizationService;
+        private EasingFactory _easingFactory;
 
         public ProjectFilesManager(
             AppSettings appSettings,
             GlobalState globalState,
             Interpolation interpolation,
-            LocalizationService localizationService
+            LocalizationService localizationService,
+            EasingFactory easingFactory
         )
         {
-            this._appSettings = appSettings;
-            this._globalState = globalState;
-            this._interpolation = interpolation;
-            this._localizationService = localizationService;
+            _appSettings = appSettings;
+            _globalState = globalState;
+            _interpolation = interpolation;
+            _localizationService = localizationService;
+            _easingFactory = easingFactory;
         }
 
         /// <summary>
@@ -43,9 +47,9 @@ namespace PlumJsonAnimator.Services
 
             var fileTypeFilter = new FilePickerFileType[]
             {
-                new($"*{this._globalState.programExt}")
+                new($"*{this._globalState.ProgramExt}")
                 {
-                    Patterns = new[] { $"*{this._globalState.programExt}" },
+                    Patterns = new[] { $"*{this._globalState.ProgramExt}" },
                 },
             };
 
@@ -53,7 +57,7 @@ namespace PlumJsonAnimator.Services
                 new FilePickerOpenOptions
                 {
                     Title =
-                        $"{this._localizationService.GetMessage(LocalizationConsts.SELECT_SETTINGS_FILE)}",
+                        $"{_localizationService.GetMessage(LocalizationConsts.SELECT_SETTINGS_FILE)}",
                     AllowMultiple = false,
                     FileTypeFilter = fileTypeFilter,
                 }
@@ -77,13 +81,14 @@ namespace PlumJsonAnimator.Services
 
                 Project newProject = new Project(
                     projectSettings,
-                    this._globalState,
-                    this._interpolation,
-                    this._localizationService
+                    _globalState,
+                    _interpolation,
+                    _localizationService,
+                    _easingFactory
                 );
 
                 newProject.SaveProjectSettings();
-                this._appSettings.SaveSettings();
+                _appSettings.SaveSettings();
                 LoadRes(newProject);
 
                 return newProject;

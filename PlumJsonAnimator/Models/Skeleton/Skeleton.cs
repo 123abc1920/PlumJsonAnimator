@@ -43,7 +43,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             Bone parentBone = this.RootBones[0];
             foreach (Bone b in this.Bones)
             {
-                if (b.id == parentId)
+                if (b._id == parentId)
                 {
                     parentBone = b;
                     break;
@@ -69,7 +69,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public void AddBone(Bone b)
         {
             this.Bones.Add(b);
-            b.id = _last_bone_id;
+            b._id = _last_bone_id;
             _last_bone_id++;
         }
 
@@ -77,7 +77,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             foreach (Bone b in this.Bones)
             {
-                if (b.id == id)
+                if (b._id == id)
                 {
                     return b;
                 }

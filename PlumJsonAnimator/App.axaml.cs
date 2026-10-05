@@ -10,6 +10,7 @@ using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models.Commands;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
 using PlumJsonAnimator.Views;
@@ -66,6 +67,8 @@ public partial class App : Application
         services.AddSingleton<HistoryManager>();
 
         services.AddSingleton<AutoSaver>();
+
+        services.AddSingleton<EasingFactory>();
 
         services.AddSingleton<PlumApp>();
 

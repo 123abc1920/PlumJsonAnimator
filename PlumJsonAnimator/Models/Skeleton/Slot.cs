@@ -65,14 +65,17 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <summary>
         /// Sets actual attachment to slot according current skin
         /// </summary>
-        public void UpdateAttachment()
+        public void UpdateAttachment(Attachment? attachment)
         {
-            CurrentAttachment = _globalState.CurrentProject!.CurrentSkin.GetAttachment(this);
+            if (attachment == null)
+                return;
+
+            CurrentAttachment = attachment;
             if (CurrentAttachment != null && BoundedBone != null)
             {
-                LocalX = CurrentAttachment.x;
-                LocalY = CurrentAttachment.y;
-                LocalA = CurrentAttachment.a;
+                LocalX = CurrentAttachment._x;
+                LocalY = CurrentAttachment._y;
+                LocalA = CurrentAttachment._a;
 
                 var size = CurrentAttachment.GetSize();
                 LengthX = size["width"] ?? LengthX;
@@ -97,7 +100,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// </summary>
         public void UpdateDrawOrderOffset()
         {
-            double currTime = this._globalState.CurrentProject.CurrentAnimation.currentTime;
+            double currTime = _globalState.CurrentProject.CurrentAnimation.CurrentTime;
 
             double? foundKey = null;
             foreach (var key in drawOrders.Keys)
@@ -112,13 +115,13 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             if (value != null)
             {
                 isUpdatingFromCode = true;
-                this.CurrentDrawOrderOffset = value.Offset;
+                CurrentDrawOrderOffset = value.Offset;
                 isUpdatingFromCode = false;
             }
             else
             {
                 isUpdatingFromCode = true;
-                this.CurrentDrawOrderOffset = 0;
+                CurrentDrawOrderOffset = 0;
                 isUpdatingFromCode = false;
             }
         }
@@ -137,7 +140,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                     _boundedBone = value;
                     if (value != null)
                     {
-                        Move(value.GlobalX + this.X, value.GlobalY + this.Y);
+                        Move(value.GlobalX + X, value.GlobalY + Y);
                     }
                     this.RaisePropertyChanged();
                 }
@@ -205,7 +208,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                     if (_globalState?.CurrentProject?.CurrentAnimation == null)
                         return;
 
-                    double currTime = _globalState.CurrentProject.CurrentAnimation.currentTime;
+                    double currTime = _globalState.CurrentProject.CurrentAnimation.CurrentTime;
                     if (drawOrders.ContainsKey(currTime))
                     {
                         drawOrders[currTime].Offset = value;
@@ -228,36 +231,20 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 });
         }
 
-        public Slot(GlobalState globalState, int id, string path)
-            : this(globalState)
-        {
-            this.id = id;
-            this.A = 0;
-            this.X = 0;
-            this.Y = 0;
-
-            this.Name = $"{Path.GetFileNameWithoutExtension(path)}{Counter.GenerateNamePostfix()}";
-
-            this._globalState = globalState;
-            UpdateAttachment();
-        }
-
         public Slot(GlobalState globalState, string name, Bone b)
             : this(globalState)
         {
-            this.Name = name;
-            this.BoundedBone = b;
-            this._globalState = globalState;
-            UpdateAttachment();
+            Name = name;
+            BoundedBone = b;
+            _globalState = globalState;
         }
 
         public Slot(GlobalState globalState, Bone b)
             : this(globalState)
         {
-            this.Name = $"tesr{Counter.GenerateNamePostfix()}";
-            this.BoundedBone = b;
-            this._globalState = globalState;
-            UpdateAttachment();
+            Name = $"slot{Counter.GenerateNamePostfix()}";
+            BoundedBone = b;
+            _globalState = globalState;
         }
 
         /// <summary>
@@ -292,10 +279,13 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             if (CurrentAttachment != null)
             {
-                LengthX = Math.Abs(x - this.X) * 5;
-                LengthY = Math.Abs(y - this.Y) * 5;
+                LengthX *= x;
+                LengthY *= y;
 
-                CurrentAttachment.SetSize(this.LengthX, this.LengthY);
+                ScaleX = x;
+                ScaleY = y;
+
+                CurrentAttachment.SetSize(LengthX, LengthY);
             }
         }
 
@@ -327,8 +317,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                     BorderBrush = AppColors.Red,
                     BorderThickness = new Thickness(2),
                 };
-                Canvas.SetLeft(border, canvas.Width / 2 + this.GlobalX - 5);
-                Canvas.SetTop(border, canvas.Height / 2 + this.GlobalY - 5);
+                Canvas.SetLeft(border, canvas.Width / 2 + GlobalX - 5);
+                Canvas.SetTop(border, canvas.Height / 2 + GlobalY - 5);
                 canvas.Children.Add(border);
             }
         }
@@ -337,15 +327,15 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             return new SlotData
             {
-                Name = this.Name,
-                Bone = this.BoundedBone?.Name,
-                Attachment = this.CurrentAttachment?.Name,
+                Name = Name,
+                Bone = BoundedBone?.Name,
+                Attachment = CurrentAttachment?.Name,
             };
         }
 
         public new string GenerateCode()
         {
-            return JsonConvert.SerializeObject(GenerateJSONData(), this._globalState.jsonSettings);
+            return JsonConvert.SerializeObject(GenerateJSONData(), _globalState.jsonSettings);
         }
 
         /// <summary>
@@ -354,23 +344,23 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="name">New name</param>
         public new void SetName(string? name)
         {
-            if (this._globalState.CurrentProject.IsUniqSlot(name))
+            if (_globalState.CurrentProject.IsUniqSlot(name))
             {
                 if (name != null)
                 {
-                    this.Name = name;
+                    Name = name;
                 }
             }
         }
 
         public new string GetName
         {
-            get => this.Name;
+            get => Name;
             set
             {
-                if (this.Name != value)
+                if (Name != value)
                 {
-                    this.Name = value;
+                    Name = value;
                 }
             }
         }

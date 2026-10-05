@@ -1,11 +1,10 @@
 using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls;
-using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Commands;
+using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
@@ -31,6 +30,7 @@ public class PlumApp
     private readonly HistoryManager _historyManager;
     private readonly AutoSaver _autoSaver;
     private readonly CanvasRenderer _canvasUpdater;
+    private readonly EasingFactory _easingFactory;
 
     public PlumApp(
         AppSettings appSettings,
@@ -46,7 +46,8 @@ public class PlumApp
         ImageExporter imageExporter,
         HistoryManager historyManager,
         AutoSaver autoSaver,
-        CanvasRenderer canvasUpdater
+        CanvasRenderer canvasUpdater,
+        EasingFactory easingFactory
     )
     {
         AppSettings = appSettings;
@@ -64,6 +65,7 @@ public class PlumApp
         _historyManager = historyManager;
         _autoSaver = autoSaver;
         _canvasUpdater = canvasUpdater;
+        _easingFactory = easingFactory;
     }
 
     public void Start()
@@ -85,7 +87,9 @@ public class PlumApp
             GlobalState
         );
 
-        InitProject(new Project(projectSettings, GlobalState, _interpolation, Localization));
+        InitProject(
+            new Project(projectSettings, GlobalState, _interpolation, Localization, _easingFactory)
+        );
 
         _autoSaver.StartAutoSaveAsync(GlobalState.autoSaveSec);
     }
@@ -118,7 +122,8 @@ public class PlumApp
             projectSettings,
             GlobalState,
             this._interpolation,
-            Localization
+            Localization,
+            _easingFactory
         );
 
         AppSettings.SaveSettings();
@@ -359,7 +364,7 @@ public class PlumApp
 
     public void AddSlot()
     {
-        Bone? bone = GlobalState.currentBone;
+        Bone? bone = GlobalState.CurrentBone;
         if (bone != null)
         {
             Slot s = new Slot(GlobalState, bone);
@@ -375,7 +380,7 @@ public class PlumApp
             DeleteSlotCommand deleteSlotCommand = new DeleteSlotCommand(
                 GlobalState.CurrentProject,
                 selectedSlot,
-                GlobalState.currentBone
+                GlobalState.CurrentBone
             );
             this._historyManager.DoCommand(deleteSlotCommand);
         }
@@ -383,12 +388,13 @@ public class PlumApp
 
     public void AddKeyFrame()
     {
-        if (GlobalState.currentBone != null)
+        if (GlobalState.CurrentBone != null)
         {
             AddKeyFrameCommand addKeyFrameCommand = new AddKeyFrameCommand(
                 GlobalState.CurrentProject.CurrentAnimation,
-                GlobalState.currentBone,
-                GlobalState.CurrentProject.currentMode.Type
+                GlobalState.CurrentBone,
+                GlobalState.CurrentProject.CurrentMode.Type,
+                _easingFactory.CreateEasing(GlobalState.CurrentEasingType)
             );
             this._historyManager.DoCommand(addKeyFrameCommand);
         }
@@ -396,12 +402,12 @@ public class PlumApp
 
     public void DeleteKeyFrame()
     {
-        if (GlobalState.currentBone != null)
+        if (GlobalState.CurrentBone != null)
         {
             DeleteKeyFrameCommand deleteKeyFrameCommand = new DeleteKeyFrameCommand(
                 GlobalState.CurrentProject.CurrentAnimation,
-                GlobalState.currentBone,
-                GlobalState.CurrentProject.currentMode.Type
+                GlobalState.CurrentBone,
+                GlobalState.CurrentProject.CurrentMode.Type
             );
             this._historyManager.DoCommand(deleteKeyFrameCommand);
         }
@@ -416,18 +422,23 @@ public class PlumApp
 
     public void Transform(double a, double b)
     {
-        GlobalState.CurrentProject?.currentMode.Transform(GlobalState.currentBone, a, b);
+        GlobalState.CurrentProject?.CurrentMode.Transform(
+            GlobalState.CurrentBone,
+            a,
+            b,
+            _easingFactory.CreateEasing(GlobalState.CurrentEasingType)
+        );
     }
 
     public void ChangeBoneStatus(BoneStatus oldBoneStatus, BoneStatus newBoneStatus, bool isAnim)
     {
         ChangeBoneStatusCommand changeBoneStatusCommand = new ChangeBoneStatusCommand(
-            GlobalState.currentBone,
+            GlobalState.CurrentBone,
             oldBoneStatus,
             newBoneStatus,
             GlobalState.CurrentProject.CurrentAnimation,
             isAnim,
-            GlobalState.CurrentProject.CurrentAnimation.currentTime
+            GlobalState.CurrentProject.CurrentAnimation.CurrentTime
         );
         this._historyManager.DoCommand(changeBoneStatusCommand);
     }

@@ -41,7 +41,7 @@ namespace PlumJsonAnimator.Services
             }
 
             string output = JsonConvert.SerializeObject(
-                this.jsonCode.generateJSONData(project),
+                this.jsonCode.GenerateJSONData(project),
                 this.globalState.jsonSettings
             );
 

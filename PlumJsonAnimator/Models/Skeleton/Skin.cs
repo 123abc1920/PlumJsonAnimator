@@ -33,13 +33,14 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public Skin(GlobalState globalState)
         {
-            this._globalState = globalState;
+            _globalState = globalState;
+            UpdateSkinAttachments();
         }
 
         public Skin(string name, GlobalState globalState)
+            : this(globalState)
         {
-            this.Name = name;
-            this._globalState = globalState;
+            Name = name;
         }
 
         /// <summary>
@@ -62,7 +63,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 SlotAttachmentBinding.Add(s, a);
             }
-            s.UpdateAttachment();
+            s.UpdateAttachment(GetAttachment(s));
         }
 
         /// <summary>
@@ -127,6 +128,14 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             return false;
         }
 
+        public void UpdateSkinAttachments()
+        {
+            foreach (Slot s in SlotAttachmentBinding.Keys)
+            {
+                s.UpdateAttachment(GetAttachment(s));
+            }
+        }
+
         /// <summary>
         /// Tries to remove resource from skin
         /// </summary>
@@ -138,7 +147,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 if (SlotAttachmentBinding[s] != null && SlotAttachmentBinding[s].GetRes() == res)
                 {
                     SlotAttachmentBinding[s] = null;
-                    s.UpdateAttachment();
+                    s.UpdateAttachment(GetAttachment(s));
                     return;
                 }
             }
@@ -216,12 +225,12 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 }
             }
 
-            return new SkinData { Name = this.Name, Attachments = attachments };
+            return new SkinData { Name = Name, Attachments = attachments };
         }
 
         public string GenerateCode()
         {
-            return JsonConvert.SerializeObject(GenerateJSONData(), this._globalState.jsonSettings);
+            return JsonConvert.SerializeObject(GenerateJSONData(), _globalState.jsonSettings);
         }
 
         public bool IsAttachUniq(string name)

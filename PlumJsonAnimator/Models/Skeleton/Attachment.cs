@@ -21,18 +21,18 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
     {
         public string? Name { get; set; }
 
-        public double x;
-        public double y;
-        public double a;
+        public double _x;
+        public double _y;
+        public double _a;
 
         protected int? _width = null;
         protected int? _height = null;
 
         public void SetPos(double x, double y, double a)
         {
-            this.x = x;
-            this.y = y;
-            this.a = a;
+            _x = x;
+            _y = y;
+            _a = a;
         }
 
         public virtual Res? GetRes()
@@ -44,8 +44,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public void SetSize(double width, double height)
         {
-            this._width = (int)width;
-            this._height = (int)height;
+            _width = (int)width;
+            _height = (int)height;
         }
 
         public Dictionary<string, int?> GetSize()
@@ -69,44 +69,42 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public ImageAttachment(ImageRes res)
         {
-            this._image = res;
-            this.Name = res.Name;
+            _image = res;
+            Name = res.Name;
         }
 
         public ImageAttachment(ImageRes res, AttachmentData data)
+            : this(res)
         {
-            this._image = res;
-            this.Name = res.Name;
+            _x = data.X;
+            _y = data.Y;
+            _a = data.A;
 
-            this.x = data.X;
-            this.y = data.Y;
-            this.a = data.A;
-
-            this._width = data.Width;
-            this._height = data.Height;
+            _width = data.Width;
+            _height = data.Height;
         }
 
         public string GetPath()
         {
-            return this._image.Path;
+            return _image.Path;
         }
 
         public override AttachmentData GenerateJSONData()
         {
             return new AttachmentData
             {
-                Name = this._image.Name,
-                Width = this._width,
-                Height = this._height,
-                X = this.x,
-                Y = this.y,
-                A = this.a,
+                Name = _image.Name,
+                Width = _width,
+                Height = _height,
+                X = _x,
+                Y = _y,
+                A = _a,
             };
         }
 
         public override Res GetRes()
         {
-            return this._image;
+            return _image;
         }
 
         private Bitmap _cachedBitmap;
@@ -117,7 +115,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             if (canvas == null)
                 return;
 
-            string currentPath = this.GetPath();
+            string currentPath = GetPath();
             if (_cachedBitmap == null || _cachedPath != currentPath)
             {
                 _cachedPath = currentPath;
@@ -127,26 +125,22 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 _cachedBitmap = new Bitmap(ms);
             }
 
-            // 1. Получаем матрицу кости (уже вычисленную в DrawBone)
             double boneM11 = slot.BoundedBone.G11;
             double boneM12 = slot.BoundedBone.G12;
             double boneM21 = slot.BoundedBone.G21;
             double boneM22 = slot.BoundedBone.G22;
 
-            // 2. Локальный поворот аттачмента
-            double attachAngleRad = this.a * Math.PI / 180.0;
+            double attachAngleRad = _a * Math.PI / 180.0;
             double ac = Math.Cos(attachAngleRad);
             double asin = Math.Sin(attachAngleRad);
 
-            // 3. Комбинируем матрицы
             double f11 = boneM11 * ac + boneM21 * asin;
             double f12 = boneM12 * ac + boneM22 * asin;
             double f21 = -boneM11 * asin + boneM21 * ac;
             double f22 = -boneM12 * asin + boneM22 * ac;
 
-            // 4. Размеры
-            double imgWidth = this._width ?? slot.LengthX;
-            double imgHeight = this._height ?? slot.LengthY;
+            double imgWidth = _width ?? slot.LengthX;
+            double imgHeight = _height ?? slot.LengthY;
 
             var image = new Image
             {
@@ -157,11 +151,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 RenderTransformOrigin = new RelativePoint(0.5, 0.5, RelativeUnit.Relative),
             };
 
-            // 5. Мировые координаты
-            double worldX = slot.BoundedBone.GlobalX + (this.x * boneM11 + this.y * boneM21);
-            double worldY = slot.BoundedBone.GlobalY + (this.x * boneM12 + this.y * boneM22);
+            double worldX = slot.BoundedBone.GlobalX + (_x * boneM11 + _y * boneM21);
+            double worldY = slot.BoundedBone.GlobalY + (_x * boneM12 + _y * boneM22);
 
-            // 6. Позиционирование
             double left = canvas.Width / 2 + worldX - image.Width / 2;
             double top = canvas.Height / 2 + worldY - image.Height / 2;
 

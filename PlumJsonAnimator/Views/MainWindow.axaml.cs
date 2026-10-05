@@ -53,7 +53,7 @@ public partial class MainWindow : SukiWindow
         {
             viewModel.Timeline = Timeline;
             viewModel.SetMainWin(this);
-            globalState.canvas = mainCanvas;
+            globalState.Canvas = mainCanvas;
 
             if (!viewModel.JsonErrorObj.IsOk)
             {
@@ -127,14 +127,14 @@ public partial class MainWindow : SukiWindow
                         {
                             this._oldBoneStatus.T =
                                 viewModel.CurrentProject.CurrentAnimation.GetKeyframe(
-                                    TransformModesTypes.TRANSLATE,
+                                    TransformModeTypes.TRANSLATE,
                                     viewModel.CurrentTime,
                                     viewModel.CurrentBone
                                 );
 
                             this._oldBoneStatus.R =
                                 viewModel.CurrentProject.CurrentAnimation.GetKeyframe(
-                                    TransformModesTypes.ROTATE,
+                                    TransformModeTypes.ROTATE,
                                     viewModel.CurrentTime,
                                     viewModel.CurrentBone
                                 );
@@ -175,20 +175,20 @@ public partial class MainWindow : SukiWindow
 
         if (DataContext is MainWindowViewModel viewModel)
         {
-            viewModel.CurrentProject?.currentMode.ClearMode();
+            viewModel.CurrentProject?.CurrentMode.ClearMode();
             if (this._oldBoneStatus != null)
             {
                 BoneStatus newBoneStatus = new BoneStatus(viewModel.CurrentBone);
                 if (viewModel.IsAnimMode)
                 {
                     newBoneStatus.T = viewModel.CurrentProject.CurrentAnimation.GetKeyframe(
-                        TransformModesTypes.TRANSLATE,
+                        TransformModeTypes.TRANSLATE,
                         viewModel.CurrentTime,
                         viewModel.CurrentBone
                     );
 
                     newBoneStatus.R = viewModel.CurrentProject.CurrentAnimation.GetKeyframe(
-                        TransformModesTypes.ROTATE,
+                        TransformModeTypes.ROTATE,
                         viewModel.CurrentTime,
                         viewModel.CurrentBone
                     );
@@ -234,7 +234,7 @@ public partial class MainWindow : SukiWindow
                     {
                         if (DataContext is MainWindowViewModel viewModel)
                         {
-                            viewModel.DropSlotToBone(bone.id, res);
+                            viewModel.DropSlotToBone(bone._id, res);
                             return;
                         }
                     }

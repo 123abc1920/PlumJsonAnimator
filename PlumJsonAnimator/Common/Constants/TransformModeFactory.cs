@@ -9,30 +9,30 @@ namespace PlumJsonAnimator.Common.Constants
     public class TransformModeFactory
     {
         private GlobalState _globalState;
-        private readonly Dictionary<TransformModesTypes, Mode> _modes;
+        private readonly Dictionary<TransformModeTypes, Mode> _modes;
 
         public TransformModeFactory(GlobalState globalState)
         {
             this._globalState = globalState;
 
-            _modes = new Dictionary<TransformModesTypes, Mode>
+            _modes = new Dictionary<TransformModeTypes, Mode>
             {
-                [TransformModesTypes.NO] = new NoMode(globalState),
-                [TransformModesTypes.TRANSLATE] = new TransformMode(globalState),
-                [TransformModesTypes.ROTATE] = new RotateMode(globalState),
-                [TransformModesTypes.SCALE] = new ScaleMode(globalState),
-                [TransformModesTypes.SHEAR] = new ShearMode(globalState),
+                [TransformModeTypes.NO] = new NoMode(globalState),
+                [TransformModeTypes.TRANSLATE] = new TransformMode(globalState),
+                [TransformModeTypes.ROTATE] = new RotateMode(globalState),
+                [TransformModeTypes.SCALE] = new ScaleMode(globalState),
+                [TransformModeTypes.SHEAR] = new ShearMode(globalState),
             };
         }
 
-        public Mode CreateMode(Mode old, TransformModesTypes type)
+        public Mode CreateMode(Mode old, TransformModeTypes type)
         {
             if (old.Type == type)
             {
-                return _modes[TransformModesTypes.NO];
+                return _modes[TransformModeTypes.NO];
             }
 
-            return _modes.TryGetValue(type, out var mode) ? mode : _modes[TransformModesTypes.NO];
+            return _modes.TryGetValue(type, out var mode) ? mode : _modes[TransformModeTypes.NO];
         }
     }
 }

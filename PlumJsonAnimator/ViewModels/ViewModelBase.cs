@@ -14,7 +14,7 @@ namespace PlumJsonAnimator.ViewModels;
 
 public class ViewModelBase : ObservableObject, INotifyPropertyChanged
 {
-    public GlobalState globalState;
+    public GlobalState _globalState;
     protected Dialogs dialogs;
     protected ProjectFilesManager projectManager;
     protected AppSettings appSettings;
@@ -41,7 +41,7 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
 
     public CaptureArea? GetCaptureArea()
     {
-        return this.globalState.captureArea;
+        return this._globalState.captureArea;
     }
 
     protected ViewModelBase(
@@ -54,7 +54,7 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
         PlumApp plumApp
     )
     {
-        this.globalState = globalState;
+        this._globalState = globalState;
         this.dialogs = dialogs;
         this.projectManager = projectManager;
         this.appSettings = appSettings;
@@ -62,7 +62,7 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
         this.imageExporter = imageExporter;
         this.PlumApp = plumApp;
 
-        this.globalState.PropertyChanged += (s, e) =>
+        this._globalState.PropertyChanged += (s, e) =>
         {
             if (e.PropertyName == nameof(GlobalState.CurrentProject))
             {
@@ -73,7 +73,7 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
 
     public Project? CurrentProject
     {
-        get => globalState.CurrentProject;
+        get => _globalState.CurrentProject;
     }
 
     public void RenameProject(SettingsData settingsData)

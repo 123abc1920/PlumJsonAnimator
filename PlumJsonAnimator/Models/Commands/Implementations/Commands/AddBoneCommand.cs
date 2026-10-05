@@ -25,7 +25,7 @@ class AddBoneCommand : ICommand
 
         if (_selectedBone != null && _selectedBone.IsBone)
         {
-            this._newBone = _project?.MainSkeleton?.AddBoneToParent(_selectedBone.id);
+            this._newBone = _project?.MainSkeleton?.AddBoneToParent(_selectedBone._id);
         }
     }
 

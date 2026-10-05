@@ -63,9 +63,9 @@ namespace PlumJsonAnimator.Services
             if (this.globalState.currentTab == 0)
             {
                 UpdateCanvas(
-                    this.globalState.canvas,
-                    this.globalState.drawBones,
-                    this.globalState.captureMode
+                    this.globalState.Canvas,
+                    this.globalState.DrawBones,
+                    this.globalState.CaptureMode
                 );
             }
         }

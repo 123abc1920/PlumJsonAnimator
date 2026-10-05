@@ -2,11 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Commands;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
@@ -32,7 +35,19 @@ namespace PlumJsonAnimator.Models
         }
         public MetaData MetaData { get; set; } = new MetaData();
 
-        public Mode currentMode;
+        private Mode _currentMode;
+        public Mode CurrentMode
+        {
+            get => _currentMode;
+            set
+            {
+                if (_currentMode != value)
+                {
+                    _currentMode = value;
+                    OnPropertyChanged(nameof(CurrentMode));
+                }
+            }
+        }
 
         public Skeleton? MainSkeleton { get; set; } = null;
         public ObservableCollection<Slot> Slots { get; set; } = new ObservableCollection<Slot>();
@@ -44,11 +59,12 @@ namespace PlumJsonAnimator.Models
         private Skin _currentSkin;
         private Animation? _currentAnimation;
 
-        private ProjectSettings projectSettings;
+        private ProjectSettings _projectSettings;
 
         private GlobalState _globalState;
         private Interpolation _interpolation;
         private LocalizationService _localizationService;
+        private EasingFactory _easingFactory;
 
         public Skin CurrentSkin
         {
@@ -58,11 +74,8 @@ namespace PlumJsonAnimator.Models
                 if (_currentSkin != value)
                 {
                     _currentSkin = value;
+                    _currentAnimation?.UpdateAllDrawOrder();
                     OnPropertyChanged(nameof(CurrentSkin));
-                    foreach (Bone b in MainSkeleton!.Bones)
-                    {
-                        b.UpdateSlots();
-                    }
                 }
             }
         }
@@ -75,6 +88,7 @@ namespace PlumJsonAnimator.Models
                 if (_currentAnimation != value)
                 {
                     _currentAnimation = value;
+                    _currentAnimation?.UpdateAllDrawOrder();
                     OnPropertyChanged(nameof(CurrentAnimation));
                 }
             }
@@ -97,53 +111,43 @@ namespace PlumJsonAnimator.Models
         public Project(
             GlobalState globalState,
             Interpolation interpolation,
-            LocalizationService localizationService
+            LocalizationService localizationService,
+            EasingFactory easingFactory
         )
         {
             MainSkeleton = new Skeleton(globalState, localizationService);
-            Animations.Add(new Animation(globalState, interpolation));
+            Animations.Add(new Animation(globalState, interpolation, easingFactory));
             CurrentAnimation = Animations[0];
             Skins.Add(new Skin(globalState));
             CurrentSkin = Skins[0];
 
-            this.currentMode = new NoMode(globalState);
+            CurrentMode = new NoMode(globalState);
 
-            this._globalState = globalState;
-            this._interpolation = interpolation;
-            this._localizationService = localizationService;
-        }
-
-        public Project(
-            string name,
-            string path,
-            GlobalState globalState,
-            Interpolation interpolation,
-            LocalizationService localizationService
-        )
-            : this(globalState, interpolation, localizationService)
-        {
-            this.Name = name;
-            this.ProjectPath = path;
+            _globalState = globalState;
+            _interpolation = interpolation;
+            _localizationService = localizationService;
+            _easingFactory = easingFactory;
         }
 
         public Project(
             ProjectSettings projectSettings,
             GlobalState globalState,
             Interpolation interpolation,
-            LocalizationService localizationService
+            LocalizationService localizationService,
+            EasingFactory easingFactory
         )
-            : this(globalState, interpolation, localizationService)
+            : this(globalState, interpolation, localizationService, easingFactory)
         {
-            this.projectSettings = projectSettings;
-            this.SetupProjectSettings(projectSettings.GetSettingsData());
+            _projectSettings = projectSettings;
+            SetupProjectSettings(projectSettings.GetSettingsData());
         }
 
         public void SetupProjectSettings(SettingsData settingsData)
         {
-            this.ProjectPath = settingsData.Path;
-            this.Name = settingsData.Name;
-            this.MetaData.Spine = settingsData.Spine;
-            this.Code = settingsData.Anim;
+            ProjectPath = settingsData.Path;
+            Name = settingsData.Name;
+            MetaData.Spine = settingsData.Spine;
+            Code = settingsData.Anim;
         }
 
         public Animation? GetCurrentAnimation()
@@ -154,46 +158,47 @@ namespace PlumJsonAnimator.Models
         public Animation AddAnimation()
         {
             Animation newAnimation = new Animation(
-                this._globalState,
-                this._interpolation,
+                _globalState,
+                _interpolation,
+                _easingFactory,
                 $"anim{Counter.GenerateNamePostfix()}"
             );
-            this.Animations.Add(newAnimation);
+            Animations.Add(newAnimation);
             return newAnimation;
         }
 
         public void RestoreAnimation(Animation animation)
         {
-            this.Animations.Add(animation);
+            Animations.Add(animation);
         }
 
         public void DeleteAnimation(Animation animation)
         {
-            if (this.Animations.Count > 1)
+            if (Animations.Count > 1)
             {
-                this.Animations.Remove(animation);
-                CurrentAnimation = this.Animations[0];
+                Animations.Remove(animation);
+                CurrentAnimation = Animations[0];
             }
         }
 
         public Skin AddSkin()
         {
-            Skin newSkin = new Skin($"skin{Counter.GenerateNamePostfix()}", this._globalState);
-            this.Skins.Add(newSkin);
+            Skin newSkin = new Skin($"skin{Counter.GenerateNamePostfix()}", _globalState);
+            Skins.Add(newSkin);
             return newSkin;
         }
 
         public void RestoreSkin(Skin skin)
         {
-            this.Skins.Add(skin);
+            Skins.Add(skin);
         }
 
         public void DeleteSkin(Skin skin)
         {
-            if (this.Skins.Count > 1)
+            if (Skins.Count > 1)
             {
-                this.Skins.Remove(skin);
-                CurrentSkin = this.Skins[0];
+                Skins.Remove(skin);
+                CurrentSkin = Skins[0];
             }
         }
 
@@ -213,15 +218,15 @@ namespace PlumJsonAnimator.Models
         public void DrawSlots(Canvas c)
         {
             CurrentSkin.DrawSkin(c);
-            if (this._globalState.currentBone?.IsBone == false)
+            if (_globalState.CurrentBone?.IsBone == false)
             {
-                ((Slot)this._globalState.currentBone).DrawSlotSelection(c);
+                ((Slot)_globalState.CurrentBone).DrawSlotSelection(c);
             }
         }
 
         public string GetProjectPath()
         {
-            return Path.Combine(this.ProjectPath, this.Name);
+            return Path.Combine(ProjectPath, Name);
         }
 
         /// <summary>
@@ -229,7 +234,7 @@ namespace PlumJsonAnimator.Models
         /// </summary>
         public MetaData GenerateMetaData()
         {
-            return this.MetaData;
+            return MetaData;
         }
 
         /// <summary>
@@ -278,12 +283,12 @@ namespace PlumJsonAnimator.Models
         /// </summary>
         public void AddRes(Res res)
         {
-            this.Resources.Add(res);
+            Resources.Add(res);
         }
 
         public Res? GetResByName(string name)
         {
-            foreach (Res res in this.Resources)
+            foreach (Res res in Resources)
             {
                 if (res.Name == name)
                 {
@@ -297,8 +302,8 @@ namespace PlumJsonAnimator.Models
         {
             List<SlotAttach> result = new List<SlotAttach>();
 
-            this.Slots.Remove(slot);
-            foreach (Skin s in this.Skins)
+            Slots.Remove(slot);
+            foreach (Skin s in Skins)
             {
                 if (s.ContainsSlot(slot) == true)
                 {
@@ -318,9 +323,9 @@ namespace PlumJsonAnimator.Models
 
             List<BoneAnim> result = new List<BoneAnim>();
 
-            this.MainSkeleton?.Bones.Remove(bone);
+            MainSkeleton?.Bones.Remove(bone);
             bone?.Parent?.Children.Remove(bone);
-            foreach (Animation a in this.Animations)
+            foreach (Animation a in Animations)
             {
                 if (a.ContainsBone(bone))
                 {
@@ -337,7 +342,7 @@ namespace PlumJsonAnimator.Models
             if (bone == null)
                 return;
 
-            this.MainSkeleton?.Bones.Add(bone);
+            MainSkeleton?.Bones.Add(bone);
 
             if (parent != null)
             {
@@ -355,17 +360,17 @@ namespace PlumJsonAnimator.Models
             if (bone == null)
                 return;
 
-            this.MainSkeleton.Bones.Add(bone);
+            MainSkeleton.Bones.Add(bone);
 
             foreach (Slot s in bone.Slots)
             {
-                this.Slots.Add(s);
+                Slots.Add(s);
             }
         }
 
         public void AddSlotToProject(Slot s, Bone b)
         {
-            this.Slots.Add(s);
+            Slots.Add(s);
         }
 
         /// <summary>
@@ -381,7 +386,7 @@ namespace PlumJsonAnimator.Models
             // recreate bones
             List<Bone> bonesToRemove = new List<Bone>();
 
-            foreach (Bone b in this.MainSkeleton!.Bones)
+            foreach (Bone b in MainSkeleton!.Bones)
             {
                 if (bones.TryGetValue(b.Name, out BoneData? boneData))
                 {
@@ -392,7 +397,7 @@ namespace PlumJsonAnimator.Models
                         b.BaseA = boneData.Rotation;
                         b.ShearX = boneData.ShearX;
                         b.ShearY = boneData.ShearY;
-                        b.Parent = this.MainSkeleton.GetBoneByName(boneData.Parent);
+                        b.Parent = MainSkeleton.GetBoneByName(boneData.Parent);
                     }
                     bones.Remove(b.Name);
                 }
@@ -404,13 +409,13 @@ namespace PlumJsonAnimator.Models
 
             foreach (var bone in bones)
             {
-                Bone b = new Bone(this._globalState, bone.Key, this._localizationService);
+                Bone b = new Bone(_globalState, bone.Key, _localizationService);
                 b.BaseX = bone.Value.X;
                 b.BaseY = bone.Value.Y;
                 b.BaseA = bone.Value.Rotation;
                 b.ShearX = bone.Value.ShearX;
                 b.ShearY = bone.Value.ShearY;
-                this.MainSkeleton.AddBone(b);
+                MainSkeleton.AddBone(b);
             }
 
             foreach (var bone in bones)
@@ -436,28 +441,27 @@ namespace PlumJsonAnimator.Models
 
             foreach (var bone in bonesToRemove)
             {
-                this.MainSkeleton.Bones.Remove(bone);
+                MainSkeleton.Bones.Remove(bone);
             }
 
-            if (this.MainSkeleton.Bones.Count <= 0)
+            if (MainSkeleton.Bones.Count <= 0)
             {
-                this.MainSkeleton.Bones.Add(new Bone(this._globalState, this._localizationService));
-                this.MainSkeleton.RootBones = new ObservableCollection<Bone>()
-                {
-                    this.MainSkeleton.Bones[0],
-                };
+                MainSkeleton.Bones.Add(new Bone(_globalState, _localizationService));
+                MainSkeleton.RootBones = new ObservableCollection<Bone>() { MainSkeleton.Bones[0] };
             }
 
             // recreate slots
             List<Slot> slotsToRemove = new List<Slot>();
 
-            foreach (Slot slot in this.Slots)
+            foreach (Slot slot in Slots.ToList())
             {
                 if (slots.TryGetValue(slot.Name, out SlotData slotData))
                 {
                     if (slot.GenerateJSONData() != slotData)
                     {
-                        slot.BoundedBone = this.MainSkeleton.GetBoneByName(slotData.Bone);
+                        slot.BoundedBone?.Slots.Remove(slot);
+
+                        slot.BoundedBone = MainSkeleton.GetBoneByName(slotData.Bone);
                         slot.BoundedBone?.Slots.Add(slot);
                     }
                     slots.Remove(slot.Name);
@@ -471,24 +475,37 @@ namespace PlumJsonAnimator.Models
             foreach (var slot in slots)
             {
                 Slot s = new Slot(
-                    this._globalState,
+                    _globalState,
                     slot.Key,
-                    this.MainSkeleton.GetBoneByName(slot.Value.Bone)
+                    MainSkeleton.GetBoneByName(slot.Value.Bone)
                 );
-                this.MainSkeleton.GetBoneByName(slot.Value.Bone)?.Slots.Add(s);
-                this.Slots.Add(s);
+
+                var targetBone = MainSkeleton.GetBoneByName(slot.Value.Bone);
+                if (targetBone != null && !targetBone.Slots.Contains(s))
+                {
+                    targetBone.Slots.Add(s);
+                }
+
+                Slots.Add(s);
             }
 
             foreach (var slot in slotsToRemove)
             {
                 slot.BoundedBone?.Slots.Remove(slot);
-                this.Slots.Remove(slot);
+                Slots.Remove(slot);
             }
 
+            _globalState.CurrentBone = null;
+
             // recreate animations
+            foreach (Slot s in _globalState.CurrentProject.Slots)
+            {
+                s.drawOrders.Clear();
+            }
+
             List<Animation> animationsToRemove = new List<Animation>();
 
-            foreach (Animation animation in this.Animations)
+            foreach (Animation animation in Animations)
             {
                 if (animations.TryGetValue(animation.Name, out AnimationData animationData))
                 {
@@ -498,10 +515,15 @@ namespace PlumJsonAnimator.Models
                         foreach (string name in animationData.Bones.Keys)
                         {
                             var boneAnimation = animationData.Bones[name];
-                            Bone bone = this.MainSkeleton.GetBoneByName(name);
+                            Bone bone = MainSkeleton.GetBoneByName(name);
                             foreach (IKeyframeTypeData keyframe in boneAnimation.rotate)
                             {
-                                animation.RotateBone(bone, keyframe.Value, keyframe.Time);
+                                animation.RotateBone(
+                                    bone,
+                                    keyframe.Value,
+                                    keyframe.Time,
+                                    keyframe.Curve
+                                );
                             }
                             foreach (IKeyframeTypeData keyframe in boneAnimation.translate)
                             {
@@ -509,16 +531,29 @@ namespace PlumJsonAnimator.Models
                                     bone,
                                     keyframe.X,
                                     keyframe.Y,
-                                    keyframe.Time
+                                    keyframe.Time,
+                                    keyframe.Curve
                                 );
                             }
                             foreach (IKeyframeTypeData keyframe in boneAnimation.shear)
                             {
-                                animation.ShearBone(bone, keyframe.X, keyframe.Y, keyframe.Time);
+                                animation.ShearBone(
+                                    bone,
+                                    keyframe.X,
+                                    keyframe.Y,
+                                    keyframe.Time,
+                                    keyframe.Curve
+                                );
                             }
                             foreach (IKeyframeTypeData keyframe in boneAnimation.scale)
                             {
-                                animation.ScaleBone(bone, keyframe.X, keyframe.Y, keyframe.Time);
+                                animation.ScaleBone(
+                                    bone,
+                                    keyframe.X,
+                                    keyframe.Y,
+                                    keyframe.Time,
+                                    keyframe.Curve
+                                );
                             }
                         }
                         if (animationData.DrawOrder != null && animationData != null)
@@ -527,7 +562,7 @@ namespace PlumJsonAnimator.Models
                             {
                                 foreach (DrawOrderOffset drawOrderOffset in item.Offsets)
                                 {
-                                    Slot s = this!.GetSlotByName(drawOrderOffset.Slot);
+                                    Slot s = GetSlotByName(drawOrderOffset.Slot);
                                     if (s != null)
                                     {
                                         if (s.drawOrders.ContainsKey((double)item.Time))
@@ -560,28 +595,47 @@ namespace PlumJsonAnimator.Models
 
             foreach (var animation in animations)
             {
-                Animation a = new Animation(this._globalState, this._interpolation, animation.Key);
+                Animation a = new Animation(
+                    _globalState,
+                    _interpolation,
+                    _easingFactory,
+                    animation.Key
+                );
                 a.BoneAnimationBinding = new Dictionary<Bone, BoneAnimation>();
                 var animationData = animation.Value;
 
                 foreach (string name in animationData.Bones.Keys)
                 {
                     var boneAnimation = animationData.Bones[name];
-                    Bone bone = this.MainSkeleton.GetBoneByName(name);
+                    Bone bone = MainSkeleton.GetBoneByName(name);
                     foreach (IKeyframeTypeData keyframe in boneAnimation.rotate)
                     {
-                        a.RotateBone(bone, keyframe.Value, keyframe.Time);
+                        a.RotateBone(bone, keyframe.Value, keyframe.Time, keyframe.Curve);
                     }
                     foreach (IKeyframeTypeData keyframe in boneAnimation.translate)
                     {
-                        a.TranslateBone(bone, keyframe.X, keyframe.Y, keyframe.Time);
+                        a.TranslateBone(
+                            bone,
+                            keyframe.X,
+                            keyframe.Y,
+                            keyframe.Time,
+                            keyframe.Curve
+                        );
+                    }
+                    foreach (IKeyframeTypeData keyframe in boneAnimation.shear)
+                    {
+                        a.ShearBone(bone, keyframe.X, keyframe.Y, keyframe.Time, keyframe.Curve);
+                    }
+                    foreach (IKeyframeTypeData keyframe in boneAnimation.scale)
+                    {
+                        a.ScaleBone(bone, keyframe.X, keyframe.Y, keyframe.Time, keyframe.Curve);
                     }
                 }
                 foreach (DrawOrderItem item in animationData.DrawOrder)
                 {
                     foreach (DrawOrderOffset drawOrderOffset in item.Offsets)
                     {
-                        Slot s = this!.GetSlotByName(drawOrderOffset.Slot);
+                        Slot s = GetSlotByName(drawOrderOffset.Slot);
                         if (s != null)
                         {
                             if (s.drawOrders.ContainsKey((double)item.Time))
@@ -602,24 +656,24 @@ namespace PlumJsonAnimator.Models
                         }
                     }
                 }
-                this.Animations.Add(a);
+                Animations.Add(a);
             }
 
             foreach (var animation in animationsToRemove)
             {
-                this.Animations.Remove(animation);
+                Animations.Remove(animation);
             }
 
             if (Animations.Count <= 0)
             {
-                Animations.Add(new Animation(this._globalState, this._interpolation));
+                Animations.Add(new Animation(_globalState, _interpolation, _easingFactory));
             }
-            this.CurrentAnimation = Animations[0];
+            CurrentAnimation = Animations[0];
 
             // recreate skins and slot-bone bounding
             List<Skin> skinsToRemove = new List<Skin>();
 
-            foreach (Skin skin in this.Skins)
+            foreach (Skin skin in Skins)
             {
                 if (skins.TryGetValue(skin.Name, out SkinData skinData))
                 {
@@ -635,10 +689,10 @@ namespace PlumJsonAnimator.Models
                             {
                                 var attach = attachs[attachName];
                                 ImageAttachment a = new ImageAttachment(
-                                    (ImageRes)this.GetResByName(attach.Name),
+                                    (ImageRes)GetResByName(attach.Name),
                                     attach
                                 );
-                                skin.BindSlotAttachment(this.GetSlotByName(slotName), a);
+                                skin.BindSlotAttachment(GetSlotByName(slotName), a);
                             }
                         }
                     }
@@ -652,7 +706,7 @@ namespace PlumJsonAnimator.Models
 
             foreach (var skin in skins)
             {
-                Skin s = new Skin(skin.Key, this._globalState);
+                Skin s = new Skin(skin.Key, _globalState);
                 var skinData = skin.Value;
                 s.SlotAttachmentBinding = new Dictionary<Slot, Attachment>();
                 foreach (string slotName in skinData.Attachments.Keys)
@@ -662,30 +716,30 @@ namespace PlumJsonAnimator.Models
                     {
                         var attach = attachs[attachName];
                         ImageAttachment a = new ImageAttachment(
-                            (ImageRes)this.GetResByName(attach.Name),
+                            (ImageRes)GetResByName(attach.Name),
                             attach
                         );
-                        s.BindSlotAttachment(this.GetSlotByName(slotName), a);
+                        s.BindSlotAttachment(GetSlotByName(slotName), a);
                     }
                 }
-                this.Skins.Add(s);
+                Skins.Add(s);
             }
 
             foreach (var skin in skinsToRemove)
             {
-                this.Skins.Remove(skin);
+                Skins.Remove(skin);
             }
 
             if (Skins.Count <= 0)
             {
-                Skins.Add(new Skin(this._globalState));
+                Skins.Add(new Skin(_globalState));
             }
-            this.CurrentSkin = Skins[0];
+            CurrentSkin = Skins[0];
         }
 
         public bool IsUniqRes(string name)
         {
-            foreach (Res r in this.Resources)
+            foreach (Res r in Resources)
             {
                 if (r.Name == name)
                 {
@@ -697,7 +751,7 @@ namespace PlumJsonAnimator.Models
 
         public bool IsUniqBone(string name)
         {
-            foreach (Bone bone in this.MainSkeleton.Bones)
+            foreach (Bone bone in MainSkeleton.Bones)
             {
                 if (bone.Name == name)
                 {
@@ -709,7 +763,7 @@ namespace PlumJsonAnimator.Models
 
         public bool IsUniqSlot(string name)
         {
-            foreach (Slot slot in this.Slots)
+            foreach (Slot slot in Slots)
             {
                 if (slot.Name == name)
                 {
@@ -721,7 +775,7 @@ namespace PlumJsonAnimator.Models
 
         public bool IsUniqAttach(string name)
         {
-            foreach (Skin skin in this.Skins)
+            foreach (Skin skin in Skins)
             {
                 if (skin.IsAttachUniq(name) == false)
                 {
@@ -733,26 +787,26 @@ namespace PlumJsonAnimator.Models
 
         public void SaveProjectSettings()
         {
-            this.projectSettings.SaveSettings();
+            _projectSettings.SaveSettings();
         }
 
         public void SaveProject(JsonCode jsonCode)
         {
             string project = JsonConvert.SerializeObject(
-                jsonCode.generateJSONData(this),
+                jsonCode.GenerateJSONData(this),
                 _globalState.jsonSettings
             );
-            projectSettings.WriteProjectJSON(project);
+            _projectSettings.WriteProjectJSON(project);
         }
 
         public void AutoSaveProjectSettings(JsonCode jsonCode)
         {
             string project = JsonConvert.SerializeObject(
-                jsonCode.generateJSONData(this),
-                this._globalState.jsonSettings
+                jsonCode.GenerateJSONData(this),
+                _globalState.jsonSettings
             );
 
-            this.projectSettings.WriteAutoSave(project);
+            _projectSettings.WriteAutoSave(project);
         }
     }
 
