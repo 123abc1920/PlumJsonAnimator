@@ -29,6 +29,8 @@ namespace PlumJsonAnimator.Common.Timeline
         private const double KeyframeHeight = 18;
         private const double BaseBezierDelta = 0.1;
         private const int MouseMoveThreshold = 5;
+        private const int MinZoom = 1;
+        private const int MaxZoom = 10;
 
         private double _timeStep;
         private bool _isDraggingPlayhead = false;
@@ -63,9 +65,7 @@ namespace PlumJsonAnimator.Common.Timeline
 
         private static int CoerceZoom(AvaloniaObject obj, int value)
         {
-            const int minZoom = 1;
-            const int maxZoom = 10;
-            return Math.Clamp(value, minZoom, maxZoom);
+            return Math.Clamp(value, MinZoom, MaxZoom);
         }
 
         public static readonly StyledProperty<int> FPSProperty = AvaloniaProperty.Register<

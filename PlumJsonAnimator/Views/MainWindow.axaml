@@ -615,6 +615,8 @@
                                             Padding="0"
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"
+                                            Command="{Binding SetEasingModeCommand}"
+                                            CommandParameter="bezier"
                                             IsChecked="{Binding EasingMode, Converter={StaticResource EasingTypeToBoolConverter}, ConverterParameter='bezier', Mode=TwoWay}">
                                             <iconPacks:PackIconBootstrapIcons Kind="Arrow90degRight" />
                                         </ToggleButton>
@@ -625,6 +627,8 @@
                                             Padding="0"
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"
+                                            Command="{Binding SetEasingModeCommand}"
+                                            CommandParameter="stepped"
                                             IsChecked="{Binding EasingMode, Converter={StaticResource EasingTypeToBoolConverter}, ConverterParameter='stepped', Mode=TwoWay}">
                                             <iconPacks:PackIconBootstrapIcons Kind="ArrowRight" />
                                         </ToggleButton>
@@ -635,6 +639,8 @@
                                             Padding="0"
                                             HorizontalContentAlignment="Center"
                                             VerticalContentAlignment="Center"
+                                            Command="{Binding SetEasingModeCommand}"
+                                            CommandParameter="linear"
                                             IsChecked="{Binding EasingMode, Converter={StaticResource EasingTypeToBoolConverter}, ConverterParameter='linear', Mode=TwoWay}">
                                             <iconPacks:PackIconBootstrapIcons Kind="ArrowUpRight" />
                                         </ToggleButton>
@@ -652,9 +658,9 @@
                                             Background="Transparent"
                                             CurrentAnimation="{Binding CurrentProject.CurrentAnimation}"
                                             CurrentBone="{Binding CurrentBone}"
+                                            CurrentEasingMode="{Binding EasingMode, Mode=TwoWay}"
                                             CurrentMode="{Binding CurrentProject.CurrentMode}"
                                             CurrentTime="{Binding CurrentTime, Mode=TwoWay}"
-                                            CurrentEasingMode="{Binding EasingMode, Mode=TwoWay}"
                                             FPS="{Binding FPS}"
                                             PixelsPerSecond="100"
                                             TotalDuration="60"

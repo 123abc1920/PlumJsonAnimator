@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Input;
 using Avalonia.Controls;
 using Microsoft.Extensions.DependencyInjection;
@@ -181,13 +180,6 @@ public partial class MainWindowViewModel : ViewModelBase
             if (_easingMode != value)
             {
                 _easingMode = value;
-
-                CurrentProject?.CurrentAnimation?.ChangeCurrentEasingMode(
-                    CurrentBone,
-                    _easingMode,
-                    CurrentProject.CurrentMode.Type
-                );
-
                 OnPropertyChanged();
             }
         }
@@ -386,6 +378,7 @@ public partial class MainWindowViewModel : ViewModelBase
     public ICommand PlayAnim { get; }
     public ICommand ZoomCanvasComm { get; }
     public ICommand ToggleTransformModeCommand { get; }
+    public ICommand SetEasingModeCommand { get; }
     public ICommand Undo { get; }
     public ICommand Redo { get; }
 
@@ -582,6 +575,14 @@ public partial class MainWindowViewModel : ViewModelBase
                     this.ZoomCanvas -= ZOOM_STEP;
                 }
             }
+        });
+        SetEasingModeCommand = new Command(_ =>
+        {
+            CurrentProject?.CurrentAnimation?.ChangeCurrentEasingMode(
+                CurrentBone,
+                _easingMode,
+                CurrentProject.CurrentMode.Type
+            );
         });
 
         Undo = new Command(_ =>
