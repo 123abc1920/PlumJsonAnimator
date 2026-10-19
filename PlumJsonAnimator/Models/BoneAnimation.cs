@@ -41,8 +41,8 @@ namespace PlumJsonAnimator.Models
 
         public BoneAnimation(GlobalState globalState, Interpolation interpolation)
         {
-            this._globalState = globalState;
-            this._interpolation = interpolation;
+            _globalState = globalState;
+            _interpolation = interpolation;
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace PlumJsonAnimator.Models
             if (_translateKeyframes.ContainsKey(time))
             {
                 _translateKeyframes[time] = new TranslateKeyFrame(
-                    this._globalState,
+                    _globalState,
                     time,
                     x,
                     y,
@@ -67,7 +67,7 @@ namespace PlumJsonAnimator.Models
             {
                 _translateKeyframes.Add(
                     time,
-                    new TranslateKeyFrame(this._globalState, time, x, y, easing)
+                    new TranslateKeyFrame(_globalState, time, x, y, easing)
                 );
             }
         }
@@ -83,7 +83,7 @@ namespace PlumJsonAnimator.Models
             if (_rotateKeyframes.ContainsKey(time))
             {
                 _rotateKeyframes[time] = new RotateKeyFrame(
-                    this._globalState,
+                    _globalState,
                     time,
                     value,
                     easing
@@ -93,7 +93,7 @@ namespace PlumJsonAnimator.Models
             {
                 _rotateKeyframes.Add(
                     time,
-                    new RotateKeyFrame(this._globalState, time, value, easing)
+                    new RotateKeyFrame(_globalState, time, value, easing)
                 );
             }
         }
@@ -548,7 +548,7 @@ namespace PlumJsonAnimator.Models
                 {
                     var currentSegment = _shearKeyframes.Get(_shearStart);
                     FindSegment(time, TransformModeTypes.SHEAR);
-                    double t = this._interpolation.FindInterpolateParam(
+                    double t = _interpolation.FindInterpolateParam(
                         _shearEnd - _shearStart,
                         time - _shearStart,
                         currentSegment.Curve
@@ -690,7 +690,7 @@ namespace PlumJsonAnimator.Models
 
         public string GenerateCode()
         {
-            return JsonConvert.SerializeObject(GenerateJSONData(), this._globalState.jsonSettings);
+            return JsonConvert.SerializeObject(GenerateJSONData(), _globalState.jsonSettings);
         }
 
         /// <summary>

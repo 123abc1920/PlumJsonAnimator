@@ -47,9 +47,9 @@ namespace PlumJsonAnimator.Services
 
             var fileTypeFilter = new FilePickerFileType[]
             {
-                new($"*{this._globalState.ProgramExt}")
+                new($"*{_globalState.ProgramExt}")
                 {
-                    Patterns = new[] { $"*{this._globalState.ProgramExt}" },
+                    Patterns = new[] { $"*{_globalState.ProgramExt}" },
                 },
             };
 
@@ -70,14 +70,16 @@ namespace PlumJsonAnimator.Services
         {
             if (projectName != null && projectPath != null)
             {
-                this._globalState.CurrentProject?.SaveProjectSettings();
+                _globalState.CurrentProject?.SaveProjectSettings();
 
                 ProjectSettings projectSettings = new ProjectSettings(
-                    this._appSettings,
-                    this._globalState
+                    projectPath,
+                    projectName,
+                    _appSettings,
+                    _globalState
                 );
 
-                this._appSettings.ChangeProject(projectSettings.GetSettingsData());
+                _appSettings.ChangeProject(projectSettings.GetSettingsData());
 
                 Project newProject = new Project(
                     projectSettings,
@@ -129,8 +131,8 @@ namespace PlumJsonAnimator.Services
             }
 
             string projectPath = Path.Combine(
-                this._globalState.CurrentProject!.ProjectPath,
-                this._globalState.CurrentProject.Name
+                _globalState.CurrentProject!.ProjectPath,
+                _globalState.CurrentProject.Name
             );
             string resDir = Path.Combine(projectPath, "res");
 
@@ -169,7 +171,7 @@ namespace PlumJsonAnimator.Services
             catch (Exception ex)
             {
                 Console.WriteLine(
-                    $"{this._localizationService.GetMessage(LocalizationConsts.DELETE_ERROR)}: {ex.Message}"
+                    $"{_localizationService.GetMessage(LocalizationConsts.DELETE_ERROR)}: {ex.Message}"
                 );
                 return false;
             }
@@ -215,7 +217,7 @@ namespace PlumJsonAnimator.Services
                 Directory.CreateDirectory(newDir);
 
                 var files = Directory.GetFiles(oldDir);
-                var options = this._globalState.GetParallelOptions();
+                var options = _globalState.GetParallelOptions();
                 Parallel.ForEach(
                     files,
                     options,
@@ -262,7 +264,7 @@ namespace PlumJsonAnimator.Services
                     {
                         return new ImageRes(
                             this,
-                            this._globalState,
+                            _globalState,
                             filePath,
                             Path.GetFileNameWithoutExtension(filePath),
                             Path.GetExtension(filePath)
@@ -278,7 +280,7 @@ namespace PlumJsonAnimator.Services
             catch (Exception ex)
             {
                 Console.WriteLine(
-                    $"{this._localizationService.GetMessage(LocalizationConsts.ERROR)}: {ex.Message}"
+                    $"{_localizationService.GetMessage(LocalizationConsts.ERROR)}: {ex.Message}"
                 );
             }
         }

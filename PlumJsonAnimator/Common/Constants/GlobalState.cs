@@ -76,23 +76,23 @@ namespace PlumJsonAnimator.Common.Constants
         {
             set
             {
-                if (this.lastSaveTime != value)
+                if (lastSaveTime != value)
                 {
-                    this.lastSaveTime = value;
+                    lastSaveTime = value;
                     OnPropertyChanged(nameof(LastSaveTime));
                 }
             }
-            get => this.lastSaveTime;
+            get => lastSaveTime;
         }
 
         public CaptureArea? captureArea;
 
         public GlobalState(LocalizationService localizationService)
         {
-            this.jsonError = new JsonError(localizationService);
+            jsonError = new JsonError(localizationService);
 
-            this.SettingsFileName = $"settings{this.ProgramExt}";
-            this.AutoSaveFile = $"autosave{this.ProgramExt}";
+            SettingsFileName = $"settings{ProgramExt}";
+            AutoSaveFile = $"autosave{ProgramExt}";
         }
 
         public ParallelOptions GetParallelOptions()
@@ -104,7 +104,7 @@ namespace PlumJsonAnimator.Common.Constants
 
         public IImmutableBrush GetDotBoneColor(Bone b)
         {
-            if (this.CurrentBone == b && this.CurrentBone.IsBone == true)
+            if (CurrentBone == b && CurrentBone.IsBone == true)
             {
                 return AppColors.Red;
             }
@@ -116,7 +116,7 @@ namespace PlumJsonAnimator.Common.Constants
 
         public IImmutableBrush GetLineBoneColor(Bone b)
         {
-            if (this.CurrentBone == b && this.CurrentBone.IsBone == true)
+            if (CurrentBone == b && CurrentBone.IsBone == true)
             {
                 return AppColors.Blue;
             }
@@ -128,9 +128,9 @@ namespace PlumJsonAnimator.Common.Constants
 
         public bool IsSlotSelected(Slot slot)
         {
-            if (this.CurrentBone != null)
+            if (CurrentBone != null)
             {
-                if (!this.CurrentBone.IsBone && this.CurrentBone == slot)
+                if (!CurrentBone.IsBone && CurrentBone == slot)
                 {
                     return true;
                 }

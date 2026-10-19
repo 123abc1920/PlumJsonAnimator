@@ -9,17 +9,17 @@ class DeleteAnimationCommand : ICommand
 
     public DeleteAnimationCommand(Project project, Animation animation)
     {
-        this._project = project;
-        this._animation = animation;
+        _project = project;
+        _animation = animation;
     }
 
     public void Execute()
     {
-        _project?.DeleteAnimation(this._animation);
+        _project?.DeleteAnimation(_animation);
     }
 
     public void Undo()
     {
-        _project?.RestoreAnimation(this._animation);
+        _project?.RestoreAnimation(_animation);
     }
 }

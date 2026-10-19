@@ -289,7 +289,7 @@ namespace PlumJsonAnimator.Common.Timeline
             // ----------------------------------------------------------------------------------
 
             double step = 1.0 / FPS;
-            this._timeStep = step;
+            _timeStep = step;
 
             for (double t = 0; t <= duration; t += step)
             {
@@ -551,7 +551,7 @@ namespace PlumJsonAnimator.Common.Timeline
                     double frameDuration = 1.0 / FPS;
                     int frameNumber = (int)Math.Round(CurrentTime / frameDuration);
                     CurrentTime = frameNumber * frameDuration;
-                    CurrentTime = Math.Round(CurrentTime / this._timeStep) * this._timeStep;
+                    CurrentTime = Math.Round(CurrentTime / _timeStep) * _timeStep;
 
                     InvalidateVisual();
                 }

@@ -75,8 +75,8 @@ public class PlumApp
 
         AppSettings.ReadSettings();
         GlobalState.captureArea = AppSettings.CreateCaptureArea(
-            this.GlobalState.canvasWidth,
-            this.GlobalState.canvasHeight
+            GlobalState.canvasWidth,
+            GlobalState.canvasHeight
         );
         GlobalState.lastSaveTime = DateTime.Now;
 
@@ -101,16 +101,16 @@ public class PlumApp
         _fileManager.LoadRes(GlobalState.CurrentProject);
 
         ValidResult validateResult = _jsonCode.Regenerate(GlobalState.CurrentProject, true);
-        this.GlobalState.jsonError.IsOk = validateResult.IsOk;
+        GlobalState.jsonError.IsOk = validateResult.IsOk;
 
-        this._historyManager.Clear();
+        _historyManager.Clear();
 
         project.SaveProjectSettings();
     }
 
     public async void OpenProject(Window win)
     {
-        var path = await this._fileManager.OpenProjectDialog(win);
+        var path = await _fileManager.OpenProjectDialog(win);
 
         if (path == "" || path == null)
             return;
@@ -121,7 +121,7 @@ public class PlumApp
         Project newProject = new Project(
             projectSettings,
             GlobalState,
-            this._interpolation,
+            _interpolation,
             Localization,
             _easingFactory
         );
@@ -133,22 +133,22 @@ public class PlumApp
 
     public bool CanGenerateProject()
     {
-        return this._canvasUpdater.CanGenerateProject();
+        return _canvasUpdater.CanGenerateProject();
     }
 
     public void RegenerateProject()
     {
-        this._jsonCode.Regenerate(GlobalState.CurrentProject, true);
+        _jsonCode.Regenerate(GlobalState.CurrentProject, true);
     }
 
     public ExportResult ExportSpineJson(string outFolder)
     {
-        return this._jsonExport.exportSpineJson(outFolder, GlobalState.CurrentProject);
+        return _jsonExport.exportSpineJson(outFolder, GlobalState.CurrentProject);
     }
 
     public ExportResult ImportSpineJson(string inputFile)
     {
-        return this._jsonExport.importSpineJson(inputFile, GlobalState.CurrentProject);
+        return _jsonExport.importSpineJson(inputFile, GlobalState.CurrentProject);
     }
 
     public string Prettify(string text)
@@ -157,12 +157,12 @@ public class PlumApp
         {
             return "";
         }
-        return this._prettify.prettify(text);
+        return _prettify.prettify(text);
     }
 
     public void RunAnimation()
     {
-        this._engine.runAnimation(GlobalState.CurrentProject?.CurrentAnimation);
+        _engine.runAnimation(GlobalState.CurrentProject?.CurrentAnimation);
     }
 
     public string GetMessage(LocalizationConsts constStr)
@@ -172,24 +172,24 @@ public class PlumApp
 
     public bool SaveProject()
     {
-        GlobalState.CurrentProject?.SaveProject(this._jsonCode);
+        GlobalState.CurrentProject?.SaveProject(_jsonCode);
         return true;
     }
 
     public void AddRes(string[] paths)
     {
-        this._fileManager.GetProjectDir(GlobalState.CurrentProject);
+        _fileManager.GetProjectDir(GlobalState.CurrentProject);
 
         foreach (string p in paths)
         {
             string resName = "img" + GlobalState.CurrentProject?.Resources.Count.ToString();
-            string ext = this._fileManager.CopyRes(resName, p, GlobalState.CurrentProject);
+            string ext = _fileManager.CopyRes(resName, p, GlobalState.CurrentProject);
             if (ext != "")
             {
                 Res image = new ImageRes(
-                    this._fileManager,
-                    this.GlobalState,
-                    this._fileManager.GetResDir(GlobalState.CurrentProject, $"{resName}{ext}"),
+                    _fileManager,
+                    GlobalState,
+                    _fileManager.GetResDir(GlobalState.CurrentProject, $"{resName}{ext}"),
                     resName,
                     ext
                 );
@@ -207,9 +207,9 @@ public class PlumApp
                 bone,
                 GlobalState.CurrentProject,
                 res,
-                new Slot(this.GlobalState, bone)
+                new Slot(GlobalState, bone)
             );
-            this._historyManager.DoCommand(dropImageToBoneCommand);
+            _historyManager.DoCommand(dropImageToBoneCommand);
         }
     }
 
@@ -223,12 +223,12 @@ public class PlumApp
         var oldDir = Path.Combine(oldPath, oldName);
         var newDir = Path.Combine(GlobalState.CurrentProject.ProjectPath, settingsData.Name);
 
-        this._fileManager.CopyDir(oldDir, newDir);
+        _fileManager.CopyDir(oldDir, newDir);
 
         GlobalState.CurrentProject.SetupProjectSettings(settingsData);
         AppSettings.ChangeProject(settingsData);
 
-        this._fileManager.MoveRes(GlobalState.CurrentProject);
+        _fileManager.MoveRes(GlobalState.CurrentProject);
 
         GlobalState.CurrentProject.SaveProjectSettings();
 
@@ -237,10 +237,10 @@ public class PlumApp
 
     public bool NewProject(string? projectName, string? projectPath)
     {
-        Project? result = this._fileManager.NewProject(projectName, projectPath);
+        Project? result = _fileManager.NewProject(projectName, projectPath);
         if (result != null)
         {
-            this.GlobalState.CurrentProject = result;
+            GlobalState.CurrentProject = result;
             return true;
         }
         return false;
@@ -257,7 +257,7 @@ public class PlumApp
     // TODO: паттерн стратегия
     public async Task<ExportResult> ExportAsJpg(double start, double end, string outputFolder)
     {
-        ExportResult result = await this._imageExporter.ExportAsJpg(
+        ExportResult result = await _imageExporter.ExportAsJpg(
             start,
             end,
             outputFolder,
@@ -268,7 +268,7 @@ public class PlumApp
 
     public async Task<ExportResult> ExportAsGif(double start, double end, string outputFile)
     {
-        ExportResult result = await this._imageExporter.ExportAsGif(
+        ExportResult result = await _imageExporter.ExportAsGif(
             start,
             end,
             outputFile,
@@ -284,7 +284,7 @@ public class PlumApp
         string ffmpegPath
     )
     {
-        ExportResult result = await this._imageExporter.ExportAsMp4(
+        ExportResult result = await _imageExporter.ExportAsMp4(
             start,
             end,
             outputFile,
@@ -296,7 +296,7 @@ public class PlumApp
 
     public async Task<ExportResult> ExportAsPng(double start, double end, string outputFolder)
     {
-        ExportResult result = await this._imageExporter.ExportAsPng(
+        ExportResult result = await _imageExporter.ExportAsPng(
             start,
             end,
             outputFolder,
@@ -314,20 +314,20 @@ public class PlumApp
                 s.RemoveResIfContains(res);
             }
             GlobalState.CurrentProject.Resources.Remove(res);
-            this._fileManager.DeleteResource(res.Name, res.ext, GlobalState.CurrentProject);
+            _fileManager.DeleteResource(res.Name, res.ext, GlobalState.CurrentProject);
         }
     }
 
     public void DeleteBone(Bone? bone)
     {
         DeleteBoneCommand command = new DeleteBoneCommand(bone, GlobalState.CurrentProject);
-        this._historyManager.DoCommand(command);
+        _historyManager.DoCommand(command);
     }
 
     public void AddBone(Bone? selectedBone)
     {
         AddBoneCommand command = new AddBoneCommand(selectedBone, GlobalState.CurrentProject);
-        this._historyManager.DoCommand(command);
+        _historyManager.DoCommand(command);
     }
 
     public void AddAnimation()
@@ -335,13 +335,13 @@ public class PlumApp
         AddAnimationCommand addAnimationCommand = new AddAnimationCommand(
             GlobalState.CurrentProject
         );
-        this._historyManager.DoCommand(addAnimationCommand);
+        _historyManager.DoCommand(addAnimationCommand);
     }
 
     public void AddSkin()
     {
         AddSkinCommand addSkinCommand = new AddSkinCommand(GlobalState.CurrentProject);
-        this._historyManager.DoCommand(addSkinCommand);
+        _historyManager.DoCommand(addSkinCommand);
     }
 
     public void DeleteAnimation()
@@ -350,7 +350,7 @@ public class PlumApp
             GlobalState.CurrentProject,
             GlobalState.CurrentProject.CurrentAnimation
         );
-        this._historyManager.DoCommand(deleteAnimationCommand);
+        _historyManager.DoCommand(deleteAnimationCommand);
     }
 
     public void DeleteSkin()
@@ -359,7 +359,7 @@ public class PlumApp
             GlobalState.CurrentProject,
             GlobalState.CurrentProject.CurrentSkin
         );
-        this._historyManager.DoCommand(deleteSkinCommand);
+        _historyManager.DoCommand(deleteSkinCommand);
     }
 
     public void AddSlot()
@@ -369,7 +369,7 @@ public class PlumApp
         {
             Slot s = new Slot(GlobalState, bone);
             AddSlotCommand addSlotCommand = new AddSlotCommand(GlobalState.CurrentProject, s, bone);
-            this._historyManager.DoCommand(addSlotCommand);
+            _historyManager.DoCommand(addSlotCommand);
         }
     }
 
@@ -382,7 +382,7 @@ public class PlumApp
                 selectedSlot,
                 GlobalState.CurrentBone
             );
-            this._historyManager.DoCommand(deleteSlotCommand);
+            _historyManager.DoCommand(deleteSlotCommand);
         }
     }
 
@@ -396,7 +396,7 @@ public class PlumApp
                 GlobalState.CurrentProject.CurrentMode.Type,
                 _easingFactory.CreateEasing(GlobalState.CurrentEasingType)
             );
-            this._historyManager.DoCommand(addKeyFrameCommand);
+            _historyManager.DoCommand(addKeyFrameCommand);
         }
     }
 
@@ -409,7 +409,7 @@ public class PlumApp
                 GlobalState.CurrentBone,
                 GlobalState.CurrentProject.CurrentMode.Type
             );
-            this._historyManager.DoCommand(deleteKeyFrameCommand);
+            _historyManager.DoCommand(deleteKeyFrameCommand);
         }
     }
 
@@ -417,7 +417,7 @@ public class PlumApp
     {
         var oldName = renamableObject.GetName;
         RenameCommand renameCommand = new RenameCommand(renamableObject, oldName, newName);
-        this._historyManager.DoCommand(renameCommand);
+        _historyManager.DoCommand(renameCommand);
     }
 
     public void Transform(double a, double b)
@@ -440,16 +440,16 @@ public class PlumApp
             isAnim,
             GlobalState.CurrentProject.CurrentAnimation.CurrentTime
         );
-        this._historyManager.DoCommand(changeBoneStatusCommand);
+        _historyManager.DoCommand(changeBoneStatusCommand);
     }
 
     public void Undo()
     {
-        this._historyManager.Undo();
+        _historyManager.Undo();
     }
 
     public void Redo()
     {
-        this._historyManager.Redo();
+        _historyManager.Redo();
     }
 }
