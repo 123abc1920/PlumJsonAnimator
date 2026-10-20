@@ -34,7 +34,7 @@ namespace PlumJsonAnimator.Services
             }
             catch (JsonReaderException ex)
             {
-                _globalState.jsonError.ErrorText = GetErrorWithContext(
+                _globalState.JsonError.ErrorText = GetErrorWithContext(
                     text,
                     ex.LineNumber,
                     ex.LinePosition,

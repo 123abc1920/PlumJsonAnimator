@@ -49,8 +49,8 @@ namespace PlumJsonAnimator.Services
                 Ffmpeg = "",
                 CaptureX = 0,
                 CaptureY = 0,
-                CaptureWidth = _globalState.canvasWidth,
-                CaptureHeight = _globalState.canvasHeight,
+                CaptureWidth = _globalState.CanvasWidth,
+                CaptureHeight = _globalState.CanvasHeight,
             };
         }
 

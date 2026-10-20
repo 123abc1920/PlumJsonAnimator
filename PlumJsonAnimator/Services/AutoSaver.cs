@@ -26,7 +26,7 @@ public class AutoSaver
 
         while (await _autoSaveTimer.WaitForNextTickAsync(_autoSaveCts.Token))
         {
-            if (_globalState.isAutoSave)
+            if (_globalState.IsAutoSave)
             {
                 _globalState.CurrentProject?.AutoSaveProjectSettings(_jsonCode);
                 _globalState.LastSaveTime = DateTime.Now;

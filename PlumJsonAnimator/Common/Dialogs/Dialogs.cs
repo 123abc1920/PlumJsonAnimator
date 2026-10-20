@@ -107,7 +107,7 @@ namespace PlumJsonAnimator.Common.Dialogs
             await window.ShowDialog(owner);
         }
 
-        public Window mainWin;
+        public Window MainWin { get; set; }
 
         public async void ShowDialog(string title, ViewModelBase viewModel, DialogType viewType)
         {
@@ -125,7 +125,7 @@ namespace PlumJsonAnimator.Common.Dialogs
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
             };
 
-            await window.ShowDialog(mainWin);
+            await window.ShowDialog(MainWin);
         }
     }
 }

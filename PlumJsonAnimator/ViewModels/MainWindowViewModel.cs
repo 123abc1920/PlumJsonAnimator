@@ -28,12 +28,12 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public int CanvasWidth
     {
-        get { return _globalState.canvasWidth; }
+        get { return _globalState.CanvasWidth; }
         set
         {
-            if (_globalState.canvasWidth != value)
+            if (_globalState.CanvasWidth != value)
             {
-                _globalState.canvasWidth = value;
+                _globalState.CanvasWidth = value;
                 OnPropertyChanged(nameof(CanvasWidth));
             }
         }
@@ -41,12 +41,12 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public int CanvasHeight
     {
-        get { return _globalState.canvasHeight; }
+        get { return _globalState.CanvasHeight; }
         set
         {
-            if (_globalState.canvasHeight != value)
+            if (_globalState.CanvasHeight != value)
             {
-                _globalState.canvasHeight = value;
+                _globalState.CanvasHeight = value;
                 OnPropertyChanged(nameof(CanvasHeight));
             }
         }
@@ -54,12 +54,12 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public int CurrentTab
     {
-        get => _globalState.currentTab;
+        get => _globalState.CurrentTab;
         set
         {
-            if (_globalState.currentTab != value)
+            if (_globalState.CurrentTab != value)
             {
-                _globalState.currentTab = value;
+                _globalState.CurrentTab = value;
                 CurrentBone = null;
                 OnPropertyChanged(nameof(CurrentTab));
             }
@@ -87,7 +87,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public JsonError JsonErrorObj
     {
-        get { return _globalState.jsonError; }
+        get { return _globalState.JsonError; }
     }
 
     public int FPS
@@ -231,16 +231,16 @@ public partial class MainWindowViewModel : ViewModelBase
     private const double MaxZoomCanvas = 5.0;
     public double ZoomCanvas
     {
-        get => _globalState.zoomCanvas;
+        get => _globalState.ZoomCanvas;
         set
         {
             if (
-                _globalState.zoomCanvas != value
+                _globalState.ZoomCanvas != value
                 && value > MinZoomCanvas
                 && value < MaxZoomCanvas
             )
             {
-                _globalState.zoomCanvas = value;
+                _globalState.ZoomCanvas = value;
                 CanvasWidth = (int)(GlobalState.BaseCanvasSize * value);
                 CanvasHeight = (int)(GlobalState.BaseCanvasSize * value);
                 OnPropertyChanged(nameof(ZoomCanvas));
@@ -260,7 +260,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public void SetMainWin(Window window)
     {
-        _dialogs.mainWin = window;
+        _dialogs.MainWin = window;
     }
 
     private ViewModelBase GetViewModel(DialogType viewType)

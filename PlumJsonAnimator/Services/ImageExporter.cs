@@ -56,7 +56,7 @@ namespace PlumJsonAnimator.Services
         /// <param name="canvas">Canvas that contains graphics</param>
         private RenderTargetBitmap CatchCanvas(Canvas? canvas)
         {
-            var captureBounds = _globalState.captureArea!.GetRect();
+            var captureBounds = _globalState.CaptureArea!.GetRect();
 
             var result = new RenderTargetBitmap(
                 new PixelSize((int)captureBounds.Width, (int)captureBounds.Height),

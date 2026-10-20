@@ -16,25 +16,16 @@ namespace PlumJsonAnimator.Services
     /// </summary>
     public class ProjectFilesManager
     {
-        private AppSettings _appSettings;
         private GlobalState _globalState;
-        private Interpolation _interpolation;
         private LocalizationService _localizationService;
-        private EasingFactory _easingFactory;
 
         public ProjectFilesManager(
-            AppSettings appSettings,
             GlobalState globalState,
-            Interpolation interpolation,
-            LocalizationService localizationService,
-            EasingFactory easingFactory
+            LocalizationService localizationService
         )
         {
-            _appSettings = appSettings;
             _globalState = globalState;
-            _interpolation = interpolation;
             _localizationService = localizationService;
-            _easingFactory = easingFactory;
         }
 
         /// <summary>
@@ -64,38 +55,6 @@ namespace PlumJsonAnimator.Services
             );
 
             return result?.FirstOrDefault()?.Path.LocalPath;
-        }
-
-        public Project? NewProject(string? projectName, string? projectPath)
-        {
-            if (projectName != null && projectPath != null)
-            {
-                _globalState.CurrentProject?.SaveProjectSettings();
-
-                ProjectSettings projectSettings = new ProjectSettings(
-                    projectPath,
-                    projectName,
-                    _appSettings,
-                    _globalState
-                );
-
-                _appSettings.ChangeProject(projectSettings.GetSettingsData());
-
-                Project newProject = new Project(
-                    projectSettings,
-                    _globalState,
-                    _interpolation,
-                    _localizationService,
-                    _easingFactory
-                );
-
-                newProject.SaveProjectSettings();
-                _appSettings.SaveSettings();
-                LoadRes(newProject);
-
-                return newProject;
-            }
-            return null;
         }
 
         /// <summary>

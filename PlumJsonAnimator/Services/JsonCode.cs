@@ -18,7 +18,7 @@ public class JsonCode
     /// <summary>
     /// Contains information about json validation and provides updated validated data
     /// </summary>
-    public class ValidResult
+    public class RegenerateResult
     {
         public required string Message { get; set; }
         public bool IsOk { get; set; }
@@ -192,7 +192,7 @@ public class JsonCode
     /// }
     /// </example>
     /// <returns>ValoidResult, where UpdatedArray is selected bones</returns>
-    private ValidResult regenerateBones(List<BoneData> bones)
+    private RegenerateResult regenerateBones(List<BoneData> bones)
     {
         List<BoneData> newBones = bones;
         List<BoneData> oldBones =
@@ -207,7 +207,7 @@ public class JsonCode
         {
             if (b.Name == null)
             {
-                return new ValidResult
+                return new RegenerateResult
                 {
                     Message =
                         $"{_localizationService.GetMessage(LocalizationConsts.ERROR)}: {_localizationService.GetMessage(LocalizationConsts.BONE_NULL_NAME_ERROR)}",
@@ -227,7 +227,7 @@ public class JsonCode
                     var template = _localizationService.GetMessage(
                         LocalizationConsts.BONE_PARENT_NULL_ERROR
                     );
-                    return new ValidResult
+                    return new RegenerateResult
                     {
                         Message =
                             $"{_localizationService.GetMessage(LocalizationConsts.ERROR)}: {string.Format(template, b.Name)}",
@@ -240,7 +240,7 @@ public class JsonCode
 
         if (rootBonesCount > 1)
         {
-            return new ValidResult
+            return new RegenerateResult
             {
                 Message =
                     $"{_localizationService.GetMessage(LocalizationConsts.ERROR)}: {_localizationService.GetMessage(LocalizationConsts.SEVERAL_ROOT_BONES)}",
@@ -250,7 +250,7 @@ public class JsonCode
         }
         else if (rootBonesCount < 1)
         {
-            return new ValidResult
+            return new RegenerateResult
             {
                 Message =
                     $"{_localizationService.GetMessage(LocalizationConsts.ERROR)}: {_localizationService.GetMessage(LocalizationConsts.NO_ROOT_BONE)}",
@@ -259,7 +259,7 @@ public class JsonCode
             };
         }
 
-        return new ValidResult
+        return new RegenerateResult
         {
             Message = "",
             IsOk = true,
@@ -278,7 +278,7 @@ public class JsonCode
     /// }
     /// </example>
     /// <returns>ValoidResult, where UpdatedArray is selected slots</returns>
-    private ValidResult regenerateSlots(List<SlotData> slots)
+    private RegenerateResult regenerateSlots(List<SlotData> slots)
     {
         List<SlotData> newSlots = slots;
         List<SlotData> oldSlots = _globalState.CurrentProject!.GenerateSlotsJSONData();
@@ -291,7 +291,7 @@ public class JsonCode
         {
             if (s.Name == null)
             {
-                return new ValidResult
+                return new RegenerateResult
                 {
                     Message =
                         $"{_localizationService.GetMessage(LocalizationConsts.SLOT_NULL_NAME)}",
@@ -301,7 +301,7 @@ public class JsonCode
             }
         }
 
-        return new ValidResult
+        return new RegenerateResult
         {
             Message = "",
             IsOk = true,
@@ -320,7 +320,7 @@ public class JsonCode
     /// }
     /// </example>
     /// <returns>ValoidResult, where UpdatedArray is selected skins</returns>
-    private ValidResult regenerateSkins(List<SkinData> skins)
+    private RegenerateResult regenerateSkins(List<SkinData> skins)
     {
         List<SkinData> newSkins = skins;
         List<SkinData> oldSkins = _globalState.CurrentProject!.GenerateSkinsJSONData();
@@ -333,7 +333,7 @@ public class JsonCode
         {
             if (s.Name == null)
             {
-                return new ValidResult
+                return new RegenerateResult
                 {
                     Message =
                         $"{_localizationService.GetMessage(LocalizationConsts.SLOT_NULL_NAME)}",
@@ -343,7 +343,7 @@ public class JsonCode
             }
         }
 
-        return new ValidResult
+        return new RegenerateResult
         {
             Message = "",
             IsOk = true,
@@ -363,7 +363,7 @@ public class JsonCode
     /// }
     /// </example>
     /// <returns>ValoidResult, where UpdatedArray is selected animations</returns>
-    private ValidResult regenerateAnimations(Dictionary<string, AnimationData> animations)
+    private RegenerateResult regenerateAnimations(Dictionary<string, AnimationData> animations)
     {
         Dictionary<string, AnimationData> newAnimations = animations;
         Dictionary<string, AnimationData> oldAnimations =
@@ -373,7 +373,7 @@ public class JsonCode
             oldAnimations
         );
 
-        return new ValidResult
+        return new RegenerateResult
         {
             Message = "",
             IsOk = true,
@@ -395,11 +395,11 @@ public class JsonCode
     /// </example>
     /// <returns>ValoidResult, where UpdatedArray is empty</returns>
     // TODO: разделить валиацию и регенерацию
-    public ValidResult Regenerate(Project project, bool needRegeneration)
+    public RegenerateResult Regenerate(Project project, bool needRegeneration)
     {
         if (project.Code == null || project.Code == "")
         {
-            return new ValidResult
+            return new RegenerateResult
             {
                 Message = $"{_localizationService.GetMessage(LocalizationConsts.EMPTY_JSON)}",
                 IsOk = false,
@@ -410,31 +410,31 @@ public class JsonCode
 
         if (codeData == null)
         {
-            return new ValidResult { Message = "", IsOk = false };
+            return new RegenerateResult { Message = "", IsOk = false };
         }
 
         var boneResult = regenerateBones(codeData.Bones);
         if (!boneResult.IsOk)
         {
-            return new ValidResult { Message = boneResult.Message, IsOk = false };
+            return new RegenerateResult { Message = boneResult.Message, IsOk = false };
         }
 
         var slotResult = regenerateSlots(codeData.Slots);
         if (!slotResult.IsOk)
         {
-            return new ValidResult { Message = slotResult.Message, IsOk = false };
+            return new RegenerateResult { Message = slotResult.Message, IsOk = false };
         }
 
         var skinResult = regenerateSkins(codeData.Skins);
         if (!skinResult.IsOk)
         {
-            return new ValidResult { Message = skinResult.Message, IsOk = false };
+            return new RegenerateResult { Message = skinResult.Message, IsOk = false };
         }
 
         var animationResult = regenerateAnimations(codeData.Animations);
         if (!animationResult.IsOk)
         {
-            return new ValidResult { Message = animationResult.Message, IsOk = false };
+            return new RegenerateResult { Message = animationResult.Message, IsOk = false };
         }
 
         if (needRegeneration == true)
@@ -447,7 +447,7 @@ public class JsonCode
             );
         }
 
-        return new ValidResult { Message = "", IsOk = true };
+        return new RegenerateResult { Message = "", IsOk = true };
     }
 }
 

@@ -60,7 +60,7 @@ namespace PlumJsonAnimator.Services
 
         private void UpdateCanvas(object? sender, EventArgs e)
         {
-            if (_globalState.currentTab == 0)
+            if (_globalState.CurrentTab == 0)
             {
                 UpdateCanvas(
                     _globalState.Canvas,
@@ -80,7 +80,7 @@ namespace PlumJsonAnimator.Services
             }
             if (isDrawCapture)
             {
-                _globalState.captureArea?.DrawCaptureArea(canvas);
+                _globalState.CaptureArea?.DrawCaptureArea(canvas);
             }
         }
     }

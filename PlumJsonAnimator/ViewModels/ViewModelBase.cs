@@ -39,7 +39,7 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
 
     public CaptureArea? GetCaptureArea()
     {
-        return _globalState.captureArea;
+        return _globalState.CaptureArea;
     }
 
     protected ViewModelBase(

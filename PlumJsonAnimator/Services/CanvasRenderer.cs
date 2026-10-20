@@ -37,7 +37,7 @@ public class CanvasRenderer
 
     private void UpdateCanvas(object? sender, EventArgs e)
     {
-        if (_globalState.currentTab == 0)
+        if (_globalState.CurrentTab == 0)
         {
             RedrawCanvas(
                 _globalState.Canvas,
@@ -45,7 +45,7 @@ public class CanvasRenderer
                 _globalState.CaptureMode
             );
         }
-        else if (_globalState.currentTab == 1)
+        else if (_globalState.CurrentTab == 1)
         {
             CanGenerateProject();
         }
@@ -63,24 +63,24 @@ public class CanvasRenderer
         }
         if (isDrawCapture)
         {
-            _globalState.captureArea?.DrawCaptureArea(canvas);
+            _globalState.CaptureArea?.DrawCaptureArea(canvas);
         }
     }
 
     public bool CanGenerateProject()
     {
-        _globalState.jsonError.ErrorText = _jsonValidator.Validate(
+        _globalState.JsonError.ErrorText = _jsonValidator.Validate(
             _globalState.CurrentProject.Code
         );
-        if (_globalState.jsonError.IsOk)
+        if (_globalState.JsonError.IsOk)
         {
-            ValidResult validateResult = _jsonCode.Regenerate(
+            RegenerateResult validateResult = _jsonCode.Regenerate(
                 _globalState.CurrentProject,
                 false
             );
             if (!validateResult.IsOk)
             {
-                _globalState.jsonError.ErrorText = validateResult.Message;
+                _globalState.JsonError.ErrorText = validateResult.Message;
                 return false;
             }
         }
