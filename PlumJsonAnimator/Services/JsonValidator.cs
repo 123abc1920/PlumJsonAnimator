@@ -9,11 +9,11 @@ namespace PlumJsonAnimator.Services
     /// </summary>
     public class JsonValidator
     {
-        private LocalizationService localizationService;
+        private LocalizationService _localizationService;
 
         public JsonValidator(LocalizationService localizationService)
         {
-            this.localizationService = localizationService;
+            _localizationService = localizationService;
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace PlumJsonAnimator.Services
             try
             {
                 JToken.Parse(text);
-                return this.localizationService.GetMessage(LocalizationConsts.JSON_VALID);
+                return _localizationService.GetMessage(LocalizationConsts.JSON_VALID);
             }
             catch (JsonReaderException ex)
             {
@@ -54,19 +54,19 @@ namespace PlumJsonAnimator.Services
         {
             if (json == "" || json == null)
             {
-                return $"{this.localizationService.GetMessage(LocalizationConsts.ERROR)}: {errorMessage}";
+                return $"{_localizationService.GetMessage(LocalizationConsts.ERROR)}: {errorMessage}";
             }
 
             var lines = json.Split('\n');
 
             if (errorLine > lines.Length)
             {
-                return $"{this.localizationService.GetMessage(LocalizationConsts.ERROR)}: {errorMessage}";
+                return $"{_localizationService.GetMessage(LocalizationConsts.ERROR)}: {errorMessage}";
             }
 
             if (lines.Length <= errorLine - 1)
             {
-                return $"{this.localizationService.GetMessage(LocalizationConsts.ERROR)}: {errorMessage}";
+                return $"{_localizationService.GetMessage(LocalizationConsts.ERROR)}: {errorMessage}";
             }
 
             string errorLineText = lines[errorLine - 1];
@@ -84,9 +84,9 @@ namespace PlumJsonAnimator.Services
             if (errorLine < lines.Length)
                 context += $"{errorLine + 1}: {lines[errorLine]}\n";
 
-            return $"{this.localizationService.GetMessage(LocalizationConsts.JSON_ERROR_STR)} {errorLine}, {this.localizationService.GetMessage(LocalizationConsts.JSON_ERROR_POS)} {errorPos}:\n"
+            return $"{_localizationService.GetMessage(LocalizationConsts.JSON_ERROR_STR)} {errorLine}, {_localizationService.GetMessage(LocalizationConsts.JSON_ERROR_POS)} {errorPos}:\n"
                 + $"{errorMessage}\n\n"
-                + $"{this.localizationService.GetMessage(LocalizationConsts.JSON_CONTEXT)}:\n{context}";
+                + $"{_localizationService.GetMessage(LocalizationConsts.JSON_CONTEXT)}:\n{context}";
         }
     }
 }

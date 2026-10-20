@@ -12,24 +12,24 @@ namespace PlumJsonAnimator.Services
     public class Engine
     {
         private DispatcherTimer _animationLoop = new DispatcherTimer();
-        private Animation? currentAnimation;
+        private Animation? _currentAnimation;
 
-        private GlobalState globalState;
+        private GlobalState _globalState;
 
         public Engine(GlobalState globalState)
         {
-            this.globalState = globalState;
+            _globalState = globalState;
 
-            this._animationLoop.Interval = TimeSpan.FromSeconds(1.0 / (double)this.globalState.FPS);
-            this._animationLoop.Tick += AnimStep;
+            _animationLoop.Interval = TimeSpan.FromSeconds(1.0 / (double)_globalState.FPS);
+            _animationLoop.Tick += AnimStep;
         }
 
         private void AnimStep(object? sender, EventArgs e)
         {
-            if (this.currentAnimation != null)
+            if (_currentAnimation != null)
             {
-                this.currentAnimation.Step();
-                this.globalState.OnTimeUpdated();
+                _currentAnimation.Step();
+                _globalState.OnTimeUpdated();
             }
         }
 
@@ -46,26 +46,26 @@ namespace PlumJsonAnimator.Services
 
             if (animation.IsRun)
             {
-                this._animationLoop.Stop();
+                _animationLoop.Stop();
                 animation.IsRun = false;
             }
             else
             {
-                this._animationLoop.Start();
+                _animationLoop.Start();
                 animation.IsRun = true;
             }
 
-            this.currentAnimation = animation;
+            _currentAnimation = animation;
         }
 
         private void UpdateCanvas(object? sender, EventArgs e)
         {
-            if (this.globalState.currentTab == 0)
+            if (_globalState.currentTab == 0)
             {
                 UpdateCanvas(
-                    this.globalState.Canvas,
-                    this.globalState.DrawBones,
-                    this.globalState.CaptureMode
+                    _globalState.Canvas,
+                    _globalState.DrawBones,
+                    _globalState.CaptureMode
                 );
             }
         }
@@ -73,14 +73,14 @@ namespace PlumJsonAnimator.Services
         public void UpdateCanvas(Canvas canvas, bool isDrawBone, bool isDrawCapture)
         {
             canvas?.Children.Clear();
-            this.globalState.CurrentProject?.DrawSlots(canvas);
+            _globalState.CurrentProject?.DrawSlots(canvas);
             if (isDrawBone)
             {
-                this.globalState.CurrentProject?.MainSkeleton?.DrawSkeleton(canvas);
+                _globalState.CurrentProject?.MainSkeleton?.DrawSkeleton(canvas);
             }
             if (isDrawCapture)
             {
-                this.globalState.captureArea?.DrawCaptureArea(canvas);
+                _globalState.captureArea?.DrawCaptureArea(canvas);
             }
         }
     }

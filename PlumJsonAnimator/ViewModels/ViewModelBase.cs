@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Runtime.CompilerServices;
 using CommunityToolkit.Mvvm.ComponentModel;
 using PlumJsonAnimator.Common.Constants;
@@ -15,25 +13,25 @@ namespace PlumJsonAnimator.ViewModels;
 public class ViewModelBase : ObservableObject, INotifyPropertyChanged
 {
     public GlobalState _globalState;
-    protected Dialogs dialogs;
-    protected ProjectFilesManager projectManager;
-    protected AppSettings appSettings;
-    protected LocalizationService localizationService;
-    protected ImageExporter imageExporter;
+    protected Dialogs _dialogs;
+    protected ProjectFilesManager _projectManager;
+    protected AppSettings _appSettings;
+    protected LocalizationService _localizationService;
+    protected ImageExporter _imageExporter;
     public PlumApp PlumApp { get; set; }
 
     public List<string> Langs
     {
-        get => this.localizationService.langs;
+        get => _localizationService.Langs;
     }
     public string CurrentLang
     {
-        get => this.localizationService.currentLang;
+        get => _localizationService._currentLang;
         set
         {
-            if (this.localizationService.currentLang != value)
+            if (_localizationService._currentLang != value)
             {
-                this.localizationService.currentLang = value;
+                _localizationService._currentLang = value;
                 OnPropertyChanged(nameof(CurrentLang));
             }
         }
@@ -41,7 +39,7 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
 
     public CaptureArea? GetCaptureArea()
     {
-        return this._globalState.captureArea;
+        return _globalState.captureArea;
     }
 
     protected ViewModelBase(
@@ -54,15 +52,15 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
         PlumApp plumApp
     )
     {
-        this._globalState = globalState;
-        this.dialogs = dialogs;
-        this.projectManager = projectManager;
-        this.appSettings = appSettings;
-        this.localizationService = localizationService;
-        this.imageExporter = imageExporter;
-        this.PlumApp = plumApp;
+        _globalState = globalState;
+        _dialogs = dialogs;
+        _projectManager = projectManager;
+        _appSettings = appSettings;
+        _localizationService = localizationService;
+        _imageExporter = imageExporter;
+        PlumApp = plumApp;
 
-        this._globalState.PropertyChanged += (s, e) =>
+        _globalState.PropertyChanged += (s, e) =>
         {
             if (e.PropertyName == nameof(GlobalState.CurrentProject))
             {
@@ -78,7 +76,7 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
 
     public void RenameProject(SettingsData settingsData)
     {
-        bool isSuccess = this.PlumApp.RenameProject(settingsData);
+        bool isSuccess = PlumApp.RenameProject(settingsData);
 
         if (isSuccess)
         {
@@ -91,7 +89,7 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
 
     public string GetMessage(LocalizationConsts constStr)
     {
-        return this.PlumApp.GetMessage(constStr);
+        return PlumApp.GetMessage(constStr);
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

@@ -6,6 +6,6 @@ class DoneHistory : IHistory
 {
     public IReadOnlyCollection<ICommand> GetAll()
     {
-        return this.commands;
+        return _commands;
     }
 }

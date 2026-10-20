@@ -94,24 +94,24 @@ public class ProjectSettings
 
     public void ExistOrCreateProjectDirs()
     {
-        if (!Directory.Exists(_appSettings.appSettings!.Workspace))
+        if (!Directory.Exists(_appSettings._appSettings!.Workspace))
         {
-            Directory.CreateDirectory(_appSettings.appSettings!.Workspace);
+            Directory.CreateDirectory(_appSettings._appSettings!.Workspace);
         }
 
-        if (!Directory.Exists(Path.Combine(_appSettings.appSettings!.Workspace, "res")))
+        if (!Directory.Exists(Path.Combine(_appSettings._appSettings!.Workspace, "res")))
         {
-            Directory.CreateDirectory(Path.Combine(_appSettings.appSettings!.Workspace, "res"));
+            Directory.CreateDirectory(Path.Combine(_appSettings._appSettings!.Workspace, "res"));
         }
 
         if (
             !File.Exists(
-                Path.Combine(_appSettings.appSettings!.Workspace, _globalState.SettingsFileName)
+                Path.Combine(_appSettings._appSettings!.Workspace, _globalState.SettingsFileName)
             )
         )
         {
             File.Create(
-                    Path.Combine(_appSettings.appSettings!.Workspace, _globalState.SettingsFileName)
+                    Path.Combine(_appSettings._appSettings!.Workspace, _globalState.SettingsFileName)
                 )
                 .Close();
         }
@@ -120,7 +120,7 @@ public class ProjectSettings
     public void SaveSettings()
     {
         string settingsPath = Path.Combine(
-            _appSettings.appSettings!.Workspace,
+            _appSettings._appSettings!.Workspace,
             _globalState.SettingsFileName
         );
 
@@ -149,7 +149,7 @@ public class ProjectSettings
     public void WriteProjectJSON(string jsonifyedProject)
     {
         string settingsPath = Path.Combine(
-            _appSettings.appSettings!.Workspace,
+            _appSettings._appSettings!.Workspace,
             _globalState.SettingsFileName
         );
         WriteProjectInFile(settingsPath, jsonifyedProject);
@@ -158,7 +158,7 @@ public class ProjectSettings
     public void WriteAutoSave(string jsonifyedProject)
     {
         string settingsPath = Path.Combine(
-            _appSettings.appSettings!.Workspace,
+            _appSettings._appSettings!.Workspace,
             _globalState.AutoSaveFile
         );
         Console.WriteLine(settingsPath);
@@ -186,7 +186,7 @@ public class ProjectSettings
     public SettingsData? ReadSettings()
     {
         string settingsPath = Path.Combine(
-            _appSettings.appSettings!.Workspace,
+            _appSettings._appSettings!.Workspace,
             _globalState.SettingsFileName
         );
 

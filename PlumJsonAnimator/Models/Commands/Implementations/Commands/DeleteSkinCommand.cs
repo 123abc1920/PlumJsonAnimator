@@ -9,17 +9,17 @@ class DeleteSkinCommand : ICommand
 
     public DeleteSkinCommand(Project project, Skin skin)
     {
-        this._project = project;
-        this._skin = skin;
+        _project = project;
+        _skin = skin;
     }
 
     public void Execute()
     {
-        _project?.DeleteSkin(this._skin);
+        _project?.DeleteSkin(_skin);
     }
 
     public void Undo()
     {
-        _project?.RestoreSkin(this._skin);
+        _project?.RestoreSkin(_skin);
     }
 }

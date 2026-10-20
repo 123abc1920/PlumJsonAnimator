@@ -259,12 +259,12 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public Bone(
             GlobalState globalState,
             Bone parent,
-            int _id,
+            int id,
             LocalizationService localizationService
         )
             : this()
         {
-            this._id = _id;
+            _id = id;
             string name = "bone";
             Name = $"{name}{Counter.GenerateNamePostfix()}";
 

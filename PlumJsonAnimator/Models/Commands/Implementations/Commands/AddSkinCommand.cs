@@ -9,22 +9,22 @@ class AddSkinCommand : ICommand
 
     public AddSkinCommand(Project project)
     {
-        this._project = project;
+        _project = project;
     }
 
     public void Execute()
     {
-        if (this._addedSkin != null)
+        if (_addedSkin != null)
         {
-            _project.RestoreSkin(this._addedSkin);
+            _project.RestoreSkin(_addedSkin);
             return;
         }
 
-        this._addedSkin = _project?.AddSkin();
+        _addedSkin = _project?.AddSkin();
     }
 
     public void Undo()
     {
-        _project?.DeleteSkin(this._addedSkin);
+        _project?.DeleteSkin(_addedSkin);
     }
 }

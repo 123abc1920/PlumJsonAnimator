@@ -1,6 +1,5 @@
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
-using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Services;
 
@@ -30,6 +29,6 @@ public partial class NewProjectViewModel : ViewModelBase
 
     public bool NewProject(string? projectName, string? projectPath)
     {
-        return this.PlumApp.NewProject(projectName, projectPath);
+        return PlumApp.NewProject(projectName, projectPath);
     }
 }

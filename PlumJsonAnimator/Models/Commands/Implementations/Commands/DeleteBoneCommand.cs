@@ -1,35 +1,34 @@
 using System.Collections.Generic;
 using System.Linq;
-using Avalonia.Metadata;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 
 namespace PlumJsonAnimator.Models.Commands;
 
 public class BoneAnim
 {
-    public Bone bone;
-    public Animation animation;
-    public BoneAnimation boneAnimation;
+    public Bone _bone;
+    public Animation _animation;
+    public BoneAnimation _boneAnimation;
 
     public BoneAnim(Bone bone, Animation animation, BoneAnimation boneAnimation)
     {
-        this.bone = bone;
-        this.animation = animation;
-        this.boneAnimation = boneAnimation;
+        _bone = bone;
+        _animation = animation;
+        _boneAnimation = boneAnimation;
     }
 }
 
 public class SlotAttach
 {
-    public Slot slot;
-    public Skin skin;
-    public Attachment attachment;
+    public Slot _slot;
+    public Skin _skin;
+    public Attachment _attachment;
 
     public SlotAttach(Slot slot, Skin skin, Attachment attachment)
     {
-        this.slot = slot;
-        this.skin = skin;
-        this.attachment = attachment;
+        _slot = slot;
+        _skin = skin;
+        _attachment = attachment;
     }
 }
 
@@ -51,11 +50,11 @@ class DeleteBoneCommand : ICommand
             return;
         }
 
-        this._selectedBone = selectedBone;
-        this._project = project;
-        this._parent = selectedBone.Parent;
+        _selectedBone = selectedBone;
+        _project = project;
+        _parent = selectedBone.Parent;
 
-        SnapshotBonesRecursive(this._selectedBone);
+        SnapshotBonesRecursive(_selectedBone);
     }
 
     private void SnapshotBonesRecursive(Bone? bone)
@@ -71,22 +70,22 @@ class DeleteBoneCommand : ICommand
 
     public void Execute()
     {
-        DeleteBoneReqursion(this._selectedBone);
+        DeleteBoneReqursion(_selectedBone);
     }
 
     public void Undo()
     {
-        RestoreBoneRecursive(this._selectedBone);
-        this._parent?.Children.Add(this._selectedBone);
+        RestoreBoneRecursive(_selectedBone);
+        _parent?.Children.Add(_selectedBone);
 
         foreach (var skinDTO in skins)
         {
-            skinDTO.skin.RestoreSlot(skinDTO.slot, skinDTO.attachment);
+            skinDTO._skin.RestoreSlot(skinDTO._slot, skinDTO._attachment);
         }
 
         foreach (var animDTO in anims)
         {
-            animDTO.animation.RestoreBoneAnimation(animDTO.bone, animDTO.boneAnimation);
+            animDTO._animation.RestoreBoneAnimation(animDTO._bone, animDTO._boneAnimation);
         }
     }
 

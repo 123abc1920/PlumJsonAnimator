@@ -196,7 +196,7 @@ public class JsonCode
     {
         List<BoneData> newBones = bones;
         List<BoneData> oldBones =
-            this._globalState.CurrentProject!.MainSkeleton!.GenerateJSONData();
+            _globalState.CurrentProject!.MainSkeleton!.GenerateJSONData();
         Dictionary<string, BoneData> updatedBones = RegenerateBones(
             newBones.ToDictionary(b => b.Name, b => b),
             oldBones.ToDictionary(b => b.Name, b => b)
@@ -253,7 +253,7 @@ public class JsonCode
             return new ValidResult
             {
                 Message =
-                    $"{this._localizationService.GetMessage(LocalizationConsts.ERROR)}: {_localizationService.GetMessage(LocalizationConsts.NO_ROOT_BONE)}",
+                    $"{_localizationService.GetMessage(LocalizationConsts.ERROR)}: {_localizationService.GetMessage(LocalizationConsts.NO_ROOT_BONE)}",
                 IsOk = false,
                 UpdatedArray = null,
             };
@@ -281,7 +281,7 @@ public class JsonCode
     private ValidResult regenerateSlots(List<SlotData> slots)
     {
         List<SlotData> newSlots = slots;
-        List<SlotData> oldSlots = this._globalState.CurrentProject!.GenerateSlotsJSONData();
+        List<SlotData> oldSlots = _globalState.CurrentProject!.GenerateSlotsJSONData();
         Dictionary<string, SlotData> updatedSlots = RegenerateSlots(
             newSlots.ToDictionary(b => b.Name, b => b),
             oldSlots.ToDictionary(b => b.Name, b => b)
@@ -294,7 +294,7 @@ public class JsonCode
                 return new ValidResult
                 {
                     Message =
-                        $"{this._localizationService.GetMessage(LocalizationConsts.SLOT_NULL_NAME)}",
+                        $"{_localizationService.GetMessage(LocalizationConsts.SLOT_NULL_NAME)}",
                     IsOk = false,
                     UpdatedArray = null,
                 };
@@ -323,7 +323,7 @@ public class JsonCode
     private ValidResult regenerateSkins(List<SkinData> skins)
     {
         List<SkinData> newSkins = skins;
-        List<SkinData> oldSkins = this._globalState.CurrentProject!.GenerateSkinsJSONData();
+        List<SkinData> oldSkins = _globalState.CurrentProject!.GenerateSkinsJSONData();
         Dictionary<string, SkinData> updatedSkins = RegenerateSkins(
             newSkins.ToDictionary(b => b.Name, b => b),
             oldSkins.ToDictionary(b => b.Name, b => b)
@@ -336,7 +336,7 @@ public class JsonCode
                 return new ValidResult
                 {
                     Message =
-                        $"{this._localizationService.GetMessage(LocalizationConsts.SLOT_NULL_NAME)}",
+                        $"{_localizationService.GetMessage(LocalizationConsts.SLOT_NULL_NAME)}",
                     IsOk = false,
                     UpdatedArray = null,
                 };
@@ -367,7 +367,7 @@ public class JsonCode
     {
         Dictionary<string, AnimationData> newAnimations = animations;
         Dictionary<string, AnimationData> oldAnimations =
-            this._globalState.CurrentProject!.GenerateAnimationsJSONData();
+            _globalState.CurrentProject!.GenerateAnimationsJSONData();
         Dictionary<string, AnimationData> updatedAnimations = RegenerateAnimations(
             newAnimations,
             oldAnimations
@@ -401,7 +401,7 @@ public class JsonCode
         {
             return new ValidResult
             {
-                Message = $"{this._localizationService.GetMessage(LocalizationConsts.EMPTY_JSON)}",
+                Message = $"{_localizationService.GetMessage(LocalizationConsts.EMPTY_JSON)}",
                 IsOk = false,
             };
         }
@@ -439,7 +439,7 @@ public class JsonCode
 
         if (needRegeneration == true)
         {
-            this._globalState.CurrentProject?.RegenerateProject(
+            _globalState.CurrentProject?.RegenerateProject(
                 (Dictionary<string, BoneData>)boneResult.UpdatedArray,
                 (Dictionary<string, SlotData>)slotResult.UpdatedArray,
                 (Dictionary<string, SkinData>)skinResult.UpdatedArray,

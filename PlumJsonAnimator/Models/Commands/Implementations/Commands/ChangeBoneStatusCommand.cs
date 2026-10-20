@@ -12,25 +12,25 @@ public class BoneStatus
     public IKeyframeType T;
     public IKeyframeType R;
 
-    private BoneStatus(double X, double Y, double A)
+    private BoneStatus(double x, double y, double a)
     {
-        this.X = X;
-        this.Y = Y;
-        this.A = A;
+        X = x;
+        Y = y;
+        A = a;
     }
 
     public BoneStatus(Bone b)
     {
-        this.X = b.X;
-        this.Y = b.Y;
-        this.A = b.A;
+        X = b.X;
+        Y = b.Y;
+        A = b.A;
     }
 
     public BoneStatus Copy()
     {
-        BoneStatus newBone = new BoneStatus(this.X, this.Y, this.A);
-        newBone.T = this.T;
-        newBone.R = this.R;
+        BoneStatus newBone = new BoneStatus(X, Y, A);
+        newBone.T = T;
+        newBone.R = R;
         return newBone;
     }
 }
@@ -38,11 +38,11 @@ public class BoneStatus
 public class ChangeBoneStatusCommand : ICommand
 {
     private readonly Bone _bone;
-    private readonly BoneStatus oldStatus;
-    private readonly BoneStatus newStatus;
-    private readonly Animation animation;
-    private readonly bool isAnim;
-    private readonly double time;
+    private readonly BoneStatus _oldStatus;
+    private readonly BoneStatus _newStatus;
+    private readonly Animation _animation;
+    private readonly bool _isAnim;
+    private readonly double _time;
 
     public ChangeBoneStatusCommand(
         Bone bone,
@@ -55,36 +55,36 @@ public class ChangeBoneStatusCommand : ICommand
     {
         _bone = bone;
 
-        this.oldStatus = oldStatus;
-        this.newStatus = newStatus;
-        this.animation = animation;
-        this.isAnim = isAnim;
-        this.time = time;
+        _oldStatus = oldStatus;
+        _newStatus = newStatus;
+        _animation = animation;
+        _isAnim = isAnim;
+        _time = time;
     }
 
     public void Execute()
     {
-        _bone.X = newStatus.X;
-        _bone.Y = newStatus.Y;
-        _bone.A = newStatus.A;
+        _bone.X = _newStatus.X;
+        _bone.Y = _newStatus.Y;
+        _bone.A = _newStatus.A;
 
-        if (isAnim == true)
+        if (_isAnim == true)
         {
-            animation.SetKeyFrame(TransformModeTypes.TRANSLATE, time, newStatus.T, _bone);
-            animation.SetKeyFrame(TransformModeTypes.ROTATE, time, newStatus.R, _bone);
+            _animation.SetKeyFrame(TransformModeTypes.TRANSLATE, _time, _newStatus.T, _bone);
+            _animation.SetKeyFrame(TransformModeTypes.ROTATE, _time, _newStatus.R, _bone);
         }
     }
 
     public void Undo()
     {
-        _bone.X = oldStatus.X;
-        _bone.Y = oldStatus.Y;
-        _bone.A = oldStatus.A;
+        _bone.X = _oldStatus.X;
+        _bone.Y = _oldStatus.Y;
+        _bone.A = _oldStatus.A;
 
-        if (isAnim == true)
+        if (_isAnim == true)
         {
-            animation.SetKeyFrame(TransformModeTypes.TRANSLATE, time, oldStatus.T, _bone);
-            animation.SetKeyFrame(TransformModeTypes.ROTATE, time, oldStatus.R, _bone);
+            _animation.SetKeyFrame(TransformModeTypes.TRANSLATE, _time, _oldStatus.T, _bone);
+            _animation.SetKeyFrame(TransformModeTypes.ROTATE, _time, _oldStatus.R, _bone);
         }
     }
 }

@@ -6,10 +6,8 @@ using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Newtonsoft.Json;
-using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
-using PlumJsonAnimator.Services;
 
 // TODO: fix SetSize GetSize Size
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
@@ -52,8 +50,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             return new Dictionary<string, int?>()
             {
-                ["width"] = this._width,
-                ["height"] = this._height,
+                ["width"] = _width,
+                ["height"] = _height,
             };
         }
 

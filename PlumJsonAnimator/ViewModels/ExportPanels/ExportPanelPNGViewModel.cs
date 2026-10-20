@@ -25,12 +25,12 @@ public partial class ExportPanelPNGViewModel : ViewModelBase
 
     public string ExportPath
     {
-        get { return this.imageExporter.ExportPath; }
+        get { return _imageExporter.ExportPath; }
         set
         {
-            if (this.imageExporter.ExportPath != value)
+            if (_imageExporter.ExportPath != value)
             {
-                this.imageExporter.ExportPath = value;
+                _imageExporter.ExportPath = value;
                 OnPropertyChanged(nameof(ExportPath));
             }
         }
@@ -55,7 +55,7 @@ public partial class ExportPanelPNGViewModel : ViewModelBase
             plumApp
         )
     {
-        this.imageExporter.ProgressChanged += (sender, percent) =>
+        _imageExporter.ProgressChanged += (sender, percent) =>
         {
             ProgressValue = percent;
         };
@@ -63,6 +63,6 @@ public partial class ExportPanelPNGViewModel : ViewModelBase
 
     public async Task<ExportResult> ExportAsPng(double start, double end, string outputFolder)
     {
-        return await this.PlumApp.ExportAsPng(start, end, outputFolder);
+        return await PlumApp.ExportAsPng(start, end, outputFolder);
     }
 }

@@ -10,9 +10,9 @@ class RenameCommand : ICommand
 
     public RenameCommand(IRenamable renamable, string oldName, string newName)
     {
-        this._renamableObject = renamable;
-        this._oldName = oldName;
-        this._newName = newName;
+        _renamableObject = renamable;
+        _oldName = oldName;
+        _newName = newName;
     }
 
     public void Execute()

@@ -80,7 +80,7 @@ public class PlumApp
         );
         GlobalState.lastSaveTime = DateTime.Now;
 
-        var projectWorkspace = AppSettings.appSettings.Workspace;
+        var projectWorkspace = AppSettings._appSettings.Workspace;
         ProjectSettings projectSettings = new ProjectSettings(
             Path.Combine(projectWorkspace, GlobalState.SettingsFileName),
             AppSettings,

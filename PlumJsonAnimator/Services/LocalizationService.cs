@@ -19,8 +19,8 @@ namespace PlumJsonAnimator.Services
 
         private string LocalizationFilesPath;
 
-        public List<string> langs = new List<string>();
-        public string currentLang = START_LANG;
+        public List<string> Langs { get; private set; } = new List<string>();
+        public string _currentLang = START_LANG;
 
         public ResourceDictionary LangResources = new();
 
@@ -69,7 +69,7 @@ namespace PlumJsonAnimator.Services
         }
 
         /// <summary>
-        /// Reads all files in LocalizationFilesPath and collect them into this.langs
+        /// Reads all files in LocalizationFilesPath and collect them into langs
         /// </summary>
         public void LoadLangs()
         {
@@ -78,7 +78,7 @@ namespace PlumJsonAnimator.Services
             foreach (var filePath in jsonFiles)
             {
                 var languageCode = Path.GetFileNameWithoutExtension(filePath);
-                this.langs.Add(languageCode);
+                Langs.Add(languageCode);
             }
         }
 
@@ -88,7 +88,7 @@ namespace PlumJsonAnimator.Services
         /// <param name="lang">Lang that has to be loaded</param>
         private void loadLangRes(string lang)
         {
-            this.currentLang = lang;
+            _currentLang = lang;
 
             string filePath = Path.Combine(LocalizationFilesPath, $"{lang}.json");
 
