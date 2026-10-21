@@ -48,14 +48,10 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public Dictionary<string, int?> GetSize()
         {
-            return new Dictionary<string, int?>()
-            {
-                ["width"] = _width,
-                ["height"] = _height,
-            };
+            return new Dictionary<string, int?>() { ["width"] = _width, ["height"] = _height };
         }
 
-        public abstract void DrawAttachment(Slot slot, Canvas? canvas = null);
+        public abstract void DrawSlotAttachment(Slot slot, Canvas? canvas = null);
     }
 
     /// <summary>
@@ -108,7 +104,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         private Bitmap _cachedBitmap;
         private string _cachedPath;
 
-        public override void DrawAttachment(Slot slot, Canvas? canvas)
+        public override void DrawSlotAttachment(Slot slot, Canvas? canvas)
         {
             if (canvas == null)
                 return;
@@ -148,6 +144,35 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 RenderTransform = new MatrixTransform(new Matrix(f11, f12, f21, f22, 0, 0)),
                 RenderTransformOrigin = new RelativePoint(0.5, 0.5, RelativeUnit.Relative),
             };
+
+            // for (int i = 0; i < triangles.Length; i += 3)
+            // {
+            //     ctx.BeginFigure(clippedPoints[triangles[i]], isFilled: true);
+            //     ctx.LineTo(clippedPoints[triangles[i + 1]]);
+            //     ctx.LineTo(clippedPoints[triangles[i + 2]]);
+            //     ctx.EndFigure(isClosed: true);
+            // }
+
+            var clipGeometry = new StreamGeometry();
+            using (var ctx = clipGeometry.Open())
+            {
+                Point p0 = new Point(0, 0);
+                Point p1 = new Point(imgWidth, 0);
+                Point p2 = new Point(imgWidth, imgHeight);
+                Point p3 = new Point(0, imgHeight);
+
+                ctx.BeginFigure(p0, isFilled: true);
+                ctx.LineTo(p1);
+                ctx.LineTo(p2);
+                ctx.EndFigure(isClosed: true);
+
+                ctx.BeginFigure(p2, isFilled: true);
+                ctx.LineTo(p3);
+                ctx.LineTo(p0);
+                ctx.EndFigure(isClosed: true);
+            }
+
+            image.Clip = clipGeometry;
 
             double worldX = slot.BoundedBone.GlobalX + (_x * boneM11 + _y * boneM21);
             double worldY = slot.BoundedBone.GlobalY + (_x * boneM12 + _y * boneM22);

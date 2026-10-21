@@ -105,7 +105,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 if (_globalState.CurrentProject!.CurrentSkin.IsSlotDrawable(item.Key))
                 {
-                    item.Value?.DrawAttachment(item.Key, canvas);
+                    item.Value?.DrawSlotAttachment(item.Key, canvas);
                     item.Key.DrawSlotSelection(canvas);
                 }
             }
