@@ -1,7 +1,5 @@
-using System;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.ViewModels;
 
 // TODO: unique names in redactobjs

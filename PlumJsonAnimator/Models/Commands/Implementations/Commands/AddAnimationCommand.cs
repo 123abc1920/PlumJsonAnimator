@@ -9,18 +9,18 @@ class AddAnimationCommand : ICommand
 
     public AddAnimationCommand(Project project)
     {
-        this._project = project;
+        _project = project;
     }
 
     public void Execute()
     {
-        if (this._addedAnimation != null)
+        if (_addedAnimation != null)
         {
             _project.RestoreAnimation(_addedAnimation);
             return;
         }
 
-        this._addedAnimation = _project.AddAnimation();
+        _addedAnimation = _project.AddAnimation();
     }
 
     public void Undo()

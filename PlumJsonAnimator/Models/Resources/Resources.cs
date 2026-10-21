@@ -32,18 +32,18 @@ namespace PlumJsonAnimator.Models.Resources
 
         public Res(ProjectFilesManager projectManager, GlobalState globalState)
         {
-            this._projectManager = projectManager;
-            this._globalState = globalState;
+            _projectManager = projectManager;
+            _globalState = globalState;
         }
 
         public string GetName
         {
-            get => this.Name;
+            get => Name;
             set
             {
-                if (this.Name != value)
+                if (Name != value)
                 {
-                    this.Name = value;
+                    Name = value;
                 }
             }
         }
@@ -68,11 +68,11 @@ namespace PlumJsonAnimator.Models.Resources
         {
             get
             {
-                if (_preview == null && !string.IsNullOrEmpty(this.Path) && File.Exists(this.Path))
+                if (_preview == null && !string.IsNullOrEmpty(Path) && File.Exists(Path))
                 {
                     try
                     {
-                        _preview = new Bitmap(this.Path);
+                        _preview = new Bitmap(Path);
                     }
                     catch { }
                 }
@@ -87,15 +87,15 @@ namespace PlumJsonAnimator.Models.Resources
         {
             if (name != null)
             {
-                if (this._globalState.CurrentProject.IsUniqRes(name) == true)
+                if (_globalState.CurrentProject.IsUniqRes(name) == true)
                 {
-                    this.Name = name;
-                    this._projectManager.RenameFile(
+                    Name = name;
+                    _projectManager.RenameFile(
                         Path,
                         System.IO.Path.Combine(
-                            this._globalState.CurrentProject!.GetProjectPath(),
+                            _globalState.CurrentProject!.GetProjectPath(),
                             "res",
-                            $"{this.Name}{ext}"
+                            $"{Name}{ext}"
                         )
                     );
                 }
@@ -104,7 +104,7 @@ namespace PlumJsonAnimator.Models.Resources
 
         public void SetPath(string newProjectPath)
         {
-            this.Path = System.IO.Path.Combine(newProjectPath, "res", $"{this.Name}{this.ext}");
+            Path = System.IO.Path.Combine(newProjectPath, "res", $"{Name}{ext}");
         }
     }
 
@@ -128,9 +128,9 @@ namespace PlumJsonAnimator.Models.Resources
         )
             : base(projectManager, globalState)
         {
-            this.Name = name;
-            this.ext = _ext;
-            this.Path = _path;
+            Name = name;
+            ext = _ext;
+            Path = _path;
         }
     }
 }

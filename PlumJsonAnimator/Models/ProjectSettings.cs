@@ -11,29 +11,24 @@ namespace PlumJsonAnimator.Models;
 /// </summary>
 public class ProjectSettings
 {
-    private AppSettings appSettings;
-    private GlobalState globalState;
+    private AppSettings _appSettings;
+    private GlobalState _globalState;
 
     private const string BASE_ANIM =
         "{'skeleton':{'spine':'4.3.2'},'bones':[{'name':'root','x':100.0,'y':100.0}],'slots':[],'skins':[{'name':'default','attachments':{}}],'animations':{'anim0':{'bones':{},'drawOrder':[]}}}";
 
-    private SettingsData settingsData;
-
-    public SettingsData GetSettingsData()
-    {
-        return this.settingsData;
-    }
+    private SettingsData _settingsData;
 
     public ProjectSettings(AppSettings appSettings, GlobalState globalState)
     {
-        this.appSettings = appSettings;
-        this.globalState = globalState;
+        _appSettings = appSettings;
+        _globalState = globalState;
 
-        this.settingsData = new SettingsData()
+        _settingsData = new SettingsData()
         {
             Path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
-                this.globalState.GlobalWorkspace
+                _globalState.GlobalWorkspace
             ),
             Name = "NewProject",
             Spine = "4.3.2",
@@ -41,42 +36,82 @@ public class ProjectSettings
         };
     }
 
-    public ProjectSettings(string path, AppSettings appSettings, GlobalState globalState)
+    public ProjectSettings(
+        string settingsPathFile,
+        AppSettings appSettings,
+        GlobalState globalState
+    )
         : this(appSettings, globalState)
     {
-        SettingsData? settingsData = ReadSettings(path);
-        if (settingsData != null)
+        if (!File.Exists(settingsPathFile))
         {
-            this.settingsData = settingsData;
+            _settingsData.Path = settingsPathFile;
+            SaveSettings();
         }
+        else
+        {
+            SettingsData? settingsData = ReadSettings(settingsPathFile);
+            if (settingsData != null)
+            {
+                string directoryPath = Path.GetDirectoryName(settingsPathFile);
+                string projectName = Path.GetFileName(directoryPath);
+                string workspacePath = Path.GetDirectoryName(directoryPath);
+                _settingsData = settingsData;
+                _settingsData.Name = projectName;
+                _settingsData.Path = workspacePath;
+            }
+        }
+    }
+
+    public ProjectSettings(
+        string path,
+        string name,
+        AppSettings appSettings,
+        GlobalState globalState
+    )
+        : this(appSettings, globalState)
+    {
+        if (!File.Exists(path))
+        {
+            _settingsData.Path = path;
+            _settingsData.Name = name;
+            SaveSettings();
+        }
+        else
+        {
+            SettingsData? settingsData = ReadSettings(path);
+            if (settingsData != null)
+            {
+                _settingsData = settingsData;
+            }
+        }
+    }
+
+    public SettingsData GetSettingsData()
+    {
+        return _settingsData;
     }
 
     public void ExistOrCreateProjectDirs()
     {
-        if (!Directory.Exists(this.appSettings.appSettings!.Workspace))
+        if (!Directory.Exists(_appSettings._appSettings!.Workspace))
         {
-            Directory.CreateDirectory(this.appSettings.appSettings!.Workspace);
+            Directory.CreateDirectory(_appSettings._appSettings!.Workspace);
         }
 
-        if (!Directory.Exists(Path.Combine(this.appSettings.appSettings!.Workspace, "res")))
+        if (!Directory.Exists(Path.Combine(_appSettings._appSettings!.Workspace, "res")))
         {
-            Directory.CreateDirectory(Path.Combine(this.appSettings.appSettings!.Workspace, "res"));
+            Directory.CreateDirectory(Path.Combine(_appSettings._appSettings!.Workspace, "res"));
         }
 
         if (
             !File.Exists(
-                Path.Combine(
-                    this.appSettings.appSettings!.Workspace,
-                    this.globalState.SettingsFileName
-                )
+                Path.Combine(_appSettings._appSettings!.Workspace, _globalState.SettingsFileName)
             )
         )
         {
             File.Create(
-                    Path.Combine(
-                        this.appSettings.appSettings!.Workspace,
-                        this.globalState.SettingsFileName
-                    )
+                    Path.Combine(_appSettings._appSettings!.Workspace, _globalState.SettingsFileName)
                 )
                 .Close();
         }
@@ -85,15 +120,15 @@ public class ProjectSettings
     public void SaveSettings()
     {
         string settingsPath = Path.Combine(
-            this.appSettings.appSettings!.Workspace,
-            this.globalState.SettingsFileName
+            _appSettings._appSettings!.Workspace,
+            _globalState.SettingsFileName
         );
 
         ExistOrCreateProjectDirs();
 
         File.WriteAllText(
             settingsPath,
-            JsonConvert.SerializeObject(this.settingsData, this.globalState.jsonSettings)
+            JsonConvert.SerializeObject(_settingsData, _globalState.jsonSettings)
         );
     }
 
@@ -101,21 +136,21 @@ public class ProjectSettings
     {
         ExistOrCreateProjectDirs();
 
-        this.settingsData.Anim = jsonifyedProject;
+        _settingsData.Anim = jsonifyedProject;
 
         ExistOrCreateProjectDirs();
 
         File.WriteAllText(
             filePath,
-            JsonConvert.SerializeObject(this.settingsData, this.globalState.jsonSettings)
+            JsonConvert.SerializeObject(_settingsData, _globalState.jsonSettings)
         );
     }
 
     public void WriteProjectJSON(string jsonifyedProject)
     {
         string settingsPath = Path.Combine(
-            this.appSettings.appSettings!.Workspace,
-            this.globalState.SettingsFileName
+            _appSettings._appSettings!.Workspace,
+            _globalState.SettingsFileName
         );
         WriteProjectInFile(settingsPath, jsonifyedProject);
     }
@@ -123,26 +158,20 @@ public class ProjectSettings
     public void WriteAutoSave(string jsonifyedProject)
     {
         string settingsPath = Path.Combine(
-            this.appSettings.appSettings!.Workspace,
-            this.globalState.AutoSaveFile
+            _appSettings._appSettings!.Workspace,
+            _globalState.AutoSaveFile
         );
         Console.WriteLine(settingsPath);
         WriteProjectInFile(settingsPath, jsonifyedProject);
     }
 
-    private SettingsData? readFile(string settingsPath)
+    private SettingsData? ReadFile(string settingsPath)
     {
-        if (!File.Exists(settingsPath))
-        {
-            SaveSettings();
-            return null;
-        }
-
         ExistOrCreateProjectDirs();
 
         var settings = JsonConvert.DeserializeObject<SettingsData>(File.ReadAllText(settingsPath));
 
-        if (settings != null && settings.Name != null)
+        if (settings != null)
         {
             settings.Path = Directory
                 .GetParent(Directory.GetParent(settingsPath).FullName)
@@ -150,27 +179,25 @@ public class ProjectSettings
 
             return settings;
         }
-        else
-        {
-            return null;
-        }
+        
+        return null;
     }
 
     public SettingsData? ReadSettings()
     {
         string settingsPath = Path.Combine(
-            this.appSettings.appSettings!.Workspace,
-            this.globalState.SettingsFileName
+            _appSettings._appSettings!.Workspace,
+            _globalState.SettingsFileName
         );
 
-        return readFile(settingsPath);
+        return ReadFile(settingsPath);
     }
 
     public SettingsData? ReadSettings(string? path)
     {
         if (path != null)
         {
-            return readFile(path);
+            return ReadFile(path);
         }
         return null;
     }
@@ -184,7 +211,7 @@ public class SettingsData
     [JsonIgnore]
     public required string Path { get; set; }
 
-    [JsonProperty("project_name")]
+    [JsonIgnore]
     public required string Name { get; set; }
 
     [JsonProperty("project_spine")]

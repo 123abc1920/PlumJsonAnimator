@@ -2,7 +2,6 @@ using System;
 using Avalonia.Controls;
 using Avalonia.Threading;
 using PlumJsonAnimator.Common.Constants;
-using PlumJsonAnimator.Models;
 using static PlumJsonAnimator.Services.JsonCode;
 
 namespace PlumJsonAnimator.Services;
@@ -11,17 +10,17 @@ public class CanvasRenderer
 {
     private DispatcherTimer _canvasLoop = new DispatcherTimer();
 
-    public GlobalState globalState;
-    public JsonCode jsonCode;
-    public JsonValidator jsonValidator;
+    public GlobalState _globalState;
+    public JsonCode _jsonCode;
+    public JsonValidator _jsonValidator;
 
     public CanvasRenderer(GlobalState globalState, JsonCode jsonCode, JsonValidator jsonValidator)
     {
-        this.globalState = globalState;
-        this.jsonCode = jsonCode;
-        this.jsonValidator = jsonValidator;
+        _globalState = globalState;
+        _jsonCode = jsonCode;
+        _jsonValidator = jsonValidator;
 
-        _canvasLoop.Interval = TimeSpan.FromMilliseconds(1000 / this.globalState.FPS);
+        _canvasLoop.Interval = TimeSpan.FromMilliseconds(1000 / _globalState.FPS);
         _canvasLoop.Tick += UpdateCanvas;
         _canvasLoop.Start();
     }
@@ -38,15 +37,15 @@ public class CanvasRenderer
 
     private void UpdateCanvas(object? sender, EventArgs e)
     {
-        if (this.globalState.currentTab == 0)
+        if (_globalState.CurrentTab == 0)
         {
             RedrawCanvas(
-                this.globalState.Canvas,
-                this.globalState.DrawBones,
-                this.globalState.CaptureMode
+                _globalState.Canvas,
+                _globalState.DrawBones,
+                _globalState.CaptureMode
             );
         }
-        else if (this.globalState.currentTab == 1)
+        else if (_globalState.CurrentTab == 1)
         {
             CanGenerateProject();
         }
@@ -55,33 +54,33 @@ public class CanvasRenderer
     public void RedrawCanvas(Canvas canvas, bool isDrawBone, bool isDrawCapture)
     {
         canvas?.Children.Clear();
-        this.globalState.CurrentProject?.DrawSlots(canvas);
-        this.globalState.CurrentProject?.MainSkeleton?.RecalculateBones();
+        _globalState.CurrentProject?.DrawSlots(canvas);
+        _globalState.CurrentProject?.MainSkeleton?.RecalculateBones();
         if (isDrawBone)
         {
-            this.globalState.CurrentProject?.MainSkeleton?.DrawSkeleton(canvas);
-            this.jsonCode.GenerateCode(this.globalState.CurrentProject);
+            _globalState.CurrentProject?.MainSkeleton?.DrawSkeleton(canvas);
+            _jsonCode.GenerateCode(_globalState.CurrentProject);
         }
         if (isDrawCapture)
         {
-            this.globalState.captureArea?.DrawCaptureArea(canvas);
+            _globalState.CaptureArea?.DrawCaptureArea(canvas);
         }
     }
 
     public bool CanGenerateProject()
     {
-        this.globalState.jsonError.ErrorText = this.jsonValidator.Validate(
-            this.globalState.CurrentProject.Code
+        _globalState.JsonError.ErrorText = _jsonValidator.Validate(
+            _globalState.CurrentProject.Code
         );
-        if (this.globalState.jsonError.IsOk)
+        if (_globalState.JsonError.IsOk)
         {
-            ValidResult validateResult = this.jsonCode.Regenerate(
-                this.globalState.CurrentProject,
+            RegenerateResult validateResult = _jsonCode.Regenerate(
+                _globalState.CurrentProject,
                 false
             );
             if (!validateResult.IsOk)
             {
-                this.globalState.jsonError.ErrorText = validateResult.Message;
+                _globalState.JsonError.ErrorText = validateResult.Message;
                 return false;
             }
         }

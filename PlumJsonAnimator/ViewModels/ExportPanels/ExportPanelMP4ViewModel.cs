@@ -25,12 +25,12 @@ public partial class ExportPanelMP4ViewModel : ViewModelBase
 
     public string ExportPath
     {
-        get { return this.imageExporter.ExportPath; }
+        get { return _imageExporter.ExportPath; }
         set
         {
-            if (this.imageExporter.ExportPath != value)
+            if (_imageExporter.ExportPath != value)
             {
-                this.imageExporter.ExportPath = value;
+                _imageExporter.ExportPath = value;
                 OnPropertyChanged(nameof(ExportPath));
             }
         }
@@ -38,12 +38,12 @@ public partial class ExportPanelMP4ViewModel : ViewModelBase
 
     public string FfmpegPath
     {
-        get { return this.appSettings.appSettings.Ffmpeg; }
+        get { return _appSettings._appSettings.Ffmpeg; }
         set
         {
-            if (this.appSettings.appSettings.Ffmpeg != value || value == null || value == "")
+            if (_appSettings._appSettings.Ffmpeg != value || value == null || value == "")
             {
-                this.appSettings.appSettings.Ffmpeg = value;
+                _appSettings._appSettings.Ffmpeg = value;
                 OnPropertyChanged(nameof(FfmpegPath));
             }
         }
@@ -68,7 +68,7 @@ public partial class ExportPanelMP4ViewModel : ViewModelBase
             plumApp
         )
     {
-        this.imageExporter.ProgressChanged += (sender, percent) =>
+        _imageExporter.ProgressChanged += (sender, percent) =>
         {
             ProgressValue = percent;
         };
@@ -81,6 +81,6 @@ public partial class ExportPanelMP4ViewModel : ViewModelBase
         string ffmpegPath
     )
     {
-        return await this.PlumApp.ExportAsMp4(start, end, outputFile, ffmpegPath);
+        return await PlumApp.ExportAsMp4(start, end, outputFile, ffmpegPath);
     }
 }

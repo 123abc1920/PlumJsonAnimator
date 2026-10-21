@@ -1,4 +1,3 @@
-using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Services;
 using ReactiveUI;
 

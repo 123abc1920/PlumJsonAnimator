@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Avalonia;
@@ -6,7 +5,6 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
-using Avalonia.Threading;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models;
@@ -38,7 +36,7 @@ public partial class MainWindow : SukiWindow
     public MainWindow()
     {
         InitializeComponent();
-        this.KeyDown += OnWindowKeyDown;
+        KeyDown += OnWindowKeyDown;
 
         ToastHost.Manager = ToastManager;
         Popups.ToastManager = ToastManager;
@@ -125,14 +123,14 @@ public partial class MainWindow : SukiWindow
                         _oldBoneStatus = new BoneStatus(viewModel.CurrentBone);
                         if (viewModel.IsAnimMode)
                         {
-                            this._oldBoneStatus.T =
+                            _oldBoneStatus.T =
                                 viewModel.CurrentProject.CurrentAnimation.GetKeyframe(
                                     TransformModeTypes.TRANSLATE,
                                     viewModel.CurrentTime,
                                     viewModel.CurrentBone
                                 );
 
-                            this._oldBoneStatus.R =
+                            _oldBoneStatus.R =
                                 viewModel.CurrentProject.CurrentAnimation.GetKeyframe(
                                     TransformModeTypes.ROTATE,
                                     viewModel.CurrentTime,
@@ -176,7 +174,7 @@ public partial class MainWindow : SukiWindow
         if (DataContext is MainWindowViewModel viewModel)
         {
             viewModel.CurrentProject?.CurrentMode.ClearMode();
-            if (this._oldBoneStatus != null)
+            if (_oldBoneStatus != null)
             {
                 BoneStatus newBoneStatus = new BoneStatus(viewModel.CurrentBone);
                 if (viewModel.IsAnimMode)

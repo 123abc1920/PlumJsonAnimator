@@ -11,9 +11,9 @@ class AddSlotCommand : ICommand
 
     public AddSlotCommand(Project project, Slot slot, Bone bone)
     {
-        this._project = project;
-        this._slot = slot;
-        this._bone = bone;
+        _project = project;
+        _slot = slot;
+        _bone = bone;
     }
 
     public void Execute()

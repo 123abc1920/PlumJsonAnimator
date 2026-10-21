@@ -16,25 +16,16 @@ namespace PlumJsonAnimator.Services
     /// </summary>
     public class ProjectFilesManager
     {
-        private AppSettings _appSettings;
         private GlobalState _globalState;
-        private Interpolation _interpolation;
         private LocalizationService _localizationService;
-        private EasingFactory _easingFactory;
 
         public ProjectFilesManager(
-            AppSettings appSettings,
             GlobalState globalState,
-            Interpolation interpolation,
-            LocalizationService localizationService,
-            EasingFactory easingFactory
+            LocalizationService localizationService
         )
         {
-            _appSettings = appSettings;
             _globalState = globalState;
-            _interpolation = interpolation;
             _localizationService = localizationService;
-            _easingFactory = easingFactory;
         }
 
         /// <summary>
@@ -47,9 +38,9 @@ namespace PlumJsonAnimator.Services
 
             var fileTypeFilter = new FilePickerFileType[]
             {
-                new($"*{this._globalState.ProgramExt}")
+                new($"*{_globalState.ProgramExt}")
                 {
-                    Patterns = new[] { $"*{this._globalState.ProgramExt}" },
+                    Patterns = new[] { $"*{_globalState.ProgramExt}" },
                 },
             };
 
@@ -64,36 +55,6 @@ namespace PlumJsonAnimator.Services
             );
 
             return result?.FirstOrDefault()?.Path.LocalPath;
-        }
-
-        public Project? NewProject(string? projectName, string? projectPath)
-        {
-            if (projectName != null && projectPath != null)
-            {
-                this._globalState.CurrentProject?.SaveProjectSettings();
-
-                ProjectSettings projectSettings = new ProjectSettings(
-                    this._appSettings,
-                    this._globalState
-                );
-
-                this._appSettings.ChangeProject(projectSettings.GetSettingsData());
-
-                Project newProject = new Project(
-                    projectSettings,
-                    _globalState,
-                    _interpolation,
-                    _localizationService,
-                    _easingFactory
-                );
-
-                newProject.SaveProjectSettings();
-                _appSettings.SaveSettings();
-                LoadRes(newProject);
-
-                return newProject;
-            }
-            return null;
         }
 
         /// <summary>
@@ -129,8 +90,8 @@ namespace PlumJsonAnimator.Services
             }
 
             string projectPath = Path.Combine(
-                this._globalState.CurrentProject!.ProjectPath,
-                this._globalState.CurrentProject.Name
+                _globalState.CurrentProject!.ProjectPath,
+                _globalState.CurrentProject.Name
             );
             string resDir = Path.Combine(projectPath, "res");
 
@@ -169,7 +130,7 @@ namespace PlumJsonAnimator.Services
             catch (Exception ex)
             {
                 Console.WriteLine(
-                    $"{this._localizationService.GetMessage(LocalizationConsts.DELETE_ERROR)}: {ex.Message}"
+                    $"{_localizationService.GetMessage(LocalizationConsts.DELETE_ERROR)}: {ex.Message}"
                 );
                 return false;
             }
@@ -215,7 +176,7 @@ namespace PlumJsonAnimator.Services
                 Directory.CreateDirectory(newDir);
 
                 var files = Directory.GetFiles(oldDir);
-                var options = this._globalState.GetParallelOptions();
+                var options = _globalState.GetParallelOptions();
                 Parallel.ForEach(
                     files,
                     options,
@@ -262,7 +223,7 @@ namespace PlumJsonAnimator.Services
                     {
                         return new ImageRes(
                             this,
-                            this._globalState,
+                            _globalState,
                             filePath,
                             Path.GetFileNameWithoutExtension(filePath),
                             Path.GetExtension(filePath)
@@ -278,7 +239,7 @@ namespace PlumJsonAnimator.Services
             catch (Exception ex)
             {
                 Console.WriteLine(
-                    $"{this._localizationService.GetMessage(LocalizationConsts.ERROR)}: {ex.Message}"
+                    $"{_localizationService.GetMessage(LocalizationConsts.ERROR)}: {ex.Message}"
                 );
             }
         }

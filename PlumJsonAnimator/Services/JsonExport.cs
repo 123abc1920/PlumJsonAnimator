@@ -10,10 +10,10 @@ namespace PlumJsonAnimator.Services
     /// </summary>
     public class JsonExport
     {
-        private JsonValidator jsonValidator;
-        private JsonCode jsonCode;
-        private GlobalState globalState;
-        private LocalizationService localizationService;
+        private JsonValidator _jsonValidator;
+        private JsonCode _jsonCode;
+        private GlobalState _globalState;
+        private LocalizationService _localizationService;
 
         public JsonExport(
             JsonValidator jsonValidator,
@@ -22,10 +22,10 @@ namespace PlumJsonAnimator.Services
             LocalizationService localizationService
         )
         {
-            this.jsonValidator = jsonValidator;
-            this.jsonCode = jsonCode;
-            this.globalState = globalState;
-            this.localizationService = localizationService;
+            _jsonValidator = jsonValidator;
+            _jsonCode = jsonCode;
+            _globalState = globalState;
+            _localizationService = localizationService;
         }
 
         /// <summary>
@@ -41,8 +41,8 @@ namespace PlumJsonAnimator.Services
             }
 
             string output = JsonConvert.SerializeObject(
-                this.jsonCode.GenerateJSONData(project),
-                this.globalState.jsonSettings
+                _jsonCode.GenerateJSONData(project),
+                _globalState.jsonSettings
             );
 
             if (Directory.Exists(outFolder))
@@ -69,8 +69,8 @@ namespace PlumJsonAnimator.Services
             if (File.Exists(inputFile))
             {
                 string text = File.ReadAllText(inputFile);
-                string result = this.jsonValidator.Validate(text);
-                if (result == this.localizationService.GetMessage(LocalizationConsts.JSON_VALID))
+                string result = _jsonValidator.Validate(text);
+                if (result == _localizationService.GetMessage(LocalizationConsts.JSON_VALID))
                 {
                     project!.Code = text;
                     return ExportResult.SUCCESS;

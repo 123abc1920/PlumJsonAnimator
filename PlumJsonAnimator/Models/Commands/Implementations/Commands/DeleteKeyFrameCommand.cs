@@ -13,13 +13,13 @@ class DeleteKeyFrameCommand : ICommand
 
     public DeleteKeyFrameCommand(Animation animation, Bone bone, TransformModeTypes type)
     {
-        this._animation = animation;
-        this._bone = bone;
-        this._type = type;
+        _animation = animation;
+        _bone = bone;
+        _type = type;
 
-        this._time = animation.CurrentTime;
+        _time = animation.CurrentTime;
 
-        this._keyframe = animation.GetKeyframe(this._type, this._time, this._bone);
+        _keyframe = animation.GetKeyframe(_type, _time, _bone);
     }
 
     public void Execute()

@@ -13,7 +13,7 @@ namespace PlumJsonAnimator.Common.Constants
 
         public TransformModeFactory(GlobalState globalState)
         {
-            this._globalState = globalState;
+            _globalState = globalState;
 
             _modes = new Dictionary<TransformModeTypes, Mode>
             {

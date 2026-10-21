@@ -28,14 +28,14 @@ namespace PlumJsonAnimator.Models
 
         public CaptureArea(int x, int y, int width, int height, AppSettings appSettings)
         {
-            this._a = new PointModel(x, y);
-            this._b = new PointModel(x + width, y);
-            this._c = new PointModel(x + width, y + height);
-            this._d = new PointModel(x, y + height);
+            _a = new PointModel(x, y);
+            _b = new PointModel(x + width, y);
+            _c = new PointModel(x + width, y + height);
+            _d = new PointModel(x, y + height);
 
-            _points = new PointModel[4] { this._a, this._b, this._c, this._d };
+            _points = new PointModel[4] { _a, _b, _c, _d };
 
-            this._appSettings = appSettings;
+            _appSettings = appSettings;
 
             ValidatePoints();
         }
@@ -104,7 +104,7 @@ namespace PlumJsonAnimator.Models
 
                 if (dx < NearRegion && dy < NearRegion)
                 {
-                    this._selectedPoint = p;
+                    _selectedPoint = p;
                     break;
                 }
             }
@@ -117,23 +117,23 @@ namespace PlumJsonAnimator.Models
         /// <param name="y">Y click coordinate</param>
         public void MoveSelectedPoint(int x, int y)
         {
-            if (this._selectedPoint != null)
+            if (_selectedPoint != null)
             {
-                var oldx = this._selectedPoint.X;
-                var oldy = this._selectedPoint.Y;
+                var oldx = _selectedPoint.X;
+                var oldy = _selectedPoint.Y;
 
-                this._selectedPoint.X = x;
-                this._selectedPoint.Y = y;
+                _selectedPoint.X = x;
+                _selectedPoint.Y = y;
 
                 foreach (PointModel p in _points)
                 {
                     if (p.X == oldx)
                     {
-                        p.X = this._selectedPoint.X;
+                        p.X = _selectedPoint.X;
                     }
                     if (p.Y == oldy)
                     {
-                        p.Y = this._selectedPoint.Y;
+                        p.Y = _selectedPoint.Y;
                     }
                 }
             }
@@ -146,11 +146,11 @@ namespace PlumJsonAnimator.Models
         /// </summary>
         public void UnSelectPoint()
         {
-            this._selectedPoint = null;
+            _selectedPoint = null;
 
             ValidatePoints();
 
-            this._appSettings.SetCaptureArea(GetRect());
+            _appSettings.SetCaptureArea(GetRect());
         }
 
         /// <summary>
@@ -159,8 +159,8 @@ namespace PlumJsonAnimator.Models
         /// <returns>Bound rect</returns>
         public Rect GetRect()
         {
-            var width = Math.Abs(this._b.X - this._a.X);
-            var height = Math.Abs(this._d.Y - this._a.Y);
+            var width = Math.Abs(_b.X - _a.X);
+            var height = Math.Abs(_d.Y - _a.Y);
 
             if (width % 2 != 0)
             {
@@ -172,8 +172,8 @@ namespace PlumJsonAnimator.Models
             }
 
             return new Rect(
-                Math.Floor((double)this._a.X),
-                Math.Floor((double)this._a.Y),
+                Math.Floor((double)_a.X),
+                Math.Floor((double)_a.Y),
                 width,
                 height
             );
@@ -195,8 +195,8 @@ namespace PlumJsonAnimator.Models
             Canvas.SetTop(rectangle, rect.Y);
             canvas.Children.Add(rectangle);
 
-            var width = this._b.X - this._a.X;
-            var height = this._d.Y - this._a.Y;
+            var width = _b.X - _a.X;
+            var height = _d.Y - _a.Y;
             var sizeText = new TextBlock
             {
                 Text = $"{width:F0} x {height:F0}",
@@ -210,10 +210,10 @@ namespace PlumJsonAnimator.Models
             Canvas.SetTop(sizeText, rect.Y);
             canvas.Children.Add(sizeText);
 
-            DrawPoint(canvas, this._a.X, this._a.Y);
-            DrawPoint(canvas, this._b.X, this._b.Y);
-            DrawPoint(canvas, this._c.X, this._c.Y);
-            DrawPoint(canvas, this._d.X, this._d.Y);
+            DrawPoint(canvas, _a.X, _a.Y);
+            DrawPoint(canvas, _b.X, _b.Y);
+            DrawPoint(canvas, _c.X, _c.Y);
+            DrawPoint(canvas, _d.X, _d.Y);
         }
 
         /// <summary>

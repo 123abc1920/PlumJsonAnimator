@@ -16,8 +16,8 @@ namespace PlumJsonAnimator.Services
 
         public Prettify(GlobalState globalState, LocalizationService localizationService)
         {
-            this._globalState = globalState;
-            this._localizationService = localizationService;
+            _globalState = globalState;
+            _localizationService = localizationService;
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace PlumJsonAnimator.Services
             }
             catch (JsonReaderException ex)
             {
-                this._globalState.jsonError.ErrorText = GetErrorWithContext(
+                _globalState.JsonError.ErrorText = GetErrorWithContext(
                     text,
                     ex.LineNumber,
                     ex.LinePosition,
@@ -62,7 +62,7 @@ namespace PlumJsonAnimator.Services
             var lines = json.Split('\n');
 
             if (errorLine > lines.Length)
-                return $"{this._localizationService.GetMessage(LocalizationConsts.ERROR)}: {errorMessage}";
+                return $"{_localizationService.GetMessage(LocalizationConsts.ERROR)}: {errorMessage}";
 
             string errorLineText = lines[errorLine - 1];
 
@@ -79,9 +79,9 @@ namespace PlumJsonAnimator.Services
             if (errorLine < lines.Length)
                 context += $"{errorLine + 1}: {lines[errorLine]}\n";
 
-            return $"{this._localizationService.GetMessage(LocalizationConsts.JSON_ERROR_STR)} {errorLine}, {this._localizationService.GetMessage(LocalizationConsts.JSON_ERROR_POS)} {errorPos}:\n"
+            return $"{_localizationService.GetMessage(LocalizationConsts.JSON_ERROR_STR)} {errorLine}, {_localizationService.GetMessage(LocalizationConsts.JSON_ERROR_POS)} {errorPos}:\n"
                 + $"{errorMessage}\n\n"
-                + $"{this._localizationService.GetMessage(LocalizationConsts.JSON_CONTEXT)}:\n{context}";
+                + $"{_localizationService.GetMessage(LocalizationConsts.JSON_CONTEXT)}:\n{context}";
         }
     }
 }

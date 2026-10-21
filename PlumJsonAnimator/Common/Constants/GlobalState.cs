@@ -34,14 +34,14 @@ namespace PlumJsonAnimator.Common.Constants
         public readonly string SettingsFileName;
         public readonly string AutoSaveFile;
 
-        public JsonError jsonError;
+        public JsonError JsonError { get; set; }
         public JsonSerializerSettings jsonSettings = new JsonSerializerSettings
         {
             Formatting = Formatting.Indented,
             NullValueHandling = NullValueHandling.Ignore,
             DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
         };
-        public int FPS = 60;
+        public int FPS { get; set; } = 60;
 
         public event Action TimeUpdated;
 
@@ -50,7 +50,7 @@ namespace PlumJsonAnimator.Common.Constants
             TimeUpdated?.Invoke();
         }
 
-        public int currentTab;
+        public int CurrentTab { get; set; }
 
         public EasingTypes CurrentEasingType { get; set; } = EasingTypes.LINEAR;
 
@@ -64,35 +64,35 @@ namespace PlumJsonAnimator.Common.Constants
 
         public Canvas? Canvas { get; set; }
         public const int BaseCanvasSize = 1000;
-        public int canvasHeight = 1000;
-        public int canvasWidth = 1000;
+        public int CanvasHeight { get; set; } = 1000;
+        public int CanvasWidth { get; set; } = 1000;
 
-        public double zoomCanvas = 1;
+        public double ZoomCanvas { get; set; } = 1;
 
-        public bool isAutoSave = true;
-        public long autoSaveSec = 300;
-        public DateTime lastSaveTime;
+        public bool IsAutoSave { get; set; } = true;
+        public long AutoSaveSec { get; set; } = 300;
+        private DateTime _lastSaveTime;
         public DateTime LastSaveTime
         {
             set
             {
-                if (this.lastSaveTime != value)
+                if (_lastSaveTime != value)
                 {
-                    this.lastSaveTime = value;
+                    _lastSaveTime = value;
                     OnPropertyChanged(nameof(LastSaveTime));
                 }
             }
-            get => this.lastSaveTime;
+            get => _lastSaveTime;
         }
 
-        public CaptureArea? captureArea;
+        public CaptureArea? CaptureArea { get; set; }
 
         public GlobalState(LocalizationService localizationService)
         {
-            this.jsonError = new JsonError(localizationService);
+            JsonError = new JsonError(localizationService);
 
-            this.SettingsFileName = $"settings{this.ProgramExt}";
-            this.AutoSaveFile = $"autosave{this.ProgramExt}";
+            SettingsFileName = $"settings{ProgramExt}";
+            AutoSaveFile = $"autosave{ProgramExt}";
         }
 
         public ParallelOptions GetParallelOptions()
@@ -104,7 +104,7 @@ namespace PlumJsonAnimator.Common.Constants
 
         public IImmutableBrush GetDotBoneColor(Bone b)
         {
-            if (this.CurrentBone == b && this.CurrentBone.IsBone == true)
+            if (CurrentBone == b && CurrentBone.IsBone == true)
             {
                 return AppColors.Red;
             }
@@ -116,7 +116,7 @@ namespace PlumJsonAnimator.Common.Constants
 
         public IImmutableBrush GetLineBoneColor(Bone b)
         {
-            if (this.CurrentBone == b && this.CurrentBone.IsBone == true)
+            if (CurrentBone == b && CurrentBone.IsBone == true)
             {
                 return AppColors.Blue;
             }
@@ -128,9 +128,9 @@ namespace PlumJsonAnimator.Common.Constants
 
         public bool IsSlotSelected(Slot slot)
         {
-            if (this.CurrentBone != null)
+            if (CurrentBone != null)
             {
-                if (!this.CurrentBone.IsBone && this.CurrentBone == slot)
+                if (!CurrentBone.IsBone && CurrentBone == slot)
                 {
                     return true;
                 }

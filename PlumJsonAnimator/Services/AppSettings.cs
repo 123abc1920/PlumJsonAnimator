@@ -17,15 +17,15 @@ namespace PlumJsonAnimator.Services
     {
         private string AppSettingsPath;
         private string AppSettingsFile;
-        public AppSettingsData? appSettings = null;
+        public AppSettingsData? _appSettings = null;
 
-        private GlobalState globalState;
-        private LocalizationService localizationService;
+        private GlobalState _globalState;
+        private LocalizationService _localizationService;
 
         public AppSettings(GlobalState globalState, LocalizationService localizationService)
         {
-            this.globalState = globalState;
-            this.localizationService = localizationService;
+            _globalState = globalState;
+            _localizationService = localizationService;
 
             AppSettingsPath = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
@@ -33,30 +33,30 @@ namespace PlumJsonAnimator.Services
             );
             AppSettingsFile = Path.Combine(
                 AppSettingsPath,
-                $"settings{this.globalState.ProgramExt}"
+                $"settings{_globalState.ProgramExt}"
             );
 
-            this.appSettings = new AppSettingsData()
+            _appSettings = new AppSettingsData()
             {
                 Lang = LocalizationService.START_LANG,
                 LastDir = "",
                 Theme = "light",
                 Workspace = Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
-                    this.globalState.GlobalWorkspace,
+                    _globalState.GlobalWorkspace,
                     "NewProject"
                 ),
                 Ffmpeg = "",
                 CaptureX = 0,
                 CaptureY = 0,
-                CaptureWidth = this.globalState.canvasWidth,
-                CaptureHeight = this.globalState.canvasHeight,
+                CaptureWidth = _globalState.CanvasWidth,
+                CaptureHeight = _globalState.CanvasHeight,
             };
         }
 
         public void SetSettings(AppSettingsData appSettings)
         {
-            this.appSettings = appSettings;
+            _appSettings = appSettings;
             SaveSettings();
         }
 
@@ -66,10 +66,10 @@ namespace PlumJsonAnimator.Services
         /// <param name="rect">New capture area form</param>
         public void SetCaptureArea(Rect rect)
         {
-            this.appSettings!.CaptureX = (int)rect.X;
-            this.appSettings.CaptureY = (int)rect.Y;
-            this.appSettings.CaptureWidth = (int)rect.Width;
-            this.appSettings.CaptureHeight = (int)rect.Height;
+            _appSettings!.CaptureX = (int)rect.X;
+            _appSettings.CaptureY = (int)rect.Y;
+            _appSettings.CaptureWidth = (int)rect.Width;
+            _appSettings.CaptureHeight = (int)rect.Height;
 
             SaveSettings();
         }
@@ -78,8 +78,8 @@ namespace PlumJsonAnimator.Services
         {
             string newProjectWorkspace = Path.Combine(newProjectData.Path, newProjectData.Name);
 
-            this.appSettings!.Workspace = newProjectWorkspace;
-            this.appSettings!.LastDir = newProjectWorkspace;
+            _appSettings!.Workspace = newProjectWorkspace;
+            _appSettings!.LastDir = newProjectWorkspace;
 
             SaveSettings();
         }
@@ -98,7 +98,7 @@ namespace PlumJsonAnimator.Services
 
             File.WriteAllText(
                 AppSettingsFile,
-                JsonConvert.SerializeObject(this.appSettings, this.globalState.jsonSettings)
+                JsonConvert.SerializeObject(_appSettings, _globalState.jsonSettings)
             );
         }
 
@@ -127,34 +127,34 @@ namespace PlumJsonAnimator.Services
                     && Directory.Exists(newSettings.Workspace)
                 )
                 {
-                    this.appSettings!.LastDir = newSettings.LastDir;
-                    this.appSettings.Workspace = newSettings.Workspace;
-                    this.appSettings.Theme = newSettings.Theme;
-                    this.appSettings.Lang = newSettings.Lang;
-                    this.appSettings.Ffmpeg =
-                        (newSettings.Ffmpeg == null) ? this.appSettings.Ffmpeg : newSettings.Ffmpeg;
-                    this.appSettings.CaptureX =
+                    _appSettings!.LastDir = newSettings.LastDir;
+                    _appSettings.Workspace = newSettings.Workspace;
+                    _appSettings.Theme = newSettings.Theme;
+                    _appSettings.Lang = newSettings.Lang;
+                    _appSettings.Ffmpeg =
+                        (newSettings.Ffmpeg == null) ? _appSettings.Ffmpeg : newSettings.Ffmpeg;
+                    _appSettings.CaptureX =
                         (newSettings.CaptureX == null)
-                            ? this.appSettings.CaptureX
+                            ? _appSettings.CaptureX
                             : newSettings.CaptureX;
-                    this.appSettings.CaptureY =
+                    _appSettings.CaptureY =
                         (newSettings.CaptureY == null)
-                            ? this.appSettings.CaptureY
+                            ? _appSettings.CaptureY
                             : newSettings.CaptureY;
-                    this.appSettings.CaptureWidth =
+                    _appSettings.CaptureWidth =
                         (newSettings.CaptureWidth == null)
-                            ? this.appSettings.CaptureWidth
+                            ? _appSettings.CaptureWidth
                             : newSettings.CaptureWidth;
-                    this.appSettings.CaptureHeight =
+                    _appSettings.CaptureHeight =
                         (newSettings.CaptureHeight == null)
-                            ? this.appSettings.CaptureHeight
+                            ? _appSettings.CaptureHeight
                             : newSettings.CaptureHeight;
 
-                    this.localizationService.LoadLangResorce(newSettings.Lang);
+                    _localizationService.LoadLangResorce(newSettings.Lang);
 
-                    this.globalState.Theme = newSettings.Theme;
+                    _globalState.Theme = newSettings.Theme;
                     var sukiTheme = SukiTheme.GetInstance();
-                    if (this.globalState.Theme == "dark")
+                    if (_globalState.Theme == "dark")
                     {
                         sukiTheme.ChangeBaseTheme(ThemeVariant.Dark);
                     }
@@ -175,7 +175,7 @@ namespace PlumJsonAnimator.Services
 
         public string GetTheme()
         {
-            return this.appSettings!.Theme;
+            return _appSettings!.Theme;
         }
 
         /// <summary>
@@ -186,10 +186,10 @@ namespace PlumJsonAnimator.Services
         public CaptureArea CreateCaptureArea(int canvasWidth, int canvasHeight)
         {
             return new CaptureArea(
-                this.appSettings!.CaptureX > 0 ? this.appSettings.CaptureX : 0,
-                this.appSettings.CaptureY > 0 ? this.appSettings.CaptureY : 0,
-                this.appSettings.CaptureWidth > 0 ? this.appSettings.CaptureWidth : canvasWidth,
-                this.appSettings.CaptureHeight > 0 ? this.appSettings.CaptureHeight : canvasHeight,
+                _appSettings!.CaptureX > 0 ? _appSettings.CaptureX : 0,
+                _appSettings.CaptureY > 0 ? _appSettings.CaptureY : 0,
+                _appSettings.CaptureWidth > 0 ? _appSettings.CaptureWidth : canvasWidth,
+                _appSettings.CaptureHeight > 0 ? _appSettings.CaptureHeight : canvasHeight,
                 this
             );
         }

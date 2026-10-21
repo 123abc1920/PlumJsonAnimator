@@ -11,7 +11,6 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models;
-using PlumJsonAnimator.Models.Common;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Gif;
 using SixLabors.ImageSharp.PixelFormats;
@@ -26,12 +25,12 @@ namespace PlumJsonAnimator.Services
         public string ExportPath = "";
         public Canvas? Canvas
         {
-            get => this._globalState.Canvas;
+            get => _globalState.Canvas;
             set
             {
-                if (this._globalState.Canvas != value)
+                if (_globalState.Canvas != value)
                 {
-                    this._globalState.Canvas = value;
+                    _globalState.Canvas = value;
                 }
             }
         }
@@ -46,9 +45,9 @@ namespace PlumJsonAnimator.Services
             CanvasRenderer canvasRenderer
         )
         {
-            this._globalState = globalState;
-            this._localizationService = localizationService;
-            this._canvasRenderer = canvasRenderer;
+            _globalState = globalState;
+            _localizationService = localizationService;
+            _canvasRenderer = canvasRenderer;
         }
 
         /// <summary>
@@ -57,7 +56,7 @@ namespace PlumJsonAnimator.Services
         /// <param name="canvas">Canvas that contains graphics</param>
         private RenderTargetBitmap CatchCanvas(Canvas? canvas)
         {
-            var captureBounds = this._globalState.captureArea!.GetRect();
+            var captureBounds = _globalState.CaptureArea!.GetRect();
 
             var result = new RenderTargetBitmap(
                 new PixelSize((int)captureBounds.Width, (int)captureBounds.Height),
@@ -107,18 +106,18 @@ namespace PlumJsonAnimator.Services
                 return ExportResult.NO_FOLDER;
             }
 
-            this._canvasRenderer.LoopStop();
+            _canvasRenderer.LoopStop();
 
             project!.CurrentAnimation!.CurrentTime = start;
             double endTime = Math.Min(project.CurrentAnimation.MaxTime(), end);
 
-            var totalFrames = (int)((endTime - start) * this._globalState.FPS) + 1;
+            var totalFrames = (int)((endTime - start) * _globalState.FPS) + 1;
             int frameCount = 0;
 
             var i = 0;
 
-            this._globalState.CurrentProject.CurrentAnimation.SetupBones();
-            this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
+            _globalState.CurrentProject.CurrentAnimation.SetupBones();
+            _canvasRenderer.RedrawCanvas(Canvas, false, false);
 
             while (project.CurrentAnimation.CurrentTime <= endTime)
             {
@@ -142,7 +141,7 @@ namespace PlumJsonAnimator.Services
 
                 project.CurrentAnimation.Step();
 
-                this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
+                _canvasRenderer.RedrawCanvas(Canvas, false, false);
 
                 await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(
                     () => { },
@@ -152,8 +151,8 @@ namespace PlumJsonAnimator.Services
                 i++;
             }
 
-            this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
-            this._canvasRenderer.LoopStart();
+            _canvasRenderer.RedrawCanvas(Canvas, false, false);
+            _canvasRenderer.LoopStart();
 
             ProgressChanged?.Invoke(this, 0);
             return ExportResult.SUCCESS;
@@ -179,18 +178,18 @@ namespace PlumJsonAnimator.Services
                 return ExportResult.NO_FOLDER;
             }
 
-            this._canvasRenderer.LoopStop();
+            _canvasRenderer.LoopStop();
 
             project!.CurrentAnimation!.CurrentTime = start;
             double endTime = Math.Min(project.CurrentAnimation.MaxTime(), end);
 
-            var totalFrames = (int)((endTime - start) * this._globalState.FPS) + 1;
+            var totalFrames = (int)((endTime - start) * _globalState.FPS) + 1;
             int frameCount = 0;
 
             var i = 0;
 
-            this._globalState.CurrentProject.CurrentAnimation.SetupBones();
-            this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
+            _globalState.CurrentProject.CurrentAnimation.SetupBones();
+            _canvasRenderer.RedrawCanvas(Canvas, false, false);
 
             while (project.CurrentAnimation.CurrentTime <= endTime)
             {
@@ -214,7 +213,7 @@ namespace PlumJsonAnimator.Services
 
                 project.CurrentAnimation.Step();
 
-                this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
+                _canvasRenderer.RedrawCanvas(Canvas, false, false);
 
                 await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(
                     () => { },
@@ -224,8 +223,8 @@ namespace PlumJsonAnimator.Services
                 i++;
             }
 
-            this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
-            this._canvasRenderer.LoopStart();
+            _canvasRenderer.RedrawCanvas(Canvas, false, false);
+            _canvasRenderer.LoopStart();
 
             ProgressChanged?.Invoke(this, 0);
             return ExportResult.SUCCESS;
@@ -260,19 +259,19 @@ namespace PlumJsonAnimator.Services
 
             if (File.Exists(outputFile))
             {
-                this._canvasRenderer.LoopStop();
+                _canvasRenderer.LoopStop();
 
                 project!.CurrentAnimation!.CurrentTime = start;
                 double endTime = Math.Min(project.CurrentAnimation.MaxTime(), end);
 
-                var totalFrames = (int)((endTime - start) * this._globalState.FPS) + 1;
+                var totalFrames = (int)((endTime - start) * _globalState.FPS) + 1;
                 int frameCount = 0;
 
                 List<SixLabors.ImageSharp.Image<Rgba32>> frames =
                     new List<SixLabors.ImageSharp.Image<Rgba32>>();
 
-                this._globalState.CurrentProject.CurrentAnimation.SetupBones();
-                this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
+                _globalState.CurrentProject.CurrentAnimation.SetupBones();
+                _canvasRenderer.RedrawCanvas(Canvas, false, false);
 
                 while (project.CurrentAnimation.CurrentTime <= endTime)
                 {
@@ -299,7 +298,7 @@ namespace PlumJsonAnimator.Services
 
                     project.CurrentAnimation.Step();
 
-                    this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
+                    _canvasRenderer.RedrawCanvas(Canvas, false, false);
 
                     await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(
                         () => { },
@@ -309,7 +308,7 @@ namespace PlumJsonAnimator.Services
 
                 if (frames.Count > 0)
                 {
-                    int gifFrameDelay = (int)Math.Round(100.0 / this._globalState.FPS);
+                    int gifFrameDelay = (int)Math.Round(100.0 / _globalState.FPS);
 
                     using (var gif = frames[0].CloneAs<Rgba32>())
                     {
@@ -338,8 +337,8 @@ namespace PlumJsonAnimator.Services
                     }
                 }
 
-                this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
-                this._canvasRenderer.LoopStart();
+                _canvasRenderer.RedrawCanvas(Canvas, false, false);
+                _canvasRenderer.LoopStart();
 
                 ProgressChanged?.Invoke(this, 0);
                 return ExportResult.SUCCESS;
@@ -371,11 +370,11 @@ namespace PlumJsonAnimator.Services
                 return ExportResult.NO_FFMPEG;
             }
 
-            this._canvasRenderer.LoopStop();
+            _canvasRenderer.LoopStop();
 
             project!.CurrentAnimation!.CurrentTime = start;
-            this._globalState.CurrentProject.CurrentAnimation.SetupBones();
-            this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
+            _globalState.CurrentProject.CurrentAnimation.SetupBones();
+            _canvasRenderer.RedrawCanvas(Canvas, false, false);
 
             Canvas!.Measure(new Avalonia.Size(double.PositiveInfinity, double.PositiveInfinity));
             Canvas!.Arrange(new Avalonia.Rect(Canvas.Bounds.Size));
@@ -384,7 +383,7 @@ namespace PlumJsonAnimator.Services
             {
                 if (testBitmap == null)
                 {
-                    this._canvasRenderer.LoopStart();
+                    _canvasRenderer.LoopStart();
                     ProgressChanged?.Invoke(this, 0);
                     return ExportResult.FFMPEG_ERROR;
                 }
@@ -395,7 +394,7 @@ namespace PlumJsonAnimator.Services
 
                 if (width <= 0 || height <= 0)
                 {
-                    this._canvasRenderer.LoopStart();
+                    _canvasRenderer.LoopStart();
                     ProgressChanged?.Invoke(this, 0);
                     return ExportResult.FFMPEG_ERROR;
                 }
@@ -403,7 +402,7 @@ namespace PlumJsonAnimator.Services
                 string arguments =
                     $"-f rawvideo -pix_fmt bgra "
                     + $"-s {width}x{height} "
-                    + $"-r {this._globalState.FPS} "
+                    + $"-r {_globalState.FPS} "
                     + $"-i - "
                     + $"-c:v libx264 "
                     + $"-preset medium "
@@ -443,7 +442,7 @@ namespace PlumJsonAnimator.Services
                 double endTime = Math.Min(project.CurrentAnimation.MaxTime(), end);
                 int frameCount = 0;
                 bool error = false;
-                var totalFrames = (int)((endTime - start) * this._globalState.FPS) + 1;
+                var totalFrames = (int)((endTime - start) * _globalState.FPS) + 1;
 
                 using (var stdin = process.StandardInput.BaseStream)
                 {
@@ -496,7 +495,7 @@ namespace PlumJsonAnimator.Services
                             catch (Exception ex)
                             {
                                 Console.WriteLine(
-                                    $"{this._localizationService.GetMessage(LocalizationConsts.ERROR)}: {ex.Message}"
+                                    $"{_localizationService.GetMessage(LocalizationConsts.ERROR)}: {ex.Message}"
                                 );
                                 error = true;
                                 break;
@@ -505,7 +504,7 @@ namespace PlumJsonAnimator.Services
 
                         project.CurrentAnimation.Step();
 
-                        this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
+                        _canvasRenderer.RedrawCanvas(Canvas, false, false);
 
                         await Avalonia.Threading.Dispatcher.UIThread.InvokeAsync(
                             () => { },
@@ -519,8 +518,8 @@ namespace PlumJsonAnimator.Services
                     }
                 }
 
-                this._canvasRenderer.RedrawCanvas(this.Canvas, false, false);
-                this._canvasRenderer.LoopStart();
+                _canvasRenderer.RedrawCanvas(Canvas, false, false);
+                _canvasRenderer.LoopStart();
 
                 if (!process.WaitForExit(10000))
                 {

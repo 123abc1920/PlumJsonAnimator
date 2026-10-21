@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
@@ -11,12 +10,12 @@ public partial class AppSettingsViewModel : ViewModelBase
 {
     public string FfmpegPath
     {
-        get { return this.appSettings.appSettings.Ffmpeg; }
+        get { return _appSettings._appSettings.Ffmpeg; }
         set
         {
-            if (this.appSettings.appSettings.Ffmpeg != value || value == null || value == "")
+            if (_appSettings._appSettings.Ffmpeg != value || value == null || value == "")
             {
-                this.appSettings.appSettings.Ffmpeg = value;
+                _appSettings._appSettings.Ffmpeg = value;
                 OnPropertyChanged(nameof(FfmpegPath));
             }
         }
@@ -25,12 +24,12 @@ public partial class AppSettingsViewModel : ViewModelBase
     public List<string> Themes { get; set; } = new List<string>() { "light", "dark" };
     public string CurrentTheme
     {
-        get => this._globalState.Theme;
+        get => _globalState.Theme;
         set
         {
-            if (this._globalState.Theme != value)
+            if (_globalState.Theme != value)
             {
-                this._globalState.Theme = value;
+                _globalState.Theme = value;
                 OnPropertyChanged(nameof(CurrentTheme));
             }
         }
@@ -38,7 +37,7 @@ public partial class AppSettingsViewModel : ViewModelBase
 
     public void SaveSettings(AppSettingsData data)
     {
-        bool isSuccess = this.PlumApp.SaveSettings(data);
+        bool isSuccess = PlumApp.SaveSettings(data);
 
         if (isSuccess)
         {
@@ -68,6 +67,6 @@ public partial class AppSettingsViewModel : ViewModelBase
             plumApp
         )
     {
-        this.CurrentTheme = appSettings.appSettings.Theme;
+        CurrentTheme = appSettings._appSettings.Theme;
     }
 }

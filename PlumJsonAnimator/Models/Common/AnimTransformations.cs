@@ -17,7 +17,7 @@ namespace PlumJsonAnimator.Models.Common
 
         public String GenerateCode()
         {
-            return JsonConvert.SerializeObject(GenerateJSONData(), this._globalState.jsonSettings);
+            return JsonConvert.SerializeObject(GenerateJSONData(), _globalState.jsonSettings);
         }
     }
 

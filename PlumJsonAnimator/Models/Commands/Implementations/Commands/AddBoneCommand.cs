@@ -11,26 +11,26 @@ class AddBoneCommand : ICommand
 
     public AddBoneCommand(Bone selectedBone, Project project)
     {
-        this._selectedBone = selectedBone;
-        this._project = project;
+        _selectedBone = selectedBone;
+        _project = project;
     }
 
     public void Execute()
     {
-        if (this._newBone != null)
+        if (_newBone != null)
         {
-            _project?.AddBoneToProject(this._newBone, this._selectedBone);
+            _project?.AddBoneToProject(_newBone, _selectedBone);
             return;
         }
 
         if (_selectedBone != null && _selectedBone.IsBone)
         {
-            this._newBone = _project?.MainSkeleton?.AddBoneToParent(_selectedBone._id);
+            _newBone = _project?.MainSkeleton?.AddBoneToParent(_selectedBone._id);
         }
     }
 
     public void Undo()
     {
-        _project.DeleteBoneFromProject(this._newBone);
+        _project.DeleteBoneFromProject(_newBone);
     }
 }

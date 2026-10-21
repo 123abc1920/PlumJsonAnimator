@@ -12,10 +12,10 @@ class DropImageToBoneCommand : ICommand
 
     public DropImageToBoneCommand(Bone selectedBone, Project project, Res res, Slot slot)
     {
-        this._selectedBone = selectedBone;
-        this._project = project;
-        this._res = res;
-        this._slot = slot;
+        _selectedBone = selectedBone;
+        _project = project;
+        _res = res;
+        _slot = slot;
     }
 
     public void Execute()

@@ -30,8 +30,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
             _last_bone_id++;
 
-            this._globalState = globalState;
-            this._localizationService = localizationService;
+            _globalState = globalState;
+            _localizationService = localizationService;
         }
 
         /// <summary>
@@ -40,8 +40,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="parentId">Parent bone id</param>
         public Bone AddBoneToParent(int parentId)
         {
-            Bone parentBone = this.RootBones[0];
-            foreach (Bone b in this.Bones)
+            Bone parentBone = RootBones[0];
+            foreach (Bone b in Bones)
             {
                 if (b._id == parentId)
                 {
@@ -50,12 +50,12 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 }
             }
             Bone newBone = new Bone(
-                this._globalState,
+                _globalState,
                 parentBone,
                 _last_bone_id,
-                this._localizationService
+                _localizationService
             );
-            this.Bones.Add(newBone);
+            Bones.Add(newBone);
             parentBone.AddChildren(newBone);
             _last_bone_id++;
 
@@ -68,14 +68,14 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="b">New bone</param>
         public void AddBone(Bone b)
         {
-            this.Bones.Add(b);
+            Bones.Add(b);
             b._id = _last_bone_id;
             _last_bone_id++;
         }
 
         public Bone? GetBoneById(int id)
         {
-            foreach (Bone b in this.Bones)
+            foreach (Bone b in Bones)
             {
                 if (b._id == id)
                 {
@@ -87,7 +87,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public Bone? GetBoneByName(string? name)
         {
-            foreach (Bone b in this.Bones)
+            foreach (Bone b in Bones)
             {
                 if (b.Name == name)
                 {
@@ -121,7 +121,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         public String GenerateCode()
         {
-            return JsonConvert.SerializeObject(GenerateJSONData(), this._globalState.jsonSettings);
+            return JsonConvert.SerializeObject(GenerateJSONData(), _globalState.jsonSettings);
         }
     }
 

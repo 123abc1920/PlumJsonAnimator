@@ -29,13 +29,13 @@ namespace PlumJsonAnimator.Common.Dialogs
     {
         private class DialogSize
         {
-            public int width;
-            public int height;
+            public int _width;
+            public int _height;
 
             public DialogSize(int _x, int _y)
             {
-                this.width = _x;
-                this.height = _y;
+                _width = _x;
+                _height = _y;
             }
         }
 
@@ -95,11 +95,11 @@ namespace PlumJsonAnimator.Common.Dialogs
             var window = new SukiWindow
             {
                 Title = title,
-                Width = size.width,
+                Width = size._width,
                 Icon = new WindowIcon(
                     AssetLoader.Open(new Uri("avares://PlumJsonAnimator/Assets/logo.ico"))
                 ),
-                Height = size.height,
+                Height = size._height,
                 Content = UserControlFactory(viewType, viewModel),
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
             };
@@ -107,7 +107,7 @@ namespace PlumJsonAnimator.Common.Dialogs
             await window.ShowDialog(owner);
         }
 
-        public Window mainWin;
+        public Window MainWin { get; set; }
 
         public async void ShowDialog(string title, ViewModelBase viewModel, DialogType viewType)
         {
@@ -116,16 +116,16 @@ namespace PlumJsonAnimator.Common.Dialogs
             var window = new SukiWindow
             {
                 Title = title,
-                Width = size.width,
+                Width = size._width,
                 Icon = new WindowIcon(
                     AssetLoader.Open(new Uri("avares://PlumJsonAnimator/Assets/logo.ico"))
                 ),
-                Height = size.height,
+                Height = size._height,
                 Content = UserControlFactory(viewType, viewModel),
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
             };
 
-            await window.ShowDialog(mainWin);
+            await window.ShowDialog(MainWin);
         }
     }
 }
