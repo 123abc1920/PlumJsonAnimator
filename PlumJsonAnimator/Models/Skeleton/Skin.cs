@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
+using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {

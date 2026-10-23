@@ -1,5 +1,6 @@
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
+using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 
 namespace PlumJsonAnimator.Models.Commands;
 

@@ -4,7 +4,7 @@ using Avalonia;
 using Avalonia.Controls;
 using PlumJsonAnimator.Models.Common;
 
-namespace PlumJsonAnimator.Models.SkeletonNameSpace;
+namespace PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 
 public class ClipAttachment : Attachment
 {

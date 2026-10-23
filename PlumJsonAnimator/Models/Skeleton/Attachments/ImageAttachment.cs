@@ -7,7 +7,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using PlumJsonAnimator.Models.Resources;
 
-namespace PlumJsonAnimator.Models.SkeletonNameSpace;
+namespace PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 
 /// <summary>
 /// Binds slot and res

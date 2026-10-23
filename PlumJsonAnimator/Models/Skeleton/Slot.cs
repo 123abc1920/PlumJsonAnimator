@@ -9,6 +9,7 @@ using Avalonia.Media.Imaging;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
+using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 using PlumJsonAnimator.Services;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;

@@ -13,6 +13,7 @@ using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
+using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.Models

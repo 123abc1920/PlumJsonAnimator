@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace PlumJsonAnimator.Models.SkeletonNameSpace;
+namespace PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 
 /// <summary>
 /// Jsonifyed attachment data

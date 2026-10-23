@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
+using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 using PlumJsonAnimator.ViewModels;
 
 namespace PlumJsonAnimator.Views

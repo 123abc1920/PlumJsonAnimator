@@ -4,7 +4,7 @@ using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
 
 // TODO: fix SetSize GetSize Size
-namespace PlumJsonAnimator.Models.SkeletonNameSpace;
+namespace PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 
 /// <summary>
 /// Attachment class. Helps to bind slot and res or another functions
