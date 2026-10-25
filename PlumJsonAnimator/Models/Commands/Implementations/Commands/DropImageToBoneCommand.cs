@@ -22,7 +22,7 @@ class DropImageToBoneCommand : ICommand
     public void Execute()
     {
         _project.AddSlotToProject(_slot, _selectedBone);
-        _project.CurrentSkin.BindSlotAttachment(_slot, new ImageAttachment((ImageRes)_res));
+        _project.CurrentSkin.BindSlotAttachment(_slot, new RegionAttachment((ImageRes)_res));
         _selectedBone.UpdateSlots();
     }
 

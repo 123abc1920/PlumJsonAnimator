@@ -14,6 +14,9 @@ public class ClipAttachment : Attachment
     public ClipAttachment(string name)
         : base(name, TypeStr) { }
 
+    public ClipAttachment(AttachmentData data)
+        : base(data.Name, data.Type) { }
+
     public override void DrawSlotAttachment(
         Slot slot,
         Canvas? canvas = null,
@@ -28,11 +31,11 @@ public class ClipAttachment : Attachment
         return new AttachmentData
         {
             Name = Name,
-            Width = _width,
-            Height = _height,
-            X = _x,
-            Y = _y,
-            A = _a,
+            Width = Width,
+            Height = Height,
+            X = X,
+            Y = Y,
+            A = A,
             Type = AttachmentType,
         };
     }

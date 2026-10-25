@@ -14,12 +14,12 @@ public abstract class Attachment : INotifyable
     public string Name { get; set; }
     protected readonly string AttachmentType;
 
-    public double _x;
-    public double _y;
-    public double _a;
+    public double X { get; set; }
+    public double Y { get; set; }
+    public double A { get; set; }
 
-    protected int? _width = null;
-    protected int? _height = null;
+    protected int? Width { get; set; } = null;
+    protected int? Height { get; set; } = null;
 
     public Attachment(string name, string type)
     {
@@ -29,9 +29,9 @@ public abstract class Attachment : INotifyable
 
     public void SetPos(double x, double y, double a)
     {
-        _x = x;
-        _y = y;
-        _a = a;
+        X = x;
+        Y = y;
+        A = a;
     }
 
     public virtual Res? GetRes()
@@ -43,13 +43,13 @@ public abstract class Attachment : INotifyable
 
     public void SetSize(double width, double height)
     {
-        _width = (int)width;
-        _height = (int)height;
+        Width = (int)width;
+        Height = (int)height;
     }
 
     public Dictionary<string, int?> GetSize()
     {
-        return new Dictionary<string, int?>() { ["width"] = _width, ["height"] = _height };
+        return new Dictionary<string, int?>() { ["width"] = Width, ["height"] = Height };
     }
 
     public abstract void DrawSlotAttachment(

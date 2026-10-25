@@ -162,7 +162,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             if (SlotAttachmentBinding.ContainsKey(s) && SlotAttachmentBinding[s] != null)
             {
-                return ((ImageAttachment)SlotAttachmentBinding[s]).GetPath();
+                return ((RegionAttachment)SlotAttachmentBinding[s]).GetPath();
             }
             else
             {

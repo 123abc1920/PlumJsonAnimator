@@ -74,9 +74,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             CurrentAttachment = attachment;
             if (CurrentAttachment != null && BoundedBone != null)
             {
-                LocalX = CurrentAttachment._x;
-                LocalY = CurrentAttachment._y;
-                LocalA = CurrentAttachment._a;
+                LocalX = CurrentAttachment.X;
+                LocalY = CurrentAttachment.Y;
+                LocalA = CurrentAttachment.A;
 
                 var size = CurrentAttachment.GetSize();
                 LengthX = size["width"] ?? LengthX;

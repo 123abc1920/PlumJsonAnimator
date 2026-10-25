@@ -31,6 +31,7 @@ public class PlumApp
     private readonly AutoSaver _autoSaver;
     private readonly CanvasRenderer _canvasUpdater;
     private readonly EasingFactory _easingFactory;
+    private readonly AttachmentFactory _attachmentFactory;
 
     public PlumApp(
         AppSettings appSettings,
@@ -47,7 +48,8 @@ public class PlumApp
         HistoryManager historyManager,
         AutoSaver autoSaver,
         CanvasRenderer canvasUpdater,
-        EasingFactory easingFactory
+        EasingFactory easingFactory,
+        AttachmentFactory attachmentFactory
     )
     {
         Localization = localization;
@@ -66,6 +68,7 @@ public class PlumApp
         _autoSaver = autoSaver;
         _canvasUpdater = canvasUpdater;
         _easingFactory = easingFactory;
+        _attachmentFactory = attachmentFactory;
     }
 
     public void Start()
@@ -90,7 +93,14 @@ public class PlumApp
         );
 
         InitProject(
-            new Project(projectSettings, _globalState, _interpolation, Localization, _easingFactory)
+            new Project(
+                projectSettings,
+                _globalState,
+                _interpolation,
+                Localization,
+                _easingFactory,
+                _attachmentFactory
+            )
         );
 
         _autoSaver.StartAutoSaveAsync(_globalState.AutoSaveSec);
@@ -123,7 +133,8 @@ public class PlumApp
             _globalState,
             _interpolation,
             Localization,
-            _easingFactory
+            _easingFactory,
+            _attachmentFactory
         );
 
         InitProject(newProject);
@@ -253,7 +264,8 @@ public class PlumApp
                 _globalState,
                 _interpolation,
                 Localization,
-                _easingFactory
+                _easingFactory,
+                _attachmentFactory
             );
 
             _globalState.CurrentProject = newProject;
@@ -331,7 +343,7 @@ public class PlumApp
                 s.RemoveResIfContains(res);
             }
             _globalState.CurrentProject.Resources.Remove(res);
-            _fileManager.DeleteResource(res.Name, res.ext, _globalState.CurrentProject);
+            _fileManager.DeleteResource(res.Name, res.Ext, _globalState.CurrentProject);
         }
     }
 

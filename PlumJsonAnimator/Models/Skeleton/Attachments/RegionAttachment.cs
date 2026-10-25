@@ -12,34 +12,36 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 /// <summary>
 /// Binds slot and res
 /// </summary>
-public class ImageAttachment : Attachment
+public class RegionAttachment : Attachment
 {
     private const string TypeStr = "region";
 
-    private ImageRes _image;
+    private ImageRes _imageRes;
     private Bitmap? _cachedBitmap;
     private string? _cachedPath;
 
-    public ImageAttachment(ImageRes res)
+    public RegionAttachment(ImageRes res)
         : base(res.Name, TypeStr)
     {
-        _image = res;
+        _imageRes = res;
     }
 
-    public ImageAttachment(ImageRes res, AttachmentData data)
-        : this(res)
+    public RegionAttachment(AttachmentData data, ImageRes imageRes)
+        : base(data.Name, data.Type)
     {
-        _x = data.X;
-        _y = data.Y;
-        _a = data.A;
+        _imageRes = imageRes;
 
-        _width = data.Width;
-        _height = data.Height;
+        X = data.X;
+        Y = data.Y;
+        A = data.A;
+
+        Width = data.Width;
+        Height = data.Height;
     }
 
     public string GetPath()
     {
-        return _image.Path;
+        return _imageRes.Path;
     }
 
     public override AttachmentData GenerateJSONData()
@@ -47,18 +49,18 @@ public class ImageAttachment : Attachment
         return new AttachmentData
         {
             Name = Name,
-            Width = _width,
-            Height = _height,
-            X = _x,
-            Y = _y,
-            A = _a,
+            Width = Width,
+            Height = Height,
+            X = X,
+            Y = Y,
+            A = A,
             Type = AttachmentType,
         };
     }
 
     public override Res GetRes()
     {
-        return _image;
+        return _imageRes;
     }
 
     public override void DrawSlotAttachment(
@@ -88,7 +90,7 @@ public class ImageAttachment : Attachment
         double boneM21 = slot.BoundedBone.G21;
         double boneM22 = slot.BoundedBone.G22;
 
-        double attachAngleRad = _a * Math.PI / 180.0;
+        double attachAngleRad = A * Math.PI / 180.0;
         double ac = Math.Cos(attachAngleRad);
         double asin = Math.Sin(attachAngleRad);
 
@@ -97,8 +99,8 @@ public class ImageAttachment : Attachment
         double f21 = -boneM11 * asin + boneM21 * ac;
         double f22 = -boneM12 * asin + boneM22 * ac;
 
-        double imgWidth = _width ?? slot.LengthX;
-        double imgHeight = _height ?? slot.LengthY;
+        double imgWidth = Width ?? slot.LengthX;
+        double imgHeight = Height ?? slot.LengthY;
 
         var image = new Image
         {
@@ -141,8 +143,8 @@ public class ImageAttachment : Attachment
 
         image.Clip = clipGeometry;
 
-        double worldX = slot.BoundedBone.GlobalX + (_x * boneM11 + _y * boneM21);
-        double worldY = slot.BoundedBone.GlobalY + (_x * boneM12 + _y * boneM22);
+        double worldX = slot.BoundedBone.GlobalX + (X * boneM11 + Y * boneM21);
+        double worldY = slot.BoundedBone.GlobalY + (X * boneM12 + Y * boneM22);
 
         double left = canvas.Width / 2 + worldX - image.Width / 2;
         double top = canvas.Height / 2 + worldY - image.Height / 2;

@@ -80,7 +80,7 @@ namespace PlumJsonAnimator.Models.Resources
             }
         }
 
-        public string ext = ".png";
+        public string Ext { get; set; } = ".png";
 
         // TODO: show toast about names
         public void SetName(string? name)
@@ -95,7 +95,7 @@ namespace PlumJsonAnimator.Models.Resources
                         System.IO.Path.Combine(
                             _globalState.CurrentProject!.GetProjectPath(),
                             "res",
-                            $"{Name}{ext}"
+                            $"{Name}{Ext}"
                         )
                     );
                 }
@@ -104,7 +104,7 @@ namespace PlumJsonAnimator.Models.Resources
 
         public void SetPath(string newProjectPath)
         {
-            Path = System.IO.Path.Combine(newProjectPath, "res", $"{Name}{ext}");
+            Path = System.IO.Path.Combine(newProjectPath, "res", $"{Name}{Ext}");
         }
     }
 
@@ -113,8 +113,8 @@ namespace PlumJsonAnimator.Models.Resources
     /// </summary>
     public class ImageRes : Res
     {
-        public int width;
-        public int height;
+        private int _width;
+        private int _height;
 
         public ImageRes(ProjectFilesManager projectManager, GlobalState globalState)
             : base(projectManager, globalState) { }
@@ -122,15 +122,23 @@ namespace PlumJsonAnimator.Models.Resources
         public ImageRes(
             ProjectFilesManager projectManager,
             GlobalState globalState,
-            string _path,
+            string path,
             string name,
-            string _ext
+            string ext
         )
             : base(projectManager, globalState)
         {
             Name = name;
-            ext = _ext;
-            Path = _path;
+            Ext = ext;
+            Path = path;
+        }
+
+        public ImageRes(ProjectFilesManager projectManager, GlobalState globalState, ResDTO resDTO)
+            : base(projectManager, globalState)
+        {
+            Name = resDTO.ImageName!;
+            Ext = resDTO.ImageExt!;
+            Path = resDTO.ImagePath!;
         }
     }
 }

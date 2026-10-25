@@ -55,7 +55,7 @@ namespace PlumJsonAnimator.Views
                     {
                         viewModel.CurrentProject.CurrentSkin.BindSlotAttachment(
                             slot,
-                            new ImageAttachment(imageRes)
+                            new RegionAttachment(imageRes)
                         );
                     }
                     e.Handled = true;

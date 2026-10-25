@@ -4,13 +4,11 @@ using System.Linq;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Common;
-using PlumJsonAnimator.Models.Easing;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
 
 // TODO: Remove repetitions
-// TODO: new project not working
 namespace PlumJsonAnimator.Models
 {
     /// <summary>
@@ -51,6 +49,7 @@ namespace PlumJsonAnimator.Models
         /// <param name="time"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
+        /// <param name="easing"></param>
         public void AddTranslateFrame(double time, double x, double y, IEasing easing)
         {
             if (_translateKeyframes.ContainsKey(time))

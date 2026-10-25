@@ -27,4 +27,16 @@ public class AttachmentData
 
     [JsonProperty("a", NullValueHandling = NullValueHandling.Ignore)]
     public double A { get; set; }
+
+    [JsonProperty("end", NullValueHandling = NullValueHandling.Ignore)]
+    public double End { get; set; }
+
+    [JsonProperty("vertexCount", NullValueHandling = NullValueHandling.Ignore)]
+    public double VertexCount { get; set; }
+
+    [JsonProperty("vertices", NullValueHandling = NullValueHandling.Ignore)]
+    public double Vertices { get; set; }
+
+    [JsonProperty("color", NullValueHandling = NullValueHandling.Ignore)]
+    public double Color { get; set; }
 }

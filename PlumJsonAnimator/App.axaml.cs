@@ -69,6 +69,8 @@ public partial class App : Application
         services.AddSingleton<AutoSaver>();
 
         services.AddSingleton<EasingFactory>();
+        services.AddSingleton<AttachmentFactory>();
+        services.AddSingleton<ResFactory>();
 
         services.AddSingleton<PlumApp>();
 
