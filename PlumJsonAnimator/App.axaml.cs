@@ -6,6 +6,7 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Avalonia.Svg.Skia;
 using Microsoft.Extensions.DependencyInjection;
+using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models.Commands;
@@ -71,6 +72,8 @@ public partial class App : Application
         services.AddSingleton<EasingFactory>();
         services.AddSingleton<AttachmentFactory>();
         services.AddSingleton<ResFactory>();
+
+        services.AddSingleton<AttachmentTypeConverter>();
 
         services.AddSingleton<PlumApp>();
 

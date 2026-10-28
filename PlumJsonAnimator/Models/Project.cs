@@ -696,9 +696,14 @@ namespace PlumJsonAnimator.Models
                             foreach (string attachName in attachs.Keys)
                             {
                                 var attach = attachs[attachName];
-                                var a = _attachmentFactory.CreateAttachmentWithRes(
-                                    attach,
-                                    GetResByName(attach.Name)
+                                var a = _attachmentFactory.CreateAttachmentByStr(
+                                    attach.Type,
+                                    new AttachmentDTO()
+                                    {
+                                        Res = GetResByName(attach.Name),
+                                        AttachmentData = attach,
+                                        Name = $"attachment{Counter.GenerateNamePostfix()}",
+                                    }
                                 );
                                 if (!(a is null))
                                 {
@@ -726,9 +731,14 @@ namespace PlumJsonAnimator.Models
                     foreach (string attachName in attachs.Keys)
                     {
                         var attach = attachs[attachName];
-                        var a = _attachmentFactory.CreateAttachmentWithRes(
-                            attach,
-                            GetResByName(attach.Name)
+                        var a = _attachmentFactory.CreateAttachmentByStr(
+                            attach.Type,
+                            new AttachmentDTO()
+                            {
+                                Name = $"attachment{Counter.GenerateNamePostfix()}",
+                                AttachmentData = attach,
+                                Res = GetResByName(attach.Name),
+                            }
                         );
                         if (!(a is null))
                         {

@@ -5,6 +5,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
+using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Models.Resources;
 
 namespace PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
@@ -14,29 +15,39 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 /// </summary>
 public class RegionAttachment : Attachment
 {
-    private const string TypeStr = "region";
+    public override AttachmentTypes AttachmentType => AttachmentTypes.REGION;
 
     private ImageRes _imageRes;
     private Bitmap? _cachedBitmap;
     private string? _cachedPath;
 
-    public RegionAttachment(ImageRes res)
-        : base(res.Name, TypeStr)
+    public RegionAttachment(
+        AttachmentDTO attachmentDTO,
+        AttachmentTypeConverter attachmentTypeConverter
+    )
+        : base(attachmentDTO.Name, attachmentTypeConverter)
     {
-        _imageRes = res;
+        _imageRes = (ImageRes)attachmentDTO.Res;
+
+        var data = attachmentDTO.AttachmentData;
+
+        if (!(data is null))
+        {
+            X = data.X;
+            Y = data.Y;
+            A = data.A;
+
+            Width = data.Width;
+            Height = data.Height;
+        }
     }
 
-    public RegionAttachment(AttachmentData data, ImageRes imageRes)
-        : base(data.Name, data.Type)
+    public static Attachment Create(
+        AttachmentTypeConverter attachmentTypeConverter,
+        AttachmentDTO attachmentDTO
+    )
     {
-        _imageRes = imageRes;
-
-        X = data.X;
-        Y = data.Y;
-        A = data.A;
-
-        Width = data.Width;
-        Height = data.Height;
+        return new RegionAttachment(attachmentDTO, attachmentTypeConverter);
     }
 
     public string GetPath()
@@ -54,7 +65,7 @@ public class RegionAttachment : Attachment
             X = X,
             Y = Y,
             A = A,
-            Type = AttachmentType,
+            Type = _attachmentTypeConverter.GetAttachmentTypeString(AttachmentType),
         };
     }
 

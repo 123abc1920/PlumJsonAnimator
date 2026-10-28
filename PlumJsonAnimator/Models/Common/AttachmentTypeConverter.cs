@@ -5,7 +5,7 @@ namespace PlumJsonAnimator.Common;
 
 public class AttachmentTypeConverter
 {
-    public AttachmentTypes CreateAttachment(string attachmentStr)
+    public AttachmentTypes CreateAttachmentTypeData(string attachmentStr)
     {
         if (Enum.TryParse(attachmentStr, true, out AttachmentTypes result))
         {
@@ -13,5 +13,10 @@ public class AttachmentTypeConverter
         }
 
         return default(AttachmentTypes);
+    }
+
+    public string GetAttachmentTypeString(AttachmentTypes attachmentType)
+    {
+        return attachmentType.ToString().ToLowerInvariant();
     }
 }

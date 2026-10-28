@@ -1,65 +1,69 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 using PlumJsonAnimator.ViewModels;
 
-namespace PlumJsonAnimator.Views
+namespace PlumJsonAnimator.Views;
+
+public partial class BoneInfo : UserControl
 {
-    public partial class BoneInfo : UserControl
+    public BoneInfo()
     {
-        public BoneInfo()
+        InitializeComponent();
+    }
+
+    public BoneInfo(ViewModelBase viewModel)
+        : this()
+    {
+        DataContext = viewModel;
+    }
+
+    private void OnSlotSelectionChanged(object sender, TappedEventArgs e)
+    {
+        Slot selectedSlot = SlotsList.SelectedItem as Slot;
+        if (selectedSlot != null)
         {
-            InitializeComponent();
+            if (DataContext is MainWindowViewModel viewModel)
+            {
+                viewModel.CurrentBone = (Bone)selectedSlot;
+            }
+        }
+    }
+
+    private void OnListBoxDrop(object sender, DragEventArgs e)
+    {
+        var listBox = (ListBox)sender;
+        var point = e.GetPosition(listBox);
+        var item = listBox.InputHitTest(point) as Visual;
+
+        while (item != null && !(item is ListBoxItem))
+        {
+            item = item.Parent as Visual;
         }
 
-        public BoneInfo(ViewModelBase viewModel)
-            : this()
+        if (item is ListBoxItem listBoxItem)
         {
-            DataContext = viewModel;
-        }
-
-        private void OnSlotSelectionChanged(object sender, TappedEventArgs e)
-        {
-            Slot selectedSlot = SlotsList.SelectedItem as Slot;
-            if (selectedSlot != null)
+            if (e.Data.Get("Resource") is ImageRes imageRes && listBoxItem.DataContext is Slot slot)
             {
                 if (DataContext is MainWindowViewModel viewModel)
                 {
-                    viewModel.CurrentBone = (Bone)selectedSlot;
+                    viewModel.CurrentProject.CurrentSkin.BindSlotAttachment(
+                        slot,
+                        viewModel._attachmentFactory.CreateAttachmentByType(
+                            AttachmentTypes.REGION,
+                            new AttachmentDTO()
+                            {
+                                Name = $"attachment{Counter.GenerateNamePostfix()}",
+                                Res = imageRes,
+                            }
+                        )
+                    );
                 }
-            }
-        }
-
-        private void OnListBoxDrop(object sender, DragEventArgs e)
-        {
-            var listBox = (ListBox)sender;
-            var point = e.GetPosition(listBox);
-            var item = listBox.InputHitTest(point) as Visual;
-
-            while (item != null && !(item is ListBoxItem))
-            {
-                item = item.Parent as Visual;
-            }
-
-            if (item is ListBoxItem listBoxItem)
-            {
-                if (
-                    e.Data.Get("Resource") is ImageRes imageRes
-                    && listBoxItem.DataContext is Slot slot
-                )
-                {
-                    if (DataContext is MainWindowViewModel viewModel)
-                    {
-                        viewModel.CurrentProject.CurrentSkin.BindSlotAttachment(
-                            slot,
-                            new RegionAttachment(imageRes)
-                        );
-                    }
-                    e.Handled = true;
-                }
+                e.Handled = true;
             }
         }
     }

@@ -1,66 +1,52 @@
+using System;
+using System.Collections.Generic;
 using PlumJsonAnimator.Common;
-using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 
 namespace PlumJsonAnimator.Models.Factories;
 
 public class AttachmentFactory
 {
-    private readonly ResFactory _resFactory;
     private readonly AttachmentTypeConverter _attachmentTypeConverter;
 
-    public AttachmentFactory(ResFactory resFactory)
-    {
-        _resFactory = resFactory;
+    private readonly Dictionary<
+        AttachmentTypes,
+        Func<AttachmentTypeConverter, AttachmentDTO, Attachment>
+    > _registry;
 
-        _attachmentTypeConverter = new AttachmentTypeConverter();
+    public AttachmentFactory(AttachmentTypeConverter attachmentTypeConverter)
+    {
+        _attachmentTypeConverter = attachmentTypeConverter;
+
+        _registry = new Dictionary<
+            AttachmentTypes,
+            Func<AttachmentTypeConverter, AttachmentDTO, Attachment>
+        >
+        {
+            { AttachmentTypes.REGION, (converter, dto) => RegionAttachment.Create(converter, dto) },
+            { AttachmentTypes.CLIPPING, (converter, dto) => ClipAttachment.Create(converter, dto) },
+        };
     }
 
-    public Attachment? CreateAttachment(AttachmentData attachmentData)
+    public Attachment CreateAttachmentByStr(string typeStr, AttachmentDTO attachmentDTO)
     {
-        var attachmentType = _attachmentTypeConverter.CreateAttachment(attachmentData.Type);
+        var type = _attachmentTypeConverter.CreateAttachmentTypeData(typeStr);
 
-        switch (attachmentType)
+        if (_registry.TryGetValue(type, out var createFunc))
         {
-            case AttachmentTypes.REGION:
-                var imageRes = _resFactory.CreateRes(
-                    ResTypes.IMAGE,
-                    new ResDTO
-                    {
-                        ImageName = "",
-                        ImageExt = "",
-                        ImagePath = "",
-                    }
-                );
-                if (!(imageRes is null))
-                {
-                    return new RegionAttachment(attachmentData, (ImageRes)imageRes);
-                }
-                break;
-            case AttachmentTypes.CLIPPING:
-                return new ClipAttachment(attachmentData);
+            return createFunc(_attachmentTypeConverter, attachmentDTO);
         }
 
-        return null;
+        throw new ArgumentException($"Тип {type} не добавлен в список фабрики.");
     }
 
-    public Attachment? CreateAttachmentWithRes(AttachmentData attachmentData, Res? res)
+    public Attachment CreateAttachmentByType(AttachmentTypes type, AttachmentDTO attachmentDTO)
     {
-        if (res is null)
+        if (_registry.TryGetValue(type, out var createFunc))
         {
-            return null;
+            return createFunc(_attachmentTypeConverter, attachmentDTO);
         }
 
-        var attachmentType = _attachmentTypeConverter.CreateAttachment(attachmentData.Type);
-
-        switch (attachmentType)
-        {
-            case AttachmentTypes.REGION:
-                return new RegionAttachment(attachmentData, (ImageRes)res);
-            case AttachmentTypes.CLIPPING:
-                return new ClipAttachment(attachmentData);
-        }
-
-        return null;
+        throw new ArgumentException($"Тип {type} не добавлен в список фабрики.");
     }
 }

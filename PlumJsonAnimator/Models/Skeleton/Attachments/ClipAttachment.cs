@@ -2,20 +2,44 @@ using System;
 using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
+using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Resources;
 
 namespace PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 
 public class ClipAttachment : Attachment
 {
-    private const string TypeStr = "clipping";
+    public override AttachmentTypes AttachmentType => AttachmentTypes.CLIPPING;
     public List<PointModel> Points { get; } = new List<PointModel>();
 
-    public ClipAttachment(string name)
-        : base(name, TypeStr) { }
+    private string _endSlotName { get; set; } = "";
+    private int _vertexCount { get; set; } = 3;
+    private List<PointModel> _vertices { get; set; } = new List<PointModel>();
 
-    public ClipAttachment(AttachmentData data)
-        : base(data.Name, data.Type) { }
+    public ClipAttachment(
+        AttachmentDTO attachmentDTO,
+        AttachmentTypeConverter attachmentTypeConverter
+    )
+        : base(attachmentDTO.Name!, attachmentTypeConverter)
+    {
+        _endSlotName = attachmentDTO.AttachmentData!.End!;
+        _vertexCount = attachmentDTO.AttachmentData!.VertexCount!;
+
+        var xyArray = attachmentDTO.AttachmentData!.Vertices!;
+        for (int i = 0; i < _vertexCount * 2; i += 2)
+        {
+            _vertices.Add(new PointModel((int)xyArray[i], (int)xyArray[i + 1]));
+        }
+    }
+
+    public static Attachment Create(
+        AttachmentTypeConverter attachmentTypeConverter,
+        AttachmentDTO attachmentDTO
+    )
+    {
+        return new ClipAttachment(attachmentDTO, attachmentTypeConverter);
+    }
 
     public override void DrawSlotAttachment(
         Slot slot,
@@ -36,7 +60,7 @@ public class ClipAttachment : Attachment
             X = X,
             Y = Y,
             A = A,
-            Type = AttachmentType,
+            Type = _attachmentTypeConverter.GetAttachmentTypeString(AttachmentType),
         };
     }
 

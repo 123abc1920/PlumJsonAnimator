@@ -8,6 +8,7 @@ using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Common.Timeline;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
@@ -234,11 +235,7 @@ public partial class MainWindowViewModel : ViewModelBase
         get => _globalState.ZoomCanvas;
         set
         {
-            if (
-                _globalState.ZoomCanvas != value
-                && value > MinZoomCanvas
-                && value < MaxZoomCanvas
-            )
+            if (_globalState.ZoomCanvas != value && value > MinZoomCanvas && value < MaxZoomCanvas)
             {
                 _globalState.ZoomCanvas = value;
                 CanvasWidth = (int)(GlobalState.BaseCanvasSize * value);
@@ -383,6 +380,7 @@ public partial class MainWindowViewModel : ViewModelBase
     public ICommand Redo { get; }
 
     private readonly IServiceProvider _serviceProvider;
+    public readonly AttachmentFactory _attachmentFactory;
 
     public MainWindowViewModel(
         IServiceProvider serviceProvider,
@@ -392,7 +390,8 @@ public partial class MainWindowViewModel : ViewModelBase
         ImageExporter imageExporter,
         LocalizationService localizationService,
         Dialogs dialogs,
-        PlumApp plumApp
+        PlumApp plumApp,
+        AttachmentFactory attachmentFactory
     )
         : base(
             globalState,
@@ -405,6 +404,7 @@ public partial class MainWindowViewModel : ViewModelBase
         )
     {
         _serviceProvider = serviceProvider;
+        _attachmentFactory = attachmentFactory;
 
         globalState.PropertyChanged += (s, e) =>
         {

@@ -29,14 +29,11 @@ public class AttachmentData
     public double A { get; set; }
 
     [JsonProperty("end", NullValueHandling = NullValueHandling.Ignore)]
-    public double End { get; set; }
+    public string? End { get; set; }
 
     [JsonProperty("vertexCount", NullValueHandling = NullValueHandling.Ignore)]
-    public double VertexCount { get; set; }
+    public int VertexCount { get; set; }
 
     [JsonProperty("vertices", NullValueHandling = NullValueHandling.Ignore)]
-    public double Vertices { get; set; }
-
-    [JsonProperty("color", NullValueHandling = NullValueHandling.Ignore)]
-    public double Color { get; set; }
+    public double[]? Vertices { get; set; }
 }

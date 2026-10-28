@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Avalonia.Controls;
+using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
 
@@ -12,7 +13,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 public abstract class Attachment : INotifyable
 {
     public string Name { get; set; }
-    protected readonly string AttachmentType;
+    public abstract AttachmentTypes AttachmentType { get; }
 
     public double X { get; set; }
     public double Y { get; set; }
@@ -21,10 +22,12 @@ public abstract class Attachment : INotifyable
     protected int? Width { get; set; } = null;
     protected int? Height { get; set; } = null;
 
-    public Attachment(string name, string type)
+    protected readonly AttachmentTypeConverter _attachmentTypeConverter;
+
+    public Attachment(string name, AttachmentTypeConverter attachmentTypeConverter)
     {
         Name = name;
-        AttachmentType = type;
+        _attachmentTypeConverter = attachmentTypeConverter;
     }
 
     public void SetPos(double x, double y, double a)

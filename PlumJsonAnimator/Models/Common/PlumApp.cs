@@ -2,12 +2,14 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using Avalonia.Controls;
+using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Commands;
 using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
+using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 using PlumJsonAnimator.Services;
 using static PlumJsonAnimator.Services.JsonCode;
 
@@ -32,6 +34,7 @@ public class PlumApp
     private readonly CanvasRenderer _canvasUpdater;
     private readonly EasingFactory _easingFactory;
     private readonly AttachmentFactory _attachmentFactory;
+    private readonly AttachmentTypeConverter _attachmentTypeConverter;
 
     public PlumApp(
         AppSettings appSettings,
@@ -49,7 +52,8 @@ public class PlumApp
         AutoSaver autoSaver,
         CanvasRenderer canvasUpdater,
         EasingFactory easingFactory,
-        AttachmentFactory attachmentFactory
+        AttachmentFactory attachmentFactory,
+        AttachmentTypeConverter attachmentTypeConverter
     )
     {
         Localization = localization;
@@ -69,6 +73,7 @@ public class PlumApp
         _canvasUpdater = canvasUpdater;
         _easingFactory = easingFactory;
         _attachmentFactory = attachmentFactory;
+        _attachmentTypeConverter = attachmentTypeConverter;
     }
 
     public void Start()
@@ -216,7 +221,13 @@ public class PlumApp
                 bone,
                 _globalState.CurrentProject,
                 res,
-                new Slot(_globalState, bone)
+                new Slot(_globalState, bone),
+                _attachmentFactory,
+                new AttachmentDTO()
+                {
+                    Name = $"attachment{Counter.GenerateNamePostfix()}",
+                    Res = res,
+                }
             );
             _historyManager.DoCommand(dropImageToBoneCommand);
         }
