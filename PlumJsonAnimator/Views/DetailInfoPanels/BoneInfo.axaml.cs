@@ -9,8 +9,10 @@ using PlumJsonAnimator.ViewModels;
 
 namespace PlumJsonAnimator.Views;
 
-public partial class BoneInfo : UserControl
+public partial class BoneInfo : UserControl, IInfoPanel
 {
+    public static InfoPanelTypes InfoPanelType => InfoPanelTypes.BONEINFO;
+
     public BoneInfo()
     {
         InitializeComponent();
@@ -66,5 +68,10 @@ public partial class BoneInfo : UserControl
                 e.Handled = true;
             }
         }
+    }
+
+    public static IInfoPanel Create()
+    {
+        return new BoneInfo();
     }
 }

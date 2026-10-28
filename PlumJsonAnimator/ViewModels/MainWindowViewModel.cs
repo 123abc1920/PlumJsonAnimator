@@ -219,8 +219,19 @@ public partial class MainWindowViewModel : ViewModelBase
             {
                 _globalState.CurrentBone = value;
                 _globalState.CurrentBone?.UpdateSlots();
-                // TODO: фабрика
-                CurrentInfoPanel = new BoneInfo();
+
+                if (_globalState.CurrentBone != null)
+                {
+                    if (_globalState.CurrentBone.IsBone)
+                    {
+                        CurrentInfoPanel = _infoPanelFactory.Create(InfoPanelTypes.BONEINFO);
+                    }
+                    else
+                    {
+                        CurrentInfoPanel = _infoPanelFactory.Create(InfoPanelTypes.SLOTINFO);
+                    }
+                }
+
                 OnPropertyChanged(nameof(CurrentBone));
                 OnPropertyChanged(nameof(CurrentInfoPanel));
             }
@@ -381,6 +392,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     private readonly IServiceProvider _serviceProvider;
     public readonly AttachmentFactory _attachmentFactory;
+    private readonly InfoPanelFactory _infoPanelFactory;
 
     public MainWindowViewModel(
         IServiceProvider serviceProvider,
@@ -391,7 +403,8 @@ public partial class MainWindowViewModel : ViewModelBase
         LocalizationService localizationService,
         Dialogs dialogs,
         PlumApp plumApp,
-        AttachmentFactory attachmentFactory
+        AttachmentFactory attachmentFactory,
+        InfoPanelFactory infoPanelFactory
     )
         : base(
             globalState,
@@ -405,6 +418,7 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         _serviceProvider = serviceProvider;
         _attachmentFactory = attachmentFactory;
+        _infoPanelFactory = infoPanelFactory;
 
         globalState.PropertyChanged += (s, e) =>
         {
