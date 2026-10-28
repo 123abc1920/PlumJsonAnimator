@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -6,7 +7,7 @@ using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Common;
-using PlumJsonAnimator.Models.Factories;
+using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.ViewModels;
@@ -14,6 +15,7 @@ namespace PlumJsonAnimator.ViewModels;
 public class ViewModelBase : ObservableObject, INotifyPropertyChanged
 {
     public GlobalState _globalState;
+    protected IServiceProvider _serviceProvider;
     protected Dialogs _dialogs;
     protected ProjectFilesManager _projectManager;
     protected AppSettings _appSettings;
@@ -75,6 +77,20 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
         get => _globalState.CurrentProject;
     }
 
+    private bool _isAnimMode = true;
+    public bool IsAnimMode
+    {
+        set
+        {
+            if (_isAnimMode != value)
+            {
+                _isAnimMode = value;
+                OnPropertyChanged(nameof(IsAnimMode));
+            }
+        }
+        get => _isAnimMode;
+    }
+
     public void RenameProject(SettingsData settingsData)
     {
         bool isSuccess = PlumApp.RenameProject(settingsData);
@@ -86,6 +102,112 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
                 GetMessage(LocalizationConsts.INFO_MESSAGE)
             );
         }
+    }
+
+    protected void OpenRenameDialog(IRenamable? _renamableObject)
+    {
+        if (_renamableObject != null)
+        {
+            var viewModel = (RenameViewModel)GetViewModel(DialogType.RENAME);
+            viewModel.RenamableObject = _renamableObject;
+            _dialogs.ShowDialog(
+                GetMessage(LocalizationConsts.RENAME),
+                viewModel,
+                DialogType.RENAME
+            );
+        }
+    }
+
+    protected ViewModelBase GetViewModel(DialogType viewType)
+    {
+        ViewModelBase viewModel = this;
+
+        if (viewType == DialogType.SETTINGS)
+        {
+            return new AppSettingsViewModel(
+                _globalState,
+                _dialogs,
+                _projectManager,
+                _appSettings,
+                _localizationService,
+                _imageExporter,
+                PlumApp
+            );
+        }
+        if (viewType == DialogType.NEWPROJECT)
+        {
+            return new NewProjectViewModel(
+                _projectManager,
+                _globalState,
+                _dialogs,
+                _appSettings,
+                _localizationService,
+                _imageExporter,
+                PlumApp
+            );
+        }
+        if (viewType == DialogType.RENAME)
+        {
+            return new RenameViewModel(
+                _globalState,
+                _dialogs,
+                _projectManager,
+                _appSettings,
+                _localizationService,
+                _imageExporter,
+                PlumApp
+            );
+        }
+        if (viewType == DialogType.EXPORT_JPG)
+        {
+            return new ExportPanelJPGViewModel(
+                _globalState,
+                _dialogs,
+                _imageExporter,
+                _projectManager,
+                _appSettings,
+                _localizationService,
+                PlumApp
+            );
+        }
+        if (viewType == DialogType.EXPORT_PNG)
+        {
+            return new ExportPanelPNGViewModel(
+                _globalState,
+                _dialogs,
+                _imageExporter,
+                _projectManager,
+                _appSettings,
+                _localizationService,
+                PlumApp
+            );
+        }
+        if (viewType == DialogType.EXPORT_GIF)
+        {
+            return new ExportPanelGIFViewModel(
+                _globalState,
+                _dialogs,
+                _imageExporter,
+                _projectManager,
+                _appSettings,
+                _localizationService,
+                PlumApp
+            );
+        }
+        if (viewType == DialogType.EXPORT_MP4)
+        {
+            return new ExportPanelMP4ViewModel(
+                _globalState,
+                _dialogs,
+                _imageExporter,
+                _appSettings,
+                _projectManager,
+                _localizationService,
+                PlumApp
+            );
+        }
+
+        return viewModel;
     }
 
     public string GetMessage(LocalizationConsts constStr)

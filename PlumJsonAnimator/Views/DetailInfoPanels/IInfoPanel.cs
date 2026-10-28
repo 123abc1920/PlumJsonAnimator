@@ -1,7 +1,20 @@
+using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Services;
+
 namespace PlumJsonAnimator.Views;
 
 public interface IInfoPanel
 {
     static abstract InfoPanelTypes InfoPanelType { get; }
-    static abstract IInfoPanel Create();
+    static abstract IInfoPanel Create(
+        GlobalState globalState,
+        Dialogs dialogs,
+        ProjectFilesManager projectManager,
+        AppSettings appSettings,
+        LocalizationService localizationService,
+        ImageExporter imageExporter,
+        PlumApp plumApp
+    );
 }

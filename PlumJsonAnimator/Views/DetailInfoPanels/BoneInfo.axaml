@@ -5,7 +5,7 @@
     xmlns:iconPacks="https://github.com/MahApps/IconPacks.Avalonia"
     xmlns:suki="clr-namespace:SukiUI.Controls;assembly=SukiUI"
     xmlns:viewModels="clr-namespace:PlumJsonAnimator.ViewModels"
-    x:DataType="viewModels:MainWindowViewModel"
+    x:DataType="viewModels:BoneInfoViewModel"
     Background="{DynamicResource SukiBackgroundBrush}">
     <ScrollViewer Margin="5" VerticalScrollBarVisibility="Auto">
         <StackPanel IsEnabled="{Binding IsAnimMode}">

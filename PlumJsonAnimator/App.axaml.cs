@@ -35,14 +35,6 @@ public partial class App : Application
 
         services.AddSingleton<MainWindowViewModel>();
 
-        services.AddTransient<NewProjectViewModel>();
-        services.AddTransient<RenameViewModel>();
-        services.AddTransient<ExportPanelGIFViewModel>();
-        services.AddTransient<ExportPanelJPGViewModel>();
-        services.AddTransient<ExportPanelMP4ViewModel>();
-        services.AddTransient<ExportPanelPNGViewModel>();
-        services.AddTransient<AppSettingsViewModel>();
-
         services.AddSingleton<AppSettings>();
         services.AddSingleton<GlobalState>();
 

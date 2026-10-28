@@ -2,9 +2,12 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
+using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
 
 namespace PlumJsonAnimator.Views;
@@ -13,15 +16,26 @@ public partial class BoneInfo : UserControl, IInfoPanel
 {
     public static InfoPanelTypes InfoPanelType => InfoPanelTypes.BONEINFO;
 
-    public BoneInfo()
+    public BoneInfo(
+        GlobalState globalState,
+        Dialogs dialogs,
+        ProjectFilesManager projectManager,
+        AppSettings appSettings,
+        LocalizationService localizationService,
+        ImageExporter imageExporter,
+        PlumApp plumApp
+    )
     {
         InitializeComponent();
-    }
-
-    public BoneInfo(ViewModelBase viewModel)
-        : this()
-    {
-        DataContext = viewModel;
+        DataContext = new BoneInfoViewModel(
+            globalState,
+            dialogs,
+            projectManager,
+            appSettings,
+            localizationService,
+            imageExporter,
+            plumApp
+        );
     }
 
     private void OnSlotSelectionChanged(object sender, TappedEventArgs e)
@@ -70,8 +84,24 @@ public partial class BoneInfo : UserControl, IInfoPanel
         }
     }
 
-    public static IInfoPanel Create()
+    public static IInfoPanel Create(
+        GlobalState globalState,
+        Dialogs dialogs,
+        ProjectFilesManager projectManager,
+        AppSettings appSettings,
+        LocalizationService localizationService,
+        ImageExporter imageExporter,
+        PlumApp plumApp
+    )
     {
-        return new BoneInfo();
+        return new BoneInfo(
+            globalState,
+            dialogs,
+            projectManager,
+            appSettings,
+            localizationService,
+            imageExporter,
+            plumApp
+        );
     }
 }

@@ -186,20 +186,6 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
-    private bool _isAnimMode = true;
-    public bool IsAnimMode
-    {
-        set
-        {
-            if (_isAnimMode != value)
-            {
-                _isAnimMode = value;
-                OnPropertyChanged(nameof(IsAnimMode));
-            }
-        }
-        get => _isAnimMode;
-    }
-
     public DateTime LastSaveTime
     {
         get => _globalState.LastSaveTime;
@@ -271,42 +257,6 @@ public partial class MainWindowViewModel : ViewModelBase
         _dialogs.MainWin = window;
     }
 
-    private ViewModelBase GetViewModel(DialogType viewType)
-    {
-        ViewModelBase viewModel = this;
-
-        if (viewType == DialogType.SETTINGS)
-        {
-            viewModel = _serviceProvider.GetRequiredService<AppSettingsViewModel>();
-        }
-        if (viewType == DialogType.NEWPROJECT)
-        {
-            viewModel = _serviceProvider.GetRequiredService<NewProjectViewModel>();
-        }
-        if (viewType == DialogType.RENAME)
-        {
-            viewModel = _serviceProvider.GetRequiredService<RenameViewModel>();
-        }
-        if (viewType == DialogType.EXPORT_JPG)
-        {
-            viewModel = _serviceProvider.GetRequiredService<ExportPanelJPGViewModel>();
-        }
-        if (viewType == DialogType.EXPORT_PNG)
-        {
-            viewModel = _serviceProvider.GetRequiredService<ExportPanelPNGViewModel>();
-        }
-        if (viewType == DialogType.EXPORT_GIF)
-        {
-            viewModel = _serviceProvider.GetRequiredService<ExportPanelGIFViewModel>();
-        }
-        if (viewType == DialogType.EXPORT_MP4)
-        {
-            viewModel = _serviceProvider.GetRequiredService<ExportPanelMP4ViewModel>();
-        }
-
-        return viewModel;
-    }
-
     public async void ShowDialog(string title, Window owner, DialogType viewType)
     {
         ViewModelBase viewModel = GetViewModel(viewType);
@@ -351,24 +301,9 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
-    private void OpenRenameDialog(IRenamable? _renamableObject)
-    {
-        if (_renamableObject != null)
-        {
-            var viewModel = (RenameViewModel)GetViewModel(DialogType.RENAME);
-            viewModel.RenamableObject = _renamableObject;
-            _dialogs.ShowDialog(
-                GetMessage(LocalizationConsts.RENAME),
-                viewModel,
-                DialogType.RENAME
-            );
-        }
-    }
-
     public ICommand AddBoneView { get; }
     public ICommand RenameRes { get; }
     public ICommand DeleteRes { get; }
-    public ICommand RenameSlot { get; }
     public ICommand RenameBone { get; }
     public ICommand DeleteBone { get; }
     public ICommand SetTransformMode { get; }
@@ -376,8 +311,6 @@ public partial class MainWindowViewModel : ViewModelBase
     public ICommand AddSkin { get; }
     public ICommand DeleteAnimation { get; }
     public ICommand DeleteSkin { get; }
-    public ICommand AddSlot { get; }
-    public ICommand DeleteSlot { get; }
     public ICommand SaveProject { get; }
     public ICommand PrevKeyFrame { get; }
     public ICommand NextKeyFrame { get; }
@@ -390,7 +323,6 @@ public partial class MainWindowViewModel : ViewModelBase
     public ICommand Undo { get; }
     public ICommand Redo { get; }
 
-    private readonly IServiceProvider _serviceProvider;
     public readonly AttachmentFactory _attachmentFactory;
     private readonly InfoPanelFactory _infoPanelFactory;
 
@@ -477,14 +409,6 @@ public partial class MainWindowViewModel : ViewModelBase
                 PlumApp.DeleteRes(res);
             }
         });
-        RenameSlot = new Command(parameter =>
-        {
-            if (parameter is ListBox SlotsList)
-            {
-                Slot? selectedSlot = SlotsList.SelectedItem as Slot;
-                OpenRenameDialog(selectedSlot);
-            }
-        });
         RenameBone = new Command(parameter =>
         {
             if (parameter is TreeView boneTreeView)
@@ -512,18 +436,6 @@ public partial class MainWindowViewModel : ViewModelBase
         DeleteSkin = new Command(_ =>
         {
             PlumApp.DeleteSkin();
-        });
-        AddSlot = new Command(_ =>
-        {
-            PlumApp.AddSlot();
-        });
-        DeleteSlot = new Command(parameter =>
-        {
-            if (parameter is ListBox SlotsList)
-            {
-                Slot? selectedSlot = SlotsList.SelectedItem as Slot;
-                PlumApp.DeleteSlot(selectedSlot);
-            }
         });
 
         SaveProject = new Command(_ =>
