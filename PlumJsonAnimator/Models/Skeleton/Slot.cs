@@ -1,16 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Reactive.Linq;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Media;
-using Avalonia.Media.Imaging;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
-using PlumJsonAnimator.Services;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
@@ -72,13 +68,19 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 return;
 
             CurrentAttachment = attachment;
-            if (CurrentAttachment != null && BoundedBone != null)
+            if (
+                CurrentAttachment != null
+                && BoundedBone != null
+                && CurrentAttachment.AttachmentType == AttachmentTypes.REGION
+            )
             {
-                LocalX = CurrentAttachment.X;
-                LocalY = CurrentAttachment.Y;
-                LocalA = CurrentAttachment.A;
+                var regionAttachment = (RegionAttachment)CurrentAttachment;
 
-                var size = CurrentAttachment.GetSize();
+                LocalX = regionAttachment.X;
+                LocalY = regionAttachment.Y;
+                LocalA = regionAttachment.A;
+
+                var size = regionAttachment.GetSize();
                 LengthX = size["width"] ?? LengthX;
                 LengthY = size["height"] ?? LengthY;
 

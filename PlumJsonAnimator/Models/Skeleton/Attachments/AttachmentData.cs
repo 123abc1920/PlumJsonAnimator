@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
@@ -35,5 +36,5 @@ public class AttachmentData
     public int VertexCount { get; set; }
 
     [JsonProperty("vertices", NullValueHandling = NullValueHandling.Ignore)]
-    public double[]? Vertices { get; set; }
+    public List<double>? Vertices { get; set; }
 }

@@ -121,9 +121,13 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             foreach (Attachment? a in SlotAttachmentBinding.Values)
             {
-                if (a?.GetRes() == res)
+                if (a?.AttachmentType == AttachmentTypes.REGION)
                 {
-                    return true;
+                    var regionAttachment = (RegionAttachment)a;
+                    if (regionAttachment?.GetRes() == res)
+                    {
+                        return true;
+                    }
                 }
             }
             return false;
@@ -145,11 +149,18 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             foreach (Slot s in SlotAttachmentBinding.Keys)
             {
-                if (SlotAttachmentBinding[s] != null && SlotAttachmentBinding[s].GetRes() == res)
+                if (
+                    SlotAttachmentBinding[s] != null
+                    && SlotAttachmentBinding[s].AttachmentType == AttachmentTypes.REGION
+                )
                 {
-                    SlotAttachmentBinding[s] = null;
-                    s.UpdateAttachment(GetAttachment(s));
-                    return;
+                    var a = (RegionAttachment)SlotAttachmentBinding[s];
+                    if (a.GetRes() == res)
+                    {
+                        SlotAttachmentBinding[s] = null;
+                        s.UpdateAttachment(GetAttachment(s));
+                        return;
+                    }
                 }
             }
         }

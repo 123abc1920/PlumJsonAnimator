@@ -4,7 +4,6 @@ using Avalonia;
 using Avalonia.Controls;
 using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Models.Common;
-using PlumJsonAnimator.Models.Resources;
 
 namespace PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 
@@ -50,17 +49,26 @@ public class ClipAttachment : Attachment
         throw new NotImplementedException();
     }
 
+    private List<double> MakeFlatVerticesArray()
+    {
+        List<double> arr = new List<double>();
+        foreach (PointModel pointModel in _vertices)
+        {
+            arr.Add(pointModel.X);
+            arr.Add(pointModel.Y);
+        }
+        return arr;
+    }
+
     public override AttachmentData GenerateJSONData()
     {
         return new AttachmentData
         {
             Name = Name,
-            Width = Width,
-            Height = Height,
-            X = X,
-            Y = Y,
-            A = A,
             Type = _attachmentTypeConverter.GetAttachmentTypeString(AttachmentType),
+            End = _endSlotName,
+            VertexCount = _vertexCount,
+            Vertices = MakeFlatVerticesArray(),
         };
     }
 
@@ -75,4 +83,8 @@ public class ClipAttachment : Attachment
 
         return result;
     }
+
+    public override void SetPos(double x, double y, double a) { }
+
+    public override void SetSize(double width, double height) { }
 }

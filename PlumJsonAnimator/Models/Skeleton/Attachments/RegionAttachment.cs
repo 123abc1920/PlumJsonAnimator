@@ -8,6 +8,7 @@ using Avalonia.Media.Imaging;
 using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Models.Resources;
 
+// TODO: fix SetSize GetSize Size
 namespace PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 
 /// <summary>
@@ -20,6 +21,13 @@ public class RegionAttachment : Attachment
     private ImageRes _imageRes;
     private Bitmap? _cachedBitmap;
     private string? _cachedPath;
+
+    public double X { get; set; }
+    public double Y { get; set; }
+    public double A { get; set; }
+
+    protected int? Width { get; set; } = null;
+    protected int? Height { get; set; } = null;
 
     public RegionAttachment(
         AttachmentDTO attachmentDTO,
@@ -69,9 +77,27 @@ public class RegionAttachment : Attachment
         };
     }
 
-    public override Res GetRes()
+    public Res GetRes()
     {
         return _imageRes;
+    }
+
+    public override void SetPos(double x, double y, double a)
+    {
+        X = x;
+        Y = y;
+        A = a;
+    }
+
+    public override void SetSize(double width, double height)
+    {
+        Width = (int)width;
+        Height = (int)height;
+    }
+
+    public Dictionary<string, int?> GetSize()
+    {
+        return new Dictionary<string, int?>() { ["width"] = Width, ["height"] = Height };
     }
 
     public override void DrawSlotAttachment(
