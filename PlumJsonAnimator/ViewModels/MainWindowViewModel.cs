@@ -191,18 +191,6 @@ public partial class MainWindowViewModel : ViewModelBase
         set => _globalState.LastSaveTime = value;
     }
 
-    public object CurrentInfoPanel
-    {
-        get => _panelState.CurrentInfoPanel;
-        set
-        {
-            if (_panelState.CurrentInfoPanel != value)
-            {
-                _panelState.CurrentInfoPanel = value;
-            }
-        }
-    }
-
     public string IsTransformModeActive => TransformMode;
 
     public Bone? CurrentBone
@@ -219,12 +207,11 @@ public partial class MainWindowViewModel : ViewModelBase
                 {
                     if (_globalState.CurrentBone.IsBone)
                     {
-                        CurrentInfoPanel = _infoPanelFactory.Create(PanelTypes.BONEINFO);
+                        PanelState.CurrentInfoPanel = _infoPanelFactory.Create(PanelTypes.BONEINFO);
                     }
                 }
 
                 OnPropertyChanged(nameof(CurrentBone));
-                OnPropertyChanged(nameof(CurrentInfoPanel));
             }
         }
     }
@@ -330,7 +317,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public readonly AttachmentFactory _attachmentFactory;
     private readonly InfoPanelFactory _infoPanelFactory;
-    private readonly PanelState _panelState;
+    public PanelState PanelState { get; set; }
 
     public MainWindowViewModel(
         IServiceProvider serviceProvider,
@@ -358,7 +345,7 @@ public partial class MainWindowViewModel : ViewModelBase
         _serviceProvider = serviceProvider;
         _attachmentFactory = attachmentFactory;
         _infoPanelFactory = infoPanelFactory;
-        _panelState = panelState;
+        PanelState = panelState;
 
         globalState.PropertyChanged += (s, e) =>
         {

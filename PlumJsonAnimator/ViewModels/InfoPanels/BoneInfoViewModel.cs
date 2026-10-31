@@ -1,8 +1,10 @@
+using System;
 using System.Windows.Input;
 using Avalonia.Controls;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Constants.Command;
 using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Common.States;
 using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
@@ -24,10 +26,9 @@ public partial class BoneInfoViewModel : ViewModelBase
 
                 if (_globalState.CurrentBone != null)
                 {
-                    if (_globalState.CurrentBone.IsBone)
-                    {
-                        //CurrentInfoPanel = _infoPanelFactory.Create(InfoPanelTypes.SLOTINFO);
-                    }
+                    _panelState.CurrentInfoPanel = _infoPanelFactory.Create(
+                        Views.PanelTypes.SLOTINFO
+                    );
                 }
 
                 OnPropertyChanged(nameof(CurrentBone));
@@ -40,6 +41,7 @@ public partial class BoneInfoViewModel : ViewModelBase
     public ICommand RenameSlot { get; }
 
     private readonly InfoPanelFactory _infoPanelFactory;
+    private readonly PanelState _panelState;
 
     public BoneInfoViewModel(
         GlobalState globalState,
@@ -49,7 +51,8 @@ public partial class BoneInfoViewModel : ViewModelBase
         LocalizationService localizationService,
         ImageExporter imageExporter,
         PlumApp plumApp,
-        InfoPanelFactory infoPanelFactory
+        InfoPanelFactory infoPanelFactory,
+        PanelState panelState
     )
         : base(
             globalState,
@@ -62,6 +65,7 @@ public partial class BoneInfoViewModel : ViewModelBase
         )
     {
         _infoPanelFactory = infoPanelFactory;
+        _panelState = panelState;
 
         AddSlot = new Command(_ =>
         {

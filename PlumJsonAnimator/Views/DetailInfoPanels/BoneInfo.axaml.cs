@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Common.States;
 using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Resources;
@@ -25,7 +26,8 @@ public partial class BoneInfo : UserControl, IInfoPanel
         LocalizationService localizationService,
         ImageExporter imageExporter,
         PlumApp plumApp,
-        InfoPanelFactory infoPanelFactory
+        InfoPanelFactory infoPanelFactory,
+        PanelState panelState
     )
     {
         InitializeComponent();
@@ -37,7 +39,8 @@ public partial class BoneInfo : UserControl, IInfoPanel
             localizationService,
             imageExporter,
             plumApp,
-            infoPanelFactory
+            infoPanelFactory,
+            panelState
         );
     }
 
@@ -46,7 +49,7 @@ public partial class BoneInfo : UserControl, IInfoPanel
         Slot selectedSlot = SlotsList.SelectedItem as Slot;
         if (selectedSlot != null)
         {
-            if (DataContext is MainWindowViewModel viewModel)
+            if (DataContext is BoneInfoViewModel viewModel)
             {
                 viewModel.CurrentBone = (Bone)selectedSlot;
             }
@@ -95,7 +98,8 @@ public partial class BoneInfo : UserControl, IInfoPanel
         LocalizationService localizationService,
         ImageExporter imageExporter,
         PlumApp plumApp,
-        InfoPanelFactory infoPanelFactory
+        InfoPanelFactory infoPanelFactory,
+        PanelState panelState
     )
     {
         return new BoneInfo(
@@ -106,7 +110,8 @@ public partial class BoneInfo : UserControl, IInfoPanel
             localizationService,
             imageExporter,
             plumApp,
-            infoPanelFactory
+            infoPanelFactory,
+            panelState
         );
     }
 }

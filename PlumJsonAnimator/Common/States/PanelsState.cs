@@ -1,8 +1,10 @@
-using PlumJsonAnimator.Views;
+using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 
 namespace PlumJsonAnimator.Common.States;
 
-public class PanelState
+public partial class PanelState : ReactiveObject
 {
-    public object CurrentInfoPanel { get; set; }
+    [Reactive]
+    public object? CurrentInfoPanel { get; set; }
 }

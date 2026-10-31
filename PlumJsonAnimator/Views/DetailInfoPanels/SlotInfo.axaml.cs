@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Common.States;
 using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Services;
@@ -20,7 +21,8 @@ public partial class SlotInfo : UserControl, IInfoPanel
         LocalizationService localizationService,
         ImageExporter imageExporter,
         PlumApp plumApp,
-        InfoPanelFactory infoPanelFactory
+        InfoPanelFactory infoPanelFactory,
+        PanelState panelState
     )
     {
         InitializeComponent();
@@ -32,7 +34,8 @@ public partial class SlotInfo : UserControl, IInfoPanel
             localizationService,
             imageExporter,
             plumApp,
-            infoPanelFactory
+            infoPanelFactory,
+            panelState
         );
     }
 
@@ -44,7 +47,8 @@ public partial class SlotInfo : UserControl, IInfoPanel
         LocalizationService localizationService,
         ImageExporter imageExporter,
         PlumApp plumApp,
-        InfoPanelFactory infoPanelFactory
+        InfoPanelFactory infoPanelFactory,
+        PanelState panelState
     )
     {
         return new SlotInfo(
@@ -55,7 +59,8 @@ public partial class SlotInfo : UserControl, IInfoPanel
             localizationService,
             imageExporter,
             plumApp,
-            infoPanelFactory
+            infoPanelFactory,
+            panelState
         );
     }
 }

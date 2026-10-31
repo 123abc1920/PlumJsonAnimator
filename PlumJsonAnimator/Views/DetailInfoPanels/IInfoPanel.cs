@@ -1,5 +1,6 @@
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Common.States;
 using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Services;
@@ -17,6 +18,7 @@ public interface IInfoPanel
         LocalizationService localizationService,
         ImageExporter imageExporter,
         PlumApp plumApp,
-        InfoPanelFactory infoPanelFactory
+        InfoPanelFactory infoPanelFactory,
+        PanelState panelState
     );
 }

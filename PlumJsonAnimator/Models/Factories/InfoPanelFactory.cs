@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Common.States;
 using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Services;
 using PlumJsonAnimator.Views;
@@ -19,7 +20,8 @@ public class InfoPanelFactory
         AppSettings appSettings,
         LocalizationService localizationService,
         ImageExporter imageExporter,
-        PlumApp plumApp
+        PlumApp plumApp,
+        PanelState panelState
     )
     {
         _registry = new()
@@ -35,7 +37,8 @@ public class InfoPanelFactory
                         localizationService,
                         imageExporter,
                         plumApp,
-                        this
+                        this,
+                        panelState
                     )
             },
             {
@@ -49,7 +52,8 @@ public class InfoPanelFactory
                         localizationService,
                         imageExporter,
                         plumApp,
-                        this
+                        this,
+                        panelState
                     )
             },
         };
