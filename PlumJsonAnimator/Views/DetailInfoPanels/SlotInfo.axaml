@@ -39,8 +39,7 @@
             <TextBox
                 Height="32"
                 Margin="0,0,0,5"
-                Text="Name"
-                TextWrapping="Wrap" />
+                Text="{Binding CurrentBone.Name}" />
             <TextBlock
                 Height="24"
                 FontSize="14"
@@ -54,13 +53,10 @@
                 <ComboBoxItem Content="Item2" />
             </ComboBox>
             <TextBlock
-                Height="24"
                 FontSize="14"
                 Text="Attachment" />
             <Grid
-                Height="60"
-                Margin="5,0,10,0"
-                Background="#FFF0F0F0">
+                Margin="5,0,10,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10*" />
                     <ColumnDefinition Width="*" />
@@ -68,16 +64,14 @@
                 <TextBox
                     Grid.Row="0"
                     Grid.Column="0"
-                    Width="120"
-                    Height="32"
                     HorizontalAlignment="Left"
                     CaretIndex="1"
                     Text="TextBox" />
                 <Canvas
                     Grid.Row="0"
                     Grid.Column="1"
-                    Width="40"
-                    Height="40"
+                    Width="30"
+                    Height="30"
                     HorizontalAlignment="Right"
                     Background="#FFE6E6E6" />
             </Grid>
