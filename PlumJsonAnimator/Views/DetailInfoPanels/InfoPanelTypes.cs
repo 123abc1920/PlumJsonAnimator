@@ -1,7 +1,8 @@
 namespace PlumJsonAnimator.Views;
 
-public enum InfoPanelTypes
+public enum PanelTypes
 {
+    EMPTY,
     BONEINFO,
     SLOTINFO,
     ATTACHMENTINFO,

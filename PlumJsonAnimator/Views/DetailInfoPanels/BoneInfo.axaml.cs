@@ -4,6 +4,7 @@ using Avalonia.Input;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
@@ -14,7 +15,7 @@ namespace PlumJsonAnimator.Views;
 
 public partial class BoneInfo : UserControl, IInfoPanel
 {
-    public static InfoPanelTypes InfoPanelType => InfoPanelTypes.BONEINFO;
+    public static PanelTypes InfoPanelType => PanelTypes.BONEINFO;
 
     public BoneInfo(
         GlobalState globalState,
@@ -23,7 +24,8 @@ public partial class BoneInfo : UserControl, IInfoPanel
         AppSettings appSettings,
         LocalizationService localizationService,
         ImageExporter imageExporter,
-        PlumApp plumApp
+        PlumApp plumApp,
+        InfoPanelFactory infoPanelFactory
     )
     {
         InitializeComponent();
@@ -34,7 +36,8 @@ public partial class BoneInfo : UserControl, IInfoPanel
             appSettings,
             localizationService,
             imageExporter,
-            plumApp
+            plumApp,
+            infoPanelFactory
         );
     }
 
@@ -91,7 +94,8 @@ public partial class BoneInfo : UserControl, IInfoPanel
         AppSettings appSettings,
         LocalizationService localizationService,
         ImageExporter imageExporter,
-        PlumApp plumApp
+        PlumApp plumApp,
+        InfoPanelFactory infoPanelFactory
     )
     {
         return new BoneInfo(
@@ -101,7 +105,8 @@ public partial class BoneInfo : UserControl, IInfoPanel
             appSettings,
             localizationService,
             imageExporter,
-            plumApp
+            plumApp,
+            infoPanelFactory
         );
     }
 }

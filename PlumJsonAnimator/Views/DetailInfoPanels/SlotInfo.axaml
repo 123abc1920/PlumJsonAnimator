@@ -35,9 +35,52 @@
                     VerticalContentAlignment="Center">
                     <iconPacks:PackIconBootstrapIcons Kind="PencilFill" />
                 </Button>
+                <TextBox
+                    Height="32"
+                    Margin="0,0,0,5"
+                    Text="Name"
+                    TextWrapping="Wrap" />
+                <TextBlock
+                    Height="24"
+                    FontSize="14"
+                    Text="Bone" />
+                <ComboBox
+                    Height="32"
+                    Margin="0,0,0,5"
+                    Padding="6,4"
+                    FontSize="13">
+                    <ComboBoxItem Content="Item1" IsSelected="True" />
+                    <ComboBoxItem Content="Item2" />
+                </ComboBox>
+                <TextBlock
+                    Height="24"
+                    FontSize="14"
+                    Text="Attachment" />
+                <Grid
+                    Height="60"
+                    Margin="5,0,10,0"
+                    Background="#FFF0F0F0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Width="120"
+                        Height="32"
+                        HorizontalAlignment="Left"
+                        CaretIndex="1"
+                        Text="TextBox" />
+                    <Canvas
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Width="40"
+                        Height="40"
+                        HorizontalAlignment="Right"
+                        Background="#FFE6E6E6" />
+                </Grid>
                 <ListBox>
-                    <DragDrop.AllowDrop>True</DragDrop.AllowDrop>
-
                     <ListBox.ItemTemplate>
                         <DataTemplate />
                     </ListBox.ItemTemplate>

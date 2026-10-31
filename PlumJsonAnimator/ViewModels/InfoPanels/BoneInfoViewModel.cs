@@ -4,6 +4,7 @@ using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Constants.Command;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
 
@@ -14,11 +15,31 @@ public partial class BoneInfoViewModel : ViewModelBase
     public Bone? CurrentBone
     {
         get => _globalState.CurrentBone;
+        set
+        {
+            if (_globalState.CurrentBone != value)
+            {
+                _globalState.CurrentBone = value;
+                _globalState.CurrentBone?.UpdateSlots();
+
+                if (_globalState.CurrentBone != null)
+                {
+                    if (_globalState.CurrentBone.IsBone)
+                    {
+                        //CurrentInfoPanel = _infoPanelFactory.Create(InfoPanelTypes.SLOTINFO);
+                    }
+                }
+
+                OnPropertyChanged(nameof(CurrentBone));
+            }
+        }
     }
 
     public ICommand AddSlot { get; }
     public ICommand DeleteSlot { get; }
     public ICommand RenameSlot { get; }
+
+    private readonly InfoPanelFactory _infoPanelFactory;
 
     public BoneInfoViewModel(
         GlobalState globalState,
@@ -27,7 +48,8 @@ public partial class BoneInfoViewModel : ViewModelBase
         AppSettings appSettings,
         LocalizationService localizationService,
         ImageExporter imageExporter,
-        PlumApp plumApp
+        PlumApp plumApp,
+        InfoPanelFactory infoPanelFactory
     )
         : base(
             globalState,
@@ -39,6 +61,8 @@ public partial class BoneInfoViewModel : ViewModelBase
             plumApp
         )
     {
+        _infoPanelFactory = infoPanelFactory;
+
         AddSlot = new Command(_ =>
         {
             PlumApp.AddSlot();

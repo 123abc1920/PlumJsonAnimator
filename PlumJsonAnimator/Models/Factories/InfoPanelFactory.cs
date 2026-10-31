@@ -10,7 +10,7 @@ namespace PlumJsonAnimator.Models.Factories;
 
 public class InfoPanelFactory
 {
-    private readonly Dictionary<InfoPanelTypes, Func<object>> _registry;
+    private readonly Dictionary<PanelTypes, Func<object>> _registry;
 
     public InfoPanelFactory(
         GlobalState globalState,
@@ -25,7 +25,7 @@ public class InfoPanelFactory
         _registry = new()
         {
             {
-                InfoPanelTypes.BONEINFO,
+                PanelTypes.BONEINFO,
                 () =>
                     BoneInfo.Create(
                         globalState,
@@ -34,11 +34,12 @@ public class InfoPanelFactory
                         appSettings,
                         localizationService,
                         imageExporter,
-                        plumApp
+                        plumApp,
+                        this
                     )
             },
             {
-                InfoPanelTypes.SLOTINFO,
+                PanelTypes.SLOTINFO,
                 () =>
                     SlotInfo.Create(
                         globalState,
@@ -47,13 +48,14 @@ public class InfoPanelFactory
                         appSettings,
                         localizationService,
                         imageExporter,
-                        plumApp
+                        plumApp,
+                        this
                     )
             },
         };
     }
 
-    public IInfoPanel Create(InfoPanelTypes infoPanelType)
+    public IInfoPanel Create(PanelTypes infoPanelType)
     {
         if (_registry.TryGetValue(infoPanelType, out var createFunc))
         {

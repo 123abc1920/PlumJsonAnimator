@@ -1,6 +1,7 @@
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.ViewModels;
@@ -14,7 +15,8 @@ public partial class SlotInfoViewModel : ViewModelBase
         AppSettings appSettings,
         LocalizationService localizationService,
         ImageExporter imageExporter,
-        PlumApp plumApp
+        PlumApp plumApp,
+        InfoPanelFactory infoPanelFactory
     )
         : base(
             globalState,

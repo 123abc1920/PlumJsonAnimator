@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Windows.Input;
 using Avalonia.Controls;
-using Microsoft.Extensions.DependencyInjection;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Constants.Command;
 using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Common.States;
 using PlumJsonAnimator.Common.Timeline;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Factories;
-using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
@@ -192,7 +191,17 @@ public partial class MainWindowViewModel : ViewModelBase
         set => _globalState.LastSaveTime = value;
     }
 
-    public object CurrentInfoPanel { get; set; }
+    public object CurrentInfoPanel
+    {
+        get => _panelState.CurrentInfoPanel;
+        set
+        {
+            if (_panelState.CurrentInfoPanel != value)
+            {
+                _panelState.CurrentInfoPanel = value;
+            }
+        }
+    }
 
     public string IsTransformModeActive => TransformMode;
 
@@ -210,11 +219,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 {
                     if (_globalState.CurrentBone.IsBone)
                     {
-                        CurrentInfoPanel = _infoPanelFactory.Create(InfoPanelTypes.BONEINFO);
-                    }
-                    else
-                    {
-                        CurrentInfoPanel = _infoPanelFactory.Create(InfoPanelTypes.SLOTINFO);
+                        CurrentInfoPanel = _infoPanelFactory.Create(PanelTypes.BONEINFO);
                     }
                 }
 
@@ -325,6 +330,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public readonly AttachmentFactory _attachmentFactory;
     private readonly InfoPanelFactory _infoPanelFactory;
+    private readonly PanelState _panelState;
 
     public MainWindowViewModel(
         IServiceProvider serviceProvider,
@@ -336,7 +342,8 @@ public partial class MainWindowViewModel : ViewModelBase
         Dialogs dialogs,
         PlumApp plumApp,
         AttachmentFactory attachmentFactory,
-        InfoPanelFactory infoPanelFactory
+        InfoPanelFactory infoPanelFactory,
+        PanelState panelState
     )
         : base(
             globalState,
@@ -351,6 +358,7 @@ public partial class MainWindowViewModel : ViewModelBase
         _serviceProvider = serviceProvider;
         _attachmentFactory = attachmentFactory;
         _infoPanelFactory = infoPanelFactory;
+        _panelState = panelState;
 
         globalState.PropertyChanged += (s, e) =>
         {

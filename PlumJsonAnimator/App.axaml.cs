@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Common.States;
 using PlumJsonAnimator.Models.Commands;
 using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Factories;
@@ -36,7 +37,9 @@ public partial class App : Application
         services.AddSingleton<MainWindowViewModel>();
 
         services.AddSingleton<AppSettings>();
+
         services.AddSingleton<GlobalState>();
+        services.AddSingleton<PanelState>();
 
         services.AddSingleton<Interpolation>();
         services.AddSingleton<Engine>();
