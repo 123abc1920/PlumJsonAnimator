@@ -404,8 +404,7 @@ public class PlumApp
 
     public void AddSlot()
     {
-        Bone? bone = _globalState.CurrentBone;
-        if (bone != null)
+        if (_globalState.SelectedItem is Bone bone)
         {
             Slot s = new Slot(_globalState, bone);
             AddSlotCommand addSlotCommand = new AddSlotCommand(
@@ -419,24 +418,27 @@ public class PlumApp
 
     public void DeleteSlot(Slot? selectedSlot)
     {
-        if (selectedSlot != null)
+        if (_globalState.SelectedItem is Bone bone)
         {
-            DeleteSlotCommand deleteSlotCommand = new DeleteSlotCommand(
-                _globalState.CurrentProject,
-                selectedSlot,
-                _globalState.CurrentBone
-            );
-            _historyManager.DoCommand(deleteSlotCommand);
+            if (selectedSlot != null)
+            {
+                DeleteSlotCommand deleteSlotCommand = new DeleteSlotCommand(
+                    _globalState.CurrentProject,
+                    selectedSlot,
+                    bone
+                );
+                _historyManager.DoCommand(deleteSlotCommand);
+            }
         }
     }
 
     public void AddKeyFrame()
     {
-        if (_globalState.CurrentBone != null)
+        if (_globalState.SelectedItem is Bone bone)
         {
             AddKeyFrameCommand addKeyFrameCommand = new AddKeyFrameCommand(
                 _globalState.CurrentProject.CurrentAnimation,
-                _globalState.CurrentBone,
+                bone,
                 _globalState.CurrentProject.CurrentMode.Type,
                 _easingFactory.CreateEasing(_globalState.CurrentEasingType)
             );
@@ -446,11 +448,11 @@ public class PlumApp
 
     public void DeleteKeyFrame()
     {
-        if (_globalState.CurrentBone != null)
+        if (_globalState.SelectedItem is Bone bone)
         {
             DeleteKeyFrameCommand deleteKeyFrameCommand = new DeleteKeyFrameCommand(
                 _globalState.CurrentProject.CurrentAnimation,
-                _globalState.CurrentBone,
+                bone,
                 _globalState.CurrentProject.CurrentMode.Type
             );
             _historyManager.DoCommand(deleteKeyFrameCommand);
@@ -466,25 +468,31 @@ public class PlumApp
 
     public void Transform(double a, double b)
     {
-        _globalState.CurrentProject?.CurrentMode.Transform(
-            _globalState.CurrentBone,
-            a,
-            b,
-            _easingFactory.CreateEasing(_globalState.CurrentEasingType)
-        );
+        if (_globalState.SelectedItem is Bone bone)
+        {
+            _globalState.CurrentProject?.CurrentMode.Transform(
+                bone,
+                a,
+                b,
+                _easingFactory.CreateEasing(_globalState.CurrentEasingType)
+            );
+        }
     }
 
     public void ChangeBoneStatus(BoneStatus oldBoneStatus, BoneStatus newBoneStatus, bool isAnim)
     {
-        ChangeBoneStatusCommand changeBoneStatusCommand = new ChangeBoneStatusCommand(
-            _globalState.CurrentBone,
-            oldBoneStatus,
-            newBoneStatus,
-            _globalState.CurrentProject.CurrentAnimation,
-            isAnim,
-            _globalState.CurrentProject.CurrentAnimation.CurrentTime
-        );
-        _historyManager.DoCommand(changeBoneStatusCommand);
+        if (_globalState.SelectedItem is Bone bone)
+        {
+            ChangeBoneStatusCommand changeBoneStatusCommand = new ChangeBoneStatusCommand(
+                bone,
+                oldBoneStatus,
+                newBoneStatus,
+                _globalState.CurrentProject.CurrentAnimation,
+                isAnim,
+                _globalState.CurrentProject.CurrentAnimation.CurrentTime
+            );
+            _historyManager.DoCommand(changeBoneStatusCommand);
+        }
     }
 
     public void Undo()

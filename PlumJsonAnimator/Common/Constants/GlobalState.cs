@@ -54,6 +54,19 @@ namespace PlumJsonAnimator.Common.Constants
 
         public EasingTypes CurrentEasingType { get; set; } = EasingTypes.LINEAR;
 
+        private IPresentableItem? _selectedItem = null;
+        public IPresentableItem? SelectedItem
+        {
+            get => _selectedItem;
+            set
+            {
+                if (_selectedItem != value)
+                {
+                    _selectedItem = value;
+                }
+            }
+        }
+
         public Bone? CurrentBone { get; set; } = null;
         public string Theme { get; set; } = "light";
         public bool DrawBones { get; set; } = true;
@@ -104,37 +117,31 @@ namespace PlumJsonAnimator.Common.Constants
 
         public IImmutableBrush GetDotBoneColor(Bone b)
         {
-            if (CurrentBone == b && CurrentBone.IsBone == true)
+            if (SelectedItem == b)
             {
                 return AppColors.Red;
             }
-            else
-            {
-                return AppColors.Green;
-            }
+
+            return AppColors.Green;
         }
 
         public IImmutableBrush GetLineBoneColor(Bone b)
         {
-            if (CurrentBone == b && CurrentBone.IsBone == true)
+            if (SelectedItem == b)
             {
                 return AppColors.Blue;
             }
-            else
-            {
-                return AppColors.Aqua;
-            }
+
+            return AppColors.Aqua;
         }
 
         public bool IsSlotSelected(Slot slot)
         {
-            if (CurrentBone != null)
+            if (SelectedItem == slot)
             {
-                if (!CurrentBone.IsBone && CurrentBone == slot)
-                {
-                    return true;
-                }
+                return true;
             }
+
             return false;
         }
     }

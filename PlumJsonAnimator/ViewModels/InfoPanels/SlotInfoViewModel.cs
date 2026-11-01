@@ -3,6 +3,7 @@ using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Common.States;
 using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Factories;
+using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
 
@@ -12,15 +13,31 @@ public partial class SlotInfoViewModel : ViewModelBase
 {
     public Bone? CurrentBone
     {
-        get => _globalState.CurrentBone;
+        get => _globalState.SelectedItem as Bone;
         set
         {
-            if (_globalState.CurrentBone != value)
+            if (value is null)
             {
-                _globalState.CurrentBone = value;
+                _globalState.SelectedItem = null;
+                _panelState.CurrentInfoPanel = null;
+                OnPropertyChanged(nameof(CurrentBone));
+                return;
+            }
+
+            if (value is Bone bone && _globalState.SelectedItem != bone)
+            {
+                _globalState.SelectedItem = (IPresentableItem?)bone;
+                bone.UpdateSlots();
+
+                _panelState.CurrentInfoPanel = _infoPanelFactory.Create(Views.PanelTypes.SLOTINFO);
+
+                OnPropertyChanged(nameof(CurrentBone));
             }
         }
     }
+
+    private readonly InfoPanelFactory _infoPanelFactory;
+    private readonly PanelState _panelState;
 
     public SlotInfoViewModel(
         GlobalState globalState,
@@ -41,5 +58,9 @@ public partial class SlotInfoViewModel : ViewModelBase
             localizationService,
             imageExporter,
             plumApp
-        ) { }
+        )
+    {
+        _infoPanelFactory = infoPanelFactory;
+        _panelState = panelState;
+    }
 }

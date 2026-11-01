@@ -16,7 +16,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
     /// <summary>
     /// Bone data
     /// </summary>
-    public class Bone : ReactiveObject, IRenamable
+    public class Bone : ReactiveObject, IRenamable, IPresentableItem
     {
         public int _id = 0;
 

@@ -15,7 +15,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
     /// <summary>
     /// Provides methods for work with slots
     /// </summary>
-    public class Slot : Bone, IRenamable
+    public class Slot : Bone, IRenamable, IPresentableItem
     {
         public override bool IsBone
         {

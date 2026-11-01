@@ -228,10 +228,10 @@ namespace PlumJsonAnimator.Models
         public void DrawSlots(Canvas c)
         {
             CurrentSkin.DrawSkin(c);
-            if (_globalState.CurrentBone?.IsBone == false)
-            {
-                ((Slot)_globalState.CurrentBone).DrawSlotSelection(c);
-            }
+            // if (_globalState.CurrentBone?.IsBone == false)
+            // {
+            //     ((Slot)_globalState.CurrentBone).DrawSlotSelection(c);
+            // }
         }
 
         public string GetProjectPath()
@@ -454,7 +454,6 @@ namespace PlumJsonAnimator.Models
 
         private void RecreateSlots(Dictionary<string, SlotData> slots)
         {
-            // recreate slots
             List<Slot> slotsToRemove = new List<Slot>();
 
             foreach (Slot slot in Slots.ToList())
@@ -499,7 +498,7 @@ namespace PlumJsonAnimator.Models
                 Slots.Remove(slot);
             }
 
-            _globalState.CurrentBone = null;
+            _globalState.SelectedItem = null;
         }
 
         private void RecreateAnimations(Dictionary<string, AnimationData> animations)

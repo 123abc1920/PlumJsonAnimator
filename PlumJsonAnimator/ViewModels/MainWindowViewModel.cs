@@ -9,6 +9,7 @@ using PlumJsonAnimator.Common.Timeline;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Factories;
+using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
@@ -195,21 +196,23 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public Bone? CurrentBone
     {
-        get => _globalState.CurrentBone;
+        get => _globalState.SelectedItem as Bone;
         set
         {
-            if (_globalState.CurrentBone != value)
+            if (value is null)
             {
-                _globalState.CurrentBone = value;
-                _globalState.CurrentBone?.UpdateSlots();
+                _globalState.SelectedItem = null;
+                PanelState.CurrentInfoPanel = null;
+                OnPropertyChanged(nameof(CurrentBone));
+                return;
+            }
 
-                if (_globalState.CurrentBone != null)
-                {
-                    if (_globalState.CurrentBone.IsBone)
-                    {
-                        PanelState.CurrentInfoPanel = _infoPanelFactory.Create(PanelTypes.BONEINFO);
-                    }
-                }
+            if (value is Bone bone && _globalState.SelectedItem != bone)
+            {
+                _globalState.SelectedItem = (IPresentableItem?)bone;
+                bone.UpdateSlots();
+
+                PanelState.CurrentInfoPanel = _infoPanelFactory.Create(PanelTypes.BONEINFO);
 
                 OnPropertyChanged(nameof(CurrentBone));
             }
@@ -287,7 +290,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public void Transform(double a, double b)
     {
-        if (_globalState.CurrentBone != null)
+        if (_globalState.SelectedItem is Bone bone)
         {
             PlumApp.Transform(a, b);
         }
