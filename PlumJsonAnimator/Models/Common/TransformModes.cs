@@ -59,7 +59,7 @@ class TransformMode : Mode
         if (_globalState.SetBasePos == false)
         {
             var animation = _globalState.CurrentProject?.GetCurrentAnimation();
-            if (animation != null && !animation.IsRun && bone.IsBone == true)
+            if (animation != null && !animation.IsRun)
             {
                 animation.TranslateBone(bone, bone.X, bone.Y, easing);
             }
@@ -105,7 +105,7 @@ class RotateMode : Mode
         if (_globalState.SetBasePos == false)
         {
             var animation = _globalState.CurrentProject?.GetCurrentAnimation();
-            if (animation != null && !animation.IsRun && bone.IsBone == true)
+            if (animation != null && !animation.IsRun)
             {
                 animation.RotateBone(bone, bone.A, easing);
             }
@@ -171,7 +171,7 @@ class ScaleMode : Mode
         if (_globalState.SetBasePos == false)
         {
             var animation = _globalState.CurrentProject?.GetCurrentAnimation();
-            if (animation != null && !animation.IsRun && bone.IsBone == true)
+            if (animation != null && !animation.IsRun)
             {
                 animation.ScaleBone(bone, bone.ScaleX, bone.ScaleY, easing);
             }
@@ -252,7 +252,7 @@ class ShearMode : Mode
         if (_globalState.SetBasePos == false)
         {
             var animation = _globalState.CurrentProject?.GetCurrentAnimation();
-            if (animation != null && !animation.IsRun && bone.IsBone == true)
+            if (animation != null && !animation.IsRun)
             {
                 animation.ShearBone(bone, bone.ShearX, bone.ShearY, easing);
             }

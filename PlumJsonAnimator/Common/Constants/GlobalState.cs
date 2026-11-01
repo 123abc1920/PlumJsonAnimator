@@ -3,8 +3,10 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Newtonsoft.Json;
+using PlumJsonAnimator.Common.States;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
@@ -63,11 +65,21 @@ namespace PlumJsonAnimator.Common.Constants
                 if (_selectedItem != value)
                 {
                     _selectedItem = value;
+
+                    if (!(_selectedItem is null))
+                    {
+                        // _panelState.CurrentInfoPanel = _infoPanelFactory.Create(
+                        //     _selectedItem.PanelType
+                        // );
+                    }
+                    else
+                    {
+                        _panelState.CurrentInfoPanel = null;
+                    }
                 }
             }
         }
 
-        public Bone? CurrentBone { get; set; } = null;
         public string Theme { get; set; } = "light";
         public bool DrawBones { get; set; } = true;
         public bool SetBasePos { get; set; } = true;
@@ -100,10 +112,17 @@ namespace PlumJsonAnimator.Common.Constants
 
         public CaptureArea? CaptureArea { get; set; }
 
-        public GlobalState(LocalizationService localizationService)
+        private PanelState _panelState;
+        private InfoPanelFactory _infoPanelFactory;
+
+        public GlobalState(
+            LocalizationService localizationService,
+            PanelState panelState
+        )
         {
             JsonError = new JsonError(localizationService);
-
+            _panelState = panelState;
+            
             SettingsFileName = $"settings{ProgramExt}";
             AutoSaveFile = $"autosave{ProgramExt}";
         }

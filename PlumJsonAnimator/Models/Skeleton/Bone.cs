@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Services;
+using PlumJsonAnimator.Views;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
@@ -22,10 +23,6 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
         [Reactive]
         public string Name { get; set; } = "";
-        public virtual bool IsBone
-        {
-            get { return true; }
-        }
 
         [Reactive]
         public virtual double BaseX { get; set; }
@@ -230,8 +227,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         [Reactive]
         public SolidColorBrush BoneColor { get; set; } = new SolidColorBrush(Colors.Black);
 
-        protected GlobalState _globalState;
-        protected LocalizationService _localizationService;
+        public PanelTypes PanelType => PanelTypes.BONEINFO;
+
+        private GlobalState _globalState;
 
         protected Bone()
         {
@@ -253,7 +251,6 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             Name = "root";
 
             _globalState = globalState;
-            _localizationService = localizationService;
         }
 
         public Bone(
@@ -269,7 +266,6 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             Name = $"{name}{Counter.GenerateNamePostfix()}";
 
             _globalState = globalState;
-            _localizationService = localizationService;
         }
 
         public Bone(GlobalState globalState, Bone parent, LocalizationService localizationService)
@@ -281,7 +277,6 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             Parent = parent;
 
             _globalState = globalState;
-            _localizationService = localizationService;
         }
 
         public Bone(GlobalState globalState, string name, LocalizationService localizationService)
@@ -292,7 +287,6 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             _id = 100;
 
             _globalState = globalState;
-            _localizationService = localizationService;
         }
 
         public void AddChildren(Bone bone)

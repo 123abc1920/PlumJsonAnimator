@@ -23,7 +23,7 @@ class AddBoneCommand : ICommand
             return;
         }
 
-        if (_selectedBone != null && _selectedBone.IsBone)
+        if (_selectedBone != null)
         {
             _newBone = _project?.MainSkeleton?.AddBoneToParent(_selectedBone._id);
         }

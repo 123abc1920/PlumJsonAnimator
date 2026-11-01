@@ -228,13 +228,10 @@ public partial class MainWindow : SukiWindow
             {
                 if (element is TreeViewItem item && item.DataContext is Bone bone)
                 {
-                    if (bone.IsBone == true)
+                    if (DataContext is MainWindowViewModel viewModel)
                     {
-                        if (DataContext is MainWindowViewModel viewModel)
-                        {
-                            viewModel.DropSlotToBone(bone._id, res);
-                            return;
-                        }
+                        viewModel.DropSlotToBone(bone._id, res);
+                        return;
                     }
                 }
                 element = element.Parent as Visual;

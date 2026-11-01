@@ -212,7 +212,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 _globalState.SelectedItem = (IPresentableItem?)bone;
                 bone.UpdateSlots();
 
-                PanelState.CurrentInfoPanel = _infoPanelFactory.Create(PanelTypes.BONEINFO);
+                PanelState.CurrentInfoPanel = _infoPanelFactory.Create(PanelTypes.SLOTINFO);
 
                 OnPropertyChanged(nameof(CurrentBone));
             }

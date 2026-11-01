@@ -23,7 +23,6 @@ public partial class BoneInfoViewModel : ViewModelBase
             if (value is null)
             {
                 _globalState.SelectedItem = null;
-                _panelState.CurrentInfoPanel = null;
                 OnPropertyChanged(nameof(CurrentBone));
                 return;
             }
@@ -32,8 +31,6 @@ public partial class BoneInfoViewModel : ViewModelBase
             {
                 _globalState.SelectedItem = (IPresentableItem?)bone;
                 bone.UpdateSlots();
-
-                _panelState.CurrentInfoPanel = _infoPanelFactory.Create(Views.PanelTypes.SLOTINFO);
 
                 OnPropertyChanged(nameof(CurrentBone));
             }

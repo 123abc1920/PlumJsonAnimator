@@ -6,6 +6,7 @@ using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Common.States;
 using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Factories;
+using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
@@ -51,7 +52,7 @@ public partial class BoneInfo : UserControl, IInfoPanel
         {
             if (DataContext is BoneInfoViewModel viewModel)
             {
-                viewModel.CurrentBone = (Bone)selectedSlot;
+                viewModel._globalState.SelectedItem = selectedSlot;
             }
         }
     }

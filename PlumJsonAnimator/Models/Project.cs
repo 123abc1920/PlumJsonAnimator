@@ -228,10 +228,10 @@ namespace PlumJsonAnimator.Models
         public void DrawSlots(Canvas c)
         {
             CurrentSkin.DrawSkin(c);
-            // if (_globalState.CurrentBone?.IsBone == false)
-            // {
-            //     ((Slot)_globalState.CurrentBone).DrawSlotSelection(c);
-            // }
+            if (_globalState.SelectedItem is Slot slot)
+            {
+                slot.DrawSlotSelection(c);
+            }
         }
 
         public string GetProjectPath()

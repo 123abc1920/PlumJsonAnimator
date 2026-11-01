@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
+using PlumJsonAnimator.Views;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
@@ -15,21 +16,21 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
     /// <summary>
     /// Provides methods for work with slots
     /// </summary>
-    public class Slot : Bone, IRenamable, IPresentableItem
+    public class Slot : ReactiveObject, IRenamable, IPresentableItem
     {
-        public override bool IsBone
-        {
-            get { return false; }
-        }
-
         public double LocalX = 0;
         public double LocalY = 0;
         public double LocalA = 0;
 
         [Reactive]
+        public string Name { get; set; } = "";
+
+        [Reactive]
         public Attachment? CurrentAttachment { get; set; }
 
-        public override double X
+        public PanelTypes PanelType => PanelTypes.SLOTINFO;
+
+        public double X
         {
             get => BoundedBone != null ? BoundedBone.X + LocalX : LocalX;
             set
@@ -39,7 +40,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
-        public override double Y
+        public double Y
         {
             get => BoundedBone != null ? BoundedBone.Y + LocalY : LocalY;
             set
@@ -49,7 +50,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
-        public override double A
+        public double A
         {
             get => BoundedBone != null ? BoundedBone.A + LocalA : LocalA;
             set
@@ -202,6 +203,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
+        private GlobalState _globalState;
+
         private Slot(GlobalState _globalState)
         {
             this.WhenAnyValue(x => x.CurrentDrawOrderOffset)
@@ -255,7 +258,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// </summary>
         /// <param name="x">Target x coordinate</param>
         /// <param name="y">Target y coordinate</param>
-        public override void Move(double x, double y)
+        public void Move(double x, double y)
         {
             if (BoundedBone != null)
             {
@@ -278,7 +281,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// </summary>
         /// <param name="x">X click coordinate</param>
         /// <param name="y">Y click coordinate</param>
-        public override void Scale(double x, double y)
+        public void Scale(double x, double y)
         {
             if (CurrentAttachment != null)
             {
@@ -296,7 +299,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// Rotates slot
         /// </summary>
         /// <param name="a">Target angle</param>
-        public override void Rotate(double a)
+        public void Rotate(double a)
         {
             if (BoundedBone != null)
             {
