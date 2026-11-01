@@ -68,9 +68,10 @@ namespace PlumJsonAnimator.Common.Constants
 
                     if (!(_selectedItem is null))
                     {
-                        // _panelState.CurrentInfoPanel = _infoPanelFactory.Create(
-                        //     _selectedItem.PanelType
-                        // );
+                        _panelState.CurrentInfoPanel = _infoPanelFactory.Create(
+                            this,
+                            _selectedItem.PanelType
+                        );
                     }
                     else
                     {
@@ -114,15 +115,18 @@ namespace PlumJsonAnimator.Common.Constants
 
         private PanelState _panelState;
         private InfoPanelFactory _infoPanelFactory;
+        private PlumApp _plumApp;
 
         public GlobalState(
             LocalizationService localizationService,
-            PanelState panelState
+            PanelState panelState,
+            InfoPanelFactory infoPanelFactory
         )
         {
             JsonError = new JsonError(localizationService);
             _panelState = panelState;
-            
+            _infoPanelFactory = infoPanelFactory;
+
             SettingsFileName = $"settings{ProgramExt}";
             AutoSaveFile = $"autosave{ProgramExt}";
         }

@@ -1,38 +1,34 @@
-using System;
 using System.Windows.Input;
 using Avalonia.Controls;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Constants.Command;
-using PlumJsonAnimator.Common.Dialogs;
-using PlumJsonAnimator.Common.States;
 using PlumJsonAnimator.Models.Common;
-using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
+using ReactiveUI;
 
 namespace PlumJsonAnimator.ViewModels;
 
-public partial class BoneInfoViewModel : ViewModelBase
+public partial class BoneInfoViewModel : ReactiveObject
 {
     public Bone? CurrentBone
     {
-        get => _globalState.SelectedItem as Bone;
+        get => GlobalState.SelectedItem as Bone;
         set
         {
             if (value is null)
             {
-                _globalState.SelectedItem = null;
-                OnPropertyChanged(nameof(CurrentBone));
+                GlobalState.SelectedItem = null;
+                this.RaisePropertyChanged(nameof(CurrentBone));
                 return;
             }
 
-            if (value is Bone bone && _globalState.SelectedItem != bone)
+            if (value is Bone bone && GlobalState.SelectedItem != bone)
             {
-                _globalState.SelectedItem = (IPresentableItem?)bone;
+                GlobalState.SelectedItem = (IPresentableItem?)bone;
                 bone.UpdateSlots();
-
-                OnPropertyChanged(nameof(CurrentBone));
+                this.RaisePropertyChanged(nameof(CurrentBone));
             }
         }
     }
@@ -41,54 +37,34 @@ public partial class BoneInfoViewModel : ViewModelBase
     public ICommand DeleteSlot { get; }
     public ICommand RenameSlot { get; }
 
-    private readonly InfoPanelFactory _infoPanelFactory;
-    private readonly PanelState _panelState;
+    public readonly GlobalState GlobalState;
 
-    public BoneInfoViewModel(
-        GlobalState globalState,
-        Dialogs dialogs,
-        ProjectFilesManager projectManager,
-        AppSettings appSettings,
-        LocalizationService localizationService,
-        ImageExporter imageExporter,
-        PlumApp plumApp,
-        InfoPanelFactory infoPanelFactory,
-        PanelState panelState
-    )
-        : base(
-            globalState,
-            dialogs,
-            projectManager,
-            appSettings,
-            localizationService,
-            imageExporter,
-            plumApp
-        )
+    public BoneInfoViewModel(GlobalState globalState)
     {
-        _infoPanelFactory = infoPanelFactory;
-        _panelState = panelState;
+        GlobalState = globalState;
 
+        // TODO: fix commands. separate PlumApp parts
         AddSlot = new Command(_ =>
         {
-            PlumApp.AddSlot();
+            //plumApp.AddSlot();
         });
 
         DeleteSlot = new Command(parameter =>
         {
-            if (parameter is ListBox SlotsList)
-            {
-                Slot? selectedSlot = SlotsList.SelectedItem as Slot;
-                PlumApp.DeleteSlot(selectedSlot);
-            }
+            // if (parameter is ListBox SlotsList)
+            // {
+            //     Slot? selectedSlot = SlotsList.SelectedItem as Slot;
+            //     plumApp.DeleteSlot(selectedSlot);
+            // }
         });
 
         RenameSlot = new Command(parameter =>
         {
-            if (parameter is ListBox SlotsList)
-            {
-                Slot? selectedSlot = SlotsList.SelectedItem as Slot;
-                OpenRenameDialog(selectedSlot);
-            }
+            // if (parameter is ListBox SlotsList)
+            // {
+            //     Slot? selectedSlot = SlotsList.SelectedItem as Slot;
+            //     _plumApp.OpenRenameDialog(selectedSlot);
+            // }
         });
     }
 }

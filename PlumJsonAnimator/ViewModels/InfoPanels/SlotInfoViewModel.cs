@@ -6,61 +6,37 @@ using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
+using ReactiveUI;
 
 namespace PlumJsonAnimator.ViewModels;
 
-public partial class SlotInfoViewModel : ViewModelBase
+public partial class SlotInfoViewModel : ReactiveObject
 {
     public Bone? CurrentBone
     {
-        get => _globalState.SelectedItem as Bone;
+        get => GlobalState.SelectedItem as Bone;
         set
         {
             if (value is null)
             {
-                _globalState.SelectedItem = null;
-                _panelState.CurrentInfoPanel = null;
-                OnPropertyChanged(nameof(CurrentBone));
+                GlobalState.SelectedItem = null;
+                this.RaisePropertyChanged(nameof(CurrentBone));
                 return;
             }
 
-            if (value is Bone bone && _globalState.SelectedItem != bone)
+            if (value is Bone bone && GlobalState.SelectedItem != bone)
             {
-                _globalState.SelectedItem = (IPresentableItem?)bone;
+                GlobalState.SelectedItem = (IPresentableItem?)bone;
                 bone.UpdateSlots();
-
-                _panelState.CurrentInfoPanel = _infoPanelFactory.Create(Views.PanelTypes.SLOTINFO);
-
-                OnPropertyChanged(nameof(CurrentBone));
+                this.RaisePropertyChanged(nameof(CurrentBone));
             }
         }
     }
 
-    private readonly InfoPanelFactory _infoPanelFactory;
-    private readonly PanelState _panelState;
+    public readonly GlobalState GlobalState;
 
-    public SlotInfoViewModel(
-        GlobalState globalState,
-        Dialogs dialogs,
-        ProjectFilesManager projectManager,
-        AppSettings appSettings,
-        LocalizationService localizationService,
-        ImageExporter imageExporter,
-        PlumApp plumApp,
-        InfoPanelFactory infoPanelFactory,
-        PanelState panelState
-    )
-        : base(
-            globalState,
-            dialogs,
-            projectManager,
-            appSettings,
-            localizationService,
-            imageExporter,
-            plumApp
-        )
+    public SlotInfoViewModel(GlobalState globalState)
     {
-        _infoPanelFactory = infoPanelFactory;
-        _panelState = panelState;
+        GlobalState = globalState;
     }
 }

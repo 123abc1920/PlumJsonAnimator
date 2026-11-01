@@ -1,69 +1,29 @@
 using System;
 using System.Collections.Generic;
 using PlumJsonAnimator.Common.Constants;
-using PlumJsonAnimator.Common.Dialogs;
-using PlumJsonAnimator.Common.States;
 using PlumJsonAnimator.Models.Common;
-using PlumJsonAnimator.Services;
 using PlumJsonAnimator.Views;
 
 namespace PlumJsonAnimator.Models.Factories;
 
 public class InfoPanelFactory
 {
-    private readonly Dictionary<PanelTypes, Func<object>> _registry;
+    private readonly Dictionary<PanelTypes, Func<GlobalState, object>> _registry;
 
-    public InfoPanelFactory(
-        GlobalState globalState,
-        Dialogs dialogs,
-        ProjectFilesManager projectManager,
-        AppSettings appSettings,
-        LocalizationService localizationService,
-        ImageExporter imageExporter,
-        PlumApp plumApp,
-        PanelState panelState
-    )
+    public InfoPanelFactory()
     {
         _registry = new()
         {
-            {
-                PanelTypes.BONEINFO,
-                () =>
-                    BoneInfo.Create(
-                        globalState,
-                        dialogs,
-                        projectManager,
-                        appSettings,
-                        localizationService,
-                        imageExporter,
-                        plumApp,
-                        this,
-                        panelState
-                    )
-            },
-            {
-                PanelTypes.SLOTINFO,
-                () =>
-                    SlotInfo.Create(
-                        globalState,
-                        dialogs,
-                        projectManager,
-                        appSettings,
-                        localizationService,
-                        imageExporter,
-                        plumApp,
-                        this,
-                        panelState
-                    )
-            },
+            [PanelTypes.BONEINFO] = gs => BoneInfo.Create(gs),
+            [PanelTypes.SLOTINFO] = gs => SlotInfo.Create(gs),
         };
     }
 
-    public IInfoPanel Create(PanelTypes infoPanelType)
+    public IInfoPanel Create(GlobalState globalState, PanelTypes infoPanelType)
     {
         if (_registry.TryGetValue(infoPanelType, out var createFunc))
         {
-            return (IInfoPanel)createFunc();
+            return (IInfoPanel)createFunc(globalState);
         }
 
         throw new ArgumentException($"Тип {infoPanelType} не добавлен в список фабрики.");

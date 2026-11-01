@@ -2,15 +2,9 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using PlumJsonAnimator.Common.Constants;
-using PlumJsonAnimator.Common.Dialogs;
-using PlumJsonAnimator.Common.States;
-using PlumJsonAnimator.Models.Common;
-using PlumJsonAnimator.Models.Factories;
-using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
-using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
 
 namespace PlumJsonAnimator.Views;
@@ -20,29 +14,11 @@ public partial class BoneInfo : UserControl, IInfoPanel
     public static PanelTypes InfoPanelType => PanelTypes.BONEINFO;
 
     public BoneInfo(
-        GlobalState globalState,
-        Dialogs dialogs,
-        ProjectFilesManager projectManager,
-        AppSettings appSettings,
-        LocalizationService localizationService,
-        ImageExporter imageExporter,
-        PlumApp plumApp,
-        InfoPanelFactory infoPanelFactory,
-        PanelState panelState
+        GlobalState globalState
     )
     {
         InitializeComponent();
-        DataContext = new BoneInfoViewModel(
-            globalState,
-            dialogs,
-            projectManager,
-            appSettings,
-            localizationService,
-            imageExporter,
-            plumApp,
-            infoPanelFactory,
-            panelState
-        );
+        DataContext = new BoneInfoViewModel(globalState);
     }
 
     private void OnSlotSelectionChanged(object sender, TappedEventArgs e)
@@ -52,7 +28,7 @@ public partial class BoneInfo : UserControl, IInfoPanel
         {
             if (DataContext is BoneInfoViewModel viewModel)
             {
-                viewModel._globalState.SelectedItem = selectedSlot;
+                viewModel.GlobalState.SelectedItem = selectedSlot;
             }
         }
     }
@@ -91,28 +67,8 @@ public partial class BoneInfo : UserControl, IInfoPanel
         }
     }
 
-    public static IInfoPanel Create(
-        GlobalState globalState,
-        Dialogs dialogs,
-        ProjectFilesManager projectManager,
-        AppSettings appSettings,
-        LocalizationService localizationService,
-        ImageExporter imageExporter,
-        PlumApp plumApp,
-        InfoPanelFactory infoPanelFactory,
-        PanelState panelState
-    )
+    public static IInfoPanel Create(GlobalState globalState)
     {
-        return new BoneInfo(
-            globalState,
-            dialogs,
-            projectManager,
-            appSettings,
-            localizationService,
-            imageExporter,
-            plumApp,
-            infoPanelFactory,
-            panelState
-        );
+        return new BoneInfo(globalState);
     }
 }

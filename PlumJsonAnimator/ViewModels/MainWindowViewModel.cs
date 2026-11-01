@@ -202,7 +202,6 @@ public partial class MainWindowViewModel : ViewModelBase
             if (value is null)
             {
                 _globalState.SelectedItem = null;
-                PanelState.CurrentInfoPanel = null;
                 OnPropertyChanged(nameof(CurrentBone));
                 return;
             }
@@ -211,9 +210,6 @@ public partial class MainWindowViewModel : ViewModelBase
             {
                 _globalState.SelectedItem = (IPresentableItem?)bone;
                 bone.UpdateSlots();
-
-                PanelState.CurrentInfoPanel = _infoPanelFactory.Create(PanelTypes.SLOTINFO);
-
                 OnPropertyChanged(nameof(CurrentBone));
             }
         }
@@ -319,7 +315,6 @@ public partial class MainWindowViewModel : ViewModelBase
     public ICommand Redo { get; }
 
     public readonly AttachmentFactory _attachmentFactory;
-    private readonly InfoPanelFactory _infoPanelFactory;
     public PanelState PanelState { get; set; }
 
     public MainWindowViewModel(
@@ -332,7 +327,6 @@ public partial class MainWindowViewModel : ViewModelBase
         Dialogs dialogs,
         PlumApp plumApp,
         AttachmentFactory attachmentFactory,
-        InfoPanelFactory infoPanelFactory,
         PanelState panelState
     )
         : base(
@@ -347,7 +341,6 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         _serviceProvider = serviceProvider;
         _attachmentFactory = attachmentFactory;
-        _infoPanelFactory = infoPanelFactory;
         PanelState = panelState;
 
         globalState.PropertyChanged += (s, e) =>

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models.Commands;
 using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
@@ -11,6 +12,7 @@ using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 using PlumJsonAnimator.Services;
+using PlumJsonAnimator.ViewModels;
 using static PlumJsonAnimator.Services.JsonCode;
 
 namespace PlumJsonAnimator.Models.Common;
@@ -24,7 +26,6 @@ public class PlumApp
     private readonly Interpolation _interpolation;
     private readonly ProjectFilesManager _fileManager;
     private readonly JsonCode _jsonCode;
-    private readonly JsonValidator _jsonValidator;
     private readonly JsonExport _jsonExport;
     private readonly Prettify _prettify;
     private readonly Engine _engine;
@@ -35,6 +36,8 @@ public class PlumApp
     private readonly EasingFactory _easingFactory;
     private readonly AttachmentFactory _attachmentFactory;
     private readonly AttachmentTypeConverter _attachmentTypeConverter;
+    private readonly ProjectFilesManager _projectFilesManager;
+    private readonly Dialogs _dialogs;
 
     public PlumApp(
         AppSettings appSettings,
@@ -43,7 +46,6 @@ public class PlumApp
         LocalizationService localization,
         ProjectFilesManager projectManager,
         JsonCode jsonCode,
-        JsonValidator jsonValidator,
         JsonExport jsonExport,
         Prettify prettify,
         Engine engine,
@@ -53,7 +55,9 @@ public class PlumApp
         CanvasRenderer canvasUpdater,
         EasingFactory easingFactory,
         AttachmentFactory attachmentFactory,
-        AttachmentTypeConverter attachmentTypeConverter
+        AttachmentTypeConverter attachmentTypeConverter,
+        ProjectFilesManager projectFilesManager,
+        Dialogs dialogs
     )
     {
         Localization = localization;
@@ -63,7 +67,6 @@ public class PlumApp
         _interpolation = interpolation;
         _fileManager = projectManager;
         _jsonCode = jsonCode;
-        _jsonValidator = jsonValidator;
         _jsonExport = jsonExport;
         _prettify = prettify;
         _engine = engine;
@@ -74,6 +77,8 @@ public class PlumApp
         _easingFactory = easingFactory;
         _attachmentFactory = attachmentFactory;
         _attachmentTypeConverter = attachmentTypeConverter;
+        _projectFilesManager = projectFilesManager;
+        _dialogs = dialogs;
     }
 
     public void Start()
@@ -182,6 +187,28 @@ public class PlumApp
     public string GetMessage(LocalizationConsts constStr)
     {
         return Localization.GetMessage(constStr);
+    }
+
+    public void OpenRenameDialog(IRenamable? _renamableObject)
+    {
+        if (_renamableObject != null)
+        {
+            var viewModel = new RenameViewModel(
+                _globalState,
+                _dialogs,
+                _projectFilesManager,
+                _appSettings,
+                Localization,
+                _imageExporter,
+                this
+            );
+            viewModel.RenamableObject = _renamableObject;
+            _dialogs.ShowDialog(
+                GetMessage(LocalizationConsts.RENAME),
+                viewModel,
+                DialogType.RENAME
+            );
+        }
     }
 
     public bool SaveProject()

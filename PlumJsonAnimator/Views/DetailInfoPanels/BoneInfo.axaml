@@ -8,7 +8,7 @@
     x:DataType="viewModels:BoneInfoViewModel"
     Background="{DynamicResource SukiBackgroundBrush}">
     <ScrollViewer Margin="5" VerticalScrollBarVisibility="Auto">
-        <StackPanel IsEnabled="{Binding IsAnimMode}">
+        <StackPanel>
             <TextBlock Text="{DynamicResource info}" />
             <StackPanel Orientation="Horizontal">
                 <Button
