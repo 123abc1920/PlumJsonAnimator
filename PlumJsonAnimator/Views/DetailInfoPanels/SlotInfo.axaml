@@ -50,8 +50,8 @@
                 Padding="6,4"
                 DisplayMemberBinding="{Binding Name}"
                 FontSize="13"
-                ItemsSource="{Binding Items}"
-                SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
+                ItemsSource="{Binding Bones}"
+                SelectedItem="{Binding SelectedBone, Mode=TwoWay}" />
             <TextBlock FontSize="14" Text="Attachment" />
             <Grid Margin="5,0,10,0">
                 <Grid.ColumnDefinitions>
@@ -63,7 +63,7 @@
                     Grid.Column="0"
                     HorizontalAlignment="Left"
                     CaretIndex="1"
-                    Text="TextBox" />
+                    Text="{Binding SelectedAttachment.Name}" />
                 <Canvas
                     Grid.Row="0"
                     Grid.Column="1"
@@ -72,11 +72,6 @@
                     HorizontalAlignment="Right"
                     Background="#FFE6E6E6" />
             </Grid>
-            <ListBox>
-                <ListBox.ItemTemplate>
-                    <DataTemplate />
-                </ListBox.ItemTemplate>
-            </ListBox>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

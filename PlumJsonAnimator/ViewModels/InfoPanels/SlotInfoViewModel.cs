@@ -4,9 +4,9 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
+using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 using PlumJsonAnimator.Services;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
 
 namespace PlumJsonAnimator.ViewModels;
 
@@ -32,23 +32,28 @@ public partial class SlotInfoViewModel : ReactiveObject
         }
     }
 
-    public ObservableCollection<Bone> Items => GlobalState.CurrentProject.MainSkeleton.Bones;
+    public ObservableCollection<Bone> Bones => GlobalState.CurrentProject.MainSkeleton.Bones;
 
-    private Bone? _selectedItem = null;
-    public Bone? SelectedItem
+    private Bone? _selectedBone = null;
+    public Bone? SelectedBone
     {
-        get => _selectedItem;
+        get => _selectedBone;
         set
         {
-            if (_selectedItem != value)
+            if (_selectedBone != value)
             {
-                this.RaiseAndSetIfChanged(ref _selectedItem, value);
+                this.RaiseAndSetIfChanged(ref _selectedBone, value);
                 CurrentSlot.BoundedBone = value;
             }
         }
     }
 
-    
+    private Attachment? _selectedAttachment;
+    public Attachment? SelectedAttachment
+    {
+        get => _selectedAttachment;
+        set => this.RaiseAndSetIfChanged(ref _selectedAttachment, value);
+    }
 
     public readonly GlobalState GlobalState;
     private readonly HistoryManager _historyManager;
@@ -58,6 +63,7 @@ public partial class SlotInfoViewModel : ReactiveObject
         GlobalState = globalState;
         _historyManager = historyManager;
 
-        SelectedItem = Items.FirstOrDefault(b => b == CurrentSlot.BoundedBone);
+        SelectedBone = Bones.FirstOrDefault(b => b == CurrentSlot.BoundedBone);
+        SelectedAttachment = CurrentSlot.CurrentAttachment;
     }
 }
