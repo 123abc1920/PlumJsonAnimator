@@ -58,8 +58,11 @@ public class RegionAttachment : Attachment
         return new RegionAttachment(attachmentDTO, attachmentTypeConverter);
     }
 
-    public string GetPath()
+    public string? GetPath()
     {
+        if (_imageRes is null)
+            return null;
+
         return _imageRes.Path;
     }
 
@@ -109,7 +112,10 @@ public class RegionAttachment : Attachment
         if (canvas == null)
             return;
 
-        string currentPath = GetPath();
+        string? currentPath = GetPath();
+        if (currentPath is null)
+            return;
+
         if (_cachedBitmap == null || _cachedPath != currentPath)
         {
             _cachedPath = currentPath;

@@ -5,6 +5,7 @@ using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
+using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
 
 namespace PlumJsonAnimator.Views;
@@ -13,12 +14,10 @@ public partial class BoneInfo : UserControl, IInfoPanel
 {
     public static PanelTypes InfoPanelType => PanelTypes.BONEINFO;
 
-    public BoneInfo(
-        GlobalState globalState
-    )
+    public BoneInfo(GlobalState globalState, HistoryManager historyManager)
     {
         InitializeComponent();
-        DataContext = new BoneInfoViewModel(globalState);
+        DataContext = new BoneInfoViewModel(globalState, historyManager);
     }
 
     private void OnSlotSelectionChanged(object sender, TappedEventArgs e)
@@ -67,8 +66,8 @@ public partial class BoneInfo : UserControl, IInfoPanel
         }
     }
 
-    public static IInfoPanel Create(GlobalState globalState)
+    public static IInfoPanel Create(GlobalState globalState, HistoryManager historyManager)
     {
-        return new BoneInfo(globalState);
+        return new BoneInfo(globalState, historyManager);
     }
 }

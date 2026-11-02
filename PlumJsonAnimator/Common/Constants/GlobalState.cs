@@ -115,7 +115,6 @@ namespace PlumJsonAnimator.Common.Constants
 
         private PanelState _panelState;
         private InfoPanelFactory _infoPanelFactory;
-        private PlumApp _plumApp;
 
         public GlobalState(
             LocalizationService localizationService,

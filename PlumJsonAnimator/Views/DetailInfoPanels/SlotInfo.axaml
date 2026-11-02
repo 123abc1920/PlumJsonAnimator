@@ -39,7 +39,7 @@
             <TextBox
                 Height="32"
                 Margin="0,0,0,5"
-                Text="{Binding CurrentBone.Name}" />
+                Text="{Binding CurrentSlot.Name}" />
             <TextBlock
                 Height="24"
                 FontSize="14"

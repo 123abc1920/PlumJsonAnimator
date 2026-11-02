@@ -1,8 +1,4 @@
 using PlumJsonAnimator.Common.Constants;
-using PlumJsonAnimator.Common.Dialogs;
-using PlumJsonAnimator.Common.States;
-using PlumJsonAnimator.Models.Common;
-using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
@@ -12,31 +8,32 @@ namespace PlumJsonAnimator.ViewModels;
 
 public partial class SlotInfoViewModel : ReactiveObject
 {
-    public Bone? CurrentBone
+    public Slot? CurrentSlot
     {
-        get => GlobalState.SelectedItem as Bone;
+        get => GlobalState.SelectedItem as Slot;
         set
         {
             if (value is null)
             {
                 GlobalState.SelectedItem = null;
-                this.RaisePropertyChanged(nameof(CurrentBone));
+                this.RaisePropertyChanged(nameof(CurrentSlot));
                 return;
             }
 
-            if (value is Bone bone && GlobalState.SelectedItem != bone)
+            if (value is Slot slot && GlobalState.SelectedItem != slot)
             {
-                GlobalState.SelectedItem = (IPresentableItem?)bone;
-                bone.UpdateSlots();
-                this.RaisePropertyChanged(nameof(CurrentBone));
+                GlobalState.SelectedItem = (IPresentableItem?)slot;
+                this.RaisePropertyChanged(nameof(CurrentSlot));
             }
         }
     }
 
     public readonly GlobalState GlobalState;
+    private readonly HistoryManager _historyManager;
 
-    public SlotInfoViewModel(GlobalState globalState)
+    public SlotInfoViewModel(GlobalState globalState, HistoryManager historyManager)
     {
         GlobalState = globalState;
+        _historyManager = historyManager;
     }
 }

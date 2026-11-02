@@ -2,7 +2,7 @@ using System.Windows.Input;
 using Avalonia.Controls;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Constants.Command;
-using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Commands;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
@@ -33,38 +33,56 @@ public partial class BoneInfoViewModel : ReactiveObject
         }
     }
 
-    public ICommand AddSlot { get; }
-    public ICommand DeleteSlot { get; }
-    public ICommand RenameSlot { get; }
+    private Slot? _selectedSlot;
+    public Slot? SelectedSlot
+    {
+        get => _selectedSlot;
+        set => this.RaiseAndSetIfChanged(ref _selectedSlot, value);
+    }
+
+    public System.Windows.Input.ICommand AddSlot { get; }
+    public System.Windows.Input.ICommand DeleteSlot { get; }
+    public System.Windows.Input.ICommand RenameSlot { get; }
 
     public readonly GlobalState GlobalState;
+    private readonly HistoryManager _historyManager;
 
-    public BoneInfoViewModel(GlobalState globalState)
+    public BoneInfoViewModel(GlobalState globalState, HistoryManager historyManager)
     {
         GlobalState = globalState;
+        _historyManager = historyManager;
 
-        // TODO: fix commands. separate PlumApp parts
         AddSlot = new Command(_ =>
         {
-            //plumApp.AddSlot();
+            if (GlobalState.SelectedItem is Bone bone)
+            {
+                Slot s = new Slot(GlobalState, bone);
+                AddSlotCommand addSlotCommand = new AddSlotCommand(
+                    GlobalState.CurrentProject,
+                    s,
+                    bone
+                );
+                _historyManager.DoCommand(addSlotCommand);
+            }
         });
 
-        DeleteSlot = new Command(parameter =>
+        DeleteSlot = new Command(execute: _ =>
         {
-            // if (parameter is ListBox SlotsList)
-            // {
-            //     Slot? selectedSlot = SlotsList.SelectedItem as Slot;
-            //     plumApp.DeleteSlot(selectedSlot);
-            // }
+            if (GlobalState.SelectedItem is Bone bone && SelectedSlot is Slot slot)
+            {
+                _historyManager.DoCommand(
+                    new DeleteSlotCommand(GlobalState.CurrentProject, slot, bone)
+                );
+            }
         });
 
-        RenameSlot = new Command(parameter =>
+        // TODO:fix renameDialog
+        RenameSlot = new Command(execute: _ =>
         {
-            // if (parameter is ListBox SlotsList)
-            // {
-            //     Slot? selectedSlot = SlotsList.SelectedItem as Slot;
-            //     _plumApp.OpenRenameDialog(selectedSlot);
-            // }
+            if (SelectedSlot is Slot slot)
+            {
+                // _plumApp.OpenRenameDialog(slot);
+            }
         });
     }
 }

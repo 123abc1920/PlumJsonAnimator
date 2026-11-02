@@ -13,7 +13,6 @@ public partial class RenameViewModel : ViewModelBase
     public RenameViewModel(
         GlobalState globalState,
         Dialogs dialogs,
-        ProjectFilesManager projectManager,
         AppSettings appSettings,
         LocalizationService localizationService,
         ImageExporter imageExporter,
@@ -22,7 +21,6 @@ public partial class RenameViewModel : ViewModelBase
         : base(
             globalState,
             dialogs,
-            projectManager,
             appSettings,
             localizationService,
             imageExporter,

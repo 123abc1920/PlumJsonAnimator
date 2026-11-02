@@ -51,7 +51,6 @@ public partial class AppSettingsViewModel : ViewModelBase
     public AppSettingsViewModel(
         GlobalState globalState,
         Dialogs dialogs,
-        ProjectFilesManager projectManager,
         AppSettings appSettings,
         LocalizationService localizationService,
         ImageExporter imageExporter,
@@ -60,7 +59,6 @@ public partial class AppSettingsViewModel : ViewModelBase
         : base(
             globalState,
             dialogs,
-            projectManager,
             appSettings,
             localizationService,
             imageExporter,

@@ -250,7 +250,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public async void ShowDialog(string title, Window owner, DialogType viewType)
     {
-        ViewModelBase viewModel = GetViewModel(viewType);
+        ViewModelBase viewModel = _viewModelFactory.GetViewModel(viewType);
         _dialogs.ShowDialog(title, viewModel, owner, viewType);
     }
 
@@ -315,33 +315,25 @@ public partial class MainWindowViewModel : ViewModelBase
     public ICommand Redo { get; }
 
     public readonly AttachmentFactory _attachmentFactory;
+    private readonly ViewModelFactory _viewModelFactory;
     public PanelState PanelState { get; set; }
 
     public MainWindowViewModel(
-        IServiceProvider serviceProvider,
         AppSettings appSettings,
-        ProjectFilesManager projectManager,
         GlobalState globalState,
         ImageExporter imageExporter,
         LocalizationService localizationService,
         Dialogs dialogs,
         PlumApp plumApp,
         AttachmentFactory attachmentFactory,
-        PanelState panelState
+        PanelState panelState,
+        ViewModelFactory viewModelFactory
     )
-        : base(
-            globalState,
-            dialogs,
-            projectManager,
-            appSettings,
-            localizationService,
-            imageExporter,
-            plumApp
-        )
+        : base(globalState, dialogs, appSettings, localizationService, imageExporter, plumApp)
     {
-        _serviceProvider = serviceProvider;
         _attachmentFactory = attachmentFactory;
         PanelState = panelState;
+        _viewModelFactory = viewModelFactory;
 
         globalState.PropertyChanged += (s, e) =>
         {
@@ -349,7 +341,8 @@ public partial class MainWindowViewModel : ViewModelBase
                 OnPropertyChanged(nameof(LastSaveTime));
         };
 
-        var appSettingsVM = (AppSettingsViewModel)GetViewModel(DialogType.SETTINGS);
+        var appSettingsVM = (AppSettingsViewModel)
+            _viewModelFactory.GetViewModel(DialogType.SETTINGS);
         appSettingsVM.CurrentTheme = appSettingsVM.Themes[0];
 
         _globalState.TimeUpdated += () =>

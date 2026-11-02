@@ -9,7 +9,6 @@ namespace PlumJsonAnimator.ViewModels;
 public partial class NewProjectViewModel : ViewModelBase
 {
     public NewProjectViewModel(
-        ProjectFilesManager projectManager,
         GlobalState globalState,
         Dialogs dialogs,
         AppSettings appSettings,
@@ -20,7 +19,6 @@ public partial class NewProjectViewModel : ViewModelBase
         : base(
             globalState,
             dialogs,
-            projectManager,
             appSettings,
             localizationService,
             imageExporter,

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Services;
 using PlumJsonAnimator.Views;
 
 namespace PlumJsonAnimator.Models.Factories;
@@ -10,12 +11,12 @@ public class InfoPanelFactory
 {
     private readonly Dictionary<PanelTypes, Func<GlobalState, object>> _registry;
 
-    public InfoPanelFactory()
+    public InfoPanelFactory(HistoryManager historyManager)
     {
         _registry = new()
         {
-            [PanelTypes.BONEINFO] = gs => BoneInfo.Create(gs),
-            [PanelTypes.SLOTINFO] = gs => SlotInfo.Create(gs),
+            [PanelTypes.BONEINFO] = gs => BoneInfo.Create(gs, historyManager),
+            [PanelTypes.SLOTINFO] = gs => SlotInfo.Create(gs, historyManager),
         };
     }
 

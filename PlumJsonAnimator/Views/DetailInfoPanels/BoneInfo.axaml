@@ -20,24 +20,24 @@
                     Command="{Binding AddSlot}">
                     <iconPacks:PackIconBootstrapIcons Kind="Plus" />
                 </Button>
+
                 <Button
                     Width="32"
                     Height="32"
                     Padding="0"
                     HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center"
-                    Command="{Binding DeleteSlot}"
-                    CommandParameter="{Binding ElementName=SlotsList}">
+                    Command="{Binding DeleteSlot}">
                     <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
                 </Button>
+
                 <Button
                     Width="32"
                     Height="32"
                     Padding="0"
                     HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center"
-                    Command="{Binding RenameSlot}"
-                    CommandParameter="{Binding ElementName=SlotsList}">
+                    Command="{Binding RenameSlot}">
                     <iconPacks:PackIconBootstrapIcons Kind="PencilFill" />
                 </Button>
             </StackPanel>
@@ -49,7 +49,8 @@
                 x:Name="SlotsList"
                 DragDrop.Drop="OnListBoxDrop"
                 IsVisible="{Binding CurrentBone}"
-                ItemsSource="{Binding CurrentBone.Slots}">
+                ItemsSource="{Binding CurrentBone.Slots}"
+                SelectedItem="{Binding SelectedSlot, Mode=TwoWay}">
                 <DragDrop.AllowDrop>True</DragDrop.AllowDrop>
 
                 <ListBox.Styles>

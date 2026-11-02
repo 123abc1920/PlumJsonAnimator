@@ -40,7 +40,6 @@ public partial class ExportPanelGIFViewModel : ViewModelBase
         GlobalState globalState,
         Dialogs dialogs,
         ImageExporter imageExporter,
-        ProjectFilesManager projectManager,
         AppSettings appSettings,
         LocalizationService localizationService,
         PlumApp plumApp
@@ -48,7 +47,6 @@ public partial class ExportPanelGIFViewModel : ViewModelBase
         : base(
             globalState,
             dialogs,
-            projectManager,
             appSettings,
             localizationService,
             imageExporter,

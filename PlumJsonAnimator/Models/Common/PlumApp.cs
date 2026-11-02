@@ -189,20 +189,19 @@ public class PlumApp
         return Localization.GetMessage(constStr);
     }
 
-    public void OpenRenameDialog(IRenamable? _renamableObject)
+    public void OpenRenameDialog(IRenamable? renamableObject)
     {
-        if (_renamableObject != null)
+        if (renamableObject != null)
         {
             var viewModel = new RenameViewModel(
                 _globalState,
                 _dialogs,
-                _projectFilesManager,
                 _appSettings,
                 Localization,
                 _imageExporter,
                 this
             );
-            viewModel.RenamableObject = _renamableObject;
+            viewModel.RenamableObject = renamableObject;
             _dialogs.ShowDialog(
                 GetMessage(LocalizationConsts.RENAME),
                 viewModel,

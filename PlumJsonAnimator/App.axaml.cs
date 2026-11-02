@@ -68,6 +68,7 @@ public partial class App : Application
         services.AddSingleton<AttachmentFactory>();
         services.AddSingleton<ResFactory>();
         services.AddSingleton<InfoPanelFactory>();
+        services.AddSingleton<ViewModelFactory>();
 
         services.AddSingleton<AttachmentTypeConverter>();
 
