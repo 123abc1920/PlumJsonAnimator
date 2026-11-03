@@ -1,7 +1,8 @@
 using System.Collections.ObjectModel;
 using System.Linq;
-using CommunityToolkit.Mvvm.ComponentModel;
+using System.Windows.Input;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Common.Constants.Command;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
@@ -55,6 +56,9 @@ public partial class SlotInfoViewModel : ReactiveObject
         set => this.RaiseAndSetIfChanged(ref _selectedAttachment, value);
     }
 
+    public ICommand OpenBone { get; }
+    public ICommand OpenAttachment { get; }
+
     public readonly GlobalState GlobalState;
     private readonly HistoryManager _historyManager;
 
@@ -65,5 +69,14 @@ public partial class SlotInfoViewModel : ReactiveObject
 
         SelectedBone = Bones.FirstOrDefault(b => b == CurrentSlot.BoundedBone);
         SelectedAttachment = CurrentSlot.CurrentAttachment;
+
+        OpenBone = new Command(_ =>
+        {
+            GlobalState.SelectedItem = SelectedBone;
+        });
+        OpenAttachment = new Command(_ =>
+        {
+            // TODO: Open Attachment command
+        });
     }
 }

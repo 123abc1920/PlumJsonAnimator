@@ -7,7 +7,10 @@
     xmlns:viewModels="clr-namespace:PlumJsonAnimator.ViewModels"
     x:DataType="viewModels:SlotInfoViewModel"
     Background="{DynamicResource SukiBackgroundBrush}">
-    <ScrollViewer Margin="5" VerticalScrollBarVisibility="Auto">
+    <ScrollViewer
+        Margin="5"
+        HorizontalScrollBarVisibility="Disabled"
+        VerticalScrollBarVisibility="Auto">
         <StackPanel>
             <TextBlock Text="{DynamicResource info}" />
             <StackPanel Orientation="Horizontal">
@@ -44,32 +47,60 @@
                 Height="24"
                 FontSize="14"
                 Text="Bone" />
-            <ComboBox
-                Height="32"
-                Margin="0,0,0,5"
-                Padding="6,4"
-                DisplayMemberBinding="{Binding Name}"
-                FontSize="13"
-                ItemsSource="{Binding Bones}"
-                SelectedItem="{Binding SelectedBone, Mode=TwoWay}" />
-            <TextBlock FontSize="14" Text="Attachment" />
-            <Grid Margin="5,0,10,0">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ComboBox
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Height="32"
+                    Margin="0,0,0,5"
+                    Padding="6,4"
+                    DisplayMemberBinding="{Binding Name}"
+                    FontSize="13"
+                    ItemsSource="{Binding Bones}"
+                    SelectedItem="{Binding SelectedBone, Mode=TwoWay}" />
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Width="32"
+                    Height="32"
+                    Command="{Binding OpenBone}"
+                    Padding="0"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center">
+                    <iconPacks:PackIconBootstrapIcons Kind="ArrowBarRight" />
+                </Button>
+            </Grid>
+            <TextBlock FontSize="14" Text="Attachment" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <TextBox
                     Grid.Row="0"
                     Grid.Column="0"
                     HorizontalAlignment="Left"
-                    CaretIndex="1"
                     Text="{Binding SelectedAttachment.Name}" />
-                <Canvas
+                <Button
                     Grid.Row="0"
                     Grid.Column="1"
-                    Width="30"
-                    Height="30"
-                    HorizontalAlignment="Right"
+                    Width="32"
+                    Height="32"
+                    Padding="0"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center">
+                    <iconPacks:PackIconBootstrapIcons Kind="ArrowBarRight" />
+                </Button>
+                <Canvas
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Width="10"
+                    Height="10"
                     Background="#FFE6E6E6" />
             </Grid>
         </StackPanel>
