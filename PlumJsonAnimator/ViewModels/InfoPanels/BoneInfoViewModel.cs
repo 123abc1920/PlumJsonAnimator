@@ -1,5 +1,3 @@
-using System.Windows.Input;
-using Avalonia.Controls;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Constants.Command;
 using PlumJsonAnimator.Models.Commands;

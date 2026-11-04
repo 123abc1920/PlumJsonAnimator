@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using PlumJsonAnimator.Common.Constants;
-using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Services;
 using PlumJsonAnimator.Views;
 
@@ -17,6 +16,7 @@ public class InfoPanelFactory
         {
             [PanelTypes.BONEINFO] = gs => BoneInfo.Create(gs, historyManager),
             [PanelTypes.SLOTINFO] = gs => SlotInfo.Create(gs, historyManager),
+            [PanelTypes.ATTACHMENTINFO] = gs => AttachmentInfo.Create(gs, historyManager),
         };
     }
 

@@ -91,6 +91,7 @@
                     Grid.Column="1"
                     Width="32"
                     Height="32"
+                    Command="{Binding OpenAttachment}"
                     Padding="0"
                     HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center">

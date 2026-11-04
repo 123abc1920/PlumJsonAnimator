@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
@@ -76,7 +77,7 @@ public partial class SlotInfoViewModel : ReactiveObject
         });
         OpenAttachment = new Command(_ =>
         {
-            // TODO: Open Attachment command
+            GlobalState.SelectedItem = SelectedAttachment;
         });
     }
 }

@@ -1,16 +1,25 @@
 using Avalonia.Controls;
+using Avalonia.Media;
 using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Models.Interfaces;
+using PlumJsonAnimator.Views;
+using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 
 namespace PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 
 /// <summary>
 /// Attachment class. Helps to bind slot and res or another functions
 /// </summary>
-public abstract class Attachment : INotifyable
+public abstract class Attachment : ReactiveObject, IPresentableItem
 {
     public string Name { get; set; }
     public abstract AttachmentTypes AttachmentType { get; }
+
+    [Reactive]
+    public SolidColorBrush AttachmentColor { get; set; } = new SolidColorBrush(Colors.Black);
+
+    public PanelTypes PanelType => PanelTypes.ATTACHMENTINFO;
 
     protected readonly AttachmentTypeConverter _attachmentTypeConverter;
 

@@ -1,0 +1,30 @@
+<UserControl
+    x:Class="PlumJsonAnimator.Views.AttachmentInfo"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:iconPacks="https://github.com/MahApps/IconPacks.Avalonia"
+    xmlns:suki="clr-namespace:SukiUI.Controls;assembly=SukiUI"
+    xmlns:viewModels="clr-namespace:PlumJsonAnimator.ViewModels"
+    x:DataType="viewModels:AttachmentInfoViewModel"
+    Background="{DynamicResource SukiBackgroundBrush}">
+    <ScrollViewer Margin="5" VerticalScrollBarVisibility="Auto">
+        <StackPanel Orientation="Vertical" >
+        <TextBlock Text="Attachment" FontSize="14" Height="24" />
+        <TextBlock Text="Type:" FontSize="14" Height="24" />
+        <ComboBox Height="32" Padding="6,4" FontSize="13">
+            <ComboBoxItem Content="Item1" IsSelected="True" />
+            <ComboBoxItem Content="Item2" />
+        </ComboBox>
+        <TextBlock Text="Slot:" FontSize="14" Height="24" />
+        <ComboBox Height="32" Padding="6,4" FontSize="13">
+            <ComboBoxItem Content="Item1" IsSelected="True" />
+            <ComboBoxItem Content="Item2" />
+        </ComboBox>
+        <TextBlock Text="Skin:" FontSize="14" Height="24" />
+        <ComboBox Height="32" Padding="6,4" FontSize="13">
+            <ComboBoxItem Content="Item1" IsSelected="True" />
+            <ComboBoxItem Content="Item2" />
+        </ComboBox>
+    </StackPanel>
+    </ScrollViewer>
+</UserControl>
