@@ -35,7 +35,6 @@ public partial class SlotInfoViewModel : ReactiveObject
     }
 
     public ObservableCollection<Bone> Bones => GlobalState.CurrentProject.MainSkeleton.Bones;
-
     private Bone? _selectedBone = null;
     public Bone? SelectedBone
     {

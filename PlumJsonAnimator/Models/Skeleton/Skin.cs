@@ -222,6 +222,16 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             return null;
         }
 
+        public Slot? GetSlot(Attachment s)
+        {
+            foreach (var kvp in SlotAttachmentBinding)
+            {
+                if (Equals(kvp.Value, s))
+                    return kvp.Key;
+            }
+            return null;
+        }
+
         public SkinData GenerateJSONData()
         {
             Dictionary<string, Dictionary<string, AttachmentData>> attachments =

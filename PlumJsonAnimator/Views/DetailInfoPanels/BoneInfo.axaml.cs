@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
@@ -66,7 +67,11 @@ public partial class BoneInfo : UserControl, IInfoPanel
         }
     }
 
-    public static IInfoPanel Create(GlobalState globalState, HistoryManager historyManager)
+    public static IInfoPanel Create(
+        GlobalState globalState,
+        HistoryManager historyManager,
+        AttachmentTypeConverter? attachmentTypeConverter = null
+    )
     {
         return new BoneInfo(globalState, historyManager);
     }

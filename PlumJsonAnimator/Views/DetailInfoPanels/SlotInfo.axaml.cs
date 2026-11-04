@@ -1,6 +1,6 @@
 using Avalonia.Controls;
+using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Common.Constants;
-using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
 
@@ -16,7 +16,11 @@ public partial class SlotInfo : UserControl, IInfoPanel
         DataContext = new SlotInfoViewModel(globalState, historyManager);
     }
 
-    public static IInfoPanel Create(GlobalState globalState, HistoryManager historyManager)
+    public static IInfoPanel Create(
+        GlobalState globalState,
+        HistoryManager historyManager,
+        AttachmentTypeConverter? attachmentTypeConverter = null
+    )
     {
         return new SlotInfo(globalState, historyManager);
     }

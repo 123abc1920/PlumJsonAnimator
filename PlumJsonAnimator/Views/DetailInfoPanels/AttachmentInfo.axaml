@@ -8,23 +8,80 @@
     x:DataType="viewModels:AttachmentInfoViewModel"
     Background="{DynamicResource SukiBackgroundBrush}">
     <ScrollViewer Margin="5" VerticalScrollBarVisibility="Auto">
-        <StackPanel Orientation="Vertical" >
-        <TextBlock Text="Attachment" FontSize="14" Height="24" />
-        <TextBlock Text="Type:" FontSize="14" Height="24" />
-        <ComboBox Height="32" Padding="6,4" FontSize="13">
-            <ComboBoxItem Content="Item1" IsSelected="True" />
-            <ComboBoxItem Content="Item2" />
-        </ComboBox>
-        <TextBlock Text="Slot:" FontSize="14" Height="24" />
-        <ComboBox Height="32" Padding="6,4" FontSize="13">
-            <ComboBoxItem Content="Item1" IsSelected="True" />
-            <ComboBoxItem Content="Item2" />
-        </ComboBox>
-        <TextBlock Text="Skin:" FontSize="14" Height="24" />
-        <ComboBox Height="32" Padding="6,4" FontSize="13">
-            <ComboBoxItem Content="Item1" IsSelected="True" />
-            <ComboBoxItem Content="Item2" />
-        </ComboBox>
-    </StackPanel>
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="{DynamicResource info}" />
+            <StackPanel Orientation="Horizontal">
+                <Button
+                    Width="32"
+                    Height="32"
+                    Padding="0"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center">
+                    <iconPacks:PackIconBootstrapIcons Kind="Plus" />
+                </Button>
+                <Button
+                    Width="32"
+                    Height="32"
+                    Padding="0"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center">
+                    <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
+                </Button>
+                <Button
+                    Width="32"
+                    Height="32"
+                    Padding="0"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center">
+                    <iconPacks:PackIconBootstrapIcons Kind="PencilFill" />
+                </Button>
+            </StackPanel>
+            <TextBlock
+                Height="24"
+                FontSize="14"
+                Text="Attachment" />
+            <TextBlock
+                Height="24"
+                FontSize="14"
+                Text="Name:" />
+            <TextBlock
+                Height="24"
+                FontSize="14"
+                Text="{Binding CurrentAttachment.Name}" />
+            <TextBlock
+                Height="24"
+                FontSize="14"
+                Text="Type:" />
+            <TextBlock
+                Height="24"
+                FontSize="14"
+                Text="{Binding Type}" />
+            <TextBlock
+                Height="24"
+                FontSize="14"
+                Text="Slot:" />
+            <ComboBox
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0,0,0,5"
+                Padding="6,4"
+                DisplayMemberBinding="{Binding Name}"
+                FontSize="13"
+                ItemsSource="{Binding Slots}"
+                SelectedItem="{Binding SelectedSlot, Mode=TwoWay}" />
+            <TextBlock
+                Height="24"
+                FontSize="14"
+                Text="Skin:" />
+            <ComboBox
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0,0,0,5"
+                Padding="6,4"
+                DisplayMemberBinding="{Binding Name}"
+                FontSize="13"
+                ItemsSource="{Binding Skins}"
+                SelectedItem="{Binding SelectedSkin, Mode=TwoWay}" />
+        </StackPanel>
     </ScrollViewer>
 </UserControl>
