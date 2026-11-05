@@ -211,4 +211,6 @@ public class RegionAttachment : Attachment
     {
         return new RegionAttachmentInfo(_imageRes);
     }
+
+    public override void Draw(Canvas canvas) { }
 }

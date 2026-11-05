@@ -39,11 +39,8 @@ public class CanvasRenderer
     {
         if (_globalState.CurrentTab == 0)
         {
-            RedrawCanvas(
-                _globalState.Canvas,
-                _globalState.DrawBones,
-                _globalState.CaptureMode
-            );
+            RedrawCanvas(_globalState.Canvas, _globalState.DrawBones, _globalState.CaptureMode);
+            _globalState.SelectedItem?.Draw(_globalState.Canvas);
         }
         else if (_globalState.CurrentTab == 1)
         {

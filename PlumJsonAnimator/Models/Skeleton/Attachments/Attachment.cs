@@ -42,4 +42,6 @@ public abstract class Attachment : ReactiveObject, IPresentableItem
     );
 
     public abstract object CreateInfoPanel();
+
+    public abstract void Draw(Canvas canvas);
 }

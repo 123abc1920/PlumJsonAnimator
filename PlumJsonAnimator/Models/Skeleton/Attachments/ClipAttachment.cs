@@ -92,4 +92,9 @@ public class ClipAttachment : Attachment
     {
         throw new NotImplementedException();
     }
+
+    public override void Draw(Canvas canvas)
+    {
+        throw new NotImplementedException();
+    }
 }

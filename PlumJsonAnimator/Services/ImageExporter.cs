@@ -118,6 +118,8 @@ namespace PlumJsonAnimator.Services
 
             _globalState.CurrentProject.CurrentAnimation.SetupBones();
             _canvasRenderer.RedrawCanvas(Canvas, false, false);
+            var selectedItem = _globalState.SelectedItem;
+            _globalState.SelectedItem = null;
 
             while (project.CurrentAnimation.CurrentTime <= endTime)
             {
@@ -153,6 +155,7 @@ namespace PlumJsonAnimator.Services
 
             _canvasRenderer.RedrawCanvas(Canvas, false, false);
             _canvasRenderer.LoopStart();
+            _globalState.SelectedItem = selectedItem;
 
             ProgressChanged?.Invoke(this, 0);
             return ExportResult.SUCCESS;
@@ -190,6 +193,8 @@ namespace PlumJsonAnimator.Services
 
             _globalState.CurrentProject.CurrentAnimation.SetupBones();
             _canvasRenderer.RedrawCanvas(Canvas, false, false);
+            var selectedItem = _globalState.SelectedItem;
+            _globalState.SelectedItem = null;
 
             while (project.CurrentAnimation.CurrentTime <= endTime)
             {
@@ -225,6 +230,7 @@ namespace PlumJsonAnimator.Services
 
             _canvasRenderer.RedrawCanvas(Canvas, false, false);
             _canvasRenderer.LoopStart();
+            _globalState.SelectedItem = selectedItem;
 
             ProgressChanged?.Invoke(this, 0);
             return ExportResult.SUCCESS;
@@ -267,11 +273,12 @@ namespace PlumJsonAnimator.Services
                 var totalFrames = (int)((endTime - start) * _globalState.FPS) + 1;
                 int frameCount = 0;
 
-                List<SixLabors.ImageSharp.Image<Rgba32>> frames =
-                    new List<SixLabors.ImageSharp.Image<Rgba32>>();
+                List<Image<Rgba32>> frames = new List<Image<Rgba32>>();
 
                 _globalState.CurrentProject.CurrentAnimation.SetupBones();
                 _canvasRenderer.RedrawCanvas(Canvas, false, false);
+                var selectedItem = _globalState.SelectedItem;
+                _globalState.SelectedItem = null;
 
                 while (project.CurrentAnimation.CurrentTime <= endTime)
                 {
@@ -339,6 +346,7 @@ namespace PlumJsonAnimator.Services
 
                 _canvasRenderer.RedrawCanvas(Canvas, false, false);
                 _canvasRenderer.LoopStart();
+                _globalState.SelectedItem = selectedItem;
 
                 ProgressChanged?.Invoke(this, 0);
                 return ExportResult.SUCCESS;
@@ -375,15 +383,18 @@ namespace PlumJsonAnimator.Services
             project!.CurrentAnimation!.CurrentTime = start;
             _globalState.CurrentProject.CurrentAnimation.SetupBones();
             _canvasRenderer.RedrawCanvas(Canvas, false, false);
+            var selectedItem = _globalState.SelectedItem;
+            _globalState.SelectedItem = null;
 
             Canvas!.Measure(new Avalonia.Size(double.PositiveInfinity, double.PositiveInfinity));
-            Canvas!.Arrange(new Avalonia.Rect(Canvas.Bounds.Size));
+            Canvas!.Arrange(new Rect(Canvas.Bounds.Size));
 
             using (var testBitmap = CatchCanvas(Canvas))
             {
                 if (testBitmap == null)
                 {
                     _canvasRenderer.LoopStart();
+                    _globalState.SelectedItem = selectedItem;
                     ProgressChanged?.Invoke(this, 0);
                     return ExportResult.FFMPEG_ERROR;
                 }
@@ -395,6 +406,7 @@ namespace PlumJsonAnimator.Services
                 if (width <= 0 || height <= 0)
                 {
                     _canvasRenderer.LoopStart();
+                    _globalState.SelectedItem = selectedItem;
                     ProgressChanged?.Invoke(this, 0);
                     return ExportResult.FFMPEG_ERROR;
                 }
@@ -520,6 +532,7 @@ namespace PlumJsonAnimator.Services
 
                 _canvasRenderer.RedrawCanvas(Canvas, false, false);
                 _canvasRenderer.LoopStart();
+                _globalState.SelectedItem = selectedItem;
 
                 if (!process.WaitForExit(10000))
                 {

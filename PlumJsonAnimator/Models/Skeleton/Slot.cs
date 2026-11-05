@@ -329,6 +329,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
+        public void Draw(Canvas canvas)
+        {
+            DrawSlotSelection(canvas);
+        }
+
         public new SlotData GenerateJSONData()
         {
             return new SlotData

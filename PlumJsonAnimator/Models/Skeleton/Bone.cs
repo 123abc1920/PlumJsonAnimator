@@ -412,10 +412,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             ShearY = y;
         }
 
-        /// <summary>
-        /// Draws bone with matrix logic matching Spine 2D
-        /// </summary>
-        public void DrawBone(Canvas canvas)
+        private void DrawThisBone(Canvas canvas)
         {
             double endX = GlobalX + (LengthX * G11);
             double endY = GlobalY + (LengthX * G12);
@@ -443,11 +440,23 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
 
             canvas.Children.Add(line);
             canvas.Children.Add(joint);
+        }
 
+        /// <summary>
+        /// Draws bone with matrix logic matching Spine 2D
+        /// </summary>
+        public void DrawBone(Canvas canvas)
+        {
+            DrawThisBone(canvas);
             foreach (var childBone in Children)
             {
                 childBone.DrawBone(canvas);
             }
+        }
+
+        public void Draw(Canvas canvas)
+        {
+            DrawThisBone(canvas);
         }
 
         /// <summary>
