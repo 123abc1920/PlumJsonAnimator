@@ -65,6 +65,9 @@ public partial class AttachmentInfoViewModel : ReactiveObject
     [Reactive]
     public string Type { get; set; }
 
+    [Reactive]
+    public object? CurrentAttachmentProperties { get; set; } = null;
+
     public readonly GlobalState GlobalState;
     private readonly HistoryManager _historyManager;
 
@@ -82,5 +85,6 @@ public partial class AttachmentInfoViewModel : ReactiveObject
             s == GlobalState.CurrentProject.CurrentSkin.GetSlot(CurrentAttachment)
         );
         SelectedSkin = Skins.FirstOrDefault(s => s == GlobalState.CurrentProject.CurrentSkin);
+        CurrentAttachmentProperties = CurrentAttachment.CreateInfoPanel();
     }
 }

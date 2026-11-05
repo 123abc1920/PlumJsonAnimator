@@ -82,6 +82,7 @@
                 FontSize="13"
                 ItemsSource="{Binding Skins}"
                 SelectedItem="{Binding SelectedSkin, Mode=TwoWay}" />
+            <ContentControl Content="{Binding CurrentAttachmentProperties}" />
         </StackPanel>
     </ScrollViewer>
 </UserControl>

@@ -87,4 +87,9 @@ public class ClipAttachment : Attachment
     public override void SetPos(double x, double y, double a) { }
 
     public override void SetSize(double width, double height) { }
+
+    public override object CreateInfoPanel()
+    {
+        throw new NotImplementedException();
+    }
 }

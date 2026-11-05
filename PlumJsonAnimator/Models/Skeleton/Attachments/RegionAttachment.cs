@@ -7,6 +7,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Models.Resources;
+using PlumJsonAnimator.Views;
 
 // TODO: fix SetSize GetSize Size
 namespace PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
@@ -204,5 +205,10 @@ public class RegionAttachment : Attachment
     private void Dispose()
     {
         _cachedBitmap?.Dispose();
+    }
+
+    public override object CreateInfoPanel()
+    {
+        return new RegionAttachmentInfo();
     }
 }

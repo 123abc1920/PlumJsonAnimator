@@ -40,4 +40,6 @@ public abstract class Attachment : ReactiveObject, IPresentableItem
         Canvas? canvas = null,
         ClipAttachment? clipAttachment = null
     );
+
+    public abstract object CreateInfoPanel();
 }
