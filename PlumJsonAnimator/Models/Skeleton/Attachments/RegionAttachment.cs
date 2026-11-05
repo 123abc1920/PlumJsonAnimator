@@ -209,6 +209,6 @@ public class RegionAttachment : Attachment
 
     public override object CreateInfoPanel()
     {
-        return new RegionAttachmentInfo();
+        return new RegionAttachmentInfo(_imageRes);
     }
 }

@@ -8,9 +8,16 @@
     x:DataType="viewModels:RegionAttachmentInfoViewModel"
     Background="{DynamicResource SukiBackgroundBrush}">
     <ScrollViewer Margin="5" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
             <TextBlock
                 Height="24"
                 FontSize="14"
-                Text="Text test" />
+                Text="Image:" />
+            <TextBox
+                Grid.Row="0"
+                Grid.Column="0"
+                HorizontalAlignment="Left"
+                Text="{Binding Image.Path}" />
+        </StackPanel>
     </ScrollViewer>
 </UserControl>
