@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Models.DTO;
 using PlumJsonAnimator.Services;
 using PlumJsonAnimator.Views;
 
@@ -13,15 +14,34 @@ public class InfoPanelFactory
 
     public InfoPanelFactory(
         HistoryManager historyManager,
-        AttachmentTypeConverter attachmentTypeConverter
+        AttachmentTypeConverter attachmentTypeConverter,
+        AttachmentFactory attachmentFactory
     )
     {
         _registry = new()
         {
-            [PanelTypes.BONEINFO] = gs => BoneInfo.Create(gs, historyManager),
-            [PanelTypes.SLOTINFO] = gs => SlotInfo.Create(gs, historyManager),
+            [PanelTypes.BONEINFO] = gs =>
+                BoneInfo.Create(
+                    new InfoPanelDTO() { GlobalState = gs, HistoryManager = historyManager }
+                ),
+            [PanelTypes.SLOTINFO] = gs =>
+                SlotInfo.Create(
+                    new InfoPanelDTO()
+                    {
+                        GlobalState = gs,
+                        HistoryManager = historyManager,
+                        AttachmentFactory = attachmentFactory,
+                    }
+                ),
             [PanelTypes.ATTACHMENTINFO] = gs =>
-                AttachmentInfo.Create(gs, historyManager, attachmentTypeConverter),
+                AttachmentInfo.Create(
+                    new InfoPanelDTO()
+                    {
+                        GlobalState = gs,
+                        HistoryManager = historyManager,
+                        AttachmentTypeConverter = attachmentTypeConverter,
+                    }
+                ),
         };
     }
 

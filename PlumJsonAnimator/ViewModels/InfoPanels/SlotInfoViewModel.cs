@@ -1,9 +1,9 @@
-using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Constants.Command;
+using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
@@ -58,14 +58,21 @@ public partial class SlotInfoViewModel : ReactiveObject
 
     public ICommand OpenBone { get; }
     public ICommand OpenAttachment { get; }
+    public ICommand AddAttachment { get; }
 
     public readonly GlobalState GlobalState;
     private readonly HistoryManager _historyManager;
+    private readonly AttachmentFactory _attachmentFactory;
 
-    public SlotInfoViewModel(GlobalState globalState, HistoryManager historyManager)
+    public SlotInfoViewModel(
+        GlobalState globalState,
+        HistoryManager historyManager,
+        AttachmentFactory attachmentFactory
+    )
     {
         GlobalState = globalState;
         _historyManager = historyManager;
+        _attachmentFactory = attachmentFactory;
 
         SelectedBone = Bones.FirstOrDefault(b => b == CurrentSlot.BoundedBone);
         SelectedAttachment = CurrentSlot.CurrentAttachment;
@@ -77,6 +84,16 @@ public partial class SlotInfoViewModel : ReactiveObject
         OpenAttachment = new Command(_ =>
         {
             GlobalState.SelectedItem = SelectedAttachment;
+        });
+        AddAttachment = new Command(parameter =>
+        {
+            if (parameter is AttachmentTypes type)
+            {
+                SelectedAttachment = _attachmentFactory.CreateAttachmentByType(
+                    type,
+                    new AttachmentDTO() { Name = $"attachment{Counter.GenerateNamePostfix()}" }
+                );
+            }
         });
     }
 }

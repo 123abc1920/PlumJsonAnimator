@@ -2,11 +2,13 @@
     x:Class="PlumJsonAnimator.Views.SlotInfo"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attachments="clr-namespace:PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;assembly=PlumJsonAnimator"
     xmlns:iconPacks="https://github.com/MahApps/IconPacks.Avalonia"
     xmlns:suki="clr-namespace:SukiUI.Controls;assembly=SukiUI"
     xmlns:viewModels="clr-namespace:PlumJsonAnimator.ViewModels"
     x:DataType="viewModels:SlotInfoViewModel"
     Background="{DynamicResource SukiBackgroundBrush}">
+
     <ScrollViewer
         Margin="5"
         HorizontalScrollBarVisibility="Disabled"
@@ -20,8 +22,21 @@
                     Padding="0"
                     HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center">
+                    <Button.Flyout>
+                        <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                            <MenuItem
+                                Command="{Binding AddAttachment}"
+                                CommandParameter="{x:Static attachments:AttachmentTypes.REGION}"
+                                Header="Add region" />
+                            <MenuItem
+                                Command="{Binding AddAttachment}"
+                                CommandParameter="{x:Static attachments:AttachmentTypes.CLIPPING}"
+                                Header="Add clipping" />
+                        </MenuFlyout>
+                    </Button.Flyout>
                     <iconPacks:PackIconBootstrapIcons Kind="Plus" />
                 </Button>
+
                 <Button
                     Width="32"
                     Height="32"
@@ -67,10 +82,10 @@
                     Grid.Column="1"
                     Width="32"
                     Height="32"
-                    Command="{Binding OpenBone}"
                     Padding="0"
                     HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center">
+                    VerticalContentAlignment="Center"
+                    Command="{Binding OpenBone}">
                     <iconPacks:PackIconBootstrapIcons Kind="ArrowBarRight" />
                 </Button>
             </Grid>
@@ -91,10 +106,10 @@
                     Grid.Column="1"
                     Width="32"
                     Height="32"
-                    Command="{Binding OpenAttachment}"
                     Padding="0"
                     HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center">
+                    VerticalContentAlignment="Center"
+                    Command="{Binding OpenAttachment}">
                     <iconPacks:PackIconBootstrapIcons Kind="ArrowBarRight" />
                 </Button>
                 <Canvas

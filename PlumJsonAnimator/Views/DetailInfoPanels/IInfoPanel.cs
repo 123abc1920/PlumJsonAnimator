@@ -1,5 +1,6 @@
 using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Models.DTO;
 using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.Views;
@@ -7,9 +8,5 @@ namespace PlumJsonAnimator.Views;
 public interface IInfoPanel
 {
     static abstract PanelTypes InfoPanelType { get; }
-    static abstract IInfoPanel Create(
-        GlobalState globalState,
-        HistoryManager historyManager,
-        AttachmentTypeConverter? attachmentTypeConverter = null
-    );
+    static abstract IInfoPanel Create(InfoPanelDTO infoPanelDTO);
 }

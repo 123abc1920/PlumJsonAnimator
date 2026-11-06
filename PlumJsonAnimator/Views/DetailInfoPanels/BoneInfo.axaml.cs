@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Models.DTO;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
@@ -67,12 +68,8 @@ public partial class BoneInfo : UserControl, IInfoPanel
         }
     }
 
-    public static IInfoPanel Create(
-        GlobalState globalState,
-        HistoryManager historyManager,
-        AttachmentTypeConverter? attachmentTypeConverter = null
-    )
+    public static IInfoPanel Create(InfoPanelDTO infoPanelDTO)
     {
-        return new BoneInfo(globalState, historyManager);
+        return new BoneInfo(infoPanelDTO.GlobalState!, infoPanelDTO.HistoryManager!);
     }
 }
