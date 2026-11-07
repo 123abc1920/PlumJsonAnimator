@@ -19,7 +19,7 @@ public class RegionAttachment : Attachment
 {
     public override AttachmentTypes AttachmentType => AttachmentTypes.REGION;
 
-    private ImageRes _imageRes;
+    public ImageRes? ImageRes;
     private Bitmap? _cachedBitmap;
     private string? _cachedPath;
 
@@ -36,7 +36,7 @@ public class RegionAttachment : Attachment
     )
         : base(attachmentDTO.Name, attachmentTypeConverter)
     {
-        _imageRes = (ImageRes)attachmentDTO.Res;
+        ImageRes = (ImageRes)attachmentDTO.Res;
 
         var data = attachmentDTO.AttachmentData;
 
@@ -61,10 +61,10 @@ public class RegionAttachment : Attachment
 
     public string? GetPath()
     {
-        if (_imageRes is null)
+        if (ImageRes is null)
             return null;
 
-        return _imageRes.Path;
+        return ImageRes.Path;
     }
 
     public override AttachmentData GenerateJSONData()
@@ -83,7 +83,7 @@ public class RegionAttachment : Attachment
 
     public Res GetRes()
     {
-        return _imageRes;
+        return ImageRes;
     }
 
     public override void SetPos(double x, double y, double a)
@@ -209,7 +209,7 @@ public class RegionAttachment : Attachment
 
     public override object CreateInfoPanel()
     {
-        return new RegionAttachmentInfo(_imageRes);
+        return new RegionAttachmentInfo(this);
     }
 
     public override void Draw(Canvas canvas) { }

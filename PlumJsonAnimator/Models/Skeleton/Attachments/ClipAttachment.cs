@@ -4,6 +4,7 @@ using Avalonia;
 using Avalonia.Controls;
 using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Views;
 
 namespace PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 
@@ -12,8 +13,8 @@ public class ClipAttachment : Attachment
     public override AttachmentTypes AttachmentType => AttachmentTypes.CLIPPING;
     public List<PointModel> Points { get; } = new List<PointModel>();
 
-    private string _endSlotName { get; set; } = "";
-    private int _vertexCount { get; set; } = 3;
+    private string? _endSlotName { get; set; } = "";
+    private int? _vertexCount { get; set; } = 3;
     private List<PointModel> _vertices { get; set; } = new List<PointModel>();
 
     public ClipAttachment(
@@ -22,13 +23,16 @@ public class ClipAttachment : Attachment
     )
         : base(attachmentDTO.Name!, attachmentTypeConverter)
     {
-        _endSlotName = attachmentDTO.AttachmentData!.End!;
-        _vertexCount = attachmentDTO.AttachmentData!.VertexCount!;
+        _endSlotName = attachmentDTO.AttachmentData?.End;
+        _vertexCount = attachmentDTO.AttachmentData?.VertexCount;
 
-        var xyArray = attachmentDTO.AttachmentData!.Vertices!;
-        for (int i = 0; i < _vertexCount * 2; i += 2)
+        var xyArray = attachmentDTO.AttachmentData?.Vertices;
+        if (!(xyArray is null))
         {
-            _vertices.Add(new PointModel((int)xyArray[i], (int)xyArray[i + 1]));
+            for (int i = 0; i < _vertexCount * 2; i += 2)
+            {
+                _vertices.Add(new PointModel((int)xyArray[i], (int)xyArray[i + 1]));
+            }
         }
     }
 
@@ -90,11 +94,8 @@ public class ClipAttachment : Attachment
 
     public override object CreateInfoPanel()
     {
-        throw new NotImplementedException();
+        return new ClipAttachmentInfo(this);
     }
 
-    public override void Draw(Canvas canvas)
-    {
-        throw new NotImplementedException();
-    }
+    public override void Draw(Canvas canvas) { }
 }

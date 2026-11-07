@@ -33,7 +33,7 @@ public class AttachmentData
     public string? End { get; set; }
 
     [JsonProperty("vertexCount", NullValueHandling = NullValueHandling.Ignore)]
-    public int VertexCount { get; set; }
+    public int? VertexCount { get; set; }
 
     [JsonProperty("vertices", NullValueHandling = NullValueHandling.Ignore)]
     public List<double>? Vertices { get; set; }
