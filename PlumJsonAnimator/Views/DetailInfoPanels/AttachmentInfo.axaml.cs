@@ -2,6 +2,7 @@ using Avalonia.Controls;
 using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.DTO;
+using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
 
@@ -14,14 +15,16 @@ public partial class AttachmentInfo : UserControl, IInfoPanel
     public AttachmentInfo(
         GlobalState globalState,
         HistoryManager historyManager,
-        AttachmentTypeConverter attachmentTypeConverter
+        AttachmentTypeConverter attachmentTypeConverter,
+        Slot slot
     )
     {
         InitializeComponent();
         DataContext = new AttachmentInfoViewModel(
             globalState,
             historyManager,
-            attachmentTypeConverter
+            attachmentTypeConverter,
+            slot
         );
     }
 
@@ -30,7 +33,8 @@ public partial class AttachmentInfo : UserControl, IInfoPanel
         return new AttachmentInfo(
             infoPanelDTO.GlobalState!,
             infoPanelDTO.HistoryManager!,
-            infoPanelDTO.AttachmentTypeConverter!
+            infoPanelDTO.AttachmentTypeConverter!,
+            infoPanelDTO.Slot!
         );
     }
 }

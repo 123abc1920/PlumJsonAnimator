@@ -73,17 +73,15 @@ public partial class AttachmentInfoViewModel : ReactiveObject
     public AttachmentInfoViewModel(
         GlobalState globalState,
         HistoryManager historyManager,
-        AttachmentTypeConverter attachmentTypeConverter
+        AttachmentTypeConverter attachmentTypeConverter,
+        Slot selectedSlot
     )
     {
         GlobalState = globalState;
         _historyManager = historyManager;
 
         Type = attachmentTypeConverter.GetAttachmentTypeString(CurrentAttachment!.AttachmentType);
-        // TODO: передавать слот из клика
-        SelectedSlot = Slots.FirstOrDefault(s =>
-            s == GlobalState.CurrentProject.CurrentSkin.GetSlot(CurrentAttachment)
-        );
+        SelectedSlot = selectedSlot;
         SelectedSkin = Skins.FirstOrDefault(s => s == GlobalState.CurrentProject.CurrentSkin);
         CurrentAttachmentProperties = CurrentAttachment.CreateInfoPanel();
     }

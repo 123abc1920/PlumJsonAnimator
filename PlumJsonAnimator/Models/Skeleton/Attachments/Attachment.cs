@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Media;
 using PlumJsonAnimator.Common;
+using PlumJsonAnimator.Models.DTO;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Views;
 using ReactiveUI;
@@ -44,4 +45,9 @@ public abstract class Attachment : ReactiveObject, IPresentableItem
     public abstract object CreateInfoPanel();
 
     public abstract void Draw(Canvas canvas);
+
+    public InfoPanelDTO GetInfoPanelDTO()
+    {
+        return new InfoPanelDTO();
+    }
 }

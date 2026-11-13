@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using PlumJsonAnimator.Common.States;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.DTO;
 using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
@@ -64,12 +65,20 @@ namespace PlumJsonAnimator.Common.Constants
             {
                 if (_selectedItem != value)
                 {
-                    _selectedItem = value;
-
+                    InfoPanelDTO? dto = null;
                     if (!(_selectedItem is null))
                     {
+                        dto = _selectedItem.GetInfoPanelDTO();
+                        dto.GlobalState = this;
+                        Console.WriteLine(dto.Slot);
+                    }
+
+                    _selectedItem = value;
+
+                    if (!(_selectedItem is null) && !(dto is null))
+                    {
                         _panelState.CurrentInfoPanel = _infoPanelFactory.Create(
-                            this,
+                            dto,
                             _selectedItem.PanelType
                         );
                     }

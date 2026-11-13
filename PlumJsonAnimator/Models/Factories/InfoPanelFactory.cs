@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using PlumJsonAnimator.Common;
-using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.DTO;
 using PlumJsonAnimator.Services;
 using PlumJsonAnimator.Views;
@@ -10,7 +9,11 @@ namespace PlumJsonAnimator.Models.Factories;
 
 public class InfoPanelFactory
 {
-    private readonly Dictionary<PanelTypes, Func<GlobalState, object>> _registry;
+    private readonly Dictionary<PanelTypes, Func<InfoPanelDTO, object>> _registry;
+
+    private HistoryManager _historyManager;
+    private AttachmentTypeConverter _attachmentTypeConverter;
+    private AttachmentFactory _attachmentFactory;
 
     public InfoPanelFactory(
         HistoryManager historyManager,
@@ -18,38 +21,27 @@ public class InfoPanelFactory
         AttachmentFactory attachmentFactory
     )
     {
+        _historyManager = historyManager;
+        _attachmentFactory = attachmentFactory;
+        _attachmentTypeConverter = attachmentTypeConverter;
+
         _registry = new()
         {
-            [PanelTypes.BONEINFO] = gs =>
-                BoneInfo.Create(
-                    new InfoPanelDTO() { GlobalState = gs, HistoryManager = historyManager }
-                ),
-            [PanelTypes.SLOTINFO] = gs =>
-                SlotInfo.Create(
-                    new InfoPanelDTO()
-                    {
-                        GlobalState = gs,
-                        HistoryManager = historyManager,
-                        AttachmentFactory = attachmentFactory,
-                    }
-                ),
-            [PanelTypes.ATTACHMENTINFO] = gs =>
-                AttachmentInfo.Create(
-                    new InfoPanelDTO()
-                    {
-                        GlobalState = gs,
-                        HistoryManager = historyManager,
-                        AttachmentTypeConverter = attachmentTypeConverter,
-                    }
-                ),
+            [PanelTypes.BONEINFO] = dto => BoneInfo.Create(dto),
+            [PanelTypes.SLOTINFO] = dto => SlotInfo.Create(dto),
+            [PanelTypes.ATTACHMENTINFO] = dto => AttachmentInfo.Create(dto),
         };
     }
 
-    public IInfoPanel Create(GlobalState globalState, PanelTypes infoPanelType)
+    public IInfoPanel Create(InfoPanelDTO dto, PanelTypes infoPanelType)
     {
         if (_registry.TryGetValue(infoPanelType, out var createFunc))
         {
-            return (IInfoPanel)createFunc(globalState);
+            dto.AttachmentFactory = _attachmentFactory;
+            dto.AttachmentTypeConverter = _attachmentTypeConverter;
+            dto.HistoryManager = _historyManager;
+
+            return (IInfoPanel)createFunc(dto);
         }
 
         throw new ArgumentException($"Тип {infoPanelType} не добавлен в список фабрики.");

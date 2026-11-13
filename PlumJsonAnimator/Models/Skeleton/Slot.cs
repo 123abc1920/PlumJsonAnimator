@@ -5,6 +5,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Models.DTO;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 using PlumJsonAnimator.Views;
@@ -362,6 +363,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                     Name = name;
                 }
             }
+        }
+
+        public InfoPanelDTO GetInfoPanelDTO()
+        {
+            return new InfoPanelDTO() { Slot = this };
         }
 
         public new string GetName
