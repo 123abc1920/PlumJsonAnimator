@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Common.Constants;
@@ -81,6 +80,7 @@ public partial class AttachmentInfoViewModel : ReactiveObject
         _historyManager = historyManager;
 
         Type = attachmentTypeConverter.GetAttachmentTypeString(CurrentAttachment!.AttachmentType);
+        // TODO: передавать слот из клика
         SelectedSlot = Slots.FirstOrDefault(s =>
             s == GlobalState.CurrentProject.CurrentSkin.GetSlot(CurrentAttachment)
         );

@@ -13,6 +13,40 @@
                 Height="24"
                 FontSize="14"
                 Text="Clipping form:" />
+            <TextBlock
+                Height="24"
+                FontSize="14"
+                Text="Vertices:" />
+            <Button
+                Width="32"
+                Height="32"
+                Padding="0"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Command="{Binding AddVertice}">
+                <iconPacks:PackIconBootstrapIcons Kind="Plus" />
+            </Button>
+            <TextBox
+                Height="24"
+                FontSize="14"
+                Text="{Binding ClipAttachment.EndSlotName}" />
+            <ListBox
+                Grid.Row="2"
+                Margin="0,5"
+                ItemsSource="{Binding ClipAttachment.Vertices}"
+                ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel
+                            HorizontalAlignment="Stretch"
+                            Background="Transparent"
+                            Orientation="Horizontal">
+                            <TextBox HorizontalAlignment="Stretch" Text="{Binding X}" />
+                            <TextBox HorizontalAlignment="Stretch" Text="{Binding Y}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </StackPanel>
     </ScrollViewer>
 </UserControl>
