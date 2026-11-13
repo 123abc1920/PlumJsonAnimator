@@ -15,6 +15,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 public class ClipAttachment : Attachment
 {
     public override AttachmentTypes AttachmentType => AttachmentTypes.CLIPPING;
+
+    private Project? _currentProject;
+
     public List<PointModel> Points { get; } = new List<PointModel>();
 
     [Reactive]
@@ -40,6 +43,8 @@ public class ClipAttachment : Attachment
                 Vertices.Add(new PointModel((int)xyArray[i], (int)xyArray[i + 1]));
             }
         }
+
+        _currentProject = attachmentDTO.CurrentProject;
     }
 
     public static Attachment Create(
@@ -100,7 +105,8 @@ public class ClipAttachment : Attachment
 
     public override object CreateInfoPanel()
     {
-        return new ClipAttachmentInfo(this);
+        ObservableCollection<Slot>? slots = _currentProject?.Slots;
+        return new ClipAttachmentInfo(this, slots);
     }
 
     public override void Draw(Canvas canvas)

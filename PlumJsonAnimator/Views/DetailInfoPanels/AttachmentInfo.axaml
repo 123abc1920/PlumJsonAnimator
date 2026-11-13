@@ -60,15 +60,27 @@
                 Height="24"
                 FontSize="14"
                 Text="Slot:" />
-            <ComboBox
-                Grid.Row="0"
-                Grid.Column="0"
-                Margin="0,0,0,5"
-                Padding="6,4"
-                DisplayMemberBinding="{Binding Name}"
-                FontSize="13"
-                ItemsSource="{Binding Slots}"
-                SelectedItem="{Binding SelectedSlot, Mode=TwoWay}" />
+            <Grid ColumnDefinitions="*,Auto">
+                <ComboBox
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="0,0,0,5"
+                    Padding="6,4"
+                    DisplayMemberBinding="{Binding Name}"
+                    FontSize="13"
+                    ItemsSource="{Binding Slots}"
+                    SelectedItem="{Binding SelectedSlot, Mode=TwoWay}" />
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Width="32"
+                    Height="32"
+                    Padding="0"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center">
+                    <iconPacks:PackIconBootstrapIcons Kind="ArrowBarRight" />
+                </Button>
+            </Grid>
             <TextBlock
                 Height="24"
                 FontSize="14"

@@ -29,7 +29,33 @@
             <TextBox
                 Height="24"
                 FontSize="14"
-                Text="{Binding ClipAttachment.EndSlotName}" />
+                Text="End Slot name:" />
+            <Grid ColumnDefinitions="*,Auto">
+                <ComboBox
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Height="24"
+                    FontSize="14"
+                    ItemsSource="{Binding AvailableEndSlotNames}"
+                    SelectedValue="{Binding ClipAttachment.EndSlotName, Mode=TwoWay}"
+                    SelectedValueBinding="{Binding Name}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Width="32"
+                    Height="32"
+                    Padding="0"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center">
+                    <iconPacks:PackIconBootstrapIcons Kind="ArrowBarRight" />
+                </Button>
+            </Grid>
             <ListBox
                 Grid.Row="2"
                 Margin="0,5"

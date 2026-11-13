@@ -702,6 +702,7 @@ namespace PlumJsonAnimator.Models
                                         Res = GetResByName(attach.Name),
                                         AttachmentData = attach,
                                         Name = $"attachment{Counter.GenerateNamePostfix()}",
+                                        CurrentProject = _globalState.CurrentProject,
                                     }
                                 );
                                 if (!(a is null))
@@ -737,6 +738,7 @@ namespace PlumJsonAnimator.Models
                                 Name = $"attachment{Counter.GenerateNamePostfix()}",
                                 AttachmentData = attach,
                                 Res = GetResByName(attach.Name),
+                                CurrentProject = _globalState.CurrentProject,
                             }
                         );
                         if (!(a is null))

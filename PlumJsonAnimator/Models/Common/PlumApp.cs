@@ -252,7 +252,7 @@ public class PlumApp
                 new AttachmentDTO()
                 {
                     Name = $"attachment{Counter.GenerateNamePostfix()}",
-                    Res = res,
+                    Res = res
                 }
             );
             _historyManager.DoCommand(dropImageToBoneCommand);

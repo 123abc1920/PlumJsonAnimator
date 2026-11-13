@@ -7,4 +7,5 @@ public class AttachmentDTO
     public required string Name { get; set; }
     public AttachmentData? AttachmentData { get; set; }
     public Res? Res { get; set; }
+    public Project? CurrentProject { get; set; }
 }

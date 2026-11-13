@@ -91,7 +91,11 @@ public partial class SlotInfoViewModel : ReactiveObject
             {
                 SelectedAttachment = _attachmentFactory.CreateAttachmentByType(
                     type,
-                    new AttachmentDTO() { Name = $"attachment{Counter.GenerateNamePostfix()}" }
+                    new AttachmentDTO()
+                    {
+                        Name = $"attachment{Counter.GenerateNamePostfix()}",
+                        CurrentProject = GlobalState.CurrentProject,
+                    }
                 );
             }
         });

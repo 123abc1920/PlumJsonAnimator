@@ -70,15 +70,14 @@ namespace PlumJsonAnimator.Common.Constants
                     {
                         dto = _selectedItem.GetInfoPanelDTO();
                         dto.GlobalState = this;
-                        Console.WriteLine(dto.Slot);
                     }
 
                     _selectedItem = value;
 
-                    if (!(_selectedItem is null) && !(dto is null))
+                    if (!(_selectedItem is null))
                     {
                         _panelState.CurrentInfoPanel = _infoPanelFactory.Create(
-                            dto,
+                            dto ?? new InfoPanelDTO { GlobalState = this },
                             _selectedItem.PanelType
                         );
                     }
