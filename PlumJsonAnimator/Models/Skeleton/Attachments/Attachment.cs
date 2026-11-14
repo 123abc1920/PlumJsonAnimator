@@ -36,7 +36,7 @@ public abstract class Attachment : ReactiveObject, IPresentableItem
 
     public abstract void SetSize(double width, double height);
 
-    public abstract void DrawSlotAttachment(
+    public abstract void DrawAttachment(
         Slot slot,
         Canvas? canvas = null,
         ClipAttachment? clipAttachment = null

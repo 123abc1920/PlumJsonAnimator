@@ -102,12 +102,28 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <param name="canvas"></param>
         public void DrawSkin(Canvas canvas)
         {
+            ClipAttachment? clipAttachment = null;
             foreach (var item in SlotAttachmentBinding.OrderBy(it => it.Key.CurrentDrawOrderOffset))
             {
                 if (_globalState.CurrentProject!.CurrentSkin.IsSlotDrawable(item.Key))
                 {
-                    item.Value?.DrawSlotAttachment(item.Key, canvas);
-                    item.Key.DrawSlotSelection(canvas);
+                    var attachment = item.Value;
+                    var slot = item.Key;
+                    if (attachment is ClipAttachment clipAttachment1)
+                    {
+                        clipAttachment = clipAttachment1;
+                    }
+
+                    attachment?.DrawAttachment(item.Key, canvas, clipAttachment);
+                    slot.DrawSlotSelection(canvas);
+
+                    if (!(clipAttachment is null))
+                    {
+                        if (slot.Name == clipAttachment.EndSlotName)
+                        {
+                            clipAttachment = null;
+                        }
+                    }
                 }
             }
         }

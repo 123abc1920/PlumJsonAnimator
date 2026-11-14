@@ -55,14 +55,11 @@ public class ClipAttachment : Attachment
         return new ClipAttachment(attachmentDTO, attachmentTypeConverter);
     }
 
-    public override void DrawSlotAttachment(
+    public override void DrawAttachment(
         Slot slot,
         Canvas? canvas = null,
         ClipAttachment? clipAttachment = null
-    )
-    {
-        throw new NotImplementedException();
-    }
+    ) { }
 
     private List<double> MakeFlatVerticesArray()
     {

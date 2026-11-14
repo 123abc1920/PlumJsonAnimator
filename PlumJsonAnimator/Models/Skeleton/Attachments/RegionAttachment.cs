@@ -104,7 +104,7 @@ public class RegionAttachment : Attachment
         return new Dictionary<string, int?>() { ["width"] = Width, ["height"] = Height };
     }
 
-    public override void DrawSlotAttachment(
+    public override void DrawAttachment(
         Slot slot,
         Canvas? canvas,
         ClipAttachment? clipAttachment = null

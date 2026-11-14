@@ -97,6 +97,10 @@ public partial class SlotInfoViewModel : ReactiveObject
                         CurrentProject = GlobalState.CurrentProject,
                     }
                 );
+                GlobalState.CurrentProject?.CurrentSkin.BindSlotAttachment(
+                    CurrentSlot,
+                    SelectedAttachment
+                );
             }
         });
     }
