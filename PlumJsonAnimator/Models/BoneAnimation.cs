@@ -54,13 +54,7 @@ namespace PlumJsonAnimator.Models
         {
             if (_translateKeyframes.ContainsKey(time))
             {
-                _translateKeyframes[time] = new TranslateKeyFrame(
-                    _globalState,
-                    time,
-                    x,
-                    y,
-                    easing
-                );
+                _translateKeyframes[time] = new TranslateKeyFrame(_globalState, time, x, y, easing);
             }
             else
             {
@@ -81,19 +75,11 @@ namespace PlumJsonAnimator.Models
         {
             if (_rotateKeyframes.ContainsKey(time))
             {
-                _rotateKeyframes[time] = new RotateKeyFrame(
-                    _globalState,
-                    time,
-                    value,
-                    easing
-                );
+                _rotateKeyframes[time] = new RotateKeyFrame(_globalState, time, value, easing);
             }
             else
             {
-                _rotateKeyframes.Add(
-                    time,
-                    new RotateKeyFrame(_globalState, time, value, easing)
-                );
+                _rotateKeyframes.Add(time, new RotateKeyFrame(_globalState, time, value, easing));
             }
         }
 
@@ -435,6 +421,9 @@ namespace PlumJsonAnimator.Models
                 var onlyKeyframe = (TranslateKeyFrame)_translateKeyframes.First().Value;
                 localX = (double)onlyKeyframe.X;
                 localY = (double)onlyKeyframe.Y;
+
+                b.AnimX = localX;
+                b.AnimY = localY;
             }
             else
             {
@@ -466,8 +455,8 @@ namespace PlumJsonAnimator.Models
                     else
                         return;
 
-                    b.X = localX;
-                    b.Y = localY;
+                    b.AnimX = localX;
+                    b.AnimY = localY;
                 }
             }
         }

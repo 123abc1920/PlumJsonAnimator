@@ -1,8 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
 using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.Shapes;
 using Avalonia.Media;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
@@ -284,7 +282,6 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             : this()
         {
             Name = name;
-
             _id = 100;
 
             _globalState = globalState;
@@ -328,9 +325,6 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                     AnimX = localX - BaseX;
                     AnimY = localY - BaseY;
                 }
-
-                X = localX;
-                Y = localY;
             }
             else
             {
@@ -344,9 +338,6 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                     AnimX = x - BaseX;
                     AnimY = y - BaseY;
                 }
-
-                X = x;
-                Y = y;
             }
 
             _isMoving = false;
