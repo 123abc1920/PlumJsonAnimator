@@ -38,13 +38,13 @@ public abstract class Attachment : ReactiveObject, IPresentableItem
 
     public abstract void DrawAttachment(
         Slot slot,
-        Canvas? canvas = null,
+        DrawingContext? context = null,
         ClipAttachment? clipAttachment = null
     );
 
     public abstract object CreateInfoPanel();
 
-    public abstract void Draw(Canvas canvas);
+    public abstract void Draw(DrawingContext context);
 
     public InfoPanelDTO GetInfoPanelDTO()
     {

@@ -413,51 +413,36 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             ShearY = y;
         }
 
-        private void DrawThisBone(Canvas canvas)
+        private void DrawThisBone(DrawingContext context)
         {
             double endX = GlobalX + (LengthX * G11);
             double endY = GlobalY + (LengthX * G12);
 
-            Point start = new Point(canvas.Width / 2 + GlobalX, canvas.Height / 2 + GlobalY);
-            Point end = new Point(canvas.Width / 2 + endX, canvas.Height / 2 + endY);
+            Point start = new Point(GlobalX, GlobalY);
+            Point end = new Point(endX, endY);
 
-            var line = new Line
-            {
-                StartPoint = start,
-                EndPoint = end,
-                Stroke = _globalState.GetLineBoneColor(this),
-                StrokeThickness = 3,
-            };
+            var bonePen = new Pen(_globalState.GetLineBoneColor(this), 3);
+            context.DrawLine(bonePen, start, end);
 
-            var joint = new Ellipse
-            {
-                Width = 8,
-                Height = 8,
-                Fill = _globalState.GetDotBoneColor(this),
-            };
-
-            Canvas.SetLeft(joint, start.X - 4);
-            Canvas.SetTop(joint, start.Y - 4);
-
-            canvas.Children.Add(line);
-            canvas.Children.Add(joint);
+            var jointBrush = _globalState.GetDotBoneColor(this);
+            context.DrawEllipse(jointBrush, null, start, 4, 4);
         }
 
         /// <summary>
         /// Draws bone with matrix logic matching Spine 2D
         /// </summary>
-        public void DrawBone(Canvas canvas)
+        public void DrawBone(DrawingContext context)
         {
-            DrawThisBone(canvas);
+            DrawThisBone(context);
             foreach (var childBone in Children)
             {
-                childBone.DrawBone(canvas);
+                childBone.DrawBone(context);
             }
         }
 
-        public void Draw(Canvas canvas)
+        public void Draw(DrawingContext context)
         {
-            DrawThisBone(canvas);
+            DrawThisBone(context);
         }
 
         /// <summary>

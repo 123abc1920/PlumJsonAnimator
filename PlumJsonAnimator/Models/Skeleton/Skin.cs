@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Avalonia.Controls;
+using Avalonia.Media;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
@@ -99,8 +100,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// <summary>
         /// Draws skin
         /// </summary>
-        /// <param name="canvas"></param>
-        public void DrawSkin(Canvas canvas)
+        /// <param name="context"></param>
+        public void DrawSkin(DrawingContext context)
         {
             ClipAttachment? clipAttachment = null;
             foreach (var item in SlotAttachmentBinding.OrderBy(it => it.Key.CurrentDrawOrderOffset))
@@ -114,10 +115,10 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                         clipAttachment = clipAttachment1;
                     }
 
-                    attachment?.DrawAttachment(item.Key, canvas, clipAttachment);
-                    slot.DrawSlotSelection(canvas);
+                    attachment?.DrawAttachment(item.Key, context, clipAttachment);
+                    slot.DrawSlotSelection(context);
 
-                    if (!(clipAttachment is null))
+                    if (clipAttachment is not null)
                     {
                         if (slot.Name == clipAttachment.EndSlotName)
                         {

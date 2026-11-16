@@ -57,7 +57,7 @@ public class ClipAttachment : Attachment
 
     public override void DrawAttachment(
         Slot slot,
-        Canvas? canvas = null,
+        DrawingContext? context = null,
         ClipAttachment? clipAttachment = null
     ) { }
 
@@ -106,19 +106,16 @@ public class ClipAttachment : Attachment
         return new ClipAttachmentInfo(this, slots);
     }
 
-    public override void Draw(Canvas canvas)
+    private static readonly IPen ClipOutlinePen = new Pen(Brushes.Red, 1);
+
+    public override void Draw(DrawingContext context)
     {
+        if (Vertices == null || Vertices.Count == 0)
+            return;
+
         foreach (PointModel vertice in Vertices)
         {
-            var dot = new Ellipse
-            {
-                Width = 5,
-                Height = 5,
-                Fill = Brushes.Red,
-            };
-            Canvas.SetLeft(dot, vertice.X + canvas.Width / 2);
-            Canvas.SetTop(dot, vertice.Y + canvas.Height / 2);
-            canvas.Children.Add(dot);
+            context.DrawEllipse(Brushes.Red, null, new Point(vertice.X, vertice.Y), 2.5, 2.5);
         }
 
         for (int i = 0; i < Vertices.Count - 1; i++)
@@ -126,14 +123,7 @@ public class ClipAttachment : Attachment
             var p1 = Vertices[i];
             var p2 = Vertices[i + 1];
 
-            var line = new Line
-            {
-                StartPoint = new Point(p1.X + 2 + canvas.Width / 2, p1.Y + 2 + canvas.Height / 2),
-                EndPoint = new Point(p2.X + 2 + canvas.Width / 2, p2.Y + 2 + canvas.Height / 2),
-                Stroke = Brushes.Red,
-                StrokeThickness = 1,
-            };
-            canvas.Children.Add(line);
+            context.DrawLine(ClipOutlinePen, new Point(p1.X, p1.Y), new Point(p2.X, p2.Y));
         }
 
         if (Vertices.Count > 1)
@@ -141,20 +131,11 @@ public class ClipAttachment : Attachment
             var first = Vertices[0];
             var last = Vertices[Vertices.Count - 1];
 
-            var closingLine = new Line
-            {
-                StartPoint = new Point(
-                    last.X + 2 + canvas.Width / 2,
-                    last.Y + 2 + canvas.Height / 2
-                ),
-                EndPoint = new Point(
-                    first.X + 2 + canvas.Width / 2,
-                    first.Y + 2 + canvas.Height / 2
-                ),
-                Stroke = Brushes.Red,
-                StrokeThickness = 1,
-            };
-            canvas.Children.Add(closingLine);
+            context.DrawLine(
+                ClipOutlinePen,
+                new Point(last.X, last.Y),
+                new Point(first.X, first.Y)
+            );
         }
     }
 }

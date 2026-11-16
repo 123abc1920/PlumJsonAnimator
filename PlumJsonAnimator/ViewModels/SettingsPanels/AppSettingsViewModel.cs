@@ -24,12 +24,12 @@ public partial class AppSettingsViewModel : ViewModelBase
     public List<string> Themes { get; set; } = new List<string>() { "light", "dark" };
     public string CurrentTheme
     {
-        get => _globalState.Theme;
+        get => GlobalState.Theme;
         set
         {
-            if (_globalState.Theme != value)
+            if (GlobalState.Theme != value)
             {
-                _globalState.Theme = value;
+                GlobalState.Theme = value;
                 OnPropertyChanged(nameof(CurrentTheme));
             }
         }

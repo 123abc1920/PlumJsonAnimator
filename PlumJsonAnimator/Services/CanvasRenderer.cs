@@ -1,5 +1,6 @@
 using System;
 using Avalonia.Controls;
+using Avalonia.Media;
 using Avalonia.Threading;
 using PlumJsonAnimator.Common.Constants;
 using static PlumJsonAnimator.Services.JsonCode;
@@ -37,30 +38,19 @@ public class CanvasRenderer
 
     private void UpdateCanvas(object? sender, EventArgs e)
     {
+        RedrawCanvas(_globalState.Canvas);
+    }
+
+    public void RedrawCanvas(Control canvas, bool? b = null, bool? a = null)
+    {
         if (_globalState.CurrentTab == 0)
         {
-            RedrawCanvas(_globalState.Canvas, _globalState.DrawBones, _globalState.CaptureMode);
-            _globalState.SelectedItem?.Draw(_globalState.Canvas);
+            canvas?.InvalidateVisual();
+            _jsonCode.GenerateCode(_globalState.CurrentProject);
         }
         else if (_globalState.CurrentTab == 1)
         {
             CanGenerateProject();
-        }
-    }
-
-    public void RedrawCanvas(Canvas canvas, bool isDrawBone, bool isDrawCapture)
-    {
-        canvas?.Children.Clear();
-        _globalState.CurrentProject?.DrawSlots(canvas);
-        _globalState.CurrentProject?.MainSkeleton?.RecalculateBones();
-        if (isDrawBone)
-        {
-            _globalState.CurrentProject?.MainSkeleton?.DrawSkeleton(canvas);
-            _jsonCode.GenerateCode(_globalState.CurrentProject);
-        }
-        if (isDrawCapture)
-        {
-            _globalState.CaptureArea?.DrawCaptureArea(canvas);
         }
     }
 

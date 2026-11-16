@@ -1,7 +1,5 @@
 using System;
 using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.Shapes;
 using Avalonia.Media;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Common;
@@ -25,6 +23,14 @@ namespace PlumJsonAnimator.Models
         private AppSettings _appSettings;
 
         private const int NearRegion = 20;
+
+        private static readonly IPen BluePen = new Pen(Brushes.Blue, 2);
+        private static readonly Typeface DefaultTypeface = new Typeface(FontFamily.Default);
+        private static readonly IBrush PointFillBrush = new SolidColorBrush(Colors.Red, 0.6);
+        private static readonly IPen PointStrokePen = new Pen(
+            new SolidColorBrush(Colors.Black, 0.6),
+            1
+        );
 
         public CaptureArea(int x, int y, int width, int height, AppSettings appSettings)
         {
@@ -171,73 +177,50 @@ namespace PlumJsonAnimator.Models
                 height++;
             }
 
-            return new Rect(
-                Math.Floor((double)_a.X),
-                Math.Floor((double)_a.Y),
-                width,
-                height
-            );
+            return new Rect(Math.Floor((double)_a.X), Math.Floor((double)_a.Y), width, height);
         }
 
-        public void DrawCaptureArea(Canvas canvas)
+        public void DrawCaptureArea(DrawingContext context)
         {
             var rect = GetRect();
 
-            var rectangle = new Border
-            {
-                BorderBrush = new SolidColorBrush(Colors.Blue),
-                BorderThickness = new Thickness(2),
-                Width = rect.Width,
-                Height = rect.Height,
-            };
-
-            Canvas.SetLeft(rectangle, rect.X);
-            Canvas.SetTop(rectangle, rect.Y);
-            canvas.Children.Add(rectangle);
+            context.DrawRectangle(null, BluePen, new Rect(rect.X, rect.Y, rect.Width, rect.Height));
 
             var width = _b.X - _a.X;
             var height = _d.Y - _a.Y;
-            var sizeText = new TextBlock
-            {
-                Text = $"{width:F0} x {height:F0}",
-                FontSize = 10,
-                Foreground = new SolidColorBrush(Colors.Black),
-                Background = new SolidColorBrush(Colors.White),
-                Padding = new Thickness(2),
-            };
+            var formattedText = new FormattedText(
+                $"{width:F0} x {height:F0}",
+                System.Globalization.CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight,
+                DefaultTypeface,
+                10,
+                Brushes.Black
+            );
 
-            Canvas.SetLeft(sizeText, rect.X);
-            Canvas.SetTop(sizeText, rect.Y);
-            canvas.Children.Add(sizeText);
+            var textBgRect = new Rect(
+                rect.X,
+                rect.Y,
+                formattedText.Width + 4,
+                formattedText.Height + 4
+            );
+            context.FillRectangle(Brushes.White, textBgRect);
+            context.DrawText(formattedText, new Point(rect.X + 2, rect.Y + 2));
 
-            DrawPoint(canvas, _a.X, _a.Y);
-            DrawPoint(canvas, _b.X, _b.Y);
-            DrawPoint(canvas, _c.X, _c.Y);
-            DrawPoint(canvas, _d.X, _d.Y);
+            DrawPoint(context, _a.X, _a.Y);
+            DrawPoint(context, _b.X, _b.Y);
+            DrawPoint(context, _c.X, _c.Y);
+            DrawPoint(context, _d.X, _d.Y);
         }
 
         /// <summary>
         /// Draws corner point and its bounds
         /// </summary>
-        /// <param name="canvas">Canvas for drawing</param>
+        /// <param name="context">Canvas for drawing</param>
         /// <param name="x">Point x coordinate</param>
         /// <param name="y">Point y coordinate</param>
-        private void DrawPoint(Canvas canvas, double x, double y)
+        private void DrawPoint(DrawingContext context, double x, double y)
         {
-            var point = new Ellipse
-            {
-                Fill = new SolidColorBrush(Colors.Red),
-                Stroke = new SolidColorBrush(Colors.Black),
-                Width = 20,
-                Height = 20,
-                StrokeThickness = 1,
-                Opacity = 0.6,
-            };
-
-            Canvas.SetLeft(point, x - 10);
-            Canvas.SetTop(point, y - 10);
-
-            canvas.Children.Add(point);
+            context.DrawEllipse(PointFillBrush, PointStrokePen, new Point(x, y), 10, 10);
         }
     }
 }

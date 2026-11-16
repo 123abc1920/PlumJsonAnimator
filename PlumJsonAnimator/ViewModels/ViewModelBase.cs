@@ -14,7 +14,7 @@ namespace PlumJsonAnimator.ViewModels;
 
 public class ViewModelBase : ObservableObject, INotifyPropertyChanged
 {
-    public GlobalState _globalState;
+    public GlobalState GlobalState { get; set; }
     protected Dialogs _dialogs;
     protected AppSettings _appSettings;
     protected LocalizationService _localizationService;
@@ -40,7 +40,7 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
 
     public CaptureArea? GetCaptureArea()
     {
-        return _globalState.CaptureArea;
+        return GlobalState.CaptureArea;
     }
 
     protected ViewModelBase(
@@ -52,16 +52,16 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
         PlumApp plumApp
     )
     {
-        _globalState = globalState;
+        GlobalState = globalState;
         _dialogs = dialogs;
         _appSettings = appSettings;
         _localizationService = localizationService;
         _imageExporter = imageExporter;
         PlumApp = plumApp;
 
-        _globalState.PropertyChanged += (s, e) =>
+        GlobalState.PropertyChanged += (s, e) =>
         {
-            if (e.PropertyName == nameof(GlobalState.CurrentProject))
+            if (e.PropertyName == nameof(Common.Constants.GlobalState.CurrentProject))
             {
                 OnPropertyChanged(nameof(CurrentProject));
             }
@@ -70,7 +70,7 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
 
     public Project? CurrentProject
     {
-        get => _globalState.CurrentProject;
+        get => GlobalState.CurrentProject;
     }
 
     private bool _isAnimMode = true;

@@ -107,7 +107,7 @@ public partial class MainWindow : SukiWindow
 
     private void Press_Canvas(object sender, PointerPressedEventArgs e)
     {
-        var canvas = (Canvas)sender;
+        var canvas = (Control)sender;
         var point = e.GetPosition(canvas);
 
         var properties = e.GetCurrentPoint(canvas).Properties;
@@ -149,7 +149,7 @@ public partial class MainWindow : SukiWindow
 
     private void Move_Canvas(object sender, PointerEventArgs e)
     {
-        var canvas = (Canvas)sender;
+        var canvas = (Control)sender;
         var point = e.GetPosition(canvas);
 
         if (DataContext is MainWindowViewModel viewModel)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reactive.Linq;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Media;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.DTO;
@@ -313,26 +314,20 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             CurrentAttachment?.SetPos(LocalX, LocalY, LocalA);
         }
 
-        public void DrawSlotSelection(Canvas canvas)
+        private static readonly IPen SelectedSlotPen = new Pen(AppColors.Red, 2);
+
+        public void DrawSlotSelection(DrawingContext context)
         {
             if (_globalState.IsSlotSelected(this))
             {
-                var border = new Border
-                {
-                    Width = 10,
-                    Height = 10,
-                    BorderBrush = AppColors.Red,
-                    BorderThickness = new Thickness(2),
-                };
-                Canvas.SetLeft(border, canvas.Width / 2 + GlobalX - 5);
-                Canvas.SetTop(border, canvas.Height / 2 + GlobalY - 5);
-                canvas.Children.Add(border);
+                var rect = new Rect(GlobalX - 5, GlobalY - 5, 10, 10);
+                context.DrawRectangle(null, SelectedSlotPen, rect);
             }
         }
 
-        public void Draw(Canvas canvas)
+        public void Draw(DrawingContext context)
         {
-            DrawSlotSelection(canvas);
+            DrawSlotSelection(context);
         }
 
         public new SlotData GenerateJSONData()

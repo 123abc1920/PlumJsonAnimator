@@ -21,7 +21,7 @@ namespace PlumJsonAnimator.ViewModels;
 // TODO: add factory pattern
 public partial class MainWindowViewModel : ViewModelBase
 {
-    public Canvas? Canvas
+    public Control? Canvas
     {
         get { return _imageExporter.Canvas; }
         set { _imageExporter.Canvas = value; }
@@ -29,12 +29,12 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public int CanvasWidth
     {
-        get { return _globalState.CanvasWidth; }
+        get { return GlobalState.CanvasWidth; }
         set
         {
-            if (_globalState.CanvasWidth != value)
+            if (GlobalState.CanvasWidth != value)
             {
-                _globalState.CanvasWidth = value;
+                GlobalState.CanvasWidth = value;
                 OnPropertyChanged(nameof(CanvasWidth));
             }
         }
@@ -42,12 +42,12 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public int CanvasHeight
     {
-        get { return _globalState.CanvasHeight; }
+        get { return GlobalState.CanvasHeight; }
         set
         {
-            if (_globalState.CanvasHeight != value)
+            if (GlobalState.CanvasHeight != value)
             {
-                _globalState.CanvasHeight = value;
+                GlobalState.CanvasHeight = value;
                 OnPropertyChanged(nameof(CanvasHeight));
             }
         }
@@ -55,12 +55,12 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public int CurrentTab
     {
-        get => _globalState.CurrentTab;
+        get => GlobalState.CurrentTab;
         set
         {
-            if (_globalState.CurrentTab != value)
+            if (GlobalState.CurrentTab != value)
             {
-                _globalState.CurrentTab = value;
+                GlobalState.CurrentTab = value;
                 CurrentBone = null;
                 OnPropertyChanged(nameof(CurrentTab));
             }
@@ -88,22 +88,22 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public JsonError JsonErrorObj
     {
-        get { return _globalState.JsonError; }
+        get { return GlobalState.JsonError; }
     }
 
     public int FPS
     {
-        get { return _globalState.FPS; }
+        get { return GlobalState.FPS; }
     }
 
     public bool DrawBones
     {
-        get { return _globalState.DrawBones; }
+        get { return GlobalState.DrawBones; }
         set
         {
-            if (_globalState.DrawBones != value)
+            if (GlobalState.DrawBones != value)
             {
-                _globalState.DrawBones = value;
+                GlobalState.DrawBones = value;
                 OnPropertyChanged(nameof(DrawBones));
             }
         }
@@ -111,12 +111,12 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public bool SetBasePos
     {
-        get { return _globalState.SetBasePos; }
+        get { return GlobalState.SetBasePos; }
         set
         {
-            if (_globalState.SetBasePos != value)
+            if (GlobalState.SetBasePos != value)
             {
-                _globalState.SetBasePos = value;
+                GlobalState.SetBasePos = value;
                 OnPropertyChanged(nameof(SetBasePos));
             }
         }
@@ -124,12 +124,12 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public bool CaptureMode
     {
-        get { return _globalState.CaptureMode; }
+        get { return GlobalState.CaptureMode; }
         set
         {
-            if (_globalState.CaptureMode != value)
+            if (GlobalState.CaptureMode != value)
             {
-                _globalState.CaptureMode = value;
+                GlobalState.CaptureMode = value;
                 OnPropertyChanged(nameof(CaptureMode));
             }
         }
@@ -147,23 +147,23 @@ public partial class MainWindowViewModel : ViewModelBase
 
                 if (value == "transform")
                 {
-                    CurrentProject!.CurrentMode = new TransformMode(_globalState);
+                    CurrentProject!.CurrentMode = new TransformMode(GlobalState);
                 }
                 else if (value == "rotate")
                 {
-                    CurrentProject!.CurrentMode = new RotateMode(_globalState);
+                    CurrentProject!.CurrentMode = new RotateMode(GlobalState);
                 }
                 else if (value == "scale")
                 {
-                    CurrentProject!.CurrentMode = new ScaleMode(_globalState);
+                    CurrentProject!.CurrentMode = new ScaleMode(GlobalState);
                 }
                 else if (value == "shear")
                 {
-                    CurrentProject!.CurrentMode = new ShearMode(_globalState);
+                    CurrentProject!.CurrentMode = new ShearMode(GlobalState);
                 }
                 else
                 {
-                    CurrentProject!.CurrentMode = new NoMode(_globalState);
+                    CurrentProject!.CurrentMode = new NoMode(GlobalState);
                 }
 
                 OnPropertyChanged(nameof(TransformMode));
@@ -188,27 +188,27 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public DateTime LastSaveTime
     {
-        get => _globalState.LastSaveTime;
-        set => _globalState.LastSaveTime = value;
+        get => GlobalState.LastSaveTime;
+        set => GlobalState.LastSaveTime = value;
     }
 
     public string IsTransformModeActive => TransformMode;
 
     public Bone? CurrentBone
     {
-        get => _globalState.SelectedItem as Bone;
+        get => GlobalState.SelectedItem as Bone;
         set
         {
             if (value is null)
             {
-                _globalState.SelectedItem = null;
+                GlobalState.SelectedItem = null;
                 OnPropertyChanged(nameof(CurrentBone));
                 return;
             }
 
-            if (value is Bone bone && _globalState.SelectedItem != bone)
+            if (value is Bone bone && GlobalState.SelectedItem != bone)
             {
-                _globalState.SelectedItem = (IPresentableItem?)bone;
+                GlobalState.SelectedItem = (IPresentableItem?)bone;
                 bone.UpdateSlots();
                 OnPropertyChanged(nameof(CurrentBone));
             }
@@ -220,12 +220,12 @@ public partial class MainWindowViewModel : ViewModelBase
     private const double MaxZoomCanvas = 5.0;
     public double ZoomCanvas
     {
-        get => _globalState.ZoomCanvas;
+        get => GlobalState.ZoomCanvas;
         set
         {
-            if (_globalState.ZoomCanvas != value && value > MinZoomCanvas && value < MaxZoomCanvas)
+            if (GlobalState.ZoomCanvas != value && value > MinZoomCanvas && value < MaxZoomCanvas)
             {
-                _globalState.ZoomCanvas = value;
+                GlobalState.ZoomCanvas = value;
                 CanvasWidth = (int)(GlobalState.BaseCanvasSize * value);
                 CanvasHeight = (int)(GlobalState.BaseCanvasSize * value);
                 OnPropertyChanged(nameof(ZoomCanvas));
@@ -286,7 +286,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public void Transform(double a, double b)
     {
-        if (_globalState.SelectedItem is Bone bone)
+        if (GlobalState.SelectedItem is Bone bone)
         {
             PlumApp.Transform(a, b);
         }
@@ -337,15 +337,15 @@ public partial class MainWindowViewModel : ViewModelBase
 
         globalState.PropertyChanged += (s, e) =>
         {
-            if (e.PropertyName == nameof(GlobalState.LastSaveTime))
-                OnPropertyChanged(nameof(LastSaveTime));
+            if (e.PropertyName == nameof(Common.Constants.GlobalState.LastSaveTime))
+                base.OnPropertyChanged(nameof(LastSaveTime));
         };
 
         var appSettingsVM = (AppSettingsViewModel)
             _viewModelFactory.GetViewModel(DialogType.SETTINGS);
         appSettingsVM.CurrentTheme = appSettingsVM.Themes[0];
 
-        _globalState.TimeUpdated += () =>
+        GlobalState.TimeUpdated += () =>
         {
             foreach (Slot s in CurrentProject.Slots)
             {

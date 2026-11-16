@@ -106,11 +106,11 @@ public class RegionAttachment : Attachment
 
     public override void DrawAttachment(
         Slot slot,
-        Canvas? canvas,
+        DrawingContext? context,
         ClipAttachment? clipAttachment = null
     )
     {
-        if (canvas == null)
+        if (context == null)
             return;
 
         string? currentPath = GetPath();
@@ -146,57 +146,62 @@ public class RegionAttachment : Attachment
         double imgWidth = Width ?? slot.LengthX;
         double imgHeight = Height ?? slot.LengthY;
 
-        var image = new Image
+        Rect destRect = new Rect(0, 0, imgWidth, imgHeight);
+        if (
+            _cachedBitmap.Size.Width > 0
+            && _cachedBitmap.Size.Height > 0
+            && imgWidth > 0
+            && imgHeight > 0
+        )
         {
-            Source = _cachedBitmap,
-            Width = imgWidth,
-            Height = imgHeight,
-            RenderTransform = new MatrixTransform(new Matrix(f11, f12, f21, f22, 0, 0)),
-            RenderTransformOrigin = new RelativePoint(0.5, 0.5, RelativeUnit.Relative),
-        };
-
-        var points = new List<Point>();
-
-        if (clipAttachment is null)
-        {
-            points.Add(new Point(0, 0));
-            points.Add(new Point(imgWidth, 0));
-            points.Add(new Point(imgWidth, imgHeight));
-            points.Add(new Point(0, imgHeight));
+            double scale = Math.Min(
+                imgWidth / _cachedBitmap.Size.Width,
+                imgHeight / _cachedBitmap.Size.Height
+            );
+            double finalW = _cachedBitmap.Size.Width * scale;
+            double finalH = _cachedBitmap.Size.Height * scale;
+            double offsetX = (imgWidth - finalW) / 2.0;
+            double offsetY = (imgHeight - finalH) / 2.0;
+            destRect = new Rect(offsetX, offsetY, finalW, finalH);
         }
-        else
-        {
-            points = clipAttachment.GetAvaloniaPointsList();
-        }
-
-        if (points.Count < 3)
-            return;
-
-        var clipGeometry = new StreamGeometry();
-        using (var ctx = clipGeometry.Open())
-        {
-            ctx.BeginFigure(points[0], isFilled: true);
-
-            for (int i = 1; i < points.Count; i++)
-            {
-                ctx.LineTo(points[i]);
-            }
-
-            ctx.EndFigure(isClosed: true);
-        }
-
-        image.Clip = clipGeometry;
 
         double worldX = slot.BoundedBone.GlobalX + (X * boneM11 + Y * boneM21);
         double worldY = slot.BoundedBone.GlobalY + (X * boneM12 + Y * boneM22);
 
-        double left = canvas.Width / 2 + worldX - image.Width / 2;
-        double top = canvas.Height / 2 + worldY - image.Height / 2;
+        var transform =
+            Matrix.CreateTranslation(-imgWidth / 2.0, -imgHeight / 2.0)
+            * new Matrix(f11, f12, f21, f22, 0, 0)
+            * Matrix.CreateTranslation(worldX, worldY);
 
-        Canvas.SetLeft(image, left);
-        Canvas.SetTop(image, top);
+        using (context.PushTransform(transform))
+        {
+            if (clipAttachment != null)
+            {
+                var points = clipAttachment.GetAvaloniaPointsList();
+                if (points.Count < 3)
+                    return;
 
-        canvas.Children.Add(image);
+                var clipGeometry = new StreamGeometry();
+                using (var ctx = clipGeometry.Open())
+                {
+                    ctx.BeginFigure(points[0], isFilled: true);
+                    for (int i = 1; i < points.Count; i++)
+                    {
+                        ctx.LineTo(points[i]);
+                    }
+                    ctx.EndFigure(isClosed: true);
+                }
+
+                using (context.PushGeometryClip(clipGeometry))
+                {
+                    context.DrawImage(_cachedBitmap, destRect);
+                }
+            }
+            else
+            {
+                context.DrawImage(_cachedBitmap, destRect);
+            }
+        }
     }
 
     /// <summary>
@@ -212,5 +217,5 @@ public class RegionAttachment : Attachment
         return new RegionAttachmentInfo(this);
     }
 
-    public override void Draw(Canvas canvas) { }
+    public override void Draw(DrawingContext context) { }
 }

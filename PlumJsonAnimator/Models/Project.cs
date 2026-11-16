@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using Avalonia.Controls;
+using Avalonia.Media;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Commands;
@@ -225,12 +226,12 @@ namespace PlumJsonAnimator.Models
             return null;
         }
 
-        public void DrawSlots(Canvas c)
+        public void DrawSlots(DrawingContext context)
         {
-            CurrentSkin.DrawSkin(c);
+            CurrentSkin.DrawSkin(context);
             if (_globalState.SelectedItem is Slot slot)
             {
-                slot.DrawSlotSelection(c);
+                slot.DrawSlotSelection(context);
             }
         }
 

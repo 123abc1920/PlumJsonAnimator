@@ -23,7 +23,7 @@ namespace PlumJsonAnimator.Services
     public class ImageExporter
     {
         public string ExportPath = "";
-        public Canvas? Canvas
+        public Control? Canvas
         {
             get => _globalState.Canvas;
             set
@@ -54,7 +54,7 @@ namespace PlumJsonAnimator.Services
         /// Catches canvas bitmap
         /// </summary>
         /// <param name="canvas">Canvas that contains graphics</param>
-        private RenderTargetBitmap CatchCanvas(Canvas? canvas)
+        private RenderTargetBitmap CatchCanvas(Control? canvas)
         {
             var captureBounds = _globalState.CaptureArea!.GetRect();
 

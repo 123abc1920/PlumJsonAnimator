@@ -96,7 +96,7 @@ namespace PlumJsonAnimator.Common.Constants
         public string GlobalWorkspace { get; set; } = "PlumJsonAnimatorWorkspace";
         public string ProgramExt { get; set; } = ".plmjsn";
 
-        public Canvas? Canvas { get; set; }
+        public Control? Canvas { get; set; }
         public const int BaseCanvasSize = 1000;
         public int CanvasHeight { get; set; } = 1000;
         public int CanvasWidth { get; set; } = 1000;
