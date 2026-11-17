@@ -2,11 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using PlumJsonAnimator.Common;
-using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Views;
 
@@ -174,31 +172,34 @@ public class RegionAttachment : Attachment
             * new Matrix(f11, f12, f21, f22, 0, 0)
             * Matrix.CreateTranslation(worldX, worldY);
 
-        using (context.PushTransform(transform))
+        if (clipAttachment != null)
         {
-            if (clipAttachment != null)
+            var points = clipAttachment.GetAvaloniaPointsList();
+            if (points.Count < 3)
+                return;
+
+            var clipGeometry = new StreamGeometry();
+            using (var ctx = clipGeometry.Open())
             {
-                var points = clipAttachment.GetAvaloniaPointsList();
-                if (points.Count < 3)
-                    return;
-
-                var clipGeometry = new StreamGeometry();
-                using (var ctx = clipGeometry.Open())
+                ctx.BeginFigure(points[0], isFilled: true);
+                for (int i = 1; i < points.Count; i++)
                 {
-                    ctx.BeginFigure(points[0], isFilled: true);
-                    for (int i = 1; i < points.Count; i++)
-                    {
-                        ctx.LineTo(points[i]);
-                    }
-                    ctx.EndFigure(isClosed: true);
+                    ctx.LineTo(points[i]);
                 }
+                ctx.EndFigure(isClosed: true);
+            }
 
-                using (context.PushGeometryClip(clipGeometry))
+            using (context.PushGeometryClip(clipGeometry))
+            {
+                using (context.PushTransform(transform))
                 {
                     context.DrawImage(_cachedBitmap, destRect);
                 }
             }
-            else
+        }
+        else
+        {
+            using (context.PushTransform(transform))
             {
                 context.DrawImage(_cachedBitmap, destRect);
             }

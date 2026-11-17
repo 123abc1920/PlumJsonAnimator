@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.Shapes;
 using Avalonia.Media;
 using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Models.Common;
@@ -17,8 +15,6 @@ public class ClipAttachment : Attachment
     public override AttachmentTypes AttachmentType => AttachmentTypes.CLIPPING;
 
     private Project? _currentProject;
-
-    public List<PointModel> Points { get; } = new List<PointModel>();
 
     [Reactive]
     public string? EndSlotName { get; set; } = "";
@@ -88,7 +84,7 @@ public class ClipAttachment : Attachment
     {
         List<Point> result = new List<Point>();
 
-        foreach (var p in this.Points)
+        foreach (var p in Vertices)
         {
             result.Add(new Point(p.X, p.Y));
         }
