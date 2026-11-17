@@ -9,6 +9,7 @@ using Avalonia.Media;
 using Avalonia.Rendering;
 using Avalonia.Threading;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Common.TransformModes;
 using PlumJsonAnimator.Models.Easing;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Common.TransformModes;
 using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Services;

@@ -8,6 +8,7 @@ using PlumJsonAnimator.Common.States;
 using PlumJsonAnimator.Common.Timeline;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Common.TransformModes;
 using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
