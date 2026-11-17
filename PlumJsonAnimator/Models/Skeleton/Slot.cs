@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Reactive.Linq;
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Media;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
@@ -363,6 +362,11 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public InfoPanelDTO GetInfoPanelDTO()
         {
             return new InfoPanelDTO() { Slot = this };
+        }
+
+        public void Shear(double x, double y)
+        {
+            return;
         }
 
         public new string GetName

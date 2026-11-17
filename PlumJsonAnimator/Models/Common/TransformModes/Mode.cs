@@ -1,6 +1,5 @@
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
-using PlumJsonAnimator.Models.SkeletonNameSpace;
 
 namespace PlumJsonAnimator.Models.Common.TransformModes;
 
@@ -21,5 +20,5 @@ public abstract class Mode
 
     public abstract void ClearMode();
 
-    public abstract void Transform(Bone bone, double a, double b, IEasing easing);
+    public abstract void Transform(IAnimatable item, double a, double b, IEasing easing);
 }

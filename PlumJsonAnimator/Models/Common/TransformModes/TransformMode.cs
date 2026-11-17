@@ -16,15 +16,18 @@ class TransformMode : Mode
 
     public override void ClearMode() { }
 
-    public override void Transform(Bone bone, double x, double y, IEasing easing)
+    public override void Transform(IAnimatable item, double x, double y, IEasing easing)
     {
-        bone.Move(x, y);
-        if (_globalState.SetBasePos == false)
+        item.Move(x, y);
+        if (item is Bone bone)
         {
-            var animation = _globalState.CurrentProject?.GetCurrentAnimation();
-            if (animation != null && !animation.IsRun)
+            if (_globalState.SetBasePos == false)
             {
-                animation.TranslateBone(bone, bone.X, bone.Y, easing);
+                var animation = _globalState.CurrentProject?.GetCurrentAnimation();
+                if (animation != null && !animation.IsRun)
+                {
+                    animation.TranslateBone(bone, bone.X, bone.Y, easing);
+                }
             }
         }
     }

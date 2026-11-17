@@ -23,7 +23,7 @@ class ScaleMode : Mode
         startY = null;
     }
 
-    public override void Transform(Bone bone, double x, double y, IEasing easing)
+    public override void Transform(IAnimatable item, double x, double y, IEasing easing)
     {
         if (startX == null || startY == null)
         {
@@ -56,16 +56,19 @@ class ScaleMode : Mode
             }
         }
 
-        bone.Scale(bone.ScaleX + dx, bone.ScaleY + dy);
+        item.Scale(item.ScaleX + dx, item.ScaleY + dy);
         startX = x;
         startY = y;
 
-        if (_globalState.SetBasePos == false)
+        if (item is Bone bone)
         {
-            var animation = _globalState.CurrentProject?.GetCurrentAnimation();
-            if (animation != null && !animation.IsRun)
+            if (_globalState.SetBasePos == false)
             {
-                animation.ScaleBone(bone, bone.ScaleX, bone.ScaleY, easing);
+                var animation = _globalState.CurrentProject?.GetCurrentAnimation();
+                if (animation != null && !animation.IsRun)
+                {
+                    animation.ScaleBone(bone, bone.ScaleX, bone.ScaleY, easing);
+                }
             }
         }
     }

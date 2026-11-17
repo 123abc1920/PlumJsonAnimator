@@ -32,14 +32,14 @@ class ShearMode : Mode
         isVerticalLocked = false;
     }
 
-    public override void Transform(Bone bone, double x, double y, IEasing easing)
+    public override void Transform(IAnimatable item, double x, double y, IEasing easing)
     {
         if (startX == null || startY == null)
         {
             startX = x;
             startY = y;
-            startShearX = bone.ShearX;
-            startShearY = bone.ShearY;
+            startShearX = item.ShearX;
+            startShearY = item.ShearY;
             return;
         }
 
@@ -73,14 +73,17 @@ class ShearMode : Mode
         newShearX = Math.Clamp(newShearX, -89.0, 89.0);
         newShearY = Math.Clamp(newShearY, -89.0, 89.0);
 
-        bone.Shear(newShearX, newShearY);
+        item.Shear(newShearX, newShearY);
 
-        if (_globalState.SetBasePos == false)
+        if (item is Bone bone)
         {
-            var animation = _globalState.CurrentProject?.GetCurrentAnimation();
-            if (animation != null && !animation.IsRun)
+            if (_globalState.SetBasePos == false)
             {
-                animation.ShearBone(bone, bone.ShearX, bone.ShearY, easing);
+                var animation = _globalState.CurrentProject?.GetCurrentAnimation();
+                if (animation != null && !animation.IsRun)
+                {
+                    animation.ShearBone(bone, bone.ShearX, bone.ShearY, easing);
+                }
             }
         }
     }

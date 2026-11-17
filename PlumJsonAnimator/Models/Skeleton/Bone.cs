@@ -16,7 +16,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
     /// <summary>
     /// Bone data
     /// </summary>
-    public class Bone : ReactiveObject, IRenamable, IPresentableItem
+    public class Bone : ReactiveObject, IRenamable, IPresentableItem, IAnimatable
     {
         public int _id = 0;
 
@@ -24,22 +24,22 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public string Name { get; set; } = "";
 
         [Reactive]
-        public virtual double BaseX { get; set; }
+        public double BaseX { get; set; }
 
         [Reactive]
-        public virtual double BaseY { get; set; }
+        public double BaseY { get; set; }
 
         [Reactive]
-        public virtual double BaseA { get; set; }
+        public double BaseA { get; set; }
 
         [Reactive]
-        public virtual double AnimX { get; set; }
+        public double AnimX { get; set; }
 
         [Reactive]
-        public virtual double AnimY { get; set; }
+        public double AnimY { get; set; }
 
         private double _animA;
-        public virtual double AnimA
+        public double AnimA
         {
             get => _animA;
             set
@@ -52,7 +52,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
-        public virtual double X
+        public double X
         {
             get
             {
@@ -73,7 +73,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
-        public virtual double Y
+        public double Y
         {
             get
             {
@@ -94,7 +94,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
-        public virtual double A
+        public double A
         {
             get
             {
@@ -163,7 +163,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             private set { }
         }
 
-        public virtual double GlobalA
+        public double GlobalA
         {
             get
             {
@@ -300,7 +300,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// </summary>
         /// <param name="x">Target x coordinate (global)</param>
         /// <param name="y">Target y coordinate (global)</param>
-        public virtual void Move(double x, double y)
+        public void Move(double x, double y)
         {
             if (_isMoving)
                 return;
@@ -349,7 +349,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// Rotates bone to new angle
         /// </summary>
         /// <param name="a">Target angle</param>
-        public virtual void Rotate(double a)
+        public void Rotate(double a)
         {
             if (_isRotating)
                 return;
@@ -366,14 +366,14 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// </summary>
         /// <param name="x">Click x coordinate</param>
         /// <param name="y">Click y coordinate</param>
-        public virtual void Scale(double x, double y)
+        public void Scale(double x, double y)
         {
             ScaleX = x;
             ScaleY = y;
         }
 
         private double _scaleX = 1;
-        public virtual double ScaleX
+        public double ScaleX
         {
             get => _scaleX;
             set
@@ -386,7 +386,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         }
 
         private double _scaleY = 1;
-        public virtual double ScaleY
+        public double ScaleY
         {
             get => _scaleY;
             set
@@ -398,7 +398,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
-        public virtual void Shear(double x, double y)
+        public void Shear(double x, double y)
         {
             ShearX = x;
             ShearY = y;

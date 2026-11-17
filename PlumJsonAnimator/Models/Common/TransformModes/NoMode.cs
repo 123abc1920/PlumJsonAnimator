@@ -15,7 +15,7 @@ class NoMode : Mode
 
     public override void ClearMode() { }
 
-    public override void Transform(Bone bone, double a, double b, IEasing easing)
+    public override void Transform(IAnimatable item, double a, double b, IEasing easing)
     {
         return;
     }

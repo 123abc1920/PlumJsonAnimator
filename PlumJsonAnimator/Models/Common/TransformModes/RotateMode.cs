@@ -28,10 +28,10 @@ class RotateMode : Mode
 
     public override void ClearMode() { }
 
-    public override void Transform(Bone bone, double x, double y, IEasing easing)
+    public override void Transform(IAnimatable item, double x, double y, IEasing easing)
     {
-        double xx = x - bone.X;
-        Point av = new Point(xx, y - bone.Y);
+        double xx = x - item.X;
+        Point av = new Point(xx, y - item.Y);
         Point bv = new Point(10, 0);
 
         double dot = av._x * bv._x + av._y * bv._y;
@@ -39,13 +39,17 @@ class RotateMode : Mode
         double angleRad = Math.Atan2(det, dot);
         double angleDeg = angleRad * 180 / Math.PI;
 
-        bone.Rotate(-angleDeg);
-        if (_globalState.SetBasePos == false)
+        item.Rotate(-angleDeg);
+
+        if (item is Bone bone)
         {
-            var animation = _globalState.CurrentProject?.GetCurrentAnimation();
-            if (animation != null && !animation.IsRun)
+            if (_globalState.SetBasePos == false)
             {
-                animation.RotateBone(bone, bone.A, easing);
+                var animation = _globalState.CurrentProject?.GetCurrentAnimation();
+                if (animation != null && !animation.IsRun)
+                {
+                    animation.RotateBone(bone, bone.A, easing);
+                }
             }
         }
     }
