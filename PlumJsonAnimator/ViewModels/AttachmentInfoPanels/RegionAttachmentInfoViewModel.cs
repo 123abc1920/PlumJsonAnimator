@@ -1,11 +1,9 @@
-using System;
 using System.Windows.Input;
 using Avalonia.Input;
 using PlumJsonAnimator.Common.Constants.Command;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 using ReactiveUI;
-using ReactiveUI.Fody.Helpers;
 
 namespace PlumJsonAnimator.ViewModels;
 

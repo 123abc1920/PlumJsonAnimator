@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Avalonia;
@@ -18,7 +17,7 @@ public class ClipAttachment : Attachment
 
     [Reactive]
     public string? EndSlotName { get; set; } = "";
-    public int? VertexCount { get; set; } = 3;
+    public int? VertexCount { get; set; } = 0;
     public ObservableCollection<PointModel> Vertices { get; set; } =
         new ObservableCollection<PointModel>();
 
@@ -29,7 +28,7 @@ public class ClipAttachment : Attachment
         : base(attachmentDTO.Name!, attachmentTypeConverter)
     {
         EndSlotName = attachmentDTO.AttachmentData?.End;
-        VertexCount = attachmentDTO.AttachmentData?.VertexCount;
+        VertexCount = attachmentDTO.AttachmentData?.Vertices?.Count / 2 ?? 0;
 
         var xyArray = attachmentDTO.AttachmentData?.Vertices;
         if (!(xyArray is null))
