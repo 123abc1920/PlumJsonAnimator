@@ -14,7 +14,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 /// </summary>
 public abstract class Attachment : ReactiveObject, IPresentableItem
 {
-    public string Name { get; set; }
+    [Reactive]
+    public virtual string Name { get; set; }
+
     public abstract AttachmentTypes AttachmentType { get; }
 
     [Reactive]

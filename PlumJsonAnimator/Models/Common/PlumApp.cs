@@ -249,11 +249,7 @@ public class PlumApp
                 res,
                 new Slot(_globalState, bone),
                 _attachmentFactory,
-                new AttachmentDTO()
-                {
-                    Name = $"attachment{Counter.GenerateNamePostfix()}",
-                    Res = res
-                }
+                new AttachmentDTO() { Name = res.Name, Res = res }
             );
             _historyManager.DoCommand(dropImageToBoneCommand);
         }

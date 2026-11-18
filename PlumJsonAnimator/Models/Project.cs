@@ -702,7 +702,7 @@ namespace PlumJsonAnimator.Models
                                     {
                                         Res = GetResByName(attach.Name),
                                         AttachmentData = attach,
-                                        Name = $"attachment{Counter.GenerateNamePostfix()}",
+                                        Name = attach.Name,
                                         CurrentProject = _globalState.CurrentProject,
                                     }
                                 );
@@ -736,7 +736,7 @@ namespace PlumJsonAnimator.Models
                             attach.Type,
                             new AttachmentDTO()
                             {
-                                Name = $"attachment{Counter.GenerateNamePostfix()}",
+                                Name = attach.Name,
                                 AttachmentData = attach,
                                 Res = GetResByName(attach.Name),
                                 CurrentProject = _globalState.CurrentProject,

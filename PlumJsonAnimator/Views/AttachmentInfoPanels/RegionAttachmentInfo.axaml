@@ -2,7 +2,7 @@
     x:Class="PlumJsonAnimator.Views.RegionAttachmentInfo"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:iconPacks="https://github.com/MahApps/IconPacks.Avalonia"
+    xmlns:iconPacks="https://github.com"
     xmlns:suki="clr-namespace:SukiUI.Controls;assembly=SukiUI"
     xmlns:viewModels="clr-namespace:PlumJsonAnimator.ViewModels"
     x:DataType="viewModels:RegionAttachmentInfoViewModel"
@@ -13,11 +13,13 @@
                 Height="24"
                 FontSize="14"
                 Text="Image:" />
-            <TextBox
-                Grid.Row="0"
-                Grid.Column="0"
+            <Border
+                x:Name="DropBorder"
+                MinWidth="200"
                 HorizontalAlignment="Left"
-                Text="{Binding Image.Path}" />
+                Background="Transparent">
+                <TextBox IsHitTestVisible="False" Text="{Binding Image.Path}" />
+            </Border>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

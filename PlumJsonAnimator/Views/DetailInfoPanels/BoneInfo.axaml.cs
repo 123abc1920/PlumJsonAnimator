@@ -57,7 +57,7 @@ public partial class BoneInfo : UserControl, IInfoPanel
                             AttachmentTypes.REGION,
                             new AttachmentDTO()
                             {
-                                Name = $"attachment{Counter.GenerateNamePostfix()}",
+                                Name = imageRes.Name,
                                 Res = imageRes,
                             }
                         )

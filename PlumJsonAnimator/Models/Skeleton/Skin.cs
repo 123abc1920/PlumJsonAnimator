@@ -141,7 +141,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             {
                 if (a?.AttachmentType == AttachmentTypes.REGION)
                 {
-                    var regionAttachment = (RegionAttachment)a;
+                    var regionAttachment = a as RegionAttachment;
                     if (regionAttachment?.GetRes() == res)
                     {
                         return true;

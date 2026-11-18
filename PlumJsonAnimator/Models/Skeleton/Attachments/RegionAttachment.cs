@@ -7,6 +7,7 @@ using Avalonia.Media.Imaging;
 using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Views;
+using ReactiveUI;
 
 // TODO: fix SetSize GetSize Size
 namespace PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
@@ -18,7 +19,43 @@ public class RegionAttachment : Attachment
 {
     public override AttachmentTypes AttachmentType => AttachmentTypes.REGION;
 
-    public ImageRes? ImageRes;
+    private string _name;
+    public override string Name
+    {
+        get => _name;
+        set
+        {
+            if (_name != value)
+            {
+                _name = value;
+            }
+            if (_imageRes is not null && _name != _imageRes.Name)
+            {
+                _imageRes.Name = _name;
+                this.RaisePropertyChanged(nameof(ImageRes));
+            }
+            this.RaisePropertyChanged(nameof(Name));
+        }
+    }
+
+    private ImageRes? _imageRes = null;
+    public ImageRes? ImageRes
+    {
+        get => _imageRes;
+        set
+        {
+            if (_imageRes != value)
+            {
+                _imageRes = value;
+
+                if (_imageRes is not null)
+                {
+                    Name = _imageRes.Name;
+                }
+            }
+            this.RaisePropertyChanged(nameof(ImageRes));
+        }
+    }
     private Bitmap? _cachedBitmap;
     private string? _cachedPath;
 
@@ -35,7 +72,7 @@ public class RegionAttachment : Attachment
     )
         : base(attachmentDTO.Name, attachmentTypeConverter)
     {
-        ImageRes = (ImageRes)attachmentDTO.Res;
+        ImageRes = attachmentDTO.Res as ImageRes;
 
         var data = attachmentDTO.AttachmentData;
 
@@ -61,7 +98,9 @@ public class RegionAttachment : Attachment
     public string? GetPath()
     {
         if (ImageRes is null)
+        {
             return null;
+        }
 
         return ImageRes.Path;
     }
