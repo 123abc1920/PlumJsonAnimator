@@ -64,15 +64,15 @@ public class MainCanvas : Control
 
     public void RedrawCanvas(DrawingContext context, bool isDrawBone, bool isDrawCapture)
     {
-        GlobalState.CurrentProject?.DrawSlots(context);
-        GlobalState.CurrentProject?.MainSkeleton?.RecalculateBones();
+        GlobalState?.CurrentProject?.DrawSlots(context);
+        GlobalState?.CurrentProject?.MainSkeleton?.RecalculateBones();
         if (isDrawBone)
         {
-            GlobalState.CurrentProject?.MainSkeleton?.DrawSkeleton(context);
+            GlobalState?.CurrentProject?.MainSkeleton?.DrawSkeleton(context);
         }
         if (isDrawCapture)
         {
-            GlobalState.CaptureArea?.DrawCaptureArea(context);
+            GlobalState?.CaptureArea?.DrawCaptureArea(context);
         }
     }
 }

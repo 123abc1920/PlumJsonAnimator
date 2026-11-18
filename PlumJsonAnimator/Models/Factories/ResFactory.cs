@@ -20,7 +20,7 @@ public class ResFactory
         switch (resType)
         {
             case ResTypes.IMAGE:
-                if (!(resDTO is null))
+                if (resDTO is not null)
                 {
                     return new ImageRes(_projectFilesManager, _globalState, resDTO);
                 }

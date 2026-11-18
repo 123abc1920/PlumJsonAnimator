@@ -706,7 +706,7 @@ namespace PlumJsonAnimator.Models
                                         CurrentProject = _globalState.CurrentProject,
                                     }
                                 );
-                                if (!(a is null))
+                                if (a is not null)
                                 {
                                     skin.BindSlotAttachment(GetSlotByName(slotName), a);
                                 }
@@ -742,7 +742,7 @@ namespace PlumJsonAnimator.Models
                                 CurrentProject = _globalState.CurrentProject,
                             }
                         );
-                        if (!(a is null))
+                        if (a is not null)
                         {
                             s.BindSlotAttachment(GetSlotByName(slotName), a);
                         }

@@ -85,7 +85,7 @@ public class Res : INotifyable, IRenamable
     // TODO: show toast about names
     public void SetName(string? name)
     {
-        if (name != null && !(_globalState.CurrentProject is null))
+        if (name != null && _globalState.CurrentProject is not null)
         {
             if (_globalState.CurrentProject.IsUniqRes(name) == true)
             {

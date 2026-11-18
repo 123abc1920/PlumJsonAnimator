@@ -31,7 +31,7 @@ public class ClipAttachment : Attachment
         VertexCount = attachmentDTO.AttachmentData?.Vertices?.Count / 2 ?? 0;
 
         var xyArray = attachmentDTO.AttachmentData?.Vertices;
-        if (!(xyArray is null))
+        if (xyArray is not null)
         {
             for (int i = 0; i < VertexCount * 2; i += 2)
             {

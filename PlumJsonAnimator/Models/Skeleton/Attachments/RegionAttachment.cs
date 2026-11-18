@@ -76,7 +76,7 @@ public class RegionAttachment : Attachment
 
         var data = attachmentDTO.AttachmentData;
 
-        if (!(data is null))
+        if (data is not null)
         {
             X = data.X;
             Y = data.Y;
