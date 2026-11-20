@@ -25,7 +25,7 @@ public class ClipAttachment : Attachment
         AttachmentDTO attachmentDTO,
         AttachmentTypeConverter attachmentTypeConverter
     )
-        : base(attachmentDTO.Name!, attachmentTypeConverter)
+        : base(attachmentDTO.Name!, attachmentTypeConverter, new SolidColorBrush(Colors.LimeGreen))
     {
         EndSlotName = attachmentDTO.AttachmentData?.End;
         VertexCount = attachmentDTO.AttachmentData?.Vertices?.Count / 2 ?? 0;

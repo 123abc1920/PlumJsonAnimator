@@ -36,64 +36,93 @@
                     <iconPacks:PackIconBootstrapIcons Kind="PencilFill" />
                 </Button>
             </StackPanel>
-            <TextBlock
-                Height="24"
-                FontSize="14"
-                Text="Attachment" />
-            <TextBlock
-                Height="24"
-                FontSize="14"
-                Text="Name:" />
-            <TextBlock
-                Height="24"
-                FontSize="14"
-                Text="{Binding CurrentAttachment.Name}" />
-            <TextBlock
-                Height="24"
-                FontSize="14"
-                Text="Type:" />
-            <TextBlock
-                Height="24"
-                FontSize="14"
-                Text="{Binding Type}" />
-            <TextBlock
-                Height="24"
-                FontSize="14"
-                Text="Slot:" />
-            <Grid ColumnDefinitions="*,Auto">
-                <ComboBox
-                    Grid.Row="0"
+            <Grid ColumnDefinitions="Auto,*">
+                <TextBlock
                     Grid.Column="0"
+                    Height="24"
+                    FontSize="14"
+                    Text="Name:" />
+                <TextBlock
+                    Grid.Column="1"
+                    Height="24"
+                    Margin="6,0,0,0"
+                    FontSize="14"
+                    Text="{Binding CurrentAttachment.Name}">
+                    <ToolTip.Tip>
+                        <TextBlock Text="{Binding CurrentAttachment.Name}" />
+                    </ToolTip.Tip>
+                </TextBlock>
+            </Grid>
+            <Grid ColumnDefinitions="Auto,Auto,*">
+                <TextBlock
+                    Grid.Column="0"
+                    Height="24"
+                    FontSize="14"
+                    Text="Type:" />
+                <Canvas
+                    Grid.Column="1"
+                    Width="10"
+                    Height="10"
+                    Margin="8,0,4,0"
+                    Background="{Binding CurrentAttachment.AttachmentTypeColor}" />
+                <TextBlock
+                    Grid.Column="2"
+                    Height="24"
+                    FontSize="14"
+                    Text="{Binding Type}" />
+            </Grid>
+            <Grid ColumnDefinitions="Auto,*">
+                <TextBlock
+                    Grid.Column="0"
+                    Height="24"
+                    FontSize="14"
+                    Text="Slot:" />
+                <Grid Grid.Column="1" ColumnDefinitions="*,Auto">
+                    <ComboBox
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="0,0,0,5"
+                        Padding="6,4"
+                        DisplayMemberBinding="{Binding Name}"
+                        FontSize="13"
+                        ItemsSource="{Binding Slots}"
+                        SelectedItem="{Binding SelectedSlot, Mode=TwoWay}">
+                        <ToolTip.Tip>
+                            <TextBlock Text="{Binding SelectedSlot.Name}" />
+                        </ToolTip.Tip>
+                    </ComboBox>
+                    <Button
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Width="32"
+                        Height="32"
+                        Padding="0"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Command="{Binding OpenSlot}">
+                        <iconPacks:PackIconBootstrapIcons Kind="ArrowBarRight" />
+                    </Button>
+                </Grid>
+            </Grid>
+            <Grid ColumnDefinitions="Auto,*">
+                <TextBlock
+                    Grid.Column="0"
+                    Height="24"
+                    FontSize="14"
+                    Text="Skin:" />
+                <ComboBox
+                    Grid.Column="1"
                     Margin="0,0,0,5"
                     Padding="6,4"
                     DisplayMemberBinding="{Binding Name}"
                     FontSize="13"
-                    ItemsSource="{Binding Slots}"
-                    SelectedItem="{Binding SelectedSlot, Mode=TwoWay}" />
-                <Button
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Width="32"
-                    Height="32"
-                    Padding="0"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center">
-                    <iconPacks:PackIconBootstrapIcons Kind="ArrowBarRight" />
-                </Button>
+                    ItemsSource="{Binding Skins}"
+                    SelectedItem="{Binding SelectedSkin, Mode=TwoWay}">
+                    <ToolTip.Tip>
+                        <TextBlock Text="{Binding SelectedSkin.Name}" />
+                    </ToolTip.Tip>
+                </ComboBox>
             </Grid>
-            <TextBlock
-                Height="24"
-                FontSize="14"
-                Text="Skin:" />
-            <ComboBox
-                Grid.Row="0"
-                Grid.Column="0"
-                Margin="0,0,0,5"
-                Padding="6,4"
-                DisplayMemberBinding="{Binding Name}"
-                FontSize="13"
-                ItemsSource="{Binding Skins}"
-                SelectedItem="{Binding SelectedSkin, Mode=TwoWay}" />
             <ContentControl Content="{Binding CurrentAttachmentProperties}" />
         </StackPanel>
     </ScrollViewer>

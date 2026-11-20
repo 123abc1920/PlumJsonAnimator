@@ -59,6 +59,7 @@ public partial class SlotInfoViewModel : ReactiveObject
     public ICommand OpenBone { get; }
     public ICommand OpenAttachment { get; }
     public ICommand AddAttachment { get; }
+    public ICommand DeleteAttachment { get; }
 
     public readonly GlobalState GlobalState;
     private readonly HistoryManager _historyManager;
@@ -102,6 +103,12 @@ public partial class SlotInfoViewModel : ReactiveObject
                     SelectedAttachment
                 );
             }
+        });
+        DeleteAttachment = new Command(_ =>
+        {
+            SelectedAttachment = null;
+            GlobalState.CurrentProject?.CurrentSkin.DeleteAttachment(CurrentSlot);
+            CurrentSlot.CurrentAttachment = null;
         });
     }
 }

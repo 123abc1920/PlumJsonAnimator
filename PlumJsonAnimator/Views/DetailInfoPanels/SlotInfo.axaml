@@ -15,8 +15,62 @@
         VerticalScrollBarVisibility="Auto">
         <StackPanel>
             <TextBlock Text="{DynamicResource info}" />
-            <StackPanel Orientation="Horizontal">
+            <Grid ColumnDefinitions="Auto,*">
+                <TextBlock
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Text="Name:" />
+                <TextBox
+                    Grid.Column="1"
+                    Margin="2,0,0,0"
+                    Text="{Binding CurrentSlot.Name}">
+                    <ToolTip.Tip>
+                        <TextBlock Text="{Binding CurrentSlot.Name}" />
+                    </ToolTip.Tip>
+                </TextBox>
+            </Grid>
+            <TextBlock
+                Height="24"
+                FontSize="14"
+                Text="Bone:" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ComboBox
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Height="32"
+                    Margin="0,0,0,5"
+                    Padding="6,4"
+                    DisplayMemberBinding="{Binding Name}"
+                    FontSize="13"
+                    ItemsSource="{Binding Bones}"
+                    SelectedItem="{Binding SelectedBone, Mode=TwoWay}">
+                    <ToolTip.Tip>
+                        <TextBlock Text="{Binding SelectedBone.Name}" />
+                    </ToolTip.Tip>
+                </ComboBox>
                 <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Width="32"
+                    Height="32"
+                    Padding="0"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Command="{Binding OpenBone}">
+                    <iconPacks:PackIconBootstrapIcons Kind="ArrowBarRight" />
+                </Button>
+            </Grid>
+            <Grid ColumnDefinitions="*,Auto,Auto">
+                <TextBlock
+                    Grid.Column="0"
+                    FontSize="14"
+                    Text="Attachment:" />
+                <Button
+                    Grid.Column="1"
                     Width="32"
                     Height="32"
                     Padding="0"
@@ -36,74 +90,38 @@
                     </Button.Flyout>
                     <iconPacks:PackIconBootstrapIcons Kind="Plus" />
                 </Button>
-
                 <Button
-                    Width="32"
-                    Height="32"
-                    Padding="0"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center">
-                    <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
-                </Button>
-                <Button
-                    Width="32"
-                    Height="32"
-                    Padding="0"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center">
-                    <iconPacks:PackIconBootstrapIcons Kind="PencilFill" />
-                </Button>
-            </StackPanel>
-            <TextBox
-                Height="32"
-                Margin="0,0,0,5"
-                Text="{Binding CurrentSlot.Name}" />
-            <TextBlock
-                Height="24"
-                FontSize="14"
-                Text="Bone" />
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <ComboBox
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Height="32"
-                    Margin="0,0,0,5"
-                    Padding="6,4"
-                    DisplayMemberBinding="{Binding Name}"
-                    FontSize="13"
-                    ItemsSource="{Binding Bones}"
-                    SelectedItem="{Binding SelectedBone, Mode=TwoWay}" />
-                <Button
-                    Grid.Row="0"
-                    Grid.Column="1"
+                    Grid.Column="2"
                     Width="32"
                     Height="32"
                     Padding="0"
                     HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center"
-                    Command="{Binding OpenBone}">
-                    <iconPacks:PackIconBootstrapIcons Kind="ArrowBarRight" />
+                    Command="{Binding DeleteAttachment}">
+                    <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
                 </Button>
             </Grid>
-            <TextBlock FontSize="14" Text="Attachment" />
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBox
-                    Grid.Row="0"
+                <Canvas
                     Grid.Column="0"
-                    HorizontalAlignment="Left"
-                    Text="{Binding SelectedAttachment.Name}" />
-                <Button
-                    Grid.Row="0"
+                    Width="10"
+                    Height="10"
+                    Background="{Binding SelectedAttachment.AttachmentTypeColor}" />
+                <TextBox
                     Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    Text="{Binding SelectedAttachment.Name}">
+                    <ToolTip.Tip>
+                        <TextBlock Text="{Binding SelectedAttachment.Name}" />
+                    </ToolTip.Tip>
+                </TextBox>
+                <Button
+                    Grid.Column="2"
                     Width="32"
                     Height="32"
                     Padding="0"
@@ -112,12 +130,6 @@
                     Command="{Binding OpenAttachment}">
                     <iconPacks:PackIconBootstrapIcons Kind="ArrowBarRight" />
                 </Button>
-                <Canvas
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    Width="10"
-                    Height="10"
-                    Background="#FFE6E6E6" />
             </Grid>
         </StackPanel>
     </ScrollViewer>

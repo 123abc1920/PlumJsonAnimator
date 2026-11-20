@@ -70,7 +70,7 @@ public class RegionAttachment : Attachment
         AttachmentDTO attachmentDTO,
         AttachmentTypeConverter attachmentTypeConverter
     )
-        : base(attachmentDTO.Name, attachmentTypeConverter)
+        : base(attachmentDTO.Name, attachmentTypeConverter, new SolidColorBrush(Colors.CadetBlue))
     {
         ImageRes = attachmentDTO.Res as ImageRes;
 

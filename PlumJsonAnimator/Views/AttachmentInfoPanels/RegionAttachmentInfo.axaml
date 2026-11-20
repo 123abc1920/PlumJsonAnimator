@@ -19,6 +19,9 @@
                 HorizontalAlignment="Left"
                 Background="Transparent">
                 <TextBox IsHitTestVisible="False" Text="{Binding Image.Path}" />
+                <ToolTip.Tip>
+                    <TextBlock Text="{Binding Image.Path}" />
+                </ToolTip.Tip>
             </Border>
         </StackPanel>
     </ScrollViewer>

@@ -1,3 +1,4 @@
+using System;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Constants.Command;
 using PlumJsonAnimator.Models.Commands;
@@ -41,6 +42,7 @@ public partial class BoneInfoViewModel : ReactiveObject
     public System.Windows.Input.ICommand AddSlot { get; }
     public System.Windows.Input.ICommand DeleteSlot { get; }
     public System.Windows.Input.ICommand RenameSlot { get; }
+    public System.Windows.Input.ICommand OpenAttachment { get; }
 
     public readonly GlobalState GlobalState;
     private readonly HistoryManager _historyManager;
@@ -81,6 +83,12 @@ public partial class BoneInfoViewModel : ReactiveObject
             {
                 // _plumApp.OpenRenameDialog(slot);
             }
+        });
+
+        OpenAttachment = new Command(execute: _ =>
+        {
+            GlobalState.SelectedItem = SelectedSlot;
+            GlobalState.SelectedItem = SelectedSlot?.CurrentAttachment;
         });
     }
 }

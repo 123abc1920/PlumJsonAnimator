@@ -17,19 +17,24 @@ public abstract class Attachment : ReactiveObject, IPresentableItem
     [Reactive]
     public virtual string Name { get; set; }
 
-    public abstract AttachmentTypes AttachmentType { get; }
-
     [Reactive]
-    public SolidColorBrush AttachmentColor { get; set; } = new SolidColorBrush(Colors.Black);
+    public SolidColorBrush AttachmentTypeColor { get; set; } = new SolidColorBrush(Colors.Black);
+
+    public abstract AttachmentTypes AttachmentType { get; }
 
     public PanelTypes PanelType => PanelTypes.ATTACHMENTINFO;
 
     protected readonly AttachmentTypeConverter _attachmentTypeConverter;
 
-    public Attachment(string name, AttachmentTypeConverter attachmentTypeConverter)
+    public Attachment(
+        string name,
+        AttachmentTypeConverter attachmentTypeConverter,
+        SolidColorBrush solidColorBrush
+    )
     {
         Name = name;
         _attachmentTypeConverter = attachmentTypeConverter;
+        AttachmentTypeColor = solidColorBrush;
     }
 
     public abstract AttachmentData GenerateJSONData();

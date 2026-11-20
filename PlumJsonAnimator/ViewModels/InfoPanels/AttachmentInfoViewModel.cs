@@ -1,7 +1,9 @@
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Common.Constants.Command;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
@@ -67,6 +69,8 @@ public partial class AttachmentInfoViewModel : ReactiveObject
     [Reactive]
     public object? CurrentAttachmentProperties { get; set; } = null;
 
+    public ICommand OpenSlot { get; }
+
     public readonly GlobalState GlobalState;
     private readonly HistoryManager _historyManager;
 
@@ -84,5 +88,10 @@ public partial class AttachmentInfoViewModel : ReactiveObject
         SelectedSlot = selectedSlot;
         SelectedSkin = Skins.FirstOrDefault(s => s == GlobalState.CurrentProject.CurrentSkin);
         CurrentAttachmentProperties = CurrentAttachment.CreateInfoPanel();
+
+        OpenSlot = new Command(_ =>
+        {
+            GlobalState.SelectedItem = SelectedSlot;
+        });
     }
 }

@@ -55,16 +55,20 @@ public partial class BoneInfo : UserControl, IInfoPanel
                         slot,
                         viewModel._attachmentFactory.CreateAttachmentByType(
                             AttachmentTypes.REGION,
-                            new AttachmentDTO()
-                            {
-                                Name = imageRes.Name,
-                                Res = imageRes,
-                            }
+                            new AttachmentDTO() { Name = imageRes.Name, Res = imageRes }
                         )
                     );
                 }
                 e.Handled = true;
             }
+        }
+    }
+
+    private void OnAttachmentDoubleTapped(object? sender, TappedEventArgs e)
+    {
+        if (DataContext is BoneInfoViewModel vm)
+        {
+            vm.OpenAttachment.Execute(null);
         }
     }
 

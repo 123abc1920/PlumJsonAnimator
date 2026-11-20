@@ -98,6 +98,14 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
+        public void DeleteAttachment(Slot s)
+        {
+            if (SlotAttachmentBinding.ContainsKey(s))
+            {
+                SlotAttachmentBinding[s] = null;
+            }
+        }
+
         /// <summary>
         /// Draws skin
         /// </summary>
