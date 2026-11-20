@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using PlumJsonAnimator.Common.Constants.Command;
@@ -15,7 +16,11 @@ public partial class ClipAttachmentInfoViewModel : ReactiveObject
 
     public ClipAttachment ClipAttachment { get; set; }
 
+    [Reactive]
+    public PointModel? SelectedVertice { get; set; }
+
     public ICommand AddVertice { get; }
+    public ICommand DeleteVertice { get; }
 
     public ClipAttachmentInfoViewModel(
         ClipAttachment clipAttachment,
@@ -29,6 +34,14 @@ public partial class ClipAttachmentInfoViewModel : ReactiveObject
         AddVertice = new Command(_ =>
         {
             ClipAttachment.Vertices.Add(new PointModel(0, 0));
+        });
+        DeleteVertice = new Command(_ =>
+        {
+            if (SelectedVertice is not null)
+            {
+                ClipAttachment.Vertices.Remove(SelectedVertice);
+                SelectedVertice = null;
+            }
         });
     }
 }

@@ -13,19 +13,6 @@
                 Height="24"
                 FontSize="14"
                 Text="Clipping form:" />
-            <TextBlock
-                Height="24"
-                FontSize="14"
-                Text="Vertices:" />
-            <Button
-                Width="32"
-                Height="32"
-                Padding="0"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                Command="{Binding AddVertice}">
-                <iconPacks:PackIconBootstrapIcons Kind="Plus" />
-            </Button>
             <TextBox
                 Height="24"
                 FontSize="14"
@@ -56,20 +43,51 @@
                     <iconPacks:PackIconBootstrapIcons Kind="ArrowBarRight" />
                 </Button>
             </Grid>
+            <Grid ColumnDefinitions="*,Auto,Auto">
+                <TextBlock
+                    Grid.Column="0"
+                    Height="24"
+                    FontSize="14"
+                    Text="Vertices:" />
+                <Button
+                    Grid.Column="1"
+                    Width="32"
+                    Height="32"
+                    Padding="0"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Command="{Binding AddVertice}">
+                    <iconPacks:PackIconBootstrapIcons Kind="Plus" />
+                </Button>
+                <Button
+                    Grid.Column="2"
+                    Width="32"
+                    Height="32"
+                    Padding="0"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Command="{Binding DeleteVertice}">
+                    <iconPacks:PackIconBootstrapIcons Kind="Dash" />
+                </Button>
+            </Grid>
             <ListBox
                 Grid.Row="2"
                 Margin="0,5"
                 ItemsSource="{Binding ClipAttachment.Vertices}"
-                ScrollViewer.VerticalScrollBarVisibility="Auto">
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                SelectedItem="{Binding SelectedVertice}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel
-                            HorizontalAlignment="Stretch"
-                            Background="Transparent"
-                            Orientation="Horizontal">
-                            <TextBox HorizontalAlignment="Stretch" Text="{Binding X}" />
-                            <TextBox HorizontalAlignment="Stretch" Text="{Binding Y}" />
-                        </StackPanel>
+                        <Grid ColumnDefinitions="*,*">
+                            <TextBox
+                                Grid.Column="0"
+                                HorizontalAlignment="Stretch"
+                                Text="{Binding X}" />
+                            <TextBox
+                                Grid.Column="1"
+                                HorizontalAlignment="Stretch"
+                                Text="{Binding Y}" />
+                        </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
