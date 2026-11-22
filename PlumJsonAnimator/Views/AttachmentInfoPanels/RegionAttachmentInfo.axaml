@@ -9,28 +9,23 @@
     Background="{DynamicResource SukiBackgroundBrush}">
     <ScrollViewer Margin="5" VerticalScrollBarVisibility="Auto">
         <StackPanel>
-            <StackPanel Orientation="Horizontal">
+            <Grid ColumnDefinitions="*,Auto,Auto">
+                <TextBlock
+                    Grid.Column="0"
+                    Height="24"
+                    FontSize="14"
+                    Text="Image:" />
                 <Button
+                    Grid.Column="1"
                     Width="32"
                     Height="32"
                     Padding="0"
                     HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center">
-                    <iconPacks:PackIconBootstrapIcons Kind="Plus" />
-                </Button>
-                <Button
-                    Width="32"
-                    Height="32"
-                    Padding="0"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center">
+                    VerticalContentAlignment="Center"
+                    Command="{Binding DeleteImage}">
                     <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
                 </Button>
-            </StackPanel>
-            <TextBlock
-                Height="24"
-                FontSize="14"
-                Text="Image:" />
+            </Grid>
             <Border
                 x:Name="DropBorder"
                 MinWidth="200"
@@ -38,7 +33,14 @@
                 Background="Transparent">
                 <TextBox IsHitTestVisible="False" Text="{Binding Image.Path}" />
                 <ToolTip.Tip>
-                    <TextBlock Text="{Binding Image.Path}" />
+                    <StackPanel>
+                        <TextBlock Text="{Binding Image.Path}" />
+                        <Image
+                            MaxWidth="200"
+                            MaxHeight="150"
+                            Source="{Binding Image.Preview}"
+                            Stretch="Uniform" />
+                    </StackPanel>
                 </ToolTip.Tip>
             </Border>
         </StackPanel>

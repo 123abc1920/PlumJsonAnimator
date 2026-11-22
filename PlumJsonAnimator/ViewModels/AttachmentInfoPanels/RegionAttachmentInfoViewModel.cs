@@ -24,6 +24,7 @@ public partial class RegionAttachmentInfoViewModel : ReactiveObject
     }
 
     public ICommand DropImageCommand { get; }
+    public ICommand DeleteImage { get; }
 
     public RegionAttachment RegionAttachment { get; set; }
 
@@ -40,6 +41,10 @@ public partial class RegionAttachmentInfoViewModel : ReactiveObject
             {
                 Image = droppedImage;
             }
+        });
+        DeleteImage = new Command(_ =>
+        {
+            Image = null;
         });
     }
 }
