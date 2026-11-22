@@ -60,6 +60,10 @@ public class MainCanvas : Control
             RedrawCanvas(context, GlobalState.DrawBones, GlobalState.CaptureMode);
             GlobalState.SelectedItem?.Draw(context);
         }
+        if (GlobalState.CaptureMode)
+        {
+            GlobalState?.CaptureArea?.DrawCaptureArea(context);
+        }
     }
 
     public void RedrawCanvas(DrawingContext context, bool isDrawBone, bool isDrawCapture)
@@ -69,10 +73,6 @@ public class MainCanvas : Control
         if (isDrawBone)
         {
             GlobalState?.CurrentProject?.MainSkeleton?.DrawSkeleton(context);
-        }
-        if (isDrawCapture)
-        {
-            GlobalState?.CaptureArea?.DrawCaptureArea(context);
         }
     }
 }
