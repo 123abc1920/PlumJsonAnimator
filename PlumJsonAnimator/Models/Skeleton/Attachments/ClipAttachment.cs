@@ -89,11 +89,17 @@ public class ClipAttachment : Attachment
 
     public List<Point> GetAvaloniaPointsList()
     {
+        var bone = Slot?.BoundedBone;
+        if (bone is null)
+        {
+            return new List<Point>();
+        }
+
         List<Point> result = new List<Point>();
 
         foreach (var p in Vertices)
         {
-            result.Add(new Point(p.X, p.Y));
+            result.Add(new Point(bone.X + p.X, bone.Y + p.Y));
         }
 
         return result;
@@ -113,21 +119,26 @@ public class ClipAttachment : Attachment
 
     public override void Draw(DrawingContext context)
     {
-        if (Vertices == null || Vertices.Count == 0)
+        var drawVertices = GetAvaloniaPointsList();
+        var bone = Slot?.BoundedBone;
+        if (bone is null)
             return;
 
-        for (int i = 0; i < Vertices.Count - 1; i++)
+        if (drawVertices == null || drawVertices.Count == 0)
+            return;
+
+        for (int i = 0; i < drawVertices.Count - 1; i++)
         {
-            var p1 = Vertices[i];
-            var p2 = Vertices[i + 1];
+            var p1 = drawVertices[i];
+            var p2 = drawVertices[i + 1];
 
             context.DrawLine(ClipOutlinePen, new Point(p1.X, p1.Y), new Point(p2.X, p2.Y));
         }
 
-        if (Vertices.Count > 1)
+        if (drawVertices.Count > 1)
         {
-            var first = Vertices[0];
-            var last = Vertices[Vertices.Count - 1];
+            var first = drawVertices[0];
+            var last = drawVertices[drawVertices.Count - 1];
 
             context.DrawLine(
                 ClipOutlinePen,
@@ -136,14 +147,17 @@ public class ClipAttachment : Attachment
             );
         }
 
-        foreach (PointModel vertice in Vertices)
+        foreach (Point vertice in drawVertices)
         {
             var color = Brushes.Red;
-            if (vertice == SelectedVertice)
+            if (
+                vertice.X == bone.X + SelectedVertice?.X
+                && vertice.Y == bone.Y + SelectedVertice?.Y
+            )
             {
                 color = Brushes.LimeGreen;
             }
-            context.DrawEllipse(color, null, new Point(vertice.X, vertice.Y), 2.5, 2.5);
+            context.DrawEllipse(color, null, vertice, 2.5, 2.5);
         }
     }
 }

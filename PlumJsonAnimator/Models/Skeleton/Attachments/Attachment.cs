@@ -1,4 +1,3 @@
-using Avalonia.Controls;
 using Avalonia.Media;
 using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Models.DTO;
@@ -19,6 +18,8 @@ public abstract class Attachment : ReactiveObject, IPresentableItem
 
     [Reactive]
     public SolidColorBrush AttachmentTypeColor { get; set; } = new SolidColorBrush(Colors.Black);
+
+    public Slot? Slot { get; set; }
 
     public abstract AttachmentTypes AttachmentType { get; }
 

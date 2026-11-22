@@ -67,6 +67,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 SlotAttachmentBinding.Add(s, a);
             }
             s.UpdateAttachment(GetAttachment(s));
+            a.Slot = s;
         }
 
         /// <summary>
@@ -88,12 +89,18 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public void RestoreSlot(Slot s, Attachment a)
         {
             SlotAttachmentBinding[s] = a;
+            a.Slot = s;
         }
 
         public void DeleteSlot(Slot s)
         {
             if (SlotAttachmentBinding.ContainsKey(s))
             {
+                var a = SlotAttachmentBinding[s];
+                if (a is not null)
+                {
+                    a.Slot = null;
+                }
                 SlotAttachmentBinding.Remove(s);
             }
         }
@@ -102,7 +109,12 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             if (SlotAttachmentBinding.ContainsKey(s))
             {
-                SlotAttachmentBinding[s] = null;
+                var a = SlotAttachmentBinding[s];
+                if (a is not null)
+                {
+                    a.Slot = null;
+                    SlotAttachmentBinding[s] = null;
+                }
             }
         }
 
