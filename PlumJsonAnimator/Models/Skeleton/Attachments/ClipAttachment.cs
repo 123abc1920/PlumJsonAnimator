@@ -5,6 +5,7 @@ using Avalonia.Media;
 using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Views;
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
 namespace PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
@@ -20,6 +21,13 @@ public class ClipAttachment : Attachment
     public int? VertexCount { get; set; } = 0;
     public ObservableCollection<PointModel> Vertices { get; set; } =
         new ObservableCollection<PointModel>();
+
+    private PointModel? _selectedVertice;
+    public PointModel? SelectedVertice
+    {
+        get => _selectedVertice;
+        set => this.RaiseAndSetIfChanged(ref _selectedVertice, value);
+    }
 
     public ClipAttachment(
         AttachmentDTO attachmentDTO,
@@ -108,11 +116,6 @@ public class ClipAttachment : Attachment
         if (Vertices == null || Vertices.Count == 0)
             return;
 
-        foreach (PointModel vertice in Vertices)
-        {
-            context.DrawEllipse(Brushes.Red, null, new Point(vertice.X, vertice.Y), 2.5, 2.5);
-        }
-
         for (int i = 0; i < Vertices.Count - 1; i++)
         {
             var p1 = Vertices[i];
@@ -131,6 +134,16 @@ public class ClipAttachment : Attachment
                 new Point(last.X, last.Y),
                 new Point(first.X, first.Y)
             );
+        }
+
+        foreach (PointModel vertice in Vertices)
+        {
+            var color = Brushes.Red;
+            if (vertice == SelectedVertice)
+            {
+                color = Brushes.LimeGreen;
+            }
+            context.DrawEllipse(color, null, new Point(vertice.X, vertice.Y), 2.5, 2.5);
         }
     }
 }

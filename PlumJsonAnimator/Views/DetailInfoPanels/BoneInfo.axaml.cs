@@ -47,7 +47,10 @@ public partial class BoneInfo : UserControl, IInfoPanel
 
         if (item is ListBoxItem listBoxItem)
         {
-            if (e.Data.Get("Resource") is ImageRes imageRes && listBoxItem.DataContext is Slot slot)
+            if (
+                e.Data.Get(Consts.RESOURCE_DRAG_DATA) is ImageRes imageRes
+                && listBoxItem.DataContext is Slot slot
+            )
             {
                 if (DataContext is MainWindowViewModel viewModel)
                 {

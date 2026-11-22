@@ -212,14 +212,14 @@ public partial class MainWindow : SukiWindow
         if (sender is TextBlock textBlock && textBlock.DataContext is Res res)
         {
             var data = new DataObject();
-            data.Set("Resource", res);
+            data.Set(Consts.RESOURCE_DRAG_DATA, res);
             DragDrop.DoDragDrop(e, data, DragDropEffects.Copy);
         }
     }
 
     private void OnTreeViewDrop(object sender, DragEventArgs e)
     {
-        if (e.Data.Get("Resource") is Res res)
+        if (e.Data.Get(Consts.RESOURCE_DRAG_DATA) is Res res)
         {
             var position = e.GetPosition(boneTreeView);
             var element = boneTreeView.InputHitTest(position) as Visual;

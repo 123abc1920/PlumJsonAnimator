@@ -2,13 +2,31 @@
     x:Class="PlumJsonAnimator.Views.RegionAttachmentInfo"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:iconPacks="https://github.com"
+    xmlns:iconPacks="https://github.com/MahApps/IconPacks.Avalonia"
     xmlns:suki="clr-namespace:SukiUI.Controls;assembly=SukiUI"
     xmlns:viewModels="clr-namespace:PlumJsonAnimator.ViewModels"
     x:DataType="viewModels:RegionAttachmentInfoViewModel"
     Background="{DynamicResource SukiBackgroundBrush}">
     <ScrollViewer Margin="5" VerticalScrollBarVisibility="Auto">
         <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button
+                    Width="32"
+                    Height="32"
+                    Padding="0"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center">
+                    <iconPacks:PackIconBootstrapIcons Kind="Plus" />
+                </Button>
+                <Button
+                    Width="32"
+                    Height="32"
+                    Padding="0"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center">
+                    <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
+                </Button>
+            </StackPanel>
             <TextBlock
                 Height="24"
                 FontSize="14"

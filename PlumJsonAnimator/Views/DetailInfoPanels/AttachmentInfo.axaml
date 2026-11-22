@@ -10,32 +10,6 @@
     <ScrollViewer Margin="5" VerticalScrollBarVisibility="Auto">
         <StackPanel Orientation="Vertical">
             <TextBlock Text="{DynamicResource info}" />
-            <StackPanel Orientation="Horizontal">
-                <Button
-                    Width="32"
-                    Height="32"
-                    Padding="0"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center">
-                    <iconPacks:PackIconBootstrapIcons Kind="Plus" />
-                </Button>
-                <Button
-                    Width="32"
-                    Height="32"
-                    Padding="0"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center">
-                    <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
-                </Button>
-                <Button
-                    Width="32"
-                    Height="32"
-                    Padding="0"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center">
-                    <iconPacks:PackIconBootstrapIcons Kind="PencilFill" />
-                </Button>
-            </StackPanel>
             <Grid ColumnDefinitions="Auto,*">
                 <TextBlock
                     Grid.Column="0"

@@ -1,5 +1,6 @@
 using System.Windows.Input;
 using Avalonia.Input;
+using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Constants.Command;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
@@ -32,7 +33,10 @@ public partial class RegionAttachmentInfoViewModel : ReactiveObject
 
         DropImageCommand = new Command(parameter =>
         {
-            if (parameter is DragEventArgs e && e.Data.Get("Resource") is ImageRes droppedImage)
+            if (
+                parameter is DragEventArgs e
+                && e.Data.Get(Consts.RESOURCE_DRAG_DATA) is ImageRes droppedImage
+            )
             {
                 Image = droppedImage;
             }

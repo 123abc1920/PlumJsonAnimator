@@ -75,7 +75,8 @@
                 Margin="0,5"
                 ItemsSource="{Binding ClipAttachment.Vertices}"
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
-                SelectedItem="{Binding SelectedVertice}">
+                SelectedItem="{Binding ClipAttachment.SelectedVertice}"
+                SelectionMode="Toggle">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid ColumnDefinitions="*,*">

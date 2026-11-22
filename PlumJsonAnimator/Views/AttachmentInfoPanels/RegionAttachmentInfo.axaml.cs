@@ -2,6 +2,7 @@ using System;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 using PlumJsonAnimator.ViewModels;
@@ -20,7 +21,7 @@ public partial class RegionAttachmentInfo : UserControl
             DragDrop.DragOverEvent,
             (s, e) =>
             {
-                if (e.Data.Get("Resource") is ImageRes)
+                if (e.Data.Get(Consts.RESOURCE_DRAG_DATA) is ImageRes)
                 {
                     e.DragEffects = DragDropEffects.Copy;
                     e.Handled = true;
