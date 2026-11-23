@@ -90,16 +90,18 @@ public class ClipAttachment : Attachment
     public List<Point> GetAvaloniaPointsList()
     {
         var bone = Slot?.BoundedBone;
-        if (bone is null)
+        if (bone is null || Vertices == null)
         {
             return new List<Point>();
         }
 
-        List<Point> result = new List<Point>();
+        var result = new List<Point>(Vertices.Count);
 
         foreach (var p in Vertices)
         {
-            result.Add(new Point(bone.X + p.X, bone.Y + p.Y));
+            double gx = bone.GlobalX + (p.X * bone.G11) + (p.Y * bone.G21);
+            double gy = bone.GlobalY + (p.X * bone.G12) + (p.Y * bone.G22);
+            result.Add(new Point(gx, gy));
         }
 
         return result;
@@ -119,45 +121,32 @@ public class ClipAttachment : Attachment
 
     public override void Draw(DrawingContext context)
     {
-        var drawVertices = GetAvaloniaPointsList();
-        var bone = Slot?.BoundedBone;
-        if (bone is null)
+        var globalVertices = GetAvaloniaPointsList();
+        if (globalVertices == null || globalVertices.Count == 0)
             return;
 
-        if (drawVertices == null || drawVertices.Count == 0)
-            return;
-
-        for (int i = 0; i < drawVertices.Count - 1; i++)
+        for (int i = 0; i < globalVertices.Count - 1; i++)
         {
-            var p1 = drawVertices[i];
-            var p2 = drawVertices[i + 1];
-
-            context.DrawLine(ClipOutlinePen, new Point(p1.X, p1.Y), new Point(p2.X, p2.Y));
+            context.DrawLine(ClipOutlinePen, globalVertices[i], globalVertices[i + 1]);
         }
 
-        if (drawVertices.Count > 1)
+        if (globalVertices.Count > 1)
         {
-            var first = drawVertices[0];
-            var last = drawVertices[drawVertices.Count - 1];
-
-            context.DrawLine(
-                ClipOutlinePen,
-                new Point(last.X, last.Y),
-                new Point(first.X, first.Y)
-            );
+            context.DrawLine(ClipOutlinePen, globalVertices[^1], globalVertices[0]);
         }
 
-        foreach (Point vertice in drawVertices)
+        for (int i = 0; i < globalVertices.Count; i++)
         {
+            var global = globalVertices[i];
+            var rawLocal = Vertices[i];
+
             var color = Brushes.Red;
-            if (
-                vertice.X == bone.X + SelectedVertice?.X
-                && vertice.Y == bone.Y + SelectedVertice?.Y
-            )
+            if (rawLocal.X == SelectedVertice?.X && rawLocal.Y == SelectedVertice?.Y)
             {
                 color = Brushes.LimeGreen;
             }
-            context.DrawEllipse(color, null, vertice, 2.5, 2.5);
+
+            context.DrawEllipse(color, null, global, 2.5, 2.5);
         }
     }
 }
