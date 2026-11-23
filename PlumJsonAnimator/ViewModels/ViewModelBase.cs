@@ -6,18 +6,20 @@ using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Factories;
+using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.ViewModels;
 
 public class ViewModelBase : ObservableObject, INotifyPropertyChanged
 {
-    public GlobalState _globalState;
+    public GlobalState GlobalState { get; set; }
     protected Dialogs _dialogs;
-    protected ProjectFilesManager _projectManager;
     protected AppSettings _appSettings;
     protected LocalizationService _localizationService;
     protected ImageExporter _imageExporter;
+    protected ViewModelFactory _viewModelFactory;
     public PlumApp PlumApp { get; set; }
 
     public List<string> Langs
@@ -39,30 +41,30 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
 
     public CaptureArea? GetCaptureArea()
     {
-        return _globalState.CaptureArea;
+        return GlobalState.CaptureArea;
     }
 
     protected ViewModelBase(
         GlobalState globalState,
         Dialogs dialogs,
-        ProjectFilesManager projectManager,
         AppSettings appSettings,
         LocalizationService localizationService,
         ImageExporter imageExporter,
+        ViewModelFactory viewModelFactory,
         PlumApp plumApp
     )
     {
-        _globalState = globalState;
+        GlobalState = globalState;
         _dialogs = dialogs;
-        _projectManager = projectManager;
         _appSettings = appSettings;
         _localizationService = localizationService;
         _imageExporter = imageExporter;
+        _viewModelFactory = viewModelFactory;
         PlumApp = plumApp;
 
-        _globalState.PropertyChanged += (s, e) =>
+        GlobalState.PropertyChanged += (s, e) =>
         {
-            if (e.PropertyName == nameof(GlobalState.CurrentProject))
+            if (e.PropertyName == nameof(Common.Constants.GlobalState.CurrentProject))
             {
                 OnPropertyChanged(nameof(CurrentProject));
             }
@@ -71,7 +73,21 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
 
     public Project? CurrentProject
     {
-        get => _globalState.CurrentProject;
+        get => GlobalState.CurrentProject;
+    }
+
+    private bool _isAnimMode = true;
+    public bool IsAnimMode
+    {
+        set
+        {
+            if (_isAnimMode != value)
+            {
+                _isAnimMode = value;
+                OnPropertyChanged(nameof(IsAnimMode));
+            }
+        }
+        get => _isAnimMode;
     }
 
     public void RenameProject(SettingsData settingsData)
@@ -83,6 +99,27 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
             Popups.ShowPopup(
                 GetMessage(LocalizationConsts.SAVED),
                 GetMessage(LocalizationConsts.INFO_MESSAGE)
+            );
+        }
+    }
+
+    protected void OpenRenameDialog(IRenamable? renamableObject)
+    {
+        if (renamableObject != null)
+        {
+            RenameViewModel? viewModel =
+                _viewModelFactory.GetViewModel(DialogType.RENAME) as RenameViewModel;
+
+            if (viewModel is null)
+            {
+                return;
+            }
+
+            viewModel.RenamableObject = renamableObject;
+            _dialogs.ShowDialog(
+                GetMessage(LocalizationConsts.RENAME),
+                viewModel,
+                DialogType.RENAME
             );
         }
     }

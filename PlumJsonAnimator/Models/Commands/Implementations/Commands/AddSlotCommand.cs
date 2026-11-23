@@ -7,7 +7,6 @@ class AddSlotCommand : ICommand
     private readonly Slot _slot;
     private readonly Project _project;
     private readonly Bone _bone;
-    private Attachment _attachment;
 
     public AddSlotCommand(Project project, Slot slot, Bone bone)
     {

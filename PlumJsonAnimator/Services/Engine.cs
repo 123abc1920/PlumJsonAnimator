@@ -15,10 +15,12 @@ namespace PlumJsonAnimator.Services
         private Animation? _currentAnimation;
 
         private GlobalState _globalState;
+        private CanvasRenderer _canvasRenderer;
 
-        public Engine(GlobalState globalState)
+        public Engine(GlobalState globalState, CanvasRenderer canvasRenderer)
         {
             _globalState = globalState;
+            _canvasRenderer = canvasRenderer;
 
             _animationLoop.Interval = TimeSpan.FromSeconds(1.0 / (double)_globalState.FPS);
             _animationLoop.Tick += AnimStep;
@@ -62,26 +64,13 @@ namespace PlumJsonAnimator.Services
         {
             if (_globalState.CurrentTab == 0)
             {
-                UpdateCanvas(
-                    _globalState.Canvas,
-                    _globalState.DrawBones,
-                    _globalState.CaptureMode
-                );
+                UpdateCanvas(_globalState.Canvas);
             }
         }
 
-        public void UpdateCanvas(Canvas canvas, bool isDrawBone, bool isDrawCapture)
+        public void UpdateCanvas(Control control)
         {
-            canvas?.Children.Clear();
-            _globalState.CurrentProject?.DrawSlots(canvas);
-            if (isDrawBone)
-            {
-                _globalState.CurrentProject?.MainSkeleton?.DrawSkeleton(canvas);
-            }
-            if (isDrawCapture)
-            {
-                _globalState.CaptureArea?.DrawCaptureArea(canvas);
-            }
+            _canvasRenderer.RedrawCanvas(control);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Common.TransformModes;
 using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Services;
@@ -401,7 +402,7 @@ public class Animation : INotifyable
     /// <param name="time">Current time</param>
     public void AddKeyFrame(Bone b, TransformModeTypes type, double time, IEasing easing)
     {
-        if (b != null && b.IsBone && type != TransformModeTypes.NO)
+        if (b != null && type != TransformModeTypes.NO)
         {
             if (type == TransformModeTypes.TRANSLATE)
             {
@@ -441,7 +442,7 @@ public class Animation : INotifyable
     /// <param name="time">Current time</param>
     public void DeleteKeyFrame(Bone b, TransformModeTypes type, double time)
     {
-        if (b != null && b.IsBone && type != TransformModeTypes.NO)
+        if (b != null && type != TransformModeTypes.NO)
         {
             if (BoneAnimationBinding.ContainsKey(b))
             {

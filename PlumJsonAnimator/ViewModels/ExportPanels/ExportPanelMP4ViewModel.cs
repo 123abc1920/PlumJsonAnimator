@@ -3,6 +3,7 @@ using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.ViewModels;
@@ -54,17 +55,17 @@ public partial class ExportPanelMP4ViewModel : ViewModelBase
         Dialogs dialogs,
         ImageExporter imageExporter,
         AppSettings appSettings,
-        ProjectFilesManager projectManager,
         LocalizationService localizationService,
+        ViewModelFactory viewModelFactory,
         PlumApp plumApp
     )
         : base(
             globalState,
             dialogs,
-            projectManager,
             appSettings,
             localizationService,
             imageExporter,
+            viewModelFactory,
             plumApp
         )
     {

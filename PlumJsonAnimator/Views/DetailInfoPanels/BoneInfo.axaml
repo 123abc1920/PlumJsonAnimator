@@ -5,10 +5,10 @@
     xmlns:iconPacks="https://github.com/MahApps/IconPacks.Avalonia"
     xmlns:suki="clr-namespace:SukiUI.Controls;assembly=SukiUI"
     xmlns:viewModels="clr-namespace:PlumJsonAnimator.ViewModels"
-    x:DataType="viewModels:MainWindowViewModel"
+    x:DataType="viewModels:BoneInfoViewModel"
     Background="{DynamicResource SukiBackgroundBrush}">
     <ScrollViewer Margin="5" VerticalScrollBarVisibility="Auto">
-        <StackPanel IsEnabled="{Binding IsAnimMode}">
+        <StackPanel>
             <TextBlock Text="{DynamicResource info}" />
             <StackPanel Orientation="Horizontal">
                 <Button
@@ -20,25 +20,15 @@
                     Command="{Binding AddSlot}">
                     <iconPacks:PackIconBootstrapIcons Kind="Plus" />
                 </Button>
+
                 <Button
                     Width="32"
                     Height="32"
                     Padding="0"
                     HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center"
-                    Command="{Binding DeleteSlot}"
-                    CommandParameter="{Binding ElementName=SlotsList}">
+                    Command="{Binding DeleteSlot}">
                     <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
-                </Button>
-                <Button
-                    Width="32"
-                    Height="32"
-                    Padding="0"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    Command="{Binding RenameSlot}"
-                    CommandParameter="{Binding ElementName=SlotsList}">
-                    <iconPacks:PackIconBootstrapIcons Kind="PencilFill" />
                 </Button>
             </StackPanel>
             <TextBlock
@@ -48,8 +38,8 @@
             <ListBox
                 x:Name="SlotsList"
                 DragDrop.Drop="OnListBoxDrop"
-                IsVisible="{Binding CurrentBone}"
-                ItemsSource="{Binding CurrentBone.Slots}">
+                ItemsSource="{Binding CurrentBone.Slots}"
+                SelectedItem="{Binding SelectedSlot, Mode=TwoWay}">
                 <DragDrop.AllowDrop>True</DragDrop.AllowDrop>
 
                 <ListBox.Styles>
@@ -88,10 +78,7 @@
 
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Center"
-                            DoubleTapped="OnSlotSelectionChanged">
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center">
                             <DragDrop.AllowDrop>True</DragDrop.AllowDrop>
 
                             <Grid.ColumnDefinitions>
@@ -104,6 +91,7 @@
                                 VerticalAlignment="Center"
                                 Spacing="2">
                                 <TextBlock
+                                    DoubleTapped="OnSlotSelectionChanged"
                                     FontSize="13"
                                     FontWeight="SemiBold"
                                     Text="{Binding Name}"
@@ -114,25 +102,37 @@
                                     </ToolTip.Tip>
                                 </TextBlock>
 
-                                <TextBlock
-                                    FontSize="11"
-                                    Opacity="0.6"
-                                    Text="{Binding CurrentAttachment.Name}"
-                                    TextTrimming="CharacterEllipsis"
-                                    TextWrapping="NoWrap">
+                                <Grid
+                                    Background="Transparent"
+                                    ColumnDefinitions="Auto,*"
+                                    DoubleTapped="OnAttachmentDoubleTapped">
 
-                                    <ToolTip.Tip>
-                                        <TextBlock Text="{Binding CurrentAttachment.Name}" />
-                                    </ToolTip.Tip>
-                                </TextBlock>
+                                    <Canvas
+                                        Grid.Column="0"
+                                        Width="10"
+                                        Height="10"
+                                        Background="{Binding CurrentAttachment.AttachmentTypeColor}" />
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        Margin="3,0,0,0"
+                                        FontSize="11"
+                                        Opacity="0.6"
+                                        Text="{Binding CurrentAttachment.Name}"
+                                        TextTrimming="CharacterEllipsis"
+                                        TextWrapping="NoWrap">
+
+                                        <ToolTip.Tip>
+                                            <TextBlock Text="{Binding CurrentAttachment.Name}" />
+                                        </ToolTip.Tip>
+                                    </TextBlock>
+                                </Grid>
                             </StackPanel>
 
                             <NumericUpDown
                                 Grid.Column="1"
-                                Width="80"
-                                MinWidth="60"
-                                Margin="12,0,0,0"
-                                Padding="4"
+                                Width="60"
+                                Margin="6,0,0,0"
+                                Padding="2"
                                 VerticalAlignment="Center"
                                 Increment="1"
                                 Value="{Binding CurrentDrawOrderOffset}" />

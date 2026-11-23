@@ -1,15 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Reactive.Linq;
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Media;
-using Avalonia.Media.Imaging;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Models.DTO;
 using PlumJsonAnimator.Models.Interfaces;
-using PlumJsonAnimator.Services;
+using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
+using PlumJsonAnimator.Views;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
@@ -18,21 +17,21 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
     /// <summary>
     /// Provides methods for work with slots
     /// </summary>
-    public class Slot : Bone, IRenamable
+    public class Slot : ReactiveObject, IRenamable, IPresentableItem
     {
-        public override bool IsBone
-        {
-            get { return false; }
-        }
-
         public double LocalX = 0;
         public double LocalY = 0;
         public double LocalA = 0;
 
         [Reactive]
+        public string Name { get; set; } = "";
+
+        [Reactive]
         public Attachment? CurrentAttachment { get; set; }
 
-        public override double X
+        public PanelTypes PanelType => PanelTypes.SLOTINFO;
+
+        public double X
         {
             get => BoundedBone != null ? BoundedBone.X + LocalX : LocalX;
             set
@@ -42,7 +41,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
-        public override double Y
+        public double Y
         {
             get => BoundedBone != null ? BoundedBone.Y + LocalY : LocalY;
             set
@@ -52,7 +51,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
-        public override double A
+        public double A
         {
             get => BoundedBone != null ? BoundedBone.A + LocalA : LocalA;
             set
@@ -71,13 +70,19 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 return;
 
             CurrentAttachment = attachment;
-            if (CurrentAttachment != null && BoundedBone != null)
+            if (
+                CurrentAttachment != null
+                && BoundedBone != null
+                && CurrentAttachment.AttachmentType == AttachmentTypes.REGION
+            )
             {
-                LocalX = CurrentAttachment._x;
-                LocalY = CurrentAttachment._y;
-                LocalA = CurrentAttachment._a;
+                var regionAttachment = (RegionAttachment)CurrentAttachment;
 
-                var size = CurrentAttachment.GetSize();
+                LocalX = regionAttachment.X;
+                LocalY = regionAttachment.Y;
+                LocalA = regionAttachment.A;
+
+                var size = regionAttachment.GetSize();
                 LengthX = size["width"] ?? LengthX;
                 LengthY = size["height"] ?? LengthY;
 
@@ -199,6 +204,8 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
+        private GlobalState _globalState;
+
         private Slot(GlobalState _globalState)
         {
             this.WhenAnyValue(x => x.CurrentDrawOrderOffset)
@@ -252,7 +259,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// </summary>
         /// <param name="x">Target x coordinate</param>
         /// <param name="y">Target y coordinate</param>
-        public override void Move(double x, double y)
+        public void Move(double x, double y)
         {
             if (BoundedBone != null)
             {
@@ -275,7 +282,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// </summary>
         /// <param name="x">X click coordinate</param>
         /// <param name="y">Y click coordinate</param>
-        public override void Scale(double x, double y)
+        public void Scale(double x, double y)
         {
             if (CurrentAttachment != null)
             {
@@ -293,7 +300,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         /// Rotates slot
         /// </summary>
         /// <param name="a">Target angle</param>
-        public override void Rotate(double a)
+        public void Rotate(double a)
         {
             if (BoundedBone != null)
             {
@@ -306,21 +313,20 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             CurrentAttachment?.SetPos(LocalX, LocalY, LocalA);
         }
 
-        public void DrawSlotSelection(Canvas canvas)
+        private static readonly IPen SelectedSlotPen = new Pen(AppColors.Red, 2);
+
+        public void DrawSlotSelection(DrawingContext context)
         {
             if (_globalState.IsSlotSelected(this))
             {
-                var border = new Border
-                {
-                    Width = 10,
-                    Height = 10,
-                    BorderBrush = AppColors.Red,
-                    BorderThickness = new Thickness(2),
-                };
-                Canvas.SetLeft(border, canvas.Width / 2 + GlobalX - 5);
-                Canvas.SetTop(border, canvas.Height / 2 + GlobalY - 5);
-                canvas.Children.Add(border);
+                var rect = new Rect(GlobalX - 5, GlobalY - 5, 10, 10);
+                context.DrawRectangle(null, SelectedSlotPen, rect);
             }
+        }
+
+        public void Draw(DrawingContext context)
+        {
+            DrawSlotSelection(context);
         }
 
         public new SlotData GenerateJSONData()
@@ -351,6 +357,16 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                     Name = name;
                 }
             }
+        }
+
+        public InfoPanelDTO GetInfoPanelDTO()
+        {
+            return new InfoPanelDTO() { Slot = this };
+        }
+
+        public void Shear(double x, double y)
+        {
+            return;
         }
 
         public new string GetName

@@ -1,10 +1,13 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Avalonia.Controls;
+using Avalonia.Media;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
+using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 
 namespace PlumJsonAnimator.Models.SkeletonNameSpace
 {
@@ -64,6 +67,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                 SlotAttachmentBinding.Add(s, a);
             }
             s.UpdateAttachment(GetAttachment(s));
+            a.Slot = s;
         }
 
         /// <summary>
@@ -85,28 +89,63 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         public void RestoreSlot(Slot s, Attachment a)
         {
             SlotAttachmentBinding[s] = a;
+            a.Slot = s;
         }
 
         public void DeleteSlot(Slot s)
         {
             if (SlotAttachmentBinding.ContainsKey(s))
             {
+                var a = SlotAttachmentBinding[s];
+                if (a is not null)
+                {
+                    a.Slot = null;
+                }
                 SlotAttachmentBinding.Remove(s);
+            }
+        }
+
+        public void DeleteAttachment(Slot s)
+        {
+            if (SlotAttachmentBinding.ContainsKey(s))
+            {
+                var a = SlotAttachmentBinding[s];
+                if (a is not null)
+                {
+                    a.Slot = null;
+                    SlotAttachmentBinding[s] = null;
+                }
             }
         }
 
         /// <summary>
         /// Draws skin
         /// </summary>
-        /// <param name="canvas"></param>
-        public void DrawSkin(Canvas canvas)
+        /// <param name="context"></param>
+        public void DrawSkin(DrawingContext context)
         {
+            ClipAttachment? clipAttachment = null;
             foreach (var item in SlotAttachmentBinding.OrderBy(it => it.Key.CurrentDrawOrderOffset))
             {
                 if (_globalState.CurrentProject!.CurrentSkin.IsSlotDrawable(item.Key))
                 {
-                    item.Value?.DrawAttachment(item.Key, canvas);
-                    item.Key.DrawSlotSelection(canvas);
+                    var attachment = item.Value;
+                    var slot = item.Key;
+                    if (attachment is ClipAttachment clipAttachment1)
+                    {
+                        clipAttachment = clipAttachment1;
+                    }
+
+                    attachment?.DrawAttachment(item.Key, context, clipAttachment);
+                    slot.DrawSlotSelection(context);
+
+                    if (clipAttachment is not null)
+                    {
+                        if (slot.Name == clipAttachment.EndSlotName)
+                        {
+                            clipAttachment = null;
+                        }
+                    }
                 }
             }
         }
@@ -120,9 +159,13 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             foreach (Attachment? a in SlotAttachmentBinding.Values)
             {
-                if (a?.GetRes() == res)
+                if (a?.AttachmentType == AttachmentTypes.REGION)
                 {
-                    return true;
+                    var regionAttachment = a as RegionAttachment;
+                    if (regionAttachment?.GetRes() == res)
+                    {
+                        return true;
+                    }
                 }
             }
             return false;
@@ -144,11 +187,18 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             foreach (Slot s in SlotAttachmentBinding.Keys)
             {
-                if (SlotAttachmentBinding[s] != null && SlotAttachmentBinding[s].GetRes() == res)
+                if (
+                    SlotAttachmentBinding[s] != null
+                    && SlotAttachmentBinding[s].AttachmentType == AttachmentTypes.REGION
+                )
                 {
-                    SlotAttachmentBinding[s] = null;
-                    s.UpdateAttachment(GetAttachment(s));
-                    return;
+                    var a = (RegionAttachment)SlotAttachmentBinding[s];
+                    if (a.GetRes() == res)
+                    {
+                        SlotAttachmentBinding[s] = null;
+                        s.UpdateAttachment(GetAttachment(s));
+                        return;
+                    }
                 }
             }
         }
@@ -161,7 +211,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
         {
             if (SlotAttachmentBinding.ContainsKey(s) && SlotAttachmentBinding[s] != null)
             {
-                return ((ImageAttachment)SlotAttachmentBinding[s]).GetPath();
+                return ((RegionAttachment)SlotAttachmentBinding[s]).GetPath();
             }
             else
             {
@@ -206,6 +256,16 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             if (SlotAttachmentBinding.ContainsKey(s))
             {
                 return SlotAttachmentBinding[s];
+            }
+            return null;
+        }
+
+        public Slot? GetSlot(Attachment s)
+        {
+            foreach (var kvp in SlotAttachmentBinding)
+            {
+                if (Equals(kvp.Value, s))
+                    return kvp.Key;
             }
             return null;
         }

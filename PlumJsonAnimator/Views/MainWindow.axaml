@@ -364,19 +364,19 @@
                                                     </DrawingBrush>
                                                 </Grid.Background>
 
-                                                <Canvas
+                                                <ctrls:MainCanvas
                                                     Name="mainCanvas"
                                                     Width="1000"
                                                     Height="1000"
-                                                    Background="Transparent"
+                                                    GlobalState="{Binding GlobalState}"
                                                     PointerMoved="Move_Canvas"
                                                     PointerPressed="Press_Canvas"
                                                     PointerReleased="Release_Canvas"
                                                     UseLayoutRounding="False">
-                                                    <Canvas.RenderTransform>
+                                                    <Control.RenderTransform>
                                                         <ScaleTransform ScaleX="{Binding ZoomCanvas}" ScaleY="{Binding ZoomCanvas}" />
-                                                    </Canvas.RenderTransform>
-                                                </Canvas>
+                                                    </Control.RenderTransform>
+                                                </ctrls:MainCanvas>
 
                                             </Grid>
                                         </ScrollViewer>
@@ -809,7 +809,7 @@
                     Background="{DynamicResource SukiPrimaryColor}"
                     ResizeDirection="Rows" />
                 <DockPanel Grid.Row="2">
-                    <ContentControl Content="{Binding CurrentInfoPanel}" />
+                    <ContentControl Content="{Binding PanelState.CurrentInfoPanel}" />
                 </DockPanel>
             </Grid>
         </Grid>

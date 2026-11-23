@@ -2,13 +2,17 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using Avalonia.Controls;
+using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models.Commands;
 using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
+using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
 using PlumJsonAnimator.Services;
+using PlumJsonAnimator.ViewModels;
 using static PlumJsonAnimator.Services.JsonCode;
 
 namespace PlumJsonAnimator.Models.Common;
@@ -22,7 +26,6 @@ public class PlumApp
     private readonly Interpolation _interpolation;
     private readonly ProjectFilesManager _fileManager;
     private readonly JsonCode _jsonCode;
-    private readonly JsonValidator _jsonValidator;
     private readonly JsonExport _jsonExport;
     private readonly Prettify _prettify;
     private readonly Engine _engine;
@@ -31,6 +34,10 @@ public class PlumApp
     private readonly AutoSaver _autoSaver;
     private readonly CanvasRenderer _canvasUpdater;
     private readonly EasingFactory _easingFactory;
+    private readonly AttachmentFactory _attachmentFactory;
+    private readonly AttachmentTypeConverter _attachmentTypeConverter;
+    private readonly ProjectFilesManager _projectFilesManager;
+    private readonly Dialogs _dialogs;
 
     public PlumApp(
         AppSettings appSettings,
@@ -39,7 +46,6 @@ public class PlumApp
         LocalizationService localization,
         ProjectFilesManager projectManager,
         JsonCode jsonCode,
-        JsonValidator jsonValidator,
         JsonExport jsonExport,
         Prettify prettify,
         Engine engine,
@@ -47,7 +53,11 @@ public class PlumApp
         HistoryManager historyManager,
         AutoSaver autoSaver,
         CanvasRenderer canvasUpdater,
-        EasingFactory easingFactory
+        EasingFactory easingFactory,
+        AttachmentFactory attachmentFactory,
+        AttachmentTypeConverter attachmentTypeConverter,
+        ProjectFilesManager projectFilesManager,
+        Dialogs dialogs
     )
     {
         Localization = localization;
@@ -57,7 +67,6 @@ public class PlumApp
         _interpolation = interpolation;
         _fileManager = projectManager;
         _jsonCode = jsonCode;
-        _jsonValidator = jsonValidator;
         _jsonExport = jsonExport;
         _prettify = prettify;
         _engine = engine;
@@ -66,6 +75,10 @@ public class PlumApp
         _autoSaver = autoSaver;
         _canvasUpdater = canvasUpdater;
         _easingFactory = easingFactory;
+        _attachmentFactory = attachmentFactory;
+        _attachmentTypeConverter = attachmentTypeConverter;
+        _projectFilesManager = projectFilesManager;
+        _dialogs = dialogs;
     }
 
     public void Start()
@@ -90,7 +103,14 @@ public class PlumApp
         );
 
         InitProject(
-            new Project(projectSettings, _globalState, _interpolation, Localization, _easingFactory)
+            new Project(
+                projectSettings,
+                _globalState,
+                _interpolation,
+                Localization,
+                _easingFactory,
+                _attachmentFactory
+            )
         );
 
         _autoSaver.StartAutoSaveAsync(_globalState.AutoSaveSec);
@@ -123,7 +143,8 @@ public class PlumApp
             _globalState,
             _interpolation,
             Localization,
-            _easingFactory
+            _easingFactory,
+            _attachmentFactory
         );
 
         InitProject(newProject);
@@ -205,7 +226,9 @@ public class PlumApp
                 bone,
                 _globalState.CurrentProject,
                 res,
-                new Slot(_globalState, bone)
+                new Slot(_globalState, bone),
+                _attachmentFactory,
+                new AttachmentDTO() { Name = res.Name, Res = res }
             );
             _historyManager.DoCommand(dropImageToBoneCommand);
         }
@@ -253,7 +276,8 @@ public class PlumApp
                 _globalState,
                 _interpolation,
                 Localization,
-                _easingFactory
+                _easingFactory,
+                _attachmentFactory
             );
 
             _globalState.CurrentProject = newProject;
@@ -331,7 +355,7 @@ public class PlumApp
                 s.RemoveResIfContains(res);
             }
             _globalState.CurrentProject.Resources.Remove(res);
-            _fileManager.DeleteResource(res.Name, res.ext, _globalState.CurrentProject);
+            _fileManager.DeleteResource(res.Name, res.Ext, _globalState.CurrentProject);
         }
     }
 
@@ -381,8 +405,7 @@ public class PlumApp
 
     public void AddSlot()
     {
-        Bone? bone = _globalState.CurrentBone;
-        if (bone != null)
+        if (_globalState.SelectedItem is Bone bone)
         {
             Slot s = new Slot(_globalState, bone);
             AddSlotCommand addSlotCommand = new AddSlotCommand(
@@ -396,24 +419,27 @@ public class PlumApp
 
     public void DeleteSlot(Slot? selectedSlot)
     {
-        if (selectedSlot != null)
+        if (_globalState.SelectedItem is Bone bone)
         {
-            DeleteSlotCommand deleteSlotCommand = new DeleteSlotCommand(
-                _globalState.CurrentProject,
-                selectedSlot,
-                _globalState.CurrentBone
-            );
-            _historyManager.DoCommand(deleteSlotCommand);
+            if (selectedSlot != null)
+            {
+                DeleteSlotCommand deleteSlotCommand = new DeleteSlotCommand(
+                    _globalState.CurrentProject,
+                    selectedSlot,
+                    bone
+                );
+                _historyManager.DoCommand(deleteSlotCommand);
+            }
         }
     }
 
     public void AddKeyFrame()
     {
-        if (_globalState.CurrentBone != null)
+        if (_globalState.SelectedItem is Bone bone)
         {
             AddKeyFrameCommand addKeyFrameCommand = new AddKeyFrameCommand(
                 _globalState.CurrentProject.CurrentAnimation,
-                _globalState.CurrentBone,
+                bone,
                 _globalState.CurrentProject.CurrentMode.Type,
                 _easingFactory.CreateEasing(_globalState.CurrentEasingType)
             );
@@ -423,11 +449,11 @@ public class PlumApp
 
     public void DeleteKeyFrame()
     {
-        if (_globalState.CurrentBone != null)
+        if (_globalState.SelectedItem is Bone bone)
         {
             DeleteKeyFrameCommand deleteKeyFrameCommand = new DeleteKeyFrameCommand(
                 _globalState.CurrentProject.CurrentAnimation,
-                _globalState.CurrentBone,
+                bone,
                 _globalState.CurrentProject.CurrentMode.Type
             );
             _historyManager.DoCommand(deleteKeyFrameCommand);
@@ -443,25 +469,31 @@ public class PlumApp
 
     public void Transform(double a, double b)
     {
-        _globalState.CurrentProject?.CurrentMode.Transform(
-            _globalState.CurrentBone,
-            a,
-            b,
-            _easingFactory.CreateEasing(_globalState.CurrentEasingType)
-        );
+        if (_globalState.SelectedItem is Bone bone)
+        {
+            _globalState.CurrentProject?.CurrentMode.Transform(
+                bone,
+                a,
+                b,
+                _easingFactory.CreateEasing(_globalState.CurrentEasingType)
+            );
+        }
     }
 
     public void ChangeBoneStatus(BoneStatus oldBoneStatus, BoneStatus newBoneStatus, bool isAnim)
     {
-        ChangeBoneStatusCommand changeBoneStatusCommand = new ChangeBoneStatusCommand(
-            _globalState.CurrentBone,
-            oldBoneStatus,
-            newBoneStatus,
-            _globalState.CurrentProject.CurrentAnimation,
-            isAnim,
-            _globalState.CurrentProject.CurrentAnimation.CurrentTime
-        );
-        _historyManager.DoCommand(changeBoneStatusCommand);
+        if (_globalState.SelectedItem is Bone bone)
+        {
+            ChangeBoneStatusCommand changeBoneStatusCommand = new ChangeBoneStatusCommand(
+                bone,
+                oldBoneStatus,
+                newBoneStatus,
+                _globalState.CurrentProject.CurrentAnimation,
+                isAnim,
+                _globalState.CurrentProject.CurrentAnimation.CurrentTime
+            );
+            _historyManager.DoCommand(changeBoneStatusCommand);
+        }
     }
 
     public void Undo()

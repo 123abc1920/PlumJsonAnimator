@@ -1,0 +1,50 @@
+using System.Windows.Input;
+using Avalonia.Input;
+using PlumJsonAnimator.Common.Constants;
+using PlumJsonAnimator.Common.Constants.Command;
+using PlumJsonAnimator.Models.Resources;
+using PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
+using ReactiveUI;
+
+namespace PlumJsonAnimator.ViewModels;
+
+public partial class RegionAttachmentInfoViewModel : ReactiveObject
+{
+    public ImageRes? Image
+    {
+        get => RegionAttachment.ImageRes;
+        set
+        {
+            if (RegionAttachment.ImageRes != value)
+            {
+                RegionAttachment.ImageRes = value;
+                this.RaisePropertyChanged(nameof(Image));
+            }
+        }
+    }
+
+    public ICommand DropImageCommand { get; }
+    public ICommand DeleteImage { get; }
+
+    public RegionAttachment RegionAttachment { get; set; }
+
+    public RegionAttachmentInfoViewModel(RegionAttachment regionAttachment)
+    {
+        RegionAttachment = regionAttachment;
+
+        DropImageCommand = new Command(parameter =>
+        {
+            if (
+                parameter is DragEventArgs e
+                && e.Data.Get(Consts.RESOURCE_DRAG_DATA) is ImageRes droppedImage
+            )
+            {
+                Image = droppedImage;
+            }
+        });
+        DeleteImage = new Command(_ =>
+        {
+            Image = null;
+        });
+    }
+}

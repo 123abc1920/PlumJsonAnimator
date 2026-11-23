@@ -1,0 +1,48 @@
+<UserControl
+    x:Class="PlumJsonAnimator.Views.RegionAttachmentInfo"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:iconPacks="https://github.com/MahApps/IconPacks.Avalonia"
+    xmlns:suki="clr-namespace:SukiUI.Controls;assembly=SukiUI"
+    xmlns:viewModels="clr-namespace:PlumJsonAnimator.ViewModels"
+    x:DataType="viewModels:RegionAttachmentInfoViewModel"
+    Background="{DynamicResource SukiBackgroundBrush}">
+    <ScrollViewer Margin="5" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <Grid ColumnDefinitions="*,Auto,Auto">
+                <TextBlock
+                    Grid.Column="0"
+                    Height="24"
+                    FontSize="14"
+                    Text="Image:" />
+                <Button
+                    Grid.Column="1"
+                    Width="32"
+                    Height="32"
+                    Padding="0"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Command="{Binding DeleteImage}">
+                    <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
+                </Button>
+            </Grid>
+            <Border
+                x:Name="DropBorder"
+                MinWidth="200"
+                HorizontalAlignment="Left"
+                Background="Transparent">
+                <TextBox IsHitTestVisible="False" Text="{Binding Image.Path}" />
+                <ToolTip.Tip>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Image.Path}" />
+                        <Image
+                            MaxWidth="200"
+                            MaxHeight="150"
+                            Source="{Binding Image.Preview}"
+                            Stretch="Uniform" />
+                    </StackPanel>
+                </ToolTip.Tip>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

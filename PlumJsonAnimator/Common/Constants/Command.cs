@@ -1,21 +1,20 @@
 using System;
 using System.Windows.Input;
 
-namespace PlumJsonAnimator.Common.Constants.Command
+namespace PlumJsonAnimator.Common.Constants.Command;
+
+public class Command : ICommand
 {
-    public class Command : ICommand
+    private readonly Action<object> _execute;
+
+    public Command(Action<object> execute)
     {
-        private readonly Action<object> _execute;
-
-        public Command(Action<object> execute)
-        {
-            _execute = execute;
-        }
-
-        public event EventHandler? CanExecuteChanged;
-
-        public bool CanExecute(object parameter) => true;
-
-        public void Execute(object parameter) => _execute(parameter);
+        _execute = execute;
     }
+
+    public event EventHandler? CanExecuteChanged;
+
+    public bool CanExecute(object parameter) => true;
+
+    public void Execute(object parameter) => _execute(parameter);
 }

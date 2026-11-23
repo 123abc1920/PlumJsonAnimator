@@ -53,7 +53,7 @@ public class Interpolation
     {
         double t = segmentDuration > 0 ? timeElapsed / segmentDuration : 1.0;
 
-        if (!(easing is null))
+        if (easing is not null)
         {
             t = easing.Ease(t);
         }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.ViewModels;
@@ -24,12 +25,12 @@ public partial class AppSettingsViewModel : ViewModelBase
     public List<string> Themes { get; set; } = new List<string>() { "light", "dark" };
     public string CurrentTheme
     {
-        get => _globalState.Theme;
+        get => GlobalState.Theme;
         set
         {
-            if (_globalState.Theme != value)
+            if (GlobalState.Theme != value)
             {
-                _globalState.Theme = value;
+                GlobalState.Theme = value;
                 OnPropertyChanged(nameof(CurrentTheme));
             }
         }
@@ -51,19 +52,19 @@ public partial class AppSettingsViewModel : ViewModelBase
     public AppSettingsViewModel(
         GlobalState globalState,
         Dialogs dialogs,
-        ProjectFilesManager projectManager,
         AppSettings appSettings,
         LocalizationService localizationService,
         ImageExporter imageExporter,
+        ViewModelFactory viewModelFactory,
         PlumApp plumApp
     )
         : base(
             globalState,
             dialogs,
-            projectManager,
             appSettings,
             localizationService,
             imageExporter,
+            viewModelFactory,
             plumApp
         )
     {

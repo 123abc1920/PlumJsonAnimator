@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Common.TransformModes;
 
 namespace PlumJsonAnimator.Common.Constants
 {

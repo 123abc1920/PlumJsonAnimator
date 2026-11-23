@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Avalonia.Controls;
+using Avalonia.Media;
 using Newtonsoft.Json;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Models.Interfaces;
@@ -49,12 +50,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                     break;
                 }
             }
-            Bone newBone = new Bone(
-                _globalState,
-                parentBone,
-                _last_bone_id,
-                _localizationService
-            );
+            Bone newBone = new Bone(_globalState, parentBone, _last_bone_id, _localizationService);
             Bones.Add(newBone);
             parentBone.AddChildren(newBone);
             _last_bone_id++;
@@ -97,9 +93,9 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             return null;
         }
 
-        public void DrawSkeleton(Canvas canvas)
+        public void DrawSkeleton(DrawingContext context)
         {
-            RootBones[0].DrawBone(canvas);
+            RootBones[0].DrawBone(context);
         }
 
         public void RecalculateBones()

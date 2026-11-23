@@ -1,0 +1,136 @@
+<UserControl
+    x:Class="PlumJsonAnimator.Views.SlotInfo"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attachments="clr-namespace:PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;assembly=PlumJsonAnimator"
+    xmlns:iconPacks="https://github.com/MahApps/IconPacks.Avalonia"
+    xmlns:suki="clr-namespace:SukiUI.Controls;assembly=SukiUI"
+    xmlns:viewModels="clr-namespace:PlumJsonAnimator.ViewModels"
+    x:DataType="viewModels:SlotInfoViewModel"
+    Background="{DynamicResource SukiBackgroundBrush}">
+
+    <ScrollViewer
+        Margin="5"
+        HorizontalScrollBarVisibility="Disabled"
+        VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="{DynamicResource info}" />
+            <Grid ColumnDefinitions="Auto,*">
+                <TextBlock
+                    Grid.Column="0"
+                    VerticalAlignment="Center"
+                    Text="Name:" />
+                <TextBox
+                    Grid.Column="1"
+                    Margin="2,0,0,0"
+                    Text="{Binding CurrentSlot.Name}">
+                    <ToolTip.Tip>
+                        <TextBlock Text="{Binding CurrentSlot.Name}" />
+                    </ToolTip.Tip>
+                </TextBox>
+            </Grid>
+            <TextBlock
+                Height="24"
+                FontSize="14"
+                Text="Bone:" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ComboBox
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Height="32"
+                    Margin="0,0,0,5"
+                    Padding="6,4"
+                    DisplayMemberBinding="{Binding Name}"
+                    FontSize="13"
+                    ItemsSource="{Binding Bones}"
+                    SelectedItem="{Binding SelectedBone, Mode=TwoWay}">
+                    <ToolTip.Tip>
+                        <TextBlock Text="{Binding SelectedBone.Name}" />
+                    </ToolTip.Tip>
+                </ComboBox>
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Width="32"
+                    Height="32"
+                    Padding="0"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Command="{Binding OpenBone}">
+                    <iconPacks:PackIconBootstrapIcons Kind="ArrowBarRight" />
+                </Button>
+            </Grid>
+            <Grid ColumnDefinitions="*,Auto,Auto">
+                <TextBlock
+                    Grid.Column="0"
+                    FontSize="14"
+                    Text="Attachment:" />
+                <Button
+                    Grid.Column="1"
+                    Width="32"
+                    Height="32"
+                    Padding="0"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center">
+                    <Button.Flyout>
+                        <MenuFlyout Placement="BottomEdgeAlignedLeft">
+                            <MenuItem
+                                Command="{Binding AddAttachment}"
+                                CommandParameter="{x:Static attachments:AttachmentTypes.REGION}"
+                                Header="Add region" />
+                            <MenuItem
+                                Command="{Binding AddAttachment}"
+                                CommandParameter="{x:Static attachments:AttachmentTypes.CLIPPING}"
+                                Header="Add clipping" />
+                        </MenuFlyout>
+                    </Button.Flyout>
+                    <iconPacks:PackIconBootstrapIcons Kind="Plus" />
+                </Button>
+                <Button
+                    Grid.Column="2"
+                    Width="32"
+                    Height="32"
+                    Padding="0"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Command="{Binding DeleteAttachment}">
+                    <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
+                </Button>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Canvas
+                    Grid.Column="0"
+                    Width="10"
+                    Height="10"
+                    Background="{Binding SelectedAttachment.AttachmentTypeColor}" />
+                <TextBox
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    Text="{Binding SelectedAttachment.Name}">
+                    <ToolTip.Tip>
+                        <TextBlock Text="{Binding SelectedAttachment.Name}" />
+                    </ToolTip.Tip>
+                </TextBox>
+                <Button
+                    Grid.Column="2"
+                    Width="32"
+                    Height="32"
+                    Padding="0"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Command="{Binding OpenAttachment}">
+                    <iconPacks:PackIconBootstrapIcons Kind="ArrowBarRight" />
+                </Button>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

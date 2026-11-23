@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Windows.Input;
 using Avalonia.Controls;
-using Microsoft.Extensions.DependencyInjection;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Constants.Command;
 using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Common.States;
 using PlumJsonAnimator.Common.Timeline;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Common.TransformModes;
+using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
@@ -20,7 +22,7 @@ namespace PlumJsonAnimator.ViewModels;
 // TODO: add factory pattern
 public partial class MainWindowViewModel : ViewModelBase
 {
-    public Canvas? Canvas
+    public Control? Canvas
     {
         get { return _imageExporter.Canvas; }
         set { _imageExporter.Canvas = value; }
@@ -28,12 +30,12 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public int CanvasWidth
     {
-        get { return _globalState.CanvasWidth; }
+        get { return GlobalState.CanvasWidth; }
         set
         {
-            if (_globalState.CanvasWidth != value)
+            if (GlobalState.CanvasWidth != value)
             {
-                _globalState.CanvasWidth = value;
+                GlobalState.CanvasWidth = value;
                 OnPropertyChanged(nameof(CanvasWidth));
             }
         }
@@ -41,12 +43,12 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public int CanvasHeight
     {
-        get { return _globalState.CanvasHeight; }
+        get { return GlobalState.CanvasHeight; }
         set
         {
-            if (_globalState.CanvasHeight != value)
+            if (GlobalState.CanvasHeight != value)
             {
-                _globalState.CanvasHeight = value;
+                GlobalState.CanvasHeight = value;
                 OnPropertyChanged(nameof(CanvasHeight));
             }
         }
@@ -54,12 +56,12 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public int CurrentTab
     {
-        get => _globalState.CurrentTab;
+        get => GlobalState.CurrentTab;
         set
         {
-            if (_globalState.CurrentTab != value)
+            if (GlobalState.CurrentTab != value)
             {
-                _globalState.CurrentTab = value;
+                GlobalState.CurrentTab = value;
                 CurrentBone = null;
                 OnPropertyChanged(nameof(CurrentTab));
             }
@@ -87,22 +89,22 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public JsonError JsonErrorObj
     {
-        get { return _globalState.JsonError; }
+        get { return GlobalState.JsonError; }
     }
 
     public int FPS
     {
-        get { return _globalState.FPS; }
+        get { return GlobalState.FPS; }
     }
 
     public bool DrawBones
     {
-        get { return _globalState.DrawBones; }
+        get { return GlobalState.DrawBones; }
         set
         {
-            if (_globalState.DrawBones != value)
+            if (GlobalState.DrawBones != value)
             {
-                _globalState.DrawBones = value;
+                GlobalState.DrawBones = value;
                 OnPropertyChanged(nameof(DrawBones));
             }
         }
@@ -110,12 +112,12 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public bool SetBasePos
     {
-        get { return _globalState.SetBasePos; }
+        get { return GlobalState.SetBasePos; }
         set
         {
-            if (_globalState.SetBasePos != value)
+            if (GlobalState.SetBasePos != value)
             {
-                _globalState.SetBasePos = value;
+                GlobalState.SetBasePos = value;
                 OnPropertyChanged(nameof(SetBasePos));
             }
         }
@@ -123,12 +125,12 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public bool CaptureMode
     {
-        get { return _globalState.CaptureMode; }
+        get { return GlobalState.CaptureMode; }
         set
         {
-            if (_globalState.CaptureMode != value)
+            if (GlobalState.CaptureMode != value)
             {
-                _globalState.CaptureMode = value;
+                GlobalState.CaptureMode = value;
                 OnPropertyChanged(nameof(CaptureMode));
             }
         }
@@ -146,23 +148,23 @@ public partial class MainWindowViewModel : ViewModelBase
 
                 if (value == "transform")
                 {
-                    CurrentProject!.CurrentMode = new TransformMode(_globalState);
+                    CurrentProject!.CurrentMode = new TransformMode(GlobalState);
                 }
                 else if (value == "rotate")
                 {
-                    CurrentProject!.CurrentMode = new RotateMode(_globalState);
+                    CurrentProject!.CurrentMode = new RotateMode(GlobalState);
                 }
                 else if (value == "scale")
                 {
-                    CurrentProject!.CurrentMode = new ScaleMode(_globalState);
+                    CurrentProject!.CurrentMode = new ScaleMode(GlobalState);
                 }
                 else if (value == "shear")
                 {
-                    CurrentProject!.CurrentMode = new ShearMode(_globalState);
+                    CurrentProject!.CurrentMode = new ShearMode(GlobalState);
                 }
                 else
                 {
-                    CurrentProject!.CurrentMode = new NoMode(_globalState);
+                    CurrentProject!.CurrentMode = new NoMode(GlobalState);
                 }
 
                 OnPropertyChanged(nameof(TransformMode));
@@ -185,43 +187,31 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
-    private bool _isAnimMode = true;
-    public bool IsAnimMode
-    {
-        set
-        {
-            if (_isAnimMode != value)
-            {
-                _isAnimMode = value;
-                OnPropertyChanged(nameof(IsAnimMode));
-            }
-        }
-        get => _isAnimMode;
-    }
-
     public DateTime LastSaveTime
     {
-        get => _globalState.LastSaveTime;
-        set => _globalState.LastSaveTime = value;
+        get => GlobalState.LastSaveTime;
+        set => GlobalState.LastSaveTime = value;
     }
-
-    public object CurrentInfoPanel { get; set; }
 
     public string IsTransformModeActive => TransformMode;
 
     public Bone? CurrentBone
     {
-        get => _globalState.CurrentBone;
+        get => GlobalState.SelectedItem as Bone;
         set
         {
-            if (_globalState.CurrentBone != value)
+            if (value is null)
             {
-                _globalState.CurrentBone = value;
-                _globalState.CurrentBone?.UpdateSlots();
-                // TODO: фабрика
-                CurrentInfoPanel = new BoneInfo();
+                GlobalState.SelectedItem = null;
                 OnPropertyChanged(nameof(CurrentBone));
-                OnPropertyChanged(nameof(CurrentInfoPanel));
+                return;
+            }
+
+            if (value is Bone bone && GlobalState.SelectedItem != bone)
+            {
+                GlobalState.SelectedItem = (IPresentableItem?)bone;
+                bone.UpdateSlots();
+                OnPropertyChanged(nameof(CurrentBone));
             }
         }
     }
@@ -231,16 +221,12 @@ public partial class MainWindowViewModel : ViewModelBase
     private const double MaxZoomCanvas = 5.0;
     public double ZoomCanvas
     {
-        get => _globalState.ZoomCanvas;
+        get => GlobalState.ZoomCanvas;
         set
         {
-            if (
-                _globalState.ZoomCanvas != value
-                && value > MinZoomCanvas
-                && value < MaxZoomCanvas
-            )
+            if (GlobalState.ZoomCanvas != value && value > MinZoomCanvas && value < MaxZoomCanvas)
             {
-                _globalState.ZoomCanvas = value;
+                GlobalState.ZoomCanvas = value;
                 CanvasWidth = (int)(GlobalState.BaseCanvasSize * value);
                 CanvasHeight = (int)(GlobalState.BaseCanvasSize * value);
                 OnPropertyChanged(nameof(ZoomCanvas));
@@ -263,45 +249,9 @@ public partial class MainWindowViewModel : ViewModelBase
         _dialogs.MainWin = window;
     }
 
-    private ViewModelBase GetViewModel(DialogType viewType)
-    {
-        ViewModelBase viewModel = this;
-
-        if (viewType == DialogType.SETTINGS)
-        {
-            viewModel = _serviceProvider.GetRequiredService<AppSettingsViewModel>();
-        }
-        if (viewType == DialogType.NEWPROJECT)
-        {
-            viewModel = _serviceProvider.GetRequiredService<NewProjectViewModel>();
-        }
-        if (viewType == DialogType.RENAME)
-        {
-            viewModel = _serviceProvider.GetRequiredService<RenameViewModel>();
-        }
-        if (viewType == DialogType.EXPORT_JPG)
-        {
-            viewModel = _serviceProvider.GetRequiredService<ExportPanelJPGViewModel>();
-        }
-        if (viewType == DialogType.EXPORT_PNG)
-        {
-            viewModel = _serviceProvider.GetRequiredService<ExportPanelPNGViewModel>();
-        }
-        if (viewType == DialogType.EXPORT_GIF)
-        {
-            viewModel = _serviceProvider.GetRequiredService<ExportPanelGIFViewModel>();
-        }
-        if (viewType == DialogType.EXPORT_MP4)
-        {
-            viewModel = _serviceProvider.GetRequiredService<ExportPanelMP4ViewModel>();
-        }
-
-        return viewModel;
-    }
-
     public async void ShowDialog(string title, Window owner, DialogType viewType)
     {
-        ViewModelBase viewModel = GetViewModel(viewType);
+        ViewModelBase viewModel = _viewModelFactory.GetViewModel(viewType);
         _dialogs.ShowDialog(title, viewModel, owner, viewType);
     }
 
@@ -337,30 +287,15 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public void Transform(double a, double b)
     {
-        if (_globalState.CurrentBone != null)
+        if (GlobalState.SelectedItem is Bone bone)
         {
             PlumApp.Transform(a, b);
-        }
-    }
-
-    private void OpenRenameDialog(IRenamable? _renamableObject)
-    {
-        if (_renamableObject != null)
-        {
-            var viewModel = (RenameViewModel)GetViewModel(DialogType.RENAME);
-            viewModel.RenamableObject = _renamableObject;
-            _dialogs.ShowDialog(
-                GetMessage(LocalizationConsts.RENAME),
-                viewModel,
-                DialogType.RENAME
-            );
         }
     }
 
     public ICommand AddBoneView { get; }
     public ICommand RenameRes { get; }
     public ICommand DeleteRes { get; }
-    public ICommand RenameSlot { get; }
     public ICommand RenameBone { get; }
     public ICommand DeleteBone { get; }
     public ICommand SetTransformMode { get; }
@@ -368,8 +303,6 @@ public partial class MainWindowViewModel : ViewModelBase
     public ICommand AddSkin { get; }
     public ICommand DeleteAnimation { get; }
     public ICommand DeleteSkin { get; }
-    public ICommand AddSlot { get; }
-    public ICommand DeleteSlot { get; }
     public ICommand SaveProject { get; }
     public ICommand PrevKeyFrame { get; }
     public ICommand NextKeyFrame { get; }
@@ -382,40 +315,47 @@ public partial class MainWindowViewModel : ViewModelBase
     public ICommand Undo { get; }
     public ICommand Redo { get; }
 
-    private readonly IServiceProvider _serviceProvider;
+    public readonly AttachmentFactory _attachmentFactory;
+    public PanelState PanelState { get; set; }
 
     public MainWindowViewModel(
-        IServiceProvider serviceProvider,
         AppSettings appSettings,
-        ProjectFilesManager projectManager,
         GlobalState globalState,
         ImageExporter imageExporter,
         LocalizationService localizationService,
         Dialogs dialogs,
-        PlumApp plumApp
+        PlumApp plumApp,
+        AttachmentFactory attachmentFactory,
+        PanelState panelState,
+        ViewModelFactory viewModelFactory
     )
         : base(
             globalState,
             dialogs,
-            projectManager,
             appSettings,
             localizationService,
             imageExporter,
+            viewModelFactory,
             plumApp
         )
     {
-        _serviceProvider = serviceProvider;
+        _attachmentFactory = attachmentFactory;
+        PanelState = panelState;
 
         globalState.PropertyChanged += (s, e) =>
         {
-            if (e.PropertyName == nameof(GlobalState.LastSaveTime))
-                OnPropertyChanged(nameof(LastSaveTime));
+            if (e.PropertyName == nameof(Common.Constants.GlobalState.LastSaveTime))
+                base.OnPropertyChanged(nameof(LastSaveTime));
         };
 
-        var appSettingsVM = (AppSettingsViewModel)GetViewModel(DialogType.SETTINGS);
-        appSettingsVM.CurrentTheme = appSettingsVM.Themes[0];
+        var appSettingsVM =
+            _viewModelFactory.GetViewModel(DialogType.SETTINGS) as AppSettingsViewModel;
+        if (appSettingsVM is not null)
+        {
+            appSettingsVM.CurrentTheme = appSettingsVM.Themes[0];
+        }
 
-        _globalState.TimeUpdated += () =>
+        GlobalState.TimeUpdated += () =>
         {
             foreach (Slot s in CurrentProject.Slots)
             {
@@ -463,14 +403,6 @@ public partial class MainWindowViewModel : ViewModelBase
                 PlumApp.DeleteRes(res);
             }
         });
-        RenameSlot = new Command(parameter =>
-        {
-            if (parameter is ListBox SlotsList)
-            {
-                Slot? selectedSlot = SlotsList.SelectedItem as Slot;
-                OpenRenameDialog(selectedSlot);
-            }
-        });
         RenameBone = new Command(parameter =>
         {
             if (parameter is TreeView boneTreeView)
@@ -498,18 +430,6 @@ public partial class MainWindowViewModel : ViewModelBase
         DeleteSkin = new Command(_ =>
         {
             PlumApp.DeleteSkin();
-        });
-        AddSlot = new Command(_ =>
-        {
-            PlumApp.AddSlot();
-        });
-        DeleteSlot = new Command(parameter =>
-        {
-            if (parameter is ListBox SlotsList)
-            {
-                Slot? selectedSlot = SlotsList.SelectedItem as Slot;
-                PlumApp.DeleteSlot(selectedSlot);
-            }
         });
 
         SaveProject = new Command(_ =>

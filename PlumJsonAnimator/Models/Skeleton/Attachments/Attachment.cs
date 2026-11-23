@@ -1,0 +1,61 @@
+using Avalonia.Media;
+using PlumJsonAnimator.Common;
+using PlumJsonAnimator.Models.DTO;
+using PlumJsonAnimator.Models.Interfaces;
+using PlumJsonAnimator.Views;
+using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
+
+namespace PlumJsonAnimator.Models.SkeletonNameSpace.Attachments;
+
+/// <summary>
+/// Attachment class. Helps to bind slot and res or another functions
+/// </summary>
+public abstract class Attachment : ReactiveObject, IPresentableItem
+{
+    [Reactive]
+    public virtual string Name { get; set; }
+
+    [Reactive]
+    public SolidColorBrush AttachmentTypeColor { get; set; } = new SolidColorBrush(Colors.Black);
+
+    public Slot? Slot { get; set; }
+
+    public abstract AttachmentTypes AttachmentType { get; }
+
+    public PanelTypes PanelType => PanelTypes.ATTACHMENTINFO;
+
+    protected readonly AttachmentTypeConverter _attachmentTypeConverter;
+
+    public Attachment(
+        string name,
+        AttachmentTypeConverter attachmentTypeConverter,
+        SolidColorBrush solidColorBrush
+    )
+    {
+        Name = name;
+        _attachmentTypeConverter = attachmentTypeConverter;
+        AttachmentTypeColor = solidColorBrush;
+    }
+
+    public abstract AttachmentData GenerateJSONData();
+
+    public abstract void SetPos(double x, double y, double a);
+
+    public abstract void SetSize(double width, double height);
+
+    public abstract void DrawAttachment(
+        Slot slot,
+        DrawingContext? context = null,
+        ClipAttachment? clipAttachment = null
+    );
+
+    public abstract object CreateInfoPanel();
+
+    public abstract void Draw(DrawingContext context);
+
+    public InfoPanelDTO GetInfoPanelDTO()
+    {
+        return new InfoPanelDTO();
+    }
+}

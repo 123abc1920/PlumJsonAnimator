@@ -1,6 +1,7 @@
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.ViewModels;
@@ -9,21 +10,21 @@ namespace PlumJsonAnimator.ViewModels;
 public partial class NewProjectViewModel : ViewModelBase
 {
     public NewProjectViewModel(
-        ProjectFilesManager projectManager,
         GlobalState globalState,
         Dialogs dialogs,
         AppSettings appSettings,
         LocalizationService localizationService,
         ImageExporter imageExporter,
+        ViewModelFactory viewModelFactory,
         PlumApp plumApp
     )
         : base(
             globalState,
             dialogs,
-            projectManager,
             appSettings,
             localizationService,
             imageExporter,
+            viewModelFactory,
             plumApp
         ) { }
 

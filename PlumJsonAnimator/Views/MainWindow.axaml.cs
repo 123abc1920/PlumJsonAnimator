@@ -107,7 +107,7 @@ public partial class MainWindow : SukiWindow
 
     private void Press_Canvas(object sender, PointerPressedEventArgs e)
     {
-        var canvas = (Canvas)sender;
+        var canvas = (Control)sender;
         var point = e.GetPosition(canvas);
 
         var properties = e.GetCurrentPoint(canvas).Properties;
@@ -149,7 +149,7 @@ public partial class MainWindow : SukiWindow
 
     private void Move_Canvas(object sender, PointerEventArgs e)
     {
-        var canvas = (Canvas)sender;
+        var canvas = (Control)sender;
         var point = e.GetPosition(canvas);
 
         if (DataContext is MainWindowViewModel viewModel)
@@ -212,14 +212,14 @@ public partial class MainWindow : SukiWindow
         if (sender is TextBlock textBlock && textBlock.DataContext is Res res)
         {
             var data = new DataObject();
-            data.Set("Resource", res);
+            data.Set(Consts.RESOURCE_DRAG_DATA, res);
             DragDrop.DoDragDrop(e, data, DragDropEffects.Copy);
         }
     }
 
     private void OnTreeViewDrop(object sender, DragEventArgs e)
     {
-        if (e.Data.Get("Resource") is Res res)
+        if (e.Data.Get(Consts.RESOURCE_DRAG_DATA) is Res res)
         {
             var position = e.GetPosition(boneTreeView);
             var element = boneTreeView.InputHitTest(position) as Visual;
@@ -228,13 +228,10 @@ public partial class MainWindow : SukiWindow
             {
                 if (element is TreeViewItem item && item.DataContext is Bone bone)
                 {
-                    if (bone.IsBone == true)
+                    if (DataContext is MainWindowViewModel viewModel)
                     {
-                        if (DataContext is MainWindowViewModel viewModel)
-                        {
-                            viewModel.DropSlotToBone(bone._id, res);
-                            return;
-                        }
+                        viewModel.DropSlotToBone(bone._id, res);
+                        return;
                     }
                 }
                 element = element.Parent as Visual;

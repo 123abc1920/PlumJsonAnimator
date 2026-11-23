@@ -3,8 +3,11 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Newtonsoft.Json;
+using PlumJsonAnimator.Common.States;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.DTO;
+using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
@@ -54,7 +57,38 @@ namespace PlumJsonAnimator.Common.Constants
 
         public EasingTypes CurrentEasingType { get; set; } = EasingTypes.LINEAR;
 
-        public Bone? CurrentBone { get; set; } = null;
+        private IPresentableItem? _selectedItem = null;
+        public IPresentableItem? SelectedItem
+        {
+            get => _selectedItem;
+            set
+            {
+                if (_selectedItem != value)
+                {
+                    InfoPanelDTO? dto = null;
+                    if (_selectedItem is not null)
+                    {
+                        dto = _selectedItem.GetInfoPanelDTO();
+                        dto.GlobalState = this;
+                    }
+
+                    _selectedItem = value;
+
+                    if (_selectedItem is not null)
+                    {
+                        _panelState.CurrentInfoPanel = _infoPanelFactory.Create(
+                            dto ?? new InfoPanelDTO { GlobalState = this },
+                            _selectedItem.PanelType
+                        );
+                    }
+                    else
+                    {
+                        _panelState.CurrentInfoPanel = null;
+                    }
+                }
+            }
+        }
+
         public string Theme { get; set; } = "light";
         public bool DrawBones { get; set; } = true;
         public bool SetBasePos { get; set; } = true;
@@ -62,7 +96,7 @@ namespace PlumJsonAnimator.Common.Constants
         public string GlobalWorkspace { get; set; } = "PlumJsonAnimatorWorkspace";
         public string ProgramExt { get; set; } = ".plmjsn";
 
-        public Canvas? Canvas { get; set; }
+        public Control? Canvas { get; set; }
         public const int BaseCanvasSize = 1000;
         public int CanvasHeight { get; set; } = 1000;
         public int CanvasWidth { get; set; } = 1000;
@@ -87,9 +121,18 @@ namespace PlumJsonAnimator.Common.Constants
 
         public CaptureArea? CaptureArea { get; set; }
 
-        public GlobalState(LocalizationService localizationService)
+        private PanelState _panelState;
+        private InfoPanelFactory _infoPanelFactory;
+
+        public GlobalState(
+            LocalizationService localizationService,
+            PanelState panelState,
+            InfoPanelFactory infoPanelFactory
+        )
         {
             JsonError = new JsonError(localizationService);
+            _panelState = panelState;
+            _infoPanelFactory = infoPanelFactory;
 
             SettingsFileName = $"settings{ProgramExt}";
             AutoSaveFile = $"autosave{ProgramExt}";
@@ -104,37 +147,31 @@ namespace PlumJsonAnimator.Common.Constants
 
         public IImmutableBrush GetDotBoneColor(Bone b)
         {
-            if (CurrentBone == b && CurrentBone.IsBone == true)
+            if (SelectedItem == b)
             {
                 return AppColors.Red;
             }
-            else
-            {
-                return AppColors.Green;
-            }
+
+            return AppColors.Green;
         }
 
         public IImmutableBrush GetLineBoneColor(Bone b)
         {
-            if (CurrentBone == b && CurrentBone.IsBone == true)
+            if (SelectedItem == b)
             {
                 return AppColors.Blue;
             }
-            else
-            {
-                return AppColors.Aqua;
-            }
+
+            return AppColors.Aqua;
         }
 
         public bool IsSlotSelected(Slot slot)
         {
-            if (CurrentBone != null)
+            if (SelectedItem == slot)
             {
-                if (!CurrentBone.IsBone && CurrentBone == slot)
-                {
-                    return true;
-                }
+                return true;
             }
+
             return false;
         }
     }

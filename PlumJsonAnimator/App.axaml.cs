@@ -6,8 +6,10 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Avalonia.Svg.Skia;
 using Microsoft.Extensions.DependencyInjection;
+using PlumJsonAnimator.Common;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
+using PlumJsonAnimator.Common.States;
 using PlumJsonAnimator.Models.Commands;
 using PlumJsonAnimator.Models.Common;
 using PlumJsonAnimator.Models.Factories;
@@ -34,16 +36,10 @@ public partial class App : Application
 
         services.AddSingleton<MainWindowViewModel>();
 
-        services.AddTransient<NewProjectViewModel>();
-        services.AddTransient<RenameViewModel>();
-        services.AddTransient<ExportPanelGIFViewModel>();
-        services.AddTransient<ExportPanelJPGViewModel>();
-        services.AddTransient<ExportPanelMP4ViewModel>();
-        services.AddTransient<ExportPanelPNGViewModel>();
-        services.AddTransient<AppSettingsViewModel>();
-
         services.AddSingleton<AppSettings>();
+
         services.AddSingleton<GlobalState>();
+        services.AddSingleton<PanelState>();
 
         services.AddSingleton<Interpolation>();
         services.AddSingleton<Engine>();
@@ -69,6 +65,12 @@ public partial class App : Application
         services.AddSingleton<AutoSaver>();
 
         services.AddSingleton<EasingFactory>();
+        services.AddSingleton<AttachmentFactory>();
+        services.AddSingleton<ResFactory>();
+        services.AddSingleton<InfoPanelFactory>();
+        services.AddSingleton<ViewModelFactory>();
+
+        services.AddSingleton<AttachmentTypeConverter>();
 
         services.AddSingleton<PlumApp>();
 
