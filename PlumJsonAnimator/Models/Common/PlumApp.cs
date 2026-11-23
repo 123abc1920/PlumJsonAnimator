@@ -189,27 +189,6 @@ public class PlumApp
         return Localization.GetMessage(constStr);
     }
 
-    public void OpenRenameDialog(IRenamable? renamableObject)
-    {
-        if (renamableObject != null)
-        {
-            var viewModel = new RenameViewModel(
-                _globalState,
-                _dialogs,
-                _appSettings,
-                Localization,
-                _imageExporter,
-                this
-            );
-            viewModel.RenamableObject = renamableObject;
-            _dialogs.ShowDialog(
-                GetMessage(LocalizationConsts.RENAME),
-                viewModel,
-                DialogType.RENAME
-            );
-        }
-    }
-
     public bool SaveProject()
     {
         _globalState.CurrentProject?.SaveProject(_jsonCode);

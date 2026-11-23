@@ -1,6 +1,7 @@
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Services;
 
@@ -16,6 +17,7 @@ public partial class RenameViewModel : ViewModelBase
         AppSettings appSettings,
         LocalizationService localizationService,
         ImageExporter imageExporter,
+        ViewModelFactory viewModelFactory,
         PlumApp plumApp
     )
         : base(
@@ -24,6 +26,7 @@ public partial class RenameViewModel : ViewModelBase
             appSettings,
             localizationService,
             imageExporter,
+            viewModelFactory,
             plumApp
         ) { }
 }

@@ -26,6 +26,7 @@ public class ViewModelFactory
                 _appSettings,
                 _localizationService,
                 _imageExporter,
+                this,
                 _plumApp
             );
         }
@@ -37,6 +38,7 @@ public class ViewModelFactory
                 _appSettings,
                 _localizationService,
                 _imageExporter,
+                this,
                 _plumApp
             );
         }
@@ -48,6 +50,7 @@ public class ViewModelFactory
                 _appSettings,
                 _localizationService,
                 _imageExporter,
+                this,
                 _plumApp
             );
         }
@@ -59,6 +62,7 @@ public class ViewModelFactory
                 _imageExporter,
                 _appSettings,
                 _localizationService,
+                this,
                 _plumApp
             );
         }
@@ -70,6 +74,7 @@ public class ViewModelFactory
                 _imageExporter,
                 _appSettings,
                 _localizationService,
+                this,
                 _plumApp
             );
         }
@@ -81,6 +86,7 @@ public class ViewModelFactory
                 _imageExporter,
                 _appSettings,
                 _localizationService,
+                this,
                 _plumApp
             );
         }
@@ -92,6 +98,7 @@ public class ViewModelFactory
                 _imageExporter,
                 _appSettings,
                 _localizationService,
+                this,
                 _plumApp
             );
         }

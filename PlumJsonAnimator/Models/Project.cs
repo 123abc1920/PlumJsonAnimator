@@ -418,6 +418,11 @@ namespace PlumJsonAnimator.Models
                 b.ShearX = bone.Value.ShearX;
                 b.ShearY = bone.Value.ShearY;
                 MainSkeleton.AddBone(b);
+
+                if (b.Parent is null)
+                {
+                    MainSkeleton.RootBones = new ObservableCollection<Bone>() { b };
+                }
             }
 
             foreach (var bone in bones)

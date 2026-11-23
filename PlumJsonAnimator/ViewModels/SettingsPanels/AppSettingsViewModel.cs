@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.ViewModels;
@@ -54,6 +55,7 @@ public partial class AppSettingsViewModel : ViewModelBase
         AppSettings appSettings,
         LocalizationService localizationService,
         ImageExporter imageExporter,
+        ViewModelFactory viewModelFactory,
         PlumApp plumApp
     )
         : base(
@@ -62,6 +64,7 @@ public partial class AppSettingsViewModel : ViewModelBase
             appSettings,
             localizationService,
             imageExporter,
+            viewModelFactory,
             plumApp
         )
     {

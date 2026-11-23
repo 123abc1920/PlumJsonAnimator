@@ -3,6 +3,7 @@ using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Services;
 
 namespace PlumJsonAnimator.ViewModels;
@@ -42,6 +43,7 @@ public partial class ExportPanelJPGViewModel : ViewModelBase
         ImageExporter imageExporter,
         AppSettings appSettings,
         LocalizationService localizationService,
+        ViewModelFactory viewModelFactory,
         PlumApp plumApp
     )
         : base(
@@ -50,6 +52,7 @@ public partial class ExportPanelJPGViewModel : ViewModelBase
             appSettings,
             localizationService,
             imageExporter,
+            viewModelFactory,
             plumApp
         )
     {

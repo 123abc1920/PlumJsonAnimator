@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -7,6 +6,7 @@ using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Dialogs;
 using PlumJsonAnimator.Models;
 using PlumJsonAnimator.Models.Common;
+using PlumJsonAnimator.Models.Factories;
 using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Services;
 
@@ -19,6 +19,7 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
     protected AppSettings _appSettings;
     protected LocalizationService _localizationService;
     protected ImageExporter _imageExporter;
+    protected ViewModelFactory _viewModelFactory;
     public PlumApp PlumApp { get; set; }
 
     public List<string> Langs
@@ -49,6 +50,7 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
         AppSettings appSettings,
         LocalizationService localizationService,
         ImageExporter imageExporter,
+        ViewModelFactory viewModelFactory,
         PlumApp plumApp
     )
     {
@@ -57,6 +59,7 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
         _appSettings = appSettings;
         _localizationService = localizationService;
         _imageExporter = imageExporter;
+        _viewModelFactory = viewModelFactory;
         PlumApp = plumApp;
 
         GlobalState.PropertyChanged += (s, e) =>
@@ -100,18 +103,24 @@ public class ViewModelBase : ObservableObject, INotifyPropertyChanged
         }
     }
 
-    // TODO: fix OpenRenameDialog
     protected void OpenRenameDialog(IRenamable? renamableObject)
     {
         if (renamableObject != null)
         {
-            // var viewModel = (RenameViewModel)GetViewModel(DialogType.RENAME);
-            // viewModel.RenamableObject = renamableObject;
-            // _dialogs.ShowDialog(
-            //     GetMessage(LocalizationConsts.RENAME),
-            //     viewModel,
-            //     DialogType.RENAME
-            // );
+            RenameViewModel? viewModel =
+                _viewModelFactory.GetViewModel(DialogType.RENAME) as RenameViewModel;
+
+            if (viewModel is null)
+            {
+                return;
+            }
+
+            viewModel.RenamableObject = renamableObject;
+            _dialogs.ShowDialog(
+                GetMessage(LocalizationConsts.RENAME),
+                viewModel,
+                DialogType.RENAME
+            );
         }
     }
 

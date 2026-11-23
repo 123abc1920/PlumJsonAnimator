@@ -30,16 +30,6 @@
                     Command="{Binding DeleteSlot}">
                     <iconPacks:PackIconBootstrapIcons Kind="TrashFill" />
                 </Button>
-
-                <Button
-                    Width="32"
-                    Height="32"
-                    Padding="0"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    Command="{Binding RenameSlot}">
-                    <iconPacks:PackIconBootstrapIcons Kind="PencilFill" />
-                </Button>
             </StackPanel>
             <TextBlock
                 Margin="0,5"

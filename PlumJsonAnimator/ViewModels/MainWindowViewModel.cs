@@ -316,7 +316,6 @@ public partial class MainWindowViewModel : ViewModelBase
     public ICommand Redo { get; }
 
     public readonly AttachmentFactory _attachmentFactory;
-    private readonly ViewModelFactory _viewModelFactory;
     public PanelState PanelState { get; set; }
 
     public MainWindowViewModel(
@@ -330,11 +329,18 @@ public partial class MainWindowViewModel : ViewModelBase
         PanelState panelState,
         ViewModelFactory viewModelFactory
     )
-        : base(globalState, dialogs, appSettings, localizationService, imageExporter, plumApp)
+        : base(
+            globalState,
+            dialogs,
+            appSettings,
+            localizationService,
+            imageExporter,
+            viewModelFactory,
+            plumApp
+        )
     {
         _attachmentFactory = attachmentFactory;
         PanelState = panelState;
-        _viewModelFactory = viewModelFactory;
 
         globalState.PropertyChanged += (s, e) =>
         {
@@ -342,9 +348,12 @@ public partial class MainWindowViewModel : ViewModelBase
                 base.OnPropertyChanged(nameof(LastSaveTime));
         };
 
-        var appSettingsVM = (AppSettingsViewModel)
-            _viewModelFactory.GetViewModel(DialogType.SETTINGS);
-        appSettingsVM.CurrentTheme = appSettingsVM.Themes[0];
+        var appSettingsVM =
+            _viewModelFactory.GetViewModel(DialogType.SETTINGS) as AppSettingsViewModel;
+        if (appSettingsVM is not null)
+        {
+            appSettingsVM.CurrentTheme = appSettingsVM.Themes[0];
+        }
 
         GlobalState.TimeUpdated += () =>
         {

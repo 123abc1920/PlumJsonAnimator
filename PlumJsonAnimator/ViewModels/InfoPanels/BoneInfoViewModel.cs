@@ -1,4 +1,3 @@
-using System;
 using PlumJsonAnimator.Common.Constants;
 using PlumJsonAnimator.Common.Constants.Command;
 using PlumJsonAnimator.Models.Commands;
@@ -73,15 +72,6 @@ public partial class BoneInfoViewModel : ReactiveObject
                 _historyManager.DoCommand(
                     new DeleteSlotCommand(GlobalState.CurrentProject, slot, bone)
                 );
-            }
-        });
-
-        // TODO:fix renameDialog
-        RenameSlot = new Command(execute: _ =>
-        {
-            if (SelectedSlot is Slot slot)
-            {
-                // _plumApp.OpenRenameDialog(slot);
             }
         });
 
