@@ -180,8 +180,9 @@ public class Animation : INotifyable
 
             foreach (Slot s in slots)
             {
-                foreach (var kv in s.drawOrders)
+                foreach (var kv in s.DrawOrders)
                 {
+                    kv.Value.Slot = s.Name;
                     if (drawOrderItems.Keys.Contains(kv.Key))
                     {
                         drawOrderItems[kv.Key].Offsets?.Add(kv.Value);
@@ -199,11 +200,11 @@ public class Animation : INotifyable
                     }
                 }
 
-                foreach (var v in drawOrderItems.Values)
+                foreach (var drawOrderItem in drawOrderItems.Values)
                 {
-                    if (!drawOrders.Contains(v))
+                    if (!drawOrders.Contains(drawOrderItem))
                     {
-                        drawOrders.Add(v);
+                        drawOrders.Add(drawOrderItem);
                     }
                 }
             }

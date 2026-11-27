@@ -418,11 +418,6 @@ namespace PlumJsonAnimator.Models
                 b.ShearX = bone.Value.ShearX;
                 b.ShearY = bone.Value.ShearY;
                 MainSkeleton.AddBone(b);
-
-                if (b.Parent is null)
-                {
-                    MainSkeleton.RootBones = new ObservableCollection<Bone>() { b };
-                }
             }
 
             foreach (var bone in bones)
@@ -449,6 +444,15 @@ namespace PlumJsonAnimator.Models
             foreach (var bone in bonesToRemove)
             {
                 MainSkeleton.Bones.Remove(bone);
+            }
+
+            foreach (Bone bone in MainSkeleton.Bones)
+            {
+                if (bone.Parent is null)
+                {
+                    MainSkeleton.RootBones = new ObservableCollection<Bone>() { bone };
+                    break;
+                }
             }
 
             if (MainSkeleton.Bones.Count <= 0)
@@ -511,7 +515,7 @@ namespace PlumJsonAnimator.Models
         {
             foreach (Slot s in _globalState.CurrentProject.Slots)
             {
-                s.drawOrders.Clear();
+                s.DrawOrders.Clear();
             }
 
             List<Animation> animationsToRemove = new List<Animation>();
@@ -576,13 +580,13 @@ namespace PlumJsonAnimator.Models
                                     Slot s = GetSlotByName(drawOrderOffset.Slot);
                                     if (s != null)
                                     {
-                                        if (s.drawOrders.ContainsKey((double)item.Time))
+                                        if (s.DrawOrders.ContainsKey((double)item.Time))
                                         {
-                                            s.drawOrders[(double)item.Time] = drawOrderOffset;
+                                            s.DrawOrders[(double)item.Time] = drawOrderOffset;
                                         }
                                         else
                                         {
-                                            s.drawOrders.Add((double)item.Time, drawOrderOffset);
+                                            s.DrawOrders.Add((double)item.Time, drawOrderOffset);
                                         }
 
                                         if (item.Time == 0)
@@ -649,13 +653,13 @@ namespace PlumJsonAnimator.Models
                         Slot s = GetSlotByName(drawOrderOffset.Slot);
                         if (s != null)
                         {
-                            if (s.drawOrders.ContainsKey((double)item.Time))
+                            if (s.DrawOrders.ContainsKey((double)item.Time))
                             {
-                                s.drawOrders[(double)item.Time] = drawOrderOffset;
+                                s.DrawOrders[(double)item.Time] = drawOrderOffset;
                             }
                             else
                             {
-                                s.drawOrders.Add((double)item.Time, drawOrderOffset);
+                                s.DrawOrders.Add((double)item.Time, drawOrderOffset);
                             }
 
                             if (item.Time == 0)

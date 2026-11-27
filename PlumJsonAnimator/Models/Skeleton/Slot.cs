@@ -92,7 +92,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             }
         }
 
-        public SortedDictionary<double, DrawOrderOffset> drawOrders =
+        public SortedDictionary<double, DrawOrderOffset> DrawOrders =
             new SortedDictionary<double, DrawOrderOffset>();
 
         public bool isUpdatingFromCode;
@@ -108,7 +108,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
             double currTime = _globalState.CurrentProject.CurrentAnimation.CurrentTime;
 
             double? foundKey = null;
-            foreach (var key in drawOrders.Keys)
+            foreach (var key in DrawOrders.Keys)
             {
                 if (key <= currTime)
                     foundKey = key;
@@ -116,7 +116,7 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                     break;
             }
 
-            var value = foundKey.HasValue ? drawOrders[foundKey.Value] : null;
+            var value = foundKey.HasValue ? DrawOrders[foundKey.Value] : null;
             if (value != null)
             {
                 isUpdatingFromCode = true;
@@ -216,13 +216,13 @@ namespace PlumJsonAnimator.Models.SkeletonNameSpace
                         return;
 
                     double currTime = _globalState.CurrentProject.CurrentAnimation.CurrentTime;
-                    if (drawOrders.ContainsKey(currTime))
+                    if (DrawOrders.ContainsKey(currTime))
                     {
-                        drawOrders[currTime].Offset = value;
+                        DrawOrders[currTime].Offset = value;
                     }
                     else
                     {
-                        drawOrders.Add(
+                        DrawOrders.Add(
                             currTime,
                             new DrawOrderOffset() { Slot = Name, Offset = value }
                         );
