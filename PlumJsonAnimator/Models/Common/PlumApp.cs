@@ -282,6 +282,8 @@ public class PlumApp
 
             _globalState.CurrentProject = newProject;
 
+            _projectFilesManager.CreateProjectDir(newProject);
+
             return true;
         }
         return false;

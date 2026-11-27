@@ -93,7 +93,7 @@ public class Res : INotifyable, IRenamable
                 _projectManager.RenameFile(
                     Path,
                     System.IO.Path.Combine(
-                        _globalState.CurrentProject.GetProjectPath(),
+                        _globalState.CurrentProject.GetFullProjectPath(),
                         "res",
                         $"{Name}{Ext}"
                     )

@@ -19,10 +19,7 @@ namespace PlumJsonAnimator.Services
         private GlobalState _globalState;
         private LocalizationService _localizationService;
 
-        public ProjectFilesManager(
-            GlobalState globalState,
-            LocalizationService localizationService
-        )
+        public ProjectFilesManager(GlobalState globalState, LocalizationService localizationService)
         {
             _globalState = globalState;
             _localizationService = localizationService;
@@ -80,6 +77,13 @@ namespace PlumJsonAnimator.Services
             }
 
             return projectPath;
+        }
+
+        public void CreateProjectDir(Project project)
+        {
+            Directory.CreateDirectory(project.GetFullProjectPath());
+            Directory.CreateDirectory(Path.Combine(project.GetFullProjectPath(), "res"));
+            project.SaveProjectSettings();
         }
 
         public string CopyRes(string resName, string filePath, Project? project)

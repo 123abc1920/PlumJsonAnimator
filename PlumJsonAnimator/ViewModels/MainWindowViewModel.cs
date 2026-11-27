@@ -14,12 +14,10 @@ using PlumJsonAnimator.Models.Interfaces;
 using PlumJsonAnimator.Models.Resources;
 using PlumJsonAnimator.Models.SkeletonNameSpace;
 using PlumJsonAnimator.Services;
-using PlumJsonAnimator.Views;
 
 namespace PlumJsonAnimator.ViewModels;
 
 // TODO: docs
-// TODO: add factory pattern
 public partial class MainWindowViewModel : ViewModelBase
 {
     public Control? Canvas

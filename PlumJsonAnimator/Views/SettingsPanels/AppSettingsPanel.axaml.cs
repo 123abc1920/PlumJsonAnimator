@@ -9,7 +9,6 @@ using PlumJsonAnimator.Services;
 using PlumJsonAnimator.ViewModels;
 using SukiUI;
 
-// TODO: исправить привязки
 namespace PlumJsonAnimator.Views
 {
     public partial class AppSettingsPanel : UserControl

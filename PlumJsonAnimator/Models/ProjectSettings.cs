@@ -45,7 +45,11 @@ public class ProjectSettings
     {
         if (!File.Exists(settingsPathFile))
         {
-            _settingsData.Path = settingsPathFile;
+            string directoryPath = Path.GetDirectoryName(settingsPathFile);
+            string projectName = Path.GetFileName(directoryPath);
+            string workspacePath = Path.GetDirectoryName(directoryPath);
+            _settingsData.Path = workspacePath;
+            _settingsData.Name = projectName;
             SaveSettings();
         }
         else
@@ -111,7 +115,10 @@ public class ProjectSettings
         )
         {
             File.Create(
-                    Path.Combine(_appSettings._appSettings!.Workspace, _globalState.SettingsFileName)
+                    Path.Combine(
+                        _appSettings._appSettings!.Workspace,
+                        _globalState.SettingsFileName
+                    )
                 )
                 .Close();
         }
@@ -179,7 +186,7 @@ public class ProjectSettings
 
             return settings;
         }
-        
+
         return null;
     }
 

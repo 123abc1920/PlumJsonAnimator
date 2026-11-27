@@ -235,7 +235,7 @@ namespace PlumJsonAnimator.Models
             }
         }
 
-        public string GetProjectPath()
+        public string GetFullProjectPath()
         {
             return Path.Combine(ProjectPath, Name);
         }
